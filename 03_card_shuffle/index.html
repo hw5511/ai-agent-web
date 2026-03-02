@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Shuffle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0d0d0d;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    header .h-txt {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.24em;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    #scene {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    #tilt {
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    #deck {
+      position: relative;
+      width: 260px;
+      height: 380px;
+    }
+
+    .card {
+      position: absolute;
+      inset: 0;
+      width: 260px;
+      height: 380px;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      will-change: transform, opacity;
+      user-select: none;
+    }
+
+    .c-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .c-col-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .c-col-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .c-genre {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .c-mid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .aka {
+      display: inline-block;
+      border: 1.5px solid rgba(255, 255, 255, 0.72);
+      border-radius: 100px;
+      padding: 7px 26px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.26em;
+      color: #ffffff;
+      background: transparent;
+    }
+
+    .c-bot {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .c-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      line-height: 0.88;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .c-songs {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .c-song {
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="h-txt">Spotify Datas</span>
+    <span class="h-txt">Your Most Stream Artist in 2024</span>
+    <span class="h-txt">6 Artists</span>
+  </header>
+
+  <div id="scene">
+    <div id="tilt">
+      <div id="deck"></div>
+    </div>
+  </div>
+
+  <script>
+    var DATA = [
+      { name: 'KEVIN',       genre: 'INDIE POP',  col: 'NEON WAVES',     color: '#E8453C', songs: ['NEON WAVES', 'CITY LIGHTS', 'ELECTRIC SOUL', 'MIDNIGHT RUN'] },
+      { name: 'DEVONTE',     genre: 'AMBIENT',    col: 'VELVET DRIFT',   color: '#F47B20', songs: ['VELVET DRIFT', 'OCEAN FLOOR', 'SOFT HAZE', 'DISTANT CALL'] },
+      { name: 'JULIAN',      genre: 'ELECTRONIC', col: 'ECHO FLAME',     color: '#F4C430', songs: ['ECHO FLAME', 'PULSE WAVE', 'SYNTH BLOOM', 'CIRCUIT DREAM'] },
+      { name: 'CASABLANCAS', genre: 'SYNTHWAVE',  col: 'PHANTOM BEAT',   color: '#4CAF84', songs: ['PHANTOM BEAT', 'RETRO DRIVE', 'NEON CITY', 'CHROME WAVE'] },
+      { name: 'STEPHEN LEE', genre: 'SOUL R&B',   col: 'BRUNER',         color: '#5B8DEF', songs: ['BRUNER', 'GOLDEN HOUR', 'VELVET TOUCH', 'SOUL TRAIN'] },
+      { name: 'THUNDER CAT', genre: 'SOUL R&B',   col: 'THE GOLDEN AGE', color: '#9B59B6', songs: ['THE GOLDEN AGE', 'BASS LINE', 'FUNKY TOWN', 'DEEP GROOVE'] }
+    ];
+
+    // Fan positions: index 0 = back-left, index 5 = front-right
+    var FAN = [
+      { r: -20, x: -160, y: 8  },
+      { r: -12, x: -96,  y: 4  },
+      { r:  -5, x: -32,  y: 0  },
+      { r:   3, x:  32,  y: 4  },
+      { r:  11, x:  96,  y: 8  },
+      { r:  19, x:  160, y: 12 }
+    ];
+
+    var deckEl  = document.getElementById('deck');
+    var tiltEl  = document.getElementById('tilt');
+
+    // Build card DOM elements
+    var cards = DATA.map(function(d) {
+      var el = document.createElement('div');
+      el.className = 'card';
+      el.style.background = d.color;
+      el.innerHTML =
+        '<div class="c-top">' +
+          '<div>' +
+            '<div class="c-col-label">Collection</div>' +
+            '<div class="c-col-name">' + d.col + '</div>' +
+          '</div>' +
+          '<div class="c-genre">' + d.genre + '</div>' +
+        '</div>' +
+        '<div class="c-mid"><span class="aka">AKA</span></div>' +
+        '<div class="c-bot">' +
+          '<div class="c-name">' + d.name + '</div>' +
+          '<div class="c-songs">' +
+            d.songs.map(function(s) { return '<div class="c-song">' + s + '</div>'; }).join('') +
+          '</div>' +
+        '</div>';
+      deckEl.appendChild(el);
+      return el;
+    });
+
+    // order[posIdx] = cardIdx
+    var order = [0, 1, 2, 3, 4, 5];
+    var busy = false;
+
+    function tf(posIdx, dy) {
+      var p = FAN[posIdx];
+      var tyVal = p.y + (dy || 0);
+      return 'translateX(' + p.x + 'px) translateY(' + tyVal + 'px) rotate(' + p.r + 'deg)';
+    }
+
+    // Initial state: all cards below the viewport
+    order.forEach(function(ci, pi) {
+      var el = cards[ci];
+      el.style.transition = 'none';
+      el.style.opacity = '0';
+      el.style.zIndex = String(pi);
+      el.style.transform = tf(pi, 600);
+    });
+
+    // Entrance animation with stagger (back-to-front order)
+    order.forEach(function(ci, pi) {
+      setTimeout(function() {
+        var el = cards[ci];
+        el.style.transition = 'transform 0.7s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease';
+        el.style.transform = tf(pi);
+        el.style.opacity = '1';
+      }, 150 + pi * 120);
+    });
+
+    // Click to shuffle: front card slides to back
+    function shuffle() {
+      if (busy) return;
+      busy = true;
+
+      var frontIdx = order[5];
+      var frontEl  = cards[frontIdx];
+
+      // Slide front card down off screen
+      frontEl.style.transition = 'transform 0.45s cubic-bezier(0.55,0,1,0.45), opacity 0.25s ease';
+      frontEl.style.transform  = tf(5, 600);
+      frontEl.style.opacity    = '0';
+
+      setTimeout(function() {
+        // Rotate order array: former front card becomes position 0 (back)
+        order = [order[5], order[0], order[1], order[2], order[3], order[4]];
+
+        // Immediately place the new back card off-screen below (no transition)
+        var backEl = cards[order[0]];
+        backEl.style.transition = 'none';
+        backEl.style.zIndex     = '0';
+        backEl.style.transform  = tf(0, 600);
+        backEl.style.opacity    = '0';
+
+        // Animate cards at positions 1 through 5 to their new fan spots
+        for (var i = 1; i < 6; i++) {
+          var el = cards[order[i]];
+          el.style.transition = 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease';
+          el.style.zIndex     = String(i);
+          el.style.transform  = tf(i);
+          el.style.opacity    = '1';
+        }
+
+        // Bring back card up after the 'none' transition flushes
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            backEl.style.transition = 'transform 0.7s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease';
+            backEl.style.transform  = tf(0);
+            backEl.style.opacity    = '1';
+          });
+        });
+
+        setTimeout(function() { busy = false; }, 720);
+      }, 460);
+    }
+
+    tiltEl.addEventListener('click', shuffle);
+
+    // Parallax tilt: lerp toward mouse direction
+    var tgtX = 0, tgtY = 0, curX = 0, curY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      var nx = e.clientX / window.innerWidth  * 2 - 1;
+      var ny = e.clientY / window.innerHeight * 2 - 1;
+      tgtY =  nx * 8;
+      tgtX = -ny * 5;
+    });
+
+    document.addEventListener('mouseleave', function() {
+      tgtX = 0;
+      tgtY = 0;
+    });
+
+    (function loop() {
+      curX += (tgtX - curX) * 0.05;
+      curY += (tgtY - curY) * 0.05;
+      tiltEl.style.transform =
+        'rotateX(' + curX.toFixed(3) + 'deg) rotateY(' + curY.toFixed(3) + 'deg)';
+      requestAnimationFrame(loop);
+    })();
+  </script>
+
+</body>
+</html>
