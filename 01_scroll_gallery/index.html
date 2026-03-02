@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll Gallery Collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #111;
+    height: 500vh;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 22px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav span {
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  #scroll-hint {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  #scroll-hint span {
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    opacity: 0.45;
+  }
+
+  #stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  #track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    will-change: transform;
+    white-space: nowrap;
+  }
+
+  .card-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+    padding-bottom: 60px;
+  }
+
+  .card {
+    width: 320px;
+    height: 440px;
+    border-radius: 22px;
+    overflow: visible;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.05) saturate(1.05);
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.12) 0%,
+      rgba(0,0,0,0.0) 35%,
+      rgba(0,0,0,0.5) 100%
+    );
+    border-radius: 22px;
+  }
+
+  .card-tags {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .card-tags span {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.88;
+  }
+
+  .badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #111;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .card-title {
+    position: absolute;
+    bottom: -24px;
+    left: -6px;
+    right: -6px;
+    z-index: 20;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 78px;
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: 0.03em;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    pointer-events: none;
+    z-index: 15;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span>STUDIO</span>
+  <span>SCROLL GALLERY COLLECTION</span>
+  <span>6 WORKS</span>
+</nav>
+
+<div id="scroll-hint">
+  <span>Scroll</span>
+</div>
+
+<div id="stage">
+  <div id="track"></div>
+</div>
+
+<script>
+(function() {
+
+  var DATA = [
+    { img: 'images/01.jpg', border: '#5B8DEF', tag1: 'COLLECTION', tag2: 'INDIE POP',   badge: 'FROM', title: 'NEON WAVES',    rotate: -3,   yoff: 0   },
+    { img: 'images/02.jpg', border: '#C8FF00', tag1: 'COLLECTION', tag2: 'AMBIENT',     badge: 'FROM', title: 'VELVET DRIFT',  rotate: 2,    yoff: -30 },
+    { img: 'images/03.jpg', border: '#00E5CC', tag1: 'COLLECTION', tag2: 'ELECTRONIC',  badge: 'FROM', title: 'ECHO FLAME',    rotate: -1.5, yoff: 20  },
+    { img: 'images/04.jpg', border: '#FFD700', tag1: 'COLLECTION', tag2: 'SYNTHWAVE',   badge: 'FROM', title: 'PHANTOM BEAT',  rotate: 3,    yoff: -20 },
+    { img: 'images/05.jpg', border: '#FF69B4', tag1: 'COLLECTION', tag2: 'DREAM POP',   badge: 'FROM', title: 'CRYSTAL VIBE',  rotate: -2.5, yoff: 30  },
+    { img: 'images/06.jpg', border: '#FF4444', tag1: 'COLLECTION', tag2: 'PUNK SOUL',   badge: 'FROM', title: 'JET FLAME',     rotate: 1.5,  yoff: -10 }
+  ];
+
+  var MARGINS = [0, -50, -30, -50, -30, -50];
+
+  var track = document.getElementById('track');
+  var scrollHint = document.getElementById('scroll-hint');
+
+  DATA.forEach(function(d, i) {
+    var wrap = document.createElement('div');
+    wrap.className = 'card-wrap';
+    if (i > 0) wrap.style.marginLeft = MARGINS[i] + 'px';
+
+    var card = document.createElement('div');
+    card.className = 'card';
+
+    var inner = document.createElement('div');
+    inner.className = 'card-inner';
+
+    var img = document.createElement('img');
+    img.src = d.img;
+    img.alt = d.title;
+
+    var overlay = document.createElement('div');
+    overlay.className = 'card-overlay';
+
+    var tags = document.createElement('div');
+    tags.className = 'card-tags';
+    var t1 = document.createElement('span');
+    t1.textContent = d.tag1;
+    var t2 = document.createElement('span');
+    t2.textContent = d.tag2;
+    tags.appendChild(t1);
+    tags.appendChild(t2);
+
+    var badge = document.createElement('div');
+    badge.className = 'badge';
+    badge.textContent = d.badge;
+    badge.style.background = d.border;
+
+    inner.appendChild(img);
+    inner.appendChild(overlay);
+    inner.appendChild(tags);
+    inner.appendChild(badge);
+
+    var border = document.createElement('div');
+    border.className = 'card-border';
+    border.style.border = '12px solid ' + d.border;
+    border.style.boxShadow = '0 0 24px ' + d.border + '66, inset 0 0 10px ' + d.border + '22';
+
+    var title = document.createElement('div');
+    title.className = 'card-title';
+    title.textContent = d.title;
+    title.style.color = d.border;
+    title.style.textShadow = '2px 3px 0 #111, 0 0 28px ' + d.border + '99';
+
+    card.appendChild(inner);
+    card.appendChild(border);
+    card.appendChild(title);
+    wrap.appendChild(card);
+    track.appendChild(wrap);
+  });
+
+  var currentX = window.innerWidth;
+  var targetX = window.innerWidth;
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+
+  function getProgress() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var maxScroll = document.body.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return 0;
+    return Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+  }
+
+  function loop() {
+    var progress = getProgress();
+    var vw = window.innerWidth;
+    var tw = track.scrollWidth;
+
+    var startX = vw;
+    var endX = -(tw);
+    targetX = startX + (endX - startX) * progress;
+
+    currentX = lerp(currentX, targetX, 0.09);
+
+    track.style.transform = 'translateY(-50%) translateX(' + currentX + 'px)';
+
+    var wraps = track.querySelectorAll('.card-wrap');
+    DATA.forEach(function(d, i) {
+      var wrap = wraps[i];
+      if (!wrap) return;
+      var delta = (progress - 0.5) * 5;
+      var newRot = d.rotate + delta * 0.25;
+      wrap.style.transform = 'rotate(' + newRot + 'deg) translateY(' + d.yoff + 'px)';
+    });
+
+    scrollHint.style.opacity = progress > 0.03 ? '0' : '1';
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+
+})();
+</script>
+</body>
+</html>
