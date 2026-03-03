@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #ff5932;
+      --color-accent: #00e1af;
+      --color-text: #f0f0f0;
+      --color-muted: #666;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.05em;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ── HERO SECTION ── */
+    #hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 120px 10vw 80px;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 12rem);
+      line-height: 0.9;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+
+    .hero-name span {
+      color: var(--color-primary);
+    }
+
+    .hero-tagline {
+      margin-top: 32px;
+      font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+      color: var(--color-muted);
+      max-width: 480px;
+      line-height: 1.8;
+      border-left: 2px solid var(--color-primary);
+      padding-left: 20px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: inline-block;
+      padding: 14px 36px;
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s forwards;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    /* floating blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .blob-1 {
+      width: 600px;
+      height: 600px;
+      background: var(--color-primary);
+      top: -200px;
+      right: -100px;
+      animation: float1 12s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 400px;
+      height: 400px;
+      background: var(--color-accent);
+      bottom: -100px;
+      left: -50px;
+      animation: float2 10s ease-in-out infinite;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(40px) translateX(-30px); }
+    }
+
+    @keyframes float2 {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-30px) translateX(20px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 10vw;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      color: var(--color-muted);
+      letter-spacing: 0.15em;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+
+    .scroll-hint::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--color-muted);
+    }
+
+    /* ── GALLERY SECTION ── */
+    #gallery {
+      padding: 120px 0 80px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      padding: 0 10vw;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      padding: 0 10vw;
+      margin-bottom: 56px;
+      line-height: 1;
+    }
+
+    .swiper {
+      width: 100%;
+      padding: 0 10vw 60px !important;
+      cursor: grab;
+    }
+
+    .swiper:active {
+      cursor: grabbing;
+    }
+
+    .swiper-slide {
+      width: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: #1a1a1a;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: brightness(0.75) saturate(0.9);
+    }
+
+    .swiper-slide:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.95) saturate(1.1);
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 20px 24px;
+      background: linear-gradient(transparent, rgba(13,13,13,0.92));
+      font-size: 0.75rem;
+      color: var(--color-text);
+      letter-spacing: 0.1em;
+    }
+
+    .slide-caption span {
+      color: var(--color-accent);
+      display: block;
+      font-size: 0.65rem;
+      margin-bottom: 4px;
+      letter-spacing: 0.2em;
+    }
+
+    .swiper-pagination-bullet {
+      background: var(--color-muted) !important;
+      opacity: 1 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--color-accent) !important;
+      transform: scaleX(2.5);
+      border-radius: 2px;
+    }
+
+    /* ── SKILLS SECTION ── */
+    #skills {
+      padding: 80px 10vw 120px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .skill-card {
+      background: #141414;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 36px 32px;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .skill-card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 225, 175, 0.12);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--color-primary);
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--color-text);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-desc {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      line-height: 1.8;
+    }
+
+    .skill-bar-wrap {
+      margin-top: 20px;
+      height: 3px;
+      background: #2a2a2a;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      border-radius: 2px;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-card.aos-animate .skill-bar {
+      transform: scaleX(1);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #1e1e1e;
+      padding: 40px 10vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--color-muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 100px 6vw 60px; }
+      .section-label, .section-title { padding: 0 6vw; }
+      #skills { padding: 80px 6vw 100px; }
+      footer { padding: 32px 6vw; }
+      .swiper { padding: 0 6vw 50px !important; }
+      .swiper-slide { width: 260px; }
+      .swiper-slide img { height: 340px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- progress bar -->
+  <div id="progress-bar"></div>
+
+  <!-- nav -->
+  <nav>
+    <div class="nav-logo">About Me</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#gallery">Photos</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </nav>
+
+  <!-- hero -->
+  <section id="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <p class="hero-badge">// NICE TO MEET YOU</p>
+    <h1 class="hero-name">
+      KIM<br /><span>MINSU</span>
+    </h1>
+    <p class="hero-tagline">
+      사람을 좋아하고, 새로운 걸 만드는 게 즐거운 사람.<br />
+      커피 한 잔이면 하루가 완성되는 일상을 살고 있어요.
+    </p>
+    <a class="hero-cta" href="#gallery">둘러보기</a>
+
+    <div class="scroll-hint">SCROLL DOWN</div>
+  </section>
+
+  <!-- gallery -->
+  <section id="gallery">
+    <p class="section-label" data-aos="fade-right">// MY FAVORITES</p>
+    <h2 class="section-title" data-aos="fade-right" data-aos-delay="100">PHOTO<br />GALLERY</h2>
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/640/840/travel,city" alt="travel" />
+          <div class="slide-caption"><span>// 01</span>도시 여행</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/640/840/cafe,coffee" alt="cafe" />
+          <div class="slide-caption"><span>// 02</span>카페에서</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/640/840/nature,forest" alt="nature" />
+          <div class="slide-caption"><span>// 03</span>자연 속으로</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/640/840/music,concert" alt="music" />
+          <div class="slide-caption"><span>// 04</span>좋아하는 음악</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/640/840/night,city" alt="night" />
+          <div class="slide-caption"><span>// 05</span>밤의 도시</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/640/840/food,restaurant" alt="food" />
+          <div class="slide-caption"><span>// 06</span>맛있는 것들</div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- skills -->
+  <section id="skills">
+    <p class="section-label" data-aos="fade-right">// WHAT I DO</p>
+    <h2 class="section-title" data-aos="fade-right" data-aos-delay="100">THINGS I<br />DO WELL</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="skill-icon">01</div>
+        <div class="skill-name">Communication</div>
+        <div class="skill-desc">사람들과 이야기하는 걸 즐겨요. 낯선 사람과도 금방 친해지는 편이에요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width: 92%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-icon">02</div>
+        <div class="skill-name">Photography</div>
+        <div class="skill-desc">일상의 작은 순간을 포착하는 것이 취미예요. 스마트폰 하나로도 충분해요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width: 78%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="skill-icon">03</div>
+        <div class="skill-name">Music</div>
+        <div class="skill-desc">플레이리스트 큐레이션부터 기타 연주까지, 음악이 없는 하루는 상상 못해요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width: 85%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="skill-icon">04</div>
+        <div class="skill-name">Cooking</div>
+        <div class="skill-desc">냉장고 안의 재료로 뭔가 만들어내는 걸 즐겨요. 파스타는 자신 있어요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width: 70%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="skill-icon">05</div>
+        <div class="skill-name">Problem Solving</div>
+        <div class="skill-desc">막힌 것에 도전하는 게 재밌어요. 포기하지 않고 끝까지 파고드는 스타일이에요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width: 88%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
+        <div class="skill-icon">06</div>
+        <div class="skill-name">Humor</div>
+        <div class="skill-desc">분위기 메이커예요. 웃음 없는 모임은 없어요. 아재개그도 가능합니다.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="width: 95%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <div class="footer-name">KIM MINSU</div>
+    <div class="footer-copy">Made with heart. 2026.</div>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // scroll progress
+    (function () {
+      var bar = document.getElementById('progress-bar');
+      var raf = null;
+
+      function update() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+        raf = null;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!raf) raf = requestAnimationFrame(update);
+      }, { passive: true });
+    })();
+
+    // AOS init
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60
+    });
+
+    // Swiper init
+    var swiper = new Swiper('.mySwiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 24,
+      freeMode: true,
+      grabCursor: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      }
+    });
+  </script>
+</body>
+</html>

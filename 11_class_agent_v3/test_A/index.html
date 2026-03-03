@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #ffffff;
+      --color-accent: #3a75be;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-primary);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.05em;
+      overflow-x: hidden;
+    }
+
+    /* Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      z-index: 100;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.8rem;
+      color: var(--color-accent);
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 60px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(58, 117, 190, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--color-accent);
+      box-shadow: 0 0 40px rgba(58, 117, 190, 0.4);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-greeting {
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .hero-name span {
+      color: var(--color-accent);
+    }
+
+    .hero-title {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.1em;
+      margin-bottom: 28px;
+    }
+
+    .hero-desc {
+      font-size: 0.85rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+      border: 2px solid var(--color-accent);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--color-accent);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* Section common */
+    section {
+      padding: 100px 60px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      color: var(--color-accent);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.08em;
+      margin-bottom: 60px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* About */
+    #about {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .stat-box {
+      background: rgba(58, 117, 190, 0.08);
+      border: 1px solid rgba(58, 117, 190, 0.25);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.35s;
+      cursor: default;
+    }
+
+    .stat-box:hover {
+      background: rgba(58, 117, 190, 0.15);
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(58, 117, 190, 0.2);
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.8rem;
+      color: var(--color-accent);
+      letter-spacing: 0.05em;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Skills */
+    #skills {
+      text-align: center;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 36px 24px;
+      transition: all 0.35s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      border-color: var(--color-accent);
+      background: rgba(58, 117, 190, 0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(58, 117, 190, 0.2);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .skill-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .skill-desc {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.7;
+    }
+
+    .skill-bar-wrap {
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      height: 4px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: var(--color-accent);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 1.2s ease;
+    }
+
+    /* Projects */
+    #projects {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.35s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(58, 117, 190, 0.25);
+      border-color: var(--color-accent);
+    }
+
+    .project-thumb {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .project-card:hover .project-thumb img {
+      transform: scale(1.08);
+    }
+
+    .project-info {
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .project-tag {
+      font-size: 0.65rem;
+      color: var(--color-accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .project-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.75;
+    }
+
+    /* Contact */
+    #contact {
+      text-align: center;
+    }
+
+    .contact-sub {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 48px;
+      line-height: 1.8;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--color-primary);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      background: rgba(58, 117, 190, 0.08);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 32px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.1em;
+    }
+
+    /* Cursor dot */
+    #cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(58, 117, 190, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9997;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      section { padding: 80px 24px; }
+
+      .hero-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .hero-photo { width: 200px; height: 200px; }
+      .hero-desc { max-width: 100%; }
+      .hero-btns { justify-content: center; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-bg-circle"></div>
+    <div class="hero-inner">
+      <div class="hero-photo" data-aos="fade-right" data-aos-duration="900">
+        <img src="https://picsum.photos/seed/portrait1/560/560" alt="Profile Photo" />
+      </div>
+      <div class="hero-text">
+        <p class="hero-greeting" data-aos="fade-up" data-aos-delay="100">Hello, I am</p>
+        <h1 class="hero-name" data-aos="fade-up" data-aos-delay="200">
+          YOUR<br /><span>NAME</span>
+        </h1>
+        <p class="hero-title" data-aos="fade-up" data-aos-delay="300">Frontend Developer &amp; Creative Designer</p>
+        <p class="hero-desc" data-aos="fade-up" data-aos-delay="400">
+          안녕하세요. 저는 사용자 경험을 중심으로 생각하며, 아름답고 기능적인 웹을 만드는 개발자입니다. 새로운 기술을 배우고 도전하는 것을 즐깁니다.
+        </p>
+        <div class="hero-btns" data-aos="fade-up" data-aos-delay="500">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label" data-aos="fade-up">Who I Am</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">About Me</h2>
+      <div class="about-grid">
+        <div class="about-text" data-aos="fade-right" data-aos-duration="800">
+          <p>
+            저는 웹 개발과 디자인의 경계에서 일하는 크리에이티브 개발자입니다. 코드로 아이디어를 현실로 만드는 순간을 가장 좋아합니다.
+          </p>
+          <p>
+            사용자가 실제로 즐길 수 있는 인터랙티브한 경험을 설계하고, 성능과 아름다움을 동시에 추구합니다. 협업을 통해 더 나은 결과물을 만들어가는 것을 중요하게 생각합니다.
+          </p>
+          <p>
+            현재는 프론트엔드 개발을 중심으로 포트폴리오를 쌓고 있으며, 풀스택으로 역량을 넓혀가고 있습니다.
+          </p>
+        </div>
+        <div class="about-stats" data-aos="fade-left" data-aos-duration="800" data-aos-delay="150">
+          <div class="stat-box">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Years of Study</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Projects Done</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Passion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-inner">
+      <p class="section-label" data-aos="fade-up">What I Do</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="skill-icon">&#9670;</span>
+          <div class="skill-name">HTML / CSS</div>
+          <div class="skill-desc">시맨틱 마크업과 반응형 레이아웃 설계</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-level="92"></div>
+          </div>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="skill-icon">&#9671;</span>
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-desc">ES6+, DOM 조작, 비동기 프로그래밍</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-level="80"></div>
+          </div>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+          <span class="skill-icon">&#9632;</span>
+          <div class="skill-name">React</div>
+          <div class="skill-desc">컴포넌트 기반 UI 개발 및 상태 관리</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-level="70"></div>
+          </div>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+          <span class="skill-icon">&#9633;</span>
+          <div class="skill-name">Design</div>
+          <div class="skill-desc">Figma, 타이포그래피, UI/UX 기초</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-level="75"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="section-inner">
+      <p class="section-label" data-aos="fade-up">My Work</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-thumb">
+            <img src="https://picsum.photos/seed/proj1/600/400" alt="Project 1" />
+          </div>
+          <div class="project-info">
+            <div class="project-tag">Web Design</div>
+            <div class="project-name">Brand Landing Page</div>
+            <p class="project-desc">브랜드 아이덴티티를 담은 인터랙티브 랜딩 페이지. GSAP 애니메이션과 스크롤 인터랙션 적용.</p>
+          </div>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="project-thumb">
+            <img src="https://picsum.photos/seed/proj2/600/400" alt="Project 2" />
+          </div>
+          <div class="project-info">
+            <div class="project-tag">Frontend Dev</div>
+            <div class="project-name">Portfolio Gallery</div>
+            <p class="project-desc">Swiper.js 슬라이더와 필터 기능이 포함된 이미지 갤러리 웹 애플리케이션.</p>
+          </div>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="project-thumb">
+            <img src="https://picsum.photos/seed/proj3/600/400" alt="Project 3" />
+          </div>
+          <div class="project-info">
+            <div class="project-tag">UI/UX</div>
+            <div class="project-name">Dashboard UI</div>
+            <p class="project-desc">데이터 시각화와 반응형 레이아웃이 결합된 관리자 대시보드 UI 프로토타입.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label" data-aos="fade-up">Get In Touch</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Contact</h2>
+      <p class="contact-sub" data-aos="fade-up" data-aos-delay="200">
+        새로운 프로젝트, 협업, 또는 그냥 안부 인사도 환영합니다.<br />
+        언제든지 연락 주세요.
+      </p>
+      <div class="contact-links" data-aos="fade-up" data-aos-delay="300">
+        <a href="mailto:your@email.com" class="contact-link">
+          &#9993; your@email.com
+        </a>
+        <a href="#" class="contact-link">
+          &#9654; GitHub
+        </a>
+        <a href="#" class="contact-link">
+          &#9671; LinkedIn
+        </a>
+        <a href="#" class="contact-link">
+          &#9632; Instagram
+        </a>
+      </div>
+      <div data-aos="fade-up" data-aos-delay="400">
+        <a href="mailto:your@email.com" class="btn btn-primary">Send Message</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>2026 &copy; Your Name. All rights reserved.</div>
+    <div>Made with code + creativity</div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // AOS init
+    AOS.init({ once: true, duration: 750, offset: 60 });
+
+    // Progress bar
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / total) * 100;
+      bar.style.width = pct + '%';
+    });
+
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0;
+    let rx = 0, ry = 0;
+
+    window.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Skill bars animate on scroll
+    const skillBars = document.querySelectorAll('.skill-bar');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const level = bar.getAttribute('data-level');
+          bar.style.width = level + '%';
+          observer.unobserve(bar);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    skillBars.forEach(b => observer.observe(b));
+
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.borderBottom = '1px solid rgba(58,117,190,0.2)';
+      } else {
+        nav.style.borderBottom = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
