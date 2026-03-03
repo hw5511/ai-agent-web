@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --accent: #00ff9d;
+      --bg: #0d0d0d;
+      --bg2: #111;
+      --white: #ffffff;
+      --gray: #888;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: 'Space Mono', 'Noto Sans KR', monospace;
+      letter-spacing: 0.05em;
+      overflow-x: hidden;
+    }
+
+    /* ---- Scroll Progress Bar ---- */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+      will-change: width;
+    }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.9), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ---- Section Common ---- */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* ---- Section 01: Hero ---- */
+    #hero {
+      position: relative;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(160px, 30vw, 400px);
+      color: rgba(255,255,255,0.03);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 12vw, 180px);
+      line-height: 0.9;
+      letter-spacing: 0.03em;
+      margin-bottom: 32px;
+      color: var(--white);
+    }
+
+    .hero-name span {
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: var(--gray);
+      max-width: 480px;
+      line-height: 1.8;
+      letter-spacing: 0.07em;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 48px;
+      left: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    .hero-scroll-hint::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gray);
+    }
+
+    /* ---- Section 02: Works ---- */
+    #works {
+      background: var(--bg2);
+      padding-left: 0;
+      padding-right: 0;
+      overflow: hidden;
+    }
+
+    #works .inner {
+      padding: 0 48px;
+    }
+
+    .works-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 80px);
+      letter-spacing: 0.05em;
+      margin-bottom: 48px;
+    }
+
+    .swiper {
+      width: 100%;
+      padding: 20px 48px 60px !important;
+      cursor: grab;
+    }
+
+    .swiper:active {
+      cursor: grabbing;
+    }
+
+    .swiper-slide {
+      width: 380px;
+      height: 480px;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+
+    .swiper-slide:hover img {
+      transform: scale(1.05);
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .swiper-slide:hover .slide-overlay {
+      opacity: 1;
+    }
+
+    .slide-num {
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      margin-bottom: 8px;
+    }
+
+    .slide-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .slide-tag {
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    .swiper-scrollbar {
+      background: rgba(255,255,255,0.1) !important;
+    }
+
+    .swiper-scrollbar-drag {
+      background: var(--accent) !important;
+    }
+
+    .drag-hint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.7rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      padding: 0 48px;
+    }
+
+    .drag-hint::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gray);
+    }
+
+    /* ---- Section 03: Skills ---- */
+    #skills {
+      background: var(--bg);
+    }
+
+    .skills-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 80px);
+      letter-spacing: 0.05em;
+      margin-bottom: 64px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      max-width: 1100px;
+    }
+
+    .skill-item {
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .skill-item:hover {
+      border-color: var(--accent);
+      background: rgba(0,255,157,0.03);
+    }
+
+    .skill-category {
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .skill-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .skill-bar-track {
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 1px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .skill-item.aos-animate .skill-bar-fill {
+      transform: scaleX(1);
+    }
+
+    .skill-level {
+      margin-top: 10px;
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ---- Section 04: Contact ---- */
+    #contact {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 80px);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .contact-sub {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 56px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 600px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--white);
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .contact-link:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+    }
+
+    .contact-link-label {
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      width: 100px;
+      flex-shrink: 0;
+    }
+
+    .contact-link-value {
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      flex: 1;
+    }
+
+    .contact-link-arrow {
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .contact-link:hover .contact-link-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .footer-bottom {
+      margin-top: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      nav {
+        padding: 20px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 100px 24px;
+      }
+
+      .hero-scroll-hint {
+        left: 24px;
+        bottom: 32px;
+      }
+
+      .swiper {
+        padding: 20px 24px 60px !important;
+      }
+
+      .swiper-slide {
+        width: 280px;
+        height: 360px;
+      }
+
+      #works .inner {
+        padding: 0 24px;
+      }
+
+      .drag-hint {
+        padding: 0 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div id="progress-bar"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section 01: Hero -->
+  <section id="hero">
+    <div class="hero-bg-text">FOLIO</div>
+    <div class="hero-content">
+      <p class="section-label">Portfolio 2024</p>
+      <h1 class="hero-name">YOUR<br /><span>NAME</span></h1>
+      <p class="hero-tagline">
+        Creative Developer &amp; Designer<br />
+        디지털 경험을 설계하고 코드로 구현합니다.<br />
+        UI/UX · Frontend · Interactive
+      </p>
+      <a href="#works" class="hero-cta">View Works</a>
+    </div>
+    <div class="hero-scroll-hint">Scroll Down</div>
+  </section>
+
+  <!-- Section 02: Works -->
+  <section id="works">
+    <div class="inner">
+      <p class="section-label">02 — Works</p>
+      <h2 class="works-title">Selected<br />Projects</h2>
+    </div>
+    <p class="drag-hint">Drag to explore</p>
+    <div class="swiper works-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/380/480/design,ui" alt="Project 01" loading="lazy" />
+          <div class="slide-overlay">
+            <p class="slide-num">01</p>
+            <p class="slide-title">Brand Redesign</p>
+            <p class="slide-tag">UI/UX · Branding</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/380/480/web,digital" alt="Project 02" loading="lazy" />
+          <div class="slide-overlay">
+            <p class="slide-num">02</p>
+            <p class="slide-title">Interactive Web</p>
+            <p class="slide-tag">Frontend · Motion</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/380/480/app,mobile" alt="Project 03" loading="lazy" />
+          <div class="slide-overlay">
+            <p class="slide-num">03</p>
+            <p class="slide-title">Mobile App</p>
+            <p class="slide-tag">UX · Development</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/380/480/graphic,poster" alt="Project 04" loading="lazy" />
+          <div class="slide-overlay">
+            <p class="slide-num">04</p>
+            <p class="slide-title">Graphic Identity</p>
+            <p class="slide-tag">Graphic · Print</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/380/480/3d,motion" alt="Project 05" loading="lazy" />
+          <div class="slide-overlay">
+            <p class="slide-num">05</p>
+            <p class="slide-title">3D Experience</p>
+            <p class="slide-tag">3D · WebGL</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://loremflickr.com/380/480/photography,art" alt="Project 06" loading="lazy" />
+          <div class="slide-overlay">
+            <p class="slide-num">06</p>
+            <p class="slide-title">Art Direction</p>
+            <p class="slide-tag">Art · Photography</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-scrollbar"></div>
+    </div>
+  </section>
+
+  <!-- Section 03: Skills -->
+  <section id="skills">
+    <p class="section-label">03 — Skills</p>
+    <h2 class="skills-title">What<br />I Do</h2>
+    <div class="skills-grid">
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="0">
+        <p class="skill-category">Design</p>
+        <p class="skill-name">UI / UX Design</p>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="width: 90%;"></div>
+        </div>
+        <div class="skill-level"><span>Figma · Adobe XD</span><span>90%</span></div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="80">
+        <p class="skill-category">Frontend</p>
+        <p class="skill-name">HTML / CSS</p>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="width: 95%;"></div>
+        </div>
+        <div class="skill-level"><span>Sass · Tailwind</span><span>95%</span></div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="160">
+        <p class="skill-category">Development</p>
+        <p class="skill-name">JavaScript</p>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="width: 85%;"></div>
+        </div>
+        <div class="skill-level"><span>ES6+ · TypeScript</span><span>85%</span></div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="240">
+        <p class="skill-category">Framework</p>
+        <p class="skill-name">React / Vue</p>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="width: 80%;"></div>
+        </div>
+        <div class="skill-level"><span>Next.js · Nuxt</span><span>80%</span></div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="320">
+        <p class="skill-category">Motion</p>
+        <p class="skill-name">Animation</p>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="width: 88%;"></div>
+        </div>
+        <div class="skill-level"><span>GSAP · CSS Motion</span><span>88%</span></div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="400">
+        <p class="skill-category">Visual</p>
+        <p class="skill-name">Graphic Design</p>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" style="width: 75%;"></div>
+        </div>
+        <div class="skill-level"><span>Illustrator · PS</span><span>75%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 04: Contact -->
+  <section id="contact">
+    <p class="section-label">04 — Contact</p>
+    <h2 class="contact-title" data-aos="fade-up">Let's<br />Work Together</h2>
+    <p class="contact-sub" data-aos="fade-up" data-aos-delay="80">
+      새로운 프로젝트나 협업 제안을 기다리고 있습니다.<br />
+      언제든지 편하게 연락주세요.
+    </p>
+    <div class="contact-links" data-aos="fade-up" data-aos-delay="160">
+      <a href="mailto:hello@yourname.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">hello@yourname.com</span>
+        <span class="contact-link-arrow">&#8599;</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-value">github.com/yourname</span>
+        <span class="contact-link-arrow">&#8599;</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-label">Instagram</span>
+        <span class="contact-link-value">@yourname.design</span>
+        <span class="contact-link-arrow">&#8599;</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-value">linkedin.com/in/yourname</span>
+        <span class="contact-link-arrow">&#8599;</span>
+      </a>
+    </div>
+    <div class="footer-bottom" data-aos="fade-up" data-aos-delay="240">
+      <span>2024 YOUR NAME. All rights reserved.</span>
+      <span>Designed &amp; Developed by Myself</span>
+    </div>
+  </section>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // AOS init
+    AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 80 });
+
+    // Swiper
+    const swiper = new Swiper('.works-swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 20,
+      grabCursor: true,
+      freeMode: true,
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        draggable: true,
+      },
+      breakpoints: {
+        768: {
+          spaceBetween: 28,
+        }
+      }
+    });
+
+    // Scroll progress bar
+    (function () {
+      var bar = document.getElementById('progress-bar');
+      var ticking = false;
+
+      function updateProgress() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(updateProgress);
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

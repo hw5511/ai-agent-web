@@ -26,8 +26,20 @@
   - Pages URL: https://hw5511.github.io/ai-agent-web/05_infinite_grid/
   - v2 개선: 타일 gap 추가 + hover scale + stagger fade-in + DRAG 힌트
 
+## Class Agent Setup
+- `09_class_agent`: 수업용 웹 제작 에이전트 초안 (2026-03-03)
+  - `.claude/CLAUDE.md`: 단일 범용 에이전트 컨텍스트
+  - 허용 라이브러리: GSAP+ScrollTrigger / Swiper.js / AOS (회차 구분 없이 적합하면 사용)
+  - 60fps 유지 원칙 포함 (requestAnimationFrame, transform/opacity만 애니메이션)
+  - 용어 매핑 사전 포함 (학생 자연어 → CSS/JS 자동 변환)
+  - 기본 다크 스타일 고정값 (#0d0d0d, Bebas Neue + Space Mono)
+  - 스타일 트리거 감지 시 확인 로직
+  - 테스트 prompt.md: 카페 소개 페이지 (스크롤 등장 + 드래그 슬라이더)
+
 ## Next Steps
-- 추가 웹 샘플 주제 기획
+- 09_class_agent prompt.md로 에이전트 실행 테스트
+- Typed.js, Splitting.js 추가 테스트
+- 4회차 AI 미디어 소스 처리 규칙 구체화
 - GitHub Actions 자동 배포 스킬 추가 (유키 COO 대기 중)
 
 ## Notes
