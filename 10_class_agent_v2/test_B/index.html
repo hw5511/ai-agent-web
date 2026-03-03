@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Music</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #ffffff;
+      --color-accent: #cfcfcc;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-primary);
+      font-family: 'Space Mono', 'Nanum Gothic', monospace;
+      overflow-x: hidden;
+    }
+
+    /* 스크롤 진행 바 */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* 네비게이션 */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.9), transparent);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--color-accent);
+    }
+
+    /* 히어로 섹션 */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 20vw, 18rem);
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.03);
+      user-select: none;
+      pointer-events: none;
+      top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      opacity: 0.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      letter-spacing: 0.06em;
+      line-height: 0.95;
+      color: var(--color-primary);
+    }
+
+    .hero-title span {
+      color: var(--color-accent);
+    }
+
+    .hero-desc {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.45);
+      max-width: 420px;
+      line-height: 1.9;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0.4;
+      animation: bounceDown 2s ease-in-out infinite;
+    }
+
+    .hero-scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll-hint .arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--color-accent), transparent);
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* 섹션 공통 */
+    section {
+      padding: 8rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-bottom: 3rem;
+    }
+
+    /* About 섹션 */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%);
+      transition: filter 0.6s ease, transform 0.6s ease;
+    }
+
+    .about-image:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.03);
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(207,207,204,0.2);
+      z-index: 1;
+      border-radius: 4px;
+    }
+
+    .about-image::after {
+      content: 'VINYL';
+      position: absolute;
+      bottom: 1.2rem;
+      right: 1.2rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--color-accent);
+      z-index: 2;
+      opacity: 0.7;
+    }
+
+    .about-content .section-title {
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text {
+      font-size: 0.88rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    .tag {
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(207,207,204,0.3);
+      border-radius: 2px;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      transition: background 0.3s ease, border-color 0.3s ease;
+      cursor: default;
+    }
+
+    .tag:hover {
+      background: rgba(207,207,204,0.1);
+      border-color: var(--color-accent);
+    }
+
+    /* 앨범 섹션 */
+    #albums {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+    }
+
+    .albums-header {
+      margin-bottom: 4rem;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .album-card {
+      position: relative;
+      cursor: pointer;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #111;
+      transition: transform 0.4s ease;
+      will-change: transform;
+    }
+
+    .album-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .album-card:nth-child(2) {
+      margin-top: 2rem;
+    }
+
+    .album-card:nth-child(5) {
+      margin-top: -2rem;
+    }
+
+    .album-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: grayscale(20%);
+    }
+
+    .album-card:hover .album-thumb {
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+
+    .album-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+
+    .album-card:hover .album-overlay {
+      opacity: 1;
+    }
+
+    .album-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.06em;
+      color: var(--color-primary);
+    }
+
+    .album-artist {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+    }
+
+    .album-year {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      background: rgba(13,13,13,0.7);
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .album-card:hover .album-year {
+      opacity: 1;
+    }
+
+    /* 페이보릿 넘버 (큰 앨범) */
+    .album-card.featured {
+      grid-column: span 2;
+    }
+
+    .album-card.featured .album-thumb {
+      aspect-ratio: 2 / 1;
+    }
+
+    /* 장르 섹션 */
+    #genres {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .genre-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .genre-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      cursor: default;
+      transition: padding-left 0.4s ease;
+    }
+
+    .genre-item:hover {
+      padding-left: 1rem;
+    }
+
+    .genre-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.2);
+      transition: color 0.4s ease;
+    }
+
+    .genre-item:hover .genre-name {
+      color: var(--color-primary);
+    }
+
+    .genre-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .genre-count {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+    }
+
+    .genre-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .genre-item:hover .genre-dot {
+      opacity: 1;
+    }
+
+    /* 통계 섹션 */
+    #stats {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-card {
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      transition: border-color 0.4s ease, background 0.4s ease;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(207,207,204,0.3);
+      background: rgba(207,207,204,0.04);
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 0.6rem;
+    }
+
+    /* 푸터 */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 3rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .footer-copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* 모바일 반응형 */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+
+      #about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 5rem 1.5rem;
+      }
+
+      .album-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .album-card.featured {
+        grid-column: span 2;
+      }
+
+      .album-card:nth-child(2),
+      .album-card:nth-child(5) {
+        margin-top: 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      section, #albums, #genres, #stats {
+        padding: 5rem 1.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <nav>
+    <div class="nav-logo">MY MUSIC</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#albums">Albums</a></li>
+      <li><a href="#genres">Genres</a></li>
+    </ul>
+  </nav>
+
+  <!-- 히어로 -->
+  <section id="hero">
+    <div class="hero-bg-text">MUSIC</div>
+    <p class="hero-label">My Music Hobby</p>
+    <h1 class="hero-title">I LIVE<br/><span>FOR MUSIC</span></h1>
+    <p class="hero-desc">음악은 나의 언어. 장르를 넘어 소리가 주는 감동을 수집하는 사람.</p>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-image" data-aos="fade-right" data-aos-duration="900">
+      <img src="https://loremflickr.com/600/600/vinyl,record,music" alt="vinyl record" />
+    </div>
+    <div class="about-content" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+      <p class="section-label">About My Taste</p>
+      <h2 class="section-title">SOUND IS<br/>EVERYTHING</h2>
+      <p class="about-text">
+        어릴 때부터 음악은 단순한 취미가 아니었습니다. 하루를 시작할 때도, 마무리할 때도, 기분이 좋을 때도 나쁠 때도 — 항상 음악이 함께였습니다.
+      </p>
+      <p class="about-text">
+        장르에 편견 없이 듣습니다. 록의 에너지, 재즈의 여유, 일렉트로닉의 몰입감, 그리고 가끔 클래식의 무게감까지. 좋은 음악은 설명하지 않아도 몸이 먼저 압니다.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Rock</span>
+        <span class="tag">Jazz</span>
+        <span class="tag">Electronic</span>
+        <span class="tag">Post-Rock</span>
+        <span class="tag">Indie</span>
+        <span class="tag">Lo-Fi</span>
+        <span class="tag">Classical</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 앨범 -->
+  <section id="albums">
+    <div class="albums-header" data-aos="fade-up">
+      <p class="section-label">Favorite Albums</p>
+      <h2 class="section-title">MY COLLECTION</h2>
+    </div>
+
+    <div class="album-grid">
+      <!-- featured -->
+      <div class="album-card featured" data-aos="fade-up" data-aos-delay="0">
+        <img class="album-thumb" src="https://loremflickr.com/900/450/concert,music,dark" alt="album" />
+        <div class="album-overlay">
+          <div class="album-title">THE WALL</div>
+          <div class="album-artist">Pink Floyd</div>
+        </div>
+        <div class="album-year">1979</div>
+      </div>
+
+      <div class="album-card" data-aos="fade-up" data-aos-delay="80">
+        <img class="album-thumb" src="https://loremflickr.com/400/400/guitar,rock,stage" alt="album" />
+        <div class="album-overlay">
+          <div class="album-title">OK COMPUTER</div>
+          <div class="album-artist">Radiohead</div>
+        </div>
+        <div class="album-year">1997</div>
+      </div>
+
+      <div class="album-card" data-aos="fade-up" data-aos-delay="160">
+        <img class="album-thumb" src="https://loremflickr.com/400/400/jazz,saxophone,night" alt="album" />
+        <div class="album-overlay">
+          <div class="album-title">KIND OF BLUE</div>
+          <div class="album-artist">Miles Davis</div>
+        </div>
+        <div class="album-year">1959</div>
+      </div>
+
+      <div class="album-card" data-aos="fade-up" data-aos-delay="0">
+        <img class="album-thumb" src="https://loremflickr.com/400/400/electronic,synthesizer,dark" alt="album" />
+        <div class="album-overlay">
+          <div class="album-title">RANDOM ACCESS</div>
+          <div class="album-artist">Daft Punk</div>
+        </div>
+        <div class="album-year">2013</div>
+      </div>
+
+      <div class="album-card" data-aos="fade-up" data-aos-delay="80">
+        <img class="album-thumb" src="https://loremflickr.com/400/400/indie,band,music" alt="album" />
+        <div class="album-overlay">
+          <div class="album-title">IN RAINBOWS</div>
+          <div class="album-artist">Radiohead</div>
+        </div>
+        <div class="album-year">2007</div>
+      </div>
+
+      <div class="album-card" data-aos="fade-up" data-aos-delay="160">
+        <img class="album-thumb" src="https://loremflickr.com/400/400/piano,classical,concert" alt="album" />
+        <div class="album-overlay">
+          <div class="album-title">GOLDBERG VARIATIONS</div>
+          <div class="album-artist">Glenn Gould</div>
+        </div>
+        <div class="album-year">1981</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 장르 -->
+  <section id="genres">
+    <div data-aos="fade-up">
+      <p class="section-label">What I Listen To</p>
+      <h2 class="section-title">GENRES</h2>
+    </div>
+
+    <div class="genre-list">
+      <div class="genre-item" data-aos="fade-up" data-aos-delay="0">
+        <span class="genre-name">POST-ROCK</span>
+        <div class="genre-meta">
+          <span class="genre-count">My #1</span>
+          <div class="genre-dot"></div>
+        </div>
+      </div>
+      <div class="genre-item" data-aos="fade-up" data-aos-delay="60">
+        <span class="genre-name">JAZZ</span>
+        <div class="genre-meta">
+          <span class="genre-count">Late night</span>
+          <div class="genre-dot"></div>
+        </div>
+      </div>
+      <div class="genre-item" data-aos="fade-up" data-aos-delay="120">
+        <span class="genre-name">ELECTRONIC</span>
+        <div class="genre-meta">
+          <span class="genre-count">Focus mode</span>
+          <div class="genre-dot"></div>
+        </div>
+      </div>
+      <div class="genre-item" data-aos="fade-up" data-aos-delay="180">
+        <span class="genre-name">INDIE ROCK</span>
+        <div class="genre-meta">
+          <span class="genre-count">Road trip</span>
+          <div class="genre-dot"></div>
+        </div>
+      </div>
+      <div class="genre-item" data-aos="fade-up" data-aos-delay="240">
+        <span class="genre-name">CLASSICAL</span>
+        <div class="genre-meta">
+          <span class="genre-count">Deep work</span>
+          <div class="genre-dot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 통계 -->
+  <section id="stats">
+    <div data-aos="fade-up">
+      <p class="section-label">By The Numbers</p>
+      <h2 class="section-title">MY MUSIC LIFE</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="stat-number">312</div>
+        <div class="stat-label">Albums in Collection</div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="stat-number">8K+</div>
+        <div class="stat-label">Hours Listened</div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="stat-number">47</div>
+        <div class="stat-label">Concerts Attended</div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Genres Explored</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">MY MUSIC</div>
+    <div class="footer-copy">Sound is my language &mdash; 2026</div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 80 });
+
+    // 스크롤 진행 바
+    const progressBar = document.getElementById('progress-bar');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          progressBar.style.width = pct + '%';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  </script>
+</body>
+</html>
