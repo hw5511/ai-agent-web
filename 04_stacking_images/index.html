@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stacking Images - 014</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -17,6 +17,7 @@
       background-color: #f5f5f0;
       height: 600vh;
       font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
     }
 
     header {
@@ -28,7 +29,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 30px;
+      padding: 20px 24px;
     }
 
     header span {
@@ -39,183 +40,244 @@
       text-transform: uppercase;
     }
 
-    .scroll-indicator {
+    #stage {
       position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      color: #000;
-      text-transform: uppercase;
-      opacity: 1;
-      transition: opacity 0.4s ease;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      perspective: 800px;
     }
 
-    .image-container {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    #stack-container {
+      position: relative;
       width: 0;
       height: 0;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
-    .img-card {
+    .img-wrapper {
       position: absolute;
       width: 280px;
       height: 360px;
-      border-radius: 4px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-      overflow: hidden;
       opacity: 0;
-      will-change: opacity, transform;
+      will-change: transform, opacity;
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .img-card img {
+    .img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
       display: block;
+    }
+
+    .img-label {
+      position: absolute;
+      bottom: -18px;
+      right: 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #888;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    #scroll-indicator {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+    }
+
+    #scroll-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #888;
+      letter-spacing: 0.1em;
+      text-align: center;
+      transition: opacity 0.4s ease;
+      white-space: nowrap;
+    }
+
+    #progress-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    #progress-fill {
+      height: 100%;
+      background: #000;
+      width: 0%;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <span>Stacking Images</span>
+    <span>STACKING IMAGES</span>
     <span>014</span>
   </header>
 
-  <div class="image-container" id="imageContainer">
-    <div class="img-card" id="img1">
-      <img src="https://picsum.photos/seed/10/400/500" alt="">
-    </div>
-    <div class="img-card" id="img2">
-      <img src="https://picsum.photos/seed/20/400/500" alt="">
-    </div>
-    <div class="img-card" id="img3">
-      <img src="https://picsum.photos/seed/30/400/500" alt="">
-    </div>
-    <div class="img-card" id="img4">
-      <img src="https://picsum.photos/seed/40/400/500" alt="">
-    </div>
-    <div class="img-card" id="img5">
-      <img src="https://picsum.photos/seed/50/400/500" alt="">
-    </div>
-    <div class="img-card" id="img6">
-      <img src="https://picsum.photos/seed/60/400/500" alt="">
-    </div>
+  <div id="stage">
+    <div id="stack-container"></div>
   </div>
 
-  <div class="scroll-indicator" id="scrollIndicator">Scroll</div>
+  <div id="scroll-indicator">
+    <div id="scroll-text">SCROLL</div>
+  </div>
+
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
+  </div>
 
   <script>
-    var images = [
-      {
-        el: document.getElementById('img1'),
-        rotate: -8,
-        tx: -120,
-        ty: -40,
-        scale: 0.85
-      },
-      {
-        el: document.getElementById('img2'),
-        rotate: 5,
-        tx: 80,
-        ty: -80,
-        scale: 0.9
-      },
-      {
-        el: document.getElementById('img3'),
-        rotate: -3,
-        tx: -60,
-        ty: 60,
-        scale: 0.95
-      },
-      {
-        el: document.getElementById('img4'),
-        rotate: 10,
-        tx: 100,
-        ty: 20,
-        scale: 0.88
-      },
-      {
-        el: document.getElementById('img5'),
-        rotate: -6,
-        tx: -30,
-        ty: -60,
-        scale: 0.92
-      },
-      {
-        el: document.getElementById('img6'),
-        rotate: 2,
-        tx: 40,
-        ty: 40,
-        scale: 1.0
-      }
+    var IMAGE_DATA = [
+      { seed: 10, rotate: -8,  tx: -120, ty: -40,  scale: 0.85 },
+      { seed: 20, rotate:  5,  tx:  80,  ty: -80,  scale: 0.90 },
+      { seed: 30, rotate: -3,  tx: -60,  ty:  60,  scale: 0.95 },
+      { seed: 40, rotate: 10,  tx:  100, ty:  20,  scale: 0.88 },
+      { seed: 50, rotate: -6,  tx: -30,  ty: -60,  scale: 0.92 },
+      { seed: 60, rotate:  2,  tx:  40,  ty:  40,  scale: 1.00 },
     ];
 
-    var scrollIndicator = document.getElementById('scrollIndicator');
-    var entryOffset = 80;
-    var segmentSize = 1 / 6;
+    var container = document.getElementById('stack-container');
+    var progressFill = document.getElementById('progress-fill');
+    var scrollText = document.getElementById('scroll-text');
 
-    function setTransform(img, progress) {
-      var tx = img.tx;
-      var ty = img.ty + entryOffset * (1 - progress);
-      var rotate = img.rotate;
-      var scale = img.scale;
-      img.el.style.transform =
-        'translate(' + (tx - 140) + 'px, ' + (ty - 180) + 'px) ' +
-        'rotate(' + rotate + 'deg) ' +
-        'scale(' + scale + ')';
-    }
+    var wrappers = [];
 
-    function setTransformFinal(img) {
-      img.el.style.transform =
-        'translate(' + (img.tx - 140) + 'px, ' + (img.ty - 180) + 'px) ' +
-        'rotate(' + img.rotate + 'deg) ' +
-        'scale(' + img.scale + ')';
-    }
+    IMAGE_DATA.forEach(function(data, i) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'img-wrapper';
+      wrapper.style.zIndex = i + 1;
+      wrapper.style.transform = buildTransform(data, 80);
 
-    images.forEach(function(img) {
-      img.el.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      setTransform(img, 0);
+      var img = document.createElement('img');
+      img.src = 'https://picsum.photos/seed/' + data.seed + '/400/500';
+      img.alt = '';
+
+      var label = document.createElement('div');
+      label.className = 'img-label';
+      label.textContent = String(i + 1).padStart(2, '0');
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(label);
+      container.appendChild(wrapper);
+
+      wrappers.push({ wrapper: wrapper, label: label, data: data });
     });
 
+    function buildTransform(data, yOffset) {
+      var tx = data.tx - 140;
+      var ty = data.ty - 180 + (yOffset || 0);
+      return (
+        'translate(' + tx + 'px, ' + ty + 'px) ' +
+        'rotate(' + data.rotate + 'deg) ' +
+        'scale(' + data.scale + ')'
+      );
+    }
+
+    var TOTAL = IMAGE_DATA.length;
+    var STEP = 1 / TOTAL;
+    var scrollTextState = 'SCROLL';
+    var textTransitioning = false;
+
     function onScroll() {
-      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var scrollY = window.scrollY || document.documentElement.scrollTop;
       var maxScroll = document.body.scrollHeight - window.innerHeight;
-      var globalProgress = scrollTop / maxScroll;
+      var progress = Math.min(scrollY / maxScroll, 1);
 
-      images.forEach(function(img, i) {
-        var start = i * segmentSize;
-        var end = start + segmentSize;
+      progressFill.style.width = (progress * 100) + '%';
 
-        if (globalProgress < start) {
-          img.el.style.opacity = '0';
-          setTransform(img, 0);
-        } else if (globalProgress >= end) {
-          img.el.style.opacity = '1';
-          setTransformFinal(img);
+      wrappers.forEach(function(item, i) {
+        var start = i * STEP;
+        var end = start + STEP;
+
+        if (progress < start) {
+          item.wrapper.style.opacity = '0';
+          item.wrapper.style.transform = buildTransform(item.data, 80);
+          item.label.style.opacity = '0';
         } else {
-          var localProgress = (globalProgress - start) / segmentSize;
-          img.el.style.opacity = String(Math.min(localProgress * 2, 1));
-          setTransform(img, localProgress);
+          item.wrapper.style.opacity = '1';
+          item.wrapper.style.transform = buildTransform(item.data, 0);
+          item.label.style.opacity = '1';
         }
       });
 
-      if (globalProgress > 0.05) {
-        scrollIndicator.style.opacity = '0';
-      } else {
-        scrollIndicator.style.opacity = '1';
+      var allVisible = progress >= 0.95;
+
+      if (allVisible && scrollTextState !== 'DRAG TO EXPLORE' && !textTransitioning) {
+        textTransitioning = true;
+        scrollText.style.opacity = '0';
+        setTimeout(function() {
+          scrollText.textContent = 'DRAG TO EXPLORE';
+          scrollText.style.opacity = '1';
+          scrollTextState = 'DRAG TO EXPLORE';
+          textTransitioning = false;
+        }, 400);
+      } else if (!allVisible && scrollTextState !== 'SCROLL' && !textTransitioning) {
+        textTransitioning = true;
+        scrollText.style.opacity = '0';
+        setTimeout(function() {
+          scrollText.textContent = 'SCROLL';
+          scrollText.style.opacity = '1';
+          scrollTextState = 'SCROLL';
+          textTransitioning = false;
+        }, 400);
       }
+
+      parallaxEnabled = allVisible;
+    }
+
+    var parallaxEnabled = false;
+    var targetRX = 0;
+    var targetRY = 0;
+    var currentRX = 0;
+    var currentRY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      if (!parallaxEnabled) return;
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      targetRY =  (e.clientX / vw - 0.5) * 10;
+      targetRX = -(e.clientY / vh - 0.5) * 10;
+    });
+
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function animateParallax() {
+      var tx, ty;
+      if (parallaxEnabled) {
+        currentRX = lerp(currentRX, targetRX, 0.06);
+        currentRY = lerp(currentRY, targetRY, 0.06);
+      } else {
+        currentRX = lerp(currentRX, 0, 0.06);
+        currentRY = lerp(currentRY, 0, 0.06);
+      }
+
+      container.style.transform = 'rotateX(' + currentRX + 'deg) rotateY(' + currentRY + 'deg)';
+      requestAnimationFrame(animateParallax);
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+    animateParallax();
   </script>
 </body>
 </html>

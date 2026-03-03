@@ -7,10 +7,10 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 
-    * {
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
@@ -19,9 +19,14 @@
       height: 100vh;
       overflow: hidden;
       font-family: 'Space Mono', monospace;
+      cursor: grab;
     }
 
-    header {
+    body.dragging {
+      cursor: grabbing;
+    }
+
+    #header {
       position: fixed;
       top: 0;
       left: 0;
@@ -30,48 +35,43 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 24px;
+      padding: 24px 32px;
       pointer-events: none;
     }
 
-    header span {
+    #header span {
       color: #fff;
+      font-family: 'Space Mono', monospace;
       font-size: 10px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.2em;
       opacity: 0.6;
-      text-transform: uppercase;
     }
 
-    #canvas {
-      position: absolute;
+    #scene {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      cursor: grab;
     }
 
-    #canvas.dragging {
-      cursor: grabbing;
-    }
-
-    .grid-wrapper {
+    .grid-copy {
       position: absolute;
       top: 0;
       left: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 280px);
+      gap: 6px;
+      will-change: transform;
     }
 
     .tile {
-      position: absolute;
       width: 280px;
       height: 280px;
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
-      transition: filter 0.2s ease;
-    }
-
-    .tile:hover {
-      filter: brightness(1.15);
+      opacity: 0;
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
 
     .tile img {
@@ -81,264 +81,219 @@
       display: block;
       pointer-events: none;
       user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    body:not(.dragging) .tile:hover {
+      transform: scale(1.04);
+      filter: brightness(1.2);
+    }
+
+    #hint {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      opacity: 0.5;
+      pointer-events: none;
+      transition: opacity 0.6s;
+      white-space: nowrap;
+      z-index: 100;
+    }
+
+    #hint.hidden {
+      opacity: 0;
     }
   </style>
 </head>
 <body>
-  <header>
-    <span>Infinite Grid</span>
+  <div id="header">
+    <span>INFINITE GRID</span>
     <span>026</span>
-  </header>
-
-  <div id="canvas">
-    <div class="grid-wrapper" id="grid"></div>
   </div>
+
+  <div id="scene"></div>
+
+  <div id="hint">DRAG TO EXPLORE</div>
 
   <script>
     const COLS = 3;
     const ROWS = 9;
     const TILE_W = 280;
     const TILE_H = 280;
-    const GAP = 12;
-    const TOTAL_W = TILE_W * COLS + GAP * (COLS - 1);
-    const TOTAL_H = TILE_H * ROWS + GAP * (ROWS - 1);
+    const GAP = 6;
+    const TOTAL = COLS * ROWS;
+    const GRID_W = TILE_W * COLS + GAP * (COLS - 1);
+    const GRID_H = TILE_H * ROWS + GAP * (ROWS - 1);
 
-    const canvas = document.getElementById('canvas');
-    const grid = document.getElementById('grid');
+    const scene = document.getElementById('scene');
+    const hint = document.getElementById('hint');
 
     let offsetX = 0;
     let offsetY = 0;
     let velX = 0;
     let velY = 0;
     let isDragging = false;
-    let lastMouseX = 0;
-    let lastMouseY = 0;
-    let animFrameId = null;
+    let isDragged = false;
+    let lastX = 0;
+    let lastY = 0;
 
-    // Build tiles
-    const tiles = [];
-    for (let i = 0; i < ROWS * COLS; i++) {
-      const tile = document.createElement('div');
-      tile.className = 'tile';
-      const img = document.createElement('img');
-      img.src = `https://picsum.photos/seed/${i + 1}/280/280`;
-      img.draggable = false;
-      tile.appendChild(img);
-      grid.appendChild(tile);
-      tiles.push(tile);
+    // Determine how many grid copies are needed to cover the viewport
+    function getCopyCounts() {
+      const cxCount = Math.ceil(window.innerWidth / GRID_W) + 2;
+      const cyCount = Math.ceil(window.innerHeight / GRID_H) + 2;
+      return { cxCount, cyCount };
     }
 
-    function positionTiles() {
-      for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-          const idx = row * COLS + col;
-          const x = col * (TILE_W + GAP);
-          const y = row * (TILE_H + GAP);
-          tiles[idx].style.left = x + 'px';
-          tiles[idx].style.top = y + 'px';
+    let copies = [];
+
+    function buildGrid() {
+      copies.forEach(c => c.el.remove());
+      copies = [];
+
+      const { cxCount, cyCount } = getCopyCounts();
+
+      for (let cy = 0; cy < cyCount; cy++) {
+        for (let cx = 0; cx < cxCount; cx++) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'grid-copy';
+
+          const tileDivs = [];
+          for (let i = 0; i < TOTAL; i++) {
+            const tile = document.createElement('div');
+            tile.className = 'tile';
+
+            const img = document.createElement('img');
+            img.src = `https://picsum.photos/seed/${i + 1}/280/280`;
+            img.alt = '';
+            img.draggable = false;
+
+            tile.appendChild(img);
+            wrapper.appendChild(tile);
+            tileDivs.push(tile);
+          }
+
+          scene.appendChild(wrapper);
+          copies.push({ el: wrapper, cx, cy, tiles: tileDivs });
         }
       }
+
+      // Fade-in stagger: all tiles across all copies, keyed by tile index within grid
+      const lastDelay = (TOTAL - 1) * 40 + 500;
+      copies.forEach(({ tiles: tileDivs }) => {
+        tileDivs.forEach((tile, i) => {
+          setTimeout(() => {
+            tile.style.transition = 'opacity 0.5s ease, transform 0.3s ease, filter 0.3s ease';
+            tile.style.opacity = '1';
+          }, i * 40);
+        });
+      });
+      // After all fade-ins complete, remove opacity from transition so hover works cleanly
+      setTimeout(() => {
+        copies.forEach(({ tiles: tileDivs }) => {
+          tileDivs.forEach(tile => {
+            tile.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+          });
+        });
+      }, lastDelay + 50);
     }
 
     function mod(n, m) {
       return ((n % m) + m) % m;
     }
 
-    function updateGrid() {
-      // Center offset so grid starts roughly in the middle of viewport
-      const cx = (window.innerWidth - TOTAL_W) / 2;
-      const cy = (window.innerHeight - TOTAL_H) / 2;
-
-      // Apply modulo for infinite loop
-      let ox = mod(offsetX, TOTAL_W);
-      let oy = mod(offsetY, TOTAL_H);
-
-      // We render the grid tiled: place it so it covers the viewport
-      // We use a translate on the wrapper, tiling by repeating offsets
-      // Instead, directly position each tile with tiling logic
-
-      const startX = cx + ox - TOTAL_W;
-      const startY = cy + oy - TOTAL_H;
-
-      // How many repetitions needed to cover viewport
-      const repX = Math.ceil(window.innerWidth / TOTAL_W) + 2;
-      const repY = Math.ceil(window.innerHeight / TOTAL_H) + 2;
-
-      // We'll manage tile elements dynamically using virtual tiling
-      // For simplicity: use a single grid wrapper with offset,
-      // then repeat by adjusting per-tile positions
-
-      // Re-approach: position each tile considering tiling
-      // Each tile has a base position. We shift the entire grid by (startX, startY)
-      // and repeat for coverage.
-
-      // Clear previous extra clones — instead use CSS repeat trick:
-      // Just translate the wrapper and let the modulo handle wraparound.
-
-      grid.style.transform = `translate(${startX}px, ${startY}px)`;
-
-      // Additional copies to fill viewport
-      // We handle this by having multiple wrappers — but that's complex.
-      // Simpler: use canvas large enough and modulo-shift.
-      // Let's use a different approach: position each tile absolutely with tiling.
-    }
-
-    // Better approach: use multiple virtual grid copies
-    let wrappers = [];
-
-    function buildWrappers() {
-      // Remove old wrappers
-      wrappers.forEach(w => w.remove());
-      wrappers = [];
-
-      const repX = Math.ceil(window.innerWidth / TOTAL_W) + 2;
-      const repY = Math.ceil(window.innerHeight / TOTAL_H) + 2;
-
-      for (let ry = 0; ry < repY; ry++) {
-        for (let rx = 0; rx < repX; rx++) {
-          const wrapper = document.createElement('div');
-          wrapper.className = 'grid-wrapper';
-          wrapper.style.position = 'absolute';
-          wrapper.style.top = '0';
-          wrapper.style.left = '0';
-
-          for (let row = 0; row < ROWS; row++) {
-            for (let col = 0; col < COLS; col++) {
-              const idx = row * COLS + col;
-              const tile = document.createElement('div');
-              tile.className = 'tile';
-              tile.style.left = (col * (TILE_W + GAP)) + 'px';
-              tile.style.top = (row * (TILE_H + GAP)) + 'px';
-
-              const img = document.createElement('img');
-              img.src = `https://picsum.photos/seed/${idx + 1}/280/280`;
-              img.draggable = false;
-              tile.appendChild(img);
-              wrapper.appendChild(tile);
-            }
-          }
-
-          wrapper.dataset.rx = rx;
-          wrapper.dataset.ry = ry;
-          canvas.appendChild(wrapper);
-          wrappers.push(wrapper);
-        }
-      }
-    }
-
-    buildWrappers();
-
-    // Remove the original grid
-    grid.remove();
-
-    const repX = Math.ceil(window.innerWidth / TOTAL_W) + 2;
-    const repY = Math.ceil(window.innerHeight / TOTAL_H) + 2;
-
     function render() {
-      // Center so grid is visually centered on load
-      const cx = (window.innerWidth - TOTAL_W) / 2;
-      const cy = (window.innerHeight - TOTAL_H) / 2;
+      const vpW = window.innerWidth;
+      const vpH = window.innerHeight;
+      const centerX = (vpW - GRID_W) / 2;
+      const centerY = (vpH - GRID_H) / 2;
 
-      const ox = mod(offsetX, TOTAL_W);
-      const oy = mod(offsetY, TOTAL_H);
+      const ox = mod(offsetX, GRID_W);
+      const oy = mod(offsetY, GRID_H);
 
-      const baseX = cx + ox - TOTAL_W;
-      const baseY = cy + oy - TOTAL_H;
+      const baseX = centerX + ox - GRID_W;
+      const baseY = centerY + oy - GRID_H;
 
-      wrappers.forEach(wrapper => {
-        const rx = parseInt(wrapper.dataset.rx);
-        const ry = parseInt(wrapper.dataset.ry);
-        const x = baseX + rx * TOTAL_W;
-        const y = baseY + ry * TOTAL_H;
-        wrapper.style.transform = `translate(${x}px, ${y}px)`;
+      copies.forEach(({ el, cx, cy }) => {
+        const x = baseX + cx * GRID_W;
+        const y = baseY + cy * GRID_H;
+        el.style.transform = `translate(${x}px, ${y}px)`;
       });
     }
 
-    function animate() {
+    function loop() {
       if (!isDragging) {
-        offsetX += velX;
-        offsetY += velY;
         velX *= 0.92;
         velY *= 0.92;
         if (Math.abs(velX) < 0.01) velX = 0;
         if (Math.abs(velY) < 0.01) velY = 0;
+        offsetX += velX;
+        offsetY += velY;
       }
       render();
-      animFrameId = requestAnimationFrame(animate);
+      requestAnimationFrame(loop);
     }
 
-    animate();
-
-    // Mouse events
-    canvas.addEventListener('mousedown', (e) => {
+    function onDragStart(x, y) {
       isDragging = true;
-      lastMouseX = e.clientX;
-      lastMouseY = e.clientY;
+      lastX = x;
+      lastY = y;
       velX = 0;
       velY = 0;
-      canvas.classList.add('dragging');
-    });
+      document.body.classList.add('dragging');
 
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const dx = e.clientX - lastMouseX;
-      const dy = e.clientY - lastMouseY;
-      lastMouseX = e.clientX;
-      lastMouseY = e.clientY;
-      velX = dx * 1.2;
-      velY = dy * 1.2;
-      offsetX += velX;
-      offsetY += velY;
-    });
-
-    window.addEventListener('mouseup', () => {
-      isDragging = false;
-      canvas.classList.remove('dragging');
-    });
-
-    canvas.addEventListener('mouseleave', () => {
-      if (isDragging) {
-        isDragging = false;
-        canvas.classList.remove('dragging');
+      if (!isDragged) {
+        isDragged = true;
+        hint.classList.add('hidden');
+        setTimeout(() => { hint.style.display = 'none'; }, 600);
       }
-    });
+    }
 
-    // Touch events
-    let lastTouchX = 0;
-    let lastTouchY = 0;
-
-    canvas.addEventListener('touchstart', (e) => {
-      const touch = e.touches[0];
-      isDragging = true;
-      lastTouchX = touch.clientX;
-      lastTouchY = touch.clientY;
-      velX = 0;
-      velY = 0;
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
+    function onDragMove(x, y) {
       if (!isDragging) return;
-      const touch = e.touches[0];
-      const dx = touch.clientX - lastTouchX;
-      const dy = touch.clientY - lastTouchY;
-      lastTouchX = touch.clientX;
-      lastTouchY = touch.clientY;
+      const dx = x - lastX;
+      const dy = y - lastY;
+      lastX = x;
+      lastY = y;
       velX = dx * 1.2;
       velY = dy * 1.2;
       offsetX += velX;
       offsetY += velY;
+    }
+
+    function onDragEnd() {
+      isDragging = false;
+      document.body.classList.remove('dragging');
+    }
+
+    document.addEventListener('mousedown', (e) => onDragStart(e.clientX, e.clientY));
+    document.addEventListener('mousemove', (e) => onDragMove(e.clientX, e.clientY));
+    document.addEventListener('mouseup', onDragEnd);
+    document.addEventListener('mouseleave', onDragEnd);
+
+    document.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      onDragStart(t.clientX, t.clientY);
     }, { passive: true });
 
-    window.addEventListener('touchend', () => {
-      isDragging = false;
-    });
+    document.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      onDragMove(t.clientX, t.clientY);
+    }, { passive: true });
+
+    document.addEventListener('touchend', onDragEnd);
 
     window.addEventListener('resize', () => {
-      // Rebuild wrappers on resize
-      wrappers.forEach(w => w.remove());
-      wrappers = [];
-      buildWrappers();
+      buildGrid();
     });
+
+    buildGrid();
+    render();
+    loop();
   </script>
 </body>
 </html>
