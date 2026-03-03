@@ -9,21 +9,22 @@
 - **GitHub Pages**: https://hw5511.github.io/ai-agent-web/
 - **QA 방식**: Pages URL로 직접 확인 (로컬 서버 불필요)
 
-## Completed Samples
-- `01_scroll_gallery`: GSAP Card Stack Scroll Gallery (PASS)
+## Completed Samples (v2)
+- `01_scroll_gallery`: GSAP Card Stack Scroll Gallery (PASS v2)
   - Pages URL: https://hw5511.github.io/ai-agent-web/01_scroll_gallery/
-- `02_word_by_word`: Word by Word 텍스트 등장 애니메이션 (PASS)
+  - v2 개선: 하단 진행 바 + SCROLL 힌트 pulse + 카드 hover scale
+- `02_word_by_word`: Word by Word 텍스트 등장 애니메이션 (PASS v2)
   - Pages URL: https://hw5511.github.io/ai-agent-web/02_word_by_word/
-  - tutorial005 재현, IntersectionObserver + stagger
-- `03_card_shuffle`: Card Shuffle FAN 배열 (PASS)
+  - v2 개선: 3섹션 구성 + 방향 교차 stagger + 우측 세로 진행 바
+- `03_card_shuffle`: Card Shuffle FAN 배열 (PASS v2)
   - Pages URL: https://hw5511.github.io/ai-agent-web/03_card_shuffle/
-  - tutorial003 재현, 6장 부채꼴 + parallax lerp
-- `04_stacking_images`: Infinite Stacking Images (PASS)
+  - v2 개선: picsum 이미지 오버레이 + CLICK TO SHUFFLE 힌트 + 카운터
+- `04_stacking_images`: Infinite Stacking Images (PASS v2)
   - Pages URL: https://hw5511.github.io/ai-agent-web/04_stacking_images/
-  - tutorial014 재현, 600vh 스크롤 구간 매핑
-- `05_infinite_grid`: Infinite Grid 드래그 타일링 (PASS)
+  - v2 개선: 이미지 번호 레이블 + mouse parallax + 하단 진행 바
+- `05_infinite_grid`: Infinite Grid 드래그 타일링 (PASS v2)
   - Pages URL: https://hw5511.github.io/ai-agent-web/05_infinite_grid/
-  - tutorial026 재현, buildWrappers + modulo 무한 루프
+  - v2 개선: 타일 gap 추가 + hover scale + stagger fade-in + DRAG 힌트
 
 ## Next Steps
 - 추가 웹 샘플 주제 기획
