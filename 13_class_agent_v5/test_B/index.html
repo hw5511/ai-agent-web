@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Music World</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #c5226d;
+      --color-accent: #33dfd4;
+      --color-text: #ffffff;
+      --color-muted: rgba(255, 255, 255, 0.5);
+      --color-card: rgba(255, 255, 255, 0.04);
+      --color-border: rgba(255, 255, 255, 0.08);
+
+      --font-title: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+      backdrop-filter: blur(0px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 60%, rgba(197, 34, 109, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 75% 40%, rgba(51, 223, 212, 0.12) 0%, transparent 70%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(5rem, 14vw, 13rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #fff 30%, var(--color-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--color-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-scroll span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--color-accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ===== SECTION BASE ===== */
+    section {
+      padding: 120px 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .section-line {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      margin-bottom: 40px;
+    }
+
+    /* ===== ABOUT ===== */
+    #about {
+      background: linear-gradient(180deg, var(--color-bg) 0%, #111014 100%);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    .about-image-wrap img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.5s;
+    }
+
+    .about-image-wrap:hover img {
+      filter: grayscale(0%);
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .tag {
+      padding: 6px 16px;
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .tag:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      cursor: default;
+    }
+
+    .about-text p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 20px;
+      letter-spacing: 0.01em;
+    }
+
+    .about-text p strong {
+      color: var(--color-accent);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-family: var(--font-title);
+      font-size: 3rem;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    /* ===== ALBUMS ===== */
+    #albums {
+      background: #0a0a0c;
+    }
+
+    .albums-header {
+      margin-bottom: 60px;
+    }
+
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .album-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+    }
+
+    .album-card:nth-child(1) { grid-column: span 2; }
+
+    .album-cover {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .album-card:nth-child(1) .album-cover {
+      aspect-ratio: 2/1;
+    }
+
+    .album-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .album-card:hover .album-overlay {
+      opacity: 1;
+    }
+
+    .album-card:hover .album-cover {
+      transform: scale(1.05);
+    }
+
+    .album-name {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .album-artist {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .album-play {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .album-card:hover .album-play {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .album-play svg {
+      fill: #0d0d0d;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ===== GENRES ===== */
+    #genres {
+      background: linear-gradient(180deg, #0a0a0c 0%, var(--color-bg) 100%);
+    }
+
+    .genres-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .genre-card {
+      padding: 40px 32px;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background: var(--color-card);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .genre-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .genre-card:hover {
+      border-color: rgba(51, 223, 212, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .genre-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .genre-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .genre-name {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .genre-desc {
+      font-size: 0.875rem;
+      color: var(--color-muted);
+      line-height: 1.8;
+    }
+
+    .genre-artists {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .artist-chip {
+      padding: 4px 12px;
+      background: rgba(197, 34, 109, 0.12);
+      border: 1px solid rgba(197, 34, 109, 0.3);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== VINYL DECORATION ===== */
+    .vinyl-deco {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .vinyl {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, #1a1a1a 28%, #111 28.5%),
+        repeating-conic-gradient(#1a1a1a 0deg, #222 0.5deg, #1a1a1a 1deg);
+      position: relative;
+      animation: vinylSpin 8s linear infinite;
+      box-shadow: 0 0 60px rgba(197, 34, 109, 0.3), 0 0 120px rgba(51, 223, 212, 0.1);
+    }
+
+    .vinyl::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--color-primary) 0%, #800040 100%);
+      box-shadow: 0 0 20px rgba(197, 34, 109, 0.6);
+    }
+
+    @keyframes vinylSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 48px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-title);
+      font-size: 2.5rem;
+      letter-spacing: 0.1em;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .container { padding: 0 24px; }
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .albums-grid { grid-template-columns: repeat(2, 1fr); }
+      .album-card:nth-child(1) { grid-column: span 2; }
+      .genres-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .albums-grid { grid-template-columns: 1fr; }
+      .album-card:nth-child(1) { grid-column: span 1; }
+      .album-card:nth-child(1) .album-cover { aspect-ratio: 1; }
+      .stat-row { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">MY MUSIC</div>
+    <ul class="nav-links">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#albums">앨범</a></li>
+      <li><a href="#genres">장르</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg">
+      <canvas id="particleCanvas"></canvas>
+    </div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">A personal music journal</p>
+      <h1 class="hero-title">MUSIC<br>IS LIFE</h1>
+      <p class="hero-sub">음악이 없는 삶은 상상할 수 없어. 내가 사랑하는 소리들을 소개할게.</p>
+      <a class="hero-cta" href="#about">탐험하기</a>
+    </div>
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrap" data-aos="fade-right" data-aos-duration="800">
+          <img src="https://loremflickr.com/600/750/concert,music" alt="Music" loading="lazy" />
+        </div>
+        <div class="about-text" data-aos="fade-left" data-aos-duration="800" data-aos-delay="100">
+          <p class="section-label">About Me</p>
+          <h2 class="section-title">나와<br>음악</h2>
+          <div class="section-line"></div>
+          <p>
+            처음 음악에 빠진 건 중학교 때였어. 이어폰 하나를 귀에 꽂고 버스 창문 밖을 바라보던 그 순간, 세상이 완전히 달라 보였지. 그때부터 <strong>음악은 내 필터가 됐어.</strong>
+          </p>
+          <p>
+            특정 장르에 갇히지 않아. 그날의 기분, 날씨, 빛의 각도에 따라 듣는 음악이 완전히 달라져. <strong>새벽엔 재즈</strong>가 어울리고, 빗소리엔 포스트록이 맞고, 달리고 싶을 땐 하드코어를 틀어.
+          </p>
+          <p>
+            앨범 단위로 듣는 걸 좋아해. 아티스트가 처음부터 끝까지 설계한 그 흐름 안에서, 하나의 세계에 완전히 잠기는 느낌이 좋거든.
+          </p>
+          <div class="about-tags">
+            <span class="tag"># Alt-Rock</span>
+            <span class="tag"># Post-Rock</span>
+            <span class="tag"># Jazz</span>
+            <span class="tag"># Electronic</span>
+            <span class="tag"># Indie</span>
+            <span class="tag"># Shoegaze</span>
+          </div>
+          <div class="stat-row" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+            <div class="stat-item">
+              <span class="stat-number">320+</span>
+              <span class="stat-label">저장된 앨범</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">47k</span>
+              <span class="stat-label">스트리밍 시간</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">12</span>
+              <span class="stat-label">공연 직관</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALBUMS -->
+  <section id="albums">
+    <div class="container">
+      <div class="albums-header" data-aos="fade-up" data-aos-duration="600">
+        <p class="section-label">My Collection</p>
+        <h2 class="section-title">최애 앨범들</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="albums-grid">
+
+        <div class="album-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+          <img class="album-cover" src="https://loremflickr.com/800/400/album,vinyl,music" alt="Album 1" loading="lazy" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-overlay">
+            <p class="album-name">THE DARK SIDE</p>
+            <p class="album-artist">Pink Floyd</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="80">
+          <img class="album-cover" src="https://loremflickr.com/400/400/rock,album,band" alt="Album 2" loading="lazy" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-overlay">
+            <p class="album-name">OK COMPUTER</p>
+            <p class="album-artist">Radiohead</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="160">
+          <img class="album-cover" src="https://loremflickr.com/400/400/jazz,record,music" alt="Album 3" loading="lazy" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-overlay">
+            <p class="album-name">KIND OF BLUE</p>
+            <p class="album-artist">Miles Davis</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="240">
+          <img class="album-cover" src="https://loremflickr.com/400/400/indie,shoegaze,music" alt="Album 4" loading="lazy" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-overlay">
+            <p class="album-name">LOVELESS</p>
+            <p class="album-artist">My Bloody Valentine</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="320">
+          <img class="album-cover" src="https://loremflickr.com/400/400/electronic,ambient,music" alt="Album 5" loading="lazy" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-overlay">
+            <p class="album-name">SELECTED AMBIENT</p>
+            <p class="album-artist">Brian Eno</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VINYL DECORATION -->
+  <div class="vinyl-deco" data-aos="zoom-in" data-aos-duration="800">
+    <div class="vinyl"></div>
+  </div>
+
+  <!-- GENRES -->
+  <section id="genres">
+    <div class="container">
+      <div data-aos="fade-up" data-aos-duration="600">
+        <p class="section-label">What I Listen To</p>
+        <h2 class="section-title">내가 사랑하는<br>장르들</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="genres-grid">
+
+        <div class="genre-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+          <span class="genre-icon">&#9835;</span>
+          <h3 class="genre-name">POST-ROCK</h3>
+          <p class="genre-desc">말 없이도 모든 걸 말하는 장르. 기타가 파도처럼 밀려오고 드럼이 천둥처럼 터질 때, 심장이 먼저 반응해.</p>
+          <div class="genre-artists">
+            <span class="artist-chip">Godspeed You!</span>
+            <span class="artist-chip">Explosions in the Sky</span>
+            <span class="artist-chip">Mogwai</span>
+          </div>
+        </div>
+
+        <div class="genre-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="120">
+          <span class="genre-icon">&#9834;</span>
+          <h3 class="genre-name">JAZZ</h3>
+          <p class="genre-desc">새벽 두 시, 혼자 커피 한 잔 마실 때의 그 공기. 즉흥 연주 속에서 인간의 진짜 감정이 흘러나온다고 생각해.</p>
+          <div class="genre-artists">
+            <span class="artist-chip">Miles Davis</span>
+            <span class="artist-chip">John Coltrane</span>
+            <span class="artist-chip">Bill Evans</span>
+          </div>
+        </div>
+
+        <div class="genre-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="240">
+          <span class="genre-icon">&#9889;</span>
+          <h3 class="genre-name">SHOEGAZE</h3>
+          <p class="genre-desc">소리로 만든 안개 속을 걷는 느낌. 가사가 잘 들리지 않아도 괜찮아, 감각으로 받아들이면 되니까.</p>
+          <div class="genre-artists">
+            <span class="artist-chip">My Bloody Valentine</span>
+            <span class="artist-chip">Slowdive</span>
+            <span class="artist-chip">Ride</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-aos="fade-up" data-aos-duration="600">
+    <div class="footer-logo">MY MUSIC</div>
+    <p>음악이 있는 한, 혼자가 아니야.</p>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      offset: 80,
+      easing: 'ease-out-quad'
+    });
+
+    // ===== SCROLL PROGRESS BAR =====
+    const progressBar = document.getElementById('progress-bar');
+    let rafId = null;
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      rafId = null;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!rafId) {
+        rafId = requestAnimationFrame(updateProgress);
+      }
+    }, { passive: true });
+
+    // ===== PARTICLE CANVAS =====
+    (function() {
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, particles;
+
+      function resize() {
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      function createParticles() {
+        particles = [];
+        const count = Math.floor(W * H / 8000);
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: Math.random() * 1.5 + 0.3,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            alpha: Math.random() * 0.6 + 0.2,
+            color: Math.random() > 0.5 ? '197,34,109' : '51,223,212'
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        for (let p of particles) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+          ctx.fill();
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = W;
+          if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H;
+          if (p.y > H) p.y = 0;
+        }
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', function() {
+        resize();
+        createParticles();
+      });
+
+      resize();
+      createParticles();
+      draw();
+    })();
+  </script>
+</body>
+</html>

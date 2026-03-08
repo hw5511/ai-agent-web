@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Woohee Cafe - 오늘의 카페</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lora:wght@400;600&family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #f4e3d5;
+      --color-primary: #f46b24;
+      --color-accent: #5c3d2e;
+      --color-text: #111111;
+      --color-soft: #eddfd3;
+      --color-muted: #8a6555;
+      --font-title: 'Playfair Display', 'Noto Serif KR', serif;
+      --font-body: 'Lora', 'Noto Sans KR', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-primary);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 3px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(244, 227, 213, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(92, 61, 46, 0.12);
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--color-muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--color-primary); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://loremflickr.com/1400/900/cafe,interior,cozy');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.55) saturate(0.9);
+      transform: scale(1.05);
+      transition: transform 8s ease-out;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(92, 61, 46, 0.3) 0%,
+        rgba(244, 107, 36, 0.12) 60%,
+        rgba(244, 227, 213, 0.9) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding: 0 20px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(244, 107, 36, 0.4);
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #ffd6b0;
+    }
+
+    .hero p {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 100px;
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+
+    .hero-btn:hover { background: #d45a18; transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+      animation: scrollDown 1.8s infinite;
+    }
+
+    @keyframes scrollDown {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: 100px 60px; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--color-muted);
+      max-width: 520px;
+      line-height: 1.9;
+      margin-bottom: 60px;
+    }
+
+    /* ===== TODAY MENU ===== */
+    .menu-section {
+      background: #fff9f5;
+    }
+
+    .menu-header { text-align: center; margin-bottom: 70px; }
+    .menu-header .section-desc { margin: 0 auto 0; }
+
+    .menu-date {
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background: var(--color-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(92, 61, 46, 0.08);
+      transition: transform 0.35s, box-shadow 0.35s;
+      cursor: pointer;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(92, 61, 46, 0.18);
+    }
+
+    .menu-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .menu-card-body { padding: 24px 28px; }
+
+    .menu-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+
+    .menu-card-title {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .menu-card-desc {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .menu-card-price {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-section { background: var(--color-bg); }
+
+    .gallery-header { margin-bottom: 50px; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item:nth-child(1) { grid-column: 1 / 8; grid-row: 1 / 2; }
+    .gallery-item:nth-child(2) { grid-column: 8 / 13; grid-row: 1 / 2; }
+    .gallery-item:nth-child(3) { grid-column: 1 / 5; grid-row: 2 / 3; }
+    .gallery-item:nth-child(4) { grid-column: 5 / 9; grid-row: 2 / 3; }
+    .gallery-item:nth-child(5) { grid-column: 9 / 13; grid-row: 2 / 3; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 240px;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(92,61,46,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-overlay-text {
+      color: #fff;
+      font-family: var(--font-title);
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    /* ===== ABOUT STRIP ===== */
+    .about-strip {
+      background: var(--color-accent);
+      color: #fff;
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .about-strip .section-tag { color: #ffd6b0; }
+
+    .about-strip .section-title { color: #fff; }
+
+    .about-strip .section-desc {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 32px;
+    }
+
+    .about-strip-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #fff;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 100px;
+      transition: background 0.3s, border-color 0.3s;
+      cursor: pointer;
+    }
+
+    .about-strip-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: #fff;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: var(--font-title);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #3a2018;
+      color: rgba(255,255,255,0.7);
+      padding: 60px 60px 36px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 60px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .nav-logo { color: #ffd6b0; }
+
+    .footer-brand p {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      max-width: 260px;
+      line-height: 1.7;
+    }
+
+    .footer-info h4 {
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 14px;
+    }
+
+    .footer-info p {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 18px 28px; }
+      .nav-links { gap: 20px; }
+      section { padding: 80px 28px; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(3),
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(5) {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .about-strip {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 60px 28px;
+      }
+
+      .footer-top { flex-direction: column; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.8rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div id="progress-bar"></div>
+
+  <!-- Nav -->
+  <nav>
+    <a href="#" class="nav-logo">Woohee Cafe</a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Daily Coffee &amp; Brunch</div>
+      <h1>A Cup of <em>Warmth</em><br>Every Morning</h1>
+      <p>따뜻한 한 잔과 함께 시작하는 하루.<br>오늘의 메뉴로 특별한 순간을 만나보세요.</p>
+      <a href="#menu" class="hero-btn">오늘의 메뉴 보기</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- Today Menu -->
+  <section class="menu-section" id="menu">
+    <div class="menu-header">
+      <div class="menu-date">2026. 03. 08 Sunday</div>
+      <div class="section-tag">Today's Special</div>
+      <h2 class="section-title">오늘의 메뉴</h2>
+      <p class="section-desc">매일 아침 정성껏 준비한 드링크와 베이커리를 소개합니다. 제철 재료로 만든 오늘만의 특별한 맛을 경험해보세요.</p>
+    </div>
+
+    <div class="menu-grid">
+
+      <div class="menu-card" data-aos="fade-up" data-aos-delay="0">
+        <img class="menu-card-img" src="https://loremflickr.com/600/440/latte,coffee,cafe" alt="라떼" loading="lazy" />
+        <div class="menu-card-body">
+          <span class="menu-badge">Signature</span>
+          <div class="menu-card-title">브라운 슈가 라떼</div>
+          <p class="menu-card-desc">진한 에스프레소에 캐러멜라이즈드 브라운 슈가 시럽과 오트 밀크를 더한 시그니처 라떼.</p>
+          <div class="menu-card-price">6,500원</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+        <img class="menu-card-img" src="https://loremflickr.com/600/440/croissant,bakery,pastry" alt="크루아상" loading="lazy" />
+        <div class="menu-card-body">
+          <span class="menu-badge">Bakery</span>
+          <div class="menu-card-title">버터 크루아상</div>
+          <p class="menu-card-desc">프랑스산 고메 버터로 겹겹이 쌓아 올린 바삭하고 촉촉한 당일 구운 크루아상.</p>
+          <div class="menu-card-price">4,200원</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+        <img class="menu-card-img" src="https://loremflickr.com/600/440/matcha,drink,green" alt="말차" loading="lazy" />
+        <div class="menu-card-body">
+          <span class="menu-badge">New</span>
+          <div class="menu-card-title">제주 말차 라떼</div>
+          <p class="menu-card-desc">제주도에서 직접 공수한 유기농 말차 파우더와 고소한 귀리 우유의 조화.</p>
+          <div class="menu-card-price">7,000원</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-aos="fade-up" data-aos-delay="0">
+        <img class="menu-card-img" src="https://loremflickr.com/600/440/waffle,dessert,cafe" alt="와플" loading="lazy" />
+        <div class="menu-card-body">
+          <span class="menu-badge">Brunch</span>
+          <div class="menu-card-title">딸기 와플 플레이트</div>
+          <p class="menu-card-desc">갓 구운 벨기에 와플 위에 생딸기, 클로티드 크림, 메이플 시럽을 곁들인 브런치 세트.</p>
+          <div class="menu-card-price">12,500원</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+        <img class="menu-card-img" src="https://loremflickr.com/600/440/espresso,coffee,black" alt="에스프레소" loading="lazy" />
+        <div class="menu-card-body">
+          <span class="menu-badge">Classic</span>
+          <div class="menu-card-title">더블 에스프레소</div>
+          <p class="menu-card-desc">에티오피아 원두를 직접 로스팅하여 깊고 풍부한 향을 담은 진한 에스프레소 2샷.</p>
+          <div class="menu-card-price">4,500원</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+        <img class="menu-card-img" src="https://loremflickr.com/600/440/cake,tiramisu,coffee" alt="케이크" loading="lazy" />
+        <div class="menu-card-body">
+          <span class="menu-badge">Dessert</span>
+          <div class="menu-card-title">티라미수 케이크</div>
+          <p class="menu-card-desc">마스카포네 치즈와 에스프레소가 어우러진 클래식 티라미수를 케이크 형태로 재해석.</p>
+          <div class="menu-card-price">8,000원</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-header">
+      <span class="section-tag">Atmosphere</span>
+      <h2 class="section-title" data-aos="fade-up">카페 분위기</h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="80">창가 햇살, 은은한 음악, 커피 향기. 우리 카페에서 당신만의 시간을 즐겨보세요.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item" data-aos="fade-right" data-aos-delay="0">
+        <img src="https://loremflickr.com/900/560/cafe,interior,warm" alt="카페 내부" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-overlay-text">따뜻한 실내</span></div>
+      </div>
+      <div class="gallery-item" data-aos="fade-left" data-aos-delay="100">
+        <img src="https://loremflickr.com/600/560/coffee,window,morning" alt="창가 커피" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-overlay-text">창가의 여유</span></div>
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="0">
+        <img src="https://loremflickr.com/500/360/barista,coffee,making" alt="바리스타" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-overlay-text">정성 가득한 손길</span></div>
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://loremflickr.com/500/360/cafe,flower,table" alt="테이블" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-overlay-text">꽃과 함께하는 테이블</span></div>
+      </div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://loremflickr.com/500/360/latte,art,coffee" alt="라떼아트" loading="lazy" />
+        <div class="gallery-overlay"><span class="gallery-overlay-text">라떼 아트</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Strip -->
+  <div class="about-strip" id="about">
+    <div data-aos="fade-right">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title">커피 한 잔에<br>담긴 이야기</h2>
+      <p class="section-desc">2018년 작은 골목에서 시작된 우희 카페는 매일 아침 최상의 원두를 직접 선별하고, 정성스러운 레시피로 여러분의 하루를 응원합니다. 공간 하나하나에 따뜻한 마음을 담았습니다.</p>
+      <a href="#top" class="about-strip-btn">처음으로 돌아가기</a>
+    </div>
+    <div class="about-stats" data-aos="fade-left" data-aos-delay="100">
+      <div class="stat-item">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years of Coffee</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">42</div>
+        <div class="stat-label">Menu Items</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12K</div>
+        <div class="stat-label">Happy Guests</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Direct Trade</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="nav-logo">Woohee Cafe</a>
+        <p>매일 정성으로 준비한 한 잔의 행복.<br>당신의 일상에 따뜻한 쉼표가 되겠습니다.</p>
+      </div>
+      <div class="footer-info">
+        <h4>Hours</h4>
+        <p>
+          Mon – Fri &nbsp; 08:00 – 21:00<br />
+          Sat – Sun &nbsp; 09:00 – 22:00
+        </p>
+      </div>
+      <div class="footer-info">
+        <h4>Location</h4>
+        <p>
+          서울특별시 마포구<br />
+          연남로 42-8 1층<br />
+          Tel. 02-1234-5678
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Woohee Cafe. All rights reserved.</span>
+      <span>Made with warmth &amp; coffee.</span>
+    </div>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // AOS init
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    // Scroll progress bar
+    function updateProgressBar() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('progress-bar').style.width = pct + '%';
+    }
+
+    // Hero parallax
+    const heroBg = document.getElementById('hero-bg');
+    let ticking = false;
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgressBar();
+          const y = window.scrollY;
+          heroBg.style.transform = `scale(1.05) translateY(${y * 0.25}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Hero BG scale in on load
+    window.addEventListener('load', () => {
+      heroBg.style.transform = 'scale(1) translateY(0px)';
+    });
+  </script>
+</body>
+</html>
