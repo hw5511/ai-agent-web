@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VANTA.js - Interactive Backgrounds</title>
+
+  <!-- Google Fonts: Orbitron + Rajdhani + Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #f1eee3;
+      --color-accent: #00ce7c;
+      --color-text: #ffffff;
+      --font-title: 'Orbitron', 'Noto Sans KR', sans-serif;
+      --font-body: 'Rajdhani', 'Noto Sans KR', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── Scroll Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px var(--color-accent);
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.85) 0%, transparent 100%);
+      backdrop-filter: blur(2px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(241,238,227,0.7);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ── Hero Section ── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #vanta-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 760px;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      border: 1px solid rgba(0,206,124,0.4);
+      border-radius: 999px;
+      padding: 6px 20px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: 0.06em;
+      color: var(--color-primary);
+      margin-bottom: 24px;
+    }
+
+    .hero-title span {
+      color: var(--color-accent);
+      text-shadow: 0 0 24px rgba(0,206,124,0.6);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(241,238,227,0.65);
+      letter-spacing: 0.02em;
+      line-height: 1.9;
+      margin-bottom: 44px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--color-accent);
+      color: #0d0d0d;
+      font-family: var(--font-title);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 2px solid var(--color-accent);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,206,124,0.3);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 36px;
+      background: transparent;
+      color: var(--color-primary);
+      font-family: var(--font-title);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 2px solid rgba(241,238,227,0.3);
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, transform 0.3s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(241,238,227,0.4);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(0,206,124,0.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ── Section Common ── */
+    section {
+      padding: 100px 48px;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--color-primary);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: rgba(241,238,227,0.6);
+      line-height: 1.9;
+      max-width: 580px;
+    }
+
+    /* ── About Section ── */
+    #about {
+      background: #0d0d0d;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,206,124,0.2);
+    }
+
+    .about-visual-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 40% 50%, rgba(0,206,124,0.15) 0%, transparent 70%),
+                  radial-gradient(ellipse at 80% 20%, rgba(0,150,255,0.08) 0%, transparent 60%),
+                  linear-gradient(135deg, #111a14 0%, #0d0d0d 100%);
+    }
+
+    .about-code-block {
+      position: absolute;
+      inset: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .code-line {
+      font-family: 'Rajdhani', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeInCode 0.5s ease forwards;
+    }
+
+    .code-line:nth-child(1) { animation-delay: 0.2s; color: rgba(241,238,227,0.4); }
+    .code-line:nth-child(2) { animation-delay: 0.5s; color: var(--color-accent); }
+    .code-line:nth-child(3) { animation-delay: 0.8s; color: rgba(241,238,227,0.7); }
+    .code-line:nth-child(4) { animation-delay: 1.1s; color: rgba(241,238,227,0.5); }
+    .code-line:nth-child(5) { animation-delay: 1.4s; color: var(--color-accent); opacity: 0; }
+    .code-line:nth-child(6) { animation-delay: 1.7s; color: rgba(241,238,227,0.4); }
+    .code-line:nth-child(7) { animation-delay: 2.0s; color: rgba(241,238,227,0.7); }
+    .code-line:nth-child(8) { animation-delay: 2.3s; color: var(--color-accent); }
+
+    @keyframes fadeInCode {
+      from { opacity: 0; transform: translateX(-8px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-num {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--color-accent);
+      letter-spacing: 0.05em;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(241,238,227,0.45);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Effects Section ── */
+    #effects {
+      background: linear-gradient(180deg, #0d0d0d 0%, #0a1210 50%, #0d0d0d 100%);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .effects-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .effects-header {
+      margin-bottom: 60px;
+    }
+
+    .effects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .effect-card {
+      position: relative;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 36px 28px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+
+    .effect-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0,206,124,0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .effect-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,206,124,0.4);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 24px rgba(0,206,124,0.1);
+    }
+
+    .effect-card:hover::before {
+      opacity: 1;
+    }
+
+    .effect-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,206,124,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      background: rgba(0,206,124,0.06);
+      position: relative;
+      z-index: 1;
+    }
+
+    .effect-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--color-accent);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .effect-name {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .effect-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      color: var(--color-accent);
+      border: 1px solid rgba(0,206,124,0.3);
+      border-radius: 999px;
+      padding: 3px 12px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    .effect-desc {
+      font-size: 0.92rem;
+      color: rgba(241,238,227,0.55);
+      line-height: 1.85;
+      position: relative;
+      z-index: 1;
+    }
+
+    .effect-footer {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .effect-prop {
+      font-size: 0.75rem;
+      color: rgba(241,238,227,0.35);
+      letter-spacing: 0.06em;
+    }
+
+    .effect-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,206,124,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .effect-card:hover .effect-arrow {
+      background: var(--color-accent);
+      transform: translateX(4px);
+    }
+
+    .effect-arrow svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--color-accent);
+      fill: none;
+      stroke-width: 2.5;
+      transition: stroke 0.3s;
+    }
+
+    .effect-card:hover .effect-arrow svg {
+      stroke: #0d0d0d;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #080808;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      color: var(--color-accent);
+      letter-spacing: 0.14em;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: rgba(241,238,227,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-accent {
+      color: var(--color-accent);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-visual { height: 240px; }
+      .effects-grid { grid-template-columns: 1fr; gap: 20px; }
+      .about-stats { flex-wrap: wrap; gap: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-cta-group { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 220px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-logo" href="#">VANTA.JS</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#effects">Effects</a></li>
+      <li><a href="https://www.vantajs.com" target="_blank">Docs</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div id="vanta-bg"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Interactive WebGL Background</div>
+      <h1 class="hero-title">
+        Make Your Site<br /><span>Come Alive</span>
+      </h1>
+      <p class="hero-sub">
+        VANTA.js는 Three.js 기반의 인터랙티브 배경 효과 라이브러리입니다.<br />
+        단 몇 줄의 코드로 살아 숨쉬는 웹을 경험하세요.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#effects" class="btn-primary">Explore Effects</a>
+        <a href="#about" class="btn-outline">Learn More</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-visual" data-aos="fade-right" data-aos-duration="800">
+        <div class="about-visual-bg"></div>
+        <div class="about-code-block">
+          <div class="code-line">// VANTA.js 초기화 예시</div>
+          <div class="code-line">VANTA.BIRDS({</div>
+          <div class="code-line">&nbsp;&nbsp;el: "#hero",</div>
+          <div class="code-line">&nbsp;&nbsp;color1: 0x00ce7c,</div>
+          <div class="code-line">&nbsp;&nbsp;color2: 0x111111,</div>
+          <div class="code-line">&nbsp;&nbsp;birdSize: 1.5,</div>
+          <div class="code-line">&nbsp;&nbsp;quantity: 4.0</div>
+          <div class="code-line">})</div>
+        </div>
+      </div>
+
+      <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="150">
+        <div class="section-label">About VANTA.js</div>
+        <h2 class="section-title">VANTA.js란?</h2>
+        <p class="section-desc">
+          VANTA.js는 Three.js와 WebGL을 기반으로 동작하는 오픈소스 배경 애니메이션 라이브러리입니다.
+          새 떼, 파도, 안개, 별빛 등 다양한 자연 현상을 인터랙티브하게 웹 배경에 적용할 수 있습니다.
+        </p>
+        <p class="section-desc" style="margin-top:16px;">
+          마우스 움직임에 반응하는 실시간 3D 렌더링으로
+          방문자에게 몰입감 있는 경험을 제공합니다.
+        </p>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Effects</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">60fps</span>
+            <span class="stat-label">Smooth</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">5KB</span>
+            <span class="stat-label">Per Effect</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Effects Section -->
+  <section id="effects">
+    <div class="effects-inner">
+      <div class="effects-header" data-aos="fade-up" data-aos-duration="700">
+        <div class="section-label">Effects Library</div>
+        <h2 class="section-title">다른 VANTA 효과들</h2>
+        <p class="section-desc">
+          Birds 외에도 다양한 효과를 지원합니다. 각 효과는 독립된 모듈로 로드됩니다.
+        </p>
+      </div>
+
+      <div class="effects-grid">
+
+        <!-- Card 1: WAVES -->
+        <div class="effect-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+          <div class="effect-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M2 12 C5 8, 8 16, 11 12 S17 8, 20 12 S23 16, 26 12" stroke-linecap="round" />
+              <path d="M2 17 C5 13, 8 21, 11 17 S17 13, 20 17" stroke-linecap="round" opacity="0.5" />
+            </svg>
+          </div>
+          <div class="effect-name">VANTA.WAVES</div>
+          <div class="effect-tag">Ocean / Fluid</div>
+          <p class="effect-desc">
+            부드럽게 물결치는 3D 파도 효과. 색상, 파고, 속도를 자유롭게 조절하여
+            깊고 몰입감 있는 바다 분위기를 연출합니다.
+          </p>
+          <div class="effect-footer">
+            <span class="effect-prop">waveHeight &bull; waveSpeed &bull; shininess</span>
+            <div class="effect-arrow">
+              <svg viewBox="0 0 12 12"><polyline points="2,6 10,6 7,3"/><polyline points="7,9 10,6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: FOG -->
+        <div class="effect-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="120">
+          <div class="effect-icon">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="10" rx="8" ry="4" opacity="0.7"/>
+              <line x1="4" y1="14" x2="20" y2="14" stroke-linecap="round" />
+              <line x1="6" y1="17" x2="18" y2="17" stroke-linecap="round" opacity="0.5" />
+            </svg>
+          </div>
+          <div class="effect-name">VANTA.FOG</div>
+          <div class="effect-tag">Atmosphere / Mist</div>
+          <p class="effect-desc">
+            서로 다른 색상의 안개가 천천히 흘러다니는 효과. 미스터리하고
+            몽환적인 분위기 연출에 최적화되어 있습니다.
+          </p>
+          <div class="effect-footer">
+            <span class="effect-prop">highlightColor &bull; midtoneColor &bull; speed</span>
+            <div class="effect-arrow">
+              <svg viewBox="0 0 12 12"><polyline points="2,6 10,6 7,3"/><polyline points="7,9 10,6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: GLOBE -->
+        <div class="effect-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="240">
+          <div class="effect-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8" />
+              <ellipse cx="12" cy="12" rx="4" ry="8" />
+              <line x1="4" y1="12" x2="20" y2="12" stroke-linecap="round" />
+              <line x1="6" y1="7" x2="18" y2="7" stroke-linecap="round" opacity="0.5"/>
+              <line x1="6" y1="17" x2="18" y2="17" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="effect-name">VANTA.GLOBE</div>
+          <div class="effect-tag">3D / Network</div>
+          <p class="effect-desc">
+            회전하는 3D 구체 위에 네트워크 연결선이 그려지는 효과.
+            테크, 글로벌, 데이터 관련 사이트에 어울리는 미래지향적 배경입니다.
+          </p>
+          <div class="effect-footer">
+            <span class="effect-prop">color &bull; backgroundColor &bull; size</span>
+            <div class="effect-arrow">
+              <svg viewBox="0 0 12 12"><polyline points="2,6 10,6 7,3"/><polyline points="7,9 10,6"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">VANTA.JS</div>
+    <p class="footer-text">
+      Powered by <span class="footer-accent">Three.js</span> &amp; WebGL &mdash;
+      Built for the modern web
+    </p>
+  </footer>
+
+  <!-- Three.js + VANTA.BIRDS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // AOS Init
+    AOS.init({ once: true, offset: 60 });
+
+    // Scroll Progress Bar
+    (function () {
+      var bar = document.getElementById('progress-bar');
+      function updateProgress() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+    })();
+
+    // VANTA BIRDS
+    var vantaEffect = null;
+
+    function initVanta() {
+      if (typeof VANTA === 'undefined' || typeof THREE === 'undefined') return;
+      if (vantaEffect) vantaEffect.destroy();
+      vantaEffect = VANTA.BIRDS({
+        el: '#vanta-bg',
+        THREE: THREE,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        backgroundColor: 0x0d0d0d,
+        color1: 0x00ce7c,
+        color2: 0x007a49,
+        colorMode: 'lerp',
+        birdSize: 1.2,
+        wingSpan: 28.0,
+        speedLimit: 5.0,
+        separation: 48.0,
+        alignment: 52.0,
+        cohesion: 30.0,
+        quantity: 3.0
+      });
+    }
+
+    initVanta();
+
+    // Cleanup on unload
+    window.addEventListener('beforeunload', function () {
+      if (vantaEffect) vantaEffect.destroy();
+    });
+  </script>
+</body>
+</html>
