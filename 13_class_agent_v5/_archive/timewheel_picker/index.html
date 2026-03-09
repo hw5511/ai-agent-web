@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Wheel Picker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #f8fcf5;
+      --color-accent: #f27522;
+      --color-text: #111111;
+      --font-title: 'Bebas Neue', 'Noto Sans KR', sans-serif;
+      --font-mono: 'Space Mono', 'Noto Sans KR', monospace;
+    }
+
+    body {
+      background: radial-gradient(ellipse at 60% 30%, #dfe7dc 0%, #c8d3c5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+    }
+
+    /* ---- Card ---- */
+    .card {
+      background: var(--color-bg);
+      border-radius: 36px;
+      box-shadow:
+        0 32px 96px rgba(0,0,0,0.14),
+        0 4px 24px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      width: 340px;
+      padding: 44px 28px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+    }
+
+    /* ---- Time Display ---- */
+    .time-display {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+      font-family: var(--font-title);
+      font-size: 78px;
+      letter-spacing: 0.03em;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .time-part {
+      min-width: 72px;
+      text-align: center;
+    }
+
+    .time-sep {
+      color: var(--color-accent);
+      font-size: 70px;
+      margin: 0 -2px;
+      line-height: 1;
+    }
+
+    .time-period {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    /* ---- Wheels Wrapper ---- */
+    .wheels-wrapper {
+      width: 100%;
+      position: relative;
+    }
+
+    .wheels-row {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Selection highlight strip (spans all 3 wheels) */
+    .selection-strip {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: calc(50% - 22px);
+      height: 44px;
+      background: rgba(242, 117, 34, 0.07);
+      border-top: 1.5px solid rgba(242, 117, 34, 0.38);
+      border-bottom: 1.5px solid rgba(242, 117, 34, 0.38);
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    /* Top and bottom fades */
+    .fade-top, .fade-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 80px;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .fade-top {
+      top: 0;
+      background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+    }
+    .fade-bottom {
+      bottom: 0;
+      background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
+    }
+
+    /* ---- Labels ---- */
+    .labels-row {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .label {
+      width: 88px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b0b8ab;
+      font-family: var(--font-mono);
+    }
+
+    /* ---- Picker Container ---- */
+    .picker {
+      width: 88px;
+      height: 220px;
+      position: relative;
+      cursor: grab;
+      perspective: 600px;
+      overflow: visible;
+    }
+
+    .picker:active { cursor: grabbing; }
+
+    .drum {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-style: preserve-3d;
+    }
+
+    .drum-item {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--color-text);
+      backface-visibility: hidden;
+      user-select: none;
+      pointer-events: none;
+      will-change: transform, opacity;
+      transition: none;
+    }
+
+    /* ---- Footer line ---- */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: rgba(242, 117, 34, 0.3);
+      border-radius: 2px;
+    }
+
+    /* ---- Scroll progress bar ---- */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--color-accent);
+      width: 0%;
+      transition: width 0.2s;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+
+  <div class="card">
+
+    <!-- Time display -->
+    <div>
+      <div class="time-display">
+        <span class="time-part" id="disp-h">00</span>
+        <span class="time-sep">:</span>
+        <span class="time-part" id="disp-m">00</span>
+        <span class="time-sep">:</span>
+        <span class="time-part" id="disp-s">00</span>
+      </div>
+      <div class="time-period" id="disp-period">AM</div>
+    </div>
+
+    <!-- Wheels -->
+    <div class="wheels-wrapper">
+      <div class="wheels-row" id="wheels-row">
+        <div class="picker" id="picker-h"></div>
+        <div class="picker" id="picker-m"></div>
+        <div class="picker" id="picker-s"></div>
+      </div>
+      <div class="selection-strip"></div>
+      <div class="fade-top"></div>
+      <div class="fade-bottom"></div>
+
+      <div class="labels-row">
+        <div class="label">Hour</div>
+        <div class="label">Min</div>
+        <div class="label">Sec</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+  </div>
+
+  <script>
+    class DrumPicker {
+      constructor(container, total) {
+        this.container = container;
+        this.total = total;
+        this.SLOTS = 12;
+        this.ANGLE = 360 / this.SLOTS;       // 30 deg
+        this.ITEM_H = 44;
+        this.R = Math.round(this.ITEM_H / (2 * Math.tan(Math.PI / this.SLOTS)));
+
+        this.rot = 0;
+        this.dragging = false;
+        this.startY = 0;
+        this.startRot = 0;
+        this.velHistory = [];
+        this.rafId = null;
+        this.onChange = null;
+        this._currentVal = 0;
+
+        this._build();
+        this._bind();
+        this._render();
+      }
+
+      _build() {
+        this.drum = document.createElement('div');
+        this.drum.className = 'drum';
+
+        this.itemEls = [];
+        for (let i = 0; i < this.SLOTS; i++) {
+          const el = document.createElement('div');
+          el.className = 'drum-item';
+          el.style.marginTop = `-${this.ITEM_H / 2}px`;
+          el.style.height = `${this.ITEM_H}px`;
+          this.drum.appendChild(el);
+          this.itemEls.push(el);
+        }
+
+        this.container.appendChild(this.drum);
+      }
+
+      _render() {
+        this.drum.style.transform = `rotateX(${this.rot}deg)`;
+        const centerStep = Math.round(this.rot / this.ANGLE);
+
+        for (let i = 0; i < this.SLOTS; i++) {
+          // Angle of this slot from front (viewer)
+          let a = i * this.ANGLE - this.rot;
+          // Normalize to [-180, 180]
+          a = ((a + 180) % 360 + 360) % 360 - 180;
+
+          const stepOffset = Math.round(a / this.ANGLE);
+          const val = ((centerStep - stepOffset) % this.total + this.total) % this.total;
+
+          const cos = Math.cos(a * Math.PI / 180);
+          const visible = cos > 0;
+          const opacity = visible ? Math.pow(cos, 0.55) : 0;
+          const fs = visible ? (11 + 11 * Math.pow(cos, 2)) : 10;
+
+          const el = this.itemEls[i];
+          el.style.transform = `rotateX(${i * this.ANGLE}deg) translateZ(${this.R}px)`;
+          el.textContent = String(val).padStart(2, '0');
+          el.style.opacity = opacity;
+          el.style.fontSize = fs + 'px';
+          el.style.color = Math.abs(a) < this.ANGLE * 0.5
+            ? 'var(--color-text)'
+            : '#666';
+        }
+
+        this._currentVal = ((centerStep % this.total) + this.total) % this.total;
+        if (this.onChange) this.onChange(this._currentVal);
+      }
+
+      _snap(extra) {
+        if (this.rafId) cancelAnimationFrame(this.rafId);
+
+        if (extra) this.rot += extra;
+
+        const target = Math.round(this.rot / this.ANGLE) * this.ANGLE;
+        const start = this.rot;
+        const startTime = performance.now();
+        const duration = 380;
+
+        const ease = t => 1 - Math.pow(1 - t, 4);
+
+        const animate = now => {
+          const t = Math.min((now - startTime) / duration, 1);
+          this.rot = start + (target - start) * ease(t);
+          this._render();
+          if (t < 1) {
+            this.rafId = requestAnimationFrame(animate);
+          } else {
+            this.rot = target;
+            this._render();
+          }
+        };
+        this.rafId = requestAnimationFrame(animate);
+      }
+
+      _bind() {
+        const onStart = y => {
+          if (this.rafId) cancelAnimationFrame(this.rafId);
+          this.dragging = true;
+          this.startY = y;
+          this.startRot = this.rot;
+          this.velHistory = [{ y, t: performance.now() }];
+        };
+
+        const onMove = y => {
+          if (!this.dragging) return;
+          const dy = y - this.startY;
+          this.rot = this.startRot - dy / this.ITEM_H * this.ANGLE;
+          this.velHistory.push({ y, t: performance.now() });
+          if (this.velHistory.length > 6) this.velHistory.shift();
+          this._render();
+        };
+
+        const onEnd = () => {
+          if (!this.dragging) return;
+          this.dragging = false;
+
+          let extra = 0;
+          if (this.velHistory.length >= 2) {
+            const a = this.velHistory[0];
+            const b = this.velHistory[this.velHistory.length - 1];
+            const dt = b.t - a.t;
+            if (dt > 0 && dt < 200) {
+              const vel = (b.y - a.y) / dt; // px/ms
+              const momentum = -vel * 60;    // px total
+              extra = momentum / this.ITEM_H * this.ANGLE;
+              // cap momentum to 3 steps
+              const max = this.ANGLE * 3;
+              extra = Math.max(-max, Math.min(max, extra));
+            }
+          }
+
+          this._snap(extra);
+        };
+
+        this.container.addEventListener('mousedown', e => {
+          e.preventDefault();
+          onStart(e.clientY);
+        });
+        document.addEventListener('mousemove', e => onMove(e.clientY));
+        document.addEventListener('mouseup', onEnd);
+
+        this.container.addEventListener('touchstart', e => {
+          onStart(e.touches[0].clientY);
+        }, { passive: true });
+        this.container.addEventListener('touchmove', e => {
+          e.preventDefault();
+          onMove(e.touches[0].clientY);
+        }, { passive: false });
+        this.container.addEventListener('touchend', onEnd);
+
+        this.container.addEventListener('wheel', e => {
+          e.preventDefault();
+          if (this.rafId) cancelAnimationFrame(this.rafId);
+          this.rot -= e.deltaY / this.ITEM_H * this.ANGLE;
+          this._snap();
+        }, { passive: false });
+      }
+
+      getValue() { return this._currentVal; }
+
+      setValue(val, animate) {
+        const target = ((val % this.total) + this.total) % this.total * this.ANGLE;
+        if (animate) {
+          this.rot = target;
+          this._snap();
+        } else {
+          this.rot = target;
+          this._render();
+        }
+      }
+    }
+
+    // ---- Init ----
+    const now = new Date();
+
+    const pickerH = new DrumPicker(document.getElementById('picker-h'), 24);
+    const pickerM = new DrumPicker(document.getElementById('picker-m'), 60);
+    const pickerS = new DrumPicker(document.getElementById('picker-s'), 60);
+
+    const dispH = document.getElementById('disp-h');
+    const dispM = document.getElementById('disp-m');
+    const dispS = document.getElementById('disp-s');
+    const dispPeriod = document.getElementById('disp-period');
+
+    function updateDisplay(h, m, s) {
+      dispH.textContent = String(h).padStart(2, '0');
+      dispM.textContent = String(m).padStart(2, '0');
+      dispS.textContent = String(s).padStart(2, '0');
+      dispPeriod.textContent = h < 12 ? 'AM' : 'PM';
+    }
+
+    pickerH.onChange = v => updateDisplay(v, pickerM.getValue(), pickerS.getValue());
+    pickerM.onChange = v => updateDisplay(pickerH.getValue(), v, pickerS.getValue());
+    pickerS.onChange = v => updateDisplay(pickerH.getValue(), pickerM.getValue(), v);
+
+    pickerH.setValue(now.getHours());
+    pickerM.setValue(now.getMinutes());
+    pickerS.setValue(now.getSeconds());
+
+    updateDisplay(now.getHours(), now.getMinutes(), now.getSeconds());
+
+    // ---- Scroll progress ----
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+      document.getElementById('progress-bar').style.width = pct + '%';
+    });
+  </script>
+</body>
+</html>

@@ -3,26 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEON.SPACE | Interactive Particle</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Nanum+Gothic:wght@400;700&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-
+  <title>Scroll Text Color Reveal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg: #0d0d0d;
-      --color-primary: #34c0de;
-      --color-accent: #a855f7;
+      --color-bg: #000b36;
+      --color-secondary: #ed1162;
+      --color-primary: #eda624;
+      --color-accent: #239da0;
       --color-text: #ffffff;
-      --color-text-muted: rgba(255,255,255,0.55);
-      --font-title: 'Space Mono', 'Nanum Gothic', monospace;
-      --font-body: 'IBM Plex Mono', 'Nanum Gothic Coding', monospace;
+      --color-muted: rgba(255, 255, 255, 0.12);
+      --font-title: 'Bebas Neue', sans-serif;
+      --font-body: 'Space Mono', 'Noto Sans KR', monospace;
     }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
 
     body {
       background: var(--color-bg);
@@ -31,682 +28,377 @@
       overflow-x: hidden;
     }
 
-    /* ---- 스크롤 진행 바 ---- */
-    #scroll-progress {
+    /* 스크롤 진행 바 */
+    #progress-bar {
       position: fixed;
       top: 0; left: 0;
-      height: 2px;
+      height: 3px;
       width: 0%;
-      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-      z-index: 9999;
-      transition: width 0.08s linear;
+      background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+      z-index: 1000;
     }
 
-    /* ---- 네비게이션 ---- */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 500;
-      padding: 1.2rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-    }
-
-    nav.scrolled {
-      background: rgba(13,13,13,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(52,192,222,0.12);
-    }
-
-    .nav-logo {
-      font-family: var(--font-title);
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--color-primary);
-      text-decoration: none;
-      text-shadow: 0 0 14px rgba(52,192,222,0.6);
-    }
-
-    .nav-logo span { color: var(--color-accent); }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 2.2rem;
-    }
-
-    .nav-links a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      font-size: 0.76rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover { color: var(--color-primary); }
-
-    /* ---- 히어로 ---- */
-    #hero {
-      position: relative;
-      width: 100%;
+    /* Hero */
+    .hero {
       height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      position: relative;
       overflow: hidden;
     }
 
-    #tsparticles {
+    .hero-bg-dots {
       position: absolute;
       inset: 0;
-      z-index: 1;
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 2rem;
-      max-width: 800px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      opacity: 0.35;
+      margin-bottom: 1.5rem;
       text-transform: uppercase;
-      color: var(--color-primary);
-      border: 1px solid rgba(52,192,222,0.35);
-      padding: 0.38rem 1.1rem;
-      border-radius: 99px;
-      margin-bottom: 1.6rem;
-      animation: fadeInDown 0.8s ease both;
     }
 
-    .hero-title {
+    .hero h1 {
       font-family: var(--font-title);
-      font-size: clamp(2.4rem, 7vw, 5.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: 0.04em;
-      margin-bottom: 1.4rem;
-      animation: fadeInUp 0.9s ease 0.2s both;
+      font-size: clamp(4rem, 12vw, 10rem);
+      letter-spacing: 0.08em;
+      line-height: 0.95;
+      color: var(--color-text);
     }
 
-    .neon-mint {
-      color: var(--color-primary);
-      text-shadow: 0 0 22px rgba(52,192,222,0.9), 0 0 55px rgba(52,192,222,0.4);
+    .hero h1 span {
+      display: block;
     }
 
-    .neon-purple {
-      color: var(--color-accent);
-      text-shadow: 0 0 22px rgba(168,85,247,0.9), 0 0 55px rgba(168,85,247,0.4);
+    .hero h1 span.accent-line {
+      background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-sub {
-      font-size: clamp(0.83rem, 1.8vw, 0.98rem);
-      color: var(--color-text-muted);
-      line-height: 1.9;
-      max-width: 500px;
-      margin: 0 auto 2.6rem;
-      letter-spacing: 0.02em;
-      animation: fadeInUp 0.9s ease 0.4s both;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.9s ease 0.6s both;
-    }
-
-    .btn-primary {
-      padding: 0.9rem 2.4rem;
-      background: var(--color-primary);
-      color: #0a0a0a;
-      border: none;
-      font-family: var(--font-title);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 4px;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.35s;
-      box-shadow: 0 0 22px rgba(52,192,222,0.45);
-      will-change: transform;
-    }
-
-    .btn-primary:hover {
-      background: #ffffff;
-      box-shadow: 0 0 36px rgba(52,192,222,0.9);
-      transform: translateY(-3px);
-    }
-
-    .btn-outline {
-      padding: 0.9rem 2.4rem;
-      background: transparent;
-      color: var(--color-accent);
-      border: 1px solid rgba(168,85,247,0.5);
-      font-family: var(--font-title);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 4px;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.35s;
-      will-change: transform;
-    }
-
-    .btn-outline:hover {
-      background: rgba(168,85,247,0.12);
-      border-color: var(--color-accent);
-      box-shadow: 0 0 24px rgba(168,85,247,0.45);
-      transform: translateY(-3px);
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      opacity: 0.4;
     }
 
     .scroll-indicator {
       position: absolute;
-      bottom: 2.4rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
+      bottom: 3rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--color-text-muted);
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      animation: float 2.4s ease-in-out infinite;
+      gap: 0.8rem;
     }
 
-    .scroll-indicator::after {
-      content: '';
+    .scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      opacity: 0.3;
+    }
+
+    .scroll-line {
       width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--color-primary), transparent);
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+      animation: scroll-anim 1.8s ease-in-out infinite;
     }
 
-    /* ---- 섹션 공통 ---- */
-    .section-label {
-      display: block;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-primary);
-      margin-bottom: 0.9rem;
+    @keyframes scroll-anim {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
     }
 
-    .section-title {
-      font-family: var(--font-title);
-      font-size: clamp(1.7rem, 4vw, 2.7rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      line-height: 1.15;
-    }
-
-    .section-title .accent { color: var(--color-accent); }
-
-    .section-desc {
-      margin-top: 1rem;
-      color: var(--color-text-muted);
-      font-size: 0.86rem;
-      line-height: 1.8;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    /* ---- 서비스 섹션 ---- */
-    #services {
-      padding: 8rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.4rem;
-    }
-
-    .service-card {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 12px;
-      padding: 2rem;
+    /* Reveal 섹션 공통 */
+    .reveal-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem clamp(1rem, 5vw, 4rem);
       position: relative;
       overflow: hidden;
-      cursor: pointer;
-      transition: background 0.4s, border-color 0.4s, transform 0.4s, box-shadow 0.4s;
-      will-change: transform;
     }
 
-    .service-card::before {
-      content: '';
+    .section-index {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-      opacity: 0;
-      transition: opacity 0.4s;
+      top: 2.5rem;
+      left: 2.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      opacity: 0.2;
     }
 
-    .service-card:hover {
-      background: rgba(52,192,222,0.04);
-      border-color: rgba(52,192,222,0.22);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(52,192,222,0.1);
-    }
-
-    .service-card:hover::before { opacity: 1; }
-
-    .service-num {
-      font-size: 0.63rem;
-      letter-spacing: 0.18em;
-      color: var(--color-primary);
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .service-name {
+    .reveal-text {
       font-family: var(--font-title);
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      margin-bottom: 0.85rem;
-    }
-
-    .service-desc {
-      font-size: 0.8rem;
-      color: var(--color-text-muted);
-      line-height: 1.85;
-    }
-
-    /* ---- 작품 섹션 ---- */
-    #works {
-      padding: 8rem 2rem;
-      background: rgba(255,255,255,0.012);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .works-inner { max-width: 1200px; margin: 0 auto; }
-
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.4rem;
-      margin-top: 3.5rem;
-    }
-
-    .work-card {
-      border-radius: 12px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.07);
-      cursor: pointer;
-      transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
-      will-change: transform;
-    }
-
-    .work-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(168,85,247,0.16);
-      border-color: rgba(168,85,247,0.28);
-    }
-
-    .work-img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.82) saturate(1.15);
-      transition: filter 0.4s;
-    }
-
-    .work-card:hover .work-img {
-      filter: brightness(1) saturate(1.3);
-    }
-
-    .work-info { padding: 1.5rem; }
-
-    .work-tag {
-      font-size: 0.63rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .work-title {
-      font-family: var(--font-title);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      margin-bottom: 0.55rem;
-    }
-
-    .work-desc {
-      font-size: 0.79rem;
-      color: var(--color-text-muted);
-      line-height: 1.8;
-    }
-
-    /* ---- 푸터 ---- */
-    footer {
-      padding: 3.5rem 2rem;
+      font-size: clamp(2.2rem, 6.5vw, 7.5rem);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
       text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      max-width: 1100px;
+      word-break: keep-all;
     }
 
-    .footer-logo {
-      font-family: var(--font-title);
-      font-size: 1.5rem;
-      font-weight: 700;
+    .char {
+      display: inline-block;
+      color: var(--color-muted);
+      will-change: color;
+    }
+
+    .section-sub {
+      margin-top: 2.5rem;
+      font-size: clamp(0.7rem, 1.5vw, 0.9rem);
       letter-spacing: 0.12em;
-      color: var(--color-primary);
-      text-shadow: 0 0 14px rgba(52,192,222,0.5);
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-logo span { color: var(--color-accent); }
-
-    .footer-tagline {
-      font-size: 0.76rem;
-      color: var(--color-text-muted);
-      letter-spacing: 0.08em;
-      margin-bottom: 1.8rem;
-    }
-
-    .footer-copy {
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 0.1em;
-    }
-
-    /* ---- 애니메이션 ---- */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(-9px); }
-    }
-
-    /* ---- 카드 스크롤 등장 ---- */
-    .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(16px);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .section-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.05);
     }
 
-    /* ---- 반응형 ---- */
+    /* 색상별 glow */
+    .section-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    #section1 .section-glow { background: #ed1162; }
+    #section2 .section-glow { background: #eda624; }
+    #section3 .section-glow { background: #239da0; }
+    #section4 .section-glow { background: #f0f0f0; }
+
+    /* Footer */
+    .footer {
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.5rem, 4vw, 3.5rem);
+      letter-spacing: 0.1em;
+      opacity: 0.15;
+    }
+
+    .footer-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      opacity: 0.2;
+    }
+
+    /* 모바일 */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .works-grid { grid-template-columns: 1fr; }
+      .reveal-text {
+        font-size: clamp(2rem, 9vw, 4rem);
+        line-height: 1.2;
+      }
+
+      .section-sub {
+        font-size: 0.75rem;
+      }
+
+      .scroll-indicator {
+        bottom: 2rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div id="scroll-progress"></div>
+  <div id="progress-bar"></div>
 
-  <nav id="navbar">
-    <a href="#" class="nav-logo">NEON<span>.</span>SPACE</a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#works">Works</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- 히어로 -->
-  <section id="hero">
-    <div id="tsparticles"></div>
-    <div class="hero-content">
-      <span class="hero-badge">Interactive Experience</span>
-      <h1 class="hero-title">
-        EXPLORE THE<br>
-        <span class="neon-mint">DIGITAL</span>
-        <span class="neon-purple"> UNIVERSE</span>
-      </h1>
-      <p class="hero-sub">
-        파티클이 살아 숨쉬는 인터랙티브 공간.<br>
-        마우스를 움직여 우주를 직접 느껴보세요.
-      </p>
-      <div class="hero-buttons">
-        <a href="#works" class="btn-primary">View Works</a>
-        <a href="#services" class="btn-outline">Our Services</a>
-      </div>
-    </div>
-    <div class="scroll-indicator">Scroll</div>
-  </section>
-
-  <!-- 서비스 -->
-  <section id="services">
-    <div class="section-header">
-      <span class="section-label">// What We Do</span>
-      <h2 class="section-title">Creative <span class="accent">Services</span></h2>
-      <p class="section-desc">디지털 경험을 새롭게 정의합니다. 인터랙티브 웹부터 인터랙션 디자인까지.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <span class="service-num">01</span>
-        <div class="service-name">Interactive Web</div>
-        <p class="service-desc">tsParticles, WebGL, Canvas API를 활용한 몰입형 인터랙티브 웹 경험. 사용자의 움직임에 반응하는 살아있는 공간을 구현합니다.</p>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">02</span>
-        <div class="service-name">Motion Design</div>
-        <p class="service-desc">GSAP와 CSS 애니메이션으로 구현하는 유려한 모션 그래픽. 60fps 유지를 원칙으로 부드러운 인터랙션을 설계합니다.</p>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">03</span>
-        <div class="service-name">UI/UX Strategy</div>
-        <p class="service-desc">사용자 경험 중심의 인터페이스 설계. 직관적이고 아름다운 디지털 제품을 함께 만들어냅니다.</p>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">04</span>
-        <div class="service-name">Brand Identity</div>
-        <p class="service-desc">네온 비주얼부터 미니멀 모던까지, 브랜드의 개성을 살린 일관된 시각적 언어를 구축합니다.</p>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">05</span>
-        <div class="service-name">Creative Coding</div>
-        <p class="service-desc">예술과 코드의 경계를 허무는 제너러티브 아트. 알고리즘으로 만들어내는 독창적인 비주얼 작품.</p>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">06</span>
-        <div class="service-name">3D Visualization</div>
-        <p class="service-desc">Three.js와 WebGL을 활용한 3D 웹 비주얼라이제이션. 데이터를 아름다운 3D 그래픽으로 변환합니다.</p>
-      </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-dots"></div>
+    <p class="hero-label">Scroll Text Color Reveal</p>
+    <h1>
+      <span>WORDS</span>
+      <span class="accent-line">COME</span>
+      <span>ALIVE</span>
+    </h1>
+    <p class="hero-sub">스크롤하면 문장에 색이 깃든다</p>
+    <div class="scroll-indicator">
+      <span>SCROLL DOWN</span>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- 작품 -->
-  <section id="works">
-    <div class="works-inner">
-      <div class="section-header">
-        <span class="section-label">// Portfolio</span>
-        <h2 class="section-title">Selected <span class="accent">Works</span></h2>
-        <p class="section-desc">창의적인 기술로 완성한 프로젝트들을 소개합니다.</p>
-      </div>
-      <div class="works-grid">
-        <div class="work-card reveal">
-          <img class="work-img" src="https://loremflickr.com/640/420/neon,technology" alt="Project 01">
-          <div class="work-info">
-            <div class="work-tag">Interactive / WebGL</div>
-            <div class="work-title">Particle Universe</div>
-            <p class="work-desc">수백만 개의 파티클로 구성된 인터랙티브 우주 시뮬레이션. 마우스 인터랙션과 물리 엔진을 결합하여 구현.</p>
-          </div>
-        </div>
-        <div class="work-card reveal">
-          <img class="work-img" src="https://loremflickr.com/640/420/cyberpunk,neon" alt="Project 02">
-          <div class="work-info">
-            <div class="work-tag">Branding / Motion</div>
-            <div class="work-title">Cyber Collective</div>
-            <p class="work-desc">사이버펑크 감성의 브랜드 정체성과 모션 그래픽. 네온과 글리치 효과로 미래적 감성을 구현.</p>
-          </div>
-        </div>
-        <div class="work-card reveal">
-          <img class="work-img" src="https://loremflickr.com/640/420/digital,abstract" alt="Project 03">
-          <div class="work-info">
-            <div class="work-tag">Data Viz / Creative</div>
-            <div class="work-title">Neural Network Art</div>
-            <p class="work-desc">신경망 알고리즘을 시각화한 제너러티브 아트. 실시간으로 생성되는 인터랙티브 패턴 작품.</p>
-          </div>
-        </div>
-      </div>
+  <!-- Reveal Section 1 -->
+  <section class="reveal-section" id="section1">
+    <div class="section-glow"></div>
+    <div class="section-index">01 / 04</div>
+    <div class="reveal-text" data-color="#ed1162">
+      DESIGN IS NOT JUST WHAT IT LOOKS LIKE
     </div>
+    <p class="section-sub">디자인이란 단순히 어떻게 보이는가의 문제가 아니다</p>
+    <div class="section-line"></div>
   </section>
 
-  <!-- 푸터 -->
-  <footer>
-    <div class="footer-logo">NEON<span>.</span>SPACE</div>
-    <p class="footer-tagline">Interactive Digital Experiences</p>
-    <p class="footer-copy">&copy; 2026 NEON.SPACE &mdash; All Rights Reserved</p>
-  </footer>
+  <!-- Reveal Section 2 -->
+  <section class="reveal-section" id="section2">
+    <div class="section-glow"></div>
+    <div class="section-index">02 / 04</div>
+    <div class="reveal-text" data-color="#eda624">
+      MAKE IT SIMPLE BUT SIGNIFICANT
+    </div>
+    <p class="section-sub">단순하게, 그러나 언제나 의미있게 만들어라</p>
+    <div class="section-line"></div>
+  </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+  <!-- Reveal Section 3 -->
+  <section class="reveal-section" id="section3">
+    <div class="section-glow"></div>
+    <div class="section-index">03 / 04</div>
+    <div class="reveal-text" data-color="#239da0">
+      GREAT DESIGN SOLVES PROBLEMS
+    </div>
+    <p class="section-sub">위대한 디자인은 반드시 문제를 해결한다</p>
+    <div class="section-line"></div>
+  </section>
+
+  <!-- Reveal Section 4 -->
+  <section class="reveal-section" id="section4">
+    <div class="section-glow"></div>
+    <div class="section-index">04 / 04</div>
+    <div class="reveal-text" data-color="#f0efff">
+      THE DETAILS ARE NOT THE DETAILS
+    </div>
+    <p class="section-sub">디테일은 단지 디테일이 아니다, 그것이 곧 디자인이다</p>
+    <div class="section-line"></div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p class="footer-title">SCROLL TEXT REVEAL</p>
+    <p class="footer-meta">GSAP &nbsp;·&nbsp; SCROLLTRIGGER &nbsp;·&nbsp; 2026</p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
+    gsap.registerPlugin(ScrollTrigger);
+
     // 스크롤 진행 바
-    const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      progressBar.style.width = (scrollTop / docHeight * 100) + '%';
-    }, { passive: true });
-
-    // 네비게이션 배경
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    // tsParticles 초기화
-    tsParticles.load("tsparticles", {
-      fullScreen: false,
-      background: { color: "transparent" },
-      fpsLimit: 60,
-      interactivity: {
-        events: {
-          onHover: {
-            enable: true,
-            mode: ["repulse", "connect"]
-          },
-          onClick: {
-            enable: true,
-            mode: "push"
-          },
-          resize: true
-        },
-        modes: {
-          repulse: {
-            distance: 130,
-            duration: 0.45,
-            speed: 1.2,
-            factor: 10,
-            maxSpeed: 60
-          },
-          connect: {
-            distance: 120,
-            links: { opacity: 0.55 },
-            radius: 90
-          },
-          push: { quantity: 5 }
-        }
-      },
-      particles: {
-        color: {
-          value: ["#34c0de", "#a855f7", "#00d8a4", "#7c3aed", "#22d3ee", "#c084fc"]
-        },
-        links: {
-          color: "#34c0de",
-          distance: 140,
-          enable: true,
-          opacity: 0.16,
-          width: 1
-        },
-        move: {
-          direction: "none",
-          enable: true,
-          outModes: { default: "bounce" },
-          random: true,
-          speed: 0.75,
-          straight: false
-        },
-        number: {
-          density: { enable: true, area: 850 },
-          value: 95
-        },
-        opacity: {
-          value: { min: 0.2, max: 0.85 },
-          animation: {
-            enable: true,
-            speed: 0.9,
-            minimumValue: 0.1,
-            sync: false
-          }
-        },
-        shape: { type: "circle" },
-        size: {
-          value: { min: 1, max: 3 },
-          animation: {
-            enable: true,
-            speed: 2,
-            minimumValue: 0.5,
-            sync: false
-          }
-        }
-      },
-      detectRetina: true
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('progress-bar').style.width = progress + '%';
     });
 
-    // 카드 스크롤 등장
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          const delay = parseFloat(entry.target.dataset.delay || 0);
-          setTimeout(() => entry.target.classList.add('visible'), delay);
-          io.unobserve(entry.target);
+    // 각 글자를 span.char 으로 분해
+    document.querySelectorAll('.reveal-text').forEach(el => {
+      const color = el.dataset.color;
+      const raw = el.textContent.trim();
+
+      el.innerHTML = raw.split('').map(ch => {
+        if (ch === ' ') {
+          return '<span class="char" style="display:inline-block;width:0.35em">&nbsp;</span>';
+        }
+        return `<span class="char">${ch}</span>`;
+      }).join('');
+
+      const chars = el.querySelectorAll('.char');
+      const section = el.closest('.reveal-section');
+      const sub = section.querySelector('.section-sub');
+      const glow = section.querySelector('.section-glow');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: '+=140%',
+          pin: true,
+          scrub: 1.2,
+          anticipatePin: 1,
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-    revealEls.forEach((el, i) => {
-      el.dataset.delay = i * 80;
-      io.observe(el);
+      // 글자 색 앞에서부터 채우기
+      tl.to(chars, {
+        color: color,
+        stagger: {
+          each: 0.025,
+          ease: 'none',
+        },
+        ease: 'none',
+        duration: 1,
+      });
+
+      // 서브 텍스트 등장
+      tl.to(sub, {
+        opacity: 1,
+        y: 0,
+        duration: 0.25,
+        ease: 'power2.out',
+      }, '-=0.15');
+
+      // glow 효과
+      tl.to(glow, {
+        opacity: 0.06,
+        duration: 0.5,
+        ease: 'power1.in',
+      }, 0);
+    });
+
+    // Hero 초기 애니메이션
+    gsap.from('.hero h1 span', {
+      y: 60,
+      opacity: 0,
+      stagger: 0.12,
+      duration: 0.9,
+      ease: 'power3.out',
+      delay: 0.2,
+    });
+
+    gsap.from('.hero-label, .hero-sub', {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: 'power2.out',
+      delay: 0.6,
+    });
+
+    gsap.from('.scroll-indicator', {
+      opacity: 0,
+      y: 10,
+      duration: 0.8,
+      delay: 1.2,
+      ease: 'power2.out',
     });
   </script>
 </body>
