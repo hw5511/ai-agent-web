@@ -44,19 +44,13 @@
       z-index: 0;
     }
 
-    .hero {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    .hero-tag,
+    .hero-name,
+    .hero-role,
+    .hero-divider,
+    .hero-buttons {
+      position: relative;
       z-index: 10;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      pointer-events: none;
     }
 
     .hero-tag {
@@ -159,7 +153,7 @@
     }
 
     .scroll-hint {
-      position: fixed;
+      position: absolute;
       bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
@@ -232,24 +226,6 @@
       color: var(--color-accent);
     }
 
-    .corner-info {
-      position: fixed;
-      bottom: 2rem;
-      right: 3rem;
-      z-index: 10;
-      text-align: right;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 1.2s;
-    }
-
-    .corner-info p {
-      font-family: var(--font-body);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: rgba(255, 255, 255, 0.3);
-      line-height: 1.8;
-    }
-
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -263,47 +239,162 @@
       50% { opacity: 0.4; transform: scaleY(0.6); }
     }
 
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 100;
+      transition: width 0.1s linear;
+    }
+
+    .section {
+      position: relative;
+      z-index: 5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .section-hero {
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .section-about {
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(2px);
+    }
+
+    .section-skills {
+      background: rgba(13, 13, 13, 0.92);
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.55);
+      max-width: 560px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      max-width: 640px;
+      width: 100%;
+    }
+
+    .skill-card {
+      border: 1px solid rgba(143, 223, 61, 0.2);
+      padding: 1.5rem 1rem;
+      border-radius: 4px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--color-accent);
+      background: rgba(143, 223, 61, 0.05);
+    }
+
+    .skill-card p {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .skill-card strong {
+      display: block;
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      color: var(--color-accent);
+      margin-bottom: 0.4rem;
+    }
+
     @media (max-width: 640px) {
       .nav { padding: 1.4rem 1.5rem; }
       .nav-links { display: none; }
       .corner-info { right: 1.5rem; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
+  <div class="progress-bar" id="progress-bar"></div>
   <canvas id="bg-canvas"></canvas>
 
   <nav class="nav">
     <div class="nav-logo">PF<span>.</span></div>
     <ul class="nav-links">
-      <li><a href="#">About</a></li>
-      <li><a href="#">Work</a></li>
-      <li><a href="#">Skills</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#hero">Hero</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
     </ul>
   </nav>
 
-  <main class="hero">
+  <section class="section section-hero" id="hero">
     <p class="hero-tag">Creative Developer</p>
     <h1 class="hero-name">KIM<br /><span>JIWON</span></h1>
     <p class="hero-role">Frontend &amp; Interactive Experience</p>
     <div class="hero-divider"></div>
     <div class="hero-buttons">
-      <a href="#" class="btn btn-primary">View Work</a>
-      <a href="#" class="btn btn-outline">Contact Me</a>
+      <a href="#about" class="btn btn-primary">View Work</a>
+      <a href="#skills" class="btn btn-outline">Skills</a>
     </div>
-  </main>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    <span>Scroll</span>
-  </div>
+  <section class="section section-about" id="about">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Three.js로<br />만든 세계</h2>
+    <p class="section-desc">이 배경의 와이어프레임 구체는 순수 Three.js WebGL로 구현되었습니다.<br />마우스 움직임에 반응하고, 스크롤에 따라 변형됩니다.</p>
+  </section>
 
-  <div class="corner-info">
-    <p>Seoul, Korea</p>
-    <p>Available for Hire</p>
-  </div>
+  <section class="section section-skills" id="skills">
+    <p class="section-label">Tech Stack</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><strong>Three.js</strong><p>WebGL 3D</p></div>
+      <div class="skill-card"><strong>GSAP</strong><p>Animation</p></div>
+      <div class="skill-card"><strong>React</strong><p>Frontend</p></div>
+      <div class="skill-card"><strong>Node.js</strong><p>Backend</p></div>
+      <div class="skill-card"><strong>Figma</strong><p>Design</p></div>
+      <div class="skill-card"><strong>WebGL</strong><p>Graphics</p></div>
+    </div>
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
   <script>
@@ -388,6 +479,20 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // scroll: progress bar + sphere scale/opacity
+      let scrollProgress = 0;
+      window.addEventListener('scroll', function () {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress = total > 0 ? window.scrollY / total : 0;
+        document.getElementById('progress-bar').style.width = (scrollProgress * 100) + '%';
+        // 스크롤이 내려갈수록 구체 축소 + 투명도 감소
+        const s = 1 - scrollProgress * 0.4;
+        sphere.scale.setScalar(s);
+        outerSphere.scale.setScalar(s);
+        material.opacity = 0.55 * (1 - scrollProgress * 0.5);
+        outerMat.opacity = 0.12 * (1 - scrollProgress * 0.5);
       });
     })();
   </script>
