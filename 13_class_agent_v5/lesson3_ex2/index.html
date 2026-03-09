@@ -367,10 +367,10 @@
             const dt = b.t - a.t;
             if (dt > 0 && dt < 200) {
               const vel = (b.y - a.y) / dt; // px/ms
-              const momentum = -vel * 150;   // px total
+              const momentum = -vel * 60;    // px total
               extra = momentum / this.ITEM_H * this.ANGLE;
-              // cap momentum to 5 steps
-              const max = this.ANGLE * 5;
+              // cap momentum to 3 steps
+              const max = this.ANGLE * 3;
               extra = Math.max(-max, Math.min(max, extra));
             }
           }

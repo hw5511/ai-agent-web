@@ -22,10 +22,14 @@
       --font-body: 'IBM Plex Mono', 'Nanum Gothic Coding', monospace;
     }
 
-    html, body {
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       width: 100%;
-      height: 100%;
-      overflow: hidden;
+      min-height: 100%;
+      overflow-y: auto;
       background: var(--color-bg);
       color: var(--color-text);
       font-family: var(--font-body);
