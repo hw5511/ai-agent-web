@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flip Card Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-bg: #faffff;
+      --color-accent: #3d2d5c;
+      --color-text: #111111;
+      --color-card-back: #3d2d5c;
+      --color-card-back-text: #ffffff;
+      --font-title: 'Bebas Neue', 'Noto Sans KR', sans-serif;
+      --font-body: 'Space Mono', 'Noto Sans KR', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+    }
+
+    /* Scroll progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* Header */
+    header {
+      padding: 80px 40px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: var(--font-title);
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      line-height: 1.1;
+    }
+
+    header p {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: #666;
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+
+    /* Card Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+
+    /* Flip Card Container */
+    .card-wrap {
+      perspective: 1000px;
+      height: 380px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+
+    .card-wrap:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Card Front */
+    .card-front {
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(61, 45, 92, 0.10);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-front .card-label {
+      padding: 20px 24px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .card-front h2 {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: var(--color-accent);
+    }
+
+    /* Card Back */
+    .card-back {
+      background: var(--color-card-back);
+      color: var(--color-card-back-text);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 28px;
+      gap: 24px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(61, 45, 92, 0.25);
+    }
+
+    .card-back .back-icon {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .card-back h3 {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+    }
+
+    .card-back p {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      opacity: 0.85;
+    }
+
+    .card-back .btn {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 10px 28px;
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: 999px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+      text-decoration: none;
+    }
+
+    .card-back .btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 24px 24px 60px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px 20px 60px;
+      }
+
+      .card-wrap {
+        height: 340px;
+      }
+
+      header {
+        padding: 60px 24px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <header>
+    <h1>FLIP CARDS</h1>
+    <p>카드에 마우스를 올려보세요 — CSS 3D flip 인터랙션 데모</p>
+  </header>
+
+  <section class="grid">
+
+    <!-- Card 1 -->
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://picsum.photos/seed/11/600/480" alt="Mountain" />
+          <div class="card-label">
+            <h2>Mountain Escape</h2>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="back-icon">&#9968;</div>
+          <h3>Mountain Escape</h3>
+          <p>고요한 산 속, 자연이 주는<br />완벽한 휴식을 경험해보세요.<br />매일의 소음에서 멀어지는 시간.</p>
+          <a href="#" class="btn">EXPLORE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://picsum.photos/seed/22/600/480" alt="Ocean" />
+          <div class="card-label">
+            <h2>Ocean Breeze</h2>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="back-icon">&#9875;</div>
+          <h3>Ocean Breeze</h3>
+          <p>파도 소리와 함께하는 여름.<br />바다가 선사하는 무한한 자유를<br />온몸으로 느껴보세요.</p>
+          <a href="#" class="btn">EXPLORE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://picsum.photos/seed/33/600/480" alt="Forest" />
+          <div class="card-label">
+            <h2>Forest Path</h2>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="back-icon">&#127795;</div>
+          <h3>Forest Path</h3>
+          <p>초록빛 숲 사이를 걷는<br />조용하고 깊은 산책길.<br />자연의 품 속으로 들어가세요.</p>
+          <a href="#" class="btn">EXPLORE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://picsum.photos/seed/44/600/480" alt="City" />
+          <div class="card-label">
+            <h2>City Lights</h2>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="back-icon">&#127751;</div>
+          <h3>City Lights</h3>
+          <p>밤이 되면 빛을 발하는 도시.<br />화려한 네온과 사람들의 에너지가<br />거리를 가득 채웁니다.</p>
+          <a href="#" class="btn">EXPLORE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://picsum.photos/seed/55/600/480" alt="Desert" />
+          <div class="card-label">
+            <h2>Desert Dunes</h2>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="back-icon">&#127774;</div>
+          <h3>Desert Dunes</h3>
+          <p>끝없이 펼쳐지는 황금빛 모래.<br />광활한 사막의 침묵 속에서<br />자신을 새롭게 발견하세요.</p>
+          <a href="#" class="btn">EXPLORE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://picsum.photos/seed/66/600/480" alt="Lake" />
+          <div class="card-label">
+            <h2>Lake Reflection</h2>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="back-icon">&#128166;</div>
+          <h3>Lake Reflection</h3>
+          <p>잔잔한 호수 위에 비치는 하늘.<br />고요함 속에서 마음을 비우고<br />새로운 에너지를 충전하세요.</p>
+          <a href="#" class="btn">EXPLORE</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    // Scroll progress bar
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = total > 0 ? (scrolled / total) * 100 : 0;
+      bar.style.width = pct + '%';
+    });
+  </script>
+
+</body>
+</html>

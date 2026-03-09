@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #fffdff;
+      --color-primary: #05aa8b;
+      --color-accent: #241e1d;
+      --color-text: #111111;
+      --font-title: 'Bebas Neue', 'Noto Sans KR', sans-serif;
+      --font-body: 'Space Mono', 'Noto Sans KR', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      line-height: 1.8;
+      letter-spacing: 0.01em;
+    }
+
+    /* Scroll Progress Bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--color-primary);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 3px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(255, 253, 255, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(5, 170, 139, 0.1);
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Section 1: Hero */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        135deg,
+        #fffdff 0%,
+        #e8faf6 40%,
+        #d0f5ed 70%,
+        #b8efe4 100%
+      );
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .hero-bg-circle:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: var(--color-primary);
+      top: -150px;
+      right: -100px;
+    }
+
+    .hero-bg-circle:nth-child(2) {
+      width: 350px;
+      height: 350px;
+      background: var(--color-accent);
+      bottom: -80px;
+      left: -60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-name {
+      font-family: var(--font-title);
+      font-size: clamp(5rem, 12vw, 10rem);
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .hero-typed-wrap {
+      margin-top: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--color-text);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+
+    .typed-cursor {
+      color: var(--color-primary);
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 1.1s forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.4rem;
+      background: var(--color-primary);
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(5, 170, 139, 0.3);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.4s forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--color-primary), transparent);
+      animation: scrollAnim 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollAnim {
+      0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section 2: About */
+    #about {
+      padding: 8rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: 0.06em;
+      color: var(--color-accent);
+      margin-bottom: 3.5rem;
+      line-height: 1;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      line-height: 1.95;
+      color: #444;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border: 1.5px solid var(--color-primary);
+      color: var(--color-primary);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.3s ease, color 0.3s ease;
+      cursor: default;
+    }
+
+    .tag:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-image-wrap::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      border: 2px solid var(--color-primary);
+      border-radius: 4px;
+      z-index: 0;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image-wrap:hover::before {
+      transform: translate(4px, 4px);
+    }
+
+    .about-image-wrap img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+      position: relative;
+      z-index: 1;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .about-image-wrap:hover img {
+      transform: translate(-4px, -4px);
+    }
+
+    /* Section 3: Contact */
+    #contact {
+      background: var(--color-accent);
+      color: #fff;
+      padding: 8rem 4rem;
+    }
+
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    #contact .section-label {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    #contact .section-title {
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-desc {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 4rem;
+      max-width: 480px;
+      line-height: 1.9;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: padding-left 0.3s ease;
+      cursor: default;
+    }
+
+    .contact-item:hover {
+      padding-left: 0.8rem;
+    }
+
+    .contact-item:first-child {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .contact-item:hover .contact-icon {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.3s ease;
+    }
+
+    .contact-value:hover {
+      color: var(--color-primary);
+    }
+
+    .contact-cta {
+      margin-top: 3.5rem;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.85rem 2.4rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1614;
+      color: rgba(255, 255, 255, 0.3);
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+      }
+
+      #about {
+        padding: 6rem 1.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-image-wrap {
+        order: -1;
+      }
+
+      #contact {
+        padding: 6rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">YourName</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section id="hero">
+    <div class="hero-bg-circle"></div>
+    <div class="hero-bg-circle"></div>
+    <div class="hero-content">
+      <p class="hero-label">Hello, World</p>
+      <h1 class="hero-name">Your Name</h1>
+      <div class="hero-typed-wrap">
+        <span id="typed-el"></span>
+      </div>
+      <div class="hero-cta">
+        <a href="#about" class="btn">About Me</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Section 2: About -->
+  <section id="about">
+    <p class="section-label" data-aos="fade-up">About Me</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text" data-aos="fade-right" data-aos-delay="100">
+        <p>
+          안녕하세요. 저는 사용자 중심의 디지털 경험을 만드는 것을 좋아하는
+          크리에이터입니다. 코드와 디자인 사이 어딘가에서 일하며,
+          아이디어를 화면 위의 현실로 바꾸는 과정을 즐깁니다.
+        </p>
+        <p>
+          새로운 기술을 탐구하고, 간결하면서도 임팩트 있는 결과물을 만드는 것이
+          목표입니다. 협업과 커뮤니케이션을 중요하게 생각하며,
+          함께 성장하는 환경을 추구합니다.
+        </p>
+        <div class="about-tags">
+          <span class="tag">UX Design</span>
+          <span class="tag">Frontend</span>
+          <span class="tag">Creative</span>
+          <span class="tag">Branding</span>
+          <span class="tag">Motion</span>
+        </div>
+      </div>
+      <div class="about-image-wrap" data-aos="fade-left" data-aos-delay="150">
+        <img
+          src="https://loremflickr.com/600/750/portrait,person"
+          alt="Profile Photo"
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Contact -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label" data-aos="fade-up">Get In Touch</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Contact</h2>
+      <p class="contact-desc" data-aos="fade-up" data-aos-delay="120">
+        프로젝트 협업, 커피챗, 또는 그냥 인사라도 환영합니다.
+        언제든 편하게 연락 주세요.
+      </p>
+      <div class="contact-list" data-aos="fade-up" data-aos-delay="160">
+        <div class="contact-item">
+          <div class="contact-icon">@</div>
+          <div class="contact-info">
+            <span class="contact-label">Email</span>
+            <a href="mailto:hello@yourname.com" class="contact-value">hello@yourname.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">in</div>
+          <div class="contact-info">
+            <span class="contact-label">LinkedIn</span>
+            <a href="#" class="contact-value">linkedin.com/in/yourname</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">gh</div>
+          <div class="contact-info">
+            <span class="contact-label">GitHub</span>
+            <a href="#" class="contact-value">github.com/yourname</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">ig</div>
+          <div class="contact-info">
+            <span class="contact-label">Instagram</span>
+            <a href="#" class="contact-value">@yourname</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-cta" data-aos="fade-up" data-aos-delay="220">
+        <a href="mailto:hello@yourname.com" class="btn-outline">Send Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Your Name. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script>
+    // AOS init
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    // Typed.js
+    new Typed('#typed-el', {
+      strings: [
+        'UI/UX Designer',
+        'Frontend Developer',
+        'Creative Thinker',
+        'Problem Solver'
+      ],
+      typeSpeed: 55,
+      backSpeed: 30,
+      backDelay: 1800,
+      loop: true
+    });
+
+    // Scroll Progress Bar
+    (function () {
+      const bar = document.getElementById('scroll-progress');
+      let ticking = false;
+
+      function updateBar() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(updateBar);
+          ticking = true;
+        }
+      });
+    }());
+  </script>
+</body>
+</html>
