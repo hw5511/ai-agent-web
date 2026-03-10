@@ -3,498 +3,642 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio | Hero</title>
+  <title>DAMAGED HELMET — Three.js 3D Viewer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@300;400;600&family=Black+Han+Sans&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --color-bg: #0d0d0d;
-      --color-accent: #8fdf3d;
+      --color-bg: #0a0a0f;
+      --color-accent: #e8b86d;
       --color-text: #ffffff;
-      --font-title: 'Space Mono', 'Black Han Sans', monospace;
-      --font-body: 'IBM Plex Mono', 'Nanum Gothic Coding', monospace;
+      --color-muted: rgba(255,255,255,0.55);
+      --color-section-bg: rgba(10,10,15,0.88);
+      --font-title: 'Orbitron', monospace;
+      --font-body: 'Rajdhani', sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      width: 100%;
-      min-height: 100%;
-      overflow-y: auto;
       background: var(--color-bg);
       color: var(--color-text);
       font-family: var(--font-body);
+      overflow-x: hidden;
     }
 
-    #bg-canvas {
+    /* ── 스크롤 진행 바 ── */
+    #progress-bar {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    .hero-tag,
-    .hero-name,
-    .hero-role,
-    .hero-divider,
-    .hero-buttons {
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero-tag {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s ease forwards 0.2s;
-    }
-
-    .hero-name {
-      font-family: var(--font-title);
-      font-size: clamp(3rem, 9vw, 8rem);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      line-height: 1.05;
-      color: var(--color-text);
-      opacity: 0;
-      transform: translateY(24px);
-      animation: fadeUp 0.9s ease forwards 0.4s;
-    }
-
-    .hero-name span {
-      color: var(--color-accent);
-    }
-
-    .hero-role {
-      font-family: var(--font-body);
-      font-size: clamp(0.85rem, 2.2vw, 1.15rem);
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.55);
-      margin-top: 1rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s ease forwards 0.6s;
-    }
-
-    .hero-divider {
-      width: 48px;
-      height: 2px;
-      background: var(--color-accent);
-      margin: 2rem auto;
-      opacity: 0;
-      animation: fadeIn 0.8s ease forwards 0.8s;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp 0.9s ease forwards 1s;
-      pointer-events: all;
-    }
-
-    .btn {
-      font-family: var(--font-body);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.85rem 2.2rem;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--color-accent);
-      color: #0d0d0d;
-      border: 2px solid var(--color-accent);
-    }
-
-    .btn-primary:hover {
-      background: transparent;
-      color: var(--color-accent);
-      box-shadow: 0 0 20px rgba(143, 223, 61, 0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--color-text);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
-      box-shadow: 0 0 20px rgba(143, 223, 61, 0.15);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 1.4s;
-    }
-
-    .scroll-hint span {
-      font-family: var(--font-body);
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--color-accent), transparent);
-      animation: scrollPulse 1.8s ease-in-out infinite;
-    }
-
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 20;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.8rem 3rem;
-    }
-
-    .nav-logo {
-      font-family: var(--font-title);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--color-text);
-    }
-
-    .nav-logo span {
-      color: var(--color-accent);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--font-body);
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.5);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--color-accent);
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 1; transform: scaleY(1); }
-      50% { opacity: 0.4; transform: scaleY(0.6); }
-    }
-
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 2px;
+      top: 0; left: 0;
       width: 0%;
+      height: 2px;
       background: var(--color-accent);
-      z-index: 100;
+      z-index: 1000;
       transition: width 0.1s linear;
     }
 
-    .section {
+    /* ── 로딩 화면 ── */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease;
+    }
+    #loading-screen.hidden { opacity: 0; pointer-events: none; }
+
+    .loading-title {
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      letter-spacing: 0.3em;
+      color: var(--color-accent);
+      margin-bottom: 2rem;
+    }
+
+    .loading-bar-wrap {
+      width: 260px;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .loading-bar-fill {
+      height: 100%;
+      background: var(--color-accent);
+      width: 0%;
+      border-radius: 2px;
+      transition: width 0.2s ease;
+    }
+    .loading-pct {
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--color-muted);
+    }
+
+    /* ── WebGL 캔버스 ── */
+    #three-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: block;
+    }
+
+    /* ── 섹션 공통 ── */
+    section {
       position: relative;
       z-index: 5;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      background: transparent;
+      flex-direction: column;
       text-align: center;
-      padding: 6rem 2rem;
+      pointer-events: none;
     }
 
-    .section-hero {
-      min-height: 100vh;
-      position: relative;
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .section-about {
-      background: rgba(13, 13, 13, 0.85);
-      backdrop-filter: blur(2px);
-    }
-
-    .section-skills {
-      background: rgba(13, 13, 13, 0.92);
-    }
-
-    .section-label {
-      font-family: var(--font-body);
-      font-size: 0.7rem;
+    .hero-label {
+      font-family: var(--font-title);
+      font-size: 0.65rem;
       letter-spacing: 0.4em;
-      text-transform: uppercase;
       color: var(--color-accent);
-      margin-bottom: 1.5rem;
+      text-transform: uppercase;
     }
 
-    .section-title {
+    .hero-title {
       font-family: var(--font-title);
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      line-height: 1.1;
-      color: var(--color-text);
-      margin-bottom: 1.5rem;
+      font-size: clamp(2.2rem, 8vw, 6rem);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      background: linear-gradient(135deg, #ffffff 30%, var(--color-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .section-desc {
+    .hero-sub {
       font-family: var(--font-body);
-      font-size: clamp(0.82rem, 1.5vw, 0.95rem);
-      line-height: 1.9;
-      color: rgba(255, 255, 255, 0.55);
-      max-width: 560px;
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+      margin-top: 0.5rem;
     }
 
-    .skills-grid {
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-hint span {
+      font-family: var(--font-title);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      color: var(--color-accent);
+    }
+    .scroll-hint-arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--color-accent), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── About ── */
+    #about {
+      background: var(--color-section-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(232,184,109,0.15);
+      border-bottom: 1px solid rgba(232,184,109,0.15);
+    }
+
+    .about-inner {
+      max-width: 1000px;
+      width: 90%;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-      max-width: 640px;
-      width: 100%;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
     }
 
-    .skill-card {
-      border: 1px solid rgba(143, 223, 61, 0.2);
-      padding: 1.5rem 1rem;
-      border-radius: 4px;
-      transition: border-color 0.3s, background 0.3s;
-    }
-
-    .skill-card:hover {
-      border-color: var(--color-accent);
-      background: rgba(143, 223, 61, 0.05);
-    }
-
-    .skill-card p {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    .skill-card strong {
-      display: block;
+    .about-text h2 {
       font-family: var(--font-title);
-      font-size: 0.95rem;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      letter-spacing: 0.12em;
       color: var(--color-accent);
-      margin-bottom: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p {
+      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+      line-height: 1.9;
+      color: var(--color-muted);
+      letter-spacing: 0.03em;
     }
 
-    @media (max-width: 640px) {
-      .nav { padding: 1.4rem 1.5rem; }
-      .nav-links { display: none; }
-      .corner-info { right: 1.5rem; }
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .spec-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .spec-card {
+      background: rgba(232,184,109,0.06);
+      border: 1px solid rgba(232,184,109,0.2);
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      cursor: default;
+    }
+    .spec-card:hover {
+      background: rgba(232,184,109,0.12);
+      border-color: rgba(232,184,109,0.45);
+    }
+    .spec-label {
+      font-family: var(--font-title);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+    .spec-value {
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      color: var(--color-accent);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Tech ── */
+    #tech {
+      background: var(--color-section-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      flex-direction: column;
+      gap: 3.5rem;
+      padding: 5rem 2rem;
+    }
+
+    .tech-header {
+      text-align: center;
+    }
+    .tech-header h2 {
+      font-family: var(--font-title);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: 0.6rem;
+    }
+    .tech-header p {
+      font-size: 1rem;
+      color: var(--color-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      max-width: 960px;
+      width: 90%;
+    }
+    .tech-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(232,184,109,0.18);
+      border-radius: 12px;
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      cursor: default;
+    }
+    .tech-card:hover {
+      transform: translateY(-6px);
+      background: rgba(232,184,109,0.08);
+      border-color: rgba(232,184,109,0.5);
+    }
+    .tech-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 0.9rem;
+      color: var(--color-accent);
+    }
+    .tech-name {
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+    .tech-desc {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 680px) {
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-title { letter-spacing: 0.06em; }
     }
   </style>
 </head>
 <body>
 
-  <div class="progress-bar" id="progress-bar"></div>
-  <canvas id="bg-canvas"></canvas>
+  <!-- 스크롤 진행 바 -->
+  <div id="progress-bar"></div>
 
-  <nav class="nav">
-    <div class="nav-logo">PF<span>.</span></div>
-    <ul class="nav-links">
-      <li><a href="#hero">Hero</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-    </ul>
-  </nav>
+  <!-- 로딩 화면 -->
+  <div id="loading-screen">
+    <p class="loading-title">LOADING MODEL</p>
+    <div class="loading-bar-wrap">
+      <div class="loading-bar-fill" id="loading-fill"></div>
+    </div>
+    <p class="loading-pct" id="loading-pct">0%</p>
+  </div>
 
-  <section class="section section-hero" id="hero">
-    <p class="hero-tag">Creative Developer</p>
-    <h1 class="hero-name">KIM<br /><span>JIWON</span></h1>
-    <p class="hero-role">Frontend &amp; Interactive Experience</p>
-    <div class="hero-divider"></div>
-    <div class="hero-buttons">
-      <a href="#about" class="btn btn-primary">View Work</a>
-      <a href="#skills" class="btn btn-outline">Skills</a>
+  <!-- Three.js 캔버스 -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- Hero 섹션 -->
+  <section id="hero">
+    <div class="hero-content">
+      <p class="hero-label">Three.js &nbsp;·&nbsp; GLTFLoader &nbsp;·&nbsp; WebGL</p>
+      <h1 class="hero-title">DAMAGED<br>HELMET</h1>
+      <p class="hero-sub">마우스로 360도 회전해보세요</p>
     </div>
     <div class="scroll-hint">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
+      <span>SCROLL</span>
+      <div class="scroll-hint-arrow"></div>
     </div>
   </section>
 
-  <section class="section section-about" id="about">
-    <p class="section-label">About Me</p>
-    <h2 class="section-title">Three.js로<br />만든 세계</h2>
-    <p class="section-desc">이 배경의 와이어프레임 구체는 순수 Three.js WebGL로 구현되었습니다.<br />마우스 움직임에 반응하고, 스크롤에 따라 변형됩니다.</p>
-  </section>
-
-  <section class="section section-skills" id="skills">
-    <p class="section-label">Tech Stack</p>
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card"><strong>Three.js</strong><p>WebGL 3D</p></div>
-      <div class="skill-card"><strong>GSAP</strong><p>Animation</p></div>
-      <div class="skill-card"><strong>React</strong><p>Frontend</p></div>
-      <div class="skill-card"><strong>Node.js</strong><p>Backend</p></div>
-      <div class="skill-card"><strong>Figma</strong><p>Design</p></div>
-      <div class="skill-card"><strong>WebGL</strong><p>Graphics</p></div>
+  <!-- About 섹션 -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <h2>ABOUT MODEL</h2>
+        <p>
+          Damaged Helmet은 Khronos Group이 공개한 대표적인
+          glTF 2.0 샘플 모델입니다.<br><br>
+          PBR(Physically Based Rendering) 재질과 고해상도 텍스처를 사용하여
+          실제 금속 표면의 반사와 긁힘, 손상 질감을 WebGL 위에서 재현합니다.<br><br>
+          Three.js의 GLTFLoader로 로드하며, 씬에 배치된 여러 광원이
+          금속 표면에서 반사되며 실시간으로 렌더링됩니다.
+        </p>
+      </div>
+      <div class="spec-cards">
+        <div class="spec-card">
+          <span class="spec-label">Format</span>
+          <span class="spec-value">glTF 2.0 Binary</span>
+        </div>
+        <div class="spec-card">
+          <span class="spec-label">Textures</span>
+          <span class="spec-value">Albedo · Normal · AO</span>
+        </div>
+        <div class="spec-card">
+          <span class="spec-label">Material</span>
+          <span class="spec-value">PBR Metallic-Roughness</span>
+        </div>
+        <div class="spec-card">
+          <span class="spec-label">Renderer</span>
+          <span class="spec-value">Three.js WebGLRenderer</span>
+        </div>
+        <div class="spec-card">
+          <span class="spec-label">Lighting</span>
+          <span class="spec-value">Ambient · Directional · Point</span>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- Tech 섹션 -->
+  <section id="tech">
+    <div class="tech-header">
+      <h2>TECH STACK</h2>
+      <p>이 페이지를 구성하는 WebGL 기술 스택</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <span class="tech-icon">&#9651;</span>
+        <p class="tech-name">THREE.JS</p>
+        <p class="tech-desc">WebGL 추상화 라이브러리. 씬, 카메라, 렌더러, 조명을 통합 관리</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-icon">&#9632;</span>
+        <p class="tech-name">GLTF LOADER</p>
+        <p class="tech-desc">glTF/GLB 포맷의 3D 모델을 비동기로 파싱하여 씬에 삽입</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-icon">&#9679;</span>
+        <p class="tech-name">ORBIT CONTROLS</p>
+        <p class="tech-desc">마우스 드래그·휠로 카메라를 구면 좌표계 위에서 자유 조작</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-icon">&#9670;</span>
+        <p class="tech-name">PBR MATERIAL</p>
+        <p class="tech-desc">물리 기반 렌더링으로 금속성·거칠기를 현실감 있게 표현</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-icon">&#9711;</span>
+        <p class="tech-name">SHADOW MAP</p>
+        <p class="tech-desc">DirectionalLight 실시간 그림자로 공간감과 깊이감 부여</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-icon">&#9674;</span>
+        <p class="tech-name">TONE MAPPING</p>
+        <p class="tech-desc">ACESFilmic 톤 매핑으로 HDR 조명을 SDR 화면에 자연스럽게 출력</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/controls/OrbitControls.js"></script>
+
   <script>
-    (function () {
-      const canvas = document.getElementById('bg-canvas');
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // ─── 로딩 UI ─────────────────────────────────────────
+    var loadingScreen = document.getElementById('loading-screen');
+    var loadingFill   = document.getElementById('loading-fill');
+    var loadingPctEl  = document.getElementById('loading-pct');
+
+    function setLoadingPct(pct) {
+      var v = Math.round(pct);
+      loadingFill.style.width = v + '%';
+      loadingPctEl.textContent = v + '%';
+    }
+
+    // ─── Renderer ────────────────────────────────────────
+    var canvas   = document.getElementById('three-canvas');
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
+    renderer.toneMapping       = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.4;
+    renderer.outputColorSpace  = THREE.SRGBColorSpace;
+
+    // ─── Scene & Camera ──────────────────────────────────
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0f);
+    scene.fog        = new THREE.Fog(0x0a0a0f, 12, 40);
+
+    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100);
+    camera.position.set(0, 0, 4.5);
+
+    // ─── OrbitControls ───────────────────────────────────
+    var controls = new THREE.OrbitControls(camera, canvas);
+    controls.enableDamping   = true;
+    controls.dampingFactor   = 0.06;
+    controls.minDistance     = 1.5;
+    controls.maxDistance     = 10;
+    controls.autoRotate      = true;
+    controls.autoRotateSpeed = 0.6;
+    controls.enablePan       = false;
+    controls.target.set(0, 0, 0);
+
+    // ─── Lights ──────────────────────────────────────────
+    var ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+    scene.add(ambientLight);
+
+    var dirLight = new THREE.DirectionalLight(0xffe8b0, 3.5);
+    dirLight.position.set(3, 5, 4);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.set(1024, 1024);
+    dirLight.shadow.camera.near = 0.1;
+    dirLight.shadow.camera.far  = 20;
+    scene.add(dirLight);
+
+    var fillLight = new THREE.DirectionalLight(0x6090ff, 1.8);
+    fillLight.position.set(-4, 2, -2);
+    scene.add(fillLight);
+
+    var rimLight = new THREE.PointLight(0xe8b86d, 4, 12);
+    rimLight.position.set(4, 1, -2);
+    scene.add(rimLight);
+
+    var topLight = new THREE.PointLight(0xffffff, 2, 8);
+    topLight.position.set(0, 5, 1);
+    scene.add(topLight);
+
+    var backLight = new THREE.PointLight(0x4040ff, 2.5, 10);
+    backLight.position.set(-2, -1, -4);
+    scene.add(backLight);
+
+    // ─── Model ───────────────────────────────────────────
+    var model        = null;
+    var modelLoaded  = false;
+    var introActive  = false;
+    var introProgress = 0;
+
+    var modelGroup = new THREE.Group();
+    scene.add(modelGroup);
+
+    function setMeshTransparency(obj, transparent, opacity) {
+      obj.traverse(function (child) {
+        if (child.isMesh && child.material) {
+          var mats = Array.isArray(child.material) ? child.material : [child.material];
+          mats.forEach(function (mat) {
+            mat.transparent = transparent;
+            mat.opacity     = opacity;
+          });
+        }
+      });
+    }
+
+    function animateModelIn() {
+      introActive   = true;
+      introProgress = 0;
+      modelGroup.position.y = -0.6;
+    }
+
+    var loader = new THREE.GLTFLoader();
+    loader.load(
+      'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb',
+      function (gltf) {
+        model = gltf.scene;
+
+        // 크기·위치 정규화
+        var box    = new THREE.Box3().setFromObject(model);
+        var center = new THREE.Vector3();
+        var size   = new THREE.Vector3();
+        box.getCenter(center);
+        box.getSize(size);
+        var maxDim = Math.max(size.x, size.y, size.z);
+        var scale  = 1.8 / maxDim;
+        model.scale.setScalar(scale);
+        model.position.sub(center.multiplyScalar(scale));
+
+        model.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow    = true;
+            child.receiveShadow = true;
+          }
+        });
+
+        setMeshTransparency(model, true, 0);
+        modelGroup.add(model);
+        modelLoaded = true;
+
+        setLoadingPct(100);
+        setTimeout(function () {
+          loadingScreen.classList.add('hidden');
+          setTimeout(function () {
+            animateModelIn();
+          }, 400);
+        }, 600);
+      },
+      function (xhr) {
+        if (xhr.total > 0) {
+          setLoadingPct((xhr.loaded / xhr.total) * 100);
+        }
+      },
+      function (err) {
+        console.error('GLTFLoader error:', err);
+        loadingPctEl.textContent = 'LOAD FAILED';
+      }
+    );
+
+    // ─── Scroll ──────────────────────────────────────────
+    var scrollProgress       = 0;
+    var targetScrollProgress = 0;
+
+    window.addEventListener('scroll', function () {
+      var total = document.body.scrollHeight - window.innerHeight;
+      var raw   = total > 0 ? window.scrollY / total : 0;
+      targetScrollProgress = Math.max(0, Math.min(1, raw));
+      document.getElementById('progress-bar').style.width =
+        (targetScrollProgress * 100) + '%';
+    });
+
+    // ─── Resize ──────────────────────────────────────────
+    window.addEventListener('resize', function () {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x0d0d0d, 1);
+    });
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.z = 5;
+    // ─── Animate ─────────────────────────────────────────
+    var clock = new THREE.Clock();
 
-      const geometry = new THREE.SphereGeometry(2, 36, 36);
-      const material = new THREE.MeshBasicMaterial({
-        color: 0x8fdf3d,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.55,
-      });
-      const sphere = new THREE.Mesh(geometry, material);
-      scene.add(sphere);
+    function lerp(a, b, t) { return a + (b - a) * t; }
 
-      const outerGeo = new THREE.SphereGeometry(2.35, 18, 18);
-      const outerMat = new THREE.MeshBasicMaterial({
-        color: 0x8fdf3d,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.12,
-      });
-      const outerSphere = new THREE.Mesh(outerGeo, outerMat);
-      scene.add(outerSphere);
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
-      const pointLight = new THREE.PointLight(0x8fdf3d, 2, 10);
-      pointLight.position.set(3, 3, 3);
-      scene.add(pointLight);
+    function animate() {
+      requestAnimationFrame(animate);
+      var delta = clock.getDelta();
 
-      let mouseX = 0;
-      let mouseY = 0;
-      let targetRotX = 0;
-      let targetRotY = 0;
-      let currentRotX = 0;
-      let currentRotY = 0;
+      // 스크롤 보간
+      scrollProgress = lerp(scrollProgress, targetScrollProgress, 0.08);
 
-      document.addEventListener('mousemove', function (e) {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-      });
+      // 등장 애니메이션
+      if (introActive && model) {
+        introProgress = Math.min(1, introProgress + delta * 0.9);
+        var t = easeOutCubic(introProgress);
 
-      let autoRotY = 0;
-      let raf;
+        modelGroup.position.y = lerp(-0.6, 0, t);
+        setMeshTransparency(model, true, t);
 
-      function lerp(a, b, t) {
-        return a + (b - a) * t;
+        if (introProgress >= 1) {
+          introActive = false;
+          setMeshTransparency(model, false, 1);
+        }
       }
 
-      function animate() {
-        raf = requestAnimationFrame(animate);
+      // 스크롤에 따라 모델 위로 이동 + fade
+      if (model && !introActive) {
+        var heroFraction  = 1 / 3;
+        var scrollFactor  = Math.min(1, scrollProgress / heroFraction);
 
-        autoRotY += 0.003;
+        modelGroup.position.y = lerp(0, 2.5, scrollFactor);
 
-        targetRotX = mouseY * 0.6;
-        targetRotY = mouseX * 0.6;
-
-        currentRotX = lerp(currentRotX, targetRotX, 0.05);
-        currentRotY = lerp(currentRotY, targetRotY, 0.05);
-
-        sphere.rotation.x = currentRotX;
-        sphere.rotation.y = autoRotY + currentRotY;
-        sphere.rotation.z = currentRotX * 0.3;
-
-        outerSphere.rotation.x = -currentRotX * 0.4;
-        outerSphere.rotation.y = -autoRotY * 0.6 + currentRotY * 0.4;
-
-        renderer.render(scene, camera);
+        if (scrollFactor > 0.01) {
+          setMeshTransparency(model, true, 1 - scrollFactor);
+        } else {
+          setMeshTransparency(model, false, 1);
+        }
       }
 
-      animate();
+      controls.update();
+      renderer.render(scene, camera);
+    }
 
-      window.addEventListener('resize', function () {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      // scroll: progress bar + sphere scale/opacity
-      let scrollProgress = 0;
-      window.addEventListener('scroll', function () {
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        scrollProgress = total > 0 ? window.scrollY / total : 0;
-        document.getElementById('progress-bar').style.width = (scrollProgress * 100) + '%';
-        // 스크롤이 내려갈수록 구체 축소 + 투명도 감소
-        const s = 1 - scrollProgress * 0.4;
-        sphere.scale.setScalar(s);
-        outerSphere.scale.setScalar(s);
-        material.opacity = 0.55 * (1 - scrollProgress * 0.5);
-        outerMat.opacity = 0.12 * (1 - scrollProgress * 0.5);
-      });
-    })();
+    animate();
   </script>
 </body>
 </html>
