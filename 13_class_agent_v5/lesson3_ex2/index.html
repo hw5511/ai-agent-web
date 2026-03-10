@@ -534,9 +534,21 @@
       modelGroup.position.y = -0.6;
     }
 
-    var loader = new GLTFLoader();
-    loader.load(
-      './models/DamagedHelmet.glb',
+    // ─── 모바일 폴백 ────────────────────────────────────
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+    if (isMobile) {
+      var geo = new THREE.TorusKnotGeometry(1, 0.32, 180, 32);
+      var mat = new THREE.MeshStandardMaterial({ color: 0xe8b86d, metalness: 0.85, roughness: 0.15 });
+      model = new THREE.Mesh(geo, mat);
+      modelGroup.add(model);
+      modelLoaded = true;
+      loadingScreen.classList.add('hidden');
+      setTimeout(function() { animateModelIn(); }, 100);
+    } else {
+      var loader = new GLTFLoader();
+      loader.load(
+        './models/DamagedHelmet.glb',
       function (gltf) {
         model = gltf.scene;
 
@@ -580,6 +592,7 @@
         loadingPctEl.textContent = 'LOAD FAILED';
       }
     );
+    } // end desktop else
 
     // ─── Scroll ──────────────────────────────────────────
     var scrollProgress       = 0;
