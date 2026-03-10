@@ -424,12 +424,20 @@
     </div>
   </section>
 
-  <!-- Three.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- Three.js ES Module -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+    }
+  }
+  </script>
 
-  <script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     // ─── 로딩 UI ─────────────────────────────────────────
     var loadingScreen = document.getElementById('loading-screen');
     var loadingFill   = document.getElementById('loading-fill');
@@ -461,7 +469,7 @@
     camera.position.set(0, 0, 4.5);
 
     // ─── OrbitControls ───────────────────────────────────
-    var controls = new THREE.OrbitControls(camera, canvas);
+    var controls = new OrbitControls(camera, canvas);
     controls.enableDamping   = true;
     controls.dampingFactor   = 0.06;
     controls.minDistance     = 1.5;
@@ -526,7 +534,7 @@
       modelGroup.position.y = -0.6;
     }
 
-    var loader = new THREE.GLTFLoader();
+    var loader = new GLTFLoader();
     loader.load(
       './models/DamagedHelmet.glb',
       function (gltf) {
