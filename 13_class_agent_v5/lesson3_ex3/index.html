@@ -512,6 +512,23 @@
       stroke: #0d0d0d;
     }
 
+    .effect-card.active {
+      border-color: rgba(0,206,124,0.6);
+      box-shadow: 0 0 0 1px rgba(0,206,124,0.3), 0 16px 48px rgba(0,0,0,0.4), 0 0 24px rgba(0,206,124,0.15);
+    }
+
+    .effect-card.active::before {
+      opacity: 1;
+    }
+
+    .effect-card.active .effect-arrow {
+      background: var(--color-accent);
+    }
+
+    .effect-card.active .effect-arrow svg {
+      stroke: #0d0d0d;
+    }
+
     /* ── Footer ── */
     footer {
       background: #080808;
@@ -656,7 +673,7 @@
       <div class="effects-grid">
 
         <!-- Card 1: WAVES -->
-        <div class="effect-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+        <div class="effect-card" data-effect="WAVES" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
           <div class="effect-icon">
             <svg viewBox="0 0 24 24">
               <path d="M2 12 C5 8, 8 16, 11 12 S17 8, 20 12 S23 16, 26 12" stroke-linecap="round" />
@@ -678,7 +695,7 @@
         </div>
 
         <!-- Card 2: FOG -->
-        <div class="effect-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="120">
+        <div class="effect-card" data-effect="FOG" data-aos="fade-up" data-aos-duration="700" data-aos-delay="120">
           <div class="effect-icon">
             <svg viewBox="0 0 24 24">
               <ellipse cx="12" cy="10" rx="8" ry="4" opacity="0.7"/>
@@ -701,7 +718,7 @@
         </div>
 
         <!-- Card 3: GLOBE -->
-        <div class="effect-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="240">
+        <div class="effect-card" data-effect="GLOBE" data-aos="fade-up" data-aos-duration="700" data-aos-delay="240">
           <div class="effect-icon">
             <svg viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="8" />
@@ -738,9 +755,12 @@
     </p>
   </footer>
 
-  <!-- Three.js + VANTA.BIRDS -->
+  <!-- Three.js + VANTA effects -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
   <!-- AOS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
@@ -791,6 +811,101 @@
     }
 
     initVanta();
+
+    // Effect presets
+    var effectPresets = {
+      BIRDS: {
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        backgroundColor: 0x0d0d0d,
+        color1: 0x00ce7c,
+        color2: 0x007a49,
+        colorMode: 'lerp',
+        birdSize: 1.2,
+        wingSpan: 28.0,
+        speedLimit: 5.0,
+        separation: 48.0,
+        alignment: 52.0,
+        cohesion: 30.0,
+        quantity: 3.0
+      },
+      WAVES: {
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0x00ce7c,
+        shininess: 55.0,
+        waveHeight: 18.0,
+        waveSpeed: 0.8,
+        zoom: 0.85
+      },
+      FOG: {
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        highlightColor: 0x00ce7c,
+        midtoneColor: 0x007a49,
+        lowlightColor: 0x0d2a1c,
+        baseColor: 0x0d0d0d,
+        blurFactor: 0.65,
+        speed: 1.2,
+        zoom: 1.0
+      },
+      GLOBE: {
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0x00ce7c,
+        backgroundColor: 0x0d0d0d,
+        size: 1.2
+      }
+    };
+
+    // Effect card click handler
+    var currentEffect = 'BIRDS';
+    var cards = document.querySelectorAll('.effect-card[data-effect]');
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        var effect = card.getAttribute('data-effect');
+        if (!VANTA[effect]) return;
+
+        // Destroy current effect
+        if (vantaEffect) {
+          vantaEffect.destroy();
+          vantaEffect = null;
+        }
+
+        // Initialize new effect
+        var options = Object.assign({ el: '#vanta-bg', THREE: THREE }, effectPresets[effect] || {});
+        vantaEffect = VANTA[effect](options);
+        currentEffect = effect;
+
+        // Update active card
+        cards.forEach(function (c) { c.classList.remove('active'); });
+        card.classList.add('active');
+
+        // Scroll to hero
+        document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
 
     // Cleanup on unload
     window.addEventListener('beforeunload', function () {
