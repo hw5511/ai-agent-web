@@ -10,15 +10,22 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0d0d0d;
-    --surface: #141414;
-    --border: #2a2a2a;
-    --text: #ffffff;
-    --muted: #666666;
-    --muted2: #444444;
-    --accent: #00ff9d;
-    --accent2: #00b4ff;
-    --accent3: #ff6b6b;
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --surface2: #f2f2f0;
+    --border: #e0e0dc;
+    --border2: #d0d0cc;
+    --text: #111111;
+    --muted: #888888;
+    --muted2: #bbbbbb;
+    --accent: #1a1a1a;
+    --tag-v1: #6c6c6c;
+    --tag-v2: #3b7dd8;
+    --tag-v3: #2d9e6b;
+    --tag-v4: #c0690a;
+    --tag-v5: #8b3dcc;
+    --tag-sample: #c0392b;
+    --tag-lesson: #1a7fa8;
   }
 
   body {
@@ -31,17 +38,18 @@
   }
 
   header {
-    padding: 80px 60px 60px;
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
+    padding: 56px 64px 48px;
   }
 
   header h1 {
     font-family: 'Space Mono', monospace;
-    font-size: clamp(24px, 3.5vw, 42px);
+    font-size: clamp(22px, 3vw, 36px);
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--accent);
-    margin-bottom: 10px;
+    color: var(--text);
+    margin-bottom: 8px;
   }
 
   header p {
@@ -50,116 +58,228 @@
     font-family: 'Space Mono', monospace;
   }
 
-  main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px;
-  }
-
-  .section { margin-bottom: 72px; }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-
-  .section-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 4px;
-    background: rgba(0,255,157,0.08);
-    color: var(--accent);
-    border: 1px solid rgba(0,255,157,0.2);
+  nav-tabs {
+    display: block;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 64px;
+    overflow-x: auto;
     white-space: nowrap;
   }
 
-  .section-tag.blue {
-    background: rgba(0,180,255,0.08);
-    color: var(--accent2);
-    border-color: rgba(0,180,255,0.2);
+  nav-tabs a {
+    display: inline-block;
+    padding: 14px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  .section-tag.red {
-    background: rgba(255,107,107,0.08);
-    color: var(--accent3);
-    border-color: rgba(255,107,107,0.2);
+  nav-tabs a:hover { color: var(--text); border-bottom-color: var(--border2); }
+
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 56px 64px;
+  }
+
+  .section { margin-bottom: 80px; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
   }
 
   .section-title {
-    font-size: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
     font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .section-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .section-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 버전 테스트 — 프롬프트 그룹 */
+  .prompt-group { margin-bottom: 40px; }
+
+  .prompt-header {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px 8px 0 0;
+    padding: 14px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .prompt-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--muted);
+    background: var(--border);
+    border-radius: 3px;
+    padding: 2px 7px;
+    white-space: nowrap;
+    margin-top: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-text {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .version-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+  }
+
+  .version-card {
+    background: var(--surface);
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--text);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .version-card:last-child { border-right: none; }
+  .version-card:hover { background: var(--surface2); }
+
+  .vtag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: #fff;
+    width: fit-content;
+  }
+
+  .vtag.v1 { background: var(--tag-v1); }
+  .vtag.v2 { background: var(--tag-v2); }
+  .vtag.v3 { background: var(--tag-v3); }
+  .vtag.v4 { background: var(--tag-v4); }
+  .vtag.v5 { background: var(--tag-v5); }
+
+  .version-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .version-card-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .version-card-arrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    margin-top: 4px;
+    transition: transform 0.15s, color 0.15s;
+  }
+
+  .version-card:hover .version-card-arrow {
+    transform: translateX(3px);
     color: var(--text);
   }
 
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 64px 0;
+  }
+
+  /* 수업/샘플 카드 */
   .round-header {
-    margin-top: 36px;
+    margin-top: 32px;
     margin-bottom: 14px;
     font-family: 'Space Mono', monospace;
     font-size: 10px;
     color: var(--muted);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     border-bottom: 1px solid var(--border);
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 12px;
   }
 
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 22px 24px;
+    border-radius: 8px;
+    padding: 20px 22px;
     text-decoration: none;
     color: var(--text);
     display: flex;
     flex-direction: column;
-    gap: 0;
-    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
     cursor: pointer;
   }
 
   .card:hover {
-    border-color: var(--accent);
-    background: rgba(0,255,157,0.03);
+    border-color: var(--border2);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
     transform: translateY(-2px);
-  }
-
-  .card.blue:hover {
-    border-color: var(--accent2);
-    background: rgba(0,180,255,0.03);
-  }
-
-  .card.red:hover {
-    border-color: var(--accent3);
-    background: rgba(255,107,107,0.03);
   }
 
   .card-label {
     font-family: 'Space Mono', monospace;
     font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .card-title {
     font-size: 14px;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .card-prompt {
@@ -167,52 +287,57 @@
     font-size: 10px;
     color: var(--muted);
     line-height: 1.65;
-    border-left: 2px solid var(--border);
+    border-left: 2px solid var(--border2);
     padding-left: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     flex: 1;
   }
 
-  .card:hover .card-prompt {
-    border-left-color: var(--accent);
-    color: #999;
-  }
-
-  .card.blue:hover .card-prompt { border-left-color: var(--accent2); }
-  .card.red:hover .card-prompt { border-left-color: var(--accent3); }
+  .card:hover .card-prompt { border-left-color: var(--border2); }
 
   .card-arrow {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
     color: var(--muted2);
-    transition: color 0.2s, transform 0.2s;
+    transition: color 0.15s, transform 0.15s;
     display: inline-block;
   }
 
-  .card:hover .card-arrow { color: var(--accent); transform: translateX(4px); }
-  .card.blue:hover .card-arrow { color: var(--accent2); transform: translateX(4px); }
-  .card.red:hover .card-arrow { color: var(--accent3); transform: translateX(4px); }
+  .card:hover .card-arrow { color: var(--text); transform: translateX(3px); }
 
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 60px 0;
+  .section-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+    color: #fff;
   }
+
+  .badge-lesson { background: var(--tag-lesson); }
+  .badge-sample { background: var(--tag-sample); }
+  .badge-test { background: #555; }
 
   footer {
     border-top: 1px solid var(--border);
-    padding: 36px 60px;
+    background: var(--surface);
+    padding: 32px 64px;
     text-align: center;
     font-family: 'Space Mono', monospace;
     font-size: 10px;
     color: var(--muted);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
   }
 
   @media (max-width: 768px) {
-    header { padding: 48px 24px 36px; }
+    header { padding: 40px 24px 32px; }
+    nav-tabs { padding: 0 24px; }
     main { padding: 36px 24px; }
-    footer { padding: 28px 24px; }
+    footer { padding: 24px; }
+    .version-grid { grid-template-columns: 1fr 1fr; }
     .grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -224,30 +349,232 @@
   <p>408 에이전트 웹 — 배포 예제 허브 &nbsp;/&nbsp; Woohee Industries</p>
 </header>
 
+<nav-tabs>
+  <a href="#version-test">에이전트 버전 테스트 (v1~v5)</a>
+  <a href="#lesson">수업 예제 v5</a>
+  <a href="#samples">샘플 01~08</a>
+</nav-tabs>
+
 <main>
 
-  <!-- 수업 예제 v5 -->
-  <section class="section">
+  <!-- 에이전트 버전 테스트 비교 -->
+  <section class="section" id="version-test">
     <div class="section-header">
-      <span class="section-tag blue">Class v5</span>
-      <span class="section-title">수업 예제 — 13_class_agent_v5</span>
+      <span class="section-title">에이전트 버전 테스트</span>
+      <span class="section-sub">v1 ~ v5</span>
     </div>
+    <p class="section-desc">동일한 프롬프트를 v1~v5 에이전트에 각각 투입해 컬러·폰트 품질 진화를 비교합니다.</p>
+
+    <!-- test_A -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT A</span>
+        <span class="prompt-text">내 소개 페이지 만들어줘.</span>
+      </div>
+      <div class="version-grid">
+        <a class="version-card" href="09_class_agent/test_A/" target="_blank">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="10_class_agent_v2/test_A/" target="_blank">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준 (흑백화 문제)</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="11_class_agent_v3/test_A/" target="_blank">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 에이전트 직접 선택</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="12_class_agent_v4/test_A/" target="_blank">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 텍스트 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="13_class_agent_v5/test_A/" target="_blank">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- test_B -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT B</span>
+        <span class="prompt-text">나 음악 좋아하는데 음악 취미 소개 페이지 만들어줘. 좋아하는 앨범 사진 있고 스크롤하면 뭔가 나타나게 해줘.</span>
+      </div>
+      <div class="version-grid">
+        <a class="version-card" href="09_class_agent/test_B/" target="_blank">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="10_class_agent_v2/test_B/" target="_blank">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="11_class_agent_v3/test_B/" target="_blank">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 직접 선택</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="12_class_agent_v4/test_B/" target="_blank">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="13_class_agent_v5/test_B/" target="_blank">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- test_C -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT C</span>
+        <span class="prompt-text">친구한테 나를 소개하는 링크 만들고 싶어. 처음에 내 이름이랑 한 줄 소개 나오고, 다음에 내가 좋아하는 사진들 드래그로 넘길 수 있게, 그 다음에 내가 잘하는 것들 스크롤하면 하나씩 나타나게 해줘. 배경은 어둡게 해줘.</span>
+      </div>
+      <div class="version-grid">
+        <a class="version-card" href="09_class_agent/test_C/" target="_blank">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="10_class_agent_v2/test_C/" target="_blank">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="11_class_agent_v3/test_C/" target="_blank">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 직접 선택</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="12_class_agent_v4/test_C/" target="_blank">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="13_class_agent_v5/test_C/" target="_blank">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- test_D -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT D</span>
+        <span class="prompt-text">포트폴리오 페이지 만들어줘. 섹션 구성: 첫 번째 섹션에 내 이름 크게 화면 가득, 두 번째 섹션에 작품 사진 슬라이더(마우스 드래그로 넘기기), 세 번째 섹션에 내 스킬 목록 스크롤하면 하나씩 나타나게, 마지막 섹션에 연락처. 배경 검정, 글자 흰색, 포인트 컬러 있으면 좋겠어.</span>
+      </div>
+      <div class="version-grid">
+        <a class="version-card" href="09_class_agent/test_D/" target="_blank">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="10_class_agent_v2/test_D/" target="_blank">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="11_class_agent_v3/test_D/" target="_blank">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 직접 선택</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="12_class_agent_v4/test_D/" target="_blank">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+        <a class="version-card" href="13_class_agent_v5/test_D/" target="_blank">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <span class="version-card-arrow">→ 열기</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- v5 전용 test_E~G -->
+    <div class="round-header">v5 전용 테스트 (E~G)</div>
+    <div class="grid">
+      <a class="card" href="13_class_agent_v5/test_E/" target="_blank">
+        <div class="card-label">v5 / test_E</div>
+        <div class="card-title">카페 블로그</div>
+        <div class="card-prompt">카페 블로그 페이지 만들어줘. 따뜻하고 아늑한 느낌으로, 오늘의 메뉴 소개랑 카페 분위기 사진들 넣어줘. 스크롤하면 내용들이 하나씩 나타나게 해줘.</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="13_class_agent_v5/test_F/" target="_blank">
+        <div class="card-label">v5 / test_F</div>
+        <div class="card-title">여행 갤러리</div>
+        <div class="card-prompt">여행 사진 올릴 페이지 만들어줘. 지금까지 다녀온 나라 목록이랑, 사진 갤러리 드래그로 넘길 수 있게, 스크롤하면 여행 이야기들이 나타나게 해줘. 밝고 상쾌한 느낌으로 만들어줘.</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="13_class_agent_v5/test_G/" target="_blank">
+        <div class="card-label">v5 / test_G</div>
+        <div class="card-title">강아지 소개 페이지</div>
+        <div class="card-prompt">강아지 취미 소개 페이지 귀엽게 만들어줘. 내가 키우는 강아지 사진들 슬라이더로 넘길 수 있게, 강아지 이름이랑 특기 소개, 좋아하는 간식 목록도 넣어줘. 파스텔 색상으로 귀엽게 해줘.</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 수업 예제 v5 -->
+  <section class="section" id="lesson">
+    <div class="section-header">
+      <span class="section-badge badge-lesson">Class v5</span>
+      <span class="section-title">수업 예제</span>
+      <span class="section-sub">13_class_agent_v5</span>
+    </div>
+    <p class="section-desc">4회차 수업용 예제. 각 카드의 프롬프트는 학생에게 제공되는 템플릿 기준입니다.</p>
 
     <div class="round-header">1회차 — 마우스 인터랙션</div>
     <div class="grid">
-      <a class="card blue" href="13_class_agent_v5/lesson1_ex1/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson1_ex1/" target="_blank">
         <div class="card-label">lesson1_ex1</div>
         <div class="card-title">Magnetic Button + Cursor</div>
         <div class="card-prompt">마그네틱 버튼 + 커스텀 커서 예제 페이지 만들어줘. 다크 배경에 큰 제목과 마그네틱 버튼 3개가 있는 한 페이지.</div>
         <span class="card-arrow">→ 열기</span>
       </a>
-      <a class="card blue" href="13_class_agent_v5/lesson1_ex2/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson1_ex2/" target="_blank">
         <div class="card-label">lesson1_ex2</div>
         <div class="card-title">Flip Cards</div>
         <div class="card-prompt">호버 카드 뒤집기(Flip Card) 예제 페이지 만들어줘. 카드 6개가 3열 그리드로 배치된 페이지.</div>
         <span class="card-arrow">→ 열기</span>
       </a>
-      <a class="card blue" href="13_class_agent_v5/lesson1_ex3/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson1_ex3/" target="_blank">
         <div class="card-label">lesson1_ex3</div>
         <div class="card-title">Spotlight Effect</div>
         <div class="card-prompt">마우스 Spotlight 효과 예제 페이지 만들어줘. 완전 어두운 배경(#000)에 텍스트 콘텐츠가 있는 페이지. 마우스 따라 빛 원형 영역 이동.</div>
@@ -257,19 +584,19 @@
 
     <div class="round-header">2회차 — 스크롤 + 타이핑</div>
     <div class="grid">
-      <a class="card blue" href="13_class_agent_v5/lesson2_ex1/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson2_ex1/" target="_blank">
         <div class="card-label">lesson2_ex1</div>
         <div class="card-title">수평 스크롤</div>
         <div class="card-prompt">수평 스크롤 섹션 페이지 만들어줘. GSAP + ScrollTrigger 사용. 세로 스크롤을 가로 이동으로 변환.</div>
         <span class="card-arrow">→ 열기</span>
       </a>
-      <a class="card blue" href="13_class_agent_v5/lesson2_ex2/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson2_ex2/" target="_blank">
         <div class="card-label">lesson2_ex2</div>
         <div class="card-title">텍스트 컬러 Reveal</div>
         <div class="card-prompt">스크롤 텍스트 컬러 reveal 페이지 만들어줘. GSAP + ScrollTrigger scrub. 스크롤에 따라 텍스트가 색칠되며 등장.</div>
         <span class="card-arrow">→ 열기</span>
       </a>
-      <a class="card blue" href="13_class_agent_v5/lesson2_ex3/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson2_ex3/" target="_blank">
         <div class="card-label">lesson2_ex3</div>
         <div class="card-title">Typed.js 타이핑 히어로</div>
         <div class="card-prompt">Typed.js 타이핑 효과 히어로 페이지 만들어줘. 풀스크린 히어로에 큰 타이틀이 자동으로 타이핑되고 지워지는 효과.</div>
@@ -279,19 +606,19 @@
 
     <div class="round-header">3회차 — 외부 라이브러리</div>
     <div class="grid">
-      <a class="card blue" href="13_class_agent_v5/lesson3_ex1/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson3_ex1/" target="_blank">
         <div class="card-label">lesson3_ex1</div>
         <div class="card-title">tsParticles</div>
         <div class="card-prompt">tsParticles 인터랙티브 파티클 배경 페이지 만들어줘. 마우스에 반응하는 파티클 효과.</div>
         <span class="card-arrow">→ 열기</span>
       </a>
-      <a class="card blue" href="13_class_agent_v5/lesson3_ex2/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson3_ex2/" target="_blank">
         <div class="card-label">lesson3_ex2</div>
         <div class="card-title">Three.js 3D</div>
         <div class="card-prompt">Three.js GLTFLoader로 실제 3D 모델을 로드하고 마우스/스크롤로 인터랙션하는 페이지 만들어줘. OrbitControls + DamagedHelmet GLB. 모바일은 TorusKnot geometry 폴백.</div>
         <span class="card-arrow">→ 열기</span>
       </a>
-      <a class="card blue" href="13_class_agent_v5/lesson3_ex3/" target="_blank">
+      <a class="card" href="13_class_agent_v5/lesson3_ex3/" target="_blank">
         <div class="card-label">lesson3_ex3</div>
         <div class="card-title">VANTA.js</div>
         <div class="card-prompt">VANTA.js 인터랙티브 배경 효과 페이지 만들어줘. VANTA.BIRDS — 마우스로 새 떼 방향 제어. Hero + About + Effects 3섹션 구조.</div>
@@ -303,11 +630,13 @@
   <div class="divider"></div>
 
   <!-- 샘플 01~08 -->
-  <section class="section">
+  <section class="section" id="samples">
     <div class="section-header">
-      <span class="section-tag">Samples</span>
-      <span class="section-title">샘플 예제 — 01~08</span>
+      <span class="section-badge badge-sample">Samples</span>
+      <span class="section-title">샘플 예제</span>
+      <span class="section-sub">01~08</span>
     </div>
+    <p class="section-desc">에이전트 개발 초기 단계의 인터랙션 샘플 및 라이브러리 테스트 예제입니다.</p>
     <div class="grid">
       <a class="card" href="01_scroll_gallery/" target="_blank">
         <div class="card-label">01_scroll_gallery</div>
@@ -324,7 +653,7 @@
       <a class="card" href="03_card_shuffle/" target="_blank">
         <div class="card-label">03_card_shuffle</div>
         <div class="card-title">Card Shuffle</div>
-        <div class="card-prompt">GSAP Card Shuffle 재현. 순수 JS. 스포티파이 아티스트 카드 6장 부채꼴 배치, 클릭 시 맨 앞 카드가 뒤로 이동. 마우스 parallax 포함.</div>
+        <div class="card-prompt">GSAP Card Shuffle 재현. 순수 JS. 스포티파이 아티스트 카드 6장 부채꼴 배치, 클릭 시 맨 앞 카드가 뒤로 이동. 마우스 parallax.</div>
         <span class="card-arrow">→ 열기</span>
       </a>
       <a class="card" href="04_stacking_images/" target="_blank">
@@ -360,17 +689,15 @@
     </div>
   </section>
 
-  <div class="divider"></div>
-
-  <!-- 테스트 -->
+  <!-- Canvas 테스트 -->
   <section class="section">
     <div class="section-header">
-      <span class="section-tag red">Test</span>
+      <span class="section-badge badge-test">Test</span>
       <span class="section-title">에이전트 테스트</span>
     </div>
     <div class="grid">
-      <a class="card red" href="13_class_agent_v5/test_canvas/" target="_blank">
-        <div class="card-label">test_canvas</div>
+      <a class="card" href="13_class_agent_v5/test_canvas/" target="_blank">
+        <div class="card-label">v5 / test_canvas</div>
         <div class="card-title">Canvas 2D 드로잉</div>
         <div class="card-prompt">마우스로 그림을 그릴 수 있는 인터랙티브 드로잉 페이지 만들어줘. 색상 팔레트 6가지, 브러시 크기 조절 슬라이더, 지우개, 전체 지우기 버튼 포함. 감성적인 느낌.</div>
         <span class="card-arrow">→ 열기</span>
