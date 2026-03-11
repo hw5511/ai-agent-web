@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Web — 예제 허브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --border: #2a2a2a;
+    --text: #ffffff;
+    --muted: #888888;
+    --accent: #00ff9d;
+    --accent2: #00b4ff;
+    --accent3: #ff6b6b;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    padding: 80px 60px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 14px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px;
+  }
+
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(0,255,157,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,255,157,0.25);
+  }
+
+  .section-tag.blue {
+    background: rgba(0,180,255,0.1);
+    color: var(--accent2);
+    border-color: rgba(0,180,255,0.25);
+  }
+
+  .section-tag.red {
+    background: rgba(255,107,107,0.1);
+    color: var(--accent3);
+    border-color: rgba(255,107,107,0.25);
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    transition: border-color 0.25s, background 0.25s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    background: rgba(0,255,157,0.04);
+    transform: translateY(-3px);
+  }
+
+  .card.blue:hover {
+    border-color: var(--accent2);
+    background: rgba(0,180,255,0.04);
+  }
+
+  .card.red:hover {
+    border-color: var(--accent3);
+    background: rgba(255,107,107,0.04);
+  }
+
+  .card-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .card-arrow {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    transition: transform 0.2s;
+  }
+
+  .card.blue .card-arrow { color: var(--accent2); }
+  .card.red .card-arrow { color: var(--accent3); }
+
+  .card:hover .card-arrow {
+    transform: translateX(4px);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 60px 0;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 60px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 48px 24px 40px; }
+    main { padding: 40px 24px; }
+    footer { padding: 32px 24px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI Agent Web</h1>
+  <p>408 에이전트 웹 — 배포 예제 허브 &nbsp;/&nbsp; Woohee Industries</p>
+</header>
+
+<main>
+
+  <!-- 수업 예제 v5 -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag blue">Class v5</span>
+      <span class="section-title">수업 예제 — 13_class_agent_v5</span>
+    </div>
+
+    <!-- 1회차 -->
+    <div class="section-header" style="margin-top:32px; margin-bottom:16px;">
+      <span style="font-size:13px; color:var(--muted); font-family:'Space Mono',monospace;">1회차 — 마우스 인터랙션</span>
+    </div>
+    <div class="grid">
+      <a class="card blue" href="13_class_agent_v5/lesson1_ex1/" target="_blank">
+        <div class="card-label">lesson1_ex1</div>
+        <div class="card-title">Magnetic Button + Cursor</div>
+        <div class="card-desc">마그네틱 버튼 + 커스텀 커서</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card blue" href="13_class_agent_v5/lesson1_ex2/" target="_blank">
+        <div class="card-label">lesson1_ex2</div>
+        <div class="card-title">Flip Cards</div>
+        <div class="card-desc">CSS 3D 플립 카드</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card blue" href="13_class_agent_v5/lesson1_ex3/" target="_blank">
+        <div class="card-label">lesson1_ex3</div>
+        <div class="card-title">Spotlight Effect</div>
+        <div class="card-desc">마우스 스포트라이트</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+    </div>
+
+    <!-- 2회차 -->
+    <div class="section-header" style="margin-top:40px; margin-bottom:16px;">
+      <span style="font-size:13px; color:var(--muted); font-family:'Space Mono',monospace;">2회차 — 스크롤 + 타이핑</span>
+    </div>
+    <div class="grid">
+      <a class="card blue" href="13_class_agent_v5/lesson2_ex1/" target="_blank">
+        <div class="card-label">lesson2_ex1</div>
+        <div class="card-title">수평 스크롤</div>
+        <div class="card-desc">GSAP ScrollTrigger pin</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card blue" href="13_class_agent_v5/lesson2_ex2/" target="_blank">
+        <div class="card-label">lesson2_ex2</div>
+        <div class="card-title">텍스트 컬러 Reveal</div>
+        <div class="card-desc">GSAP ScrollTrigger scrub</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card blue" href="13_class_agent_v5/lesson2_ex3/" target="_blank">
+        <div class="card-label">lesson2_ex3</div>
+        <div class="card-title">Typed.js 타이핑 히어로</div>
+        <div class="card-desc">타이핑 효과 히어로 섹션</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+    </div>
+
+    <!-- 3회차 -->
+    <div class="section-header" style="margin-top:40px; margin-bottom:16px;">
+      <span style="font-size:13px; color:var(--muted); font-family:'Space Mono',monospace;">3회차 — 외부 라이브러리</span>
+    </div>
+    <div class="grid">
+      <a class="card blue" href="13_class_agent_v5/lesson3_ex1/" target="_blank">
+        <div class="card-label">lesson3_ex1</div>
+        <div class="card-title">tsParticles</div>
+        <div class="card-desc">인터랙티브 파티클</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card blue" href="13_class_agent_v5/lesson3_ex2/" target="_blank">
+        <div class="card-label">lesson3_ex2</div>
+        <div class="card-title">Three.js 3D</div>
+        <div class="card-desc">GLTFLoader + DamagedHelmet GLB + OrbitControls</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card blue" href="13_class_agent_v5/lesson3_ex3/" target="_blank">
+        <div class="card-label">lesson3_ex3</div>
+        <div class="card-title">VANTA.js</div>
+        <div class="card-desc">WebGL 인터랙티브 배경 (BIRDS)</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 샘플 예제 01~08 -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">Samples</span>
+      <span class="section-title">샘플 예제 — 01~08</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="01_scroll_gallery/" target="_blank">
+        <div class="card-label">01</div>
+        <div class="card-title">Scroll Gallery</div>
+        <div class="card-desc">GSAP Card Stack 스크롤 갤러리</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="02_word_by_word/" target="_blank">
+        <div class="card-label">02</div>
+        <div class="card-title">Word by Word</div>
+        <div class="card-desc">텍스트 단어 등장 애니메이션</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="03_card_shuffle/" target="_blank">
+        <div class="card-label">03</div>
+        <div class="card-title">Card Shuffle</div>
+        <div class="card-desc">FAN 배열 카드 셔플</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="04_stacking_images/" target="_blank">
+        <div class="card-label">04</div>
+        <div class="card-title">Stacking Images</div>
+        <div class="card-desc">Infinite Stacking Images</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="05_infinite_grid/" target="_blank">
+        <div class="card-label">05</div>
+        <div class="card-title">Infinite Grid</div>
+        <div class="card-desc">드래그 인피니트 타일링</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="06_test_gsap/" target="_blank">
+        <div class="card-label">06</div>
+        <div class="card-title">GSAP Test</div>
+        <div class="card-desc">GSAP + ScrollTrigger</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="07_test_swiper/" target="_blank">
+        <div class="card-label">07</div>
+        <div class="card-title">Swiper Test</div>
+        <div class="card-desc">Swiper.js Coverflow</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+      <a class="card" href="08_test_aos/" target="_blank">
+        <div class="card-label">08</div>
+        <div class="card-title">AOS Test</div>
+        <div class="card-desc">AOS 다방향 등장</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 테스트 -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag red">Test</span>
+      <span class="section-title">에이전트 테스트</span>
+    </div>
+    <div class="grid">
+      <a class="card red" href="13_class_agent_v5/test_canvas/" target="_blank">
+        <div class="card-label">test_canvas</div>
+        <div class="card-title">Canvas 2D 드로잉</div>
+        <div class="card-desc">HTML5 Canvas 2D 트리거 테스트</div>
+        <span class="card-arrow">→ 열기</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  AI Agent Web &nbsp;/&nbsp; Woohee Industries &nbsp;/&nbsp; 408 에이전트 웹
+</footer>
+
+</body>
+</html>
