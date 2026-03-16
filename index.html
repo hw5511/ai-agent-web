@@ -769,6 +769,15 @@
           <button class="btn-prompt" data-key="lesson3_ex3">프롬프트</button>
         </div>
       </div>
+      <div class="card">
+        <div class="card-label">lesson3_ex4</div>
+        <div class="card-title">Canvas 2D</div>
+        <div class="card-prompt">순수 Canvas 2D 인터랙티브 파티클 별자리. 마우스 근처 파티클 연결선, 밀어내기 반응.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson3_ex4/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson3_ex4">프롬프트</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -996,6 +1005,19 @@ VANTA.js CDN (Three.js 먼저 로드 필요):
 스크롤하면 라이브러리 소개 섹션 2개 (VANTA.js란?, 다른 VANTA 효과 소개 카드 3장).
 카드에는 VANTA.WAVES / VANTA.FOG / VANTA.GLOBE 효과 이름과 설명.
 분위기: 어둡고 신비로운 느낌.`,
+
+  lesson3_ex4: `Canvas 2D로 인터랙티브 파티클 별자리 페이지를 만들어줘.
+
+검정 배경에 흰색/밝은 파티클 60개가 랜덤 위치에서 천천히 떠다니고, 마우스를 움직이면 마우스 근처 150px 이내의 파티클끼리 연결선이 생기는 효과. 마우스에 가까울수록 선이 밝고 뚜렷하게, 멀수록 희미하게. 파티클은 마우스에 반응해서 살짝 밀려나는 효과.
+
+외부 라이브러리 없이 순수 Canvas 2D로만 구현. requestAnimationFrame 루프 사용.
+
+페이지 구성:
+- 전체 화면 Canvas 배경 (파티클 애니메이션)
+- 중앙에 타이틀 "CONSTELLATION" 크게
+- 부제목: "Canvas 2D Interactive Particles"
+- 하단에 간단한 사용 설명 ("Move your mouse")
+- 다크 테마, 우주/별 느낌`,
 
   '01_scroll_gallery': `GSAP ScrollTrigger "Card Stack" 효과 재현. 순수 JS로 구현 (GSAP CDN 사용 금지).
 
