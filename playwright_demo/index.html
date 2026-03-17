@@ -6,340 +6,605 @@
   <title>커뮤니티 - Playwright 실습 사이트</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; }
 
-    /* NAV */
+    /* ===== NAV ===== */
     #navbar {
-      background: #2c3e50;
+      background: #1a1a2e;
       color: #fff;
       padding: 0 24px;
       display: flex;
       align-items: center;
       height: 56px;
-      gap: 16px;
+      gap: 4px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    #navbar .nav-brand { font-weight: 700; font-size: 18px; margin-right: auto; cursor: pointer; }
+    #navbar .nav-brand { font-weight: 800; font-size: 18px; margin-right: auto; cursor: pointer; letter-spacing: -0.5px; }
+    #navbar .nav-brand span { color: #e94560; }
     #navbar a, #navbar button.nav-btn {
-      color: #ccc;
+      color: #aaa;
       text-decoration: none;
       background: none;
       border: none;
       font-size: 14px;
       cursor: pointer;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 4px;
-      transition: background 0.2s;
+      transition: background 0.15s, color 0.15s;
     }
-    #navbar a:hover, #navbar button.nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
-    #navbar .nav-user { color: #7f8c8d; font-size: 13px; }
+    #navbar a:hover, #navbar button.nav-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    #navbar .nav-user { color: #e94560; font-size: 13px; font-weight: 600; margin-right: 8px; }
 
-    /* PAGES */
-    .page { display: none; max-width: 800px; margin: 32px auto; padding: 0 16px; }
+    /* ===== AUTH MODAL ===== */
+    #auth-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    #auth-modal-overlay.show { display: flex; }
+    #auth-modal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 36px 40px;
+      width: 420px;
+      max-width: 90vw;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    #auth-modal .modal-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    #auth-modal .modal-subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
+
+    /* Modal tabs */
+    .modal-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #eee;
+    }
+    .modal-tab {
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #aaa;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .modal-tab.active { color: #e94560; border-bottom-color: #e94560; }
+
+    /* ===== LAYOUT ===== */
+    #app-layout {
+      display: none;
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 16px;
+      gap: 24px;
+    }
+    #app-layout.show { display: flex; }
+
+    /* Sidebar */
+    #sidebar {
+      width: 200px;
+      flex-shrink: 0;
+    }
+    .sidebar-section { margin-bottom: 8px; }
+    .sidebar-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #aaa;
+      padding: 0 12px;
+      margin-bottom: 4px;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #555;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
+    }
+    .sidebar-item:hover { background: #e8eaf0; color: #1a1a2e; }
+    .sidebar-item.active { background: #e94560; color: #fff; font-weight: 700; }
+    .sidebar-item .cat-icon { font-size: 16px; }
+
+    /* Main content */
+    #main-content { flex: 1; min-width: 0; }
+
+    /* ===== PAGES ===== */
+    .page { display: none; }
     .page.active { display: block; }
 
-    /* CARD */
+    /* ===== CARD ===== */
     .card {
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 32px;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+      padding: 28px 32px;
     }
-    .card h2 { margin-bottom: 24px; font-size: 22px; color: #2c3e50; }
+    .card h2 { margin-bottom: 20px; font-size: 20px; color: #1a1a2e; }
 
-    /* FORM */
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #555; }
-    .form-group input, .form-group textarea {
+    /* ===== FORM ===== */
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 700; color: #444; }
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%;
       padding: 10px 12px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      border: 1.5px solid #ddd;
+      border-radius: 7px;
       font-size: 14px;
-      transition: border 0.2s;
+      font-family: inherit;
+      transition: border 0.15s;
+      background: #fafafa;
     }
-    .form-group input:focus, .form-group textarea:focus {
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
       outline: none;
-      border-color: #3498db;
+      border-color: #e94560;
+      background: #fff;
     }
-    .form-group textarea { min-height: 160px; resize: vertical; font-family: inherit; }
+    .form-group textarea { min-height: 160px; resize: vertical; }
 
-    /* BUTTONS */
+    /* ===== BUTTONS ===== */
     .btn {
       padding: 10px 20px;
       border: none;
-      border-radius: 6px;
+      border-radius: 7px;
       font-size: 14px;
       cursor: pointer;
-      font-weight: 600;
-      transition: background 0.2s, opacity 0.2s;
+      font-weight: 700;
+      transition: opacity 0.15s, transform 0.1s;
+      font-family: inherit;
     }
-    .btn:hover { opacity: 0.85; }
-    .btn-primary { background: #3498db; color: #fff; }
+    .btn:hover { opacity: 0.88; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: #e94560; color: #fff; }
+    .btn-dark { background: #1a1a2e; color: #fff; }
     .btn-success { background: #27ae60; color: #fff; }
-    .btn-danger { background: #e74c3c; color: #fff; }
-    .btn-secondary { background: #95a5a6; color: #fff; }
-    .btn-sm { padding: 6px 12px; font-size: 13px; }
-    .btn-full { width: 100%; margin-top: 8px; }
+    .btn-secondary { background: #e0e0e0; color: #555; }
+    .btn-sm { padding: 6px 14px; font-size: 13px; }
+    .btn-full { width: 100%; margin-top: 6px; padding: 12px; font-size: 15px; }
 
-    /* ALERTS */
-    .alert {
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-    .alert-error { background: #fdecea; color: #c0392b; border: 1px solid #e74c3c; }
-    .alert-success { background: #eafaf1; color: #1e8449; border: 1px solid #27ae60; }
+    /* ===== ALERTS ===== */
+    .alert { padding: 10px 14px; border-radius: 7px; font-size: 13px; margin-bottom: 14px; }
+    .alert-error { background: #fdecea; color: #c0392b; border: 1px solid #f5c6c6; }
+    .alert-success { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }
 
-    /* POST LIST */
-    #post-list { list-style: none; }
-    #post-list li {
-      background: #fff;
-      border-radius: 6px;
-      padding: 16px 20px;
-      margin-bottom: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: box-shadow 0.2s;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    #post-list li:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
-    .post-title { font-size: 15px; font-weight: 600; color: #2c3e50; }
-    .post-meta { font-size: 12px; color: #888; margin-top: 4px; }
-    .post-comment-count { font-size: 13px; color: #3498db; font-weight: 600; }
-
-    /* BOARD HEADER */
+    /* ===== BOARD HEADER ===== */
     .board-header {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .board-header-left { display: flex; align-items: center; gap: 10px; }
+    .board-header h2 { font-size: 20px; color: #1a1a2e; }
+    .board-count { font-size: 13px; color: #888; }
+
+    /* ===== POST LIST ===== */
+    #post-list { list-style: none; }
+    .post-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: box-shadow 0.15s, transform 0.1s;
+      display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
     }
-    .board-header h2 { font-size: 22px; color: #2c3e50; }
+    .post-item:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.12); transform: translateY(-1px); }
+    .post-item-left { flex: 1; min-width: 0; }
+    .post-title { font-size: 15px; font-weight: 600; color: #1a1a2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .post-meta { font-size: 12px; color: #999; margin-top: 4px; display: flex; gap: 8px; align-items: center; }
+    .post-category-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .post-item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; margin-left: 12px; }
+    .post-comment-count { font-size: 12px; color: #e94560; font-weight: 700; }
 
-    /* POST DETAIL */
-    #post-detail-title { font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 8px; }
-    #post-detail-meta { font-size: 13px; color: #888; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #eee; }
-    #post-detail-content { font-size: 15px; line-height: 1.8; min-height: 120px; margin-bottom: 32px; white-space: pre-wrap; }
+    /* ===== POST DETAIL ===== */
+    #post-detail-category { margin-bottom: 10px; }
+    #post-detail-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; line-height: 1.4; }
+    #post-detail-meta { font-size: 13px; color: #999; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #eee; }
+    #post-detail-content { font-size: 15px; line-height: 1.9; min-height: 100px; margin-bottom: 32px; white-space: pre-wrap; color: #333; }
 
-    /* COMMENTS */
-    .comments-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #2c3e50; }
-    #comment-list { list-style: none; margin-bottom: 20px; }
-    #comment-list li {
-      background: #f9f9f9;
-      border-radius: 6px;
+    /* ===== COMMENTS ===== */
+    .comments-section { border-top: 1px solid #eee; padding-top: 24px; }
+    .comments-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #1a1a2e; }
+    #comment-list { list-style: none; margin-bottom: 16px; }
+    .comment-item {
+      background: #f7f8fa;
+      border-radius: 8px;
       padding: 12px 16px;
       margin-bottom: 8px;
-      border-left: 3px solid #3498db;
     }
-    .comment-author { font-size: 13px; font-weight: 700; color: #2c3e50; }
-    .comment-text { font-size: 14px; margin-top: 4px; color: #444; }
-    .comment-date { font-size: 11px; color: #aaa; margin-top: 4px; }
+    .comment-author { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+    .comment-text { font-size: 14px; margin-top: 4px; color: #444; line-height: 1.6; }
+    .comment-date { font-size: 11px; color: #bbb; margin-top: 4px; }
     .comment-form { display: flex; gap: 8px; }
     .comment-form input { flex: 1; }
 
-    /* MYPAGE */
+    /* ===== MYPAGE ===== */
+    .mypage-info-card { margin-bottom: 16px; }
+    .mypage-stat { display: flex; gap: 24px; margin-top: 12px; }
+    .mypage-stat-item { text-align: center; }
+    .mypage-stat-num { font-size: 22px; font-weight: 800; color: #e94560; }
+    .mypage-stat-label { font-size: 12px; color: #888; }
     #my-post-list { list-style: none; }
-    #my-post-list li {
+    .my-post-item {
       background: #fff;
-      border-radius: 6px;
+      border-radius: 10px;
       padding: 14px 18px;
       margin-bottom: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
       cursor: pointer;
-      transition: box-shadow 0.2s;
+      transition: box-shadow 0.15s;
     }
-    #my-post-list li:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+    .my-post-item:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
 
-    /* AUTH LINK */
-    .auth-link { text-align: center; margin-top: 16px; font-size: 14px; color: #888; }
-    .auth-link a { color: #3498db; cursor: pointer; text-decoration: none; }
-    .auth-link a:hover { text-decoration: underline; }
+    /* ===== MISC ===== */
+    .auth-link { text-align: center; margin-top: 14px; font-size: 13px; color: #888; }
+    .auth-link a { color: #e94560; cursor: pointer; font-weight: 600; }
+    .back-btn { margin-bottom: 14px; }
+    .empty-msg { text-align: center; color: #bbb; padding: 48px 16px; font-size: 15px; background: #fff; border-radius: 10px; }
 
-    /* BACK BTN */
-    .back-btn { margin-bottom: 16px; }
-
-    /* EMPTY */
-    .empty-msg { text-align: center; color: #aaa; padding: 40px; font-size: 15px; }
+    /* Category badge colors */
+    .cat-free    { background: #e8f4fd; color: #2980b9; }
+    .cat-qna     { background: #fef9e7; color: #d68910; }
+    .cat-notice  { background: #fdecea; color: #c0392b; }
+    .cat-info    { background: #eafaf1; color: #1e8449; }
+    .cat-humor   { background: #f4ecf7; color: #7d3c98; }
   </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav id="navbar">
-  <span class="nav-brand" id="nav-brand" onclick="goBoard()">커뮤니티</span>
-  <span id="nav-user-info" class="nav-user"></span>
-  <a href="#" id="nav-board" onclick="goBoard(); return false;">게시판</a>
-  <a href="#" id="nav-mypage" onclick="goMypage(); return false;" style="display:none;">마이페이지</a>
-  <a href="#" id="nav-write" onclick="goWrite(); return false;" style="display:none;">글쓰기</a>
-  <button class="nav-btn" id="nav-logout" onclick="logout()" style="display:none;">로그아웃</button>
-  <a href="#" id="nav-login" onclick="showPage('page-login'); return false;">로그인</a>
-  <a href="#" id="nav-register" onclick="showPage('page-register'); return false;">회원가입</a>
-</nav>
+<!-- ===== AUTH MODAL ===== -->
+<div id="auth-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+  <div id="auth-modal">
+    <div class="modal-title" id="modal-title-text">커뮤니티에 오신 것을 환영합니다</div>
+    <div class="modal-subtitle">로그인 후 게시판을 이용할 수 있습니다</div>
 
-<!-- PAGE: REGISTER -->
-<div class="page" id="page-register">
-  <div class="card" style="max-width:420px; margin:0 auto;">
-    <h2>회원가입</h2>
-    <div id="register-error" class="alert alert-error" style="display:none;"></div>
-    <div id="register-success" class="alert alert-success" style="display:none;"></div>
-    <form id="register-form" onsubmit="doRegister(event)">
-      <div class="form-group">
-        <label for="register-username">아이디</label>
-        <input type="text" id="register-username" name="username" placeholder="아이디 입력" autocomplete="username" required>
-      </div>
-      <div class="form-group">
-        <label for="register-password">비밀번호</label>
-        <input type="password" id="register-password" name="password" placeholder="비밀번호 입력" autocomplete="new-password" required>
-      </div>
-      <div class="form-group">
-        <label for="register-nickname">닉네임</label>
-        <input type="text" id="register-nickname" name="nickname" placeholder="닉네임 입력" required>
-      </div>
-      <button type="submit" class="btn btn-primary btn-full" id="register-submit-btn">회원가입</button>
-    </form>
-    <div class="auth-link">이미 계정이 있으신가요? <a onclick="showPage('page-login')">로그인</a></div>
-  </div>
-</div>
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="modal-tab-login" onclick="switchModalTab('login')">로그인</div>
+      <div class="modal-tab" id="modal-tab-register" onclick="switchModalTab('register')">회원가입</div>
+    </div>
 
-<!-- PAGE: LOGIN -->
-<div class="page" id="page-login">
-  <div class="card" style="max-width:420px; margin:0 auto;">
-    <h2>로그인</h2>
-    <div id="login-error" class="alert alert-error" style="display:none;"></div>
-    <form id="login-form" onsubmit="doLogin(event)">
-      <div class="form-group">
-        <label for="login-username">아이디</label>
-        <input type="text" id="login-username" name="username" placeholder="아이디 입력" autocomplete="username" required>
-      </div>
-      <div class="form-group">
-        <label for="login-password">비밀번호</label>
-        <input type="password" id="login-password" name="password" placeholder="비밀번호 입력" autocomplete="current-password" required>
-      </div>
-      <button type="submit" class="btn btn-primary btn-full" id="login-submit-btn">로그인</button>
-    </form>
-    <div class="auth-link">계정이 없으신가요? <a onclick="showPage('page-register')">회원가입</a></div>
-  </div>
-</div>
+    <!-- Modal Login Form -->
+    <div id="modal-login-panel">
+      <div id="modal-login-error" class="alert alert-error" style="display:none;"></div>
+      <form id="modal-login-form" onsubmit="doModalLogin(event)">
+        <div class="form-group">
+          <label for="modal-login-username">아이디</label>
+          <input type="text" id="modal-login-username" name="username" placeholder="아이디 입력" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-login-password">비밀번호</label>
+          <input type="password" id="modal-login-password" name="password" placeholder="비밀번호 입력" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="modal-login-submit-btn">로그인</button>
+      </form>
+      <div class="auth-link">계정이 없으신가요? <a onclick="switchModalTab('register')">회원가입</a></div>
+    </div>
 
-<!-- PAGE: BOARD -->
-<div class="page" id="page-board">
-  <div class="board-header">
-    <h2>자유게시판</h2>
-    <button class="btn btn-primary btn-sm" id="board-write-btn" onclick="goWrite()" style="display:none;">글쓰기</button>
-  </div>
-  <div id="board-login-notice" class="alert alert-error" style="display:none;">글을 쓰려면 로그인이 필요합니다.</div>
-  <ul id="post-list"></ul>
-  <div id="post-list-empty" class="empty-msg" style="display:none;">아직 게시글이 없습니다.</div>
-</div>
-
-<!-- PAGE: POST DETAIL -->
-<div class="page" id="page-post-detail">
-  <div class="back-btn">
-    <button class="btn btn-secondary btn-sm" id="detail-back-btn" onclick="goBoard()">← 목록으로</button>
-  </div>
-  <div class="card">
-    <h1 id="post-detail-title"></h1>
-    <p id="post-detail-meta"></p>
-    <div id="post-detail-content"></div>
-    <div class="comments-section">
-      <h3 id="comment-count-label">댓글 0개</h3>
-      <ul id="comment-list"></ul>
-      <div id="comment-login-notice" class="alert alert-error" style="display:none;">댓글을 작성하려면 로그인이 필요합니다.</div>
-      <div id="comment-form-wrap" class="comment-form" style="display:none;">
-        <input type="text" id="comment-input" placeholder="댓글을 입력하세요..." maxlength="200">
-        <button class="btn btn-primary btn-sm" id="comment-submit-btn" onclick="submitComment()">등록</button>
-      </div>
+    <!-- Modal Register Form -->
+    <div id="modal-register-panel" style="display:none;">
+      <div id="modal-register-error" class="alert alert-error" style="display:none;"></div>
+      <div id="modal-register-success" class="alert alert-success" style="display:none;"></div>
+      <form id="modal-register-form" onsubmit="doModalRegister(event)">
+        <div class="form-group">
+          <label for="modal-register-username">아이디</label>
+          <input type="text" id="modal-register-username" name="username" placeholder="아이디 (3자 이상)" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-register-password">비밀번호</label>
+          <input type="password" id="modal-register-password" name="password" placeholder="비밀번호 (4자 이상)" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-register-nickname">닉네임</label>
+          <input type="text" id="modal-register-nickname" name="nickname" placeholder="닉네임 입력" required>
+        </div>
+        <button type="submit" class="btn btn-dark btn-full" id="modal-register-submit-btn">회원가입</button>
+      </form>
+      <div class="auth-link">이미 계정이 있으신가요? <a onclick="switchModalTab('login')">로그인</a></div>
     </div>
   </div>
 </div>
 
-<!-- PAGE: WRITE -->
-<div class="page" id="page-write">
-  <div class="back-btn">
-    <button class="btn btn-secondary btn-sm" id="write-back-btn" onclick="goBoard()">← 목록으로</button>
-  </div>
-  <div class="card">
-    <h2>글쓰기</h2>
-    <div id="write-error" class="alert alert-error" style="display:none;"></div>
-    <form id="write-form" onsubmit="doWrite(event)">
-      <div class="form-group">
-        <label for="write-title">제목</label>
-        <input type="text" id="write-title" name="title" placeholder="제목을 입력하세요" required>
-      </div>
-      <div class="form-group">
-        <label for="write-content">내용</label>
-        <textarea id="write-content" name="content" placeholder="내용을 입력하세요" required></textarea>
-      </div>
-      <button type="submit" class="btn btn-success" id="write-submit-btn">등록하기</button>
-    </form>
-  </div>
-</div>
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <span class="nav-brand" id="nav-brand" onclick="goBoard('free')">커뮤<span>니티</span></span>
+  <span id="nav-user-info" class="nav-user"></span>
+  <a href="#" id="nav-mypage" onclick="goMypage(); return false;" style="display:none;">마이페이지</a>
+  <a href="#" id="nav-write" onclick="goWrite(); return false;" style="display:none;">글쓰기</a>
+  <button class="nav-btn" id="nav-logout" onclick="logout()" style="display:none;">로그아웃</button>
+</nav>
 
-<!-- PAGE: MYPAGE -->
-<div class="page" id="page-mypage">
-  <div class="card" style="margin-bottom:16px;">
-    <h2>마이페이지</h2>
-    <p id="mypage-info" style="font-size:15px; color:#555;"></p>
-  </div>
-  <h3 style="margin-bottom:12px; color:#2c3e50;">내가 쓴 글</h3>
-  <ul id="my-post-list"></ul>
-  <div id="my-post-empty" class="empty-msg" style="display:none;">아직 작성한 글이 없습니다.</div>
-</div>
+<!-- ===== APP LAYOUT ===== -->
+<div id="app-layout">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">게시판</div>
+      <div class="sidebar-item active" id="cat-free" data-category="free" onclick="goBoard('free')">
+        <span class="cat-icon">💬</span> 자유게시판
+      </div>
+      <div class="sidebar-item" id="cat-qna" data-category="qna" onclick="goBoard('qna')">
+        <span class="cat-icon">❓</span> 질문/답변
+      </div>
+      <div class="sidebar-item" id="cat-notice" data-category="notice" onclick="goBoard('notice')">
+        <span class="cat-icon">📢</span> 공지사항
+      </div>
+      <div class="sidebar-item" id="cat-info" data-category="info" onclick="goBoard('info')">
+        <span class="cat-icon">📌</span> 정보공유
+      </div>
+      <div class="sidebar-item" id="cat-humor" data-category="humor" onclick="goBoard('humor')">
+        <span class="cat-icon">😄</span> 유머/잡담
+      </div>
+    </div>
+    <div class="sidebar-section" style="margin-top:16px;">
+      <div class="sidebar-label">내 활동</div>
+      <div class="sidebar-item" id="sidebar-mypage" onclick="goMypage()">
+        <span class="cat-icon">👤</span> 마이페이지
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div id="main-content">
+
+    <!-- PAGE: BOARD -->
+    <div class="page active" id="page-board">
+      <div class="board-header">
+        <div class="board-header-left">
+          <h2 id="board-title">자유게시판</h2>
+          <span class="board-count" id="board-count"></span>
+        </div>
+        <button class="btn btn-primary btn-sm" id="board-write-btn" onclick="goWrite()">+ 글쓰기</button>
+      </div>
+      <ul id="post-list"></ul>
+      <div id="post-list-empty" class="empty-msg" style="display:none;">아직 게시글이 없습니다. 첫 번째 글을 작성해보세요!</div>
+    </div>
+
+    <!-- PAGE: POST DETAIL -->
+    <div class="page" id="page-post-detail">
+      <div class="back-btn">
+        <button class="btn btn-secondary btn-sm" id="detail-back-btn" onclick="goBack()">← 목록으로</button>
+      </div>
+      <div class="card">
+        <div id="post-detail-category"></div>
+        <h1 id="post-detail-title"></h1>
+        <p id="post-detail-meta"></p>
+        <div id="post-detail-content"></div>
+        <div class="comments-section">
+          <h3 id="comment-count-label">댓글 0개</h3>
+          <ul id="comment-list"></ul>
+          <div id="comment-form-wrap" class="comment-form">
+            <input type="text" id="comment-input" placeholder="댓글을 입력하세요..." maxlength="300">
+            <button class="btn btn-primary btn-sm" id="comment-submit-btn" onclick="submitComment()">등록</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: WRITE -->
+    <div class="page" id="page-write">
+      <div class="back-btn">
+        <button class="btn btn-secondary btn-sm" id="write-back-btn" onclick="goBack()">← 목록으로</button>
+      </div>
+      <div class="card">
+        <h2>글쓰기</h2>
+        <div id="write-error" class="alert alert-error" style="display:none;"></div>
+        <form id="write-form" onsubmit="doWrite(event)">
+          <div class="form-group">
+            <label for="write-category">게시판 선택</label>
+            <select id="write-category" name="category">
+              <option value="free">💬 자유게시판</option>
+              <option value="qna">❓ 질문/답변</option>
+              <option value="notice">📢 공지사항</option>
+              <option value="info">📌 정보공유</option>
+              <option value="humor">😄 유머/잡담</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="write-title">제목</label>
+            <input type="text" id="write-title" name="title" placeholder="제목을 입력하세요" required>
+          </div>
+          <div class="form-group">
+            <label for="write-content">내용</label>
+            <textarea id="write-content" name="content" placeholder="내용을 입력하세요" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="write-submit-btn">등록하기</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- PAGE: MYPAGE -->
+    <div class="page" id="page-mypage">
+      <div class="card mypage-info-card">
+        <h2>마이페이지</h2>
+        <p id="mypage-info" style="font-size:14px; color:#666;"></p>
+        <div class="mypage-stat">
+          <div class="mypage-stat-item">
+            <div class="mypage-stat-num" id="mypage-post-count">0</div>
+            <div class="mypage-stat-label">작성 글</div>
+          </div>
+          <div class="mypage-stat-item">
+            <div class="mypage-stat-num" id="mypage-comment-count">0</div>
+            <div class="mypage-stat-label">작성 댓글</div>
+          </div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:10px; color:#1a1a2e; font-size:16px;">내가 쓴 글</h3>
+      <ul id="my-post-list"></ul>
+      <div id="my-post-empty" class="empty-msg" style="display:none;">아직 작성한 글이 없습니다.</div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /app-layout -->
 
 <script>
-  // ==================== STORAGE HELPERS ====================
-  var STORAGE_USERS = 'community_users';
-  var STORAGE_POSTS = 'community_posts';
+  // ===== CONSTANTS =====
+  var STORAGE_USERS   = 'community_users';
+  var STORAGE_POSTS   = 'community_posts';
   var STORAGE_CURRENT = 'community_current_user';
 
-  function getUsers() {
-    return JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+  var CATEGORIES = {
+    free:   { label: '자유게시판', icon: '💬', cls: 'cat-free' },
+    qna:    { label: '질문/답변',  icon: '❓', cls: 'cat-qna' },
+    notice: { label: '공지사항',   icon: '📢', cls: 'cat-notice' },
+    info:   { label: '정보공유',   icon: '📌', cls: 'cat-info' },
+    humor:  { label: '유머/잡담', icon: '😄', cls: 'cat-humor' }
+  };
+
+  var currentCategory = 'free';
+  var currentPostId   = null;
+  var prevCategory    = 'free';
+
+  // ===== STORAGE =====
+  function getUsers()   { return JSON.parse(localStorage.getItem(STORAGE_USERS)   || '[]'); }
+  function saveUsers(u) { localStorage.setItem(STORAGE_USERS, JSON.stringify(u)); }
+  function getPosts()   { return JSON.parse(localStorage.getItem(STORAGE_POSTS)   || '[]'); }
+  function savePosts(p) { localStorage.setItem(STORAGE_POSTS, JSON.stringify(p)); }
+  function getCurrentUser()   { return JSON.parse(localStorage.getItem(STORAGE_CURRENT) || 'null'); }
+  function setCurrentUser(u)  { localStorage.setItem(STORAGE_CURRENT, JSON.stringify(u)); }
+  function clearCurrentUser() { localStorage.removeItem(STORAGE_CURRENT); }
+
+  // ===== MODAL =====
+  function showModal() {
+    document.getElementById('auth-modal-overlay').classList.add('show');
+    switchModalTab('login');
   }
-  function saveUsers(users) {
-    localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+  function hideModal() {
+    document.getElementById('auth-modal-overlay').classList.remove('show');
   }
-  function getPosts() {
-    return JSON.parse(localStorage.getItem(STORAGE_POSTS) || '[]');
-  }
-  function savePosts(posts) {
-    localStorage.setItem(STORAGE_POSTS, JSON.stringify(posts));
-  }
-  function getCurrentUser() {
-    return JSON.parse(localStorage.getItem(STORAGE_CURRENT) || 'null');
-  }
-  function setCurrentUser(user) {
-    localStorage.setItem(STORAGE_CURRENT, JSON.stringify(user));
-  }
-  function clearCurrentUser() {
-    localStorage.removeItem(STORAGE_CURRENT);
+  function switchModalTab(tab) {
+    var isLogin = tab === 'login';
+    document.getElementById('modal-tab-login').classList.toggle('active', isLogin);
+    document.getElementById('modal-tab-register').classList.toggle('active', !isLogin);
+    document.getElementById('modal-login-panel').style.display    = isLogin ? '' : 'none';
+    document.getElementById('modal-register-panel').style.display = isLogin ? 'none' : '';
+    hideEl('modal-login-error');
+    hideEl('modal-register-error');
+    hideEl('modal-register-success');
   }
 
-  // ==================== PAGE NAVIGATION ====================
-  var currentPostId = null;
+  // ===== MODAL AUTH =====
+  function doModalLogin(e) {
+    e.preventDefault();
+    hideEl('modal-login-error');
+    var username = document.getElementById('modal-login-username').value.trim();
+    var password = document.getElementById('modal-login-password').value;
+    var users = getUsers();
+    var user = users.find(function(u) { return u.username === username && u.password === password; });
+    if (!user) {
+      showError('modal-login-error', '아이디 또는 비밀번호가 올바르지 않습니다.');
+      return;
+    }
+    setCurrentUser({ id: user.id, username: user.username, nickname: user.nickname });
+    document.getElementById('modal-login-form').reset();
+    hideModal();
+    onLoggedIn();
+  }
 
+  function doModalRegister(e) {
+    e.preventDefault();
+    hideEl('modal-register-error');
+    hideEl('modal-register-success');
+    var username = document.getElementById('modal-register-username').value.trim();
+    var password = document.getElementById('modal-register-password').value;
+    var nickname = document.getElementById('modal-register-nickname').value.trim();
+    if (username.length < 3) { showError('modal-register-error', '아이디는 3자 이상이어야 합니다.'); return; }
+    if (password.length < 4) { showError('modal-register-error', '비밀번호는 4자 이상이어야 합니다.'); return; }
+    if (!nickname)           { showError('modal-register-error', '닉네임을 입력해주세요.'); return; }
+    var users = getUsers();
+    if (users.find(function(u) { return u.username === username; })) {
+      showError('modal-register-error', '이미 사용 중인 아이디입니다.');
+      return;
+    }
+    var newUser = { id: Date.now().toString(), username: username, password: password, nickname: nickname };
+    users.push(newUser);
+    saveUsers(users);
+    showSuccess('modal-register-success', '회원가입 완료! 로그인해주세요.');
+    document.getElementById('modal-register-form').reset();
+    setTimeout(function() { switchModalTab('login'); }, 1000);
+  }
+
+  // ===== NAV & STATE =====
+  function updateNav() {
+    var user = getCurrentUser();
+    if (user) {
+      showEl('nav-mypage');
+      showEl('nav-write');
+      showEl('nav-logout');
+      document.getElementById('nav-user-info').textContent = user.nickname + ' 님';
+    } else {
+      hideEl('nav-mypage');
+      hideEl('nav-write');
+      hideEl('nav-logout');
+      document.getElementById('nav-user-info').textContent = '';
+    }
+  }
+
+  function onLoggedIn() {
+    updateNav();
+    document.getElementById('app-layout').classList.add('show');
+    goBoard(currentCategory);
+  }
+
+  function logout() {
+    clearCurrentUser();
+    updateNav();
+    document.getElementById('app-layout').classList.remove('show');
+    showModal();
+  }
+
+  // ===== PAGES =====
   function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(function(p) {
-      p.classList.remove('active');
-    });
-    var page = document.getElementById(pageId);
-    if (page) page.classList.add('active');
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    var p = document.getElementById(pageId);
+    if (p) p.classList.add('active');
     window.scrollTo(0, 0);
   }
 
-  function goBoard() {
-    renderBoard();
+  function goBoard(cat) {
+    cat = cat || currentCategory;
+    currentCategory = cat;
+    prevCategory = cat;
+    // sidebar active
+    document.querySelectorAll('.sidebar-item[data-category]').forEach(function(el) {
+      el.classList.toggle('active', el.getAttribute('data-category') === cat);
+    });
+    renderBoard(cat);
     showPage('page-board');
   }
 
   function goWrite() {
-    var user = getCurrentUser();
-    if (!user) {
-      showPage('page-login');
-      return;
-    }
+    document.getElementById('write-category').value = currentCategory;
     document.getElementById('write-title').value = '';
     document.getElementById('write-content').value = '';
     hideEl('write-error');
@@ -347,9 +612,8 @@
   }
 
   function goMypage() {
-    var user = getCurrentUser();
-    if (!user) { showPage('page-login'); return; }
-    renderMypage(user);
+    renderMypage(getCurrentUser());
+    document.querySelectorAll('.sidebar-item[data-category]').forEach(function(el) { el.classList.remove('active'); });
     showPage('page-mypage');
   }
 
@@ -359,174 +623,72 @@
     showPage('page-post-detail');
   }
 
-  // ==================== NAV STATE ====================
-  function updateNav() {
-    var user = getCurrentUser();
-    if (user) {
-      showEl('nav-mypage');
-      showEl('nav-write');
-      showEl('nav-logout');
-      hideEl('nav-login');
-      hideEl('nav-register');
-      showEl('board-write-btn');
-      document.getElementById('nav-user-info').textContent = user.nickname + ' 님';
-    } else {
-      hideEl('nav-mypage');
-      hideEl('nav-write');
-      hideEl('nav-logout');
-      showEl('nav-login');
-      showEl('nav-register');
-      hideEl('board-write-btn');
-      document.getElementById('nav-user-info').textContent = '';
-    }
+  function goBack() {
+    goBoard(prevCategory);
   }
 
-  function showEl(id) {
-    var el = document.getElementById(id);
-    if (el) el.style.display = '';
-  }
-  function hideEl(id) {
-    var el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  }
-  function showElFlex(id) {
-    var el = document.getElementById(id);
-    if (el) el.style.display = 'flex';
-  }
+  // ===== BOARD =====
+  function renderBoard(cat) {
+    var catInfo = CATEGORIES[cat] || CATEGORIES['free'];
+    document.getElementById('board-title').textContent = catInfo.icon + ' ' + catInfo.label;
 
-  // ==================== REGISTER ====================
-  function doRegister(e) {
-    e.preventDefault();
-    hideEl('register-error');
-    hideEl('register-success');
+    var allPosts = getPosts();
+    var posts = allPosts.filter(function(p) { return p.category === cat; }).reverse().slice(0, 10);
 
-    var username = document.getElementById('register-username').value.trim();
-    var password = document.getElementById('register-password').value;
-    var nickname = document.getElementById('register-nickname').value.trim();
+    document.getElementById('board-count').textContent = '총 ' + posts.length + '개';
 
-    if (!username || !password || !nickname) {
-      showError('register-error', '모든 항목을 입력해주세요.');
-      return;
-    }
-    if (username.length < 3) {
-      showError('register-error', '아이디는 3자 이상이어야 합니다.');
-      return;
-    }
-    if (password.length < 4) {
-      showError('register-error', '비밀번호는 4자 이상이어야 합니다.');
-      return;
-    }
-
-    var users = getUsers();
-    var exists = users.find(function(u) { return u.username === username; });
-    if (exists) {
-      showError('register-error', '이미 사용 중인 아이디입니다.');
-      return;
-    }
-
-    var newUser = {
-      id: Date.now().toString(),
-      username: username,
-      password: password,
-      nickname: nickname
-    };
-    users.push(newUser);
-    saveUsers(users);
-
-    showSuccess('register-success', '회원가입 완료! 로그인 페이지로 이동합니다.');
-    document.getElementById('register-form').reset();
-    setTimeout(function() { showPage('page-login'); }, 1200);
-  }
-
-  // ==================== LOGIN ====================
-  function doLogin(e) {
-    e.preventDefault();
-    hideEl('login-error');
-
-    var username = document.getElementById('login-username').value.trim();
-    var password = document.getElementById('login-password').value;
-
-    var users = getUsers();
-    var user = users.find(function(u) {
-      return u.username === username && u.password === password;
-    });
-
-    if (!user) {
-      showError('login-error', '아이디 또는 비밀번호가 올바르지 않습니다.');
-      return;
-    }
-
-    setCurrentUser({ id: user.id, username: user.username, nickname: user.nickname });
-    updateNav();
-    document.getElementById('login-form').reset();
-    goBoard();
-  }
-
-  // ==================== LOGOUT ====================
-  function logout() {
-    clearCurrentUser();
-    updateNav();
-    goBoard();
-  }
-
-  // ==================== BOARD ====================
-  function renderBoard() {
-    var posts = getPosts().slice().reverse().slice(0, 10);
     var list = document.getElementById('post-list');
-    var empty = document.getElementById('post-list-empty');
-    var user = getCurrentUser();
-
     list.innerHTML = '';
-    if (user) {
-      showEl('board-write-btn');
-    } else {
-      hideEl('board-write-btn');
-    }
 
     if (posts.length === 0) {
       list.style.display = 'none';
       showEl('post-list-empty');
       return;
     }
-
     hideEl('post-list-empty');
     list.style.display = '';
 
     posts.forEach(function(post) {
       var li = document.createElement('li');
+      li.className = 'post-item';
       li.setAttribute('id', 'post-item-' + post.id);
       li.setAttribute('data-post-id', post.id);
+      li.setAttribute('data-category', post.category);
       li.onclick = function() { goPostDetail(post.id); };
-
       var commentCount = post.comments ? post.comments.length : 0;
+      var ci = CATEGORIES[post.category] || CATEGORIES['free'];
       li.innerHTML =
-        '<div>' +
+        '<div class="post-item-left">' +
           '<div class="post-title">' + escHtml(post.title) + '</div>' +
-          '<div class="post-meta">' + escHtml(post.authorNickname) + ' · ' + formatDate(post.createdAt) + '</div>' +
+          '<div class="post-meta">' +
+            '<span class="post-category-badge ' + ci.cls + '">' + ci.label + '</span>' +
+            '<span>' + escHtml(post.authorNickname) + '</span>' +
+            '<span>·</span>' +
+            '<span>' + formatDate(post.createdAt) + '</span>' +
+          '</div>' +
         '</div>' +
-        '<span class="post-comment-count" title="댓글 수">댓글 ' + commentCount + '</span>';
-
+        '<div class="post-item-right">' +
+          '<span class="post-comment-count">💬 ' + commentCount + '</span>' +
+        '</div>';
       list.appendChild(li);
     });
   }
 
-  // ==================== WRITE ====================
+  // ===== WRITE =====
   function doWrite(e) {
     e.preventDefault();
     hideEl('write-error');
-
     var user = getCurrentUser();
-    if (!user) { showPage('page-login'); return; }
-
-    var title = document.getElementById('write-title').value.trim();
-    var content = document.getElementById('write-content').value.trim();
-
-    if (!title) { showError('write-error', '제목을 입력해주세요.'); return; }
+    if (!user) { showModal(); return; }
+    var category = document.getElementById('write-category').value;
+    var title    = document.getElementById('write-title').value.trim();
+    var content  = document.getElementById('write-content').value.trim();
+    if (!title)   { showError('write-error', '제목을 입력해주세요.'); return; }
     if (!content) { showError('write-error', '내용을 입력해주세요.'); return; }
-
     var posts = getPosts();
     var newPost = {
       id: Date.now().toString(),
+      category: category,
       title: title,
       content: content,
       authorId: user.id,
@@ -536,43 +698,34 @@
     };
     posts.push(newPost);
     savePosts(posts);
-
+    currentCategory = category;
     document.getElementById('write-form').reset();
     goPostDetail(newPost.id);
   }
 
-  // ==================== POST DETAIL ====================
+  // ===== POST DETAIL =====
   function renderPostDetail(postId) {
     var posts = getPosts();
     var post = posts.find(function(p) { return p.id === postId; });
-    if (!post) { goBoard(); return; }
-
+    if (!post) { goBack(); return; }
+    var ci = CATEGORIES[post.category] || CATEGORIES['free'];
+    document.getElementById('post-detail-category').innerHTML =
+      '<span class="post-category-badge ' + ci.cls + '" style="margin-bottom:10px;display:inline-block;">' + ci.icon + ' ' + ci.label + '</span>';
     document.getElementById('post-detail-title').textContent = post.title;
-    document.getElementById('post-detail-meta').textContent =
-      post.authorNickname + ' · ' + formatDate(post.createdAt);
+    document.getElementById('post-detail-meta').textContent  = post.authorNickname + ' · ' + formatDate(post.createdAt);
     document.getElementById('post-detail-content').textContent = post.content;
-
     renderComments(post);
-
-    var user = getCurrentUser();
-    if (user) {
-      showElFlex('comment-form-wrap');
-      hideEl('comment-login-notice');
-      document.getElementById('comment-input').value = '';
-    } else {
-      hideEl('comment-form-wrap');
-      showEl('comment-login-notice');
-    }
+    document.getElementById('comment-input').value = '';
   }
 
   function renderComments(post) {
     var list = document.getElementById('comment-list');
     var comments = post.comments || [];
     document.getElementById('comment-count-label').textContent = '댓글 ' + comments.length + '개';
-
     list.innerHTML = '';
     comments.forEach(function(c) {
       var li = document.createElement('li');
+      li.className = 'comment-item';
       li.setAttribute('data-comment-id', c.id);
       li.innerHTML =
         '<div class="comment-author">' + escHtml(c.authorNickname) + '</div>' +
@@ -584,126 +737,169 @@
 
   function submitComment() {
     var user = getCurrentUser();
-    if (!user) return;
-
+    if (!user) { showModal(); return; }
     var input = document.getElementById('comment-input');
     var text = input.value.trim();
     if (!text) return;
-
     var posts = getPosts();
     var post = posts.find(function(p) { return p.id === currentPostId; });
     if (!post) return;
-
-    var newComment = {
+    post.comments.push({
       id: Date.now().toString(),
       authorId: user.id,
       authorNickname: user.nickname,
       text: text,
       createdAt: new Date().toISOString()
-    };
-    post.comments.push(newComment);
+    });
     savePosts(posts);
-
     input.value = '';
     renderComments(post);
   }
 
-  // ==================== MYPAGE ====================
+  // ===== MYPAGE =====
   function renderMypage(user) {
-    document.getElementById('mypage-info').textContent =
-      '아이디: ' + user.username + '  |  닉네임: ' + user.nickname;
-
-    var posts = getPosts().filter(function(p) { return p.authorId === user.id; }).reverse();
+    if (!user) return;
+    document.getElementById('mypage-info').textContent = '아이디: ' + user.username + '  |  닉네임: ' + user.nickname;
+    var allPosts = getPosts();
+    var myPosts = allPosts.filter(function(p) { return p.authorId === user.id; }).reverse();
+    var myCommentCount = allPosts.reduce(function(acc, p) {
+      return acc + (p.comments || []).filter(function(c) { return c.authorId === user.id; }).length;
+    }, 0);
+    document.getElementById('mypage-post-count').textContent = myPosts.length;
+    document.getElementById('mypage-comment-count').textContent = myCommentCount;
     var list = document.getElementById('my-post-list');
     list.innerHTML = '';
-
-    if (posts.length === 0) {
+    if (myPosts.length === 0) {
       list.style.display = 'none';
       showEl('my-post-empty');
       return;
     }
     hideEl('my-post-empty');
     list.style.display = '';
-
-    posts.forEach(function(post) {
+    myPosts.forEach(function(post) {
       var li = document.createElement('li');
+      li.className = 'my-post-item';
       li.setAttribute('data-post-id', post.id);
-      li.onclick = function() { goPostDetail(post.id); };
+      li.onclick = function() { prevCategory = post.category; goPostDetail(post.id); };
+      var ci = CATEGORIES[post.category] || CATEGORIES['free'];
       li.innerHTML =
         '<div class="post-title">' + escHtml(post.title) + '</div>' +
-        '<div class="post-meta">' + formatDate(post.createdAt) + ' · 댓글 ' + (post.comments ? post.comments.length : 0) + '개</div>';
+        '<div class="post-meta" style="margin-top:4px;">' +
+          '<span class="post-category-badge ' + ci.cls + '">' + ci.label + '</span> ' +
+          '<span style="font-size:12px;color:#999;">' + formatDate(post.createdAt) + ' · 댓글 ' + (post.comments ? post.comments.length : 0) + '개</span>' +
+        '</div>';
       list.appendChild(li);
     });
   }
 
-  // ==================== UTILS ====================
+  // ===== UTILS =====
+  function showEl(id) { var el = document.getElementById(id); if (el) el.style.display = ''; }
+  function hideEl(id) { var el = document.getElementById(id); if (el) el.style.display = 'none'; }
+  function showError(id, msg)   { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = ''; } }
+  function showSuccess(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = ''; } }
   function escHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-
   function formatDate(iso) {
     var d = new Date(iso);
     return d.getFullYear() + '.' +
-      String(d.getMonth() + 1).padStart(2, '0') + '.' +
-      String(d.getDate()).padStart(2, '0') + ' ' +
-      String(d.getHours()).padStart(2, '0') + ':' +
-      String(d.getMinutes()).padStart(2, '0');
+      String(d.getMonth()+1).padStart(2,'0') + '.' +
+      String(d.getDate()).padStart(2,'0') + ' ' +
+      String(d.getHours()).padStart(2,'0') + ':' +
+      String(d.getMinutes()).padStart(2,'0');
   }
 
-  function showError(id, msg) {
-    var el = document.getElementById(id);
-    if (el) { el.textContent = msg; el.style.display = ''; }
-  }
-  function showSuccess(id, msg) {
-    var el = document.getElementById(id);
-    if (el) { el.textContent = msg; el.style.display = ''; }
-  }
-
-  // ==================== SEED DATA ====================
+  // ===== SEED DATA =====
   function seedDemoData() {
     var users = getUsers();
-    if (users.length > 0) return;
-
-    var demoUsers = [
-      { id: 'user1', username: 'alice', password: '1234', nickname: '앨리스' },
-      { id: 'user2', username: 'bob', password: '1234', nickname: '밥' }
-    ];
-    saveUsers(demoUsers);
-
-    var demoPosts = [
-      {
-        id: 'post1',
-        title: 'Playwright로 자동화 테스트를 시작해보세요!',
-        content: 'Playwright는 Microsoft에서 만든 브라우저 자동화 도구입니다.\n웹 스크래핑, 테스트, RPA 등 다양한 용도로 활용 가능합니다.\n이 사이트를 통해 직접 실습해보세요.',
-        authorId: 'user1',
-        authorNickname: '앨리스',
-        createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-        comments: [
-          { id: 'c1', authorId: 'user2', authorNickname: '밥', text: '좋은 글 감사합니다!', createdAt: new Date(Date.now() - 3600000 * 20).toISOString() },
-          { id: 'c2', authorId: 'user1', authorNickname: '앨리스', text: '도움이 되셨으면 좋겠네요 :)', createdAt: new Date(Date.now() - 3600000 * 18).toISOString() }
-        ]
-      },
-      {
-        id: 'post2',
-        title: '가입을 환영합니다!',
-        content: '이 커뮤니티는 AI 에이전트 실습용으로 만들어진 가상 사이트입니다.\n자유롭게 글을 쓰고 댓글을 달아보세요.\n모든 데이터는 브라우저 로컬스토리지에 저장됩니다.',
-        authorId: 'user2',
-        authorNickname: '밥',
-        createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
-        comments: []
-      }
-    ];
-    savePosts(demoPosts);
+    if (users.length === 0) {
+      saveUsers([
+        { id: 'user1', username: 'alice', password: '1234', nickname: '앨리스' },
+        { id: 'user2', username: 'bob',   password: '1234', nickname: '밥' }
+      ]);
+    }
+    var posts = getPosts();
+    if (posts.length === 0) {
+      var now = Date.now();
+      savePosts([
+        {
+          id: 'post1', category: 'free',
+          title: '자유게시판에 처음 오신 분들 환영합니다!',
+          content: '안녕하세요! 이곳은 자유롭게 이야기를 나누는 공간입니다.\n편하게 글을 남겨주세요 :)',
+          authorId: 'user1', authorNickname: '앨리스',
+          createdAt: new Date(now - 3600000 * 48).toISOString(),
+          comments: [
+            { id: 'c1', authorId: 'user2', authorNickname: '밥', text: '반갑습니다!', createdAt: new Date(now - 3600000 * 40).toISOString() }
+          ]
+        },
+        {
+          id: 'post2', category: 'free',
+          title: '오늘 날씨 너무 좋네요',
+          content: '봄이 온 것 같아서 기분이 좋습니다. 다들 산책 어떠세요?',
+          authorId: 'user2', authorNickname: '밥',
+          createdAt: new Date(now - 3600000 * 24).toISOString(),
+          comments: []
+        },
+        {
+          id: 'post3', category: 'qna',
+          title: 'Playwright로 input에 텍스트 입력하는 방법이 궁금해요',
+          content: 'page.fill() 과 page.type() 의 차이가 뭔가요?\n둘 다 텍스트를 입력하는 것 같은데 언제 어떤걸 써야 할지 모르겠습니다.',
+          authorId: 'user2', authorNickname: '밥',
+          createdAt: new Date(now - 3600000 * 36).toISOString(),
+          comments: [
+            { id: 'c2', authorId: 'user1', authorNickname: '앨리스', text: 'fill은 한 번에 전체 텍스트를 입력하고, type은 키보드로 한 글자씩 입력하는 방식이에요!', createdAt: new Date(now - 3600000 * 30).toISOString() }
+          ]
+        },
+        {
+          id: 'post4', category: 'qna',
+          title: 'localStorage 데이터 Playwright로 확인하는 법?',
+          content: 'page.evaluate()를 사용하면 브라우저의 localStorage에 접근할 수 있나요?\n예시 코드가 있으면 공유 부탁드립니다.',
+          authorId: 'user1', authorNickname: '앨리스',
+          createdAt: new Date(now - 3600000 * 12).toISOString(),
+          comments: []
+        },
+        {
+          id: 'post5', category: 'notice',
+          title: '[공지] 커뮤니티 이용 규칙 안내',
+          content: '1. 타인을 비방하는 글은 삭제됩니다.\n2. 광고성 게시물은 금지합니다.\n3. 유용한 정보를 공유해주세요.\n\n즐거운 커뮤니티를 함께 만들어 나가요!',
+          authorId: 'user1', authorNickname: '앨리스',
+          createdAt: new Date(now - 3600000 * 72).toISOString(),
+          comments: []
+        },
+        {
+          id: 'post6', category: 'info',
+          title: 'Playwright MCP 설치 가이드',
+          content: '1. npm install -D @playwright/mcp\n2. playwright install\n3. MCP 서버 설정 파일에 추가\n\n이제 Claude로 브라우저 자동화를 시작해보세요!',
+          authorId: 'user2', authorNickname: '밥',
+          createdAt: new Date(now - 3600000 * 20).toISOString(),
+          comments: [
+            { id: 'c3', authorId: 'user1', authorNickname: '앨리스', text: '정리 감사합니다!', createdAt: new Date(now - 3600000 * 15).toISOString() }
+          ]
+        },
+        {
+          id: 'post7', category: 'humor',
+          title: 'AI가 내 버그를 고쳐줬는데...',
+          content: '버그 고쳐달라고 했더니 "이 코드는 작동합니다"라고 했습니다.\n실행해봤더니 에러가 났습니다.\n다시 물어봤더니 "에러가 발생할 수 있습니다"라고 하더군요...',
+          authorId: 'user2', authorNickname: '밥',
+          createdAt: new Date(now - 3600000 * 8).toISOString(),
+          comments: [
+            { id: 'c4', authorId: 'user1', authorNickname: '앨리스', text: 'ㅋㅋㅋㅋ 공감합니다', createdAt: new Date(now - 3600000 * 6).toISOString() }
+          ]
+        }
+      ]);
+    }
   }
 
-  // ==================== INIT ====================
+  // ===== INIT =====
   seedDemoData();
-  updateNav();
-  goBoard();
+  var currentUser = getCurrentUser();
+  if (currentUser) {
+    updateNav();
+    document.getElementById('app-layout').classList.add('show');
+    goBoard('free');
+  } else {
+    showModal();
+  }
 </script>
 </body>
 </html>
