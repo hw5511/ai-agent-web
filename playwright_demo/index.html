@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 - Playwright 실습 사이트</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+
+    /* NAV */
+    #navbar {
+      background: #2c3e50;
+      color: #fff;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      gap: 16px;
+    }
+    #navbar .nav-brand { font-weight: 700; font-size: 18px; margin-right: auto; cursor: pointer; }
+    #navbar a, #navbar button.nav-btn {
+      color: #ccc;
+      text-decoration: none;
+      background: none;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    #navbar a:hover, #navbar button.nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    #navbar .nav-user { color: #7f8c8d; font-size: 13px; }
+
+    /* PAGES */
+    .page { display: none; max-width: 800px; margin: 32px auto; padding: 0 16px; }
+    .page.active { display: block; }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 32px;
+    }
+    .card h2 { margin-bottom: 24px; font-size: 22px; color: #2c3e50; }
+
+    /* FORM */
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #555; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+    .form-group textarea { min-height: 160px; resize: vertical; font-family: inherit; }
+
+    /* BUTTONS */
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: #3498db; color: #fff; }
+    .btn-success { background: #27ae60; color: #fff; }
+    .btn-danger { background: #e74c3c; color: #fff; }
+    .btn-secondary { background: #95a5a6; color: #fff; }
+    .btn-sm { padding: 6px 12px; font-size: 13px; }
+    .btn-full { width: 100%; margin-top: 8px; }
+
+    /* ALERTS */
+    .alert {
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .alert-error { background: #fdecea; color: #c0392b; border: 1px solid #e74c3c; }
+    .alert-success { background: #eafaf1; color: #1e8449; border: 1px solid #27ae60; }
+
+    /* POST LIST */
+    #post-list { list-style: none; }
+    #post-list li {
+      background: #fff;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #post-list li:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+    .post-title { font-size: 15px; font-weight: 600; color: #2c3e50; }
+    .post-meta { font-size: 12px; color: #888; margin-top: 4px; }
+    .post-comment-count { font-size: 13px; color: #3498db; font-weight: 600; }
+
+    /* BOARD HEADER */
+    .board-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .board-header h2 { font-size: 22px; color: #2c3e50; }
+
+    /* POST DETAIL */
+    #post-detail-title { font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 8px; }
+    #post-detail-meta { font-size: 13px; color: #888; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #eee; }
+    #post-detail-content { font-size: 15px; line-height: 1.8; min-height: 120px; margin-bottom: 32px; white-space: pre-wrap; }
+
+    /* COMMENTS */
+    .comments-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #2c3e50; }
+    #comment-list { list-style: none; margin-bottom: 20px; }
+    #comment-list li {
+      background: #f9f9f9;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border-left: 3px solid #3498db;
+    }
+    .comment-author { font-size: 13px; font-weight: 700; color: #2c3e50; }
+    .comment-text { font-size: 14px; margin-top: 4px; color: #444; }
+    .comment-date { font-size: 11px; color: #aaa; margin-top: 4px; }
+    .comment-form { display: flex; gap: 8px; }
+    .comment-form input { flex: 1; }
+
+    /* MYPAGE */
+    #my-post-list { list-style: none; }
+    #my-post-list li {
+      background: #fff;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    #my-post-list li:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+
+    /* AUTH LINK */
+    .auth-link { text-align: center; margin-top: 16px; font-size: 14px; color: #888; }
+    .auth-link a { color: #3498db; cursor: pointer; text-decoration: none; }
+    .auth-link a:hover { text-decoration: underline; }
+
+    /* BACK BTN */
+    .back-btn { margin-bottom: 16px; }
+
+    /* EMPTY */
+    .empty-msg { text-align: center; color: #aaa; padding: 40px; font-size: 15px; }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <span class="nav-brand" id="nav-brand" onclick="goBoard()">커뮤니티</span>
+  <span id="nav-user-info" class="nav-user"></span>
+  <a href="#" id="nav-board" onclick="goBoard(); return false;">게시판</a>
+  <a href="#" id="nav-mypage" onclick="goMypage(); return false;" style="display:none;">마이페이지</a>
+  <a href="#" id="nav-write" onclick="goWrite(); return false;" style="display:none;">글쓰기</a>
+  <button class="nav-btn" id="nav-logout" onclick="logout()" style="display:none;">로그아웃</button>
+  <a href="#" id="nav-login" onclick="showPage('page-login'); return false;">로그인</a>
+  <a href="#" id="nav-register" onclick="showPage('page-register'); return false;">회원가입</a>
+</nav>
+
+<!-- PAGE: REGISTER -->
+<div class="page" id="page-register">
+  <div class="card" style="max-width:420px; margin:0 auto;">
+    <h2>회원가입</h2>
+    <div id="register-error" class="alert alert-error" style="display:none;"></div>
+    <div id="register-success" class="alert alert-success" style="display:none;"></div>
+    <form id="register-form" onsubmit="doRegister(event)">
+      <div class="form-group">
+        <label for="register-username">아이디</label>
+        <input type="text" id="register-username" name="username" placeholder="아이디 입력" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label for="register-password">비밀번호</label>
+        <input type="password" id="register-password" name="password" placeholder="비밀번호 입력" autocomplete="new-password" required>
+      </div>
+      <div class="form-group">
+        <label for="register-nickname">닉네임</label>
+        <input type="text" id="register-nickname" name="nickname" placeholder="닉네임 입력" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="register-submit-btn">회원가입</button>
+    </form>
+    <div class="auth-link">이미 계정이 있으신가요? <a onclick="showPage('page-login')">로그인</a></div>
+  </div>
+</div>
+
+<!-- PAGE: LOGIN -->
+<div class="page" id="page-login">
+  <div class="card" style="max-width:420px; margin:0 auto;">
+    <h2>로그인</h2>
+    <div id="login-error" class="alert alert-error" style="display:none;"></div>
+    <form id="login-form" onsubmit="doLogin(event)">
+      <div class="form-group">
+        <label for="login-username">아이디</label>
+        <input type="text" id="login-username" name="username" placeholder="아이디 입력" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label for="login-password">비밀번호</label>
+        <input type="password" id="login-password" name="password" placeholder="비밀번호 입력" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="login-submit-btn">로그인</button>
+    </form>
+    <div class="auth-link">계정이 없으신가요? <a onclick="showPage('page-register')">회원가입</a></div>
+  </div>
+</div>
+
+<!-- PAGE: BOARD -->
+<div class="page" id="page-board">
+  <div class="board-header">
+    <h2>자유게시판</h2>
+    <button class="btn btn-primary btn-sm" id="board-write-btn" onclick="goWrite()" style="display:none;">글쓰기</button>
+  </div>
+  <div id="board-login-notice" class="alert alert-error" style="display:none;">글을 쓰려면 로그인이 필요합니다.</div>
+  <ul id="post-list"></ul>
+  <div id="post-list-empty" class="empty-msg" style="display:none;">아직 게시글이 없습니다.</div>
+</div>
+
+<!-- PAGE: POST DETAIL -->
+<div class="page" id="page-post-detail">
+  <div class="back-btn">
+    <button class="btn btn-secondary btn-sm" id="detail-back-btn" onclick="goBoard()">← 목록으로</button>
+  </div>
+  <div class="card">
+    <h1 id="post-detail-title"></h1>
+    <p id="post-detail-meta"></p>
+    <div id="post-detail-content"></div>
+    <div class="comments-section">
+      <h3 id="comment-count-label">댓글 0개</h3>
+      <ul id="comment-list"></ul>
+      <div id="comment-login-notice" class="alert alert-error" style="display:none;">댓글을 작성하려면 로그인이 필요합니다.</div>
+      <div id="comment-form-wrap" class="comment-form" style="display:none;">
+        <input type="text" id="comment-input" placeholder="댓글을 입력하세요..." maxlength="200">
+        <button class="btn btn-primary btn-sm" id="comment-submit-btn" onclick="submitComment()">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: WRITE -->
+<div class="page" id="page-write">
+  <div class="back-btn">
+    <button class="btn btn-secondary btn-sm" id="write-back-btn" onclick="goBoard()">← 목록으로</button>
+  </div>
+  <div class="card">
+    <h2>글쓰기</h2>
+    <div id="write-error" class="alert alert-error" style="display:none;"></div>
+    <form id="write-form" onsubmit="doWrite(event)">
+      <div class="form-group">
+        <label for="write-title">제목</label>
+        <input type="text" id="write-title" name="title" placeholder="제목을 입력하세요" required>
+      </div>
+      <div class="form-group">
+        <label for="write-content">내용</label>
+        <textarea id="write-content" name="content" placeholder="내용을 입력하세요" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-success" id="write-submit-btn">등록하기</button>
+    </form>
+  </div>
+</div>
+
+<!-- PAGE: MYPAGE -->
+<div class="page" id="page-mypage">
+  <div class="card" style="margin-bottom:16px;">
+    <h2>마이페이지</h2>
+    <p id="mypage-info" style="font-size:15px; color:#555;"></p>
+  </div>
+  <h3 style="margin-bottom:12px; color:#2c3e50;">내가 쓴 글</h3>
+  <ul id="my-post-list"></ul>
+  <div id="my-post-empty" class="empty-msg" style="display:none;">아직 작성한 글이 없습니다.</div>
+</div>
+
+<script>
+  // ==================== STORAGE HELPERS ====================
+  var STORAGE_USERS = 'community_users';
+  var STORAGE_POSTS = 'community_posts';
+  var STORAGE_CURRENT = 'community_current_user';
+
+  function getUsers() {
+    return JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+  }
+  function saveUsers(users) {
+    localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+  }
+  function getPosts() {
+    return JSON.parse(localStorage.getItem(STORAGE_POSTS) || '[]');
+  }
+  function savePosts(posts) {
+    localStorage.setItem(STORAGE_POSTS, JSON.stringify(posts));
+  }
+  function getCurrentUser() {
+    return JSON.parse(localStorage.getItem(STORAGE_CURRENT) || 'null');
+  }
+  function setCurrentUser(user) {
+    localStorage.setItem(STORAGE_CURRENT, JSON.stringify(user));
+  }
+  function clearCurrentUser() {
+    localStorage.removeItem(STORAGE_CURRENT);
+  }
+
+  // ==================== PAGE NAVIGATION ====================
+  var currentPostId = null;
+
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(function(p) {
+      p.classList.remove('active');
+    });
+    var page = document.getElementById(pageId);
+    if (page) page.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function goBoard() {
+    renderBoard();
+    showPage('page-board');
+  }
+
+  function goWrite() {
+    var user = getCurrentUser();
+    if (!user) {
+      showPage('page-login');
+      return;
+    }
+    document.getElementById('write-title').value = '';
+    document.getElementById('write-content').value = '';
+    hideEl('write-error');
+    showPage('page-write');
+  }
+
+  function goMypage() {
+    var user = getCurrentUser();
+    if (!user) { showPage('page-login'); return; }
+    renderMypage(user);
+    showPage('page-mypage');
+  }
+
+  function goPostDetail(postId) {
+    currentPostId = postId;
+    renderPostDetail(postId);
+    showPage('page-post-detail');
+  }
+
+  // ==================== NAV STATE ====================
+  function updateNav() {
+    var user = getCurrentUser();
+    if (user) {
+      showEl('nav-mypage');
+      showEl('nav-write');
+      showEl('nav-logout');
+      hideEl('nav-login');
+      hideEl('nav-register');
+      showEl('board-write-btn');
+      document.getElementById('nav-user-info').textContent = user.nickname + ' 님';
+    } else {
+      hideEl('nav-mypage');
+      hideEl('nav-write');
+      hideEl('nav-logout');
+      showEl('nav-login');
+      showEl('nav-register');
+      hideEl('board-write-btn');
+      document.getElementById('nav-user-info').textContent = '';
+    }
+  }
+
+  function showEl(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = '';
+  }
+  function hideEl(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  }
+  function showElFlex(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = 'flex';
+  }
+
+  // ==================== REGISTER ====================
+  function doRegister(e) {
+    e.preventDefault();
+    hideEl('register-error');
+    hideEl('register-success');
+
+    var username = document.getElementById('register-username').value.trim();
+    var password = document.getElementById('register-password').value;
+    var nickname = document.getElementById('register-nickname').value.trim();
+
+    if (!username || !password || !nickname) {
+      showError('register-error', '모든 항목을 입력해주세요.');
+      return;
+    }
+    if (username.length < 3) {
+      showError('register-error', '아이디는 3자 이상이어야 합니다.');
+      return;
+    }
+    if (password.length < 4) {
+      showError('register-error', '비밀번호는 4자 이상이어야 합니다.');
+      return;
+    }
+
+    var users = getUsers();
+    var exists = users.find(function(u) { return u.username === username; });
+    if (exists) {
+      showError('register-error', '이미 사용 중인 아이디입니다.');
+      return;
+    }
+
+    var newUser = {
+      id: Date.now().toString(),
+      username: username,
+      password: password,
+      nickname: nickname
+    };
+    users.push(newUser);
+    saveUsers(users);
+
+    showSuccess('register-success', '회원가입 완료! 로그인 페이지로 이동합니다.');
+    document.getElementById('register-form').reset();
+    setTimeout(function() { showPage('page-login'); }, 1200);
+  }
+
+  // ==================== LOGIN ====================
+  function doLogin(e) {
+    e.preventDefault();
+    hideEl('login-error');
+
+    var username = document.getElementById('login-username').value.trim();
+    var password = document.getElementById('login-password').value;
+
+    var users = getUsers();
+    var user = users.find(function(u) {
+      return u.username === username && u.password === password;
+    });
+
+    if (!user) {
+      showError('login-error', '아이디 또는 비밀번호가 올바르지 않습니다.');
+      return;
+    }
+
+    setCurrentUser({ id: user.id, username: user.username, nickname: user.nickname });
+    updateNav();
+    document.getElementById('login-form').reset();
+    goBoard();
+  }
+
+  // ==================== LOGOUT ====================
+  function logout() {
+    clearCurrentUser();
+    updateNav();
+    goBoard();
+  }
+
+  // ==================== BOARD ====================
+  function renderBoard() {
+    var posts = getPosts().slice().reverse().slice(0, 10);
+    var list = document.getElementById('post-list');
+    var empty = document.getElementById('post-list-empty');
+    var user = getCurrentUser();
+
+    list.innerHTML = '';
+    if (user) {
+      showEl('board-write-btn');
+    } else {
+      hideEl('board-write-btn');
+    }
+
+    if (posts.length === 0) {
+      list.style.display = 'none';
+      showEl('post-list-empty');
+      return;
+    }
+
+    hideEl('post-list-empty');
+    list.style.display = '';
+
+    posts.forEach(function(post) {
+      var li = document.createElement('li');
+      li.setAttribute('id', 'post-item-' + post.id);
+      li.setAttribute('data-post-id', post.id);
+      li.onclick = function() { goPostDetail(post.id); };
+
+      var commentCount = post.comments ? post.comments.length : 0;
+      li.innerHTML =
+        '<div>' +
+          '<div class="post-title">' + escHtml(post.title) + '</div>' +
+          '<div class="post-meta">' + escHtml(post.authorNickname) + ' · ' + formatDate(post.createdAt) + '</div>' +
+        '</div>' +
+        '<span class="post-comment-count" title="댓글 수">댓글 ' + commentCount + '</span>';
+
+      list.appendChild(li);
+    });
+  }
+
+  // ==================== WRITE ====================
+  function doWrite(e) {
+    e.preventDefault();
+    hideEl('write-error');
+
+    var user = getCurrentUser();
+    if (!user) { showPage('page-login'); return; }
+
+    var title = document.getElementById('write-title').value.trim();
+    var content = document.getElementById('write-content').value.trim();
+
+    if (!title) { showError('write-error', '제목을 입력해주세요.'); return; }
+    if (!content) { showError('write-error', '내용을 입력해주세요.'); return; }
+
+    var posts = getPosts();
+    var newPost = {
+      id: Date.now().toString(),
+      title: title,
+      content: content,
+      authorId: user.id,
+      authorNickname: user.nickname,
+      createdAt: new Date().toISOString(),
+      comments: []
+    };
+    posts.push(newPost);
+    savePosts(posts);
+
+    document.getElementById('write-form').reset();
+    goPostDetail(newPost.id);
+  }
+
+  // ==================== POST DETAIL ====================
+  function renderPostDetail(postId) {
+    var posts = getPosts();
+    var post = posts.find(function(p) { return p.id === postId; });
+    if (!post) { goBoard(); return; }
+
+    document.getElementById('post-detail-title').textContent = post.title;
+    document.getElementById('post-detail-meta').textContent =
+      post.authorNickname + ' · ' + formatDate(post.createdAt);
+    document.getElementById('post-detail-content').textContent = post.content;
+
+    renderComments(post);
+
+    var user = getCurrentUser();
+    if (user) {
+      showElFlex('comment-form-wrap');
+      hideEl('comment-login-notice');
+      document.getElementById('comment-input').value = '';
+    } else {
+      hideEl('comment-form-wrap');
+      showEl('comment-login-notice');
+    }
+  }
+
+  function renderComments(post) {
+    var list = document.getElementById('comment-list');
+    var comments = post.comments || [];
+    document.getElementById('comment-count-label').textContent = '댓글 ' + comments.length + '개';
+
+    list.innerHTML = '';
+    comments.forEach(function(c) {
+      var li = document.createElement('li');
+      li.setAttribute('data-comment-id', c.id);
+      li.innerHTML =
+        '<div class="comment-author">' + escHtml(c.authorNickname) + '</div>' +
+        '<div class="comment-text">' + escHtml(c.text) + '</div>' +
+        '<div class="comment-date">' + formatDate(c.createdAt) + '</div>';
+      list.appendChild(li);
+    });
+  }
+
+  function submitComment() {
+    var user = getCurrentUser();
+    if (!user) return;
+
+    var input = document.getElementById('comment-input');
+    var text = input.value.trim();
+    if (!text) return;
+
+    var posts = getPosts();
+    var post = posts.find(function(p) { return p.id === currentPostId; });
+    if (!post) return;
+
+    var newComment = {
+      id: Date.now().toString(),
+      authorId: user.id,
+      authorNickname: user.nickname,
+      text: text,
+      createdAt: new Date().toISOString()
+    };
+    post.comments.push(newComment);
+    savePosts(posts);
+
+    input.value = '';
+    renderComments(post);
+  }
+
+  // ==================== MYPAGE ====================
+  function renderMypage(user) {
+    document.getElementById('mypage-info').textContent =
+      '아이디: ' + user.username + '  |  닉네임: ' + user.nickname;
+
+    var posts = getPosts().filter(function(p) { return p.authorId === user.id; }).reverse();
+    var list = document.getElementById('my-post-list');
+    list.innerHTML = '';
+
+    if (posts.length === 0) {
+      list.style.display = 'none';
+      showEl('my-post-empty');
+      return;
+    }
+    hideEl('my-post-empty');
+    list.style.display = '';
+
+    posts.forEach(function(post) {
+      var li = document.createElement('li');
+      li.setAttribute('data-post-id', post.id);
+      li.onclick = function() { goPostDetail(post.id); };
+      li.innerHTML =
+        '<div class="post-title">' + escHtml(post.title) + '</div>' +
+        '<div class="post-meta">' + formatDate(post.createdAt) + ' · 댓글 ' + (post.comments ? post.comments.length : 0) + '개</div>';
+      list.appendChild(li);
+    });
+  }
+
+  // ==================== UTILS ====================
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function formatDate(iso) {
+    var d = new Date(iso);
+    return d.getFullYear() + '.' +
+      String(d.getMonth() + 1).padStart(2, '0') + '.' +
+      String(d.getDate()).padStart(2, '0') + ' ' +
+      String(d.getHours()).padStart(2, '0') + ':' +
+      String(d.getMinutes()).padStart(2, '0');
+  }
+
+  function showError(id, msg) {
+    var el = document.getElementById(id);
+    if (el) { el.textContent = msg; el.style.display = ''; }
+  }
+  function showSuccess(id, msg) {
+    var el = document.getElementById(id);
+    if (el) { el.textContent = msg; el.style.display = ''; }
+  }
+
+  // ==================== SEED DATA ====================
+  function seedDemoData() {
+    var users = getUsers();
+    if (users.length > 0) return;
+
+    var demoUsers = [
+      { id: 'user1', username: 'alice', password: '1234', nickname: '앨리스' },
+      { id: 'user2', username: 'bob', password: '1234', nickname: '밥' }
+    ];
+    saveUsers(demoUsers);
+
+    var demoPosts = [
+      {
+        id: 'post1',
+        title: 'Playwright로 자동화 테스트를 시작해보세요!',
+        content: 'Playwright는 Microsoft에서 만든 브라우저 자동화 도구입니다.\n웹 스크래핑, 테스트, RPA 등 다양한 용도로 활용 가능합니다.\n이 사이트를 통해 직접 실습해보세요.',
+        authorId: 'user1',
+        authorNickname: '앨리스',
+        createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
+        comments: [
+          { id: 'c1', authorId: 'user2', authorNickname: '밥', text: '좋은 글 감사합니다!', createdAt: new Date(Date.now() - 3600000 * 20).toISOString() },
+          { id: 'c2', authorId: 'user1', authorNickname: '앨리스', text: '도움이 되셨으면 좋겠네요 :)', createdAt: new Date(Date.now() - 3600000 * 18).toISOString() }
+        ]
+      },
+      {
+        id: 'post2',
+        title: '가입을 환영합니다!',
+        content: '이 커뮤니티는 AI 에이전트 실습용으로 만들어진 가상 사이트입니다.\n자유롭게 글을 쓰고 댓글을 달아보세요.\n모든 데이터는 브라우저 로컬스토리지에 저장됩니다.',
+        authorId: 'user2',
+        authorNickname: '밥',
+        createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
+        comments: []
+      }
+    ];
+    savePosts(demoPosts);
+  }
+
+  // ==================== INIT ====================
+  seedDemoData();
+  updateNav();
+  goBoard();
+</script>
+</body>
+</html>
