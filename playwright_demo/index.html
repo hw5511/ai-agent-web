@@ -810,84 +810,373 @@
   }
 
   // ===== SEED DATA =====
+  var SEED_VERSION = 'v3';
   function seedDemoData() {
-    var users = getUsers();
-    if (users.length === 0) {
-      saveUsers([
-        { id: 'user1', username: 'alice', password: '1234', nickname: '앨리스' },
-        { id: 'user2', username: 'bob',   password: '1234', nickname: '밥' }
-      ]);
-    }
-    var posts = getPosts();
-    if (posts.length === 0) {
-      var now = Date.now();
-      savePosts([
-        {
-          id: 'post1', category: 'free',
-          title: '자유게시판에 처음 오신 분들 환영합니다!',
-          content: '안녕하세요! 이곳은 자유롭게 이야기를 나누는 공간입니다.\n편하게 글을 남겨주세요 :)',
-          authorId: 'user1', authorNickname: '앨리스',
-          createdAt: new Date(now - 3600000 * 48).toISOString(),
-          comments: [
-            { id: 'c1', authorId: 'user2', authorNickname: '밥', text: '반갑습니다!', createdAt: new Date(now - 3600000 * 40).toISOString() }
-          ]
-        },
-        {
-          id: 'post2', category: 'free',
-          title: '오늘 날씨 너무 좋네요',
-          content: '봄이 온 것 같아서 기분이 좋습니다. 다들 산책 어떠세요?',
-          authorId: 'user2', authorNickname: '밥',
-          createdAt: new Date(now - 3600000 * 24).toISOString(),
-          comments: []
-        },
-        {
-          id: 'post3', category: 'qna',
-          title: 'Playwright로 input에 텍스트 입력하는 방법이 궁금해요',
-          content: 'page.fill() 과 page.type() 의 차이가 뭔가요?\n둘 다 텍스트를 입력하는 것 같은데 언제 어떤걸 써야 할지 모르겠습니다.',
-          authorId: 'user2', authorNickname: '밥',
-          createdAt: new Date(now - 3600000 * 36).toISOString(),
-          comments: [
-            { id: 'c2', authorId: 'user1', authorNickname: '앨리스', text: 'fill은 한 번에 전체 텍스트를 입력하고, type은 키보드로 한 글자씩 입력하는 방식이에요!', createdAt: new Date(now - 3600000 * 30).toISOString() }
-          ]
-        },
-        {
-          id: 'post4', category: 'qna',
-          title: 'localStorage 데이터 Playwright로 확인하는 법?',
-          content: 'page.evaluate()를 사용하면 브라우저의 localStorage에 접근할 수 있나요?\n예시 코드가 있으면 공유 부탁드립니다.',
-          authorId: 'user1', authorNickname: '앨리스',
-          createdAt: new Date(now - 3600000 * 12).toISOString(),
-          comments: []
-        },
-        {
-          id: 'post5', category: 'notice',
-          title: '[공지] 커뮤니티 이용 규칙 안내',
-          content: '1. 타인을 비방하는 글은 삭제됩니다.\n2. 광고성 게시물은 금지합니다.\n3. 유용한 정보를 공유해주세요.\n\n즐거운 커뮤니티를 함께 만들어 나가요!',
-          authorId: 'user1', authorNickname: '앨리스',
-          createdAt: new Date(now - 3600000 * 72).toISOString(),
-          comments: []
-        },
-        {
-          id: 'post6', category: 'info',
-          title: 'Playwright MCP 설치 가이드',
-          content: '1. npm install -D @playwright/mcp\n2. playwright install\n3. MCP 서버 설정 파일에 추가\n\n이제 Claude로 브라우저 자동화를 시작해보세요!',
-          authorId: 'user2', authorNickname: '밥',
-          createdAt: new Date(now - 3600000 * 20).toISOString(),
-          comments: [
-            { id: 'c3', authorId: 'user1', authorNickname: '앨리스', text: '정리 감사합니다!', createdAt: new Date(now - 3600000 * 15).toISOString() }
-          ]
-        },
-        {
-          id: 'post7', category: 'humor',
-          title: 'AI가 내 버그를 고쳐줬는데...',
-          content: '버그 고쳐달라고 했더니 "이 코드는 작동합니다"라고 했습니다.\n실행해봤더니 에러가 났습니다.\n다시 물어봤더니 "에러가 발생할 수 있습니다"라고 하더군요...',
-          authorId: 'user2', authorNickname: '밥',
-          createdAt: new Date(now - 3600000 * 8).toISOString(),
-          comments: [
-            { id: 'c4', authorId: 'user1', authorNickname: '앨리스', text: 'ㅋㅋㅋㅋ 공감합니다', createdAt: new Date(now - 3600000 * 6).toISOString() }
-          ]
-        }
-      ]);
-    }
+    if (localStorage.getItem('community_seed_ver') === SEED_VERSION) return;
+    var now = Date.now();
+    var h = 3600000;
+
+    saveUsers([
+      { id: 'user1', username: 'alice',   password: '1234', nickname: '앨리스' },
+      { id: 'user2', username: 'bob',     password: '1234', nickname: '밥' },
+      { id: 'user3', username: 'charlie', password: '1234', nickname: '찰리' },
+      { id: 'user4', username: 'diana',   password: '1234', nickname: '다이애나' },
+      { id: 'user5', username: 'evan',    password: '1234', nickname: '에반' }
+    ]);
+
+    savePosts([
+      // ── 자유게시판 (free) ──────────────────────────────
+      { id:'f1', category:'free', title:'자유게시판에 처음 오신 분들 환영합니다!',
+        content:'안녕하세요! 이곳은 자유롭게 이야기를 나누는 공간입니다.\n누구든 편하게 글을 남겨주세요. 따뜻한 커뮤니티가 되었으면 좋겠어요 :)',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*200).toISOString(),
+        comments:[
+          { id:'fc1', authorId:'user2', authorNickname:'밥', text:'반갑습니다! 잘 부탁드려요', createdAt: new Date(now - h*195).toISOString() },
+          { id:'fc2', authorId:'user3', authorNickname:'찰리', text:'저도 오늘 처음 왔어요 ^^', createdAt: new Date(now - h*190).toISOString() }
+        ]
+      },
+      { id:'f2', category:'free', title:'오늘 점심 뭐 드셨나요?',
+        content:'저는 오늘 돼지국밥 먹었는데 너무 맛있었어요.\n국물이 진하고 고기가 부드러웠습니다. 추천!\n다들 점심은 뭐 드셨는지 공유해봐요~',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*150).toISOString(),
+        comments:[
+          { id:'fc3', authorId:'user4', authorNickname:'다이애나', text:'저는 비빔밥 먹었어요! 건강하게~', createdAt: new Date(now - h*148).toISOString() },
+          { id:'fc4', authorId:'user1', authorNickname:'앨리스', text:'돼지국밥 듣고 갑자기 배고파졌어요 ㅋㅋ', createdAt: new Date(now - h*145).toISOString() },
+          { id:'fc5', authorId:'user5', authorNickname:'에반', text:'편의점 도시락이었습니다... 내일은 맛있는거 먹어야겠다', createdAt: new Date(now - h*140).toISOString() }
+        ]
+      },
+      { id:'f3', category:'free', title:'요즘 공부하는 것들 공유해요',
+        content:'저는 요즘 AI 에이전트 개발 공부 중입니다.\nClaude API랑 Playwright 조합이 정말 강력한 것 같아요.\n다들 어떤 것들 공부하고 계신가요?',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*120).toISOString(),
+        comments:[
+          { id:'fc6', authorId:'user1', authorNickname:'앨리스', text:'저도 비슷해요! 요즘 MCP 서버 직접 만들어보고 있어요', createdAt: new Date(now - h*118).toISOString() },
+          { id:'fc7', authorId:'user2', authorNickname:'밥', text:'리액트 공부 중입니다. 컴포넌트 개념이 점점 이해되는 것 같아요', createdAt: new Date(now - h*115).toISOString() }
+        ]
+      },
+      { id:'f4', category:'free', title:'주말에 뭐하셨어요?',
+        content:'저는 이번 주말에 한강 자전거 타러 갔다 왔어요.\n날씨가 딱 좋아서 기분 전환이 많이 됐습니다.\n다들 주말 잘 보내셨나요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*96).toISOString(),
+        comments:[
+          { id:'fc8', authorId:'user3', authorNickname:'찰리', text:'저는 집에서 넷플릭스 정주행했어요 ㅎㅎ', createdAt: new Date(now - h*94).toISOString() }
+        ]
+      },
+      { id:'f5', category:'free', title:'추천 유튜브 채널 있으신가요?',
+        content:'개발 관련 유튜브 채널 추천받고 싶어요.\n국내든 해외든 상관없고, 특히 AI/자동화 관련 채널이면 더 좋겠습니다!',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*72).toISOString(),
+        comments:[
+          { id:'fc9', authorId:'user1', authorNickname:'앨리스', text:'Fireship 추천해요! 짧고 임팩트 있어요', createdAt: new Date(now - h*70).toISOString() },
+          { id:'fc10', authorId:'user4', authorNickname:'다이애나', text:'노마드 코더도 한국어라서 좋아요', createdAt: new Date(now - h*68).toISOString() },
+          { id:'fc11', authorId:'user2', authorNickname:'밥', text:'Theo - t3.gg 는 프론트엔드 최신 트렌드 잘 다뤄요', createdAt: new Date(now - h*65).toISOString() }
+        ]
+      },
+      { id:'f6', category:'free', title:'개발자 번아웃 극복 방법 있으신가요?',
+        content:'요즘 코딩하기가 너무 싫어졌어요...\n매일 보는 화면이 지겹기도 하고, 아무것도 하기 싫은 상태입니다.\n혹시 번아웃 극복 경험 있으신 분들 계신가요?',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*48).toISOString(),
+        comments:[
+          { id:'fc12', authorId:'user1', authorNickname:'앨리스', text:'저도 그런 시기 있었어요. 잠깐 쉬는 게 제일 좋더라고요. 1-2일 완전히 쉬고 오면 다시 하고 싶어져요', createdAt: new Date(now - h*46).toISOString() },
+          { id:'fc13', authorId:'user3', authorNickname:'찰리', text:'운동이 도움 많이 됐어요! 특히 저녁 산책 추천합니다', createdAt: new Date(now - h*44).toISOString() },
+          { id:'fc14', authorId:'user5', authorNickname:'에반', text:'완전 다른 취미를 찾아보는 것도 좋아요. 저는 요리 배웠어요 ㅋㅋ', createdAt: new Date(now - h*42).toISOString() }
+        ]
+      },
+      { id:'f7', category:'free', title:'나는 왜 개발자가 됐을까',
+        content:'가끔 이런 생각을 합니다.\n처음엔 게임 만들고 싶어서 시작했는데, 어느새 웹개발을 하고 있고 이제는 AI 에이전트까지 다루고 있네요.\n여러분은 어떤 계기로 개발을 시작하셨나요?',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*36).toISOString(),
+        comments:[
+          { id:'fc15', authorId:'user4', authorNickname:'다이애나', text:'저는 디자인 하다가 "내가 직접 만들면 되겠다" 싶어서 시작했어요 ㅎㅎ', createdAt: new Date(now - h*34).toISOString() },
+          { id:'fc16', authorId:'user2', authorNickname:'밥', text:'취직 때문에... 근데 하다보니 재밌어졌어요', createdAt: new Date(now - h*32).toISOString() }
+        ]
+      },
+      { id:'f8', category:'free', title:'커피 vs 녹차, 여러분의 선택은?',
+        content:'아침에 일어나서 뭘 마시냐가 하루를 좌우하는 것 같아요.\n저는 아메리카노 없이는 못 살겠는데, 최근에 녹차도 좋다는 말을 많이 들어서 고민 중이에요.',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*24).toISOString(),
+        comments:[
+          { id:'fc17', authorId:'user5', authorNickname:'에반', text:'커피요! 카페인 없으면 집중이 안 돼요', createdAt: new Date(now - h*22).toISOString() },
+          { id:'fc18', authorId:'user1', authorNickname:'앨리스', text:'저는 녹차파요. 속이 편하더라고요', createdAt: new Date(now - h*20).toISOString() }
+        ]
+      },
+      { id:'f9', category:'free', title:'재택근무 어떻게 생각하세요?',
+        content:'저는 재택근무 2년째인데 장단점이 뚜렷한 것 같아요.\n장점: 출퇴근 없음, 편한 복장\n단점: 집중 잘 안 됨, 고립감\n다들 어떻게 생각하세요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*12).toISOString(),
+        comments:[
+          { id:'fc19', authorId:'user3', authorNickname:'찰리', text:'카페에서 일하는 게 타협점 같아요 ㅋㅋ 집도 아니고 사무실도 아닌', createdAt: new Date(now - h*10).toISOString() }
+        ]
+      },
+      { id:'f10', category:'free', title:'2026년 하반기 목표 공유해요!',
+        content:'벌써 3월이네요. 올해 목표 잘 이루어가고 계신가요?\n저는 1) 사이드프로젝트 완성 2) 운동 습관 만들기 3) 책 12권 읽기 가 목표입니다.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*4).toISOString(),
+        comments:[
+          { id:'fc20', authorId:'user2', authorNickname:'밥', text:'저는 포트폴리오 완성이 목표예요! 같이 파이팅해요', createdAt: new Date(now - h*2).toISOString() },
+          { id:'fc21', authorId:'user1', authorNickname:'앨리스', text:'AI 관련 프로젝트 하나 완성하는 게 목표입니다 :)', createdAt: new Date(now - h*1).toISOString() }
+        ]
+      },
+
+      // ── 질문/답변 (qna) ────────────────────────────────
+      { id:'q1', category:'qna', title:'Playwright로 input에 텍스트 입력하는 방법이 궁금해요',
+        content:'page.fill() 과 page.type() 의 차이가 뭔가요?\n둘 다 텍스트를 입력하는 것 같은데 언제 어떤걸 써야 할지 모르겠습니다.',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*180).toISOString(),
+        comments:[
+          { id:'qc1', authorId:'user1', authorNickname:'앨리스', text:'fill()은 기존 내용을 지우고 한 번에 입력하고, type()은 실제 키보드처럼 한 글자씩 입력해요. 이벤트 감지가 중요하면 type()을 쓰세요!', createdAt: new Date(now - h*175).toISOString() },
+          { id:'qc2', authorId:'user3', authorNickname:'찰리', text:'locator.fill()을 쓰는 게 요즘 권장 방식이에요. page.fill()은 deprecated 됐거든요', createdAt: new Date(now - h*170).toISOString() }
+        ]
+      },
+      { id:'q2', category:'qna', title:'localStorage 데이터 Playwright로 확인하는 법?',
+        content:'page.evaluate()를 사용하면 브라우저의 localStorage에 접근할 수 있다고 들었는데, 실제 코드 예시가 있으면 공유 부탁드립니다.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*160).toISOString(),
+        comments:[
+          { id:'qc3', authorId:'user4', authorNickname:'다이애나', text:'const value = await page.evaluate(() => localStorage.getItem("key")); 이렇게 쓰면 돼요!', createdAt: new Date(now - h*155).toISOString() }
+        ]
+      },
+      { id:'q3', category:'qna', title:'셀렉터가 없는 요소 클릭하는 방법?',
+        content:'id나 class가 없는 버튼을 클릭해야 하는데 어떻게 해야 할까요?\n텍스트 내용으로 클릭할 수 있나요?',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*140).toISOString(),
+        comments:[
+          { id:'qc4', authorId:'user2', authorNickname:'밥', text:'getByText("버튼텍스트") 또는 getByRole("button", { name: "텍스트" }) 를 쓰면 돼요!', createdAt: new Date(now - h*135).toISOString() },
+          { id:'qc5', authorId:'user5', authorNickname:'에반', text:'XPath 사용도 가능해요: page.locator("xpath=//button[contains(text(), \'클릭\')]")', createdAt: new Date(now - h*130).toISOString() }
+        ]
+      },
+      { id:'q4', category:'qna', title:'페이지 로딩 완료까지 기다리는 방법',
+        content:'페이지 이동 후 특정 요소가 로드될 때까지 기다려야 하는데, sleep()을 쓰면 불안정해서요.\n더 좋은 방법이 있을까요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*110).toISOString(),
+        comments:[
+          { id:'qc6', authorId:'user1', authorNickname:'앨리스', text:'waitForSelector() 또는 locator.waitFor()를 쓰세요! sleep보다 훨씬 안정적이에요', createdAt: new Date(now - h*108).toISOString() },
+          { id:'qc7', authorId:'user3', authorNickname:'찰리', text:'page.waitForLoadState("networkidle") 도 유용해요. 네트워크 요청이 끝날 때까지 기다려요', createdAt: new Date(now - h*105).toISOString() }
+        ]
+      },
+      { id:'q5', category:'qna', title:'스크린샷 특정 영역만 찍는 방법?',
+        content:'page.screenshot()은 전체 페이지를 찍는데, 특정 div 영역만 캡처하고 싶어요.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*90).toISOString(),
+        comments:[
+          { id:'qc8', authorId:'user2', authorNickname:'밥', text:'await locator.screenshot({ path: "element.png" }) 처럼 locator에 직접 screenshot()을 호출하면 돼요!', createdAt: new Date(now - h*88).toISOString() }
+        ]
+      },
+      { id:'q6', category:'qna', title:'여러 탭 동시에 다루는 방법이 있나요?',
+        content:'새 탭이 열리면 그 탭에서 작업을 해야 하는 경우가 있어요.\nPlaywright에서 새 탭을 어떻게 핸들링하나요?',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*70).toISOString(),
+        comments:[
+          { id:'qc9', authorId:'user4', authorNickname:'다이애나', text:'context.waitForEvent("page") 로 새 탭이 열리는 걸 기다릴 수 있어요. const [newPage] = await Promise.all([context.waitForEvent("page"), locator.click()]);', createdAt: new Date(now - h*68).toISOString() }
+        ]
+      },
+      { id:'q7', category:'qna', title:'CI/CD에서 Playwright 테스트 실행 시 headless 설정',
+        content:'GitHub Actions에서 Playwright 돌리는데 브라우저 에러가 납니다.\nheadless 모드 설정이 따로 필요한가요?',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*50).toISOString(),
+        comments:[
+          { id:'qc10', authorId:'user3', authorNickname:'찰리', text:'playwright.config.ts에서 use: { headless: true } 로 설정하면 되고, GitHub Actions에서는 기본적으로 headless가 필요해요. xvfb도 필요할 수 있어요.', createdAt: new Date(now - h*48).toISOString() }
+        ]
+      },
+      { id:'q8', category:'qna', title:'커뮤니티 로그인 자동화 코드 공유해주실 분?',
+        content:'이 커뮤니티 사이트 로그인을 Playwright로 자동화하는 예시 코드가 있으면 보고 싶어요!',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*30).toISOString(),
+        comments:[
+          { id:'qc11', authorId:'user5', authorNickname:'에반', text:"await page.fill('#modal-login-username', 'alice');\nawait page.fill('#modal-login-password', '1234');\nawait page.click('#modal-login-submit-btn'); 이렇게 하면 됩니다!", createdAt: new Date(now - h*28).toISOString() },
+          { id:'qc12', authorId:'user1', authorNickname:'앨리스', text:'모달이 떠 있을 때 바로 fill하면 돼요. waitForSelector 따로 안 해도 되더라고요', createdAt: new Date(now - h*26).toISOString() }
+        ]
+      },
+      { id:'q9', category:'qna', title:'Playwright MCP와 일반 Playwright 차이점?',
+        content:'Claude에서 쓰는 Playwright MCP가 일반 Playwright 라이브러리랑 어떻게 다른가요?\n별도로 설치해야 하나요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*15).toISOString(),
+        comments:[
+          { id:'qc13', authorId:'user2', authorNickname:'밥', text:'MCP(Model Context Protocol)는 AI 모델이 도구를 사용할 수 있게 해주는 프로토콜이에요. Playwright MCP는 Claude가 Playwright를 직접 호출할 수 있게 해주는 서버예요. 따로 설치 필요해요!', createdAt: new Date(now - h*13).toISOString() }
+        ]
+      },
+      { id:'q10', category:'qna', title:'Playwright로 파일 업로드하는 방법',
+        content:'input[type=file] 요소에 파일을 업로드해야 하는데 어떻게 해야 하나요?',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*5).toISOString(),
+        comments:[
+          { id:'qc14', authorId:'user1', authorNickname:'앨리스', text:'await page.setInputFiles("#file-input", "path/to/file.pdf"); 이렇게 하면 돼요!', createdAt: new Date(now - h*3).toISOString() }
+        ]
+      },
+
+      // ── 공지사항 (notice) ──────────────────────────────
+      { id:'n1', category:'notice', title:'[공지] 커뮤니티 이용 규칙 안내',
+        content:'안녕하세요, 운영팀 앨리스입니다.\n\n원활한 커뮤니티 운영을 위한 규칙을 안내드립니다.\n\n1. 타인을 비방하거나 혐오 발언을 하지 마세요.\n2. 광고성 게시물 및 스팸은 즉시 삭제됩니다.\n3. 불법 콘텐츠 공유는 금지입니다.\n4. 서로 존중하는 문화를 만들어요.\n\n즐거운 커뮤니티가 되도록 함께 노력해주세요!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*400).toISOString(),
+        comments:[]
+      },
+      { id:'n2', category:'notice', title:'[공지] 게시판 카테고리 개편 안내',
+        content:'안녕하세요!\n\n더 편리한 커뮤니티 이용을 위해 게시판을 아래와 같이 개편했습니다.\n\n- 자유게시판: 일상 이야기\n- 질문/답변: 기술 및 일반 질문\n- 공지사항: 운영 관련 공지\n- 정보공유: 유용한 정보와 링크\n- 유머/잡담: 가벼운 이야기\n\n많이 이용해주세요!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*300).toISOString(),
+        comments:[
+          { id:'nc1', authorId:'user3', authorNickname:'찰리', text:'개편 수고하셨어요! 훨씬 찾기 쉬워졌네요', createdAt: new Date(now - h*295).toISOString() }
+        ]
+      },
+      { id:'n3', category:'notice', title:'[공지] 서버 점검 안내 (3월 20일)',
+        content:'안녕하세요, 관리자입니다.\n\n3월 20일(수) 오전 2시~4시 서버 점검이 예정되어 있습니다.\n해당 시간에는 서비스 이용이 불가하오니 양해 부탁드립니다.\n\n점검 내용:\n- 서버 성능 최적화\n- 보안 패치 적용\n- 데이터베이스 마이그레이션\n\n감사합니다.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*100).toISOString(),
+        comments:[
+          { id:'nc2', authorId:'user2', authorNickname:'밥', text:'알려주셔서 감사합니다!', createdAt: new Date(now - h*98).toISOString() },
+          { id:'nc3', authorId:'user5', authorNickname:'에반', text:'새벽 시간대라 괜찮네요 ㅎㅎ', createdAt: new Date(now - h*96).toISOString() }
+        ]
+      },
+      { id:'n4', category:'notice', title:'[공지] 신고 기능 추가 예정',
+        content:'부적절한 게시물을 쉽게 신고할 수 있는 기능을 다음 업데이트에서 추가할 예정입니다.\n\n건강한 커뮤니티 문화 조성에 힘써주셔서 감사합니다!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*50).toISOString(),
+        comments:[]
+      },
+      { id:'n5', category:'notice', title:'[공지] 3월 우수 활동 회원 선정',
+        content:'3월 우수 활동 회원을 선정했습니다.\n\n🏆 1위: 밥 (댓글 42개, 글 15개)\n🥈 2위: 앨리스 (댓글 38개, 글 12개)\n🥉 3위: 찰리 (댓글 27개, 글 8개)\n\n활발한 활동 감사드립니다!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*10).toISOString(),
+        comments:[
+          { id:'nc4', authorId:'user2', authorNickname:'밥', text:'감사합니다!! 앞으로도 열심히 할게요 ㅎㅎ', createdAt: new Date(now - h*9).toISOString() },
+          { id:'nc5', authorId:'user3', authorNickname:'찰리', text:'축하해요~ 다음달엔 저도 노려볼게요 ㅋㅋ', createdAt: new Date(now - h*8).toISOString() }
+        ]
+      },
+
+      // ── 정보공유 (info) ────────────────────────────────
+      { id:'i1', category:'info', title:'Playwright MCP 설치 및 설정 가이드 (완전판)',
+        content:'Playwright MCP 설치 방법 정리합니다.\n\n1. Node.js 18+ 설치 확인\n2. npm install -D @playwright/test\n3. npx playwright install\n4. MCP 설정 파일(claude_desktop_config.json)에 추가:\n{\n  "mcpServers": {\n    "playwright": {\n      "command": "npx",\n      "args": ["@playwright/mcp"]\n    }\n  }\n}\n\n5. Claude Desktop 재시작\n\n이제 Claude에게 "브라우저 열어줘"라고 하면 됩니다!',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*190).toISOString(),
+        comments:[
+          { id:'ic1', authorId:'user1', authorNickname:'앨리스', text:'정리 감사합니다! 북마크 해뒀어요', createdAt: new Date(now - h*188).toISOString() },
+          { id:'ic2', authorId:'user4', authorNickname:'다이애나', text:'윈도우에서도 동일하게 되나요?', createdAt: new Date(now - h*185).toISOString() },
+          { id:'ic3', authorId:'user2', authorNickname:'밥', text:'네, 윈도우에서도 동일해요!', createdAt: new Date(now - h*183).toISOString() }
+        ]
+      },
+      { id:'i2', category:'info', title:'AI 에이전트 개발에 유용한 오픈소스 리스트',
+        content:'최근 관심가는 AI 에이전트 관련 오픈소스 모음입니다.\n\n1. LangChain - LLM 애플리케이션 프레임워크\n2. AutoGPT - 자율 AI 에이전트\n3. CrewAI - 멀티 에이전트 프레임워크\n4. Playwright MCP - 브라우저 자동화\n5. Puppeteer - Node.js 브라우저 자동화\n\n각각 GitHub에서 찾아보세요!',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*160).toISOString(),
+        comments:[
+          { id:'ic4', authorId:'user5', authorNickname:'에반', text:'CrewAI 써봤는데 진짜 신기하더라고요. 에이전트들이 서로 대화해요', createdAt: new Date(now - h*158).toISOString() }
+        ]
+      },
+      { id:'i3', category:'info', title:'무료로 쓸 수 있는 AI API 모음',
+        content:'돈 없는 개발자를 위한 무료 AI API 리스트!\n\n1. Gemini API - 무료 티어 있음 (Google)\n2. Groq API - 빠른 추론, 무료 티어\n3. Hugging Face Inference API - 오픈소스 모델 무료\n4. Claude API - 유료지만 Anthropic Console에서 무료 크레딧 제공\n5. OpenAI - 처음 가입 시 크레딧 제공\n\n* 무료 티어는 속도 제한이 있으니 참고하세요!',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*130).toISOString(),
+        comments:[
+          { id:'ic5', authorId:'user1', authorNickname:'앨리스', text:'Groq는 진짜 빠르더라고요! 추천합니다', createdAt: new Date(now - h*128).toISOString() },
+          { id:'ic6', authorId:'user2', authorNickname:'밥', text:'Gemini Flash가 무료에 빠르고 좋아요', createdAt: new Date(now - h*125).toISOString() }
+        ]
+      },
+      { id:'i4', category:'info', title:'커서(Cursor) AI IDE 단축키 모음',
+        content:'Cursor 쓰는 분들을 위한 유용한 단축키 모음!\n\nCmd/Ctrl + K : 코드 편집 요청\nCmd/Ctrl + L : 채팅 패널 열기\nCmd/Ctrl + I : Composer 열기\nCmd/Ctrl + Shift + L : 현재 파일 채팅에 추가\nTab : AI 제안 수락\nEsc : AI 제안 거절\n\n모르고 있던 단축키가 있으셨나요?',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*100).toISOString(),
+        comments:[
+          { id:'ic7', authorId:'user3', authorNickname:'찰리', text:'Cmd+I 진짜 자주 써요! 유용한 정보 감사합니다', createdAt: new Date(now - h*98).toISOString() },
+          { id:'ic8', authorId:'user4', authorNickname:'다이애나', text:'저는 Claude Code 쓰는데 비슷한 단축키가 있더라고요', createdAt: new Date(now - h*95).toISOString() }
+        ]
+      },
+      { id:'i5', category:'info', title:'Playwright 공식 문서 한국어 정리 (자주 쓰는 것 위주)',
+        content:'자주 쓰는 Playwright 코드 패턴 정리:\n\n// 요소 클릭\nawait page.locator("#btn").click();\n\n// 텍스트 입력\nawait page.locator("#input").fill("텍스트");\n\n// 요소 텍스트 가져오기\nconst text = await page.locator("#el").textContent();\n\n// 요소 대기\nawait page.locator("#el").waitFor();\n\n// 스크린샷\nawait page.screenshot({ path: "shot.png" });\n\n// URL 이동\nawait page.goto("https://example.com");',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*75).toISOString(),
+        comments:[
+          { id:'ic9', authorId:'user2', authorNickname:'밥', text:'초보자한테 딱인 정리네요. 저도 처음에 이런 게 있었으면 좋았을 텐데', createdAt: new Date(now - h*73).toISOString() }
+        ]
+      },
+      { id:'i6', category:'info', title:'VS Code 필수 확장 프로그램 추천 (2026)',
+        content:'2026년 기준으로 제가 필수로 쓰는 VS Code 확장 프로그램들입니다.\n\n1. GitLens - Git 히스토리 시각화\n2. Prettier - 코드 포매터\n3. ESLint - 코드 품질 체크\n4. Thunder Client - REST API 테스트\n5. Error Lens - 인라인 에러 표시\n6. Auto Rename Tag - HTML 태그 자동 수정\n7. Path Intellisense - 경로 자동완성',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*55).toISOString(),
+        comments:[
+          { id:'ic10', authorId:'user5', authorNickname:'에반', text:'Error Lens 진짜 좋아요! 몰랐던 분들은 꼭 설치해보세요', createdAt: new Date(now - h*53).toISOString() },
+          { id:'ic11', authorId:'user1', authorNickname:'앨리스', text:'저는 여기에 GitHub Copilot도 추가할게요 ㅎㅎ', createdAt: new Date(now - h*50).toISOString() }
+        ]
+      },
+      { id:'i7', category:'info', title:'LocalStorage vs SessionStorage vs Cookie 차이 정리',
+        content:'웹 스토리지 완벽 정리!\n\n[ LocalStorage ]\n- 영구 저장 (브라우저 닫아도 유지)\n- 용량: 5-10MB\n- 탭 간 공유 O\n- 서버 전송 X\n\n[ SessionStorage ]\n- 탭 닫으면 삭제\n- 용량: 5MB\n- 탭 간 공유 X\n\n[ Cookie ]\n- 만료일 설정 가능\n- 용량: 4KB\n- 서버에 자동 전송 O\n- HttpOnly 설정 시 JS 접근 불가\n\n이 커뮤니티 사이트는 LocalStorage 사용 중!',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*35).toISOString(),
+        comments:[
+          { id:'ic12', authorId:'user3', authorNickname:'찰리', text:'깔끔한 정리 감사합니다! 면접 준비할 때 자주 나오는 질문이죠', createdAt: new Date(now - h*33).toISOString() }
+        ]
+      },
+      { id:'i8', category:'info', title:'좋은 커밋 메시지 작성하는 방법',
+        content:'Conventional Commits 규칙 소개합니다.\n\n형식: <type>(<scope>): <description>\n\n주요 타입:\n- feat: 새 기능 추가\n- fix: 버그 수정\n- docs: 문서 수정\n- style: 코드 스타일 변경\n- refactor: 리팩토링\n- test: 테스트 추가\n- chore: 빌드/설정 변경\n\n예시:\nfeat(auth): add login modal component\nfix(board): resolve comment count display bug\n\n커밋 메시지 잘 쓰면 나중에 코드 히스토리 이해하기 훨씬 쉬워요!',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*20).toISOString(),
+        comments:[
+          { id:'ic13', authorId:'user2', authorNickname:'밥', text:'회사 들어가기 전에 이걸 알았으면 좋았을텐데... 이제라도 알아서 다행이에요 ㅎㅎ', createdAt: new Date(now - h*18).toISOString() },
+          { id:'ic14', authorId:'user1', authorNickname:'앨리스', text:'저는 여기에 이모지 type도 같이 쓰는데 훨씬 보기 좋아요! ✨feat 🐛fix 이런 식으로', createdAt: new Date(now - h*16).toISOString() }
+        ]
+      },
+      { id:'i9', category:'info', title:'무료 디자인 리소스 사이트 모음',
+        content:'개발할 때 유용한 무료 디자인 리소스들!\n\n[ 아이콘 ]\n- Heroicons, Lucide, Tabler Icons\n- Flaticon (무료 버전)\n\n[ 이미지/사진 ]\n- Unsplash, Pexels, Picsum.photos\n\n[ 색상 팔레트 ]\n- Coolors.co, Adobe Color\n\n[ 폰트 ]\n- Google Fonts (한국어: Noto Sans KR)\n\n[ UI 컴포넌트 ]\n- shadcn/ui, Radix UI, DaisyUI',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*8).toISOString(),
+        comments:[
+          { id:'ic15', authorId:'user4', authorNickname:'다이애나', text:'Picsum.photos 정말 자주 써요! placeholder 이미지에 딱이에요', createdAt: new Date(now - h*6).toISOString() }
+        ]
+      },
+      { id:'i10', category:'info', title:'Git 자주 쓰는 명령어 치트시트',
+        content:'매일 쓰는 Git 명령어 정리!\n\n# 기본\ngit init          # 저장소 초기화\ngit clone <url>   # 복제\ngit status        # 상태 확인\ngit add .         # 전체 스테이징\ngit commit -m ""  # 커밋\ngit push          # 원격 업로드\ngit pull          # 원격 다운로드\n\n# 브랜치\ngit branch        # 브랜치 목록\ngit checkout -b   # 새 브랜치\ngit merge         # 병합\n\n# 되돌리기\ngit stash         # 임시 저장\ngit reset --hard  # 강제 되돌리기 (주의!)',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*2).toISOString(),
+        comments:[]
+      },
+
+      // ── 유머/잡담 (humor) ──────────────────────────────
+      { id:'h1', category:'humor', title:'AI가 내 버그를 고쳐줬는데...',
+        content:'버그 고쳐달라고 했더니 "이 코드는 완벽하게 작동합니다"라고 했습니다.\n실행해봤더니 에러가 났습니다.\n다시 물어봤더니 "아, 그 에러는 특정 상황에서만 발생할 수 있어요"라고 하더군요.\n\n어떤 상황이냐고 묻자 "실행할 때요"라고 했습니다.',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*195).toISOString(),
+        comments:[
+          { id:'hc1', authorId:'user1', authorNickname:'앨리스', text:'ㅋㅋㅋㅋㅋ 실행할 때 에러 ㅋㅋㅋㅋ', createdAt: new Date(now - h*193).toISOString() },
+          { id:'hc2', authorId:'user3', authorNickname:'찰리', text:'저도 비슷한 경험... AI가 "이건 엣지 케이스"라고 했는데 그게 메인 케이스였어요', createdAt: new Date(now - h*190).toISOString() }
+        ]
+      },
+      { id:'h2', category:'humor', title:'개발자의 명언: "일단 동작하면 된다"',
+        content:'코드 리뷰에서 이런 코드를 봤습니다.\n\n// TODO: 이거 나중에 고쳐야 함\n// 2019년 추가됨\n\n2026년에도 TODO가 남아있었습니다.\n나중은 오지 않는 법이죠.',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*155).toISOString(),
+        comments:[
+          { id:'hc3', authorId:'user4', authorNickname:'다이애나', text:'TODO: 공감 버튼 만들어야 함 // 2026년 추가됨', createdAt: new Date(now - h*153).toISOString() },
+          { id:'hc4', authorId:'user5', authorNickname:'에반', text:'저도 5년 된 TODO 발견한 적 있어요... 작성자는 이미 퇴사했더라고요 ㅋㅋ', createdAt: new Date(now - h*150).toISOString() },
+          { id:'hc5', authorId:'user1', authorNickname:'앨리스', text:'FIXME가 WONTFIX가 되는 과정...', createdAt: new Date(now - h*148).toISOString() }
+        ]
+      },
+      { id:'h3', category:'humor', title:'스택오버플로우 답변 레전드 모음',
+        content:'제가 봤던 스택오버플로우 명답들...\n\nQ: "파이썬에서 리스트 역순으로 하는 방법"\nA: "파이썬 쓰지 마세요"\n\nQ: "이 코드 왜 안 되나요?"\nA: "그렇게 하면 안 되니까요"\n\nQ: "오류 해결 방법"\nA: "이미 답변됨" (링크 없음)\n\n커뮤니티의 힘...?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*115).toISOString(),
+        comments:[
+          { id:'hc6', authorId:'user2', authorNickname:'밥', text:'ㅋㅋㅋㅋ 파이썬 쓰지 마세요 ㅋㅋㅋㅋ 레전드', createdAt: new Date(now - h*113).toISOString() }
+        ]
+      },
+      { id:'h4', category:'humor', title:'밤새 버그 찾았는데... 범인은',
+        content:'어젯밤 4시간 동안 버그를 찾았습니다.\n\n용의자 목록:\n1. 라이브러리 버전 문제? (아님)\n2. 환경변수 오류? (아님)\n3. API 응답 형식? (아님)\n4. 캐시 문제? (아님)\n\n범인:\n세미콜론 하나 빠진 것\n\n좋은 밤이었습니다.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*85).toISOString(),
+        comments:[
+          { id:'hc7', authorId:'user1', authorNickname:'앨리스', text:'개발자의 클래식... 저는 오타 하나가 범인이었던 적도 있어요', createdAt: new Date(now - h*83).toISOString() },
+          { id:'hc8', authorId:'user3', authorNickname:'찰리', text:'저는 주석 처리된 코드가 실제 실행되고 있었던 적도... 어떻게? 모름', createdAt: new Date(now - h*80).toISOString() },
+          { id:'hc9', authorId:'user4', authorNickname:'다이애나', text:'ㅋㅋㅋㅋ 공감 백배. 항상 제일 사소한 데서 나옴', createdAt: new Date(now - h*78).toISOString() }
+        ]
+      },
+      { id:'h5', category:'humor', title:'비개발자 친구가 부탁한 것들',
+        content:'친구들이 개발자인 저한테 해달라는 것들:\n\n- "유튜브 광고 없애줘"\n- "내 와이파이 왜 느려?"\n- "폰 빨라지게 해줘"\n- "내 컴퓨터 바이러스 있는 것 같아"\n- "포토샵 크랙 어디서 구해?"\n- "PPT 예쁘게 만들어줘"\n\n개발자는 IT 분야 만능 해결사가 아닙니다.\n(하지만 다 도와줍니다...)',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*62).toISOString(),
+        comments:[
+          { id:'hc10', authorId:'user5', authorNickname:'에반', text:'ㅋㅋㅋㅋ 진짜 이거... 저는 TV 리모컨 고쳐달라는 말도 들어봤어요', createdAt: new Date(now - h*60).toISOString() },
+          { id:'hc11', authorId:'user1', authorNickname:'앨리스', text:'PPT 예쁘게 해줘 ㅋㅋㅋㅋ 이건 진짜 공감', createdAt: new Date(now - h*58).toISOString() }
+        ]
+      },
+      { id:'h6', category:'humor', title:'코딩 중 집중력 방해 요소 순위',
+        content:'제 개인 순위입니다.\n\n1위: 갑자기 생각나는 다른 아이디어\n2위: 유튜브 "딱 5분만"\n3위: 슬랙 알림\n4위: "이거 금방이잖아" 하는 자신감\n5위: 배고픔\n6위: 위 모든 것의 복합\n\n지금도 이 글 쓰다가 집중력 방해당하는 중...',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*42).toISOString(),
+        comments:[
+          { id:'hc12', authorId:'user3', authorNickname:'찰리', text:'4위 진짜 ㅋㅋㅋㅋ "이건 금방이야"는 항상 거짓말이에요', createdAt: new Date(now - h*40).toISOString() },
+          { id:'hc13', authorId:'user2', authorNickname:'밥', text:'1위 공감... 집중하다가 갑자기 "아 이거 만들면 어떻지?"', createdAt: new Date(now - h*38).toISOString() }
+        ]
+      },
+      { id:'h7', category:'humor', title:'PM이 말하는 "간단한 기능"',
+        content:'"이거 간단한 거죠? 버튼 하나 추가하면 되잖아요"\n\n실제 작업:\n□ 디자인 확인 (디자이너 없음)\n□ DB 스키마 변경\n□ API 추가\n□ 프론트 컴포넌트 개발\n□ 단위 테스트 작성\n□ E2E 테스트 작성\n□ 코드 리뷰\n□ QA 테스트\n□ 스테이징 배포\n□ 프로덕션 배포\n□ 모니터링\n\n"버튼 하나"의 실체입니다.',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*25).toISOString(),
+        comments:[
+          { id:'hc14', authorId:'user5', authorNickname:'에반', text:'이게 웹툰인줄... 현실이네요 ㅠㅠ', createdAt: new Date(now - h*23).toISOString() },
+          { id:'hc15', authorId:'user3', authorNickname:'찰리', text:'PM: "어려운 거야?" 개발자: "(눈물을 닦으며) 아뇨, 쉬운 거예요"', createdAt: new Date(now - h*21).toISOString() }
+        ]
+      },
+      { id:'h8', category:'humor', title:'다크 모드 쓰는 이유 설문 결과',
+        content:'제 비공식 설문 결과입니다 (n=저)\n\n"왜 다크 모드 쓰세요?"\n\n□ 눈이 편해서 - 0%\n□ 배터리 절약 - 0%\n□ 멋있어 보여서 - 100%\n\n배터리 절약 운운하지 맙시다.\n우리가 왜 다크 모드 쓰는지 다들 알잖아요.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*14).toISOString(),
+        comments:[
+          { id:'hc16', authorId:'user2', authorNickname:'밥', text:'ㅋㅋㅋㅋ 반박 불가... 솔직한 설문이에요', createdAt: new Date(now - h*12).toISOString() },
+          { id:'hc17', authorId:'user1', authorNickname:'앨리스', text:'야간에 라이트 모드 켰다가 눈 탄 적 있어서 저는 진짜 눈 편함이에요 ㅋㅋ', createdAt: new Date(now - h*10).toISOString() }
+        ]
+      },
+      { id:'h9', category:'humor', title:'개발자 운동 루틴',
+        content:'매일 하는 운동:\n\n1. 아침: 의자에서 일어나기 (1세트)\n2. 오후: 화장실 왕복 (2세트)\n3. 저녁: 배달 문 열러 가기 (1세트)\n4. 심화: 노트북 들고 소파로 이동 (1세트)\n\n총 칼로리 소모: 12kcal\n\n건강한 개발자 라이프입니다.',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*6).toISOString(),
+        comments:[
+          { id:'hc18', authorId:'user4', authorNickname:'다이애나', text:'배달 문 열러 가기는 스프린트예요 ㅋㅋㅋㅋ', createdAt: new Date(now - h*4).toISOString() },
+          { id:'hc19', authorId:'user2', authorNickname:'밥', text:'저는 서서 일하는 책상 사서 조금 나아졌어요 (서다가 앉다가 반복)', createdAt: new Date(now - h*3).toISOString() }
+        ]
+      },
+      { id:'h10', category:'humor', title:'"이거 쉽죠?" 문장 분석',
+        content:'"이거 쉽죠?" 라고 말하는 사람들 유형 분석:\n\n유형 1 - 비개발자\n: 아무것도 모름. 선의의 거짓말.\n\n유형 2 - 주니어 개발자\n: 조금 앎. 순수한 착각.\n\n유형 3 - 시니어 개발자\n: 다 앎. 너를 시험하는 것.\n\n유형 4 - PM\n: 시간 압박. 위험 신호.\n\n유형 5 - 본인\n: 10분 후 "왜 이게 이렇게 복잡하지" 깨달음 예정.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*1).toISOString(),
+        comments:[]
+      }
+    ]);
+
+    localStorage.setItem('community_seed_ver', SEED_VERSION);
   }
 
   // ===== INIT =====
