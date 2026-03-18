@@ -25,6 +25,7 @@
     --tag-v5: #8b3dcc;
     --tag-sample: #c0392b;
     --tag-lesson: #1a7fa8;
+    --tag-awww: #b5760a;
   }
 
   body {
@@ -286,7 +287,56 @@
 
   .badge-lesson { background: var(--tag-lesson); }
   .badge-sample { background: var(--tag-sample); }
+  .badge-awww { background: var(--tag-awww); }
   .badge-test { background: #555; }
+
+  /* Awwwards 비교 카드 */
+  .awww-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+
+  .card-thumb {
+    margin: -20px -22px 14px;
+    overflow: hidden;
+    border-radius: 7px 7px 0 0;
+    height: 190px;
+    position: relative;
+    background: #111;
+  }
+  .card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .card:hover .card-thumb img { transform: scale(1.03); }
+  .card-thumb-tag {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 9px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.07em;
+  }
+  .btn-site {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    background: var(--tag-awww);
+    color: #fff;
+    transition: opacity 0.15s;
+  }
+  .btn-site:hover { opacity: 0.8; }
 
   .divider { height: 1px; background: var(--border); margin: 60px 0; }
 
@@ -401,6 +451,7 @@
 <nav-tabs>
   <a href="#version-test">에이전트 버전 테스트 (v1~v5)</a>
   <a href="#lesson">수업 예제 v5</a>
+  <a href="#awwwards">Awwwards 카피</a>
   <a href="#samples">샘플 01~08</a>
 </nav-tabs>
 
@@ -776,6 +827,105 @@
         <div class="card-actions">
           <a class="btn-open" href="13_class_agent_v5/lesson3_ex4/" target="_blank">열기 →</a>
           <button class="btn-prompt" data-key="lesson3_ex4">프롬프트</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Awwwards 카피 예제 -->
+  <section class="section" id="awwwards">
+    <div class="section-header">
+      <span class="section-badge badge-awww">Awwwards</span>
+      <span class="section-title">Awwwards TOP6 카피</span>
+      <span class="section-sub">13_class_agent_v5 · awww_0N_*</span>
+    </div>
+    <p class="section-desc">Awwwards SOTD 수상작 TOP6를 v5 프롬프트로 재현한 예제입니다. 원본 레퍼런스와 생성 결과물을 함께 비교해보세요.</p>
+
+    <div class="awww-grid">
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_01_aupale/reference.png" alt="AUPALE VODKA 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_01_aupale</div>
+        <div class="card-title">AUPALE VODKA</div>
+        <div class="card-prompt">어두운 갈색 배경의 고급 음료 브랜딩. Locomotive 제작, Mar 17 SOTD.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://www.aupalevodka.com/en/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/aupale-vodka" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_01_aupale/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_02_dulcedo/reference.png" alt="DULCEDO 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_02_dulcedo</div>
+        <div class="card-title">DULCEDO</div>
+        <div class="card-prompt">검정+골드 럭셔리 모델 에이전시. 골드 세리프 타이포, Locomotive 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://dulcedo.com/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/dulcedo" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_02_dulcedo/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_03_1820/reference.png" alt="1820 PRODUCTIONS 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_03_1820</div>
+        <div class="card-title">1820 PRODUCTIONS</div>
+        <div class="card-prompt">빛번짐/글로우 파티클, 영화적 분위기. Balky Studio 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://www.1820productions.com" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/1820-productions" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_03_1820/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_04_griflan/reference.png" alt="GRIFLAN 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_04_griflan</div>
+        <div class="card-title">GRIFLAN</div>
+        <div class="card-prompt">불꽃 유니콘 일러스트, 판타지/게임 감성. 검정 배경.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://griflan.com/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/griflan-2" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_04_griflan/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_05_oceanx/reference.png" alt="OCEANX 2025 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_05_oceanx</div>
+        <div class="card-title">OCEANX 2025</div>
+        <div class="card-prompt">심해 탐험 테마, 박진감 스크롤 애니메이션. Unseen Studio 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://2025.oceanx.org/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/oceanx-2025" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_05_oceanx/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_06_lightweight/reference.png" alt="LIGHTWEIGHT 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_06_lightweight</div>
+        <div class="card-title">LIGHTWEIGHT</div>
+        <div class="card-prompt">슈퍼 미니멀 다크, 자전거 휠 브랜딩. VKZ Studio 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://lightweight.info/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/lightweight" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_06_lightweight/" target="_blank">결과물 →</a>
         </div>
       </div>
     </div>
