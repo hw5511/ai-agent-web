@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 에이전트 커리큘럼 — SBS아카데미 강남점</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg2: #0f0f0f;
+  --bg3: #141414;
+  --accent: #6b51fe;
+  --accent-light: #8b75ff;
+  --accent-dim: rgba(107,81,254,0.15);
+  --text: #ffffff;
+  --text-muted: rgba(255,255,255,0.5);
+  --text-dim: rgba(255,255,255,0.25);
+  --border: rgba(255,255,255,0.08);
+  --card-bg: rgba(255,255,255,0.03);
+  --font-title: 'Inter', sans-serif;
+  --font-body: 'Noto Sans KR', sans-serif;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* ---- Custom Cursor ---- */
+#cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  will-change: transform;
+}
+#cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(107,81,254,0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, border-color 0.25s;
+  will-change: transform;
+}
+body.cursor-hover #cursor-dot { width: 12px; height: 12px; background: #fff; }
+body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: rgba(107,81,254,1); }
+
+/* ---- Scroll Progress ---- */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 1001;
+  will-change: width;
+}
+
+/* ---- Nav ---- */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 60px;
+  transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(16px);
+  padding: 16px 60px;
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: none;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+.nav-brand:hover { color: var(--accent); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: none;
+  transition: color 0.3s;
+  text-transform: uppercase;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  padding: 10px 24px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  cursor: none;
+  transition: box-shadow 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+.nav-cta:hover {
+  box-shadow: 0 0 32px rgba(107,81,254,0.5);
+  transform: translateY(-1px);
+}
+
+/* ---- Noise Texture ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Scroll Reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.08s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.24s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.32s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.40s; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.48s; }
+.reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.56s; }
+.reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+
+/* =============================================
+   SECTION BASE
+   ============================================= */
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 60px;
+  z-index: 1;
+}
+.section--dark { background: #060608; }
+.section--alt { background: #0d0d10; }
+
+.section-inner {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-family: var(--font-title);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.section-desc {
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+/* =============================================
+   SECTION 1 — HERO
+   ============================================= */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 60px;
+}
+
+.hero-bg-glow {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(107,81,254,0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+}
+
+.hero-main {
+  font-family: var(--font-title);
+  font-size: clamp(5rem, 14vw, 12rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  margin-top: 20px;
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 300;
+  letter-spacing: 0.6em;
+  color: var(--text-muted);
+  margin-top: 12px;
+  opacity: 0;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(107,81,254,0.5);
+  margin: 36px auto;
+  opacity: 0;
+}
+
+.hero-tagline {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  opacity: 0;
+}
+.hero-instructor {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+  opacity: 0;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 80px);
+  flex-wrap: wrap;
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+}
+.stat-item { text-align: center; }
+.stat-value {
+  display: block;
+  font-family: var(--font-title);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat-value span { color: var(--accent); }
+.stat-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 6px;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: scrollPulse 2s 2.5s ease forwards, scrollFloat 2.5s 3s ease-in-out infinite;
+}
+@keyframes scrollFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+@keyframes scrollPulse {
+  to { opacity: 0.5; }
+}
+.scroll-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.scroll-line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+/* =============================================
+   SECTION 2 — AI 에이전트란?
+   ============================================= */
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.agent-svg-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.concept-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 32px;
+}
+.concept-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.concept-num {
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--accent);
+  min-width: 28px;
+  padding-top: 2px;
+  letter-spacing: 0.05em;
+}
+.concept-body strong {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.concept-body p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* =============================================
+   SECTION 3 — AI vs AGENT
+   ============================================= */
+.compare-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 56px;
+}
+.compare-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+}
+.compare-card--accent {
+  background: rgba(107,81,254,0.08);
+  border-color: rgba(107,81,254,0.3);
+}
+.compare-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.compare-tag--old { background: rgba(255,255,255,0.08); color: var(--text-muted); }
+.compare-tag--new { background: var(--accent); color: #fff; }
+.compare-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+.compare-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.compare-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.compare-card--accent .step-num {
+  background: rgba(107,81,254,0.25);
+  color: var(--accent-light);
+}
+.step-body strong {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.step-body p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.compare-divider {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0;
+  color: var(--border);
+  font-size: 18px;
+}
+.compare-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+}
+.prompt-flow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.prompt-chip {
+  padding: 8px 16px;
+  background: rgba(107,81,254,0.15);
+  border: 1px solid rgba(107,81,254,0.3);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  color: var(--accent-light);
+  letter-spacing: 0.02em;
+}
+
+/* =============================================
+   SECTION 4 — 시장 현황
+   ============================================= */
+.market-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: 56px;
+}
+.market-chart-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 40px;
+  text-align: center;
+}
+.market-chart-title {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.market-chart-title span { color: var(--accent); }
+.market-chart-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+.market-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 24px;
+  min-height: 200px;
+}
+.market-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.market-bar-label-top {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 800;
+  min-height: 1.4em;
+}
+.bar-2024 { color: rgba(255,255,255,0.4); }
+.bar-2029 { color: var(--accent-light); }
+.market-bar {
+  border-radius: 6px 6px 0 0;
+  width: 72px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+}
+.market-bar--small {
+  height: 44px;
+  background: rgba(255,255,255,0.12);
+}
+.market-bar--large {
+  height: 160px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, var(--accent) 100%);
+  box-shadow: 0 0 40px rgba(107,81,254,0.3);
+}
+.market-bar-val {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.8);
+}
+.market-arrow {
+  align-self: center;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-family: var(--font-title);
+  font-weight: 300;
+}
+.market-bar-year {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+.market-note {
+  margin-top: 24px;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.market-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.market-status-item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.3s;
+}
+.market-status-item:hover { border-color: rgba(107,81,254,0.3); }
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(107,81,254,0.6);
+}
+.status-text strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.status-text p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* =============================================
+   SECTION 5 — 채용시장 변화
+   ============================================= */
+.hiring-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 56px;
+  margin-bottom: 48px;
+}
+.hiring-quote {
+  background: rgba(107,81,254,0.08);
+  border: 1px solid rgba(107,81,254,0.25);
+  border-radius: 16px;
+  padding: 36px;
+}
+.hiring-quote blockquote {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text);
+}
+.hiring-quote blockquote strong { color: var(--accent-light); font-weight: 700; }
+.hiring-stat-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hiring-big-num {
+  font-family: var(--font-title);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.hiring-big-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.hiring-companies {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.hiring-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.hiring-card:hover {
+  border-color: rgba(107,81,254,0.3);
+  transform: translateY(-3px);
+}
+.hiring-card-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(107,81,254,0.3);
+  border-radius: 100px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 12px;
+}
+.hiring-card h4 {
+  font-family: var(--font-title);
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.hiring-card p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* =============================================
+   SECTION 6 — AI 전환 인사이트 (dark)
+   ============================================= */
+#insight {
+  background: #04040a;
+  position: relative;
+  overflow: hidden;
+}
+#insight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(107,81,254,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.insight-inner {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.insight-lead {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.insight-lead strong { color: var(--text); font-weight: 700; }
+.insight-big {
+  font-family: var(--font-title);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 32px 0;
+}
+.insight-divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(107,81,254,0.4);
+  margin: 32px auto;
+}
+.insight-detail {
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  line-height: 1.9;
+  color: rgba(255,255,255,0.5);
+}
+.insight-detail strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+.insight-bg-text {
+  position: absolute;
+  font-family: var(--font-title);
+  font-size: clamp(8rem, 22vw, 18rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(107,81,254,0.06);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =============================================
+   SECTION 7 — 커리큘럼 소개
+   ============================================= */
+.currintro-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 56px;
+}
+.currintro-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.currintro-card:hover {
+  border-color: rgba(107,81,254,0.3);
+  transform: translateY(-4px);
+}
+.currintro-card--accent {
+  background: rgba(107,81,254,0.1);
+  border-color: rgba(107,81,254,0.35);
+}
+.currintro-icon {
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+.currintro-card--accent .currintro-icon { opacity: 1; }
+.currintro-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.currintro-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.currintro-card--accent p { color: rgba(255,255,255,0.75); }
+
+.currintro-bottom {
+  margin-top: 24px;
+  padding: 28px 36px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.currintro-bottom strong { color: var(--text); font-weight: 700; }
+
+/* =============================================
+   SECTION 8 — 로드맵
+   ============================================= */
+.roadmap-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-top: 56px;
+}
+.roadmap-card {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+}
+.roadmap-card--accent {
+  background: rgba(107,81,254,0.12);
+  border-color: rgba(107,81,254,0.4);
+  box-shadow: 0 0 40px rgba(107,81,254,0.1);
+}
+.roadmap-card--dark {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.1);
+}
+.roadmap-step {
+  font-family: var(--font-title);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.roadmap-card--dark .roadmap-step { color: var(--text-muted); }
+.roadmap-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.roadmap-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.roadmap-list li {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+.roadmap-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+.roadmap-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* =============================================
+   SECTION 9 — 기초 커리큘럼
+   ============================================= */
+.curr-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 56px;
+}
+.curr-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.curr-card:hover {
+  border-color: rgba(107,81,254,0.3);
+  transform: translateY(-3px);
+}
+.curr-header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.curr-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: var(--font-title);
+}
+.curr-card h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 2px;
+}
+.curr-hours {
+  font-size: 0.62rem;
+  color: var(--accent);
+  font-weight: 600;
+  font-family: var(--font-title);
+}
+.curr-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.curr-list li {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.4;
+}
+.curr-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(107,81,254,0.5);
+}
+
+/* =============================================
+   SECTION 10 — 심화 커리큘럼
+   ============================================= */
+.curr-grid--advanced .curr-num {
+  background: rgba(107,81,254,0.2);
+  border: 1px solid rgba(107,81,254,0.4);
+  color: var(--accent-light);
+}
+
+/* =============================================
+   SECTION 11 — 활용 사례
+   ============================================= */
+.usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 56px;
+}
+.usecase-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.usecase-card:hover {
+  border-color: rgba(107,81,254,0.3);
+  transform: translateY(-4px);
+}
+.usecase-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.usecase-card:hover::before { opacity: 1; }
+.usecase-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(107,81,254,0.25);
+  border-radius: 100px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 16px;
+}
+.usecase-num {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-family: var(--font-title);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--text);
+  opacity: 0.03;
+  line-height: 1;
+  pointer-events: none;
+}
+.usecase-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.usecase-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* =============================================
+   SECTION 12 — CTA / Footer
+   ============================================= */
+#cta {
+  background: #04040a;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+#cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(107,81,254,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.cta-eyebrow {
+  font-family: var(--font-title);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.cta-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.cta-title em {
+  font-style: normal;
+  color: var(--accent-light);
+}
+.cta-desc {
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+.btn-primary {
+  padding: 16px 44px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: box-shadow 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 40px rgba(107,81,254,0.55);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  padding: 16px 44px;
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: border-color 0.3s, color 0.3s;
+  text-decoration: none;
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.footer-brand {
+  font-family: var(--font-title);
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(107,81,254,0.2);
+  user-select: none;
+  pointer-events: none;
+  margin-bottom: 32px;
+}
+
+.footer-meta {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy, .footer-info {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1024px) {
+  .curr-grid { grid-template-columns: repeat(2, 1fr); }
+  .currintro-grid { grid-template-columns: repeat(2, 1fr); }
+  .hiring-companies { grid-template-columns: repeat(2, 1fr); }
+  .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 24px; }
+  nav { padding: 20px 24px; }
+  nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .hero-main { font-size: clamp(3.5rem, 16vw, 6rem); }
+  .concept-grid { grid-template-columns: 1fr; gap: 40px; }
+  .compare-wrapper { grid-template-columns: 1fr; }
+  .market-layout { grid-template-columns: 1fr; }
+  .hiring-intro { grid-template-columns: 1fr; }
+  .hiring-companies { grid-template-columns: 1fr; }
+  .roadmap-row { flex-direction: column; }
+  .roadmap-arrow { justify-content: center; transform: rotate(90deg); padding: 8px 0; }
+  .curr-grid { grid-template-columns: 1fr; }
+  .currintro-grid { grid-template-columns: 1fr; }
+  .usecase-grid { grid-template-columns: 1fr; }
+  .footer-meta { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <a href="#hero" class="nav-brand">AI Agent Curriculum</a>
+  <ul class="nav-links">
+    <li><a href="#intro">소개</a></li>
+    <li><a href="#market">시장</a></li>
+    <li><a href="#curriculum">커리큘럼</a></li>
+    <li><a href="#usecases">사례</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">수강 문의</a>
+</nav>
+
+<!-- =============================================
+     SECTION 1 — HERO
+     ============================================= -->
+<section id="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">2026 Curriculum</p>
+    <h1 class="hero-main">AI<br>AGENT</h1>
+    <p class="hero-sub">커리큘럼</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">실전 AI 에이전트 개발 과정</p>
+    <p class="hero-instructor">SBS아카데미 컴퓨터 아트 학원 강남점 &mdash; 강사 양희우</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-value"><span>15</span>회</span>
+        <span class="stat-label">총 강의 수</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value"><span>2</span>h</span>
+        <span class="stat-label">회차별 시간</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value"><span>28</span>배</span>
+        <span class="stat-label">5년간 시장 성장</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">175<span>%</span></span>
+        <span class="stat-label">연 성장률 CAGR</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-label">Scroll</span>
+    <span class="scroll-line"></span>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 2 — AI 에이전트란?
+     ============================================= -->
+<section class="section section--alt" id="intro">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Introduction</p>
+      <h2 class="section-title">AI 에이전트란?</h2>
+    </div>
+
+    <div class="concept-grid">
+      <div class="agent-svg-wrap reveal">
+        <svg viewBox="0 0 400 360" width="100%" max-width="460" style="max-width:460px">
+          <circle cx="200" cy="150" r="65" fill="none" stroke="#6b51fe" stroke-width="1.5" opacity="0.2"/>
+          <circle cx="200" cy="150" r="42" fill="none" stroke="#6b51fe" stroke-width="1.5" opacity="0.35"/>
+          <circle cx="200" cy="150" r="20" fill="rgba(107,81,254,0.12)"/>
+          <circle cx="200" cy="150" r="7" fill="#6b51fe"/>
+          <line x1="200" y1="150" x2="108" y2="62" stroke="#6b51fe" stroke-width="1.2" opacity="0.35"/>
+          <line x1="200" y1="150" x2="312" y2="68" stroke="#6b51fe" stroke-width="1.2" opacity="0.35"/>
+          <line x1="200" y1="150" x2="76" y2="172" stroke="#6b51fe" stroke-width="1.2" opacity="0.35"/>
+          <line x1="200" y1="150" x2="324" y2="158" stroke="#6b51fe" stroke-width="1.2" opacity="0.35"/>
+          <line x1="200" y1="150" x2="120" y2="262" stroke="#6b51fe" stroke-width="1.2" opacity="0.35"/>
+          <line x1="200" y1="150" x2="282" y2="248" stroke="#6b51fe" stroke-width="1.2" opacity="0.35"/>
+          <circle cx="108" cy="62" r="10" fill="rgba(107,81,254,0.15)"/>
+          <circle cx="108" cy="62" r="4" fill="#6b51fe"/>
+          <text x="108" y="44" text-anchor="middle" fill="#8b75ff" font-size="11" font-weight="600" font-family="Inter,sans-serif">SEE</text>
+          <circle cx="312" cy="68" r="10" fill="rgba(107,81,254,0.15)"/>
+          <circle cx="312" cy="68" r="4" fill="#6b51fe"/>
+          <text x="312" y="50" text-anchor="middle" fill="#8b75ff" font-size="11" font-weight="600" font-family="Inter,sans-serif">THINK</text>
+          <circle cx="76" cy="172" r="10" fill="rgba(107,81,254,0.15)"/>
+          <circle cx="76" cy="172" r="4" fill="#6b51fe"/>
+          <text x="42" y="176" text-anchor="middle" fill="#8b75ff" font-size="11" font-weight="600" font-family="Inter,sans-serif">PLAN</text>
+          <circle cx="324" cy="158" r="10" fill="rgba(107,81,254,0.15)"/>
+          <circle cx="324" cy="158" r="4" fill="#6b51fe"/>
+          <text x="362" y="162" text-anchor="middle" fill="#8b75ff" font-size="11" font-weight="600" font-family="Inter,sans-serif">DO</text>
+          <circle cx="120" cy="262" r="10" fill="rgba(107,81,254,0.15)"/>
+          <circle cx="120" cy="262" r="4" fill="#6b51fe"/>
+          <text x="92" y="285" text-anchor="middle" fill="#8b75ff" font-size="11" font-weight="600" font-family="Inter,sans-serif">FIX</text>
+          <circle cx="282" cy="248" r="10" fill="rgba(107,81,254,0.15)"/>
+          <circle cx="282" cy="248" r="4" fill="#6b51fe"/>
+          <text x="314" y="268" text-anchor="middle" fill="#8b75ff" font-size="11" font-weight="600" font-family="Inter,sans-serif">TOOLS</text>
+          <ellipse cx="200" cy="150" rx="115" ry="108" fill="none" stroke="#6b51fe" stroke-width="0.7" stroke-dasharray="4 5" opacity="0.18"/>
+          <text x="200" y="312" text-anchor="middle" fill="#6b51fe" font-size="9.5" opacity="0.4" font-weight="600" font-family="Inter,sans-serif" letter-spacing="4">AUTONOMOUS LOOP</text>
+        </svg>
+      </div>
+
+      <div>
+        <div class="reveal">
+          <h3 style="font-family:var(--font-title);font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:800;margin-bottom:12px;letter-spacing:-0.01em;">스스로 판단하고,<br>행동하는 AI</h3>
+          <p style="font-size:0.92rem;color:var(--text-muted);line-height:1.75;margin-bottom:32px;">AI 에이전트는 단순히 질문에 답하는 AI를 넘어, <strong style="color:var(--text);">스스로 목표를 설정하고, 계획을 세우고, 도구를 사용해 실행</strong>하는 자율적 AI 시스템입니다.</p>
+        </div>
+        <div class="concept-list reveal-stagger">
+          <div class="concept-item">
+            <span class="concept-num">01</span>
+            <div class="concept-body">
+              <strong>환경 인식</strong>
+              <p>파일, 웹, API 등 외부 환경을 스스로 탐색하고 정보를 수집</p>
+            </div>
+          </div>
+          <div class="concept-item">
+            <span class="concept-num">02</span>
+            <div class="concept-body">
+              <strong>자율 판단</strong>
+              <p>수집한 정보를 바탕으로 다음 행동을 스스로 결정</p>
+            </div>
+          </div>
+          <div class="concept-item">
+            <span class="concept-num">03</span>
+            <div class="concept-body">
+              <strong>도구 활용</strong>
+              <p>코드 실행, 파일 편집, 외부 서비스 호출 등 실제 작업을 수행</p>
+            </div>
+          </div>
+          <div class="concept-item">
+            <span class="concept-num">04</span>
+            <div class="concept-body">
+              <strong>반복 학습</strong>
+              <p>결과를 확인하고 부족하면 스스로 수정하며 목표를 달성할 때까지 반복</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 3 — 일반 AI vs 에이전트
+     ============================================= -->
+<section class="section section--dark">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Comparison</p>
+      <h2 class="section-title">일반 AI와 에이전트의 차이</h2>
+    </div>
+
+    <div class="compare-wrapper reveal-stagger">
+      <div class="compare-card">
+        <span class="compare-tag compare-tag--old">Traditional</span>
+        <h3>일반 AI 사용</h3>
+        <div class="compare-steps">
+          <div class="compare-step">
+            <span class="step-num">1</span>
+            <div class="step-body">
+              <strong>프롬프트 입력</strong>
+              <p>AI에게 질문을 직접 타이핑</p>
+            </div>
+          </div>
+          <div class="compare-divider">&#8595;</div>
+          <div class="compare-step">
+            <span class="step-num">2</span>
+            <div class="step-body">
+              <strong>결과물을 직접 복사</strong>
+              <p>생성된 텍스트를 수동으로 선택·복사</p>
+            </div>
+          </div>
+          <div class="compare-divider">&#8595;</div>
+          <div class="compare-step">
+            <span class="step-num">3</span>
+            <div class="step-body">
+              <strong>직접 붙여넣기 및 수정</strong>
+              <p>다른 앱에 붙여넣고 직접 가공</p>
+            </div>
+          </div>
+        </div>
+        <div class="compare-footer">매번 사람이 개입해야 하는 반복 작업</div>
+      </div>
+
+      <div class="compare-card compare-card--accent">
+        <span class="compare-tag compare-tag--new">Agent</span>
+        <h3>AI 에이전트 활용</h3>
+        <div style="margin-bottom:20px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(107,81,254,0.2);">
+            <span class="step-num">1</span>
+            <div class="step-body"><strong>목표만 지시</strong><p>원하는 결과만 말하면 에이전트가 알아서 계획</p></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(107,81,254,0.2);">
+            <span class="step-num">2</span>
+            <div class="step-body"><strong>자율 실행</strong><p>파일 탐색·코드 실행·API 호출을 스스로 처리</p></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;">
+            <span class="step-num">3</span>
+            <div class="step-body"><strong>결과 보고</strong><p>완료 후 알림·보고서·메시지로 자동 전달</p></div>
+          </div>
+        </div>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-bottom:16px;">예시 프롬프트 하나로 전체 파이프라인 실행:</p>
+        <div class="prompt-flow">
+          <span class="prompt-chip">'매출자료' 폴더의 파일을 분석해서</span>
+          <span class="prompt-chip">매주 월요일 오전 9시,</span>
+          <span class="prompt-chip">주간 보고서를 이메일로 보내줘</span>
+        </div>
+        <div class="compare-footer" style="border-color:rgba(107,81,254,0.3);">단 한 번의 설정으로 완전 자동화</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 4 — 시장 현황
+     ============================================= -->
+<section class="section" id="market">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Market</p>
+      <h2 class="section-title">AI 에이전트 시장 현황</h2>
+      <p class="section-desc">글로벌 AI 기업들은 앞다퉈 Agent 기능을 출시하고 있으며, 시장 규모는 폭발적으로 성장 중입니다.</p>
+    </div>
+
+    <div class="market-layout">
+      <div class="market-chart-box reveal">
+        <h3 class="market-chart-title"><span>AI 에이전트</span> 시장 전망</h3>
+        <p class="market-chart-sub">5년간 28배 성장 &nbsp;|&nbsp; CAGR 175%</p>
+        <div class="market-bars">
+          <div class="market-bar-group">
+            <span class="market-bar-label-top bar-2024">2.2조원</span>
+            <div class="market-bar market-bar--small">
+              <span class="market-bar-val"></span>
+            </div>
+            <span class="market-bar-year">2024</span>
+          </div>
+          <div class="market-arrow">&#8594;</div>
+          <div class="market-bar-group">
+            <span class="market-bar-label-top bar-2029">62조원</span>
+            <div class="market-bar market-bar--large">
+              <span class="market-bar-val"></span>
+            </div>
+            <span class="market-bar-year">2029</span>
+          </div>
+        </div>
+        <p class="market-note">출처: MarketsandMarkets AI Agent Global Market Report 2024<br>단위: USD 환율 1,400원 환산 기준</p>
+      </div>
+
+      <div class="market-status-list reveal-stagger">
+        <div class="market-status-item">
+          <div class="status-dot"></div>
+          <div class="status-text">
+            <strong>OpenAI — Operator</strong>
+            <p>웹 브라우저를 직접 조작하는 에이전트 서비스 출시</p>
+          </div>
+        </div>
+        <div class="market-status-item">
+          <div class="status-dot"></div>
+          <div class="status-text">
+            <strong>Google — Gemini Agent</strong>
+            <p>Gmail·Drive·Calendar 통합 자율 에이전트 배포</p>
+          </div>
+        </div>
+        <div class="market-status-item">
+          <div class="status-dot"></div>
+          <div class="status-text">
+            <strong>Anthropic — Claude Code</strong>
+            <p>터미널 기반 설치형 코딩 에이전트, 실무 자동화 특화</p>
+          </div>
+        </div>
+        <div class="market-status-item">
+          <div class="status-dot"></div>
+          <div class="status-text">
+            <strong>Microsoft — Copilot Agent</strong>
+            <p>Office 365 전반에 걸친 AI 에이전트 통합 진행</p>
+          </div>
+        </div>
+        <div class="market-status-item">
+          <div class="status-dot"></div>
+          <div class="status-text">
+            <strong>Salesforce — AgentForce</strong>
+            <p>기업 CRM 전반을 자율 운영하는 에이전트 플랫폼</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 5 — 채용시장 변화
+     ============================================= -->
+<section class="section section--alt">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Impact &amp; Hiring</p>
+      <h2 class="section-title">채용시장의 변화</h2>
+    </div>
+
+    <div class="hiring-intro">
+      <div class="hiring-quote reveal">
+        <blockquote>
+          현재 기업들은 산업·분야에 상관없이<br>
+          <strong>AI 에이전트를 관리·운영하는 인력</strong>을<br>
+          적극적으로 채용하고 있습니다.<br><br>
+          회계·법률·마케팅 등 전통 직군에서도<br>
+          <strong>AI 도입으로 인한 구조적 변화</strong>가 진행 중입니다.
+        </blockquote>
+      </div>
+      <div class="hiring-stat-box reveal">
+        <div class="hiring-big-num">28%</div>
+        <p class="hiring-big-label">2024년 회계사 합격자 1,200명 중<br>수습기관 등록 338명(28%)<br>2025년 누적 미지정 회계사 약 1,000명 예상</p>
+      </div>
+    </div>
+
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">2026년 AI 에이전트 매니저 채용 공고 현황</p>
+    <div class="hiring-companies reveal-stagger">
+      <div class="hiring-card">
+        <span class="hiring-card-badge">Hiring</span>
+        <h4>삼성전자</h4>
+        <p>미국 법인 — AI 에이전트 매니저 직군 채용. 에이전트 시스템 설계 및 운영 담당.</p>
+      </div>
+      <div class="hiring-card">
+        <span class="hiring-card-badge">Hiring</span>
+        <h4>ZILLOW</h4>
+        <p>미국 1위 부동산 앱 — AI 에이전트 매니저. 부동산 데이터 자동화 파이프라인 관리.</p>
+      </div>
+      <div class="hiring-card">
+        <span class="hiring-card-badge">Hiring</span>
+        <h4>CNH 인더스트리얼</h4>
+        <p>다국적 농사·건설 기계 제조사 — AI 에이전트 매니저. 글로벌 운영 자동화.</p>
+      </div>
+      <div class="hiring-card">
+        <span class="hiring-card-badge">Hiring</span>
+        <h4>Yum! Brands</h4>
+        <p>피자헛·KFC·타코벨 모기업 — AI 에이전트 매니저. 전 세계 프랜차이즈 AI 운영.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 6 — AI 전환 인사이트 (DARK)
+     ============================================= -->
+<section class="section" id="insight" style="min-height:100vh;display:flex;align-items:center;justify-content:center;">
+  <div class="insight-bg-text">AGENT</div>
+  <div class="insight-inner reveal">
+    <p class="insight-lead">현재 기업들은 산업·분야에 상관없이</p>
+    <div class="insight-big">AI 전환</div>
+    <div class="insight-big" style="font-size:clamp(2rem,5vw,4rem);color:var(--text-muted);margin-top:-16px;">을 가속화하고 있습니다</div>
+    <div class="insight-divider"></div>
+    <p class="insight-detail">
+      <strong>AI를 모르는 직원은 AI를 아는 직원으로 대체되는 것이 아니라,</strong><br>
+      AI 에이전트 자체가 업무의 일부를 직접 대체하게 됩니다.<br><br>
+      지금 필요한 역량은 <strong>AI 에이전트를 설계하고, 지시하고, 관리하는 능력</strong>입니다.
+    </p>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 7 — 커리큘럼 소개
+     ============================================= -->
+<section class="section section--alt" id="curriculum">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Curriculum</p>
+      <h2 class="section-title">AI 에이전트 커리큘럼이란?</h2>
+      <p class="section-desc">프로그래밍 경험이 없어도 실무에서 바로 활용 가능한 AI 에이전트를 직접 만들고 운영하는 과정입니다.</p>
+    </div>
+
+    <div class="currintro-grid reveal-stagger" style="margin-top:56px;">
+      <div class="currintro-card currintro-card--accent">
+        <div class="currintro-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#8b75ff" stroke-width="1.2">
+            <circle cx="18" cy="18" r="14"/>
+            <path d="M18 8 Q22 13 22 18 Q22 25 18 28 Q14 25 14 18 Q14 13 18 8Z"/>
+            <line x1="6" y1="18" x2="30" y2="18"/>
+          </svg>
+        </div>
+        <h3>에이전트 기반 실습</h3>
+        <p>설치형 AI 에이전트를 직접 설치하고 에이전트 환경에서 실습하며 익히는 과정</p>
+      </div>
+      <div class="currintro-card">
+        <div class="currintro-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2">
+            <rect x="6" y="8" width="24" height="20" rx="3"/>
+            <path d="M12 14 L20 14 M12 18 L24 18 M12 22 L18 22"/>
+          </svg>
+        </div>
+        <h3>비개발자 대상</h3>
+        <p>프로그래밍 경험이 없어도 AI 에이전트를 활용할 수 있도록 설계된 과정</p>
+      </div>
+      <div class="currintro-card">
+        <div class="currintro-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2">
+            <path d="M6 28 L12 20 L18 24 L24 14 L30 8"/>
+            <circle cx="12" cy="20" r="2.5" fill="rgba(107,81,254,0.3)"/>
+            <circle cx="18" cy="24" r="2.5" fill="rgba(107,81,254,0.3)"/>
+            <circle cx="24" cy="14" r="2.5" fill="rgba(107,81,254,0.3)"/>
+          </svg>
+        </div>
+        <h3>3단계 로드맵</h3>
+        <p>프롬프트 엔지니어링 → AI 에이전트 기초 → AI 에이전트 심화로 이어지는 체계적 구성</p>
+      </div>
+      <div class="currintro-card">
+        <div class="currintro-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2">
+            <rect x="8" y="8" width="10" height="10" rx="2"/>
+            <rect x="20" y="8" width="10" height="10" rx="2"/>
+            <rect x="8" y="20" width="10" height="10" rx="2"/>
+            <rect x="20" y="20" width="10" height="10" rx="2"/>
+            <line x1="18" y1="13" x2="20" y2="13"/>
+            <line x1="13" y1="18" x2="13" y2="20"/>
+            <line x1="23" y1="18" x2="23" y2="20"/>
+            <line x1="18" y1="25" x2="20" y2="25"/>
+          </svg>
+        </div>
+        <h3>실무 자동화</h3>
+        <p>메신저 연동, 업무 자동화, 웹 자동화 등 실무에서 바로 활용 가능한 내용</p>
+      </div>
+    </div>
+
+    <div class="currintro-bottom reveal" style="margin-top:20px;">
+      <p><strong>총 15회차 × 2시간</strong> &nbsp;|&nbsp; 기초 8강 + 심화 8강으로 구성되며, 매 회차 실습 위주로 진행됩니다.<br>수강 완료 후 <strong>나만의 AI 에이전트 자동화 시스템</strong>을 직접 구축할 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 8 — 커리큘럼 로드맵
+     ============================================= -->
+<section class="section section--dark">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Roadmap</p>
+      <h2 class="section-title">커리큘럼 로드맵</h2>
+    </div>
+
+    <div class="roadmap-row reveal-stagger">
+      <div class="roadmap-card">
+        <span class="roadmap-step">Step 1</span>
+        <h3>프롬프트 엔지니어링</h3>
+        <ul class="roadmap-list">
+          <li>AI 모델 비교 및 선택</li>
+          <li>프롬프트 구조화 기법</li>
+          <li>실무 활용 예시 실습</li>
+        </ul>
+      </div>
+      <div class="roadmap-arrow">
+        <svg width="40" height="24" viewBox="0 0 40 24"><path d="M0 12h34M30 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="roadmap-card roadmap-card--accent">
+        <span class="roadmap-step">Step 2</span>
+        <h3>AI 에이전트 기초</h3>
+        <ul class="roadmap-list">
+          <li>Claude Code 기본 사용법</li>
+          <li>Sub Agent / Hooks / MCP</li>
+          <li>Skills 제작 및 자동화</li>
+          <li>메신저 알림 연동</li>
+        </ul>
+      </div>
+      <div class="roadmap-arrow">
+        <svg width="40" height="24" viewBox="0 0 40 24"><path d="M0 12h34M30 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="roadmap-card roadmap-card--dark">
+        <span class="roadmap-step" style="color:var(--accent-light);">Step 3</span>
+        <h3>AI 에이전트 심화</h3>
+        <ul class="roadmap-list">
+          <li>고급 스킬 구현 (엑셀/워드)</li>
+          <li>Gmail 웹 자동화</li>
+          <li>워크플로우 자동화 구축</li>
+          <li>나만의 자동화 시스템</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 9 — 기초 커리큘럼
+     ============================================= -->
+<section class="section">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Basic</p>
+      <h2 class="section-title">AI 에이전트 기초 커리큘럼</h2>
+      <p class="section-desc">Claude Code 설치부터 Sub Agent, MCP, Skills 구축까지 — AI 에이전트를 다루는 핵심 기초 8강</p>
+    </div>
+
+    <div class="curr-grid reveal-stagger">
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">1</span>
+          <div>
+            <h4>AI 에이전트 이해와 CLI 환경 구축</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>AI 에이전트란? / 설치형 AI란?</li>
+          <li>Gemini CLI 설치 및 로그인</li>
+          <li>GPT CLI(Codex) 설치 및 로그인</li>
+          <li>Claude Code 설치 및 로그인</li>
+          <li>세션 사용량 및 extra-usage</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">2</span>
+          <div>
+            <h4>Claude 에이전트 메모리와 파일/폴더 제어</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>에이전트 메모리 (/init, /memory, Auto Memory)</li>
+          <li>에이전트 이름 지어주기 - 프롬프팅</li>
+          <li>파일/폴더 생성, 이동, 이름변경</li>
+          <li>파일/폴더 삭제, 복사, 목록 조회</li>
+          <li>파일 내용 수정, 실행(start)</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">3</span>
+          <div>
+            <h4>Claude Code 환경 설정과 기본 명령어</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>Claude 개인정보 보안 설정 체크하기</li>
+          <li>Claude 설정 세팅하기 (파일 삭제 금지 세팅)</li>
+          <li>Bypass 모드 / esc / 사전 입력</li>
+          <li>/clear, /login, /logout, /exit, /color</li>
+          <li>웹 Search 툴 사용하기</li>
+          <li>Todos 기능 / /todos 명령어</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">4</span>
+          <div>
+            <h4>세션 관리와 Node.js 백그라운드 작업</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>/resume, /context 명령어</li>
+          <li>/compact &amp; auto compact</li>
+          <li>/rename 세션</li>
+          <li>/task - 백그라운드 프로세스 개념</li>
+          <li>백그라운드 프로세스 만들기</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">5</span>
+          <div>
+            <h4>Sub Agent와 Hooks</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>Sub Agent란?</li>
+          <li>Sub Agent의 작동 원리</li>
+          <li>Sub Agent 만들기</li>
+          <li>Claude in PowerPoint &amp; Excel</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">6</span>
+          <div>
+            <h4>MCP 개념 이해와 Notion 연동</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>MCP란?</li>
+          <li>MCP 설치 및 세팅 방법</li>
+          <li>Notion MCP 설치하기</li>
+          <li>Notion 에이전트 제어 실습</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">7</span>
+          <div>
+            <h4>Skills 활용과 Discord 알림 연동 실습</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>Skills란?</li>
+          <li>Skill 사용하기</li>
+          <li>Discord 연동 Skill 제작 실습</li>
+          <li>작업 완료 알림 받기</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">8</span>
+          <div>
+            <h4>Claude Desktop 사용법</h4>
+            <span class="curr-hours">2시간</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>일반 Claude Desktop</li>
+          <li>Desktop Claude Code</li>
+          <li>Claude Cowork</li>
+          <li>Claude Code CLI와 비교</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 10 — 심화 커리큘럼
+     ============================================= -->
+<section class="section section--alt">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Advanced</p>
+      <h2 class="section-title">AI 에이전트 심화 커리큘럼</h2>
+      <p class="section-desc">문서 자동화부터 웹 크롤링, 외부 API 연동, 워크플로우 자동화까지 — 실전 활용 8강</p>
+    </div>
+
+    <div class="curr-grid curr-grid--advanced reveal-stagger">
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">1</span>
+          <div>
+            <h4>엑셀 &amp; 워드 문서 자동 작성</h4>
+            <span class="curr-hours">2시간 — Tool &amp; Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>openpyxl로 엑셀 Skill 제작</li>
+          <li>python-docx로 워드 Skill 제작</li>
+          <li>두 Skill을 파이프라인으로 연결</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">2</span>
+          <div>
+            <h4>웹 브라우저 자동 조작하기</h4>
+            <span class="curr-hours">2시간 — Web Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>웹 자동화 원리 + Playwright 환경 구성</li>
+          <li>페이지 이동 / 클릭 / 입력 자동화</li>
+          <li>데이터 수집 및 CSV·JSON 저장</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">3</span>
+          <div>
+            <h4>외부 API 연동 1: Google Cloud Platform</h4>
+            <span class="curr-hours">2시간 — Tool &amp; Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>OAuth 인증 공통 가이드 (OAuth 2.0 / 서비스 계정)</li>
+          <li>Sheets·Forms·Docs·Drive API 연동</li>
+          <li>Gmail API + Sheets 데이터 → Gmail 리포트</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">4</span>
+          <div>
+            <h4>외부 API 연동 2: AI이미지 + Gemini + CLI</h4>
+            <span class="curr-hours">2시간 — Tool &amp; Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>AI 이미지 생성 Skill 제작</li>
+          <li>Gemini API 멀티모달 (텍스트·이미지 분석)</li>
+          <li>이미지 생성 → 분석 → 저장 파이프라인</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">5</span>
+          <div>
+            <h4>CLAUDE.md 트리거 + 문서 자동화</h4>
+            <span class="curr-hours">2시간 — Workflow Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>CLAUDE.md 트리거 키워드 설정 + 문서 라우팅</li>
+          <li>매뉴얼·가이드·PPT 자동 생성 실습</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">6</span>
+          <div>
+            <h4>자동 트렌드 리서치 보고서 파이프라인</h4>
+            <span class="curr-hours">2시간 — Workflow Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>RSS·웹 크롤링으로 트렌드 데이터 수집 + Claude 분석</li>
+          <li>Discord Webhook 자동 보고서 전송 파이프라인</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">7</span>
+          <div>
+            <h4>네이버 블로그 자동 포스팅</h4>
+            <span class="curr-hours">2시간 — Workflow Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>주제 리서치 + 이미지 생성 API로 비주얼 소재 제작</li>
+          <li>네이버 블로그 API 연동 + 자동 발행</li>
+        </ul>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <span class="curr-num">8</span>
+          <div>
+            <h4>Notion DB 기반 자동 에이전트</h4>
+            <span class="curr-hours">2시간 — Workflow Automation</span>
+          </div>
+        </div>
+        <ul class="curr-list">
+          <li>Notion DB 폴링으로 변경사항 감지 + 자동 작업 실행</li>
+          <li>결과 Notion 자동 보고 + Discord 알림</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 11 — 활용 사례
+     ============================================= -->
+<section class="section section--dark" id="usecases">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Use Cases</p>
+      <h2 class="section-title">AI 에이전트 활용 사례</h2>
+      <p class="section-desc">수강 후 직접 구현하게 될 실제 자동화 사례들입니다.</p>
+    </div>
+
+    <div class="usecase-grid reveal-stagger">
+      <div class="usecase-card">
+        <span class="usecase-tag">Email</span>
+        <span class="usecase-num">01</span>
+        <h3>이메일 자동 작성</h3>
+        <p>컨텍스트 분석 후 Gmail 자동 작성 및 발송. 수신 메일에 맞게 답장을 생성하고 일정을 잡아줍니다.</p>
+      </div>
+      <div class="usecase-card">
+        <span class="usecase-tag">Web</span>
+        <span class="usecase-num">02</span>
+        <h3>웹 브라우저 자동 조작</h3>
+        <p>Playwright로 웹사이트 로그인, 폼 입력, 데이터 수집 등 반복 업무를 완전 자동화합니다.</p>
+      </div>
+      <div class="usecase-card">
+        <span class="usecase-tag">Document</span>
+        <span class="usecase-num">03</span>
+        <h3>엑셀·워드 문서 자동화</h3>
+        <p>데이터를 읽어 보고서를 자동 생성. 매주 자동으로 엑셀 매출 분석표 + 워드 요약본을 만듭니다.</p>
+      </div>
+      <div class="usecase-card">
+        <span class="usecase-tag">Blog</span>
+        <span class="usecase-num">04</span>
+        <h3>네이버 블로그 자동 포스팅</h3>
+        <p>트렌드 키워드 리서치부터 이미지 생성, 본문 작성, 자동 발행까지 원클릭으로 처리합니다.</p>
+      </div>
+      <div class="usecase-card">
+        <span class="usecase-tag">Report</span>
+        <span class="usecase-num">05</span>
+        <h3>트렌드 리서치 보고서</h3>
+        <p>RSS와 웹 크롤링으로 업계 트렌드를 수집, Claude가 분석해 Discord로 매일 자동 전송합니다.</p>
+      </div>
+      <div class="usecase-card">
+        <span class="usecase-tag">Notion</span>
+        <span class="usecase-num">06</span>
+        <h3>Notion DB 자동 에이전트</h3>
+        <p>Notion DB의 변경을 감지해 자동으로 작업을 실행하고, 결과를 Notion과 Discord로 보고합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 12 — CTA / Footer
+     ============================================= -->
+<section class="section" id="cta" style="min-height:100vh;display:flex;align-items:center;justify-content:center;">
+  <div class="cta-inner">
+    <p class="cta-eyebrow reveal">지금 시작하세요</p>
+    <h2 class="cta-title reveal">AI 에이전트를<br><em>직접 만드는</em><br>시대</h2>
+    <p class="cta-desc reveal">비개발자도, 기획자도, 디자이너도 —<br>AI 에이전트를 설계하고 운영하는 역량이<br>2026년 가장 중요한 경쟁력이 됩니다.</p>
+    <div class="cta-buttons reveal">
+      <a href="#" class="btn-primary">수강 상담 신청</a>
+      <a href="#intro" class="btn-outline">커리큘럼 다시 보기</a>
+    </div>
+    <div class="footer-brand reveal">AI AGENT</div>
+    <div class="footer-meta reveal">
+      <span class="footer-copy">&copy; 2026 SBS아카데미 컴퓨터 아트 학원 강남점. All rights reserved.</span>
+      <span class="footer-info">강사: 양희우 &nbsp;|&nbsp; AI 에이전트 커리큘럼</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---- Custom Cursor ----
+  var dot = document.getElementById('cursor-dot');
+  var ring = document.getElementById('cursor-ring');
+  var mouseX = 0, mouseY = 0;
+  var ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+  });
+
+  document.querySelectorAll('a, button, .curr-card, .usecase-card, .hiring-card, .market-status-item').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { document.body.classList.add('cursor-hover'); });
+    el.addEventListener('mouseleave', function() { document.body.classList.remove('cursor-hover'); });
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.11;
+    ringY += (mouseY - ringY) * 0.11;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // ---- Scroll Progress Bar ----
+  var progressBar = document.getElementById('scroll-progress');
+  function updateProgress() {
+    var scrollTop = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  // ---- Nav Scroll Behavior ----
+  var nav = document.getElementById('nav');
+  function updateNav() {
+    if (window.scrollY > 80) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  // ---- IntersectionObserver: Reveal ----
+  var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(function(el) { io.observe(el); });
+
+  // ---- GSAP Hero Animations ----
+  if (window.gsap) {
+    gsap.to('.hero-eyebrow', { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: 'power3.out',
+      from: { opacity: 0, y: 20 }
+    });
+    gsap.fromTo('.hero-eyebrow', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: 'power3.out' });
+    gsap.fromTo('.hero-main', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, delay: 0.55, ease: 'power3.out' });
+    gsap.fromTo('.hero-sub', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.85, ease: 'power3.out' });
+    gsap.fromTo('.hero-divider', { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.7, delay: 1.1, ease: 'power2.out', transformOrigin: 'center' });
+    gsap.fromTo('.hero-tagline', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, delay: 1.25, ease: 'power2.out' });
+    gsap.fromTo('.hero-instructor', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, delay: 1.4, ease: 'power2.out' });
+    gsap.fromTo('.hero-stats', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, delay: 1.6, ease: 'power2.out' });
+  }
+
+  // ---- Market bar animation on scroll ----
+  var marketSection = document.querySelector('.market-chart-box');
+  if (marketSection) {
+    var barLarge = document.querySelector('.market-bar--large');
+    if (barLarge) {
+      barLarge.style.height = '0px';
+      barLarge.style.transition = 'height 1.2s cubic-bezier(0.34, 1.4, 0.64, 1)';
+      var barIo = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          setTimeout(function() { barLarge.style.height = '160px'; }, 300);
+          barIo.disconnect();
+        }
+      }, { threshold: 0.3 });
+      barIo.observe(marketSection);
+    }
+  }
+
+})();
+</script>
+</body>
+</html>
