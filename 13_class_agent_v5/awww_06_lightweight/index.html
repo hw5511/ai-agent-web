@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGHTWEIGHT — Forged Carbon Fiber Wheels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #000000;
+      --color-bg2: #0a0a0a;
+      --color-text: #ffffff;
+      --color-muted: #888888;
+      --color-dim: rgba(255,255,255,0.4);
+      --color-line: rgba(255,255,255,0.1);
+      --font-title: 'Inter', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ======= CURSOR ======= */
+    .cursor {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      will-change: left, top;
+    }
+    .cursor.hover {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    /* ======= SCROLL PROGRESS (left vertical line) ======= */
+    .scroll-track {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: rgba(255,255,255,0.08);
+      z-index: 200;
+    }
+    .scroll-fill {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 0%;
+      background: var(--color-text);
+      z-index: 201;
+      transition: height 0.06s linear;
+    }
+
+    /* ======= NAV ======= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 2.25rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      mix-blend-mode: difference;
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 0.8125rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--color-text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-title);
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--color-text); }
+
+    /* ======= SECTION 1 : HERO ======= */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #000000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3.5rem 5.5rem;
+    }
+
+    .hero-canvas-wrap {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(44vw, 480px);
+      aspect-ratio: 1;
+    }
+
+    #wheelCanvas {
+      width: 100%;
+      height: 100%;
+      animation: wheelRotate 30s linear infinite;
+      will-change: transform;
+    }
+
+    @keyframes wheelRotate {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .hero-titles { position: relative; z-index: 2; }
+
+    .hero-title-line {
+      display: block;
+      overflow: hidden;
+      line-height: 0.88;
+    }
+
+    .hero-title-inner {
+      display: block;
+      font-family: var(--font-title);
+      font-size: 17.5vw;
+      font-weight: 800;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+      opacity: 0;
+      transform: translateY(-24px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .hero-title-inner.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-sub {
+      margin-top: 1.75rem;
+      font-family: var(--font-title);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.38);
+      text-transform: uppercase;
+    }
+
+    /* ======= SECTION 2 : SPEC ======= */
+    #spec {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--color-bg2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 7rem 3.5rem;
+    }
+
+    .spec-eyebrow {
+      font-family: var(--font-title);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.38);
+      text-transform: uppercase;
+      margin-bottom: 5rem;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-left: 1px solid var(--color-line);
+    }
+
+    .spec-item {
+      padding: 2.25rem 2.75rem;
+      border-right: 1px solid var(--color-line);
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .spec-item.in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .spec-item.in:nth-child(2) { transition-delay: 0.1s; }
+    .spec-item.in:nth-child(3) { transition-delay: 0.2s; }
+    .spec-item.in:nth-child(4) { transition-delay: 0.3s; }
+
+    .spec-number {
+      font-family: var(--font-title);
+      font-size: clamp(1.75rem, 4vw, 3.25rem);
+      font-weight: 800;
+      color: var(--color-text);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.875rem;
+    }
+
+    .spec-label {
+      font-family: var(--font-body);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.38);
+      text-transform: uppercase;
+    }
+
+    .spec-footer {
+      margin-top: 5.5rem;
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 2vw, 1.625rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ======= SECTION 3 : PRODUCTS ======= */
+    #products {
+      width: 100%;
+      min-height: 100vh;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      padding: 6rem 3.5rem;
+      overflow: hidden;
+      gap: 5rem;
+    }
+
+    .products-watermark {
+      font-family: var(--font-title);
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 800;
+      color: rgba(255,255,255,0.05);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      letter-spacing: 0.12em;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .products-list {
+      flex: 1;
+      list-style: none;
+    }
+
+    .product-item {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 2.25rem 1.25rem;
+      border-bottom: 1px solid var(--color-line);
+      cursor: none;
+      opacity: 0;
+      transform: translateX(-28px);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.18s ease;
+    }
+
+    .product-item:first-child { border-top: 1px solid var(--color-line); }
+
+    .product-item.in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .product-item.in:nth-child(2) { transition-delay: 0.15s; }
+    .product-item.in:nth-child(3) { transition-delay: 0.3s; }
+
+    .product-item:hover { background: var(--color-text); }
+
+    .product-item:hover .product-num,
+    .product-item:hover .product-name,
+    .product-item:hover .product-arrow {
+      color: #000000;
+    }
+
+    .product-num {
+      font-family: var(--font-title);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.28);
+      width: 3.5rem;
+      flex-shrink: 0;
+      transition: color 0.18s ease;
+    }
+
+    .product-name {
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 1.6vw, 1.625rem);
+      font-weight: 600;
+      color: var(--color-text);
+      flex: 1;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.18s ease;
+    }
+
+    .product-arrow {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .product-item:hover .product-arrow {
+      transform: translateX(5px);
+    }
+
+    /* ======= SECTION 4 : CONTACT ======= */
+    #contact {
+      width: 100%;
+      min-height: 50vh;
+      background: #000000;
+      border-top: 1px solid var(--color-line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 5rem 3.5rem 2.5rem;
+    }
+
+    .contact-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex: 1;
+      padding-bottom: 4rem;
+    }
+
+    .contact-heading {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 4.5vw, 4.5rem);
+      font-weight: 800;
+      color: var(--color-text);
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+    }
+
+    .btn-quote {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border: 1px solid var(--color-text);
+      font-family: var(--font-title);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--color-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      background: transparent;
+      cursor: none;
+      transition: background 0.28s ease, color 0.28s ease;
+    }
+
+    .btn-quote:hover {
+      background: var(--color-text);
+      color: #000000;
+    }
+
+    .contact-bar {
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-line);
+      font-family: var(--font-title);
+      font-size: 0.5625rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.28);
+      text-transform: uppercase;
+    }
+
+    /* ======= RESPONSIVE ======= */
+    @media (max-width: 768px) {
+      nav { padding: 1.5rem 1.75rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { padding: 0 1.75rem 4rem; }
+      .hero-title-inner { font-size: 22vw; }
+      .hero-canvas-wrap {
+        width: 72vw;
+        opacity: 0.25;
+        right: -8vw;
+      }
+      .spec-grid { grid-template-columns: repeat(2, 1fr); }
+      #products { flex-direction: column; align-items: flex-start; padding: 4rem 1.75rem; gap: 2rem; }
+      .products-watermark { writing-mode: horizontal-tb; transform: none; }
+      #contact { padding: 3.5rem 1.75rem 2rem; }
+      .contact-body { flex-direction: column; align-items: flex-start; gap: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-track"></div>
+  <div class="scroll-fill" id="scrollFill"></div>
+
+  <!-- Nav -->
+  <nav>
+    <span class="nav-logo">LW</span>
+    <ul class="nav-links">
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">Tech</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- S1: HERO -->
+  <section id="hero">
+    <div class="hero-canvas-wrap">
+      <canvas id="wheelCanvas" width="600" height="600"></canvas>
+    </div>
+    <div class="hero-titles">
+      <span class="hero-title-line">
+        <span class="hero-title-inner" id="t1">LIGHT</span>
+      </span>
+      <span class="hero-title-line">
+        <span class="hero-title-inner" id="t2">WEIGHT</span>
+      </span>
+      <p class="hero-sub">Forged Carbon Fiber Wheels</p>
+    </div>
+  </section>
+
+  <!-- S2: SPEC -->
+  <section id="spec">
+    <p class="spec-eyebrow">Specifications</p>
+    <div class="spec-grid">
+      <div class="spec-item" data-from="0" data-to="6.2" data-dec="1" data-suf=" KG">
+        <div class="spec-number">0 KG</div>
+        <div class="spec-label">Weight</div>
+      </div>
+      <div class="spec-item" data-from="0" data-to="19" data-dec="0" data-suf="&quot;">
+        <div class="spec-number">0"</div>
+        <div class="spec-label">Diameter</div>
+      </div>
+      <div class="spec-item" data-static="5×112">
+        <div class="spec-number">5×112</div>
+        <div class="spec-label">Bolt Pattern</div>
+      </div>
+      <div class="spec-item" data-from="0" data-to="305" data-dec="0" data-suf="mm">
+        <div class="spec-number">0mm</div>
+        <div class="spec-label">Width</div>
+      </div>
+    </div>
+    <p class="spec-footer">The lightest wheel ever produced</p>
+  </section>
+
+  <!-- S3: PRODUCTS -->
+  <section id="products">
+    <div class="products-watermark">SERIES</div>
+    <ul class="products-list">
+      <li class="product-item">
+        <span class="product-num">01</span>
+        <span class="product-name">Carbon Forged</span>
+        <span class="product-arrow">&#8594;</span>
+      </li>
+      <li class="product-item">
+        <span class="product-num">02</span>
+        <span class="product-name">Monoblock</span>
+        <span class="product-arrow">&#8594;</span>
+      </li>
+      <li class="product-item">
+        <span class="product-num">03</span>
+        <span class="product-name">Flow Formed</span>
+        <span class="product-arrow">&#8594;</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- S4: CONTACT -->
+  <section id="contact">
+    <div class="contact-body">
+      <h2 class="contact-heading">Configure</h2>
+      <a href="#" class="btn-quote">Request a Quote</a>
+    </div>
+    <div class="contact-bar">
+      Lightweight &nbsp;&middot;&nbsp; Forged in Germany &nbsp;&middot;&nbsp; Since 2003
+    </div>
+  </section>
+
+  <script>
+    // ===== WHEEL CANVAS =====
+    (function () {
+      var c = document.getElementById('wheelCanvas');
+      var ctx = c.getContext('2d');
+      var W = c.width, H = c.height;
+      var cx = W / 2, cy = H / 2;
+
+      var outerR  = W * 0.455;
+      var tireW   = W * 0.038;
+      var rimR    = W * 0.355;
+      var innerR  = W * 0.19;
+      var hubR    = W * 0.065;
+      var SPOKES  = 5;
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        ctx.strokeStyle = '#ffffff';
+
+        // Outer tire — thick arc
+        ctx.lineWidth = tireW;
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR - tireW / 2, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Rim circle
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, rimR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Inner ring
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Spokes
+        for (var i = 0; i < SPOKES; i++) {
+          var ang = (i / SPOKES) * Math.PI * 2 - Math.PI / 2;
+          var perp = ang + Math.PI / 2;
+
+          // spoke root on hub edge, tip on rim
+          var sx = cx + Math.cos(ang) * (hubR + 4);
+          var sy = cy + Math.sin(ang) * (hubR + 4);
+          var ex = cx + Math.cos(ang) * rimR;
+          var ey = cy + Math.sin(ang) * rimR;
+
+          // two parallel lines per spoke (width tapers)
+          var wRoot = 8, wTip = 3;
+
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(
+            sx + Math.cos(perp) * wRoot / 2,
+            sy + Math.sin(perp) * wRoot / 2
+          );
+          ctx.lineTo(
+            ex + Math.cos(perp) * wTip / 2,
+            ey + Math.sin(perp) * wTip / 2
+          );
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(
+            sx - Math.cos(perp) * wRoot / 2,
+            sy - Math.sin(perp) * wRoot / 2
+          );
+          ctx.lineTo(
+            ex - Math.cos(perp) * wTip / 2,
+            ey - Math.sin(perp) * wTip / 2
+          );
+          ctx.stroke();
+        }
+
+        // Hub ring
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, hubR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Center fill dot
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      draw();
+    })();
+
+    // ===== CUSTOM CURSOR =====
+    (function () {
+      var cursor = document.getElementById('cursor');
+      var mx = 0, my = 0, cx2 = 0, cy2 = 0;
+
+      window.addEventListener('mousemove', function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+
+      function loop() {
+        cx2 += (mx - cx2) * 0.14;
+        cy2 += (my - cy2) * 0.14;
+        cursor.style.left = cx2 + 'px';
+        cursor.style.top  = cy2 + 'px';
+        requestAnimationFrame(loop);
+      }
+      loop();
+
+      document.querySelectorAll('a, .product-item, .btn-quote').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { cursor.classList.add('hover'); });
+        el.addEventListener('mouseleave', function () { cursor.classList.remove('hover'); });
+      });
+    })();
+
+    // ===== SCROLL PROGRESS =====
+    (function () {
+      var fill = document.getElementById('scrollFill');
+      window.addEventListener('scroll', function () {
+        var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+        fill.style.height = pct + '%';
+      }, { passive: true });
+    })();
+
+    // ===== HERO TITLE ENTRANCE =====
+    window.addEventListener('load', function () {
+      setTimeout(function () { document.getElementById('t1').classList.add('visible'); }, 120);
+      setTimeout(function () { document.getElementById('t2').classList.add('visible'); }, 520);
+    });
+
+    // ===== INTERSECTION: SPEC COUNT-UP + PRODUCTS SLIDE =====
+    (function () {
+      var specItems = document.querySelectorAll('.spec-item');
+
+      var specObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          el.classList.add('in');
+
+          if (!el.dataset.static) {
+            var numEl   = el.querySelector('.spec-number');
+            var from    = parseFloat(el.dataset.from);
+            var to      = parseFloat(el.dataset.to);
+            var dec     = parseInt(el.dataset.dec) || 0;
+            var suf     = el.dataset.suf || '';
+            var start   = null;
+            var dur     = 1300;
+
+            requestAnimationFrame(function tick(ts) {
+              if (!start) start = ts;
+              var p  = Math.min((ts - start) / dur, 1);
+              var ep = 1 - Math.pow(1 - p, 3);
+              numEl.textContent = (from + (to - from) * ep).toFixed(dec) + suf;
+              if (p < 1) requestAnimationFrame(tick);
+            });
+          }
+
+          specObs.unobserve(el);
+        });
+      }, { threshold: 0.35 });
+
+      specItems.forEach(function (el) { specObs.observe(el); });
+
+      var productItems = document.querySelectorAll('.product-item');
+
+      var prodObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in');
+          prodObs.unobserve(entry.target);
+        });
+      }, { threshold: 0.25 });
+
+      productItems.forEach(function (el) { prodObs.observe(el); });
+    })();
+  </script>
+</body>
+</html>

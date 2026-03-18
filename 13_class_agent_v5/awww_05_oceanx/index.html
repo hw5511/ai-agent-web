@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCEANX 2025 — Explore The Deep Ocean</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   CSS VARIABLES
+=========================== */
+:root {
+  --color-bg:     #00060f;
+  --color-bg2:    #000d1a;
+  --color-bg3:    #001a33;
+  --color-accent: #00c8ff;
+  --color-accent2:#00e5ff;
+  --color-text:   #ffffff;
+  --font-title:   'Oswald', sans-serif;
+  --font-body:    'Source Sans 3', sans-serif;
+}
+
+/* ===========================
+   RESET
+=========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ===========================
+   SCROLL PROGRESS BAR
+=========================== */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--color-accent);
+  z-index: 9999;
+  box-shadow: 0 0 8px var(--color-accent);
+  transition: width 0.08s linear;
+}
+
+/* ===========================
+   CUSTOM CURSOR
+=========================== */
+#cursor-dot {
+  position: fixed;
+  width: 14px; height: 14px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 35px; height: 35px;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+/* ===========================
+   TSPARTICLES
+=========================== */
+#tsparticles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===========================
+   NAV
+=========================== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 52px;
+  background: linear-gradient(to bottom, rgba(0,6,15,0.85) 0%, transparent 100%);
+}
+
+.nav-logo {
+  font-family: var(--font-title);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--color-accent); }
+
+/* ===========================
+   SECTION 1: HERO
+=========================== */
+#hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #00060f 0%, #000d1a 55%, #001a33 100%);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-title);
+  font-size: 5vw;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  color: var(--color-text);
+  opacity: 0;
+  transform: translateY(32px);
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: 9vw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 0.95;
+  color: var(--color-accent);
+  text-shadow:
+    0 0 30px rgba(0,200,255,0.6),
+    0 0 80px rgba(0,200,255,0.3),
+    0 0 120px rgba(0,200,255,0.15);
+  opacity: 0;
+  transform: translateY(32px);
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
+}
+
+.hero-desc {
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.55);
+  margin-top: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+}
+
+.hero-cta {
+  display: inline-block;
+  margin-top: 44px;
+  padding: 14px 40px;
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s;
+}
+
+.hero-cta:hover {
+  background: var(--color-accent);
+  color: #000;
+  box-shadow: 0 0 24px rgba(0,200,255,0.4);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease forwards 1.6s;
+  z-index: 2;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 52px;
+  background: rgba(255,255,255,0.45);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.scroll-text {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.4);
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.45; }
+  50%       { transform: scaleY(0.5); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   SECTION 2: DEPTH
+=========================== */
+#depth {
+  position: relative;
+  height: 100vh;
+  background: var(--color-bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.depth-container {
+  display: flex;
+  align-items: center;
+  gap: 90px;
+  width: 90%;
+  max-width: 1080px;
+}
+
+/* Infographic (left) */
+.depth-infographic {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.depth-infographic.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.depth-timeline {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+
+.depth-axis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1px;
+  position: relative;
+}
+
+.depth-axis-line {
+  width: 1px;
+  height: 360px;
+  background: linear-gradient(to bottom, var(--color-accent2) 0%, #002244 100%);
+}
+
+.depth-dots-col {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1px;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ddot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transform: translateX(-4.5px);
+}
+
+.depth-label-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 360px;
+  padding: 2px 0;
+}
+
+.dlabel {
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.dlabel span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+  margin-top: 1px;
+}
+
+/* Text (right) */
+.depth-text {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s;
+}
+
+.depth-text.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--color-accent);
+  margin-bottom: 18px;
+}
+
+.depth-heading {
+  font-family: var(--font-title);
+  font-size: 4.8vw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+  margin-bottom: 28px;
+}
+
+.depth-body {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.6);
+  max-width: 420px;
+}
+
+/* ===========================
+   SECTION 3: FLEET
+=========================== */
+#fleet {
+  position: relative;
+  min-height: 100vh;
+  background: #001020;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 52px;
+  z-index: 1;
+}
+
+.fleet-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.fleet-heading {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.fleet-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1080px;
+}
+
+.fleet-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 320px;
+  background: #001a33;
+  border: 1px solid rgba(0,200,255,0.18);
+  padding: 44px 36px;
+  opacity: 0;
+  transform: translateY(56px);
+  transition: opacity 0.7s ease, transform 0.7s ease,
+              border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fleet-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fleet-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 32px rgba(0,200,255,0.14),
+              inset 0 0 20px rgba(0,200,255,0.03);
+}
+
+/* Fleet icons — pure CSS */
+.fleet-icon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Submarine */
+.icon-sub::before {
+  content: '';
+  position: absolute;
+  width: 46px; height: 20px;
+  background: var(--color-accent);
+  border-radius: 40px;
+  opacity: 0.85;
+}
+.icon-sub::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 13px;
+  background: var(--color-accent);
+  border-radius: 50% 50% 0 0;
+  top: 4px;
+  left: 18px;
+  opacity: 0.95;
+}
+
+/* ROV */
+.icon-rov::before {
+  content: '';
+  position: absolute;
+  width: 34px; height: 26px;
+  border: 2px solid var(--color-accent);
+  opacity: 0.9;
+}
+.icon-rov::after {
+  content: '';
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+/* Vessel */
+.icon-vessel::before {
+  content: '';
+  position: absolute;
+  width: 42px; height: 13px;
+  background: var(--color-accent);
+  border-radius: 0 0 6px 6px;
+  bottom: 6px;
+  opacity: 0.8;
+}
+.icon-vessel::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 22px;
+  background: rgba(0,200,255,0.45);
+  bottom: 18px;
+  left: 18px;
+}
+
+.fleet-card-name {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-bottom: 14px;
+}
+
+.fleet-card-desc {
+  font-size: 0.87rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.52);
+}
+
+.fleet-card-stat {
+  margin-top: 22px;
+  font-family: var(--font-title);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+}
+
+/* ===========================
+   SECTION 4: JOIN
+=========================== */
+#join {
+  position: relative;
+  min-height: 60vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 52px;
+  z-index: 1;
+}
+
+.join-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 28px;
+}
+
+.join-heading {
+  font-family: var(--font-title);
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  text-shadow: 0 0 40px rgba(0,200,255,0.35);
+  margin-bottom: 44px;
+}
+
+.join-btn {
+  display: inline-block;
+  padding: 17px 56px;
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #000;
+  background: var(--color-accent);
+  text-decoration: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.join-btn:hover {
+  background: var(--color-accent2);
+  box-shadow: 0 0 36px rgba(0,200,255,0.45);
+}
+
+.join-location {
+  margin-top: 52px;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  .hero-eyebrow { font-size: 8vw; }
+  .hero-title   { font-size: 14vw; }
+  .depth-container {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 0;
+  }
+  .depth-axis-line,
+  .depth-dots-col,
+  .depth-label-col { height: 240px; }
+  .depth-heading { font-size: 8vw; }
+  .fleet-heading { font-size: 6vw; }
+  .join-heading  { font-size: 9vw; }
+  #cursor-dot, #cursor-ring { display: none; }
+  body { cursor: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Custom Cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- tsParticles Canvas -->
+<div id="tsparticles"></div>
+
+<!-- ==============================
+     NAV
+============================== -->
+<nav>
+  <a href="#hero" class="nav-logo">OCEANX</a>
+  <ul class="nav-links">
+    <li><a href="#depth">EXPLORE</a></li>
+    <li><a href="#depth">MISSION</a></li>
+    <li><a href="#fleet">FLEET</a></li>
+    <li><a href="#join">JOIN</a></li>
+  </ul>
+</nav>
+
+<!-- ==============================
+     SECTION 1: HERO
+============================== -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">EXPLORE THE</div>
+    <div class="hero-title">DEEP OCEAN</div>
+    <div class="hero-desc">Going where no one has gone before</div>
+    <a href="#depth" class="hero-cta">DISCOVER OUR MISSION</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">SCROLL DOWN</span>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 2: DEPTH
+============================== -->
+<section id="depth">
+  <div class="depth-container">
+
+    <!-- LEFT: Infographic -->
+    <div class="depth-infographic" id="depthInfog">
+      <div class="depth-timeline">
+        <div class="depth-axis">
+          <div class="depth-axis-line"></div>
+          <div class="depth-dots-col">
+            <div class="ddot" style="background:#00e5ff; box-shadow:0 0 8px #00e5ff;"></div>
+            <div class="ddot" style="background:#00a8d8;"></div>
+            <div class="ddot" style="background:#006699;"></div>
+            <div class="ddot" style="background:#003355;"></div>
+          </div>
+        </div>
+        <div class="depth-label-col">
+          <div class="dlabel" style="color:#00e5ff;">
+            200m
+            <span>TWILIGHT ZONE</span>
+          </div>
+          <div class="dlabel" style="color:#00a8d8;">
+            1,000m
+            <span>MIDNIGHT ZONE</span>
+          </div>
+          <div class="dlabel" style="color:#006699;">
+            4,000m
+            <span>ABYSSAL ZONE</span>
+          </div>
+          <div class="dlabel" style="color:#004477;">
+            11,000m
+            <span>HADAL ZONE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Text -->
+    <div class="depth-text" id="depthText">
+      <div class="section-eyebrow">DEEP SEA EXPLORATION</div>
+      <div class="depth-heading">INTO THE<br>ABYSS</div>
+      <p class="depth-body">
+        Over 80% of the ocean remains completely unexplored.
+        OceanX deploys cutting-edge technology and world-class scientists
+        to illuminate the mysteries of the deep sea — revealing new species,
+        hidden ecosystems, and solutions to humanity's greatest challenges.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 3: FLEET
+============================== -->
+<section id="fleet">
+  <div class="fleet-eyebrow">TECHNOLOGY</div>
+  <div class="fleet-heading">OUR FLEET</div>
+  <div class="fleet-cards">
+
+    <div class="fleet-card" id="fc1">
+      <div class="fleet-icon icon-sub"></div>
+      <div class="fleet-card-name">TRITON 3300</div>
+      <p class="fleet-card-desc">
+        Deep-diving submersible rated to 3,300 meters. Equipped with
+        high-definition cameras, sonar mapping, and specimen collection arms.
+      </p>
+      <div class="fleet-card-stat">DEPTH: 3,300M</div>
+    </div>
+
+    <div class="fleet-card" id="fc2">
+      <div class="fleet-icon icon-rov"></div>
+      <div class="fleet-card-name">ROV APEX</div>
+      <p class="fleet-card-desc">
+        Remotely operated vehicle transmitting live 4K footage. Designed
+        for extended deep-sea surveys and precision sample retrieval.
+      </p>
+      <div class="fleet-card-stat">DEPTH: 6,000M</div>
+    </div>
+
+    <div class="fleet-card" id="fc3">
+      <div class="fleet-icon icon-vessel"></div>
+      <div class="fleet-card-name">OX EXPLORER</div>
+      <p class="fleet-card-desc">
+        State-of-the-art research vessel with full labs, helicopter deck,
+        and media production suites for global broadcasting.
+      </p>
+      <div class="fleet-card-stat">LENGTH: 87M</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 4: JOIN
+============================== -->
+<section id="join">
+  <div class="join-eyebrow">BECOME PART OF THE MISSION</div>
+  <div class="join-heading">JOIN THE EXPEDITION</div>
+  <a href="#" class="join-btn">APPLY NOW</a>
+  <div class="join-location">GLOBAL OCEANS</div>
+</section>
+
+<!-- ==============================
+     tsParticles
+============================== -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+<script>
+(function () {
+
+  /* ---- TSPARTICLES ---- */
+  tsParticles.load("tsparticles", {
+    fullScreen: { enable: false },
+    background: { color: "transparent" },
+    particles: {
+      number: { value: 60 },
+      color: { value: ["#ffffff", "#00c8ff", "#00e5ff"] },
+      shape: { type: "circle" },
+      opacity: {
+        value: { min: 0.08, max: 0.5 },
+        animation: { enable: true, speed: 0.4, minimumValue: 0.06, sync: false }
+      },
+      size: {
+        value: { min: 1, max: 4 }
+      },
+      move: {
+        enable: true,
+        speed: { min: 0.08, max: 0.28 },
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: { default: "bounce" }
+      }
+    },
+    detectRetina: true
+  });
+
+  /* ---- SCROLL PROGRESS BAR ---- */
+  var progressBar = document.getElementById("progress-bar");
+
+  function updateProgress() {
+    var scrollTop = window.scrollY;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (total > 0 ? (scrollTop / total) * 100 : 0) + "%";
+  }
+
+  /* ---- CUSTOM CURSOR ---- */
+  var dot  = document.getElementById("cursor-dot");
+  var ring = document.getElementById("cursor-ring");
+  var mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener("mousemove", function (e) {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.left = mx + "px";
+    dot.style.top  = my + "px";
+  });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + "px";
+    ring.style.top  = ry + "px";
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll("a, button").forEach(function (el) {
+    el.addEventListener("mouseenter", function () {
+      ring.style.width  = "52px";
+      ring.style.height = "52px";
+      ring.style.borderColor = "#00e5ff";
+    });
+    el.addEventListener("mouseleave", function () {
+      ring.style.width  = "35px";
+      ring.style.height = "35px";
+      ring.style.borderColor = "#00c8ff";
+    });
+  });
+
+  /* ---- SCROLL BG DARKEN (Hero) ---- */
+  var hero = document.getElementById("hero");
+
+  function updateHero() {
+    var ratio = Math.min(window.scrollY / (hero.offsetHeight || 1), 1);
+    hero.style.filter = "brightness(" + (1 - ratio * 0.28) + ")";
+  }
+
+  /* ---- INTERSECTION OBSERVER ---- */
+  var ioOpts = { threshold: 0.2 };
+
+  var depthObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        document.getElementById("depthInfog").classList.add("visible");
+        document.getElementById("depthText").classList.add("visible");
+        depthObs.disconnect();
+      }
+    });
+  }, ioOpts);
+  depthObs.observe(document.getElementById("depth"));
+
+  var fleetObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        ["fc1", "fc2", "fc3"].forEach(function (id, i) {
+          setTimeout(function () {
+            var el = document.getElementById(id);
+            if (el) el.classList.add("visible");
+          }, i * 160);
+        });
+        fleetObs.disconnect();
+      }
+    });
+  }, ioOpts);
+  fleetObs.observe(document.getElementById("fleet"));
+
+  /* ---- SCROLL EVENT ---- */
+  window.addEventListener("scroll", function () {
+    updateProgress();
+    updateHero();
+  }, { passive: true });
+
+  updateProgress();
+
+})();
+</script>
+</body>
+</html>
