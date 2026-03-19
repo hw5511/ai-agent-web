@@ -534,10 +534,9 @@ body {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -547,30 +546,51 @@ body {
   box-shadow: 0 8px 28px rgba(0,0,0,0.1);
 }
 
-.lesson-card-icon {
-  width: 40px;
-  height: 40px;
+.lesson-card-thumb {
+  aspect-ratio: 16/9;
   background: var(--muted);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
+  overflow: hidden;
   flex-shrink: 0;
 }
 
+.lesson-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.lesson-card:hover .lesson-card-thumb img {
+  transform: scale(1.04);
+}
+
+.lesson-card-body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
 .lesson-card-title {
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  font-size: clamp(0.85rem, 1vw, 1rem);
   font-weight: 700;
   word-break: keep-all;
 }
 
-.lesson-card-desc {
-  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
-  color: var(--muted-fg);
-  line-height: 1.6;
-  word-break: keep-all;
+.lesson-card-link {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
 }
+
+.lesson-card-link:hover { opacity: 0.7; }
 
 .lesson-footer {
   padding: var(--space-md);
@@ -662,13 +682,51 @@ body {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.awww-card-thumb {
+  aspect-ratio: 16/9;
+  background: var(--muted);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.awww-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.awww-card:hover .awww-card-thumb img {
+  transform: scale(1.04);
+}
+
+.awww-card-body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.awww-card-link {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.awww-card-link:hover { opacity: 0.7; }
 
 .awww-card:hover {
   transform: translateY(-2px);
@@ -877,7 +935,6 @@ body {
 
     <div class="feature-grid reveal-children">
       <div class="feature-card feature-card--accent">
-        <div class="feature-card-icon">&#x2728;</div>
         <div class="feature-card-title">코딩 지식 불필요</div>
         <p class="feature-card-desc">
           HTML, CSS, JavaScript를 몰라도 됩니다.<br>
@@ -886,7 +943,6 @@ body {
         </p>
       </div>
       <div class="feature-card">
-        <div class="feature-card-icon">&#x1F680;</div>
         <div class="feature-card-title">즉시 배포 가능</div>
         <p class="feature-card-desc">
           GitHub Pages를 통해 만든 웹 페이지를 바로 인터넷에 공개할 수 있습니다.
@@ -894,7 +950,6 @@ body {
         </p>
       </div>
       <div class="feature-card">
-        <div class="feature-card-icon">&#x1F3A8;</div>
         <div class="feature-card-title">고퀄리티 인터랙션</div>
         <p class="feature-card-desc">
           마우스 인터랙션, 스크롤 애니메이션, 3D 오브젝트, 파티클 효과까지.
@@ -1005,7 +1060,7 @@ body {
       <div class="prompt-box-text">
         "검정 배경에 마우스를 따라 빛이 퍼지는 인터랙티브 웹 페이지 만들어줘. 중앙에 큰 타이틀 텍스트가 있고 마우스를 올리면 글자가 흩어지는 효과도 넣어줘."
       </div>
-      <div class="prompt-box-result">&#x2192; AI 에이전트가 HTML/CSS/JS 전체를 생성 — 즉시 브라우저에서 동작</div>
+      <div class="prompt-box-result">AI 에이전트가 HTML/CSS/JS 전체를 생성 — 즉시 브라우저에서 동작</div>
     </div>
   </div>
 </section>
@@ -1084,33 +1139,32 @@ body {
     <div class="lesson-layout">
       <div class="lesson-cards reveal-children">
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F5B1;</div>
-          <div class="lesson-card-title">마우스 따라다니는 커서 효과</div>
-          <p class="lesson-card-desc">
-            커스텀 커서와 자기장 버튼을 구현합니다. 마우스가 버튼에 가까워지면 버튼이 끌려오는 Magnetic 효과를 AI 에이전트가 순수 JS로 생성합니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson1_ex1/thumbnail.png" alt="마우스 커서 + 자기장 버튼">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">마우스 커서 + 자기장 버튼</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex1/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F4DC;</div>
-          <div class="lesson-card-title">스크롤 연동 타이핑 텍스트</div>
-          <p class="lesson-card-desc">
-            스크롤 위치에 따라 텍스트가 타이핑되는 애니메이션을 구현합니다. IntersectionObserver를 활용한 등장 효과도 함께 적용합니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson1_ex2/thumbnail.png" alt="3D 플립 카드">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">CSS 3D 플립 카드</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex2/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F3AF;</div>
-          <div class="lesson-card-title">CSS/JS 호버 카드 인터랙션</div>
-          <p class="lesson-card-desc">
-            마우스를 올리면 카드가 기울어지거나 빛이 따라오는 고급 호버 효과를 구현합니다. CSS 변환과 JS 이벤트를 조합한 결과물입니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson1_ex3/thumbnail.png" alt="마우스 스포트라이트 효과">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">마우스 스포트라이트 효과</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex3/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
-      </div>
-
-      <div class="lesson-footer reveal">
-        <span class="lesson-footer-label">배포 URL</span>
-        <a href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex1/" target="_blank">
-          https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex1/
-        </a>
       </div>
     </div>
   </div>
@@ -1130,33 +1184,32 @@ body {
     <div class="lesson-layout">
       <div class="lesson-cards reveal-children">
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F4CC;</div>
-          <div class="lesson-card-title">GSAP ScrollTrigger 스크롤 핀</div>
-          <p class="lesson-card-desc">
-            세로 스크롤에 맞춰 가로로 이동하는 수평 스크롤 패널을 구현합니다. GSAP의 ScrollTrigger 플러그인으로 정밀한 스크롤 제어가 가능합니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson2_ex1/thumbnail.png" alt="GSAP 수평 스크롤">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">GSAP 수평 스크롤 패널</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex1/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F501;</div>
-          <div class="lesson-card-title">Swiper.js 드래그 슬라이더</div>
-          <p class="lesson-card-desc">
-            터치/드래그 인터랙션을 지원하는 프로 수준의 슬라이더를 AI 에이전트로 제작합니다. 자동 재생, 네비게이션, 페이지네이션이 포함됩니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson2_ex2/thumbnail.png" alt="스크롤 텍스트 컬러 리빌">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">스크롤 텍스트 컬러 리빌</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex2/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x2B06;</div>
-          <div class="lesson-card-title">AOS 스크롤 등장 애니메이션</div>
-          <p class="lesson-card-desc">
-            스크롤을 내릴 때 각 섹션이 자연스럽게 등장하는 효과를 구현합니다. Animate On Scroll 라이브러리를 활용해 다양한 등장 방향을 설정합니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson2_ex3/thumbnail.png" alt="AOS 포트폴리오">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">AOS 포트폴리오 사이트</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex3/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
-      </div>
-
-      <div class="lesson-footer reveal">
-        <span class="lesson-footer-label">배포 URL</span>
-        <a href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex1/" target="_blank">
-          https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex1/
-        </a>
       </div>
     </div>
   </div>
@@ -1176,40 +1229,41 @@ body {
     <div class="lesson-layout">
       <div class="lesson-cards reveal-children">
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x2728;</div>
-          <div class="lesson-card-title">tsParticles 파티클 인터랙션</div>
-          <p class="lesson-card-desc">
-            마우스를 따라 반응하는 파티클 효과를 구현합니다. tsParticles 라이브러리로 눈 내리는 효과, 버블, 연결선 파티클 등을 설정할 수 있습니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex1/thumbnail.png" alt="tsParticles 파티클">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">tsParticles 인터랙티브 파티클</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex1/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F4E6;</div>
-          <div class="lesson-card-title">Three.js 3D 오브젝트</div>
-          <p class="lesson-card-desc">
-            브라우저에서 3D 그래픽을 렌더링하는 Three.js를 활용합니다. 회전하는 3D 구체, 와이어프레임 오브젝트 등을 AI 에이전트가 생성합니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex2/thumbnail.png" alt="Three.js 3D 헬멧">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">Three.js 3D 오브젝트 뷰어</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex2/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F30A;</div>
-          <div class="lesson-card-title">VANTA.js WebGL 배경</div>
-          <p class="lesson-card-desc">
-            WebGL 기반의 인터랙티브 배경 효과를 적용합니다. 파도, 새 떼, 안개 등 다양한 WebGL 배경을 한 줄의 지시로 적용할 수 있습니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex3/thumbnail.png" alt="VANTA.js WebGL 배경">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">VANTA.js WebGL 인터랙티브 배경</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex3/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
         <div class="lesson-card">
-          <div class="lesson-card-icon">&#x1F31F;</div>
-          <div class="lesson-card-title">Canvas 2D 파티클 (순수 JS)</div>
-          <p class="lesson-card-desc">
-            별자리처럼 연결되는 파티클을 순수 JS Canvas로 구현합니다. 마우스 접근 시 반응하고, 커서 주변 파티클이 연결되는 인터랙션을 AI 에이전트가 작성합니다.
-          </p>
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex4/thumbnail.png" alt="Canvas 2D 별자리 파티클">
+          </div>
+          <div class="lesson-card-body">
+            <div class="lesson-card-title">Canvas 2D 별자리 파티클</div>
+            <a class="lesson-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex4/" target="_blank">결과물 보기 &rarr;</a>
+          </div>
         </div>
-      </div>
-
-      <div class="lesson-footer reveal">
-        <span class="lesson-footer-label">배포 URL</span>
-        <a href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex1/" target="_blank">
-          https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex1/
-        </a>
       </div>
     </div>
   </div>
@@ -1231,34 +1285,70 @@ body {
 
     <div class="awww-grid reveal-children">
       <div class="awww-card">
-        <div class="awww-num">Result 01</div>
-        <div class="awww-title">AUPALE VODKA</div>
-        <p class="awww-desc">어두운 갈색 고급 음료 브랜딩. 보틀 SVG 애니메이션과 골드 액센트 컬러, 럭셔리 타이포그래피가 결합된 프리미엄 주류 브랜드 사이트.</p>
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_01_aupale/reference.png" alt="AUPALE VODKA">
+        </div>
+        <div class="awww-card-body">
+          <div class="awww-num">Result 01</div>
+          <div class="awww-title">AUPALE VODKA</div>
+          <p class="awww-desc">어두운 갈색 고급 음료 브랜딩. 보틀 SVG 애니메이션과 골드 액센트 컬러, 럭셔리 타이포그래피가 결합된 프리미엄 주류 브랜드 사이트.</p>
+          <a class="awww-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_01_aupale/" target="_blank">결과물 보기 &rarr;</a>
+        </div>
       </div>
       <div class="awww-card">
-        <div class="awww-num">Result 02</div>
-        <div class="awww-title">DULCEDO</div>
-        <p class="awww-desc">검정과 골드의 럭셔리 에이전시. 세련된 모션과 미니멀한 레이아웃으로 에이전시의 고급스러운 아이덴티티를 표현한 사이트.</p>
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_02_dulcedo/reference.png" alt="DULCEDO">
+        </div>
+        <div class="awww-card-body">
+          <div class="awww-num">Result 02</div>
+          <div class="awww-title">DULCEDO</div>
+          <p class="awww-desc">검정과 골드의 럭셔리 에이전시. 세련된 모션과 미니멀한 레이아웃으로 에이전시의 고급스러운 아이덴티티를 표현한 사이트.</p>
+          <a class="awww-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_02_dulcedo/" target="_blank">결과물 보기 &rarr;</a>
+        </div>
       </div>
       <div class="awww-card">
-        <div class="awww-num">Result 03</div>
-        <div class="awww-title">1820 PRODUCTIONS</div>
-        <p class="awww-desc">파티클 효과가 인상적인 영화 프로덕션 사이트. 어두운 배경에 수많은 파티클이 움직이며 시네마틱한 분위기를 연출합니다.</p>
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_03_1820/reference.png" alt="1820 PRODUCTIONS">
+        </div>
+        <div class="awww-card-body">
+          <div class="awww-num">Result 03</div>
+          <div class="awww-title">1820 PRODUCTIONS</div>
+          <p class="awww-desc">파티클 효과가 인상적인 영화 프로덕션 사이트. 어두운 배경에 수많은 파티클이 움직이며 시네마틱한 분위기를 연출합니다.</p>
+          <a class="awww-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_03_1820/" target="_blank">결과물 보기 &rarr;</a>
+        </div>
       </div>
       <div class="awww-card">
-        <div class="awww-num">Result 04</div>
-        <div class="awww-title">GRIFLAN</div>
-        <p class="awww-desc">판타지/게임 브랜드 스타일. 중세 판타지 감성의 텍스처와 강렬한 타이포그래피, 드라마틱한 배경 효과가 특징입니다.</p>
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_04_griflan/reference.png" alt="GRIFLAN">
+        </div>
+        <div class="awww-card-body">
+          <div class="awww-num">Result 04</div>
+          <div class="awww-title">GRIFLAN</div>
+          <p class="awww-desc">판타지/게임 브랜드 스타일. 중세 판타지 감성의 텍스처와 강렬한 타이포그래피, 드라마틱한 배경 효과가 특징입니다.</p>
+          <a class="awww-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_04_griflan/" target="_blank">결과물 보기 &rarr;</a>
+        </div>
       </div>
       <div class="awww-card">
-        <div class="awww-num">Result 05</div>
-        <div class="awww-title">OCEANX 2025</div>
-        <p class="awww-desc">심해 탐험 인터랙티브 사이트. 깊은 바다 색감과 물속 파티클 효과로 탐험 다큐멘터리의 세계관을 웹으로 구현합니다.</p>
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_05_oceanx/reference.png" alt="OCEANX 2025">
+        </div>
+        <div class="awww-card-body">
+          <div class="awww-num">Result 05</div>
+          <div class="awww-title">OCEANX 2025</div>
+          <p class="awww-desc">심해 탐험 인터랙티브 사이트. 깊은 바다 색감과 물속 파티클 효과로 탐험 다큐멘터리의 세계관을 웹으로 구현합니다.</p>
+          <a class="awww-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_05_oceanx/" target="_blank">결과물 보기 &rarr;</a>
+        </div>
       </div>
       <div class="awww-card">
-        <div class="awww-num">Result 06</div>
-        <div class="awww-title">LIGHTWEIGHT</div>
-        <p class="awww-desc">슈퍼 미니멀 자전거 휠 브랜드. 극도로 절제된 화이트 스페이스와 정밀한 제품 포커싱으로 제품의 가치를 극대화한 디자인.</p>
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_06_lightweight/reference.png" alt="LIGHTWEIGHT">
+        </div>
+        <div class="awww-card-body">
+          <div class="awww-num">Result 06</div>
+          <div class="awww-title">LIGHTWEIGHT</div>
+          <p class="awww-desc">슈퍼 미니멀 자전거 휠 브랜드. 극도로 절제된 화이트 스페이스와 정밀한 제품 포커싱으로 제품의 가치를 극대화한 디자인.</p>
+          <a class="awww-card-link" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_06_lightweight/" target="_blank">결과물 보기 &rarr;</a>
+        </div>
       </div>
     </div>
 
