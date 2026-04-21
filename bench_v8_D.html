@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Black+Han+Sans&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --bg:     oklch(8% 0.01 0);
+      --pink:   oklch(65% 0.20 342);
+      --yellow: oklch(88% 0.16 85);
+      --green:  oklch(73% 0.22 151);
+      --text:   oklch(96% 0 0);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- Progress bar ---- */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--pink);
+      width: 0%;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* =========================================
+       SECTION 1: HERO
+    ========================================= */
+    #hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #memphis-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: left;
+      padding: 0 60px;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--green);
+    }
+    .hero-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(100px, 20vw, 280px);
+      line-height: 0.82;
+      letter-spacing: -0.02em;
+    }
+    .hero-name .line-1 { color: var(--text); display: block; }
+    .hero-name .line-2 {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--yellow);
+      display: block;
+    }
+    .hero-sub-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: oklch(60% 0 0);
+      line-height: 1.7;
+      max-width: 300px;
+    }
+    .hero-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .hero-tag {
+      padding: 6px 16px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid oklch(30% 0 0);
+      color: oklch(55% 0 0);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      right: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: oklch(40% 0 0);
+    }
+    .scroll-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--pink));
+      animation: pulseRight 2s ease-in-out infinite;
+    }
+    @keyframes pulseRight {
+      0%, 100% { transform: scaleX(0.3); transform-origin: left; opacity: 0.4; }
+      50% { transform: scaleX(1); transform-origin: left; opacity: 1; }
+    }
+
+    /* =========================================
+       SECTION 2: WORK SLIDER
+    ========================================= */
+    #work {
+      padding: 120px 0 80px;
+      position: relative;
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+      padding: 0 60px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(52px, 9vw, 110px);
+      line-height: 0.9;
+      padding: 0 60px;
+      margin-bottom: 56px;
+    }
+    .slider-outer {
+      width: 100%;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+    }
+    .slider-outer.dragging { cursor: grabbing; }
+    .slider-track {
+      display: flex;
+      gap: 20px;
+      padding: 0 60px 8px;
+      width: max-content;
+    }
+    .slide-item {
+      flex: none;
+      width: clamp(260px, 38vw, 500px);
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .slide-item:hover::after { border-color: var(--pink); }
+    .slide-img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .slide-item:hover .slide-img { transform: scale(1.04); }
+    .slide-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0 0;
+    }
+    .slide-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 22px;
+      letter-spacing: 0.05em;
+    }
+    .slide-cat {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: oklch(50% 0 0);
+      text-transform: uppercase;
+    }
+    .slide-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 42px;
+      color: oklch(18% 0 0);
+      line-height: 1;
+    }
+    .slide-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .tag-p { background: var(--pink);   color: var(--bg); }
+    .tag-y { background: var(--yellow); color: var(--bg); }
+    .tag-g { background: var(--green);  color: var(--bg); }
+    .drag-hint {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 60px 0;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: oklch(35% 0 0);
+      text-transform: uppercase;
+    }
+    .drag-hint::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: oklch(35% 0 0);
+      display: inline-block;
+    }
+
+    /* =========================================
+       SECTION 3: SKILLS
+    ========================================= */
+    #skills {
+      padding: 120px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .skills-left {
+      position: sticky;
+      top: 100px;
+    }
+    .skills-left .section-label { padding: 0; margin-bottom: 8px; }
+    .skills-left .section-title { padding: 0; margin-bottom: 20px; }
+    .skills-desc {
+      font-size: 14px;
+      line-height: 1.85;
+      color: oklch(50% 0 0);
+    }
+    .skills-right {}
+    .skill-row {
+      display: grid;
+      grid-template-columns: 44px 1fr auto 70px;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 0;
+      border-bottom: 1px solid oklch(14% 0 0);
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    .skill-idx {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 16px;
+      color: var(--pink);
+    }
+    .skill-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(28px, 3.5vw, 46px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .skill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .dp { background: var(--pink); }
+    .dy { background: var(--yellow); }
+    .dg { background: var(--green); }
+    .skill-year {
+      font-size: 11px;
+      color: oklch(40% 0 0);
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+    /* Memphis deco in skills */
+    .skills-deco {
+      position: absolute;
+      right: -40px;
+      top: 80px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    /* =========================================
+       SECTION 4: CONTACT
+    ========================================= */
+    #contact {
+      padding: 100px 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-wrap { max-width: 1000px; }
+    .contact-headline {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(64px, 13vw, 170px);
+      line-height: 0.87;
+      margin: 32px 0 56px;
+    }
+    .contact-headline .ch-plain { display: block; color: var(--text); }
+    .contact-headline .ch-stroke {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--yellow);
+    }
+    .contact-headline .ch-accent { display: block; color: var(--pink); }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 80px;
+    }
+    .c-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 30px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      cursor: pointer;
+    }
+    .c-btn-main {
+      background: var(--pink);
+      color: var(--bg);
+      border: 2px solid var(--pink);
+    }
+    .c-btn-main:hover { transform: translate(-4px, -4px); background: var(--yellow); border-color: var(--yellow); }
+    .c-btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid oklch(25% 0 0);
+    }
+    .c-btn-ghost:hover { border-color: var(--text); transform: translate(-4px, -4px); }
+    .contact-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 36px;
+      border-top: 1px solid oklch(14% 0 0);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 24px;
+      color: oklch(25% 0 0);
+      letter-spacing: 0.1em;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: oklch(30% 0 0);
+      letter-spacing: 0.12em;
+    }
+    /* Memphis contact deco */
+    .contact-deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.12;
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+    @media (max-width: 900px) {
+      .skills-grid { grid-template-columns: 1fr; gap: 40px; }
+      .skills-left { position: static; }
+    }
+    @media (max-width: 640px) {
+      .hero-inner { padding: 0 24px; }
+      .hero-scroll-hint { right: 24px; }
+      .section-label, .section-title, .drag-hint { padding-left: 24px; padding-right: 24px; }
+      .slider-track { padding: 0 24px 8px; }
+      #skills, #contact { padding: 80px 24px; }
+      .contact-links { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- =========================================
+       SECTION 1: HERO
+  ========================================= -->
+  <section id="hero">
+    <svg id="memphis-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Circles -->
+      <circle cx="100" cy="80"  r="56" fill="none" stroke="#f05987" stroke-width="5" opacity="0.5"/>
+      <circle cx="1360" cy="760" r="90" fill="#fbd367" opacity="0.10"/>
+      <circle cx="70"  cy="700" r="38" fill="#00c063" opacity="0.18"/>
+      <circle cx="1400" cy="100" r="28" fill="#f05987" opacity="0.25"/>
+      <circle cx="780" cy="840" r="50" fill="none" stroke="#00c063" stroke-width="3" opacity="0.3"/>
+      <!-- Triangles -->
+      <polygon points="180,170 250,50 320,170"  fill="#fbd367" opacity="0.15"/>
+      <polygon points="1060,820 1150,680 1240,820" fill="#f05987" opacity="0.12"/>
+      <polygon points="40,440 90,360 140,440"  fill="#00c063" opacity="0.2"/>
+      <polygon points="1300,300 1360,200 1420,300" fill="none" stroke="#fbd367" stroke-width="3" opacity="0.3"/>
+      <!-- Zigzag -->
+      <polyline points="360,15 395,52 430,15 465,52 500,15 535,52 570,15 605,52 640,15" fill="none" stroke="#fbd367" stroke-width="3" opacity="0.35"/>
+      <polyline points="860,875 895,840 930,875 965,840 1000,875 1035,840 1070,875" fill="none" stroke="#00c063" stroke-width="3" opacity="0.35"/>
+      <!-- Rects -->
+      <rect x="1220" y="240" width="90" height="90" fill="none" stroke="#00c063" stroke-width="4" transform="rotate(18,1265,285)" opacity="0.3"/>
+      <rect x="50"  y="180" width="55" height="55" fill="#f05987" transform="rotate(-22,77,207)"  opacity="0.15"/>
+      <rect x="640" y="50"  width="40" height="40" fill="#fbd367" transform="rotate(10,660,70)"   opacity="0.2"/>
+      <!-- Wave lines -->
+      <path d="M0 340 Q180 290 360 340 Q540 390 720 340 Q900 290 1080 340 Q1260 390 1440 340" fill="none" stroke="#f05987" stroke-width="1.5" opacity="0.12"/>
+      <path d="M0 560 Q180 510 360 560 Q540 610 720 560 Q900 510 1080 560 Q1260 610 1440 560" fill="none" stroke="#fbd367" stroke-width="1.5" opacity="0.10"/>
+      <!-- Scattered dots -->
+      <circle cx="710" cy="90"  r="5" fill="#00c063" opacity="0.45"/>
+      <circle cx="760" cy="150" r="4" fill="#f05987" opacity="0.45"/>
+      <circle cx="660" cy="120" r="4" fill="#fbd367" opacity="0.45"/>
+      <circle cx="810" cy="70"  r="3" fill="#00c063" opacity="0.35"/>
+      <circle cx="590" cy="800" r="5" fill="#f05987" opacity="0.35"/>
+      <circle cx="650" cy="840" r="4" fill="#fbd367" opacity="0.35"/>
+      <!-- Plus marks -->
+      <line x1="340" y1="790" x2="340" y2="850" stroke="#f05987"  stroke-width="3" opacity="0.35"/>
+      <line x1="310" y1="820" x2="370" y2="820" stroke="#f05987"  stroke-width="3" opacity="0.35"/>
+      <line x1="1090" y1="90"  x2="1090" y2="150" stroke="#fbd367" stroke-width="3" opacity="0.35"/>
+      <line x1="1060" y1="120" x2="1120" y2="120" stroke="#fbd367" stroke-width="3" opacity="0.35"/>
+    </svg>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Portfolio 2026</p>
+      <h1 class="hero-name" id="heroName">
+        <span class="line-1">YOUR</span>
+        <span class="line-2">NAME</span>
+      </h1>
+      <div class="hero-sub-row">
+        <p class="hero-desc">Creative Designer &amp;<br>Frontend Developer.<br>서울 기반.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Web Design</span>
+          <span class="hero-tag">Motion</span>
+          <span class="hero-tag">Branding</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 2: WORK SLIDER
+  ========================================= -->
+  <section id="work">
+    <p class="section-label">02 &mdash; Selected Works</p>
+    <h2 class="section-title">MY<br>WORKS</h2>
+    <div class="slider-outer" id="sliderOuter">
+      <div class="slider-track" id="sliderTrack"></div>
+    </div>
+    <p class="drag-hint">Drag to explore</p>
+  </section>
+
+  <!-- =========================================
+       SECTION 3: SKILLS
+  ========================================= -->
+  <section id="skills">
+    <svg class="skills-deco" width="220" height="220" viewBox="0 0 220 220">
+      <circle cx="160" cy="90" r="80" fill="none" stroke="#f05987" stroke-width="6"/>
+      <polygon points="40,190 100,100 160,190" fill="#fbd367"/>
+      <rect x="10" y="10" width="60" height="60" fill="none" stroke="#00c063" stroke-width="4" transform="rotate(15,40,40)"/>
+    </svg>
+    <div class="skills-grid">
+      <div class="skills-left">
+        <p class="section-label">03 &mdash; Expertise</p>
+        <h2 class="section-title">SKILL<br>SET</h2>
+        <p class="skills-desc">쌓아온 기술 스택.<br>끊임없이 확장 중.<br><br>Design부터 Code까지,<br>혼자 완성합니다.</p>
+      </div>
+      <div class="skills-right" id="skillsList"></div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SECTION 4: CONTACT
+  ========================================= -->
+  <section id="contact">
+    <svg class="contact-deco" style="right:40px;bottom:100px;width:180px;height:180px;" viewBox="0 0 180 180">
+      <rect x="20" y="20" width="140" height="140" fill="none" stroke="#00c063" stroke-width="5" transform="rotate(12,90,90)"/>
+      <rect x="45" y="45" width="90" height="90"  fill="none" stroke="#fbd367" stroke-width="3" transform="rotate(28,90,90)"/>
+      <circle cx="90" cy="90" r="20" fill="#f05987"/>
+    </svg>
+    <p class="section-label">04 &mdash; Get In Touch</p>
+    <div class="contact-wrap">
+      <div class="contact-headline" id="contactHead">
+        <span class="ch-plain">LET'S</span>
+        <span class="ch-stroke">WORK</span>
+        <span class="ch-accent">TOGETHER</span>
+      </div>
+      <div class="contact-links">
+        <a class="c-btn c-btn-main" href="mailto:your@email.com">Email Me &nbsp;&#8594;</a>
+        <a class="c-btn c-btn-ghost" href="#">GitHub</a>
+        <a class="c-btn c-btn-ghost" href="#">Instagram</a>
+        <a class="c-btn c-btn-ghost" href="#">LinkedIn</a>
+      </div>
+    </div>
+    <div class="contact-footer">
+      <span class="footer-logo">YOUR NAME</span>
+      <span class="footer-copy">&copy; 2026 All Rights Reserved</span>
+    </div>
+  </section>
+
+  <script>
+    // ---- Progress bar ----
+    const pb = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      pb.style.width = pct + '%';
+    }, { passive: true });
+
+    // ---- Memphis SVG float animation ----
+    const shapes = document.querySelectorAll('#memphis-bg circle, #memphis-bg polygon, #memphis-bg rect, #memphis-bg line');
+    const ss = document.styleSheets[0];
+    ss.insertRule(`@keyframes mfA { 0%,100%{transform:translate(0,0) rotate(0deg)}  50%{transform:translate(7px,-11px) rotate(7deg)} }`,  ss.cssRules.length);
+    ss.insertRule(`@keyframes mfB { 0%,100%{transform:translate(0,0) rotate(0deg)} 50%{transform:translate(-9px,8px) rotate(-5deg)} }`, ss.cssRules.length);
+    shapes.forEach((el, i) => {
+      el.style.animation = `${i%2===0?'mfA':'mfB'} ${8+i%5*2}s ${i*0.35}s ease-in-out infinite`;
+    });
+
+    // ---- Work Slider ----
+    const works = [
+      { title: 'Neon Pulse',  cat: 'Web Design',     seed: 11, tag: 'Design', tc: 'tag-p' },
+      { title: 'Cipher Type', cat: 'Typography',      seed: 22, tag: 'Type',   tc: 'tag-y' },
+      { title: 'Grid Echo',   cat: 'Motion Graphics', seed: 33, tag: 'Motion', tc: 'tag-g' },
+      { title: 'Soft Void',   cat: '3D / AR',         seed: 44, tag: '3D',     tc: 'tag-p' },
+      { title: 'Stack Zero',  cat: 'Brand Identity',  seed: 55, tag: 'Brand',  tc: 'tag-y' },
+      { title: 'Oxide Blue',  cat: 'Interactive',     seed: 66, tag: 'Code',   tc: 'tag-g' },
+    ];
+    const track = document.getElementById('sliderTrack');
+    works.forEach((w, i) => {
+      const el = document.createElement('div');
+      el.className = 'slide-item';
+      el.innerHTML = `
+        <img class="slide-img" src="https://picsum.photos/seed/${w.seed}/500/334" alt="${w.title}" draggable="false">
+        <span class="slide-tag ${w.tc}">${w.tag}</span>
+        <div class="slide-foot">
+          <div>
+            <div class="slide-title">${w.title}</div>
+            <div class="slide-cat">${w.cat}</div>
+          </div>
+          <span class="slide-num">0${i+1}</span>
+        </div>
+      `;
+      track.appendChild(el);
+    });
+
+    const outer = document.getElementById('sliderOuter');
+    let isDragging = false, startX = 0, scrollStart = 0;
+    outer.addEventListener('mousedown', e => {
+      isDragging = true;
+      outer.classList.add('dragging');
+      startX = e.pageX - outer.offsetLeft;
+      scrollStart = outer.scrollLeft;
+    });
+    outer.addEventListener('mouseleave', () => { isDragging = false; outer.classList.remove('dragging'); });
+    outer.addEventListener('mouseup', () => { isDragging = false; outer.classList.remove('dragging'); });
+    outer.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      e.preventDefault();
+      outer.scrollLeft = scrollStart - (e.pageX - outer.offsetLeft - startX) * 1.3;
+    });
+    let tStart = 0, tScroll = 0;
+    outer.addEventListener('touchstart', e => { tStart = e.touches[0].pageX; tScroll = outer.scrollLeft; }, { passive: true });
+    outer.addEventListener('touchmove', e => { outer.scrollLeft = tScroll + (tStart - e.touches[0].pageX); }, { passive: true });
+
+    // ---- Skills ----
+    const skills = [
+      { name: 'HTML / CSS',  year: '2019 ~', dot: 'dp' },
+      { name: 'JavaScript',  year: '2020 ~', dot: 'dy' },
+      { name: 'React',       year: '2021 ~', dot: 'dg' },
+      { name: 'Figma',       year: '2020 ~', dot: 'dp' },
+      { name: 'Three.js',    year: '2022 ~', dot: 'dy' },
+      { name: 'GSAP',        year: '2022 ~', dot: 'dg' },
+      { name: 'Node.js',     year: '2021 ~', dot: 'dp' },
+      { name: 'AI / LLM',    year: '2023 ~', dot: 'dy' },
+    ];
+    const sl = document.getElementById('skillsList');
+    skills.forEach((s, i) => {
+      const row = document.createElement('div');
+      row.className = 'skill-row';
+      row.innerHTML = `
+        <span class="skill-idx">0${i+1}</span>
+        <span class="skill-name">${s.name}</span>
+        <span class="skill-dot ${s.dot}"></span>
+        <span class="skill-year">${s.year}</span>
+      `;
+      sl.appendChild(row);
+    });
+
+    // ---- GSAP Animations ----
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero name entrance
+    gsap.from('#heroName .line-1', { y: 80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
+    gsap.from('#heroName .line-2', { y: 80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.4 });
+    gsap.from('.hero-eyebrow', { x: -30, opacity: 0, duration: 0.8, ease: 'power2.out', delay: 0.1 });
+    gsap.from('.hero-sub-row', { y: 30, opacity: 0, duration: 0.8, ease: 'power2.out', delay: 0.7 });
+
+    // Skills scroll reveal
+    gsap.utils.toArray('.skill-row').forEach(row => {
+      gsap.to(row, {
+        opacity: 1, x: 0, duration: 0.55, ease: 'power2.out',
+        scrollTrigger: { trigger: row, start: 'top 86%', toggleActions: 'play none none none' }
+      });
+    });
+
+    // Contact headline
+    gsap.from('#contactHead', {
+      y: 60, opacity: 0, duration: 1.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#contactHead', start: 'top 80%' }
+    });
+
+    // Contact buttons stagger
+    gsap.from('.c-btn', {
+      y: 24, opacity: 0, duration: 0.5, stagger: 0.09, ease: 'power2.out',
+      scrollTrigger: { trigger: '.contact-links', start: 'top 85%' }
+    });
+
+    // Work section title
+    gsap.from('#work .section-title', {
+      x: -60, opacity: 0, duration: 0.9, ease: 'power2.out',
+      scrollTrigger: { trigger: '#work', start: 'top 75%' }
+    });
+  </script>
+</body>
+</html>
