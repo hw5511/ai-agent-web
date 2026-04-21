@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NULL_SIGNAL — Electronic Music Producer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: oklch(7% 0.02 240);
+    --bg2: oklch(11% 0.03 240);
+    --cyan: oklch(78% 0.22 198);
+    --magenta: oklch(68% 0.28 330);
+    --yellow: oklch(88% 0.24 102);
+    --text: oklch(88% 0.04 200);
+    --dim: oklch(45% 0.04 200);
+    --border: oklch(22% 0.05 220);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      oklch(0% 0 0 / 0.04) 2px,
+      oklch(0% 0 0 / 0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    background: oklch(7% 0.02 240 / 0.85);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    color: var(--cyan);
+    text-shadow: 0 0 20px var(--cyan);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 0 0 10px var(--yellow);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 140px 48px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+  }
+
+  .hero-left { position: relative; }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--magenta);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-label::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--magenta);
+    box-shadow: 0 0 8px var(--magenta);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: 0.03em;
+    color: var(--text);
+    position: relative;
+  }
+
+  h1 .glitch-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  h1 .glitch-wrap::before,
+  h1 .glitch-wrap::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+
+  h1 .glitch-wrap::before {
+    color: var(--cyan);
+    animation: glitch1 4s infinite;
+    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  }
+
+  h1 .glitch-wrap::after {
+    color: var(--magenta);
+    animation: glitch2 4s infinite;
+    clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+  }
+
+  @keyframes glitch1 {
+    0%, 90%, 100% { transform: translate(0); opacity: 0; }
+    91% { transform: translate(-4px, 2px); opacity: 0.8; }
+    93% { transform: translate(4px, -2px); opacity: 0.8; }
+    95% { transform: translate(-2px, 0); opacity: 0.8; }
+    97% { transform: translate(0); opacity: 0; }
+  }
+
+  @keyframes glitch2 {
+    0%, 92%, 100% { transform: translate(0); opacity: 0; }
+    93% { transform: translate(4px, 2px); opacity: 0.8; }
+    95% { transform: translate(-4px, -2px); opacity: 0.8; }
+    97% { transform: translate(2px, 0); opacity: 0.8; }
+    99% { transform: translate(0); opacity: 0; }
+  }
+
+  .hero-subtitle {
+    margin-top: 32px;
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+    max-width: 320px;
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 40px;
+  }
+
+  /* Waveform visualizer */
+  .visualizer {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .visualizer canvas {
+    width: 100%;
+    display: block;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid var(--border);
+    background: var(--border);
+  }
+
+  .stat {
+    background: var(--bg);
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.05em;
+    color: var(--cyan);
+    text-shadow: 0 0 20px var(--cyan);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .hero-scroll {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), var(--dim));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--cyan);
+    animation: scanline 2s infinite;
+  }
+
+  @keyframes scanline {
+    to { left: 100%; }
+  }
+
+  /* BG GRID */
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(oklch(25% 0.05 220 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(25% 0.05 220 / 0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .bg-glow-cyan {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, oklch(78% 0.22 198 / 0.06) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    pointer-events: none;
+  }
+
+  .bg-glow-magenta {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, oklch(68% 0.28 330 / 0.05) 0%, transparent 70%);
+    bottom: 0;
+    left: 200px;
+    pointer-events: none;
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 100px 48px;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    color: var(--magenta);
+    letter-spacing: 0.2em;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 4px;
+  }
+
+  /* TRACKS */
+  #tracks { background: var(--bg); }
+
+  .tracks-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .track-row {
+    display: grid;
+    grid-template-columns: 48px 1fr auto auto auto;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 28px;
+    background: var(--bg);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .track-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+
+  .track-row:hover { background: var(--bg2); }
+  .track-row:hover::before { transform: scaleY(1); }
+
+  .track-num {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .track-row:hover .track-num { color: var(--cyan); }
+
+  .track-info { display: flex; flex-direction: column; gap: 4px; }
+
+  .track-name {
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+
+  .track-row:hover .track-name { color: var(--cyan); }
+
+  .track-tags {
+    display: flex;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+  }
+
+  .tag.featured {
+    color: var(--magenta);
+    border-color: var(--magenta);
+    box-shadow: 0 0 8px oklch(68% 0.28 330 / 0.3);
+  }
+
+  /* Mini waveform bars */
+  .track-wave {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 28px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .track-row:hover .track-wave { opacity: 1; }
+
+  .wave-bar {
+    width: 3px;
+    background: var(--cyan);
+    border-radius: 1px;
+    animation: wavebar 0.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes wavebar {
+    from { transform: scaleY(0.2); }
+    to { transform: scaleY(1); }
+  }
+
+  .track-bpm {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    text-align: right;
+    min-width: 60px;
+  }
+
+  .track-duration {
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    text-align: right;
+    min-width: 44px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* FEATURED TRACK PLAYER */
+  .player-bar {
+    margin-top: 1px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 28px 28px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .play-btn {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--cyan);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    box-shadow: 0 0 16px oklch(78% 0.22 198 / 0.2);
+  }
+
+  .play-btn:hover {
+    background: oklch(78% 0.22 198 / 0.1);
+    box-shadow: 0 0 24px oklch(78% 0.22 198 / 0.4);
+  }
+
+  .play-btn svg { fill: var(--cyan); }
+
+  .player-track-info { flex: 1; }
+
+  .player-track-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+    text-shadow: 0 0 16px oklch(78% 0.22 198 / 0.5);
+  }
+
+  .player-track-meta {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  .progress-track {
+    flex: 1;
+  }
+
+  .progress-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    position: relative;
+    cursor: pointer;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    width: 38%;
+    box-shadow: 0 0 8px var(--cyan);
+    transition: width 0.1s;
+    position: relative;
+  }
+
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+  }
+
+  .progress-times {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* LIVE SECTION */
+  #live { background: var(--bg2); }
+
+  .shows-list {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .show-row {
+    display: grid;
+    grid-template-columns: 120px 1fr auto auto;
+    align-items: center;
+    gap: 32px;
+    padding: 28px 32px;
+    background: var(--bg2);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .show-row::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, oklch(78% 0.22 198 / 0.04), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .show-row:hover { background: var(--bg); }
+  .show-row:hover::after { opacity: 1; }
+
+  .show-date {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .show-day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--text);
+    transition: color 0.2s;
+  }
+
+  .show-row:hover .show-day { color: var(--cyan); text-shadow: 0 0 20px oklch(78% 0.22 198 / 0.5); }
+
+  .show-month-year {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .show-info { display: flex; flex-direction: column; gap: 8px; }
+
+  .show-venue {
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .show-details {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+  .show-details .sep { color: var(--border); }
+
+  .show-type {
+    padding: 4px 12px;
+    border: 1px solid;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .show-type.headline {
+    color: var(--yellow);
+    border-color: var(--yellow);
+    box-shadow: 0 0 12px oklch(88% 0.24 102 / 0.3);
+  }
+
+  .show-type.b2b {
+    color: var(--magenta);
+    border-color: var(--magenta);
+  }
+
+  .show-type.live {
+    color: var(--cyan);
+    border-color: var(--cyan);
+  }
+
+  .ticket-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 0 10px oklch(78% 0.22 198 / 0.15);
+  }
+
+  .ticket-btn:hover {
+    background: oklch(78% 0.22 198 / 0.12);
+    box-shadow: 0 0 20px oklch(78% 0.22 198 / 0.4);
+  }
+
+  .show-row.past { opacity: 0.4; }
+  .show-row.past .ticket-btn {
+    border-color: var(--dim);
+    color: var(--dim);
+    box-shadow: none;
+    cursor: default;
+  }
+
+  /* ABOUT SECTION */
+  #about {
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+    aspect-ratio: 1;
+    max-width: 480px;
+  }
+
+  .about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%) contrast(1.1);
+    mix-blend-mode: luminosity;
+    display: block;
+  }
+
+  .about-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, oklch(78% 0.22 198 / 0.15), oklch(68% 0.28 330 / 0.1));
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  .about-frame {
+    position: absolute;
+    inset: -12px;
+    border: 1px solid oklch(78% 0.22 198 / 0.3);
+    pointer-events: none;
+  }
+
+  .about-frame::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+  }
+
+  .about-frame::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: var(--magenta);
+    box-shadow: 0 0 12px var(--magenta);
+  }
+
+  .about-corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--cyan);
+    border-style: solid;
+    border-width: 0;
+  }
+
+  .about-corner.tl { top: -12px; left: -12px; border-top-width: 1px; border-left-width: 1px; }
+  .about-corner.tr { top: -12px; right: -12px; border-top-width: 1px; border-right-width: 1px; }
+  .about-corner.bl { bottom: -12px; left: -12px; border-bottom-width: 1px; border-left-width: 1px; }
+  .about-corner.br { bottom: -12px; right: -12px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  .about-content { padding: 20px 0; }
+
+  .about-tag {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .about-tag::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  .about-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  .about-text {
+    color: var(--dim);
+    line-height: 1.9;
+    font-size: 13px;
+    margin-bottom: 48px;
+  }
+
+  .gear-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .gear-item {
+    background: var(--bg2);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .gear-name {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+
+  .gear-type {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 100px 48px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 7vw, 100px);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    color: var(--text);
+  }
+
+  .contact-heading span {
+    color: var(--cyan);
+    text-shadow: 0 0 30px oklch(78% 0.22 198 / 0.6);
+    display: block;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .contact-link:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 20px oklch(78% 0.22 198 / 0.15);
+  }
+
+  .contact-link-label { font-size: 13px; letter-spacing: 0.1em; }
+  .contact-link-val { font-size: 11px; color: var(--dim); letter-spacing: 0.08em; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+
+    section { padding: 70px 24px; }
+    #hero { padding: 120px 24px 50px; }
+
+    .hero-main { grid-template-columns: 1fr; gap: 40px; }
+    .hero-right { align-items: flex-start; }
+    .hero-stats { max-width: 100%; }
+
+    #about { grid-template-columns: 1fr; padding: 70px 24px; }
+    .about-visual { max-width: 100%; }
+
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+
+    .track-row { grid-template-columns: 32px 1fr auto; }
+    .track-wave, .track-bpm { display: none; }
+
+    .show-row { grid-template-columns: 80px 1fr; gap: 20px; padding: 20px 24px; }
+    .show-type, .ticket-btn { display: none; }
+
+    footer { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">NULL_SIGNAL</div>
+  <ul class="nav-links">
+    <li><a href="#tracks">Tracks</a></li>
+    <li><a href="#live">Live</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status">
+    <span class="status-dot"></span>
+    AVAILABLE FOR BOOKINGS
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="bg-grid"></div>
+  <div class="bg-glow-cyan"></div>
+  <div class="bg-glow-magenta"></div>
+
+  <div class="hero-main">
+    <div class="hero-left">
+      <div class="hero-label">Electronic Music Producer</div>
+      <h1>
+        <div class="glitch-wrap" data-text="NULL">NULL</div><br>
+        <div class="glitch-wrap" data-text="SIGNAL">SIGNAL</div>
+      </h1>
+      <p class="hero-subtitle">
+        Techno / Industrial / Ambient<br>
+        Berlin-based. Label: VOID_REC.<br>
+        Crafting frequencies that disrupt the signal chain.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="visualizer">
+        <canvas id="vizCanvas" height="120"></canvas>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">147</span>
+          <span class="stat-label">Tracks</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">38</span>
+          <span class="stat-label">Shows / yr</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">12</span>
+          <span class="stat-label">Releases</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scroll to explore
+  </div>
+</section>
+
+<section id="tracks">
+  <div class="section-header">
+    <span class="section-num">01 //</span>
+    <h2 class="section-title">Discography</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="tracks-grid">
+    <div class="track-row" onclick="selectTrack(this, 'DEAD CHANNEL', '140 BPM · Industrial Techno', '6:12')">
+      <span class="track-num">001</span>
+      <div class="track-info">
+        <span class="track-name">DEAD CHANNEL</span>
+        <div class="track-tags">
+          <span class="tag featured">featured</span>
+          <span class="tag">industrial techno</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-1"></div>
+      <span class="track-bpm">140 BPM</span>
+      <span class="track-duration">6:12</span>
+    </div>
+
+    <div class="track-row" onclick="selectTrack(this, 'SIGNAL_LOST', '136 BPM · Dark Techno', '7:44')">
+      <span class="track-num">002</span>
+      <div class="track-info">
+        <span class="track-name">SIGNAL_LOST</span>
+        <div class="track-tags">
+          <span class="tag">dark techno</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-2"></div>
+      <span class="track-bpm">136 BPM</span>
+      <span class="track-duration">7:44</span>
+    </div>
+
+    <div class="track-row" onclick="selectTrack(this, 'VOID PROTOCOL', '128 BPM · Ambient Industrial', '9:03')">
+      <span class="track-num">003</span>
+      <div class="track-info">
+        <span class="track-name">VOID PROTOCOL</span>
+        <div class="track-tags">
+          <span class="tag">ambient industrial</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-3"></div>
+      <span class="track-bpm">128 BPM</span>
+      <span class="track-duration">9:03</span>
+    </div>
+
+    <div class="track-row" onclick="selectTrack(this, 'GHOST FREQUENCY', '144 BPM · EBM', '5:58')">
+      <span class="track-num">004</span>
+      <div class="track-info">
+        <span class="track-name">GHOST FREQUENCY</span>
+        <div class="track-tags">
+          <span class="tag featured">featured</span>
+          <span class="tag">EBM</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-4"></div>
+      <span class="track-bpm">144 BPM</span>
+      <span class="track-duration">5:58</span>
+    </div>
+
+    <div class="track-row" onclick="selectTrack(this, 'NULL VOID', '132 BPM · Dub Techno', '8:21')">
+      <span class="track-num">005</span>
+      <div class="track-info">
+        <span class="track-name">NULL VOID</span>
+        <div class="track-tags">
+          <span class="tag">dub techno</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-5"></div>
+      <span class="track-bpm">132 BPM</span>
+      <span class="track-duration">8:21</span>
+    </div>
+
+    <div class="track-row" onclick="selectTrack(this, 'SYSTEM ERROR 404', '150 BPM · Hardcore / Industrial', '5:30')">
+      <span class="track-num">006</span>
+      <div class="track-info">
+        <span class="track-name">SYSTEM ERROR 404</span>
+        <div class="track-tags">
+          <span class="tag">hardcore</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-6"></div>
+      <span class="track-bpm">150 BPM</span>
+      <span class="track-duration">5:30</span>
+    </div>
+
+    <div class="track-row" onclick="selectTrack(this, 'MAGNETIC COLLAPSE', '138 BPM · Acid Techno', '7:15')">
+      <span class="track-num">007</span>
+      <div class="track-info">
+        <span class="track-name">MAGNETIC COLLAPSE</span>
+        <div class="track-tags">
+          <span class="tag">acid techno</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-7"></div>
+      <span class="track-bpm">138 BPM</span>
+      <span class="track-duration">7:15</span>
+    </div>
+
+    <div class="track-row" onclick="selectTrack(this, 'INTERFERENCE PATTERN', '134 BPM · Experimental', '10:48')">
+      <span class="track-num">008</span>
+      <div class="track-info">
+        <span class="track-name">INTERFERENCE PATTERN</span>
+        <div class="track-tags">
+          <span class="tag">experimental</span>
+        </div>
+      </div>
+      <div class="track-wave" id="wave-8"></div>
+      <span class="track-bpm">134 BPM</span>
+      <span class="track-duration">10:48</span>
+    </div>
+  </div>
+
+  <!-- Player bar -->
+  <div class="player-bar" id="playerBar">
+    <button class="play-btn" id="playBtn" onclick="togglePlay()">
+      <svg id="playIcon" width="16" height="18" viewBox="0 0 16 18">
+        <path d="M2 1l12 8-12 8V1z"/>
+      </svg>
+    </button>
+    <div class="player-track-info">
+      <div class="player-track-name" id="playerName">DEAD CHANNEL</div>
+      <div class="player-track-meta" id="playerMeta">140 BPM · Industrial Techno</div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar-wrap" id="progressWrap" onclick="seekTrack(event)">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-times">
+        <span id="currentTime">2:21</span>
+        <span id="totalTime">6:12</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="live">
+  <div class="section-header">
+    <span class="section-num">02 //</span>
+    <h2 class="section-title">Live Dates</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="shows-list">
+
+    <!-- Past -->
+    <div class="show-row past">
+      <div class="show-date">
+        <span class="show-day">08</span>
+        <span class="show-month-year">Feb 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">Tresor, Berlin</span>
+        <div class="show-details">
+          <span>GLOBUS floor</span>
+          <span class="sep">—</span>
+          <span>23:00 onwards</span>
+          <span class="sep">—</span>
+          <span>Berlin, DE</span>
+        </div>
+      </div>
+      <span class="show-type headline">Headline</span>
+      <button class="ticket-btn">Archived</button>
+    </div>
+
+    <div class="show-row past">
+      <div class="show-date">
+        <span class="show-day">15</span>
+        <span class="show-month-year">Mar 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">Fabric, London</span>
+        <div class="show-details">
+          <span>Room 2</span>
+          <span class="sep">—</span>
+          <span>01:00 — 03:00</span>
+          <span class="sep">—</span>
+          <span>London, UK</span>
+        </div>
+      </div>
+      <span class="show-type b2b">B2B w/ KODE9</span>
+      <button class="ticket-btn">Archived</button>
+    </div>
+
+    <!-- Upcoming -->
+    <div class="show-row">
+      <div class="show-date">
+        <span class="show-day">02</span>
+        <span class="show-month-year">May 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">De School, Amsterdam</span>
+        <div class="show-details">
+          <span>Main Floor</span>
+          <span class="sep">—</span>
+          <span>00:00 — 04:00</span>
+          <span class="sep">—</span>
+          <span>Amsterdam, NL</span>
+        </div>
+      </div>
+      <span class="show-type headline">Headline</span>
+      <button class="ticket-btn">Tickets</button>
+    </div>
+
+    <div class="show-row">
+      <div class="show-date">
+        <span class="show-day">17</span>
+        <span class="show-month-year">May 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">Berghain, Berlin</span>
+        <div class="show-details">
+          <span>Panorama Bar</span>
+          <span class="sep">—</span>
+          <span>06:00 — 10:00</span>
+          <span class="sep">—</span>
+          <span>Berlin, DE</span>
+        </div>
+      </div>
+      <span class="show-type live">Live AV Set</span>
+      <button class="ticket-btn">Tickets</button>
+    </div>
+
+    <div class="show-row">
+      <div class="show-date">
+        <span class="show-day">06</span>
+        <span class="show-month-year">Jun 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">Awakenings Festival</span>
+        <div class="show-details">
+          <span>Hall of Saints stage</span>
+          <span class="sep">—</span>
+          <span>21:00 — 23:00</span>
+          <span class="sep">—</span>
+          <span>Amsterdam, NL</span>
+        </div>
+      </div>
+      <span class="show-type headline">Headline</span>
+      <button class="ticket-btn">Tickets</button>
+    </div>
+
+    <div class="show-row">
+      <div class="show-date">
+        <span class="show-day">21</span>
+        <span class="show-month-year">Jun 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">Sonar Festival, Barcelona</span>
+        <div class="show-details">
+          <span>SonarNight</span>
+          <span class="sep">—</span>
+          <span>02:00 — 04:00</span>
+          <span class="sep">—</span>
+          <span>Barcelona, ES</span>
+        </div>
+      </div>
+      <span class="show-type b2b">B2B w/ SURGEON</span>
+      <button class="ticket-btn">Tickets</button>
+    </div>
+
+    <div class="show-row">
+      <div class="show-date">
+        <span class="show-day">11</span>
+        <span class="show-month-year">Jul 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">Dekmantel Festival</span>
+        <div class="show-details">
+          <span>UFO stage</span>
+          <span class="sep">—</span>
+          <span>22:00 — 01:00</span>
+          <span class="sep">—</span>
+          <span>Amsterdam, NL</span>
+        </div>
+      </div>
+      <span class="show-type live">Live AV Set</span>
+      <button class="ticket-btn">Tickets</button>
+    </div>
+
+    <div class="show-row">
+      <div class="show-date">
+        <span class="show-day">29</span>
+        <span class="show-month-year">Aug 2026</span>
+      </div>
+      <div class="show-info">
+        <span class="show-venue">Boiler Room Tokyo</span>
+        <div class="show-details">
+          <span>Special Edition</span>
+          <span class="sep">—</span>
+          <span>TBA</span>
+          <span class="sep">—</span>
+          <span>Tokyo, JP</span>
+        </div>
+      </div>
+      <span class="show-type headline">Headline</span>
+      <button class="ticket-btn">Register</button>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-visual">
+    <img class="about-img" src="https://picsum.photos/seed/electronic-producer/600/600" alt="NULL_SIGNAL">
+    <div class="about-img-overlay"></div>
+    <div class="about-frame">
+      <div class="about-corner tl"></div>
+      <div class="about-corner tr"></div>
+      <div class="about-corner bl"></div>
+      <div class="about-corner br"></div>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <div class="about-tag">// About</div>
+    <h2 class="about-heading">Distorting<br>the signal<br>since 2014.</h2>
+    <p class="about-text">
+      NULL_SIGNAL emerged from Berlin's underground circuit, fusing industrial noise with surgical techno precision. A decade of residencies at Tresor, Berghain, and OHM has shaped a sound that refuses categorization — raw frequency manipulation layered over mechanical rhythms that push dancefloors to their structural limits.
+      <br><br>
+      Three studio albums. Twelve EPs. One obsession: finding the exact frequency where sound becomes physical force.
+    </p>
+
+    <div class="gear-list">
+      <div class="gear-item">
+        <span class="gear-name">Elektron Analog Four MKII</span>
+        <span class="gear-type">Synthesizer</span>
+      </div>
+      <div class="gear-item">
+        <span class="gear-name">Moog Matriarch</span>
+        <span class="gear-type">Semi-modular Synth</span>
+      </div>
+      <div class="gear-item">
+        <span class="gear-name">Ableton Live 12</span>
+        <span class="gear-type">DAW</span>
+      </div>
+      <div class="gear-item">
+        <span class="gear-name">Teenage Engineering OP-Z</span>
+        <span class="gear-type">Live Performance</span>
+      </div>
+      <div class="gear-item">
+        <span class="gear-name">Pioneer CDJ-3000</span>
+        <span class="gear-type">Playback</span>
+      </div>
+      <div class="gear-item">
+        <span class="gear-name">Allen & Heath Xone:96</span>
+        <span class="gear-type">Mixer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-heading">
+        Book<br>the<br><span>Void.</span>
+      </h2>
+    </div>
+    <div class="contact-links">
+      <div class="contact-link">
+        <span class="contact-link-label">Booking &amp; Management</span>
+        <span class="contact-link-val">booking@null-signal.io</span>
+      </div>
+      <div class="contact-link">
+        <span class="contact-link-label">Press &amp; Interviews</span>
+        <span class="contact-link-val">press@null-signal.io</span>
+      </div>
+      <div class="contact-link">
+        <span class="contact-link-label">Collaborations</span>
+        <span class="contact-link-val">collab@null-signal.io</span>
+      </div>
+      <div class="contact-link">
+        <span class="contact-link-label">SoundCloud</span>
+        <span class="contact-link-val">soundcloud.com/null_signal</span>
+      </div>
+      <div class="contact-link">
+        <span class="contact-link-label">Resident Advisor</span>
+        <span class="contact-link-val">ra.co/null-signal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>NULL_SIGNAL — VOID_REC © 2026</span>
+  <span>BERLIN, DE</span>
+  <span>ALL FREQUENCIES RESERVED</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+// ===== WAVEFORM CANVAS VISUALIZER =====
+const canvas = document.getElementById('vizCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+  canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const BAR_COUNT = 64;
+let phases = Array.from({length: BAR_COUNT}, () => Math.random() * Math.PI * 2);
+let speeds = Array.from({length: BAR_COUNT}, (_, i) => 0.02 + (i % 7) * 0.003);
+let baseAmps = Array.from({length: BAR_COUNT}, (_, i) => {
+  const x = i / BAR_COUNT;
+  return 0.2 + 0.6 * Math.sin(x * Math.PI) + Math.random() * 0.2;
+});
+
+let isPlaying = true;
+let animId;
+
+function drawViz() {
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  ctx.clearRect(0, 0, W, H);
+
+  const barW = (W - (BAR_COUNT - 1) * 2) / BAR_COUNT;
+
+  for (let i = 0; i < BAR_COUNT; i++) {
+    if (isPlaying) phases[i] += speeds[i];
+
+    const amp = baseAmps[i] * (0.7 + 0.3 * Math.sin(phases[i]));
+    const h = amp * H * 0.85;
+    const x = i * (barW + 2);
+    const y = (H - h) / 2;
+
+    // Color based on index
+    const t = i / BAR_COUNT;
+    let r, g, b;
+    if (t < 0.5) {
+      // cyan
+      const alpha = 0.3 + amp * 0.7;
+      ctx.fillStyle = `oklch(78% 0.22 ${198 + t * 60}deg / ${alpha})`;
+    } else {
+      const alpha = 0.3 + amp * 0.7;
+      ctx.fillStyle = `oklch(70% 0.25 ${240 + (t - 0.5) * 180}deg / ${alpha})`;
+    }
+
+    ctx.fillRect(x, y, barW, h);
+
+    // Glow on tall bars
+    if (amp > 0.7) {
+      ctx.shadowColor = i < BAR_COUNT / 2 ? '#00ffe5' : '#ff00cc';
+      ctx.shadowBlur = 8;
+      ctx.fillRect(x, y, barW, h);
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  animId = requestAnimationFrame(drawViz);
+}
+
+drawViz();
+
+// ===== MINI WAVE BARS GENERATOR =====
+document.querySelectorAll('.track-wave').forEach(el => {
+  const heights = [30, 60, 80, 45, 90, 55, 70, 40, 85, 60, 35, 75];
+  heights.forEach((h, i) => {
+    const bar = document.createElement('div');
+    bar.className = 'wave-bar';
+    bar.style.height = h + '%';
+    bar.style.animationDelay = (i * 0.08) + 's';
+    bar.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
+    el.appendChild(bar);
+  });
+});
+
+// ===== TRACK SELECTION =====
+let progressInterval = null;
+let currentProgress = 38;
+let playing = true;
+
+function selectTrack(row, name, meta, duration) {
+  document.querySelectorAll('.track-row').forEach(r => r.style.background = '');
+  row.style.background = 'var(--bg2)';
+
+  document.getElementById('playerName').textContent = name;
+  document.getElementById('playerMeta').textContent = meta;
+  document.getElementById('totalTime').textContent = duration;
+  currentProgress = 0;
+  updateProgress();
+  startProgress();
+}
+
+function togglePlay() {
+  playing = !playing;
+  isPlaying = playing;
+  const icon = document.getElementById('playIcon');
+  if (playing) {
+    icon.innerHTML = '<path d="M2 1l12 8-12 8V1z"/>';
+    startProgress();
+  } else {
+    icon.innerHTML = '<path d="M3 2h4v14H3zM9 2h4v14H9z"/>';
+    clearInterval(progressInterval);
+  }
+}
+
+function updateProgress() {
+  const fill = document.getElementById('progressFill');
+  fill.style.width = currentProgress + '%';
+  const totalSecs = parseDuration(document.getElementById('totalTime').textContent);
+  const current = Math.floor(totalSecs * currentProgress / 100);
+  document.getElementById('currentTime').textContent = formatTime(current);
+}
+
+function startProgress() {
+  clearInterval(progressInterval);
+  progressInterval = setInterval(() => {
+    if (currentProgress < 100) {
+      currentProgress += 0.15;
+      updateProgress();
+    } else {
+      clearInterval(progressInterval);
+    }
+  }, 100);
+}
+
+function seekTrack(e) {
+  const wrap = document.getElementById('progressWrap');
+  const rect = wrap.getBoundingClientRect();
+  currentProgress = ((e.clientX - rect.left) / rect.width) * 100;
+  updateProgress();
+}
+
+function parseDuration(str) {
+  const [m, s] = str.split(':').map(Number);
+  return m * 60 + s;
+}
+
+function formatTime(secs) {
+  const m = Math.floor(secs / 60);
+  const s = String(secs % 60).padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+startProgress();
+
+// ===== GSAP ANIMATIONS =====
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero entrance
+gsap.from('h1 .glitch-wrap', {
+  y: 80,
+  opacity: 0,
+  stagger: 0.15,
+  duration: 1,
+  ease: 'power4.out',
+  delay: 0.3
+});
+
+gsap.from('.hero-label, .hero-subtitle', {
+  y: 30,
+  opacity: 0,
+  stagger: 0.1,
+  duration: 0.8,
+  ease: 'power3.out',
+  delay: 0.6
+});
+
+gsap.from('.hero-stats .stat', {
+  y: 20,
+  opacity: 0,
+  stagger: 0.08,
+  duration: 0.6,
+  ease: 'power3.out',
+  delay: 0.9
+});
+
+// Track rows
+gsap.from('.track-row', {
+  scrollTrigger: { trigger: '#tracks', start: 'top 75%' },
+  x: -30,
+  opacity: 0,
+  stagger: 0.06,
+  duration: 0.5,
+  ease: 'power3.out'
+});
+
+// Show rows
+gsap.from('.show-row', {
+  scrollTrigger: { trigger: '#live', start: 'top 75%' },
+  y: 20,
+  opacity: 0,
+  stagger: 0.07,
+  duration: 0.5,
+  ease: 'power3.out'
+});
+
+// About
+gsap.from('.about-visual', {
+  scrollTrigger: { trigger: '#about', start: 'top 70%' },
+  x: -50,
+  opacity: 0,
+  duration: 0.9,
+  ease: 'power3.out'
+});
+
+gsap.from('.about-heading, .about-text, .gear-list', {
+  scrollTrigger: { trigger: '#about', start: 'top 70%' },
+  y: 30,
+  opacity: 0,
+  stagger: 0.15,
+  duration: 0.7,
+  ease: 'power3.out',
+  delay: 0.2
+});
+
+// Contact
+gsap.from('.contact-heading', {
+  scrollTrigger: { trigger: '#contact', start: 'top 75%' },
+  y: 50,
+  opacity: 0,
+  duration: 0.8,
+  ease: 'power3.out'
+});
+
+gsap.from('.contact-link', {
+  scrollTrigger: { trigger: '#contact', start: 'top 75%' },
+  x: 30,
+  opacity: 0,
+  stagger: 0.08,
+  duration: 0.5,
+  ease: 'power3.out',
+  delay: 0.2
+});
+
+// Mouse parallax on hero glow
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  document.querySelector('.bg-glow-cyan').style.transform = `translate(${x}px, ${y}px)`;
+  document.querySelector('.bg-glow-magenta').style.transform = `translate(${-x * 0.5}px, ${-y * 0.5}px)`;
+});
+</script>
+</body>
+</html>

@@ -453,7 +453,7 @@
   <a href="#lesson">수업 예제 v5</a>
   <a href="#awwwards">Awwwards 카피</a>
   <a href="#samples">샘플 01~08</a>
-  <a href="#benchmark">벤치마크 (v5 vs Claude Design)</a>
+  <a href="#benchmark">벤치마크 (v5 vs CD vs v6)</a>
 </nav-tabs>
 
 <main>
@@ -1048,45 +1048,117 @@
   <section class="section" id="benchmark">
     <div class="section-header">
       <span class="section-title">벤치마크</span>
-      <span class="section-sub">v5 vs Claude Design Style</span>
+      <span class="section-sub">v5 vs Claude Design vs v6</span>
     </div>
-    <p class="section-desc">동일 프롬프트 3종 — v5(Huemint+폰트매핑 시스템) vs Claude Design(oklch+AI슬롭금지 철학) 결과물 비교</p>
-    <div class="card-grid">
+    <p class="section-desc">동일 프롬프트 5종 — v5(Huemint+폰트매핑) / Claude Design(oklch+AI슬롭금지) / v6(Huemint+oklch+레이아웃패턴) 3방향 비교</p>
+
+    <div class="bench-group-label" style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:32px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);">A. 내 소개 페이지 — 분위기 불명확</div>
+    <div class="card-grid" style="margin-bottom:32px;">
       <div class="card">
-        <div class="card-label tag-v5">v5 / bench_A</div>
+        <div class="card-label tag-v5">v5 / A</div>
         <div class="card-title">내 소개 페이지 — v5</div>
-        <div class="card-prompt">분위기 불명확. v5 Huemint 팔레트 + 분위기 자동 판단.</div>
+        <div class="card-prompt">Huemint 팔레트 + 분위기 자동 판단. 히어로+섹션 구조.</div>
         <div class="card-actions"><a class="btn-open" href="bench_v5_A.html" target="_blank">열기 →</a></div>
       </div>
       <div class="card">
-        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / bench_A</div>
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / A</div>
         <div class="card-title">내 소개 페이지 — Claude Design</div>
-        <div class="card-prompt">분위기 불명확. oklch 색상 + AI 슬롭 금지 + 놀라게 하라 철학.</div>
+        <div class="card-prompt">oklch 색상 + AI 슬롭 금지 + 놀라게 하라 철학.</div>
         <div class="card-actions"><a class="btn-open" href="bench_cd_A.html" target="_blank">열기 →</a></div>
       </div>
       <div class="card">
-        <div class="card-label tag-v5">v5 / bench_E</div>
+        <div class="card-label" style="background:#0d7a5f;color:#fff">v6 / A</div>
+        <div class="card-title">내 소개 페이지 — v6</div>
+        <div class="card-prompt">Huemint→oklch 변환 + 레이아웃 패턴 선택 (stacked/split).</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v6_A.html" target="_blank">열기 →</a></div>
+      </div>
+    </div>
+
+    <div class="bench-group-label" style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);">B. 전자음악 프로듀서 포트폴리오 — 다크+네온</div>
+    <div class="card-grid" style="margin-bottom:32px;">
+      <div class="card">
+        <div class="card-label tag-v5">v5 / B</div>
+        <div class="card-title">전자음악 포트폴리오 — v5</div>
+        <div class="card-prompt">다크+네온. v5 음악 분위기 팔레트 자동 선택.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v5_B.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / B</div>
+        <div class="card-title">전자음악 포트폴리오 — Claude Design</div>
+        <div class="card-prompt">다크+네온. Claude Design 음악 컨셉 해석.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_cd_B.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#0d7a5f;color:#fff">v6 / B</div>
+        <div class="card-title">전자음악 포트폴리오 — v6</div>
+        <div class="card-prompt">Huemint→oklch + editorial/full-bleed 레이아웃 패턴.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v6_B.html" target="_blank">열기 →</a></div>
+      </div>
+    </div>
+
+    <div class="bench-group-label" style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);">C. 강아지 유치원 소개 — 귀엽고 활발</div>
+    <div class="card-grid" style="margin-bottom:32px;">
+      <div class="card">
+        <div class="card-label tag-v5">v5 / C</div>
+        <div class="card-title">강아지 유치원 — v5</div>
+        <div class="card-prompt">귀여운 분위기. v5 파스텔 팔레트 자동 선택.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v5_C.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / C</div>
+        <div class="card-title">강아지 유치원 — Claude Design</div>
+        <div class="card-prompt">귀여운 분위기. Claude Design 컨셉 해석.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_cd_C.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#0d7a5f;color:#fff">v6 / C</div>
+        <div class="card-title">강아지 유치원 — v6</div>
+        <div class="card-prompt">Huemint→oklch + mosaic/split-screen 레이아웃 패턴.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v6_C.html" target="_blank">열기 →</a></div>
+      </div>
+    </div>
+
+    <div class="bench-group-label" style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);">D. 포트폴리오 — 배경 검정, 흰 글자</div>
+    <div class="card-grid" style="margin-bottom:32px;">
+      <div class="card">
+        <div class="card-label tag-v5">v5 / D</div>
+        <div class="card-title">포트폴리오 다크 — v5</div>
+        <div class="card-prompt">배경 검정, 흰 글자. v5 다크 팔레트 + 슬라이더.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v5_D.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / D</div>
+        <div class="card-title">포트폴리오 다크 — Claude Design</div>
+        <div class="card-prompt">배경 검정, 흰 글자. Claude Design 다크 해석.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_cd_D.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#0d7a5f;color:#fff">v6 / D</div>
+        <div class="card-title">포트폴리오 다크 — v6</div>
+        <div class="card-prompt">Huemint→oklch + editorial/horizontal-scroll 레이아웃 패턴.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v6_D.html" target="_blank">열기 →</a></div>
+      </div>
+    </div>
+
+    <div class="bench-group-label" style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);">E. 카페 블로그 — 따뜻하고 아늑한</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label tag-v5">v5 / E</div>
         <div class="card-title">카페 블로그 — v5</div>
-        <div class="card-prompt">따뜻하고 아늑한 분위기. v5 Huemint 카페 팔레트 자동 선택.</div>
+        <div class="card-prompt">따뜻하고 아늑한 분위기. v5 Huemint 카페 팔레트.</div>
         <div class="card-actions"><a class="btn-open" href="bench_v5_E.html" target="_blank">열기 →</a></div>
       </div>
       <div class="card">
-        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / bench_E</div>
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / E</div>
         <div class="card-title">카페 블로그 — Claude Design</div>
         <div class="card-prompt">따뜻하고 아늑한 분위기. 분할 레이아웃 + 프랑스 카페 컨셉.</div>
         <div class="card-actions"><a class="btn-open" href="bench_cd_E.html" target="_blank">열기 →</a></div>
       </div>
       <div class="card">
-        <div class="card-label tag-v5">v5 / bench_D</div>
-        <div class="card-title">포트폴리오 다크 — v5</div>
-        <div class="card-prompt">배경 검정, 흰 글자, 포인트 컬러. v5 다크 팔레트.</div>
-        <div class="card-actions"><a class="btn-open" href="bench_v5_D.html" target="_blank">열기 →</a></div>
-      </div>
-      <div class="card">
-        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / bench_D</div>
-        <div class="card-title">포트폴리오 다크 — Claude Design</div>
-        <div class="card-prompt">배경 검정, 흰 글자, 포인트 컬러. Claude Design 다크 해석.</div>
-        <div class="card-actions"><a class="btn-open" href="bench_cd_D.html" target="_blank">열기 →</a></div>
+        <div class="card-label" style="background:#0d7a5f;color:#fff">v6 / E</div>
+        <div class="card-title">카페 블로그 — v6</div>
+        <div class="card-prompt">Huemint→oklch + split-screen/mosaic 레이아웃 패턴.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v6_E.html" target="_blank">열기 →</a></div>
       </div>
     </div>
   </section>

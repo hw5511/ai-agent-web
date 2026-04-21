@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NXVR — Electronic Music Producer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --color-bg:        #0d0d0d;
+      --color-secondary: #ee197a;
+      --color-primary:   #0091ab;
+      --color-accent:    #361ffe;
+      --color-text:      #ffffff;
+      --color-muted:     rgba(255,255,255,0.45);
+      --color-card:      rgba(255,255,255,0.04);
+      --color-border:    rgba(255,255,255,0.08);
+
+      --font-title:  'Bebas Neue', 'Black Han Sans', sans-serif;
+      --font-body:   'Space Grotesk', 'Noto Sans KR', sans-serif;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 3px; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13,13,13,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      letter-spacing: 0.12em;
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--color-secondary); }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0 48px;
+    }
+    #particles-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      border: 1px solid var(--color-secondary);
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(5rem, 14vw, 13rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      text-shadow: 0 0 60px rgba(238,25,122,0.35), 0 0 120px rgba(0,145,171,0.2);
+    }
+    .hero-title span {
+      display: block;
+      background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 60%, var(--color-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      margin-top: 24px;
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+    }
+    .hero-cta {
+      margin-top: 44px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-primary {
+      background: var(--color-secondary);
+      color: #fff;
+      border: 2px solid var(--color-secondary);
+      box-shadow: 0 0 28px rgba(238,25,122,0.45);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--color-secondary);
+      box-shadow: 0 0 44px rgba(238,25,122,0.7);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+    .btn-outline:hover {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 0 28px rgba(0,145,171,0.5);
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    .scroll-hint svg { opacity: 0.6; }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: 120px 48px; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--color-secondary);
+      opacity: 0.5;
+    }
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+    .section-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--color-muted);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ===== BIO ===== */
+    #bio {
+      background: linear-gradient(180deg, #0d0d0d 0%, #111118 100%);
+      border-top: 1px solid var(--color-border);
+    }
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 60px;
+    }
+    .bio-image-wrap {
+      position: relative;
+    }
+    .bio-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+      border-radius: 4px;
+      z-index: 0;
+    }
+    .bio-image {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 3px;
+      filter: saturate(0.7) contrast(1.1);
+    }
+    .bio-badge {
+      position: absolute;
+      bottom: -18px;
+      right: -18px;
+      z-index: 2;
+      background: var(--color-secondary);
+      padding: 18px 24px;
+      border-radius: 2px;
+      box-shadow: 0 0 32px rgba(238,25,122,0.5);
+    }
+    .bio-badge-num {
+      font-family: var(--font-title);
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+    .bio-badge-txt {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .bio-text p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .bio-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid var(--color-border);
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: var(--font-title);
+      font-size: 2.6rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: 6px;
+    }
+
+    /* ===== TRACKS ===== */
+    #tracks {
+      background: #0d0d0d;
+      border-top: 1px solid var(--color-border);
+    }
+    .tracks-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .track-card {
+      position: relative;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      padding: 28px;
+      cursor: pointer;
+      transition: all 0.35s;
+      overflow: hidden;
+    }
+    .track-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(238,25,122,0.06), rgba(0,145,171,0.06));
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .track-card:hover { border-color: rgba(238,25,122,0.4); transform: translateY(-4px); }
+    .track-card:hover::before { opacity: 1; }
+    .track-num {
+      font-family: var(--font-title);
+      font-size: 3.5rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.05);
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+      transition: color 0.35s;
+    }
+    .track-card:hover .track-num { color: rgba(238,25,122,0.15); }
+    .track-cover {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 2px;
+      margin-bottom: 20px;
+      filter: saturate(0.6);
+      transition: filter 0.35s;
+    }
+    .track-card:hover .track-cover { filter: saturate(1); }
+    .track-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .track-genre {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+    }
+    .track-duration {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .track-name {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .track-desc {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .track-play {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.3s;
+      box-shadow: 0 0 20px rgba(238,25,122,0.6);
+    }
+    .track-card:hover .track-play { opacity: 1; transform: scale(1); }
+    .track-play svg { margin-left: 3px; }
+
+    /* ===== SHOWS ===== */
+    #shows {
+      background: linear-gradient(180deg, #0d0d0d 0%, #0a0a10 100%);
+      border-top: 1px solid var(--color-border);
+    }
+    .shows-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .shows-list { display: flex; flex-direction: column; gap: 2px; }
+    .show-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding: 32px 36px;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      transition: all 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+    .show-item::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--color-secondary), var(--color-accent));
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.35s;
+    }
+    .show-item:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(238,25,122,0.25);
+      transform: translateX(6px);
+    }
+    .show-item:hover::after { transform: scaleY(1); }
+    .show-date {
+      text-align: center;
+    }
+    .show-day {
+      font-family: var(--font-title);
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--color-secondary);
+      text-shadow: 0 0 20px rgba(238,25,122,0.4);
+    }
+    .show-month {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+    .show-info {}
+    .show-venue {
+      font-family: var(--font-title);
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .show-location {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+    .show-location svg { color: var(--color-primary); flex-shrink: 0; }
+    .show-tags {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .show-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      background: rgba(0,145,171,0.12);
+      color: var(--color-primary);
+      border: 1px solid rgba(0,145,171,0.25);
+    }
+    .show-tag.sold-out {
+      background: rgba(238,25,122,0.1);
+      color: var(--color-secondary);
+      border-color: rgba(238,25,122,0.25);
+    }
+    .show-action { flex-shrink: 0; }
+    .btn-ticket {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--color-accent);
+      color: var(--color-accent);
+      border-radius: 2px;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-ticket:hover {
+      background: var(--color-accent);
+      color: #fff;
+      box-shadow: 0 0 24px rgba(54,31,254,0.55);
+    }
+    .btn-ticket.disabled {
+      border-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.2);
+      pointer-events: none;
+    }
+
+    /* ===== WAVEFORM DIVIDER ===== */
+    .waveform-divider {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 48px;
+      overflow: hidden;
+    }
+    .wave-bar {
+      flex-shrink: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--color-secondary), var(--color-accent));
+      border-radius: 2px;
+      animation: waveAnim 1.4s ease-in-out infinite;
+    }
+    @keyframes waveAnim {
+      0%, 100% { transform: scaleY(0.25); opacity: 0.3; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: #0a0a10;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .contact-inner { max-width: 640px; margin: 0 auto; }
+    .contact-title {
+      font-family: var(--font-title);
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+    }
+    .contact-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--color-muted);
+      margin-bottom: 48px;
+      line-height: 1.8;
+    }
+    .contact-email {
+      display: inline-block;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--color-secondary);
+      border-bottom: 1px solid rgba(238,25,122,0.4);
+      padding-bottom: 4px;
+      margin-bottom: 48px;
+      transition: all 0.3s;
+    }
+    .contact-email:hover {
+      color: var(--color-primary);
+      border-color: rgba(0,145,171,0.6);
+      text-shadow: 0 0 16px rgba(0,145,171,0.4);
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      color: var(--color-muted);
+      transition: all 0.3s;
+    }
+    .social-link:hover {
+      border-color: var(--color-secondary);
+      color: var(--color-secondary);
+      box-shadow: 0 0 20px rgba(238,25,122,0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 28px 48px;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== NEON GLOW UTILS ===== */
+    .glow-pink  { text-shadow: 0 0 24px rgba(238,25,122,0.6); }
+    .glow-cyan  { text-shadow: 0 0 24px rgba(0,145,171,0.6); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+      section { padding: 80px 24px; }
+      .bio-grid { grid-template-columns: 1fr; gap: 48px; }
+      .tracks-grid { grid-template-columns: repeat(2, 1fr); }
+      .show-item { grid-template-columns: 80px 1fr; gap: 20px; }
+      .show-action { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      section { padding: 64px 20px; }
+      .tracks-grid { grid-template-columns: 1fr; }
+      .show-item { grid-template-columns: 1fr; gap: 12px; }
+      .show-date { text-align: left; display: flex; align-items: baseline; gap: 10px; }
+      footer { flex-direction: column; text-align: center; }
+      .waveform-divider { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">NXVR</div>
+    <ul class="nav-links">
+      <li><a href="#bio">About</a></li>
+      <li><a href="#tracks">Tracks</a></li>
+      <li><a href="#shows">Shows</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-inner">
+      <div class="hero-tag" data-aos="fade-down">Electronic Music Producer</div>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+        N<span>XVR</span>
+      </h1>
+      <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">
+        Dark Techno &nbsp;/&nbsp; Ambient Rave &nbsp;/&nbsp; Industrial Bass
+      </p>
+      <div class="hero-cta" data-aos="fade-up" data-aos-delay="300">
+        <a href="#tracks" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          Listen Now
+        </a>
+        <a href="#shows" class="btn btn-outline">Upcoming Shows</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- Waveform Divider -->
+  <div class="waveform-divider" id="waveform-div"></div>
+
+  <!-- Bio -->
+  <section id="bio">
+    <div class="container">
+      <div class="bio-grid">
+        <div class="bio-image-wrap" data-aos="fade-right">
+          <img
+            src="https://loremflickr.com/600/750/music,dj,dark"
+            alt="NXVR"
+            class="bio-image"
+          />
+          <div class="bio-badge">
+            <div class="bio-badge-num">10+</div>
+            <div class="bio-badge-txt">Years Active</div>
+          </div>
+        </div>
+        <div class="bio-text" data-aos="fade-left" data-aos-delay="100">
+          <div class="section-label">About</div>
+          <h2 class="section-title">어둠 속의<br/>주파수</h2>
+          <p>NXVR는 서울을 기반으로 활동하는 전자음악 프로듀서로, 다크 테크노와 앰비언트 레이브, 산업적 베이스라인을 결합한 독자적인 사운드를 구축해왔습니다.</p>
+          <p>베를린 Berghain 서브클럽부터 도쿄 Womb, 서울 Cakeshop까지 세계 각지의 클럽에서 수천 명의 관객과 교감했으며, 지금도 경계를 허무는 사운드를 실험 중입니다.</p>
+          <div class="bio-stats">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+              <div class="stat-num">38</div>
+              <div class="stat-label">Released Tracks</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="280">
+              <div class="stat-num">120+</div>
+              <div class="stat-label">Live Shows</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="360">
+              <div class="stat-num">14</div>
+              <div class="stat-label">Countries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracks -->
+  <section id="tracks">
+    <div class="container">
+      <div class="tracks-header">
+        <div data-aos="fade-right">
+          <div class="section-label">Discography</div>
+          <h2 class="section-title">Latest<br/>Tracks</h2>
+        </div>
+        <p class="section-desc" data-aos="fade-left" style="max-width:340px;">
+          어둠과 빛 사이에서 탄생한 사운드.<br/>헤드폰을 끼고 최대 볼륨으로 감상하세요.
+        </p>
+      </div>
+      <div class="tracks-grid">
+
+        <!-- Track 1 -->
+        <div class="track-card" data-aos="fade-up">
+          <div class="track-num">01</div>
+          <img src="https://picsum.photos/seed/nxvr01/400/400" alt="Void Protocol" class="track-cover" />
+          <div class="track-play">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <div class="track-meta">
+            <span class="track-genre">Dark Techno</span>
+            <span class="track-duration">6:42</span>
+          </div>
+          <div class="track-name">Void Protocol</div>
+          <div class="track-desc">사이버 공간의 붕괴를 담은 산업적 베이스라인</div>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track-card" data-aos="fade-up" data-aos-delay="60">
+          <div class="track-num">02</div>
+          <img src="https://picsum.photos/seed/nxvr02/400/400" alt="Neon Collapse" class="track-cover" />
+          <div class="track-play">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <div class="track-meta">
+            <span class="track-genre">Ambient Rave</span>
+            <span class="track-duration">8:17</span>
+          </div>
+          <div class="track-name">Neon Collapse</div>
+          <div class="track-desc">새벽 4시의 클럽, 마지막 불빛이 꺼지기 직전의 황홀경</div>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track-card" data-aos="fade-up" data-aos-delay="120">
+          <div class="track-num">03</div>
+          <img src="https://picsum.photos/seed/nxvr03/400/400" alt="Ghost Frequency" class="track-cover" />
+          <div class="track-play">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <div class="track-meta">
+            <span class="track-genre">Industrial</span>
+            <span class="track-duration">5:58</span>
+          </div>
+          <div class="track-name">Ghost Frequency</div>
+          <div class="track-desc">잊혀진 공장 지대에서 채집한 기계 진동의 기록</div>
+        </div>
+
+        <!-- Track 4 -->
+        <div class="track-card" data-aos="fade-up" data-aos-delay="60">
+          <div class="track-num">04</div>
+          <img src="https://picsum.photos/seed/nxvr04/400/400" alt="Submerge" class="track-cover" />
+          <div class="track-play">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <div class="track-meta">
+            <span class="track-genre">Deep Techno</span>
+            <span class="track-duration">9:03</span>
+          </div>
+          <div class="track-name">Submerge</div>
+          <div class="track-desc">수면 아래로 끌려드는 무중력의 감각</div>
+        </div>
+
+        <!-- Track 5 -->
+        <div class="track-card" data-aos="fade-up" data-aos-delay="120">
+          <div class="track-num">05</div>
+          <img src="https://picsum.photos/seed/nxvr05/400/400" alt="Red Signal" class="track-cover" />
+          <div class="track-play">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <div class="track-meta">
+            <span class="track-genre">EBM</span>
+            <span class="track-duration">7:29</span>
+          </div>
+          <div class="track-name">Red Signal</div>
+          <div class="track-desc">경보음을 리듬으로 변환한 실험적 EBM 트랙</div>
+        </div>
+
+        <!-- Track 6 -->
+        <div class="track-card" data-aos="fade-up" data-aos-delay="180">
+          <div class="track-num">06</div>
+          <img src="https://picsum.photos/seed/nxvr06/400/400" alt="Ultraviolet" class="track-cover" />
+          <div class="track-play">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+          <div class="track-meta">
+            <span class="track-genre">Hypno Techno</span>
+            <span class="track-duration">11:44</span>
+          </div>
+          <div class="track-name">Ultraviolet</div>
+          <div class="track-desc">자외선 파장을 소리로 번역한 최면적 롱플레이</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Shows -->
+  <section id="shows">
+    <div class="container">
+      <div class="shows-header">
+        <div data-aos="fade-right">
+          <div class="section-label">Live</div>
+          <h2 class="section-title">Upcoming<br/>Shows</h2>
+        </div>
+        <p class="section-desc" data-aos="fade-left" style="max-width:320px;">
+          현장에서만 느낄 수 있는 날것의 에너지.<br/>티켓은 조기 매진될 수 있습니다.
+        </p>
+      </div>
+
+      <div class="shows-list">
+
+        <!-- Show 1 -->
+        <div class="show-item" data-aos="fade-up">
+          <div class="show-date">
+            <div class="show-day">26</div>
+            <div class="show-month">Apr 2026</div>
+          </div>
+          <div class="show-info">
+            <div class="show-venue">Cakeshop — Seoul</div>
+            <div class="show-location">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              이태원, 서울, 대한민국
+            </div>
+            <div class="show-tags">
+              <span class="show-tag">Dark Techno Night</span>
+              <span class="show-tag">B2B Set</span>
+            </div>
+          </div>
+          <div class="show-action">
+            <a href="#" class="btn-ticket">
+              Tickets
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Show 2 -->
+        <div class="show-item" data-aos="fade-up" data-aos-delay="60">
+          <div class="show-date">
+            <div class="show-day">10</div>
+            <div class="show-month">May 2026</div>
+          </div>
+          <div class="show-info">
+            <div class="show-venue">Womb — Tokyo</div>
+            <div class="show-location">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              시부야, 도쿄, 일본
+            </div>
+            <div class="show-tags">
+              <span class="show-tag">Resident Set</span>
+              <span class="show-tag">3h Live</span>
+            </div>
+          </div>
+          <div class="show-action">
+            <a href="#" class="btn-ticket">
+              Tickets
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Show 3 -->
+        <div class="show-item" data-aos="fade-up" data-aos-delay="120">
+          <div class="show-date">
+            <div class="show-day">24</div>
+            <div class="show-month">May 2026</div>
+          </div>
+          <div class="show-info">
+            <div class="show-venue">Fabric — London</div>
+            <div class="show-location">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Farringdon, 런던, 영국
+            </div>
+            <div class="show-tags">
+              <span class="show-tag">International Tour</span>
+              <span class="show-tag sold-out">Limited</span>
+            </div>
+          </div>
+          <div class="show-action">
+            <a href="#" class="btn-ticket">
+              Tickets
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Show 4 -->
+        <div class="show-item" data-aos="fade-up" data-aos-delay="180">
+          <div class="show-date">
+            <div class="show-day">07</div>
+            <div class="show-month">Jun 2026</div>
+          </div>
+          <div class="show-info">
+            <div class="show-venue">Berghain — Berlin</div>
+            <div class="show-location">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Friedrichshain, 베를린, 독일
+            </div>
+            <div class="show-tags">
+              <span class="show-tag">Panorama Bar</span>
+              <span class="show-tag">All Night</span>
+            </div>
+          </div>
+          <div class="show-action">
+            <a href="#" class="btn-ticket">
+              Tickets
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Show 5 -->
+        <div class="show-item" data-aos="fade-up" data-aos-delay="240">
+          <div class="show-date">
+            <div class="show-day">21</div>
+            <div class="show-month">Jun 2026</div>
+          </div>
+          <div class="show-info">
+            <div class="show-venue">Fuse — Brussels</div>
+            <div class="show-location">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              브뤼셀, 벨기에
+            </div>
+            <div class="show-tags">
+              <span class="show-tag">Summer Tour</span>
+              <span class="show-tag sold-out">Sold Out</span>
+            </div>
+          </div>
+          <div class="show-action">
+            <a href="#" class="btn-ticket disabled">Sold Out</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-inner" data-aos="fade-up">
+      <div class="section-label" style="justify-content:center;">Contact</div>
+      <h2 class="contact-title">LET'S<br/>CONNECT</h2>
+      <p class="contact-sub">
+        콜라보레이션, 공연 섭외, 레이블 문의 등<br/>모든 비즈니스 커뮤니케이션을 환영합니다.
+      </p>
+      <a href="mailto:booking@nxvr.io" class="contact-email">booking@nxvr.io</a>
+      <div class="social-links">
+        <a href="#" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+        <a href="#" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.058 1.278.266 2.16.558 2.924.306.789.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+          SoundCloud
+        </a>
+        <a href="#" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.43a8.27 8.27 0 004.84 1.56V6.45a4.85 4.85 0 01-1.07-.24z"/></svg>
+          TikTok
+        </a>
+        <a href="#" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.64 5.93h1.43v4.28h-1.43m3.93-4.28H17v4.28h-1.43M7 2L3.43 5.57v12.86h4.28V22l3.58-3.57h2.85L20.57 12V2m-1.43 9.29l-2.85 2.85h-2.86l-2.5 2.5v-2.5H7.71V3.43h11.43z"/></svg>
+          Twitch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">NXVR</div>
+    <div class="footer-copy">© 2026 NXVR. All rights reserved.</div>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // AOS Init
+    AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+    // Scroll Progress Bar
+    window.addEventListener('scroll', function() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = (scrollTop / docHeight) * 100;
+      document.getElementById('progress-bar').style.width = progress + '%';
+    });
+
+    // Waveform Divider
+    (function() {
+      var div = document.getElementById('waveform-div');
+      var barCount = Math.floor(window.innerWidth / 6);
+      for (var i = 0; i < barCount; i++) {
+        var bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        var h = Math.random() * 36 + 8;
+        bar.style.height = h + 'px';
+        bar.style.animationDelay = (Math.random() * 1.4) + 's';
+        bar.style.animationDuration = (Math.random() * 0.8 + 1.0) + 's';
+        bar.style.opacity = (Math.random() * 0.5 + 0.3).toFixed(2);
+        div.appendChild(bar);
+      }
+    })();
+
+    // Canvas Particle System
+    (function() {
+      var canvas = document.getElementById('particles-canvas');
+      var ctx = canvas.getContext('2d');
+      var W, H, particles, mouse;
+
+      function resize() {
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      mouse = { x: W / 2, y: H / 2 };
+
+      window.addEventListener('mousemove', function(e) {
+        var rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      var colors = ['#ee197a', '#0091ab', '#361ffe', '#ff4fcb', '#00d4ff'];
+
+      function Particle() {
+        this.reset();
+      }
+      Particle.prototype.reset = function() {
+        this.x = Math.random() * (W || window.innerWidth);
+        this.y = Math.random() * (H || window.innerHeight);
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.r = Math.random() * 1.8 + 0.4;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.alpha = Math.random() * 0.6 + 0.2;
+        this.life = Math.random() * 200 + 100;
+        this.age = 0;
+      };
+      Particle.prototype.update = function() {
+        this.age++;
+        if (this.age > this.life) { this.reset(); return; }
+
+        var dx = mouse.x - this.x;
+        var dy = mouse.y - this.y;
+        var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (dist < 160) {
+          this.vx -= (dx / dist) * 0.018;
+          this.vy -= (dy / dist) * 0.018;
+        }
+
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0) this.x = W;
+        if (this.x > W) this.x = 0;
+        if (this.y < 0) this.y = H;
+        if (this.y > H) this.y = 0;
+      };
+      Particle.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.alpha * (1 - this.age / this.life);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      };
+
+      function initParticles() {
+        particles = [];
+        var count = Math.min(Math.floor((W * H) / 9000), 180);
+        for (var i = 0; i < count; i++) particles.push(new Particle());
+      }
+
+      function drawConnections() {
+        var maxDist = 110;
+        for (var i = 0; i < particles.length; i++) {
+          for (var j = i + 1; j < particles.length; j++) {
+            var dx = particles[i].x - particles[j].x;
+            var dy = particles[i].y - particles[j].y;
+            var d = Math.sqrt(dx * dx + dy * dy);
+            if (d < maxDist) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = 'rgba(238,25,122,' + (1 - d / maxDist) * 0.12 + ')';
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      var raf;
+      function loop() {
+        ctx.clearRect(0, 0, W, H);
+        drawConnections();
+        for (var i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        raf = requestAnimationFrame(loop);
+      }
+
+      resize();
+      initParticles();
+      loop();
+
+      window.addEventListener('resize', function() {
+        cancelAnimationFrame(raf);
+        resize();
+        initParticles();
+        loop();
+      });
+    })();
+  </script>
+
+</body>
+</html>

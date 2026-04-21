@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>멍멍 유치원 - 강아지 유치원</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Jua&family=Gamja+Flower&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    :root {
+      --color-bg: #fff0f6;
+      --color-primary: #c0507a;
+      --color-accent: #f472b6;
+      --color-text: #111111;
+      --color-soft: #ffd6ea;
+      --color-card: #ffffff;
+      --color-muted: #888888;
+      --font-title: 'Quicksand', 'Jua', sans-serif;
+      --font-body: 'Nunito', 'Gamja Flower', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLL PROGRESS ===== */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 4px; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(255,240,246,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(192,80,122,0.12);
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--color-primary); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-blobs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.35;
+    }
+
+    .blob-1 {
+      width: 480px; height: 480px;
+      background: var(--color-accent);
+      top: -120px; right: -80px;
+      animation: float1 8s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 360px; height: 360px;
+      background: var(--color-soft);
+      bottom: -80px; left: -60px;
+      animation: float2 10s ease-in-out infinite;
+    }
+
+    .blob-3 {
+      width: 200px; height: 200px;
+      background: var(--color-primary);
+      top: 40%; left: 60%;
+      animation: float3 7s ease-in-out infinite;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-30px, 40px); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, -30px); }
+    }
+    @keyframes float3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-20px, 20px) scale(1.1); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-soft);
+      color: var(--color-primary);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .hero-title .accent { color: var(--color-accent); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #555;
+      max-width: 520px;
+      margin: 0 auto 40px;
+      position: relative;
+      line-height: 1.9;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 36px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      box-shadow: 0 6px 24px rgba(192,80,122,0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(244,114,182,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 36px;
+      border-radius: 999px;
+      border: 2px solid var(--color-primary);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s, background 0.3s, color 0.3s;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-soft);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 64px;
+      position: relative;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 50px;
+      background: rgba(192,80,122,0.2);
+      align-self: center;
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section {
+      padding: 100px 24px;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      text-align: center;
+      color: var(--color-text);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: #666;
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto 64px;
+      line-height: 1.9;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* ===== FEATURES ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .feature-card {
+      background: var(--color-card);
+      border-radius: 24px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(192,80,122,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(244,114,182,0.18);
+    }
+
+    .feature-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--color-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 0.92rem;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* ===== PROGRAMS ===== */
+    .programs {
+      background: var(--color-card);
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .program-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--color-bg);
+      box-shadow: 0 4px 20px rgba(192,80,122,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .program-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(244,114,182,0.2);
+    }
+
+    .program-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .program-body {
+      padding: 28px;
+    }
+
+    .program-tag {
+      display: inline-block;
+      background: var(--color-soft);
+      color: var(--color-primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .program-body h3 {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 10px;
+    }
+
+    .program-body p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .program-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .program-meta span {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(192,80,122,0.4), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item:hover::after { opacity: 1; }
+
+    .gallery-item.tall { grid-row: span 2; }
+
+    .gallery-item.wide { grid-column: span 2; }
+
+    .gallery-item img { height: 220px; }
+
+    .gallery-item.tall img { height: 100%; min-height: 460px; }
+
+    .gallery-item.wide img { height: 220px; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background: linear-gradient(135deg, var(--color-soft) 0%, var(--color-bg) 100%);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(192,80,122,0.08);
+      transition: transform 0.3s;
+    }
+
+    .testimonial-card:hover { transform: translateY(-4px); }
+
+    .stars {
+      color: var(--color-accent);
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-soft);
+    }
+
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--color-primary);
+    }
+
+    .reviewer-info {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      text-align: center;
+      padding: 100px 24px;
+    }
+
+    .cta h2 {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.9;
+    }
+
+    .btn-white {
+      background: #ffffff;
+      color: var(--color-primary);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 44px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 48px 24px;
+      font-size: 0.88rem;
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      margin: 0 12px;
+      transition: color 0.3s;
+    }
+
+    footer a:hover { color: var(--color-accent); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 0.85rem; }
+      .hero-stats { gap: 24px; }
+      .stat-divider { display: none; }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item.wide { grid-column: span 2; }
+      .gallery-item.tall img { min-height: 220px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">멍멍 유치원</a>
+    <ul class="nav-links">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#programs">프로그램</a></li>
+      <li><a href="#gallery">갤러리</a></li>
+      <li><a href="#reviews">후기</a></li>
+      <li><a href="#contact" class="btn-primary" style="padding:8px 20px;font-size:0.88rem;">상담 신청</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="hero-badge" data-aos="fade-down">
+      서울 마포구 1위 강아지 유치원
+    </div>
+
+    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+      우리 아이의<br /><span class="accent">행복한 하루</span>를<br />함께해요
+    </h1>
+
+    <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">
+      전문 훈련사와 함께하는 안전하고 즐거운 강아지 유치원.<br />
+      사랑 가득한 돌봄으로 우리 아이를 행복하게 키워드려요.
+    </p>
+
+    <div class="hero-btns" data-aos="fade-up" data-aos-delay="300">
+      <a href="#programs" class="btn-primary">프로그램 보기</a>
+      <a href="#contact" class="btn-outline">상담 신청하기</a>
+    </div>
+
+    <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+      <div class="stat-item">
+        <span class="stat-num">1,200+</span>
+        <div class="stat-label">졸업생 수</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">98%</span>
+        <div class="stat-label">보호자 만족도</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">7년</span>
+        <div class="stat-label">운영 경력</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">10명</span>
+        <div class="stat-label">전문 돌봄 스태프</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / FEATURES -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label" data-aos="fade-up">WHY CHOOSE US</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">멍멍 유치원이 특별한 이유</h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="100">
+        단순한 맡김이 아닌, 진짜 성장과 돌봄이 있는 공간을 만들어요.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="feature-icon">&#128293;</div>
+          <h3>안전한 실내 환경</h3>
+          <p>CCTV 전 구역 설치, 소독 완료된 놀이 공간에서 안심하고 맡기세요.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="feature-icon">&#127775;</div>
+          <h3>소수 정예 돌봄</h3>
+          <p>1인당 최대 3마리 담당 원칙으로 개별 맞춤 케어를 제공합니다.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="feature-icon">&#127881;</div>
+          <h3>매일 일일 보고서</h3>
+          <p>사진과 함께 하루 생활 리포트를 카카오톡으로 보내드려요.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="240">
+          <div class="feature-icon">&#127968;</div>
+          <h3>픽업 & 드롭 서비스</h3>
+          <p>마포구 전 지역 픽업 드롭 가능. 편하게 예약하세요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programs" class="programs">
+    <div class="container">
+      <p class="section-label" data-aos="fade-up">PROGRAMS</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">다양한 프로그램</h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="100">
+        강아지의 성격과 나이에 맞는 프로그램을 선택하세요.
+      </p>
+
+      <div class="programs-grid">
+
+        <div class="program-card" data-aos="fade-up" data-aos-delay="0">
+          <img
+            class="program-img"
+            src="https://loremflickr.com/600/440/puppy,dog,play"
+            alt="사회화 교실"
+          />
+          <div class="program-body">
+            <span class="program-tag">기초</span>
+            <h3>사회화 교실</h3>
+            <p>다른 강아지들과 어울리며 올바른 사회성을 길러요. 처음 유치원에 오는 아이들을 위한 단계적 적응 과정.</p>
+            <div class="program-meta">
+              <span>&#9201; 주 3일</span>
+              <span>&#128021; 소형견 가능</span>
+              <span>&#128176; 월 150,000원</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" data-aos="fade-up" data-aos-delay="100">
+          <img
+            class="program-img"
+            src="https://loremflickr.com/600/440/dog,running,outdoor"
+            alt="활동 놀이반"
+          />
+          <div class="program-body">
+            <span class="program-tag">활동</span>
+            <h3>활동 놀이반</h3>
+            <p>실내외 어질리티, 터그놀이, 노즈워크로 에너지를 발산! 활발한 강아지에게 딱 맞는 프로그램.</p>
+            <div class="program-meta">
+              <span>&#9201; 주 5일</span>
+              <span>&#128021; 전 견종</span>
+              <span>&#128176; 월 220,000원</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" data-aos="fade-up" data-aos-delay="200">
+          <img
+            class="program-img"
+            src="https://loremflickr.com/600/440/dog,training,cute"
+            alt="기초 훈련반"
+          />
+          <div class="program-body">
+            <span class="program-tag">훈련</span>
+            <h3>기초 훈련반</h3>
+            <p>앉아, 기다려, 이리와 등 기본 명령어 습득. 전문 훈련사가 1:1로 진행하여 효과가 탁월해요.</p>
+            <div class="program-meta">
+              <span>&#9201; 주 2일</span>
+              <span>&#128021; 4개월 이상</span>
+              <span>&#128176; 월 180,000원</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" data-aos="fade-up" data-aos-delay="300">
+          <img
+            class="program-img"
+            src="https://loremflickr.com/600/440/dog,grooming,bath"
+            alt="그루밍 & 스파"
+          />
+          <div class="program-body">
+            <span class="program-tag">케어</span>
+            <h3>그루밍 & 스파</h3>
+            <p>목욕, 드라이, 귀 청소, 발톱 케어까지 전문 그루머의 꼼꼼한 미용 서비스를 경험해보세요.</p>
+            <div class="program-meta">
+              <span>&#9201; 예약제</span>
+              <span>&#128021; 전 견종</span>
+              <span>&#128176; 50,000원~</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" data-aos="fade-up" data-aos-delay="400">
+          <img
+            class="program-img"
+            src="https://loremflickr.com/600/440/dog,senior,calm"
+            alt="시니어 케어반"
+          />
+          <div class="program-body">
+            <span class="program-tag">시니어</span>
+            <h3>시니어 케어반</h3>
+            <p>7세 이상 노견을 위한 저자극 프로그램. 온열 마사지, 관절 케어, 조용한 휴식 공간 제공.</p>
+            <div class="program-meta">
+              <span>&#9201; 주 3일</span>
+              <span>&#128021; 7세 이상</span>
+              <span>&#128176; 월 160,000원</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" data-aos="fade-up" data-aos-delay="500">
+          <img
+            class="program-img"
+            src="https://loremflickr.com/600/440/dog,puppy,sleep"
+            alt="풀데이 케어"
+          />
+          <div class="program-body">
+            <span class="program-tag">종일</span>
+            <h3>풀데이 케어</h3>
+            <p>아침 8시부터 저녁 8시까지 하루 종일 돌봄. 출퇴근이 긴 보호자분들에게 최적의 선택.</p>
+            <div class="program-meta">
+              <span>&#9201; 주 5일</span>
+              <span>&#128021; 전 견종</span>
+              <span>&#128176; 월 280,000원</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="container">
+      <p class="section-label" data-aos="fade-up">GALLERY</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">행복한 순간들</h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="100">
+        매일매일 즐겁게 보내는 우리 아이들의 모습을 담았어요.
+      </p>
+
+      <div class="gallery-grid" data-aos="fade-up" data-aos-delay="150">
+        <div class="gallery-item tall">
+          <img src="https://loremflickr.com/480/900/dog,puppy,cute" alt="강아지 사진 1" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://loremflickr.com/480/220/dog,play,happy" alt="강아지 사진 2" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://loremflickr.com/480/220/puppy,friends" alt="강아지 사진 3" />
+        </div>
+        <div class="gallery-item wide">
+          <img src="https://loremflickr.com/960/220/dogs,group,outdoors" alt="강아지 사진 4" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://loremflickr.com/480/220/dog,training" alt="강아지 사진 5" />
+        </div>
+        <div class="gallery-item tall">
+          <img src="https://loremflickr.com/480/900/dog,grooming,cute" alt="강아지 사진 6" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://loremflickr.com/480/220/puppy,sleeping" alt="강아지 사진 7" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="reviews" class="testimonials">
+    <div class="container">
+      <p class="section-label" data-aos="fade-up">REVIEWS</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">보호자 후기</h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="100">
+        멍멍 유치원을 믿고 맡겨주신 보호자분들의 생생한 이야기예요.
+      </p>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"처음엔 낯선 환경에 적응 못 할까 걱정했는데, 일주일 만에 유치원 차 소리만 들어도 꼬리 흔들어요. 선생님들이 너무 친절하고 세심해서 믿고 맡깁니다."</p>
+          <div class="reviewer">
+            <img src="https://loremflickr.com/88/88/woman,smile" alt="reviewer" class="reviewer-img" />
+            <div>
+              <div class="reviewer-name">김지은 보호자</div>
+              <div class="reviewer-info">말티즈 콩이 보호자 · 6개월 재원</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"기초 훈련반 덕분에 산책할 때 끌고 다니는 문제가 완전히 해결됐어요. 훈련사 선생님이 방법도 상세히 알려줘서 집에서도 실천 중입니다."</p>
+          <div class="reviewer">
+            <img src="https://loremflickr.com/88/88/man,smile" alt="reviewer" class="reviewer-img" />
+            <div>
+              <div class="reviewer-name">박준호 보호자</div>
+              <div class="reviewer-info">진돗개 바람이 보호자 · 3개월 재원</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"매일 카카오톡으로 사진이랑 영상 보내주시는데 회사에서도 힐링이에요. 시니어 케어반 덕분에 12살 노견 녀석도 활기차게 지내고 있어요!"</p>
+          <div class="reviewer">
+            <img src="https://loremflickr.com/88/88/woman,happy" alt="reviewer" class="reviewer-img" />
+            <div>
+              <div class="reviewer-name">이소현 보호자</div>
+              <div class="reviewer-info">포메라니안 별이 보호자 · 1년 재원</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="cta">
+    <div class="container">
+      <h2 data-aos="fade-up">지금 바로 상담 신청하세요</h2>
+      <p data-aos="fade-up" data-aos-delay="80">
+        첫 방문은 무료 체험 1일 제공! 우리 아이와 함께 멍멍 유치원을 경험해보세요.
+      </p>
+      <a href="tel:02-1234-5678" class="btn-white" data-aos="fade-up" data-aos-delay="160">
+        02-1234-5678 전화 상담
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">멍멍 유치원</div>
+    <p style="margin-bottom:16px;">서울 마포구 연남동 123-45 · 운영시간 08:00 - 20:00 (연중무휴)</p>
+    <div>
+      <a href="#">인스타그램</a>
+      <a href="#">카카오채널</a>
+      <a href="#">네이버 블로그</a>
+    </div>
+    <p style="margin-top:24px;font-size:0.78rem;">© 2026 멍멍 유치원. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+      offset: 60,
+      easing: 'ease-out-cubic'
+    });
+
+    // scroll progress bar
+    var progressBar = document.getElementById('progress-bar');
+    function updateProgress() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          updateProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  </script>
+
+</body>
+</html>
