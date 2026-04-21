@@ -1048,9 +1048,45 @@
   <section class="section" id="benchmark">
     <div class="section-header">
       <span class="section-title">벤치마크</span>
-      <span class="section-sub">v5 vs Claude Design vs v6</span>
+      <span class="section-sub">v5 vs CD vs v6 vs v7</span>
     </div>
-    <p class="section-desc">동일 프롬프트 5종 — v5(Huemint+폰트매핑) / Claude Design(oklch+AI슬롭금지) / v6(Huemint+oklch+레이아웃패턴) 3방향 비교</p>
+    <p class="section-desc">동일 프롬프트 5종 — v5(Huemint+폰트) / CD(oklch+AI슬롭금지) / v6(Huemint+oklch+레이아웃패턴) / v7(창의성엔진: concept_design+seed+자기검증) 4방향 비교</p>
+
+    <div class="bench-group-label" style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;padding-bottom:6px;border-bottom:2px solid #e63946;">v7 — 창의성 엔진 (concept_design + Seed-Metaphor + Predictability Score)</div>
+    <div class="card-grid" style="margin-bottom:40px;">
+      <div class="card">
+        <div class="card-label" style="background:#1a1a2e;color:#e0e0ff">v7 / A</div>
+        <div class="card-title">내 소개 페이지 — v7</div>
+        <div class="card-prompt">Seed: Liquid-Organic. concept_design 강제 + 자기검증.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v7_A.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#1a1a2e;color:#e0e0ff">v7 / B</div>
+        <div class="card-title">전자음악 포트폴리오 — v7</div>
+        <div class="card-prompt">Seed: Retro-Windows. 다크+네온 컨셉 재해석.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v7_B.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#1a1a2e;color:#e0e0ff">v7 / C</div>
+        <div class="card-title">강아지 유치원 — v7</div>
+        <div class="card-prompt">Seed: Bauhaus. 귀여움+기하학 도형 결합.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v7_C.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#1a1a2e;color:#e0e0ff">v7 / D</div>
+        <div class="card-title">포트폴리오 다크 — v7</div>
+        <div class="card-prompt">Seed: Liquid-Organic. 다크+유기적 곡선 결합.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v7_D.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#1a1a2e;color:#e0e0ff">v7 / E</div>
+        <div class="card-title">카페 블로그 — v7</div>
+        <div class="card-prompt">Seed: Swiss-Editorial. 따뜻한 카페+잡지 레이아웃.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v7_E.html" target="_blank">열기 →</a></div>
+      </div>
+    </div>
+
+    <div class="bench-group-label" style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);">v5 / CD / v6 비교</div>
 
     <div class="bench-group-label" style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:32px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);">A. 내 소개 페이지 — 분위기 불명확</div>
     <div class="card-grid" style="margin-bottom:32px;">

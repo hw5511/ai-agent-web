@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVOID — Electronic Music Producer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      oklch(6% 0.02 265);
+  --primary: oklch(55% 0.28 5);
+  --accent:  oklch(82% 0.10 195);
+  --text:    oklch(93% 0.01 280);
+  --win:     #c0c0c0;
+  --win-lt:  #e8e8e8;
+  --win-dk:  #6b6b6b;
+  --win-dkr: #404040;
+  --gp: 0 0 8px rgba(232,4,93,0.75), 0 0 24px rgba(232,4,93,0.3);
+  --ga: 0 0 8px rgba(100,217,227,0.75), 0 0 24px rgba(100,217,227,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  width:100vw; height:100vh; overflow:hidden;
+  background: var(--bg);
+  font-family:'Space Mono',monospace;
+  cursor:default; user-select:none;
+}
+
+/* ===== DESKTOP ===== */
+#desktop {
+  position:fixed; inset:0 0 36px 0;
+  background-image: radial-gradient(circle, rgba(100,217,227,0.1) 1px, transparent 1px);
+  background-size:28px 28px;
+  overflow:hidden;
+}
+#scanlines {
+  position:fixed; inset:0; pointer-events:none; z-index:9000;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px);
+}
+#scanline-beam {
+  position:fixed; left:0; right:0; height:80px; pointer-events:none; z-index:9001;
+  background: linear-gradient(to bottom, transparent, rgba(100,217,227,0.04), transparent);
+  animation: beamDown 7s linear infinite;
+}
+@keyframes beamDown { from { top:-80px; } to { top:100vh; } }
+
+/* ===== WINDOW BASE ===== */
+.window {
+  position:absolute;
+  background:var(--win);
+  border:2px solid;
+  border-color: var(--win-lt) var(--win-dkr) var(--win-dkr) var(--win-lt);
+  box-shadow: 2px 2px 0 var(--win-dkr);
+}
+.window.active {
+  box-shadow: 3px 3px 0 var(--win-dkr),
+    0 0 28px rgba(232,4,93,0.28), 0 0 60px rgba(232,4,93,0.1);
+}
+.window.minimized { display:none !important; }
+
+/* Title bar */
+.win-tb {
+  background: linear-gradient(90deg, #8a0060 0%, #4a0080 55%, #0e0060 100%);
+  padding:3px 3px 3px 5px;
+  display:flex; align-items:center; gap:4px;
+  cursor:move;
+}
+.window:not(.active) .win-tb { background: #888899; }
+.win-ico { width:14px; height:14px; flex-shrink:0; }
+.win-ico svg { display:block; }
+.win-lbl {
+  flex:1; font-size:11px; font-weight:700; color:#fff;
+  letter-spacing:.05em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.win-btns { display:flex; gap:2px; }
+.win-btn {
+  width:16px; height:14px;
+  background:var(--win);
+  border:1.5px solid; border-color:var(--win-lt) var(--win-dk) var(--win-dk) var(--win-lt);
+  font-size:9px; line-height:1; font-family:'Space Mono',monospace;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:#000;
+}
+.win-btn:hover { background:#e8045d; color:#fff; border-color:#ff6a9f #800030 #800030 #ff6a9f; }
+.win-btn:active { border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk); }
+
+/* Menu bar */
+.win-menu {
+  background:var(--win); display:flex; gap:2px;
+  padding:1px 3px; border-bottom:1px solid var(--win-dk);
+}
+.win-mi { font-size:11px; padding:1px 5px; cursor:pointer; color:#000; }
+.win-mi:hover { background:var(--primary); color:#fff; }
+
+/* Inset content area */
+.win-inset {
+  margin:3px; background:#08081a;
+  border:2px solid; border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk);
+  overflow:hidden;
+}
+
+/* Status bar */
+.win-status {
+  margin:0 3px 3px; display:flex;
+}
+.win-sc {
+  border:1.5px inset; border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk);
+  padding:2px 6px; font-size:10px; color:#000; flex:1;
+}
+
+/* ===== ABOUT WINDOW ===== */
+#win-about { width:315px; top:45px; left:20px; z-index:100; }
+.about-in {
+  padding:16px;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+}
+.about-img {
+  width:88px; height:88px; object-fit:cover;
+  border:2px solid var(--win-dk);
+  filter:hue-rotate(270deg) saturate(1.7) contrast(1.1);
+  box-shadow:var(--gp);
+}
+.about-name {
+  font-family:'Bebas Neue',sans-serif; font-size:54px;
+  color:var(--primary); letter-spacing:.08em; line-height:1;
+  animation:nameGlow 3s ease-in-out infinite;
+}
+@keyframes nameGlow {
+  0%,100% { text-shadow:0 0 10px rgba(232,4,93,.85),0 0 28px rgba(232,4,93,.4); }
+  50%      { text-shadow:0 0 22px rgba(232,4,93,1),0 0 55px rgba(232,4,93,.65),0 0 90px rgba(232,4,93,.2); }
+}
+.about-sub {
+  font-size:9px; color:var(--accent); letter-spacing:.3em;
+  text-transform:uppercase; text-shadow:var(--ga);
+}
+.about-bio {
+  font-size:10px; color:var(--text); line-height:1.85;
+  text-align:center; opacity:.8;
+}
+.about-stats { display:flex; gap:10px; width:100%; justify-content:center; }
+.stat {
+  text-align:center; padding:5px 12px;
+  border:1px solid rgba(100,217,227,.25);
+  box-shadow:0 0 14px rgba(100,217,227,.12);
+}
+.stat-n {
+  font-family:'Bebas Neue',sans-serif; font-size:28px;
+  color:var(--accent); text-shadow:var(--ga); line-height:1;
+}
+.stat-l { font-size:8px; color:var(--text); opacity:.5; letter-spacing:.08em; margin-top:2px; }
+
+/* ===== TRACKS WINDOW ===== */
+#win-tracks { width:400px; top:65px; left:353px; z-index:99; }
+.tk-hdr {
+  display:grid; grid-template-columns:22px 1fr 90px 48px;
+  padding:4px 8px; font-size:9px; color:var(--accent); letter-spacing:.1em;
+  border-bottom:1px solid rgba(100,217,227,.15);
+}
+.tk-row {
+  display:grid; grid-template-columns:22px 1fr 90px 48px;
+  padding:5px 8px; font-size:11px; color:var(--text);
+  cursor:pointer; align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  transition:background .1s;
+}
+.tk-row:hover { background:rgba(232,4,93,.13); color:var(--primary); }
+.tk-row.on     { background:rgba(232,4,93,.2);  color:var(--primary); }
+.tk-n { font-size:9px; color:rgba(100,217,227,.45); }
+.tk-name { font-weight:700; letter-spacing:.04em; }
+.tk-bpm { font-size:9px; color:var(--accent); opacity:.7; }
+.tk-dur { text-align:right; font-size:10px; opacity:.65; }
+
+/* ===== SHOWS WINDOW ===== */
+#win-shows { width:408px; top:45px; left:771px; z-index:98; }
+.sh-row {
+  display:grid; grid-template-columns:92px 1fr 72px;
+  padding:7px 10px; align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  cursor:pointer; transition:background .1s;
+}
+.sh-row:hover { background:rgba(100,217,227,.07); }
+.sh-date { font-size:9px; font-weight:700; color:var(--accent); letter-spacing:.04em; text-shadow:var(--ga); }
+.sh-venue { font-size:11px; font-weight:700; color:var(--text); letter-spacing:.04em; }
+.sh-city  { font-size:9px; color:var(--text); opacity:.45; margin-top:1px; }
+.sh-badge {
+  font-size:8px; padding:2px 5px; text-align:center; white-space:nowrap;
+  border:1px solid var(--primary); color:var(--primary);
+  text-shadow:0 0 6px rgba(232,4,93,.5);
+}
+.sh-badge.sold { border-color:rgba(200,200,200,.25); color:rgba(200,200,200,.3); text-shadow:none; }
+
+/* ===== PLAYER WINDOW ===== */
+#win-player { width:368px; top:390px; left:20px; z-index:110; }
+.pl-in { padding:10px; display:flex; flex-direction:column; gap:8px; }
+.pl-row1 { display:flex; gap:10px; align-items:center; }
+.pl-art {
+  width:54px; height:54px; flex-shrink:0; object-fit:cover;
+  border:1px solid rgba(232,4,93,.35); filter:saturate(1.5);
+}
+.pl-meta { flex:1; min-width:0; }
+.pl-title {
+  font-size:12px; font-weight:700; color:var(--primary);
+  text-shadow:0 0 8px rgba(232,4,93,.5);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.pl-alb  { font-size:9px; color:var(--accent); opacity:.7; margin-top:2px; }
+.pl-time { font-size:9px; color:var(--text); opacity:.5; margin-top:2px; }
+#vis-canvas {
+  width:100%; height:54px; display:block;
+  border:1px solid rgba(100,217,227,.1); background:#04040f;
+}
+.prog-wrap { display:flex; flex-direction:column; gap:2px; }
+.prog-bg {
+  height:6px; background:rgba(255,255,255,.06); cursor:pointer;
+  border:1.5px solid; border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk);
+  overflow:hidden;
+}
+.prog-fill {
+  height:100%; background:linear-gradient(90deg,var(--primary),var(--accent));
+  box-shadow:0 0 8px rgba(232,4,93,.5); transition:width .22s linear;
+}
+.prog-ts { display:flex; justify-content:space-between; font-size:9px; color:rgba(232,232,240,.35); }
+.pl-ctrls { display:flex; align-items:center; justify-content:center; gap:3px; }
+.ctrl {
+  background:var(--win); border:2px solid;
+  border-color:var(--win-lt) var(--win-dk) var(--win-dk) var(--win-lt);
+  padding:3px 9px; font-size:10px; font-family:'Space Mono',monospace;
+  cursor:pointer; color:#000;
+}
+.ctrl:hover  { background:#d4d4d4; }
+.ctrl:active { border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk); }
+.ctrl.play   {
+  background:var(--primary); color:#fff; padding:3px 18px;
+  border-color:#ff6a9f #900040 #900040 #ff6a9f;
+  box-shadow:var(--gp);
+}
+.ctrl.play:hover { background:oklch(60% .28 5); }
+
+/* ===== EQ WINDOW ===== */
+#win-eq { width:334px; top:398px; left:406px; z-index:97; }
+.eq-in { padding:10px; display:flex; flex-direction:column; gap:8px; }
+.eq-bars {
+  display:flex; align-items:flex-end; gap:2px;
+  height:72px; padding:0 2px;
+}
+.eq-b {
+  flex:1; min-height:3px;
+  background:linear-gradient(to top, var(--primary) 0%, var(--accent) 100%);
+  box-shadow:0 0 5px rgba(100,217,227,.3);
+  transition:height .08s;
+}
+.eq-lbls { display:flex; justify-content:space-between; font-size:8px; color:rgba(100,217,227,.4); }
+.sys-rows { display:flex; flex-direction:column; gap:4px; }
+.sys-r { display:flex; align-items:center; gap:6px; }
+.sys-l { font-size:9px; color:var(--accent); width:78px; flex-shrink:0; }
+.sys-bg { flex:1; height:9px; background:rgba(255,255,255,.05); border:1px inset #444; }
+.sys-fill {
+  height:100%;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  box-shadow:0 0 5px rgba(232,4,93,.4);
+}
+.sys-v { width:32px; text-align:right; font-size:9px; color:rgba(232,232,240,.5); }
+
+/* ===== TASKBAR ===== */
+#taskbar {
+  position:fixed; bottom:0; left:0; right:0; height:36px;
+  background:var(--win);
+  border-top:2px solid; border-color:var(--win-lt) transparent transparent var(--win-lt);
+  display:flex; align-items:center; padding:0 3px; gap:3px;
+  z-index:9999;
+}
+#btn-start {
+  height:28px; padding:0 8px;
+  background:var(--win); border:2px solid;
+  border-color:var(--win-lt) var(--win-dk) var(--win-dk) var(--win-lt);
+  font-family:'Space Mono',monospace; font-size:11px; font-weight:700;
+  cursor:pointer; display:flex; align-items:center; gap:5px; color:#000;
+}
+#btn-start:hover { background:var(--primary); color:#fff; box-shadow:var(--gp); }
+.tb-sep { width:2px; height:26px; border:1.5px inset; border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk); }
+.tb-btn {
+  height:28px; padding:0 8px; min-width:92px;
+  background:var(--win); border:2px solid;
+  border-color:var(--win-lt) var(--win-dk) var(--win-dk) var(--win-lt);
+  font-family:'Space Mono',monospace; font-size:10px;
+  cursor:pointer; color:#000; text-align:left;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.tb-btn:hover { background:#d4d4d4; }
+.tb-btn.on { border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk); background:#b0b0b0; }
+#clock {
+  margin-left:auto; padding:3px 8px;
+  border:2px inset; border-color:var(--win-dk) var(--win-lt) var(--win-lt) var(--win-dk);
+  font-size:11px; color:#000; font-family:'Space Mono',monospace;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width:900px) {
+  body { overflow-y:auto; height:auto; }
+  #desktop { position:static; height:auto; background-size:28px 28px; overflow:visible; }
+  .window {
+    position:relative !important; top:auto !important; left:auto !important;
+    width:calc(100% - 16px) !important; margin:8px auto !important;
+    display:block !important;
+  }
+  .win-tb { cursor:default; }
+  #taskbar { display:none; }
+  #scanlines, #scanline-beam { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="desktop">
+
+  <!-- ABOUT.EXE -->
+  <div class="window active" id="win-about">
+    <div class="win-tb">
+      <div class="win-ico"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="5" height="5" fill="#e8045d"/><rect x="8" y="1" width="5" height="5" fill="#64d9e3"/><rect x="1" y="8" width="5" height="5" fill="#64d9e3"/><rect x="8" y="8" width="5" height="5" fill="#e8045d"/></svg></div>
+      <div class="win-lbl">SVOID.EXE — Artist Profile</div>
+      <div class="win-btns">
+        <button class="win-btn" data-act="min"   data-win="win-about">_</button>
+        <button class="win-btn" data-act="max"   data-win="win-about">[]</button>
+        <button class="win-btn" data-act="close" data-win="win-about">X</button>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="win-mi">File</span><span class="win-mi">Edit</span>
+      <span class="win-mi">View</span><span class="win-mi">Help</span>
+    </div>
+    <div class="win-inset">
+      <div class="about-in">
+        <img class="about-img" src="https://loremflickr.com/88/88/music,techno,dj" alt="SVOID">
+        <div class="about-name">SVOID</div>
+        <div class="about-sub">Electronic Music Producer · DJ</div>
+        <div class="about-bio">
+          베를린과 서울을 오가며 활동하는 전자음악 프로듀서.<br>
+          테크노·IDM·앰비언트의 경계에서 기계적 텍스처와<br>
+          감성적 멜로디를 융합한다. 2016년 데뷔 이후<br>
+          세계 주요 클럽에서 활동 중.
+        </div>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-n">47</div><div class="stat-l">RELEASES</div></div>
+          <div class="stat"><div class="stat-n">130</div><div class="stat-l">AVG BPM</div></div>
+          <div class="stat"><div class="stat-n">12M</div><div class="stat-l">STREAMS</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="win-status">
+      <div class="win-sc">47 objects</div>
+      <div class="win-sc">12,847,291 bytes free</div>
+    </div>
+  </div>
+
+  <!-- TRACKS.EXE -->
+  <div class="window" id="win-tracks">
+    <div class="win-tb">
+      <div class="win-ico"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="5" height="5" fill="#e8045d"/><rect x="8" y="1" width="5" height="5" fill="#64d9e3"/><rect x="1" y="8" width="5" height="5" fill="#64d9e3"/><rect x="8" y="8" width="5" height="5" fill="#e8045d"/></svg></div>
+      <div class="win-lbl">TRACKS.EXE — Discography</div>
+      <div class="win-btns">
+        <button class="win-btn" data-act="min"   data-win="win-tracks">_</button>
+        <button class="win-btn" data-act="max"   data-win="win-tracks">[]</button>
+        <button class="win-btn" data-act="close" data-win="win-tracks">X</button>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="win-mi">File</span><span class="win-mi">Sort</span>
+      <span class="win-mi">Filter</span><span class="win-mi">Play All</span>
+    </div>
+    <div class="win-inset">
+      <div class="tk-hdr"><span>#</span><span>TITLE</span><span>BPM / KEY</span><span>TIME</span></div>
+      <div id="track-list"></div>
+    </div>
+    <div class="win-status">
+      <div class="win-sc">10 tracks</div>
+      <div class="win-sc">58:13 total playtime</div>
+    </div>
+  </div>
+
+  <!-- SHOWS.EXE -->
+  <div class="window" id="win-shows">
+    <div class="win-tb">
+      <div class="win-ico"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="5" height="5" fill="#e8045d"/><rect x="8" y="1" width="5" height="5" fill="#64d9e3"/><rect x="1" y="8" width="5" height="5" fill="#64d9e3"/><rect x="8" y="8" width="5" height="5" fill="#e8045d"/></svg></div>
+      <div class="win-lbl">SHOWS.EXE — Tour Dates 2026</div>
+      <div class="win-btns">
+        <button class="win-btn" data-act="min"   data-win="win-shows">_</button>
+        <button class="win-btn" data-act="max"   data-win="win-shows">[]</button>
+        <button class="win-btn" data-act="close" data-win="win-shows">X</button>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="win-mi">File</span><span class="win-mi">Calendar</span><span class="win-mi">Export</span>
+    </div>
+    <div class="win-inset">
+      <div id="shows-list"></div>
+    </div>
+    <div class="win-status">
+      <div class="win-sc">8 upcoming shows</div>
+      <div class="win-sc">Next: 03 May 2026</div>
+    </div>
+  </div>
+
+  <!-- PLAYER.EXE -->
+  <div class="window" id="win-player">
+    <div class="win-tb">
+      <div class="win-ico"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="5" height="5" fill="#e8045d"/><rect x="8" y="1" width="5" height="5" fill="#64d9e3"/><rect x="1" y="8" width="5" height="5" fill="#64d9e3"/><rect x="8" y="8" width="5" height="5" fill="#e8045d"/></svg></div>
+      <div class="win-lbl">PLAYER.EXE</div>
+      <div class="win-btns">
+        <button class="win-btn" data-act="min"   data-win="win-player">_</button>
+        <button class="win-btn" data-act="max"   data-win="win-player">[]</button>
+        <button class="win-btn" data-act="close" data-win="win-player">X</button>
+      </div>
+    </div>
+    <div class="win-inset">
+      <div class="pl-in">
+        <div class="pl-row1">
+          <img class="pl-art" id="pl-art" src="https://picsum.photos/seed/77/54/54" alt="art">
+          <div class="pl-meta">
+            <div class="pl-title" id="pl-title">VOID_SIGNAL</div>
+            <div class="pl-alb">ENTROPY &mdash; 2025</div>
+            <div class="pl-time"><span id="pl-cur">0:00</span> / <span id="pl-tot">6:34</span></div>
+          </div>
+        </div>
+        <canvas id="vis-canvas" width="800" height="108"></canvas>
+        <div class="prog-wrap">
+          <div class="prog-bg" id="prog-bg">
+            <div class="prog-fill" id="prog-fill" style="width:0%"></div>
+          </div>
+          <div class="prog-ts"><span>0:00</span><span id="prog-end">6:34</span></div>
+        </div>
+        <div class="pl-ctrls">
+          <button class="ctrl" id="btn-prev">|&lt;&lt;</button>
+          <button class="ctrl play" id="btn-play">&#9654;</button>
+          <button class="ctrl" id="btn-next">&gt;&gt;|</button>
+          <button class="ctrl" id="btn-shuf">SHUF</button>
+          <button class="ctrl" id="btn-rept">REPT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQ.EXE -->
+  <div class="window" id="win-eq">
+    <div class="win-tb">
+      <div class="win-ico"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="5" height="5" fill="#e8045d"/><rect x="8" y="1" width="5" height="5" fill="#64d9e3"/><rect x="1" y="8" width="5" height="5" fill="#64d9e3"/><rect x="8" y="8" width="5" height="5" fill="#e8045d"/></svg></div>
+      <div class="win-lbl">EQ.EXE — System Monitor</div>
+      <div class="win-btns">
+        <button class="win-btn" data-act="min"   data-win="win-eq">_</button>
+        <button class="win-btn" data-act="max"   data-win="win-eq">[]</button>
+        <button class="win-btn" data-act="close" data-win="win-eq">X</button>
+      </div>
+    </div>
+    <div class="win-inset">
+      <div class="eq-in">
+        <div class="eq-bars" id="eq-bars"></div>
+        <div class="eq-lbls">
+          <span>20Hz</span><span>60</span><span>125</span><span>250</span><span>500</span>
+          <span>1k</span><span>2k</span><span>4k</span><span>8k</span><span>16kHz</span>
+        </div>
+        <div class="sys-rows">
+          <div class="sys-r"><span class="sys-l">CREATIVITY</span><div class="sys-bg"><div class="sys-fill" style="width:94%"></div></div><span class="sys-v">94%</span></div>
+          <div class="sys-r"><span class="sys-l">BPM RANGE</span><div class="sys-bg"><div class="sys-fill" style="width:78%"></div></div><span class="sys-v">78%</span></div>
+          <div class="sys-r"><span class="sys-l">DARK ENERGY</span><div class="sys-bg"><div class="sys-fill" style="width:100%"></div></div><span class="sys-v">MAX</span></div>
+          <div class="sys-r"><span class="sys-l">NOISE FLOOR</span><div class="sys-bg"><div class="sys-fill" style="width:22%"></div></div><span class="sys-v">-42dB</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="win-status">
+      <div class="win-sc">SVOID OS v2.26 &mdash; All systems nominal</div>
+    </div>
+  </div>
+
+</div>
+
+<div id="scanlines"></div>
+<div id="scanline-beam"></div>
+
+<!-- TASKBAR -->
+<div id="taskbar">
+  <button id="btn-start">
+    <svg width="14" height="14" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#e8045d"/><rect x="9" y="1" width="6" height="6" fill="#64d9e3"/><rect x="1" y="9" width="6" height="6" fill="#64d9e3"/><rect x="9" y="9" width="6" height="6" fill="#e8045d"/></svg>
+    SVOID
+  </button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn on" data-tb="win-about">SVOID.EXE</button>
+  <button class="tb-btn"    data-tb="win-tracks">TRACKS.EXE</button>
+  <button class="tb-btn"    data-tb="win-shows">SHOWS.EXE</button>
+  <button class="tb-btn"    data-tb="win-player">PLAYER.EXE</button>
+  <button class="tb-btn"    data-tb="win-eq">EQ.EXE</button>
+  <div id="clock">00:00</div>
+</div>
+
+<script>
+const TRACKS = [
+  { n:'01', name:'VOID_SIGNAL',    bpm:'132', key:'Am', dur:'6:34', seed:77  },
+  { n:'02', name:'PHANTOM_WAVE',   bpm:'128', key:'Dm', dur:'4:12', seed:83  },
+  { n:'03', name:'NEURAL_DRIFT',   bpm:'136', key:'Gm', dur:'7:45', seed:91  },
+  { n:'04', name:'GLITCH_GARDEN',  bpm:'140', key:'Cm', dur:'5:23', seed:104 },
+  { n:'05', name:'BINARY_DUSK',    bpm:'124', key:'Em', dur:'8:01', seed:112 },
+  { n:'06', name:'SYNTHETIC_RAIN', bpm:'130', key:'Fm', dur:'3:56', seed:119 },
+  { n:'07', name:'CIRCUIT_BLOOM',  bpm:'138', key:'Bm', dur:'6:18', seed:127 },
+  { n:'08', name:'STATIC_DREAM',   bpm:'126', key:'Dm', dur:'5:47', seed:133 },
+  { n:'09', name:'ENTROPY_LOOP',   bpm:'142', key:'Am', dur:'9:22', seed:141 },
+  { n:'10', name:'LAST_FREQUENCY', bpm:'120', key:'Cm', dur:'4:55', seed:155 },
+];
+
+const SHOWS = [
+  { date:'03 MAY 2026', venue:'ANALOG CLUB',  city:'Tokyo, JP',      sold:false },
+  { date:'17 MAY 2026', venue:'WOMB',          city:'Tokyo, JP',      sold:false },
+  { date:'01 JUN 2026', venue:'BERGHAIN',      city:'Berlin, DE',     sold:true  },
+  { date:'14 JUN 2026', venue:'FABRIC',        city:'London, UK',     sold:false },
+  { date:'04 JUL 2026', venue:'TRESOR',        city:'Berlin, DE',     sold:false },
+  { date:'19 JUL 2026', venue:'REX CLUB',      city:'Paris, FR',      sold:true  },
+  { date:'02 AUG 2026', venue:'BOILER ROOM',   city:'Seoul, KR',      sold:false },
+  { date:'23 AUG 2026', venue:'AWAKENINGS',    city:'Amsterdam, NL',  sold:false },
+];
+
+// Render tracks
+document.getElementById('track-list').innerHTML = TRACKS.map((t,i) => `
+  <div class="tk-row" data-i="${i}" onclick="pickTrack(${i})">
+    <span class="tk-n">${t.n}</span>
+    <span class="tk-name">${t.name}</span>
+    <span class="tk-bpm">${t.bpm} ${t.key}</span>
+    <span class="tk-dur">${t.dur}</span>
+  </div>`).join('');
+
+// Render shows
+document.getElementById('shows-list').innerHTML = SHOWS.map(s => `
+  <div class="sh-row">
+    <span class="sh-date">${s.date}</span>
+    <div><div class="sh-venue">${s.venue}</div><div class="sh-city">${s.city}</div></div>
+    <div><span class="sh-badge${s.sold?' sold':''}">${s.sold?'SOLD OUT':'TICKETS'}</span></div>
+  </div>`).join('');
+
+// Player state
+let curIdx = 0, playing = false, prog = 0;
+
+function pickTrack(i) {
+  curIdx = i;
+  const t = TRACKS[i];
+  document.getElementById('pl-title').textContent = t.name;
+  document.getElementById('pl-tot').textContent   = t.dur;
+  document.getElementById('pl-cur').textContent   = '0:00';
+  document.getElementById('prog-end').textContent = t.dur;
+  document.getElementById('pl-art').src = `https://picsum.photos/seed/${t.seed}/54/54`;
+  prog = 0;
+  document.getElementById('prog-fill').style.width = '0%';
+  document.querySelectorAll('.tk-row').forEach((r,j) => r.classList.toggle('on', j===i));
+  bringFront(document.getElementById('win-player'));
+}
+
+document.getElementById('btn-play').addEventListener('click', () => {
+  playing = !playing;
+  document.getElementById('btn-play').innerHTML = playing ? '&#9646;&#9646;' : '&#9654;';
+});
+document.getElementById('btn-next').addEventListener('click', () => pickTrack((curIdx+1) % TRACKS.length));
+document.getElementById('btn-prev').addEventListener('click', () => pickTrack((curIdx-1+TRACKS.length) % TRACKS.length));
+
+// Progress tick
+setInterval(() => {
+  if (!playing) return;
+  prog = (prog + 0.04) % 100;
+  document.getElementById('prog-fill').style.width = prog + '%';
+  const [m,s] = TRACKS[curIdx].dur.split(':').map(Number);
+  const sec = Math.floor((m*60+s) * prog/100);
+  document.getElementById('pl-cur').textContent = `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+}, 250);
+
+document.getElementById('prog-bg').addEventListener('click', e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  prog = (e.clientX - r.left) / r.width * 100;
+  document.getElementById('prog-fill').style.width = prog + '%';
+});
+
+// Canvas visualizer
+(function() {
+  const c = document.getElementById('vis-canvas');
+  const ctx = c.getContext('2d');
+  let ph = 0;
+  function frame() {
+    const W = c.width, H = c.height;
+    ctx.fillStyle = '#04040f'; ctx.fillRect(0,0,W,H);
+    const bars = 90, bw = W / bars;
+    for (let i=0; i<bars; i++) {
+      const h = playing
+        ? (Math.sin(ph + i*0.22)*0.4 + Math.sin(ph*1.65 + i*0.37)*0.3 + 0.36) * H * 0.9
+        : (Math.sin(i*0.42)*0.06 + 0.07) * H;
+      const x = i*bw, y = H - h;
+      const g = ctx.createLinearGradient(0,y,0,H);
+      g.addColorStop(0,   '#e8045d');
+      g.addColorStop(0.5, '#64d9e3');
+      g.addColorStop(1,   'rgba(232,4,93,0.25)');
+      ctx.fillStyle = g;
+      ctx.fillRect(x+0.5, y, bw-1, h);
+    }
+    if (playing) ph += 0.07;
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// EQ bars
+(function() {
+  const wrap = document.getElementById('eq-bars');
+  const N = 24;
+  wrap.innerHTML = Array.from({length:N},(_,i) => `<div class="eq-b" id="eb${i}"></div>`).join('');
+  function tick() {
+    for (let i=0; i<N; i++) {
+      const el = document.getElementById('eb'+i);
+      if (!el) continue;
+      const h = playing
+        ? (Math.random()*0.78+0.05)*72
+        : (Math.sin(Date.now()*0.0015 + i*0.45)*0.1 + 0.12)*72;
+      el.style.height = h + 'px';
+    }
+    setTimeout(tick, playing ? 70 : 180);
+  }
+  tick();
+})();
+
+// Window z-management
+let zTop = 200;
+function bringFront(win) {
+  zTop++;
+  win.style.zIndex = zTop;
+  document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+  win.classList.add('active');
+  const id = win.id;
+  document.querySelectorAll('.tb-btn').forEach(b => b.classList.toggle('on', b.dataset.tb===id));
+}
+
+// Draggable windows
+function makeDrag(win) {
+  const bar = win.querySelector('.win-tb');
+  let drag=false, sx,sy,sl,st;
+  bar.addEventListener('mousedown', e => {
+    if (e.target.classList.contains('win-btn')) return;
+    drag=true; sx=e.clientX; sy=e.clientY;
+    sl=win.offsetLeft; st=win.offsetTop;
+    bringFront(win); e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!drag) return;
+    win.style.left = Math.max(0, sl + e.clientX - sx) + 'px';
+    win.style.top  = Math.max(0, st + e.clientY - sy) + 'px';
+  });
+  document.addEventListener('mouseup', () => { drag = false; });
+  win.addEventListener('mousedown', () => bringFront(win));
+}
+document.querySelectorAll('.window').forEach(makeDrag);
+
+// Window buttons (minimize / close both minimize)
+document.querySelectorAll('.win-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const act = btn.dataset.act, id = btn.dataset.win;
+    const win = document.getElementById(id);
+    if (act === 'min' || act === 'close') {
+      win.classList.add('minimized');
+      document.querySelector(`[data-tb="${id}"]`)?.classList.remove('on');
+    }
+  });
+});
+
+// Taskbar restore
+document.querySelectorAll('.tb-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.tb;
+    const win = document.getElementById(id);
+    win.classList.remove('minimized');
+    bringFront(win);
+  });
+});
+
+// Clock
+function tick() {
+  const n = new Date();
+  document.getElementById('clock').textContent =
+    String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
+}
+tick(); setInterval(tick, 10000);
+
+// Init first track
+pickTrack(0);
+</script>
+</body>
+</html>
