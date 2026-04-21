@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnetic Button + Custom Cursor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-bg: #0d0d0d;
+      --color-accent: #6b51fe;
+      --color-text: #ffffff;
+      --font-title: 'Space Mono', 'Nanum Gothic', monospace;
+      --font-body: 'IBM Plex Mono', 'Nanum Gothic', monospace;
+    }
+
+    html, body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      height: 100%;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    /* ---- Custom Cursor ---- */
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      will-change: transform;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid rgba(107, 81, 254, 0.7);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+      will-change: transform;
+    }
+
+    body.cursor-hover #cursor-dot {
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+    }
+
+    body.cursor-hover #cursor-ring {
+      width: 64px;
+      height: 64px;
+      border-color: rgba(107, 81, 254, 1);
+    }
+
+    /* ---- Layout ---- */
+    .scene {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      gap: 60px;
+      user-select: none;
+    }
+
+    .headline {
+      text-align: center;
+    }
+
+    .headline h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--color-text);
+    }
+
+    .headline h1 span {
+      color: var(--color-accent);
+    }
+
+    .headline p {
+      margin-top: 16px;
+      font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Buttons ---- */
+    .btn-group {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .mag-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 44px;
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      border: none;
+      cursor: none;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      will-change: transform;
+    }
+
+    .mag-btn--filled {
+      background: var(--color-accent);
+      color: #ffffff;
+      box-shadow: 0 0 0 0 rgba(107, 81, 254, 0);
+    }
+
+    .mag-btn--filled:hover {
+      box-shadow: 0 0 40px rgba(107, 81, 254, 0.55);
+    }
+
+    .mag-btn--outline {
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .mag-btn--outline:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .mag-btn--ghost {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.5);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mag-btn--ghost:hover {
+      background: rgba(107, 81, 254, 0.1);
+      color: var(--color-accent);
+      border-color: rgba(107, 81, 254, 0.4);
+    }
+
+    /* inner span for text isolation */
+    .mag-btn .btn-label {
+      pointer-events: none;
+    }
+
+    /* ---- Hint ---- */
+    .hint {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Noise Texture Overlay ---- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ---- Scroll progress (자동 포함 규칙 — 단일 뷰 시 hidden) ---- */
+    #progress {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <section class="scene">
+    <div class="headline">
+      <h1>Magnetic<br /><span>Interaction</span></h1>
+      <p>Move your cursor near the buttons</p>
+    </div>
+
+    <div class="btn-group">
+      <button class="mag-btn mag-btn--filled" data-mag>
+        <span class="btn-label">Get Started</span>
+      </button>
+      <button class="mag-btn mag-btn--outline" data-mag>
+        <span class="btn-label">Learn More</span>
+      </button>
+      <button class="mag-btn mag-btn--ghost" data-mag>
+        <span class="btn-label">View Source</span>
+      </button>
+    </div>
+
+    <p class="hint">80px magnetic field &middot; lerp cursor &middot; pure js</p>
+  </section>
+
+  <script>
+    (function () {
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      const body = document.body;
+
+      // ---- Cursor state ----
+      let mouseX = 0, mouseY = 0;
+      let ringX = 0, ringY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function lerp(a, b, t) {
+        return a + (b - a) * t;
+      }
+
+      // ---- Magnetic buttons ----
+      const MAGNETIC_RANGE = 80;
+      const MAGNETIC_STRENGTH = 0.45;
+      const buttons = document.querySelectorAll('[data-mag]');
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('mouseenter', () => body.classList.add('cursor-hover'));
+        btn.addEventListener('mouseleave', () => {
+          body.classList.remove('cursor-hover');
+          btn.style.transform = 'translate(0px, 0px)';
+        });
+      });
+
+      function applyMagnetic() {
+        buttons.forEach((btn) => {
+          const rect = btn.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = mouseX - cx;
+          const dy = mouseY - cy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < MAGNETIC_RANGE) {
+            const pull = (MAGNETIC_RANGE - dist) / MAGNETIC_RANGE;
+            const tx = dx * pull * MAGNETIC_STRENGTH;
+            const ty = dy * pull * MAGNETIC_STRENGTH;
+            btn.style.transform = `translate(${tx}px, ${ty}px)`;
+          } else {
+            btn.style.transform = 'translate(0px, 0px)';
+          }
+        });
+      }
+
+      // ---- rAF loop ----
+      function tick() {
+        // dot follows instantly
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        // ring lerp
+        ringX = lerp(ringX, mouseX, 0.12);
+        ringY = lerp(ringY, mouseY, 0.12);
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+
+        applyMagnetic();
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 - Playwright 실습 사이트</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; }
+
+    /* ===== NAV ===== */
+    #navbar {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      gap: 4px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    #navbar .nav-brand { font-weight: 800; font-size: 18px; margin-right: auto; cursor: pointer; letter-spacing: -0.5px; }
+    #navbar .nav-brand span { color: #e94560; }
+    #navbar a, #navbar button.nav-btn {
+      color: #aaa;
+      text-decoration: none;
+      background: none;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+    }
+    #navbar a:hover, #navbar button.nav-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    #navbar .nav-user { color: #e94560; font-size: 13px; font-weight: 600; margin-right: 8px; }
+
+    /* ===== AUTH MODAL ===== */
+    #auth-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    #auth-modal-overlay.show { display: flex; }
+    #auth-modal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 36px 40px;
+      width: 420px;
+      max-width: 90vw;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    #auth-modal .modal-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    #auth-modal .modal-subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
+
+    /* Modal tabs */
+    .modal-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #eee;
+    }
+    .modal-tab {
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #aaa;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .modal-tab.active { color: #e94560; border-bottom-color: #e94560; }
+
+    /* ===== LAYOUT ===== */
+    #app-layout {
+      display: none;
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 16px;
+      gap: 24px;
+    }
+    #app-layout.show { display: flex; }
+
+    /* Sidebar */
+    #sidebar {
+      width: 200px;
+      flex-shrink: 0;
+    }
+    .sidebar-section { margin-bottom: 8px; }
+    .sidebar-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #aaa;
+      padding: 0 12px;
+      margin-bottom: 4px;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #555;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
+    }
+    .sidebar-item:hover { background: #e8eaf0; color: #1a1a2e; }
+    .sidebar-item.active { background: #e94560; color: #fff; font-weight: 700; }
+    .sidebar-item .cat-icon { font-size: 16px; }
+
+    /* Main content */
+    #main-content { flex: 1; min-width: 0; }
+
+    /* ===== PAGES ===== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ===== CARD ===== */
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+      padding: 28px 32px;
+    }
+    .card h2 { margin-bottom: 20px; font-size: 20px; color: #1a1a2e; }
+
+    /* ===== FORM ===== */
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 700; color: #444; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #ddd;
+      border-radius: 7px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border 0.15s;
+      background: #fafafa;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none;
+      border-color: #e94560;
+      background: #fff;
+    }
+    .form-group textarea { min-height: 160px; resize: vertical; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 7px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: opacity 0.15s, transform 0.1s;
+      font-family: inherit;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: #e94560; color: #fff; }
+    .btn-dark { background: #1a1a2e; color: #fff; }
+    .btn-success { background: #27ae60; color: #fff; }
+    .btn-secondary { background: #e0e0e0; color: #555; }
+    .btn-sm { padding: 6px 14px; font-size: 13px; }
+    .btn-full { width: 100%; margin-top: 6px; padding: 12px; font-size: 15px; }
+
+    /* ===== ALERTS ===== */
+    .alert { padding: 10px 14px; border-radius: 7px; font-size: 13px; margin-bottom: 14px; }
+    .alert-error { background: #fdecea; color: #c0392b; border: 1px solid #f5c6c6; }
+    .alert-success { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }
+
+    /* ===== BOARD HEADER ===== */
+    .board-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .board-header-left { display: flex; align-items: center; gap: 10px; }
+    .board-header h2 { font-size: 20px; color: #1a1a2e; }
+    .board-count { font-size: 13px; color: #888; }
+
+    /* ===== POST LIST ===== */
+    #post-list { list-style: none; }
+    .post-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: box-shadow 0.15s, transform 0.1s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .post-item:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.12); transform: translateY(-1px); }
+    .post-item-left { flex: 1; min-width: 0; }
+    .post-title { font-size: 15px; font-weight: 600; color: #1a1a2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .post-meta { font-size: 12px; color: #999; margin-top: 4px; display: flex; gap: 8px; align-items: center; }
+    .post-category-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .post-item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; margin-left: 12px; }
+    .post-comment-count { font-size: 12px; color: #e94560; font-weight: 700; }
+
+    /* ===== POST DETAIL ===== */
+    #post-detail-category { margin-bottom: 10px; }
+    #post-detail-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; line-height: 1.4; }
+    #post-detail-meta { font-size: 13px; color: #999; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #eee; }
+    #post-detail-content { font-size: 15px; line-height: 1.9; min-height: 100px; margin-bottom: 32px; white-space: pre-wrap; color: #333; }
+
+    /* ===== COMMENTS ===== */
+    .comments-section { border-top: 1px solid #eee; padding-top: 24px; }
+    .comments-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #1a1a2e; }
+    #comment-list { list-style: none; margin-bottom: 16px; }
+    .comment-item {
+      background: #f7f8fa;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+    }
+    .comment-author { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+    .comment-text { font-size: 14px; margin-top: 4px; color: #444; line-height: 1.6; }
+    .comment-date { font-size: 11px; color: #bbb; margin-top: 4px; }
+    .comment-form { display: flex; gap: 8px; }
+    .comment-form input { flex: 1; }
+
+    /* ===== MYPAGE ===== */
+    .mypage-info-card { margin-bottom: 16px; }
+    .mypage-stat { display: flex; gap: 24px; margin-top: 12px; }
+    .mypage-stat-item { text-align: center; }
+    .mypage-stat-num { font-size: 22px; font-weight: 800; color: #e94560; }
+    .mypage-stat-label { font-size: 12px; color: #888; }
+    #my-post-list { list-style: none; }
+    .my-post-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+    .my-post-item:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+
+    /* ===== MISC ===== */
+    .auth-link { text-align: center; margin-top: 14px; font-size: 13px; color: #888; }
+    .auth-link a { color: #e94560; cursor: pointer; font-weight: 600; }
+    .back-btn { margin-bottom: 14px; }
+    .empty-msg { text-align: center; color: #bbb; padding: 48px 16px; font-size: 15px; background: #fff; border-radius: 10px; }
+
+    /* Category badge colors */
+    .cat-free    { background: #e8f4fd; color: #2980b9; }
+    .cat-qna     { background: #fef9e7; color: #d68910; }
+    .cat-notice  { background: #fdecea; color: #c0392b; }
+    .cat-info    { background: #eafaf1; color: #1e8449; }
+    .cat-humor   { background: #f4ecf7; color: #7d3c98; }
+
+    /* ===== PAGINATION ===== */
+    #board-pagination { display: flex; gap: 6px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+    .pag-btn { min-width: 36px; padding: 7px 12px; font-size: 13px; }
+    .pag-btn:disabled { opacity: 0.35; cursor: default; }
+  </style>
+</head>
+<body>
+
+<!-- ===== AUTH MODAL ===== -->
+<div id="auth-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+  <div id="auth-modal">
+    <div class="modal-title" id="modal-title-text">커뮤니티에 오신 것을 환영합니다</div>
+    <div class="modal-subtitle">로그인 후 게시판을 이용할 수 있습니다</div>
+
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="modal-tab-login" onclick="switchModalTab('login')">로그인</div>
+      <div class="modal-tab" id="modal-tab-register" onclick="switchModalTab('register')">회원가입</div>
+    </div>
+
+    <!-- Modal Login Form -->
+    <div id="modal-login-panel">
+      <div id="modal-login-error" class="alert alert-error" style="display:none;"></div>
+      <form id="modal-login-form" onsubmit="doModalLogin(event)">
+        <div class="form-group">
+          <label for="modal-login-username">아이디</label>
+          <input type="text" id="modal-login-username" name="username" placeholder="아이디 입력" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-login-password">비밀번호</label>
+          <input type="password" id="modal-login-password" name="password" placeholder="비밀번호 입력" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="modal-login-submit-btn">로그인</button>
+      </form>
+      <div class="auth-link">계정이 없으신가요? <a onclick="switchModalTab('register')">회원가입</a></div>
+    </div>
+
+    <!-- Modal Register Form -->
+    <div id="modal-register-panel" style="display:none;">
+      <div id="modal-register-error" class="alert alert-error" style="display:none;"></div>
+      <div id="modal-register-success" class="alert alert-success" style="display:none;"></div>
+      <form id="modal-register-form" onsubmit="doModalRegister(event)">
+        <div class="form-group">
+          <label for="modal-register-username">아이디</label>
+          <input type="text" id="modal-register-username" name="username" placeholder="아이디 (3자 이상)" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-register-password">비밀번호</label>
+          <input type="password" id="modal-register-password" name="password" placeholder="비밀번호 (4자 이상)" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-register-nickname">닉네임</label>
+          <input type="text" id="modal-register-nickname" name="nickname" placeholder="닉네임 입력" required>
+        </div>
+        <button type="submit" class="btn btn-dark btn-full" id="modal-register-submit-btn">회원가입</button>
+      </form>
+      <div class="auth-link">이미 계정이 있으신가요? <a onclick="switchModalTab('login')">로그인</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <span class="nav-brand" id="nav-brand" onclick="goBoard('free')">커뮤<span>니티</span></span>
+  <span id="nav-user-info" class="nav-user"></span>
+  <a href="#" id="nav-mypage" onclick="goMypage(); return false;" style="display:none;">마이페이지</a>
+  <a href="#" id="nav-write" onclick="goWrite(); return false;" style="display:none;">글쓰기</a>
+  <button class="nav-btn" id="nav-logout" onclick="logout()" style="display:none;">로그아웃</button>
+</nav>
+
+<!-- ===== APP LAYOUT ===== -->
+<div id="app-layout">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">게시판</div>
+      <div class="sidebar-item active" id="cat-free" data-category="free" onclick="goBoard('free')">
+        <span class="cat-icon">💬</span> 자유게시판
+      </div>
+      <div class="sidebar-item" id="cat-qna" data-category="qna" onclick="goBoard('qna')">
+        <span class="cat-icon">❓</span> 질문/답변
+      </div>
+      <div class="sidebar-item" id="cat-notice" data-category="notice" onclick="goBoard('notice')">
+        <span class="cat-icon">📢</span> 공지사항
+      </div>
+      <div class="sidebar-item" id="cat-info" data-category="info" onclick="goBoard('info')">
+        <span class="cat-icon">📌</span> 정보공유
+      </div>
+      <div class="sidebar-item" id="cat-humor" data-category="humor" onclick="goBoard('humor')">
+        <span class="cat-icon">😄</span> 유머/잡담
+      </div>
+    </div>
+    <div class="sidebar-section" style="margin-top:16px;">
+      <div class="sidebar-label">내 활동</div>
+      <div class="sidebar-item" id="sidebar-mypage" onclick="goMypage()">
+        <span class="cat-icon">👤</span> 마이페이지
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div id="main-content">
+
+    <!-- PAGE: BOARD -->
+    <div class="page active" id="page-board">
+      <div class="board-header">
+        <div class="board-header-left">
+          <h2 id="board-title">자유게시판</h2>
+          <span class="board-count" id="board-count"></span>
+        </div>
+        <button class="btn btn-primary btn-sm" id="board-write-btn" onclick="goWrite()">+ 글쓰기</button>
+      </div>
+      <ul id="post-list"></ul>
+      <div id="board-pagination"></div>
+      <div id="post-list-empty" class="empty-msg" style="display:none;">아직 게시글이 없습니다. 첫 번째 글을 작성해보세요!</div>
+    </div>
+
+    <!-- PAGE: POST DETAIL -->
+    <div class="page" id="page-post-detail">
+      <div class="back-btn">
+        <button class="btn btn-secondary btn-sm" id="detail-back-btn" onclick="goBack()">← 목록으로</button>
+      </div>
+      <div class="card">
+        <div id="post-detail-category"></div>
+        <h1 id="post-detail-title"></h1>
+        <p id="post-detail-meta"></p>
+        <div id="post-detail-content"></div>
+        <div class="comments-section">
+          <h3 id="comment-count-label">댓글 0개</h3>
+          <ul id="comment-list"></ul>
+          <div id="comment-form-wrap" class="comment-form">
+            <input type="text" id="comment-input" placeholder="댓글을 입력하세요..." maxlength="300">
+            <button class="btn btn-primary btn-sm" id="comment-submit-btn" onclick="submitComment()">등록</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: WRITE -->
+    <div class="page" id="page-write">
+      <div class="back-btn">
+        <button class="btn btn-secondary btn-sm" id="write-back-btn" onclick="goBack()">← 목록으로</button>
+      </div>
+      <div class="card">
+        <h2>글쓰기</h2>
+        <div id="write-error" class="alert alert-error" style="display:none;"></div>
+        <form id="write-form" onsubmit="doWrite(event)">
+          <div class="form-group">
+            <label for="write-category">게시판 선택</label>
+            <select id="write-category" name="category">
+              <option value="free">💬 자유게시판</option>
+              <option value="qna">❓ 질문/답변</option>
+              <option value="notice">📢 공지사항</option>
+              <option value="info">📌 정보공유</option>
+              <option value="humor">😄 유머/잡담</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="write-title">제목</label>
+            <input type="text" id="write-title" name="title" placeholder="제목을 입력하세요" required>
+          </div>
+          <div class="form-group">
+            <label for="write-content">내용</label>
+            <textarea id="write-content" name="content" placeholder="내용을 입력하세요" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="write-submit-btn">등록하기</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- PAGE: MYPAGE -->
+    <div class="page" id="page-mypage">
+      <div class="card mypage-info-card">
+        <h2>마이페이지</h2>
+        <p id="mypage-info" style="font-size:14px; color:#666;"></p>
+        <div class="mypage-stat">
+          <div class="mypage-stat-item">
+            <div class="mypage-stat-num" id="mypage-post-count">0</div>
+            <div class="mypage-stat-label">작성 글</div>
+          </div>
+          <div class="mypage-stat-item">
+            <div class="mypage-stat-num" id="mypage-comment-count">0</div>
+            <div class="mypage-stat-label">작성 댓글</div>
+          </div>
+        </div>
+      </div>
+      <h3 style="margin-bottom:10px; color:#1a1a2e; font-size:16px;">내가 쓴 글</h3>
+      <ul id="my-post-list"></ul>
+      <div id="my-post-empty" class="empty-msg" style="display:none;">아직 작성한 글이 없습니다.</div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /app-layout -->
+
+<script>
+  // ===== CONSTANTS =====
+  var STORAGE_USERS   = 'community_users';
+  var STORAGE_POSTS   = 'community_posts';
+  var STORAGE_CURRENT = 'community_current_user';
+
+  var CATEGORIES = {
+    free:   { label: '자유게시판', icon: '💬', cls: 'cat-free' },
+    qna:    { label: '질문/답변',  icon: '❓', cls: 'cat-qna' },
+    notice: { label: '공지사항',   icon: '📢', cls: 'cat-notice' },
+    info:   { label: '정보공유',   icon: '📌', cls: 'cat-info' },
+    humor:  { label: '유머/잡담', icon: '😄', cls: 'cat-humor' }
+  };
+
+  var currentCategory = 'free';
+  var currentPostId   = null;
+  var prevCategory    = 'free';
+  var currentPage     = {};
+
+  // ===== STORAGE =====
+  function getUsers()   { return JSON.parse(localStorage.getItem(STORAGE_USERS)   || '[]'); }
+  function saveUsers(u) { localStorage.setItem(STORAGE_USERS, JSON.stringify(u)); }
+  function getPosts()   { return JSON.parse(localStorage.getItem(STORAGE_POSTS)   || '[]'); }
+  function savePosts(p) { localStorage.setItem(STORAGE_POSTS, JSON.stringify(p)); }
+  function getCurrentUser()   { return JSON.parse(localStorage.getItem(STORAGE_CURRENT) || 'null'); }
+  function setCurrentUser(u)  { localStorage.setItem(STORAGE_CURRENT, JSON.stringify(u)); }
+  function clearCurrentUser() { localStorage.removeItem(STORAGE_CURRENT); }
+
+  // ===== MODAL =====
+  function showModal() {
+    document.getElementById('auth-modal-overlay').classList.add('show');
+    switchModalTab('login');
+  }
+  function hideModal() {
+    document.getElementById('auth-modal-overlay').classList.remove('show');
+  }
+  function switchModalTab(tab) {
+    var isLogin = tab === 'login';
+    document.getElementById('modal-tab-login').classList.toggle('active', isLogin);
+    document.getElementById('modal-tab-register').classList.toggle('active', !isLogin);
+    document.getElementById('modal-login-panel').style.display    = isLogin ? '' : 'none';
+    document.getElementById('modal-register-panel').style.display = isLogin ? 'none' : '';
+    hideEl('modal-login-error');
+    hideEl('modal-register-error');
+    hideEl('modal-register-success');
+  }
+
+  // ===== MODAL AUTH =====
+  function doModalLogin(e) {
+    e.preventDefault();
+    hideEl('modal-login-error');
+    var username = document.getElementById('modal-login-username').value.trim();
+    var password = document.getElementById('modal-login-password').value;
+    var users = getUsers();
+    var user = users.find(function(u) { return u.username === username && u.password === password; });
+    if (!user) {
+      showError('modal-login-error', '아이디 또는 비밀번호가 올바르지 않습니다.');
+      return;
+    }
+    setCurrentUser({ id: user.id, username: user.username, nickname: user.nickname });
+    document.getElementById('modal-login-form').reset();
+    hideModal();
+    onLoggedIn();
+  }
+
+  function doModalRegister(e) {
+    e.preventDefault();
+    hideEl('modal-register-error');
+    hideEl('modal-register-success');
+    var username = document.getElementById('modal-register-username').value.trim();
+    var password = document.getElementById('modal-register-password').value;
+    var nickname = document.getElementById('modal-register-nickname').value.trim();
+    if (username.length < 3) { showError('modal-register-error', '아이디는 3자 이상이어야 합니다.'); return; }
+    if (password.length < 4) { showError('modal-register-error', '비밀번호는 4자 이상이어야 합니다.'); return; }
+    if (!nickname)           { showError('modal-register-error', '닉네임을 입력해주세요.'); return; }
+    var users = getUsers();
+    if (users.find(function(u) { return u.username === username; })) {
+      showError('modal-register-error', '이미 사용 중인 아이디입니다.');
+      return;
+    }
+    var newUser = { id: Date.now().toString(), username: username, password: password, nickname: nickname };
+    users.push(newUser);
+    saveUsers(users);
+    showSuccess('modal-register-success', '회원가입 완료! 로그인해주세요.');
+    document.getElementById('modal-register-form').reset();
+    setTimeout(function() { switchModalTab('login'); }, 1000);
+  }
+
+  // ===== NAV & STATE =====
+  function updateNav() {
+    var user = getCurrentUser();
+    if (user) {
+      showEl('nav-mypage');
+      showEl('nav-write');
+      showEl('nav-logout');
+      document.getElementById('nav-user-info').textContent = user.nickname + ' 님';
+    } else {
+      hideEl('nav-mypage');
+      hideEl('nav-write');
+      hideEl('nav-logout');
+      document.getElementById('nav-user-info').textContent = '';
+    }
+  }
+
+  function onLoggedIn() {
+    updateNav();
+    document.getElementById('app-layout').classList.add('show');
+    goBoard(currentCategory);
+  }
+
+  function logout() {
+    clearCurrentUser();
+    updateNav();
+    document.getElementById('app-layout').classList.remove('show');
+    showModal();
+  }
+
+  // ===== PAGES =====
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    var p = document.getElementById(pageId);
+    if (p) p.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function goBoard(cat) {
+    cat = cat || currentCategory;
+    if (cat !== currentCategory) currentPage[cat] = 1;
+    currentCategory = cat;
+    prevCategory = cat;
+    if (!currentPage[cat]) currentPage[cat] = 1;
+    // sidebar active
+    document.querySelectorAll('.sidebar-item[data-category]').forEach(function(el) {
+      el.classList.toggle('active', el.getAttribute('data-category') === cat);
+    });
+    renderBoard(cat);
+    showPage('page-board');
+  }
+
+  function goWrite() {
+    document.getElementById('write-category').value = currentCategory;
+    document.getElementById('write-title').value = '';
+    document.getElementById('write-content').value = '';
+    hideEl('write-error');
+    showPage('page-write');
+  }
+
+  function goMypage() {
+    renderMypage(getCurrentUser());
+    document.querySelectorAll('.sidebar-item[data-category]').forEach(function(el) { el.classList.remove('active'); });
+    showPage('page-mypage');
+  }
+
+  function goPostDetail(postId) {
+    currentPostId = postId;
+    renderPostDetail(postId);
+    showPage('page-post-detail');
+  }
+
+  function goBack() {
+    goBoard(prevCategory);
+  }
+
+  // ===== PAGINATION =====
+  var PAGE_SIZE = 5;
+
+  function renderPagination(cat, page, totalPages) {
+    var pag = document.getElementById('board-pagination');
+    pag.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    var prev = document.createElement('button');
+    prev.className = 'btn btn-secondary btn-sm pag-btn';
+    prev.textContent = '이전';
+    prev.id = 'pag-prev';
+    prev.disabled = page <= 1;
+    prev.onclick = (function(p) { return function() { currentPage[cat] = p - 1; renderBoard(cat); }; })(page);
+    pag.appendChild(prev);
+
+    for (var i = 1; i <= totalPages; i++) {
+      (function(i) {
+        var btn = document.createElement('button');
+        btn.className = 'btn btn-sm pag-btn' + (i === page ? ' btn-primary' : ' btn-secondary');
+        btn.textContent = i;
+        btn.id = 'pag-' + i;
+        btn.onclick = (function(n) { return function() { currentPage[cat] = n; renderBoard(cat); }; })(i);
+        pag.appendChild(btn);
+      })(i);
+    }
+
+    var next = document.createElement('button');
+    next.className = 'btn btn-secondary btn-sm pag-btn';
+    next.textContent = '다음';
+    next.id = 'pag-next';
+    next.disabled = page >= totalPages;
+    next.onclick = (function(p) { return function() { currentPage[cat] = p + 1; renderBoard(cat); }; })(page);
+    pag.appendChild(next);
+  }
+
+  // ===== BOARD =====
+  function renderBoard(cat) {
+    var catInfo = CATEGORIES[cat] || CATEGORIES['free'];
+    document.getElementById('board-title').textContent = catInfo.icon + ' ' + catInfo.label;
+
+    var allPosts = getPosts();
+    var filtered = allPosts.filter(function(p) { return p.category === cat; }).reverse();
+    var total = filtered.length;
+    var totalPages = Math.ceil(total / PAGE_SIZE) || 1;
+    var page = currentPage[cat] || 1;
+    if (page > totalPages) page = totalPages;
+    currentPage[cat] = page;
+
+    var posts = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+    document.getElementById('board-count').textContent = '총 ' + total + '개';
+
+    var list = document.getElementById('post-list');
+    list.innerHTML = '';
+
+    if (total === 0) {
+      list.style.display = 'none';
+      showEl('post-list-empty');
+      document.getElementById('board-pagination').innerHTML = '';
+      return;
+    }
+    hideEl('post-list-empty');
+    list.style.display = '';
+    renderPagination(cat, page, totalPages);
+
+    posts.forEach(function(post) {
+      var li = document.createElement('li');
+      li.className = 'post-item';
+      li.setAttribute('id', 'post-item-' + post.id);
+      li.setAttribute('data-post-id', post.id);
+      li.setAttribute('data-category', post.category);
+      li.onclick = function() { goPostDetail(post.id); };
+      var commentCount = post.comments ? post.comments.length : 0;
+      var ci = CATEGORIES[post.category] || CATEGORIES['free'];
+      li.innerHTML =
+        '<div class="post-item-left">' +
+          '<div class="post-title">' + escHtml(post.title) + '</div>' +
+          '<div class="post-meta">' +
+            '<span class="post-category-badge ' + ci.cls + '">' + ci.label + '</span>' +
+            '<span>' + escHtml(post.authorNickname) + '</span>' +
+            '<span>·</span>' +
+            '<span>' + formatDate(post.createdAt) + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="post-item-right">' +
+          '<span class="post-comment-count">💬 ' + commentCount + '</span>' +
+        '</div>';
+      list.appendChild(li);
+    });
+  }
+
+  // ===== WRITE =====
+  function doWrite(e) {
+    e.preventDefault();
+    hideEl('write-error');
+    var user = getCurrentUser();
+    if (!user) { showModal(); return; }
+    var category = document.getElementById('write-category').value;
+    var title    = document.getElementById('write-title').value.trim();
+    var content  = document.getElementById('write-content').value.trim();
+    if (!title)   { showError('write-error', '제목을 입력해주세요.'); return; }
+    if (!content) { showError('write-error', '내용을 입력해주세요.'); return; }
+    var posts = getPosts();
+    var newPost = {
+      id: Date.now().toString(),
+      category: category,
+      title: title,
+      content: content,
+      authorId: user.id,
+      authorNickname: user.nickname,
+      createdAt: new Date().toISOString(),
+      comments: []
+    };
+    posts.push(newPost);
+    savePosts(posts);
+    currentCategory = category;
+    document.getElementById('write-form').reset();
+    goPostDetail(newPost.id);
+  }
+
+  // ===== POST DETAIL =====
+  function renderPostDetail(postId) {
+    var posts = getPosts();
+    var post = posts.find(function(p) { return p.id === postId; });
+    if (!post) { goBack(); return; }
+    var ci = CATEGORIES[post.category] || CATEGORIES['free'];
+    document.getElementById('post-detail-category').innerHTML =
+      '<span class="post-category-badge ' + ci.cls + '" style="margin-bottom:10px;display:inline-block;">' + ci.icon + ' ' + ci.label + '</span>';
+    document.getElementById('post-detail-title').textContent = post.title;
+    document.getElementById('post-detail-meta').textContent  = post.authorNickname + ' · ' + formatDate(post.createdAt);
+    document.getElementById('post-detail-content').textContent = post.content;
+    renderComments(post);
+    document.getElementById('comment-input').value = '';
+  }
+
+  function renderComments(post) {
+    var list = document.getElementById('comment-list');
+    var comments = post.comments || [];
+    document.getElementById('comment-count-label').textContent = '댓글 ' + comments.length + '개';
+    list.innerHTML = '';
+    comments.forEach(function(c) {
+      var li = document.createElement('li');
+      li.className = 'comment-item';
+      li.setAttribute('data-comment-id', c.id);
+      li.innerHTML =
+        '<div class="comment-author">' + escHtml(c.authorNickname) + '</div>' +
+        '<div class="comment-text">' + escHtml(c.text) + '</div>' +
+        '<div class="comment-date">' + formatDate(c.createdAt) + '</div>';
+      list.appendChild(li);
+    });
+  }
+
+  function submitComment() {
+    var user = getCurrentUser();
+    if (!user) { showModal(); return; }
+    var input = document.getElementById('comment-input');
+    var text = input.value.trim();
+    if (!text) return;
+    var posts = getPosts();
+    var post = posts.find(function(p) { return p.id === currentPostId; });
+    if (!post) return;
+    post.comments.push({
+      id: Date.now().toString(),
+      authorId: user.id,
+      authorNickname: user.nickname,
+      text: text,
+      createdAt: new Date().toISOString()
+    });
+    savePosts(posts);
+    input.value = '';
+    renderComments(post);
+  }
+
+  // ===== MYPAGE =====
+  function renderMypage(user) {
+    if (!user) return;
+    document.getElementById('mypage-info').textContent = '아이디: ' + user.username + '  |  닉네임: ' + user.nickname;
+    var allPosts = getPosts();
+    var myPosts = allPosts.filter(function(p) { return p.authorId === user.id; }).reverse();
+    var myCommentCount = allPosts.reduce(function(acc, p) {
+      return acc + (p.comments || []).filter(function(c) { return c.authorId === user.id; }).length;
+    }, 0);
+    document.getElementById('mypage-post-count').textContent = myPosts.length;
+    document.getElementById('mypage-comment-count').textContent = myCommentCount;
+    var list = document.getElementById('my-post-list');
+    list.innerHTML = '';
+    if (myPosts.length === 0) {
+      list.style.display = 'none';
+      showEl('my-post-empty');
+      return;
+    }
+    hideEl('my-post-empty');
+    list.style.display = '';
+    myPosts.forEach(function(post) {
+      var li = document.createElement('li');
+      li.className = 'my-post-item';
+      li.setAttribute('data-post-id', post.id);
+      li.onclick = function() { prevCategory = post.category; goPostDetail(post.id); };
+      var ci = CATEGORIES[post.category] || CATEGORIES['free'];
+      li.innerHTML =
+        '<div class="post-title">' + escHtml(post.title) + '</div>' +
+        '<div class="post-meta" style="margin-top:4px;">' +
+          '<span class="post-category-badge ' + ci.cls + '">' + ci.label + '</span> ' +
+          '<span style="font-size:12px;color:#999;">' + formatDate(post.createdAt) + ' · 댓글 ' + (post.comments ? post.comments.length : 0) + '개</span>' +
+        '</div>';
+      list.appendChild(li);
+    });
+  }
+
+  // ===== UTILS =====
+  function showEl(id) { var el = document.getElementById(id); if (el) el.style.display = ''; }
+  function hideEl(id) { var el = document.getElementById(id); if (el) el.style.display = 'none'; }
+  function showError(id, msg)   { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = ''; } }
+  function showSuccess(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = ''; } }
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function formatDate(iso) {
+    var d = new Date(iso);
+    return d.getFullYear() + '.' +
+      String(d.getMonth()+1).padStart(2,'0') + '.' +
+      String(d.getDate()).padStart(2,'0') + ' ' +
+      String(d.getHours()).padStart(2,'0') + ':' +
+      String(d.getMinutes()).padStart(2,'0');
+  }
+
+  // ===== SEED DATA =====
+  var SEED_VERSION = 'v4';
+  function seedDemoData() {
+    if (localStorage.getItem('community_seed_ver') === SEED_VERSION) return;
+    var now = Date.now();
+    var h = 3600000;
+
+    saveUsers([
+      { id: 'user1', username: 'alice',   password: '1234', nickname: '앨리스' },
+      { id: 'user2', username: 'bob',     password: '1234', nickname: '밥' },
+      { id: 'user3', username: 'charlie', password: '1234', nickname: '찰리' },
+      { id: 'user4', username: 'diana',   password: '1234', nickname: '다이애나' },
+      { id: 'user5', username: 'evan',    password: '1234', nickname: '에반' }
+    ]);
+
+    savePosts([
+      // ── 자유게시판 (free) ──────────────────────────────
+      { id:'f1', category:'free', title:'자유게시판에 처음 오신 분들 환영합니다!',
+        content:'안녕하세요! 이곳은 자유롭게 이야기를 나누는 공간입니다.\n누구든 편하게 글을 남겨주세요. 따뜻한 커뮤니티가 되었으면 좋겠어요 :)',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*200).toISOString(),
+        comments:[
+          { id:'fc1', authorId:'user2', authorNickname:'밥', text:'반갑습니다! 잘 부탁드려요', createdAt: new Date(now - h*195).toISOString() },
+          { id:'fc2', authorId:'user3', authorNickname:'찰리', text:'저도 오늘 처음 왔어요 ^^', createdAt: new Date(now - h*190).toISOString() }
+        ]
+      },
+      { id:'f2', category:'free', title:'오늘 점심 뭐 드셨나요?',
+        content:'저는 오늘 돼지국밥 먹었는데 너무 맛있었어요.\n국물이 진하고 고기가 부드러웠습니다. 추천!\n다들 점심은 뭐 드셨는지 공유해봐요~',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*150).toISOString(),
+        comments:[
+          { id:'fc3', authorId:'user4', authorNickname:'다이애나', text:'저는 비빔밥 먹었어요! 건강하게~', createdAt: new Date(now - h*148).toISOString() },
+          { id:'fc4', authorId:'user1', authorNickname:'앨리스', text:'돼지국밥 듣고 갑자기 배고파졌어요 ㅋㅋ', createdAt: new Date(now - h*145).toISOString() },
+          { id:'fc5', authorId:'user5', authorNickname:'에반', text:'편의점 도시락이었습니다... 내일은 맛있는거 먹어야겠다', createdAt: new Date(now - h*140).toISOString() }
+        ]
+      },
+      { id:'f3', category:'free', title:'요즘 공부하는 것들 공유해요',
+        content:'저는 요즘 AI 에이전트 개발 공부 중입니다.\nClaude API랑 Playwright 조합이 정말 강력한 것 같아요.\n다들 어떤 것들 공부하고 계신가요?',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*120).toISOString(),
+        comments:[
+          { id:'fc6', authorId:'user1', authorNickname:'앨리스', text:'저도 비슷해요! 요즘 MCP 서버 직접 만들어보고 있어요', createdAt: new Date(now - h*118).toISOString() },
+          { id:'fc7', authorId:'user2', authorNickname:'밥', text:'리액트 공부 중입니다. 컴포넌트 개념이 점점 이해되는 것 같아요', createdAt: new Date(now - h*115).toISOString() }
+        ]
+      },
+      { id:'f4', category:'free', title:'주말에 뭐하셨어요?',
+        content:'저는 이번 주말에 한강 자전거 타러 갔다 왔어요.\n날씨가 딱 좋아서 기분 전환이 많이 됐습니다.\n다들 주말 잘 보내셨나요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*96).toISOString(),
+        comments:[
+          { id:'fc8', authorId:'user3', authorNickname:'찰리', text:'저는 집에서 넷플릭스 정주행했어요 ㅎㅎ', createdAt: new Date(now - h*94).toISOString() }
+        ]
+      },
+      { id:'f5', category:'free', title:'추천 유튜브 채널 있으신가요?',
+        content:'개발 관련 유튜브 채널 추천받고 싶어요.\n국내든 해외든 상관없고, 특히 AI/자동화 관련 채널이면 더 좋겠습니다!',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*72).toISOString(),
+        comments:[
+          { id:'fc9', authorId:'user1', authorNickname:'앨리스', text:'Fireship 추천해요! 짧고 임팩트 있어요', createdAt: new Date(now - h*70).toISOString() },
+          { id:'fc10', authorId:'user4', authorNickname:'다이애나', text:'노마드 코더도 한국어라서 좋아요', createdAt: new Date(now - h*68).toISOString() },
+          { id:'fc11', authorId:'user2', authorNickname:'밥', text:'Theo - t3.gg 는 프론트엔드 최신 트렌드 잘 다뤄요', createdAt: new Date(now - h*65).toISOString() }
+        ]
+      },
+      { id:'f6', category:'free', title:'개발자 번아웃 극복 방법 있으신가요?',
+        content:'요즘 코딩하기가 너무 싫어졌어요...\n매일 보는 화면이 지겹기도 하고, 아무것도 하기 싫은 상태입니다.\n혹시 번아웃 극복 경험 있으신 분들 계신가요?',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*48).toISOString(),
+        comments:[
+          { id:'fc12', authorId:'user1', authorNickname:'앨리스', text:'저도 그런 시기 있었어요. 잠깐 쉬는 게 제일 좋더라고요. 1-2일 완전히 쉬고 오면 다시 하고 싶어져요', createdAt: new Date(now - h*46).toISOString() },
+          { id:'fc13', authorId:'user3', authorNickname:'찰리', text:'운동이 도움 많이 됐어요! 특히 저녁 산책 추천합니다', createdAt: new Date(now - h*44).toISOString() },
+          { id:'fc14', authorId:'user5', authorNickname:'에반', text:'완전 다른 취미를 찾아보는 것도 좋아요. 저는 요리 배웠어요 ㅋㅋ', createdAt: new Date(now - h*42).toISOString() }
+        ]
+      },
+      { id:'f7', category:'free', title:'나는 왜 개발자가 됐을까',
+        content:'가끔 이런 생각을 합니다.\n처음엔 게임 만들고 싶어서 시작했는데, 어느새 웹개발을 하고 있고 이제는 AI 에이전트까지 다루고 있네요.\n여러분은 어떤 계기로 개발을 시작하셨나요?',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*36).toISOString(),
+        comments:[
+          { id:'fc15', authorId:'user4', authorNickname:'다이애나', text:'저는 디자인 하다가 "내가 직접 만들면 되겠다" 싶어서 시작했어요 ㅎㅎ', createdAt: new Date(now - h*34).toISOString() },
+          { id:'fc16', authorId:'user2', authorNickname:'밥', text:'취직 때문에... 근데 하다보니 재밌어졌어요', createdAt: new Date(now - h*32).toISOString() }
+        ]
+      },
+      { id:'f8', category:'free', title:'커피 vs 녹차, 여러분의 선택은?',
+        content:'아침에 일어나서 뭘 마시냐가 하루를 좌우하는 것 같아요.\n저는 아메리카노 없이는 못 살겠는데, 최근에 녹차도 좋다는 말을 많이 들어서 고민 중이에요.',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*24).toISOString(),
+        comments:[
+          { id:'fc17', authorId:'user5', authorNickname:'에반', text:'커피요! 카페인 없으면 집중이 안 돼요', createdAt: new Date(now - h*22).toISOString() },
+          { id:'fc18', authorId:'user1', authorNickname:'앨리스', text:'저는 녹차파요. 속이 편하더라고요', createdAt: new Date(now - h*20).toISOString() }
+        ]
+      },
+      { id:'f9', category:'free', title:'재택근무 어떻게 생각하세요?',
+        content:'저는 재택근무 2년째인데 장단점이 뚜렷한 것 같아요.\n장점: 출퇴근 없음, 편한 복장\n단점: 집중 잘 안 됨, 고립감\n다들 어떻게 생각하세요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*12).toISOString(),
+        comments:[
+          { id:'fc19', authorId:'user3', authorNickname:'찰리', text:'카페에서 일하는 게 타협점 같아요 ㅋㅋ 집도 아니고 사무실도 아닌', createdAt: new Date(now - h*10).toISOString() }
+        ]
+      },
+      { id:'f10', category:'free', title:'2026년 하반기 목표 공유해요!',
+        content:'벌써 3월이네요. 올해 목표 잘 이루어가고 계신가요?\n저는 1) 사이드프로젝트 완성 2) 운동 습관 만들기 3) 책 12권 읽기 가 목표입니다.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*4).toISOString(),
+        comments:[
+          { id:'fc20', authorId:'user2', authorNickname:'밥', text:'저는 포트폴리오 완성이 목표예요! 같이 파이팅해요', createdAt: new Date(now - h*2).toISOString() },
+          { id:'fc21', authorId:'user1', authorNickname:'앨리스', text:'AI 관련 프로젝트 하나 완성하는 게 목표입니다 :)', createdAt: new Date(now - h*1).toISOString() }
+        ]
+      },
+
+      // ── 질문/답변 (qna) ────────────────────────────────
+      { id:'q1', category:'qna', title:'Playwright로 input에 텍스트 입력하는 방법이 궁금해요',
+        content:'page.fill() 과 page.type() 의 차이가 뭔가요?\n둘 다 텍스트를 입력하는 것 같은데 언제 어떤걸 써야 할지 모르겠습니다.',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*180).toISOString(),
+        comments:[
+          { id:'qc1', authorId:'user1', authorNickname:'앨리스', text:'fill()은 기존 내용을 지우고 한 번에 입력하고, type()은 실제 키보드처럼 한 글자씩 입력해요. 이벤트 감지가 중요하면 type()을 쓰세요!', createdAt: new Date(now - h*175).toISOString() },
+          { id:'qc2', authorId:'user3', authorNickname:'찰리', text:'locator.fill()을 쓰는 게 요즘 권장 방식이에요. page.fill()은 deprecated 됐거든요', createdAt: new Date(now - h*170).toISOString() }
+        ]
+      },
+      { id:'q2', category:'qna', title:'localStorage 데이터 Playwright로 확인하는 법?',
+        content:'page.evaluate()를 사용하면 브라우저의 localStorage에 접근할 수 있다고 들었는데, 실제 코드 예시가 있으면 공유 부탁드립니다.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*160).toISOString(),
+        comments:[
+          { id:'qc3', authorId:'user4', authorNickname:'다이애나', text:'const value = await page.evaluate(() => localStorage.getItem("key")); 이렇게 쓰면 돼요!', createdAt: new Date(now - h*155).toISOString() }
+        ]
+      },
+      { id:'q3', category:'qna', title:'셀렉터가 없는 요소 클릭하는 방법?',
+        content:'id나 class가 없는 버튼을 클릭해야 하는데 어떻게 해야 할까요?\n텍스트 내용으로 클릭할 수 있나요?',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*140).toISOString(),
+        comments:[
+          { id:'qc4', authorId:'user2', authorNickname:'밥', text:'getByText("버튼텍스트") 또는 getByRole("button", { name: "텍스트" }) 를 쓰면 돼요!', createdAt: new Date(now - h*135).toISOString() },
+          { id:'qc5', authorId:'user5', authorNickname:'에반', text:'XPath 사용도 가능해요: page.locator("xpath=//button[contains(text(), \'클릭\')]")', createdAt: new Date(now - h*130).toISOString() }
+        ]
+      },
+      { id:'q4', category:'qna', title:'페이지 로딩 완료까지 기다리는 방법',
+        content:'페이지 이동 후 특정 요소가 로드될 때까지 기다려야 하는데, sleep()을 쓰면 불안정해서요.\n더 좋은 방법이 있을까요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*110).toISOString(),
+        comments:[
+          { id:'qc6', authorId:'user1', authorNickname:'앨리스', text:'waitForSelector() 또는 locator.waitFor()를 쓰세요! sleep보다 훨씬 안정적이에요', createdAt: new Date(now - h*108).toISOString() },
+          { id:'qc7', authorId:'user3', authorNickname:'찰리', text:'page.waitForLoadState("networkidle") 도 유용해요. 네트워크 요청이 끝날 때까지 기다려요', createdAt: new Date(now - h*105).toISOString() }
+        ]
+      },
+      { id:'q5', category:'qna', title:'스크린샷 특정 영역만 찍는 방법?',
+        content:'page.screenshot()은 전체 페이지를 찍는데, 특정 div 영역만 캡처하고 싶어요.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*90).toISOString(),
+        comments:[
+          { id:'qc8', authorId:'user2', authorNickname:'밥', text:'await locator.screenshot({ path: "element.png" }) 처럼 locator에 직접 screenshot()을 호출하면 돼요!', createdAt: new Date(now - h*88).toISOString() }
+        ]
+      },
+      { id:'q6', category:'qna', title:'여러 탭 동시에 다루는 방법이 있나요?',
+        content:'새 탭이 열리면 그 탭에서 작업을 해야 하는 경우가 있어요.\nPlaywright에서 새 탭을 어떻게 핸들링하나요?',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*70).toISOString(),
+        comments:[
+          { id:'qc9', authorId:'user4', authorNickname:'다이애나', text:'context.waitForEvent("page") 로 새 탭이 열리는 걸 기다릴 수 있어요. const [newPage] = await Promise.all([context.waitForEvent("page"), locator.click()]);', createdAt: new Date(now - h*68).toISOString() }
+        ]
+      },
+      { id:'q7', category:'qna', title:'CI/CD에서 Playwright 테스트 실행 시 headless 설정',
+        content:'GitHub Actions에서 Playwright 돌리는데 브라우저 에러가 납니다.\nheadless 모드 설정이 따로 필요한가요?',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*50).toISOString(),
+        comments:[
+          { id:'qc10', authorId:'user3', authorNickname:'찰리', text:'playwright.config.ts에서 use: { headless: true } 로 설정하면 되고, GitHub Actions에서는 기본적으로 headless가 필요해요. xvfb도 필요할 수 있어요.', createdAt: new Date(now - h*48).toISOString() }
+        ]
+      },
+      { id:'q8', category:'qna', title:'커뮤니티 로그인 자동화 코드 공유해주실 분?',
+        content:'이 커뮤니티 사이트 로그인을 Playwright로 자동화하는 예시 코드가 있으면 보고 싶어요!',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*30).toISOString(),
+        comments:[
+          { id:'qc11', authorId:'user5', authorNickname:'에반', text:"await page.fill('#modal-login-username', 'alice');\nawait page.fill('#modal-login-password', '1234');\nawait page.click('#modal-login-submit-btn'); 이렇게 하면 됩니다!", createdAt: new Date(now - h*28).toISOString() },
+          { id:'qc12', authorId:'user1', authorNickname:'앨리스', text:'모달이 떠 있을 때 바로 fill하면 돼요. waitForSelector 따로 안 해도 되더라고요', createdAt: new Date(now - h*26).toISOString() }
+        ]
+      },
+      { id:'q9', category:'qna', title:'Playwright MCP와 일반 Playwright 차이점?',
+        content:'Claude에서 쓰는 Playwright MCP가 일반 Playwright 라이브러리랑 어떻게 다른가요?\n별도로 설치해야 하나요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*15).toISOString(),
+        comments:[
+          { id:'qc13', authorId:'user2', authorNickname:'밥', text:'MCP(Model Context Protocol)는 AI 모델이 도구를 사용할 수 있게 해주는 프로토콜이에요. Playwright MCP는 Claude가 Playwright를 직접 호출할 수 있게 해주는 서버예요. 따로 설치 필요해요!', createdAt: new Date(now - h*13).toISOString() }
+        ]
+      },
+      { id:'q10', category:'qna', title:'Playwright로 파일 업로드하는 방법',
+        content:'input[type=file] 요소에 파일을 업로드해야 하는데 어떻게 해야 하나요?',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*5).toISOString(),
+        comments:[
+          { id:'qc14', authorId:'user1', authorNickname:'앨리스', text:'await page.setInputFiles("#file-input", "path/to/file.pdf"); 이렇게 하면 돼요!', createdAt: new Date(now - h*3).toISOString() }
+        ]
+      },
+
+      // ── 공지사항 (notice) ──────────────────────────────
+      { id:'n1', category:'notice', title:'[공지] 커뮤니티 이용 규칙 안내',
+        content:'안녕하세요, 운영팀 앨리스입니다.\n\n원활한 커뮤니티 운영을 위한 규칙을 안내드립니다.\n\n1. 타인을 비방하거나 혐오 발언을 하지 마세요.\n2. 광고성 게시물 및 스팸은 즉시 삭제됩니다.\n3. 불법 콘텐츠 공유는 금지입니다.\n4. 서로 존중하는 문화를 만들어요.\n\n즐거운 커뮤니티가 되도록 함께 노력해주세요!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*400).toISOString(),
+        comments:[]
+      },
+      { id:'n2', category:'notice', title:'[공지] 게시판 카테고리 개편 안내',
+        content:'안녕하세요!\n\n더 편리한 커뮤니티 이용을 위해 게시판을 아래와 같이 개편했습니다.\n\n- 자유게시판: 일상 이야기\n- 질문/답변: 기술 및 일반 질문\n- 공지사항: 운영 관련 공지\n- 정보공유: 유용한 정보와 링크\n- 유머/잡담: 가벼운 이야기\n\n많이 이용해주세요!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*300).toISOString(),
+        comments:[
+          { id:'nc1', authorId:'user3', authorNickname:'찰리', text:'개편 수고하셨어요! 훨씬 찾기 쉬워졌네요', createdAt: new Date(now - h*295).toISOString() }
+        ]
+      },
+      { id:'n3', category:'notice', title:'[공지] 서버 점검 안내 (3월 20일)',
+        content:'안녕하세요, 관리자입니다.\n\n3월 20일(수) 오전 2시~4시 서버 점검이 예정되어 있습니다.\n해당 시간에는 서비스 이용이 불가하오니 양해 부탁드립니다.\n\n점검 내용:\n- 서버 성능 최적화\n- 보안 패치 적용\n- 데이터베이스 마이그레이션\n\n감사합니다.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*100).toISOString(),
+        comments:[
+          { id:'nc2', authorId:'user2', authorNickname:'밥', text:'알려주셔서 감사합니다!', createdAt: new Date(now - h*98).toISOString() },
+          { id:'nc3', authorId:'user5', authorNickname:'에반', text:'새벽 시간대라 괜찮네요 ㅎㅎ', createdAt: new Date(now - h*96).toISOString() }
+        ]
+      },
+      { id:'n4', category:'notice', title:'[공지] 신고 기능 추가 예정',
+        content:'부적절한 게시물을 쉽게 신고할 수 있는 기능을 다음 업데이트에서 추가할 예정입니다.\n\n건강한 커뮤니티 문화 조성에 힘써주셔서 감사합니다!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*50).toISOString(),
+        comments:[]
+      },
+      { id:'n5', category:'notice', title:'[공지] 3월 우수 활동 회원 선정',
+        content:'3월 우수 활동 회원을 선정했습니다.\n\n🏆 1위: 밥 (댓글 42개, 글 15개)\n🥈 2위: 앨리스 (댓글 38개, 글 12개)\n🥉 3위: 찰리 (댓글 27개, 글 8개)\n\n활발한 활동 감사드립니다!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*10).toISOString(),
+        comments:[
+          { id:'nc4', authorId:'user2', authorNickname:'밥', text:'감사합니다!! 앞으로도 열심히 할게요 ㅎㅎ', createdAt: new Date(now - h*9).toISOString() },
+          { id:'nc5', authorId:'user3', authorNickname:'찰리', text:'축하해요~ 다음달엔 저도 노려볼게요 ㅋㅋ', createdAt: new Date(now - h*8).toISOString() }
+        ]
+      },
+
+      // ── 정보공유 (info) ────────────────────────────────
+      { id:'i1', category:'info', title:'Playwright MCP 설치 및 설정 가이드 (완전판)',
+        content:'Playwright MCP 설치 방법 정리합니다.\n\n1. Node.js 18+ 설치 확인\n2. npm install -D @playwright/test\n3. npx playwright install\n4. MCP 설정 파일(claude_desktop_config.json)에 추가:\n{\n  "mcpServers": {\n    "playwright": {\n      "command": "npx",\n      "args": ["@playwright/mcp"]\n    }\n  }\n}\n\n5. Claude Desktop 재시작\n\n이제 Claude에게 "브라우저 열어줘"라고 하면 됩니다!',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*190).toISOString(),
+        comments:[
+          { id:'ic1', authorId:'user1', authorNickname:'앨리스', text:'정리 감사합니다! 북마크 해뒀어요', createdAt: new Date(now - h*188).toISOString() },
+          { id:'ic2', authorId:'user4', authorNickname:'다이애나', text:'윈도우에서도 동일하게 되나요?', createdAt: new Date(now - h*185).toISOString() },
+          { id:'ic3', authorId:'user2', authorNickname:'밥', text:'네, 윈도우에서도 동일해요!', createdAt: new Date(now - h*183).toISOString() }
+        ]
+      },
+      { id:'i2', category:'info', title:'AI 에이전트 개발에 유용한 오픈소스 리스트',
+        content:'최근 관심가는 AI 에이전트 관련 오픈소스 모음입니다.\n\n1. LangChain - LLM 애플리케이션 프레임워크\n2. AutoGPT - 자율 AI 에이전트\n3. CrewAI - 멀티 에이전트 프레임워크\n4. Playwright MCP - 브라우저 자동화\n5. Puppeteer - Node.js 브라우저 자동화\n\n각각 GitHub에서 찾아보세요!',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*160).toISOString(),
+        comments:[
+          { id:'ic4', authorId:'user5', authorNickname:'에반', text:'CrewAI 써봤는데 진짜 신기하더라고요. 에이전트들이 서로 대화해요', createdAt: new Date(now - h*158).toISOString() }
+        ]
+      },
+      { id:'i3', category:'info', title:'무료로 쓸 수 있는 AI API 모음',
+        content:'돈 없는 개발자를 위한 무료 AI API 리스트!\n\n1. Gemini API - 무료 티어 있음 (Google)\n2. Groq API - 빠른 추론, 무료 티어\n3. Hugging Face Inference API - 오픈소스 모델 무료\n4. Claude API - 유료지만 Anthropic Console에서 무료 크레딧 제공\n5. OpenAI - 처음 가입 시 크레딧 제공\n\n* 무료 티어는 속도 제한이 있으니 참고하세요!',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*130).toISOString(),
+        comments:[
+          { id:'ic5', authorId:'user1', authorNickname:'앨리스', text:'Groq는 진짜 빠르더라고요! 추천합니다', createdAt: new Date(now - h*128).toISOString() },
+          { id:'ic6', authorId:'user2', authorNickname:'밥', text:'Gemini Flash가 무료에 빠르고 좋아요', createdAt: new Date(now - h*125).toISOString() }
+        ]
+      },
+      { id:'i4', category:'info', title:'커서(Cursor) AI IDE 단축키 모음',
+        content:'Cursor 쓰는 분들을 위한 유용한 단축키 모음!\n\nCmd/Ctrl + K : 코드 편집 요청\nCmd/Ctrl + L : 채팅 패널 열기\nCmd/Ctrl + I : Composer 열기\nCmd/Ctrl + Shift + L : 현재 파일 채팅에 추가\nTab : AI 제안 수락\nEsc : AI 제안 거절\n\n모르고 있던 단축키가 있으셨나요?',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*100).toISOString(),
+        comments:[
+          { id:'ic7', authorId:'user3', authorNickname:'찰리', text:'Cmd+I 진짜 자주 써요! 유용한 정보 감사합니다', createdAt: new Date(now - h*98).toISOString() },
+          { id:'ic8', authorId:'user4', authorNickname:'다이애나', text:'저는 Claude Code 쓰는데 비슷한 단축키가 있더라고요', createdAt: new Date(now - h*95).toISOString() }
+        ]
+      },
+      { id:'i5', category:'info', title:'Playwright 공식 문서 한국어 정리 (자주 쓰는 것 위주)',
+        content:'자주 쓰는 Playwright 코드 패턴 정리:\n\n// 요소 클릭\nawait page.locator("#btn").click();\n\n// 텍스트 입력\nawait page.locator("#input").fill("텍스트");\n\n// 요소 텍스트 가져오기\nconst text = await page.locator("#el").textContent();\n\n// 요소 대기\nawait page.locator("#el").waitFor();\n\n// 스크린샷\nawait page.screenshot({ path: "shot.png" });\n\n// URL 이동\nawait page.goto("https://example.com");',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*75).toISOString(),
+        comments:[
+          { id:'ic9', authorId:'user2', authorNickname:'밥', text:'초보자한테 딱인 정리네요. 저도 처음에 이런 게 있었으면 좋았을 텐데', createdAt: new Date(now - h*73).toISOString() }
+        ]
+      },
+      { id:'i6', category:'info', title:'VS Code 필수 확장 프로그램 추천 (2026)',
+        content:'2026년 기준으로 제가 필수로 쓰는 VS Code 확장 프로그램들입니다.\n\n1. GitLens - Git 히스토리 시각화\n2. Prettier - 코드 포매터\n3. ESLint - 코드 품질 체크\n4. Thunder Client - REST API 테스트\n5. Error Lens - 인라인 에러 표시\n6. Auto Rename Tag - HTML 태그 자동 수정\n7. Path Intellisense - 경로 자동완성',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*55).toISOString(),
+        comments:[
+          { id:'ic10', authorId:'user5', authorNickname:'에반', text:'Error Lens 진짜 좋아요! 몰랐던 분들은 꼭 설치해보세요', createdAt: new Date(now - h*53).toISOString() },
+          { id:'ic11', authorId:'user1', authorNickname:'앨리스', text:'저는 여기에 GitHub Copilot도 추가할게요 ㅎㅎ', createdAt: new Date(now - h*50).toISOString() }
+        ]
+      },
+      { id:'i7', category:'info', title:'LocalStorage vs SessionStorage vs Cookie 차이 정리',
+        content:'웹 스토리지 완벽 정리!\n\n[ LocalStorage ]\n- 영구 저장 (브라우저 닫아도 유지)\n- 용량: 5-10MB\n- 탭 간 공유 O\n- 서버 전송 X\n\n[ SessionStorage ]\n- 탭 닫으면 삭제\n- 용량: 5MB\n- 탭 간 공유 X\n\n[ Cookie ]\n- 만료일 설정 가능\n- 용량: 4KB\n- 서버에 자동 전송 O\n- HttpOnly 설정 시 JS 접근 불가\n\n이 커뮤니티 사이트는 LocalStorage 사용 중!',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*35).toISOString(),
+        comments:[
+          { id:'ic12', authorId:'user3', authorNickname:'찰리', text:'깔끔한 정리 감사합니다! 면접 준비할 때 자주 나오는 질문이죠', createdAt: new Date(now - h*33).toISOString() }
+        ]
+      },
+      { id:'i8', category:'info', title:'좋은 커밋 메시지 작성하는 방법',
+        content:'Conventional Commits 규칙 소개합니다.\n\n형식: <type>(<scope>): <description>\n\n주요 타입:\n- feat: 새 기능 추가\n- fix: 버그 수정\n- docs: 문서 수정\n- style: 코드 스타일 변경\n- refactor: 리팩토링\n- test: 테스트 추가\n- chore: 빌드/설정 변경\n\n예시:\nfeat(auth): add login modal component\nfix(board): resolve comment count display bug\n\n커밋 메시지 잘 쓰면 나중에 코드 히스토리 이해하기 훨씬 쉬워요!',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*20).toISOString(),
+        comments:[
+          { id:'ic13', authorId:'user2', authorNickname:'밥', text:'회사 들어가기 전에 이걸 알았으면 좋았을텐데... 이제라도 알아서 다행이에요 ㅎㅎ', createdAt: new Date(now - h*18).toISOString() },
+          { id:'ic14', authorId:'user1', authorNickname:'앨리스', text:'저는 여기에 이모지 type도 같이 쓰는데 훨씬 보기 좋아요! ✨feat 🐛fix 이런 식으로', createdAt: new Date(now - h*16).toISOString() }
+        ]
+      },
+      { id:'i9', category:'info', title:'무료 디자인 리소스 사이트 모음',
+        content:'개발할 때 유용한 무료 디자인 리소스들!\n\n[ 아이콘 ]\n- Heroicons, Lucide, Tabler Icons\n- Flaticon (무료 버전)\n\n[ 이미지/사진 ]\n- Unsplash, Pexels, Picsum.photos\n\n[ 색상 팔레트 ]\n- Coolors.co, Adobe Color\n\n[ 폰트 ]\n- Google Fonts (한국어: Noto Sans KR)\n\n[ UI 컴포넌트 ]\n- shadcn/ui, Radix UI, DaisyUI',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*8).toISOString(),
+        comments:[
+          { id:'ic15', authorId:'user4', authorNickname:'다이애나', text:'Picsum.photos 정말 자주 써요! placeholder 이미지에 딱이에요', createdAt: new Date(now - h*6).toISOString() }
+        ]
+      },
+      { id:'i10', category:'info', title:'Git 자주 쓰는 명령어 치트시트',
+        content:'매일 쓰는 Git 명령어 정리!\n\n# 기본\ngit init          # 저장소 초기화\ngit clone <url>   # 복제\ngit status        # 상태 확인\ngit add .         # 전체 스테이징\ngit commit -m ""  # 커밋\ngit push          # 원격 업로드\ngit pull          # 원격 다운로드\n\n# 브랜치\ngit branch        # 브랜치 목록\ngit checkout -b   # 새 브랜치\ngit merge         # 병합\n\n# 되돌리기\ngit stash         # 임시 저장\ngit reset --hard  # 강제 되돌리기 (주의!)',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*2).toISOString(),
+        comments:[]
+      },
+
+      // ── 유머/잡담 (humor) ──────────────────────────────
+      { id:'h1', category:'humor', title:'AI가 내 버그를 고쳐줬는데...',
+        content:'버그 고쳐달라고 했더니 "이 코드는 완벽하게 작동합니다"라고 했습니다.\n실행해봤더니 에러가 났습니다.\n다시 물어봤더니 "아, 그 에러는 특정 상황에서만 발생할 수 있어요"라고 하더군요.\n\n어떤 상황이냐고 묻자 "실행할 때요"라고 했습니다.',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*195).toISOString(),
+        comments:[
+          { id:'hc1', authorId:'user1', authorNickname:'앨리스', text:'ㅋㅋㅋㅋㅋ 실행할 때 에러 ㅋㅋㅋㅋ', createdAt: new Date(now - h*193).toISOString() },
+          { id:'hc2', authorId:'user3', authorNickname:'찰리', text:'저도 비슷한 경험... AI가 "이건 엣지 케이스"라고 했는데 그게 메인 케이스였어요', createdAt: new Date(now - h*190).toISOString() }
+        ]
+      },
+      { id:'h2', category:'humor', title:'개발자의 명언: "일단 동작하면 된다"',
+        content:'코드 리뷰에서 이런 코드를 봤습니다.\n\n// TODO: 이거 나중에 고쳐야 함\n// 2019년 추가됨\n\n2026년에도 TODO가 남아있었습니다.\n나중은 오지 않는 법이죠.',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*155).toISOString(),
+        comments:[
+          { id:'hc3', authorId:'user4', authorNickname:'다이애나', text:'TODO: 공감 버튼 만들어야 함 // 2026년 추가됨', createdAt: new Date(now - h*153).toISOString() },
+          { id:'hc4', authorId:'user5', authorNickname:'에반', text:'저도 5년 된 TODO 발견한 적 있어요... 작성자는 이미 퇴사했더라고요 ㅋㅋ', createdAt: new Date(now - h*150).toISOString() },
+          { id:'hc5', authorId:'user1', authorNickname:'앨리스', text:'FIXME가 WONTFIX가 되는 과정...', createdAt: new Date(now - h*148).toISOString() }
+        ]
+      },
+      { id:'h3', category:'humor', title:'스택오버플로우 답변 레전드 모음',
+        content:'제가 봤던 스택오버플로우 명답들...\n\nQ: "파이썬에서 리스트 역순으로 하는 방법"\nA: "파이썬 쓰지 마세요"\n\nQ: "이 코드 왜 안 되나요?"\nA: "그렇게 하면 안 되니까요"\n\nQ: "오류 해결 방법"\nA: "이미 답변됨" (링크 없음)\n\n커뮤니티의 힘...?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*115).toISOString(),
+        comments:[
+          { id:'hc6', authorId:'user2', authorNickname:'밥', text:'ㅋㅋㅋㅋ 파이썬 쓰지 마세요 ㅋㅋㅋㅋ 레전드', createdAt: new Date(now - h*113).toISOString() }
+        ]
+      },
+      { id:'h4', category:'humor', title:'밤새 버그 찾았는데... 범인은',
+        content:'어젯밤 4시간 동안 버그를 찾았습니다.\n\n용의자 목록:\n1. 라이브러리 버전 문제? (아님)\n2. 환경변수 오류? (아님)\n3. API 응답 형식? (아님)\n4. 캐시 문제? (아님)\n\n범인:\n세미콜론 하나 빠진 것\n\n좋은 밤이었습니다.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*85).toISOString(),
+        comments:[
+          { id:'hc7', authorId:'user1', authorNickname:'앨리스', text:'개발자의 클래식... 저는 오타 하나가 범인이었던 적도 있어요', createdAt: new Date(now - h*83).toISOString() },
+          { id:'hc8', authorId:'user3', authorNickname:'찰리', text:'저는 주석 처리된 코드가 실제 실행되고 있었던 적도... 어떻게? 모름', createdAt: new Date(now - h*80).toISOString() },
+          { id:'hc9', authorId:'user4', authorNickname:'다이애나', text:'ㅋㅋㅋㅋ 공감 백배. 항상 제일 사소한 데서 나옴', createdAt: new Date(now - h*78).toISOString() }
+        ]
+      },
+      { id:'h5', category:'humor', title:'비개발자 친구가 부탁한 것들',
+        content:'친구들이 개발자인 저한테 해달라는 것들:\n\n- "유튜브 광고 없애줘"\n- "내 와이파이 왜 느려?"\n- "폰 빨라지게 해줘"\n- "내 컴퓨터 바이러스 있는 것 같아"\n- "포토샵 크랙 어디서 구해?"\n- "PPT 예쁘게 만들어줘"\n\n개발자는 IT 분야 만능 해결사가 아닙니다.\n(하지만 다 도와줍니다...)',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*62).toISOString(),
+        comments:[
+          { id:'hc10', authorId:'user5', authorNickname:'에반', text:'ㅋㅋㅋㅋ 진짜 이거... 저는 TV 리모컨 고쳐달라는 말도 들어봤어요', createdAt: new Date(now - h*60).toISOString() },
+          { id:'hc11', authorId:'user1', authorNickname:'앨리스', text:'PPT 예쁘게 해줘 ㅋㅋㅋㅋ 이건 진짜 공감', createdAt: new Date(now - h*58).toISOString() }
+        ]
+      },
+      { id:'h6', category:'humor', title:'코딩 중 집중력 방해 요소 순위',
+        content:'제 개인 순위입니다.\n\n1위: 갑자기 생각나는 다른 아이디어\n2위: 유튜브 "딱 5분만"\n3위: 슬랙 알림\n4위: "이거 금방이잖아" 하는 자신감\n5위: 배고픔\n6위: 위 모든 것의 복합\n\n지금도 이 글 쓰다가 집중력 방해당하는 중...',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*42).toISOString(),
+        comments:[
+          { id:'hc12', authorId:'user3', authorNickname:'찰리', text:'4위 진짜 ㅋㅋㅋㅋ "이건 금방이야"는 항상 거짓말이에요', createdAt: new Date(now - h*40).toISOString() },
+          { id:'hc13', authorId:'user2', authorNickname:'밥', text:'1위 공감... 집중하다가 갑자기 "아 이거 만들면 어떻지?"', createdAt: new Date(now - h*38).toISOString() }
+        ]
+      },
+      { id:'h7', category:'humor', title:'PM이 말하는 "간단한 기능"',
+        content:'"이거 간단한 거죠? 버튼 하나 추가하면 되잖아요"\n\n실제 작업:\n□ 디자인 확인 (디자이너 없음)\n□ DB 스키마 변경\n□ API 추가\n□ 프론트 컴포넌트 개발\n□ 단위 테스트 작성\n□ E2E 테스트 작성\n□ 코드 리뷰\n□ QA 테스트\n□ 스테이징 배포\n□ 프로덕션 배포\n□ 모니터링\n\n"버튼 하나"의 실체입니다.',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*25).toISOString(),
+        comments:[
+          { id:'hc14', authorId:'user5', authorNickname:'에반', text:'이게 웹툰인줄... 현실이네요 ㅠㅠ', createdAt: new Date(now - h*23).toISOString() },
+          { id:'hc15', authorId:'user3', authorNickname:'찰리', text:'PM: "어려운 거야?" 개발자: "(눈물을 닦으며) 아뇨, 쉬운 거예요"', createdAt: new Date(now - h*21).toISOString() }
+        ]
+      },
+      { id:'h8', category:'humor', title:'다크 모드 쓰는 이유 설문 결과',
+        content:'제 비공식 설문 결과입니다 (n=저)\n\n"왜 다크 모드 쓰세요?"\n\n□ 눈이 편해서 - 0%\n□ 배터리 절약 - 0%\n□ 멋있어 보여서 - 100%\n\n배터리 절약 운운하지 맙시다.\n우리가 왜 다크 모드 쓰는지 다들 알잖아요.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*14).toISOString(),
+        comments:[
+          { id:'hc16', authorId:'user2', authorNickname:'밥', text:'ㅋㅋㅋㅋ 반박 불가... 솔직한 설문이에요', createdAt: new Date(now - h*12).toISOString() },
+          { id:'hc17', authorId:'user1', authorNickname:'앨리스', text:'야간에 라이트 모드 켰다가 눈 탄 적 있어서 저는 진짜 눈 편함이에요 ㅋㅋ', createdAt: new Date(now - h*10).toISOString() }
+        ]
+      },
+      { id:'h9', category:'humor', title:'개발자 운동 루틴',
+        content:'매일 하는 운동:\n\n1. 아침: 의자에서 일어나기 (1세트)\n2. 오후: 화장실 왕복 (2세트)\n3. 저녁: 배달 문 열러 가기 (1세트)\n4. 심화: 노트북 들고 소파로 이동 (1세트)\n\n총 칼로리 소모: 12kcal\n\n건강한 개발자 라이프입니다.',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*6).toISOString(),
+        comments:[
+          { id:'hc18', authorId:'user4', authorNickname:'다이애나', text:'배달 문 열러 가기는 스프린트예요 ㅋㅋㅋㅋ', createdAt: new Date(now - h*4).toISOString() },
+          { id:'hc19', authorId:'user2', authorNickname:'밥', text:'저는 서서 일하는 책상 사서 조금 나아졌어요 (서다가 앉다가 반복)', createdAt: new Date(now - h*3).toISOString() }
+        ]
+      },
+      { id:'h10', category:'humor', title:'"이거 쉽죠?" 문장 분석',
+        content:'"이거 쉽죠?" 라고 말하는 사람들 유형 분석:\n\n유형 1 - 비개발자\n: 아무것도 모름. 선의의 거짓말.\n\n유형 2 - 주니어 개발자\n: 조금 앎. 순수한 착각.\n\n유형 3 - 시니어 개발자\n: 다 앎. 너를 시험하는 것.\n\n유형 4 - PM\n: 시간 압박. 위험 신호.\n\n유형 5 - 본인\n: 10분 후 "왜 이게 이렇게 복잡하지" 깨달음 예정.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*1).toISOString(),
+        comments:[]
+      },
+
+      // ── 자유게시판 추가 (f11~f15) ─────────────────────
+      { id:'f11', category:'free', title:'국내 개발자 커뮤니티 어디가 좋아요?',
+        content:'온라인으로 개발자들이랑 소통할 수 있는 커뮤니티 어디 좋은 데 있나요?\n오픈채팅이든 디스코드든 편하게 알려주세요!',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*168).toISOString(),
+        comments:[
+          { id:'fc22', authorId:'user1', authorNickname:'앨리스', text:'okky.kr이 국내 개발자 커뮤니티 중엔 가장 크고 활성화되어 있어요', createdAt: new Date(now - h*166).toISOString() },
+          { id:'fc23', authorId:'user5', authorNickname:'에반', text:'Disquiet 추천해요! 사이드프로젝트 공유하는 곳인데 퀄리티 높아요', createdAt: new Date(now - h*164).toISOString() },
+          { id:'fc24', authorId:'user2', authorNickname:'밥', text:'개발자 디스코드 서버들도 많아요. "개발자 디스코드" 검색해보세요!', createdAt: new Date(now - h*162).toISOString() }
+        ]
+      },
+      { id:'f12', category:'free', title:'코딩할 때 어떤 음악 들으세요?',
+        content:'저는 lofi hip-hop 계열 들으면 집중이 잘 되더라고요.\n가사 있는 음악은 집중이 안 돼서 항상 악기 위주로 듣는데, 다들 어떤 음악 들으면서 코딩하세요?',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*144).toISOString(),
+        comments:[
+          { id:'fc25', authorId:'user3', authorNickname:'찰리', text:'저도 lofi예요! "lofi girl" 유튜브 채널 항상 틀어놔요', createdAt: new Date(now - h*142).toISOString() },
+          { id:'fc26', authorId:'user1', authorNickname:'앨리스', text:'저는 완전 무음이에요. 무음이 집중에 최고더라고요', createdAt: new Date(now - h*139).toISOString() },
+          { id:'fc27', authorId:'user5', authorNickname:'에반', text:'게임 OST 좋아요. 특히 젤다의전설이나 포켓몬 OST ㅎㅎ', createdAt: new Date(now - h*136).toISOString() }
+        ]
+      },
+      { id:'f13', category:'free', title:'개발 공부 독학 vs 학원 vs 부트캠프 어떤 게 나아요?',
+        content:'입문 단계에서 어떤 방법이 가장 효과적이었나요?\n저는 독학 중인데 가끔 방향을 잃는 느낌이 들어요.\n각자의 경험 공유해주시면 큰 도움이 될 것 같아요!',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*108).toISOString(),
+        comments:[
+          { id:'fc28', authorId:'user1', authorNickname:'앨리스', text:'저는 부트캠프 출신인데 처음엔 좋았어요. 커리큘럼이 있으니까. 다만 비용이..', createdAt: new Date(now - h*106).toISOString() },
+          { id:'fc29', authorId:'user4', authorNickname:'다이애나', text:'독학은 자기 통제력이 중요해요. 저는 유튜브+인프런 조합으로 공부했어요', createdAt: new Date(now - h*103).toISOString() },
+          { id:'fc30', authorId:'user3', authorNickname:'찰리', text:'사이드프로젝트 직접 해보는 게 제일 빠른 것 같아요. 뭐든 직접 만들어봐야', createdAt: new Date(now - h*100).toISOString() }
+        ]
+      },
+      { id:'f14', category:'free', title:'첫 취업 준비 중입니다, 조언 부탁드려요!',
+        content:'개발자로 취업 준비 6개월차입니다.\n포트폴리오에 프로젝트 2개 있고, 알고리즘은 백준 실버 1 정도예요.\n자소서가 제일 막막한데 어떻게 써야 할지 모르겠어요...',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*60).toISOString(),
+        comments:[
+          { id:'fc31', authorId:'user2', authorNickname:'밥', text:'자소서는 프로젝트 할 때의 문제 해결 경험을 구체적으로 써보세요. 어떤 문제를 어떻게 해결했는지가 핵심이에요', createdAt: new Date(now - h*58).toISOString() },
+          { id:'fc32', authorId:'user1', authorNickname:'앨리스', text:'포트폴리오 README도 잘 써두세요. 기술 스택이랑 선택 이유 꼭 넣고요', createdAt: new Date(now - h*55).toISOString() },
+          { id:'fc33', authorId:'user4', authorNickname:'다이애나', text:'파이팅! 저도 20번 넘게 지원하고 됐어요. 포기하지 마세요 :)', createdAt: new Date(now - h*52).toISOString() }
+        ]
+      },
+      { id:'f15', category:'free', title:'개발자 영어 공부 어떻게 하셨어요?',
+        content:'공식 문서 읽다 보면 영어가 너무 벽으로 느껴질 때가 있어요.\n특히 에러 메시지나 Stack Overflow 답변 읽을 때...\n개발 영어 실력 늘리는 방법 있으면 공유해주세요!',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*28).toISOString(),
+        comments:[
+          { id:'fc34', authorId:'user5', authorNickname:'에반', text:'개발 영어는 일상 영어랑 달라서 그냥 많이 읽다 보면 돼요. 자주 나오는 패턴이 있어요', createdAt: new Date(now - h*26).toISOString() },
+          { id:'fc35', authorId:'user2', authorNickname:'밥', text:'구글 번역기, DeepL 적극 활용하세요. 이해하면서 읽는 게 중요하니까요', createdAt: new Date(now - h*24).toISOString() }
+        ]
+      },
+
+      // ── Q&A 추가 (q11~q15) ──────────────────────────────
+      { id:'q11', category:'qna', title:'Playwright 테스트 flaky 할 때 재시도 설정 방법',
+        content:'가끔 실패했다가 다시 실행하면 성공하는 테스트가 있어요.\n자동으로 재시도 되게 설정하는 방법이 있나요?',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*165).toISOString(),
+        comments:[
+          { id:'qc15', authorId:'user1', authorNickname:'앨리스', text:'playwright.config.ts에서 retries: 2 로 설정하면 실패 시 2번 재시도해요. test.describe.configure({ retries: 2 })로 특정 테스트만 설정도 가능해요', createdAt: new Date(now - h*163).toISOString() },
+          { id:'qc16', authorId:'user4', authorNickname:'다이애나', text:'재시도보다는 waitFor를 잘 써서 flaky 자체를 없애는 게 더 좋아요. 근본 원인을 찾아봐요!', createdAt: new Date(now - h*161).toISOString() }
+        ]
+      },
+      { id:'q12', category:'qna', title:'page.locator() vs page.$$() 차이가 뭔가요?',
+        content:'둘 다 요소를 선택하는 것 같은데 어떤 차이가 있나요?\n언제 어떤 것을 써야 하는지 헷갈려요.',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*145).toISOString(),
+        comments:[
+          { id:'qc17', authorId:'user2', authorNickname:'밥', text:'page.$$()는 즉시 현재 DOM 상태를 반환하는 구식 API예요. locator()는 lazy하게 동작하고 자동으로 대기, 재시도 기능이 있어서 훨씬 안정적이에요. 공식 권장은 locator!', createdAt: new Date(now - h*143).toISOString() },
+          { id:'qc18', authorId:'user5', authorNickname:'에반', text:'쉽게 말하면 locator()는 자동으로 waitFor 해주는 거예요. 없으면 기다려주고, $$()는 없으면 그냥 빈 배열 반환해요', createdAt: new Date(now - h*141).toISOString() }
+        ]
+      },
+      { id:'q13', category:'qna', title:'테스트 중 alert, confirm 다이얼로그 처리 방법?',
+        content:'테스트 실행 중 브라우저 alert이 뜨면 테스트가 멈추더라고요.\n자동으로 닫히게 하거나 처리할 수 있는 방법이 있나요?',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*125).toISOString(),
+        comments:[
+          { id:'qc19', authorId:'user3', authorNickname:'찰리', text:'page.on("dialog", dialog => dialog.accept()) 로 모든 다이얼로그를 자동 수락할 수 있어요. dialog.dismiss()를 쓰면 취소 처리고요', createdAt: new Date(now - h*123).toISOString() }
+        ]
+      },
+      { id:'q14', category:'qna', title:'API 응답을 mock 데이터로 가로채는 방법?',
+        content:'테스트 중에 특정 API 응답을 mock 데이터로 대체하고 싶어요.\nPlaywright에서 네트워크 요청을 가로채는 방법이 있나요?',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*85).toISOString(),
+        comments:[
+          { id:'qc20', authorId:'user4', authorNickname:'다이애나', text:'page.route()를 사용하면 돼요!\nawait page.route("**/api/users", route => route.fulfill({ json: { users: [] } }));\n이렇게 하면 해당 URL 요청을 mock 데이터로 대체할 수 있어요', createdAt: new Date(now - h*83).toISOString() },
+          { id:'qc21', authorId:'user1', authorNickname:'앨리스', text:'route.abort()로 요청 자체를 막을 수도 있어요. 네트워크 에러 케이스 테스트할 때 유용해요!', createdAt: new Date(now - h*80).toISOString() }
+        ]
+      },
+      { id:'q15', category:'qna', title:'Playwright HTML 테스트 보고서 보는 방법?',
+        content:'npx playwright test 실행하면 콘솔에만 결과가 나오는데,\n더 보기 좋은 HTML 보고서 같은 건 없나요?',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*40).toISOString(),
+        comments:[
+          { id:'qc22', authorId:'user3', authorNickname:'찰리', text:'playwright.config.ts에서 reporter: "html" 설정하면 HTML 보고서 생성돼요. npx playwright show-report 명령으로 브라우저에서 볼 수 있어요!', createdAt: new Date(now - h*38).toISOString() },
+          { id:'qc23', authorId:'user2', authorNickname:'밥', text:'--reporter=html 플래그도 돼요. 스크린샷, 비디오까지 같이 보여줘서 디버깅에 최고예요', createdAt: new Date(now - h*36).toISOString() }
+        ]
+      },
+
+      // ── 공지사항 추가 (n6~n7) ──────────────────────────
+      { id:'n6', category:'notice', title:'[공지] 글쓰기 가이드라인 업데이트',
+        content:'보다 나은 커뮤니티를 위해 글쓰기 가이드라인을 업데이트합니다.\n\n[ 제목 ]\n- 내용을 잘 나타내는 제목을 작성해주세요\n- 특수문자 남용 자제\n\n[ 내용 ]\n- 질문 시 에러 메시지, 코드 포함\n- 정보 공유 시 출처 명시\n- 최소 2줄 이상 작성 권장\n\n좋은 글이 좋은 커뮤니티를 만들어요!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*200).toISOString(),
+        comments:[
+          { id:'nc6', authorId:'user4', authorNickname:'다이애나', text:'가이드라인 잘 읽었어요. 더 나은 커뮤니티가 되겠네요!', createdAt: new Date(now - h*198).toISOString() }
+        ]
+      },
+      { id:'n7', category:'notice', title:'[공지] 4월 정기 오프라인 모임 안내',
+        content:'4월 커뮤니티 오프라인 모임을 진행합니다!\n\n일시: 4월 12일(토) 오후 2시\n장소: 강남구 선릉역 인근 (확정 후 공지)\n인원: 선착순 20명\n\n주제: AI 에이전트 실습 공유, 자유 네트워킹\n\n참여 희망자는 댓글로 닉네임 남겨주세요!',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*18).toISOString(),
+        comments:[
+          { id:'nc7', authorId:'user3', authorNickname:'찰리', text:'참여할게요! 찰리입니다', createdAt: new Date(now - h*17).toISOString() },
+          { id:'nc8', authorId:'user5', authorNickname:'에반', text:'저도 참여하고 싶어요! 에반입니다', createdAt: new Date(now - h*16).toISOString() },
+          { id:'nc9', authorId:'user2', authorNickname:'밥', text:'밥 참여합니다!', createdAt: new Date(now - h*15).toISOString() }
+        ]
+      },
+
+      // ── 정보공유 추가 (i11~i15) ────────────────────────
+      { id:'i11', category:'info', title:'Claude API 시작하기 - 완전 초보 가이드',
+        content:'Claude API로 AI 앱 만드는 방법 간단 정리!\n\n1. https://console.anthropic.com 에서 API 키 발급\n2. npm install @anthropic-ai/sdk\n3. 기본 코드:\n\nimport Anthropic from "@anthropic-ai/sdk";\nconst client = new Anthropic();\nconst message = await client.messages.create({\n  model: "claude-sonnet-4-6",\n  max_tokens: 1024,\n  messages: [{ role: "user", content: "Hello!" }]\n});\nconsole.log(message.content);\n\n이게 전부예요! 엄청 간단하죠?',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*170).toISOString(),
+        comments:[
+          { id:'ic16', authorId:'user1', authorNickname:'앨리스', text:'초보자를 위한 완벽한 가이드! 저도 처음에 이런 게 있었으면 좋았을 텐데요', createdAt: new Date(now - h*168).toISOString() },
+          { id:'ic17', authorId:'user5', authorNickname:'에반', text:'무료 크레딧 얼마나 줘요?', createdAt: new Date(now - h*165).toISOString() },
+          { id:'ic18', authorId:'user3', authorNickname:'찰리', text:'가입하면 $5 크레딧 줘요. 간단한 테스트용으론 충분해요!', createdAt: new Date(now - h*163).toISOString() }
+        ]
+      },
+      { id:'i12', category:'info', title:'JavaScript 비동기 처리 총정리 (callback → Promise → async/await)',
+        content:'JS 비동기 처리 발전사 정리!\n\n[ 1세대: Callback ]\ncallback hell 문제, 가독성 최악\n\n[ 2세대: Promise ]\n.then().catch() 체인, 훨씬 나아짐\n\n[ 3세대: async/await ]\ntry/catch로 동기 코드처럼 작성 가능 - 현재 표준!\n\n// 예시\nasync function getData() {\n  try {\n    const res = await fetch("/api/data");\n    return await res.json();\n  } catch (e) {\n    console.error(e);\n  }\n}\n\nPlaywright도 async/await 기반이에요!',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*145).toISOString(),
+        comments:[
+          { id:'ic19', authorId:'user2', authorNickname:'밥', text:'콜백 헬 겪어본 사람들은 async/await 나왔을 때 눈물 흘렸다고 ㅋㅋ', createdAt: new Date(now - h*143).toISOString() },
+          { id:'ic20', authorId:'user1', authorNickname:'앨리스', text:'Promise.all() 도 꼭 알아야 해요. 병렬 처리에 엄청 유용해요', createdAt: new Date(now - h*140).toISOString() }
+        ]
+      },
+      { id:'i13', category:'info', title:'CSS Flexbox 치트시트 (매번 까먹는 것들)',
+        content:'매번 구글링하는 Flexbox 속성들 정리!\n\n[ 부모(container) 속성 ]\ndisplay: flex\nflex-direction: row | column\njustify-content: center | space-between | flex-start\nalign-items: center | stretch | flex-start\ngap: 8px (아이템 간격)\nflex-wrap: wrap (줄바꿈 허용)\n\n[ 자식(item) 속성 ]\nflex: 1 (남은 공간 차지)\nflex-shrink: 0 (줄어들지 않음)\nalign-self: (개별 정렬)\n\n이 커뮤니티 레이아웃도 Flexbox로 구현되어 있어요!',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*115).toISOString(),
+        comments:[
+          { id:'ic21', authorId:'user3', authorNickname:'찰리', text:'flexbox froggy 게임으로 배우면 재밌어요! 강력 추천합니다', createdAt: new Date(now - h*113).toISOString() },
+          { id:'ic22', authorId:'user4', authorNickname:'다이애나', text:'justify-content랑 align-items 항상 헷갈려요 ㅋㅋ 이번에 제대로 외워야겠다', createdAt: new Date(now - h*110).toISOString() }
+        ]
+      },
+      { id:'i14', category:'info', title:'dotfiles로 개발 환경 설정 자동화하기',
+        content:'새 컴퓨터 설정할 때마다 다 다시 하기 귀찮죠? dotfiles로 해결하세요!\n\ndotfiles란:\n.zshrc, .gitconfig 등 설정 파일들을 GitHub에 올려서 관리하는 방법\n\n기본 구조:\n~/dotfiles/\n  .zshrc\n  .gitconfig\n  install.sh (심볼릭 링크 자동 생성)\n\n장점:\n- git clone 하나로 환경 복원\n- 설정 변경 이력 관리\n- 다른 사람 dotfiles 참고 가능\n\nGitHub에서 "awesome dotfiles" 검색해보세요!',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*65).toISOString(),
+        comments:[
+          { id:'ic23', authorId:'user1', authorNickname:'앨리스', text:'저도 dotfiles 쓰는데 진짜 편해요. 회사 컴퓨터 셋업이 10분 컷이었어요', createdAt: new Date(now - h*63).toISOString() },
+          { id:'ic24', authorId:'user4', authorNickname:'다이애나', text:'심볼릭 링크 개념이 처음에 헷갈렸는데 이해하고 나면 정말 편리해요', createdAt: new Date(now - h*60).toISOString() }
+        ]
+      },
+      { id:'i15', category:'info', title:'Node.js 버전 관리 - nvm 완전 정복',
+        content:'프로젝트마다 다른 Node.js 버전 때문에 고생하신 분들!\nnvm(Node Version Manager)으로 해결하세요.\n\n설치 (Mac/Linux):\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash\n\n주요 명령어:\nnvm install 20      # Node 20 설치\nnvm use 20           # Node 20 사용\nnvm ls               # 설치된 버전 목록\nnvm alias default 20 # 기본 버전 설정\n\n.nvmrc 파일을 프로젝트 루트에 두면 자동 전환도 돼요!\n\nWindows는 nvm-windows를 별도 설치하세요.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*30).toISOString(),
+        comments:[
+          { id:'ic25', authorId:'user5', authorNickname:'에반', text:'저는 fnm 씁니다! Rust로 만들어서 엄청 빠르고 nvm이랑 같은 명령어 쓸 수 있어요', createdAt: new Date(now - h*28).toISOString() },
+          { id:'ic26', authorId:'user3', authorNickname:'찰리', text:'volta도 괜찮아요! 프로젝트별 자동 전환이 매끄러워요', createdAt: new Date(now - h*25).toISOString() }
+        ]
+      },
+
+      // ── 유머/잡담 추가 (h11~h15) ───────────────────────
+      { id:'h11', category:'humor', title:'개발자 점심 메뉴 결정 알고리즘',
+        content:'while(true) {\n  let menu = random(menuList);\n  if (menu === "어제 먹은 것") continue;\n  if (menu === "너무 비쌈") continue;\n  if (menu === "줄 김") continue;\n  if (menu === "먹기 싫음") continue;\n  break; // 발견!\n}\n\n보통 이 루프는 12시 30분에 시작해서\n1시 30분에 종료됩니다.\n오늘도 편의점 도시락.',
+        authorId:'user2', authorNickname:'밥', createdAt: new Date(now - h*178).toISOString(),
+        comments:[
+          { id:'hc20', authorId:'user3', authorNickname:'찰리', text:'break 도달하면 뭐가 남아요? 항상 편의점이 답이더라고요 ㅋㅋ', createdAt: new Date(now - h*176).toISOString() },
+          { id:'hc21', authorId:'user1', authorNickname:'앨리스', text:'저는 메뉴 결정 AI 만들고 싶은 충동이 진짜로 있어요', createdAt: new Date(now - h*174).toISOString() },
+          { id:'hc22', authorId:'user4', authorNickname:'다이애나', text:'"배고픔 임계값 초과 시 아무거나" 조건을 추가하세요 ㅋㅋ', createdAt: new Date(now - h*172).toISOString() }
+        ]
+      },
+      { id:'h12', category:'humor', title:'개발자 일상의 MBTI',
+        content:'I (내향): 혼자 조용히 코딩 최고\nN (직관): 버그 원인 감으로 잡음\nT (사고): 감정 없는 코드 리뷰\nP (인식): 데드라인? 그게 뭔가요\n\n결론: 모든 개발자는 INTP\n\n(반박: 저는 ENFP인데요)\n(재반박: 깃허브 커밋 시간 보면 알 수 있어요)',
+        authorId:'user4', authorNickname:'다이애나', createdAt: new Date(now - h*135).toISOString(),
+        comments:[
+          { id:'hc23', authorId:'user5', authorNickname:'에반', text:'저 INFJ인데... 커밋 시간은 새벽 2-4시예요 ㅋㅋ 반박 불가', createdAt: new Date(now - h*133).toISOString() },
+          { id:'hc24', authorId:'user2', authorNickname:'밥', text:'P (인식): 데드라인이 뭔가요 ㅋㅋㅋㅋ 너무 공감', createdAt: new Date(now - h*131).toISOString() }
+        ]
+      },
+      { id:'h13', category:'humor', title:'코드 주석 실제 의미 번역집',
+        content:'// 임시 방편\n실제: 6개월 뒤에도 여기 있을 예정\n\n// 나중에 리팩토링\n실제: 여기는 아무도 건드리지 않을 성역\n\n// 왜 이게 동작하는지 모르겠음\n실제: 동작하니까 건드리지 마세요\n\n// 중요! 삭제 금지\n실제: 삭제하면 앱 전체가 터짐\n\n// 테스트 코드\n실제: 실제 배포에 들어가 있는 코드\n\n번역이 필요하신 분들을 위해 공유합니다.',
+        authorId:'user1', authorNickname:'앨리스', createdAt: new Date(now - h*95).toISOString(),
+        comments:[
+          { id:'hc25', authorId:'user3', authorNickname:'찰리', text:'"왜 이게 동작하는지 모르겠음" 실제로 써본 사람...? 저요 ✋', createdAt: new Date(now - h*93).toISOString() },
+          { id:'hc26', authorId:'user5', authorNickname:'에반', text:'"삭제 금지" 실제 의미에서 소름... 경험담인가요 ㅋㅋ', createdAt: new Date(now - h*90).toISOString() },
+          { id:'hc27', authorId:'user4', authorNickname:'다이애나', text:'이런 주석 번역집 신입 때 나눠줘야 해요 ㅋㅋ', createdAt: new Date(now - h*88).toISOString() }
+        ]
+      },
+      { id:'h14', category:'humor', title:'프레임워크 논쟁의 결론',
+        content:'React vs Vue vs Angular 논쟁 최종 결론:\n\n1단계: "React가 최고야!"\n2단계: "아니 Vue가 배우기 쉬워"\n3단계: "Angular는 대규모에 적합해"\n4단계: "그냥 바닐라 JS 써"\n5단계: "HTML/CSS면 충분해"\n6단계: "아무것도 하기 싫어"\n\n모든 프레임워크 논쟁은 6단계로 끝납니다.\n오늘도 저는 6단계입니다.',
+        authorId:'user3', authorNickname:'찰리', createdAt: new Date(now - h*48).toISOString(),
+        comments:[
+          { id:'hc28', authorId:'user2', authorNickname:'밥', text:'저 지금 6단계인데 내일 또 React 씁니다 ㅋㅋ 무한 사이클', createdAt: new Date(now - h*46).toISOString() },
+          { id:'hc29', authorId:'user1', authorNickname:'앨리스', text:'4단계 "바닐라 JS"는 이 커뮤니티 사이트잖아요... 우리가 이미 6단계 경험 중', createdAt: new Date(now - h*44).toISOString() }
+        ]
+      },
+      { id:'h15', category:'humor', title:'개발자와 일반인의 시간 인식 차이',
+        content:'일반인: "2시간 있어? 뭔가 만들 수 있어?"\n개발자: "뭘요?"\n일반인: "그냥 간단한 앱"\n개발자: "2시간으로요?"\n\n일반인: "이거 고치는 데 얼마나 걸려?"\n개발자: "......"\n일반인: "그래서 얼마야?"\n개발자: "모릅니다"\n\n개발자가 시간 예측을 못하는 이유:\n버그는 예고 없이 찾아오기 때문.',
+        authorId:'user5', authorNickname:'에반', createdAt: new Date(now - h*8).toISOString(),
+        comments:[
+          { id:'hc30', authorId:'user4', authorNickname:'다이애나', text:'시간 예측 = 예측한 시간 * 3 + 모르는 것의 수 * 무한대', createdAt: new Date(now - h*6).toISOString() },
+          { id:'hc31', authorId:'user3', authorNickname:'찰리', text:'프로젝트 관리의 핵심은 모른다는 걸 아는 것... 철학적인 직업이에요', createdAt: new Date(now - h*4).toISOString() }
+        ]
+      }
+    ]);
+
+    localStorage.setItem('community_seed_ver', SEED_VERSION);
+  }
+
+  // ===== INIT =====
+  seedDemoData();
+  var currentUser = getCurrentUser();
+  if (currentUser) {
+    updateNav();
+    document.getElementById('app-layout').classList.add('show');
+    goBoard('free');
+  } else {
+    showModal();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Web — 예제 허브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --surface2: #f2f2f0;
+    --border: #e0e0dc;
+    --border2: #c8c8c4;
+    --text: #111111;
+    --muted: #888888;
+    --muted2: #bbbbbb;
+    --tag-v1: #6c6c6c;
+    --tag-v2: #3b7dd8;
+    --tag-v3: #2d9e6b;
+    --tag-v4: #c0690a;
+    --tag-v5: #8b3dcc;
+    --tag-sample: #c0392b;
+    --tag-lesson: #1a7fa8;
+    --tag-awww: #b5760a;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 52px 64px 44px;
+  }
+
+  header h1 {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(20px, 2.8vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  header p { color: var(--muted); font-size: 11px; font-family: 'Noto Sans KR', sans-serif; }
+
+  nav-tabs {
+    display: block;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 64px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  nav-tabs a {
+    display: inline-block;
+    padding: 13px 18px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  nav-tabs a:hover { color: var(--text); border-bottom-color: var(--border2); }
+
+  main { max-width: 1280px; margin: 0 auto; padding: 52px 64px; }
+
+  .section { margin-bottom: 76px; }
+
+  .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+
+  .section-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .section-sub { font-size: 12px; color: var(--muted); }
+
+  .section-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 버전 비교 그룹 */
+  .prompt-group { margin-bottom: 36px; }
+
+  .prompt-header {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px 8px 0 0;
+    padding: 13px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .prompt-icon {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--muted);
+    background: var(--border);
+    border-radius: 3px;
+    padding: 2px 7px;
+    white-space: nowrap;
+    margin-top: 3px;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-text { font-size: 13px; color: var(--text); font-weight: 400; line-height: 1.6; }
+
+  .version-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+  }
+
+  .version-card {
+    background: var(--surface);
+    padding: 16px 18px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .version-card:last-child { border-right: none; }
+
+  .vtag {
+    display: inline-block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: #fff;
+    width: fit-content;
+    margin-bottom: 2px;
+  }
+
+  .vtag.v1 { background: var(--tag-v1); }
+  .vtag.v2 { background: var(--tag-v2); }
+  .vtag.v3 { background: var(--tag-v3); }
+  .vtag.v4 { background: var(--tag-v4); }
+  .vtag.v5 { background: var(--tag-v5); }
+
+  .version-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .version-card-note { font-size: 10px; color: var(--muted); line-height: 1.4; flex: 1; }
+
+  .card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-open {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    background: var(--text);
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.15s;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-open:hover { opacity: 0.75; }
+
+  .btn-prompt {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-prompt:hover { border-color: var(--text); color: var(--text); }
+
+  /* 일반 카드 */
+  .round-header {
+    margin-top: 30px;
+    margin-bottom: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover { border-color: var(--border2); box-shadow: 0 3px 14px rgba(0,0,0,0.06); }
+
+  .card-label {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+
+  .card-prompt {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.65;
+    border-left: 2px solid var(--border2);
+    padding-left: 10px;
+    margin-bottom: 0;
+    flex: 1;
+  }
+
+  .section-badge {
+    display: inline-block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: #fff;
+  }
+
+  .badge-lesson { background: var(--tag-lesson); }
+  .badge-sample { background: var(--tag-sample); }
+  .badge-awww { background: var(--tag-awww); }
+  .badge-test { background: #555; }
+
+  /* Awwwards 비교 카드 */
+  .awww-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+
+  .card-thumb {
+    margin: -20px -22px 14px;
+    overflow: hidden;
+    border-radius: 7px 7px 0 0;
+    height: 190px;
+    position: relative;
+    background: #111;
+  }
+  .card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .card:hover .card-thumb img { transform: scale(1.03); }
+  .card-thumb-tag {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 9px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.07em;
+  }
+  .btn-site {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    background: var(--tag-awww);
+    color: #fff;
+    transition: opacity 0.15s;
+  }
+  .btn-site:hover { opacity: 0.8; }
+
+  .divider { height: 1px; background: var(--border); margin: 60px 0; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 30px 64px;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* 모달 */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal-body { overflow-y: auto; padding: 20px; }
+
+  .modal-prompt-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 36px 24px 28px; }
+    nav-tabs { padding: 0 24px; }
+    main { padding: 32px 24px; }
+    footer { padding: 24px; }
+    .version-grid { grid-template-columns: 1fr 1fr; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 모달 -->
+<div class="modal-overlay" id="prompt-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title-text">투입 프롬프트</span>
+      <button class="modal-close" id="modal-close">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <pre class="modal-prompt-text" id="modal-content"></pre>
+    </div>
+  </div>
+</div>
+
+<header>
+  <h1>AI Agent Web</h1>
+  <p>408 에이전트 웹 — 배포 예제 허브 &nbsp;/&nbsp; Woohee Industries</p>
+</header>
+
+<nav-tabs>
+  <a href="#version-test">에이전트 버전 테스트 (v1~v5)</a>
+  <a href="#lesson">수업 예제 v5</a>
+  <a href="#awwwards">Awwwards 카피</a>
+  <a href="#samples">샘플 01~08</a>
+</nav-tabs>
+
+<main>
+
+  <!-- 에이전트 버전 테스트 -->
+  <section class="section" id="version-test">
+    <div class="section-header">
+      <span class="section-title">에이전트 버전 테스트</span>
+      <span class="section-sub">v1 ~ v5</span>
+    </div>
+    <p class="section-desc">동일한 프롬프트를 v1~v5 에이전트에 각각 투입해 컬러·폰트 품질 진화를 비교합니다.</p>
+
+    <!-- test_A -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT A</span>
+        <span class="prompt-text">내 소개 페이지 만들어줘.</span>
+      </div>
+      <div class="version-grid">
+        <div class="version-card">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <div class="card-actions">
+            <a class="btn-open" href="09_class_agent/test_A/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_A">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준 (흑백화 문제)</span>
+          <div class="card-actions">
+            <a class="btn-open" href="10_class_agent_v2/test_A/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_A">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 에이전트 직접 선택</span>
+          <div class="card-actions">
+            <a class="btn-open" href="11_class_agent_v3/test_A/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_A">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 텍스트 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="12_class_agent_v4/test_A/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_A">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="13_class_agent_v5/test_A/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_A">프롬프트</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- test_B -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT B</span>
+        <span class="prompt-text">나 음악 좋아하는데 음악 취미 소개 페이지 만들어줘. 좋아하는 앨범 사진 있고 스크롤하면 뭔가 나타나게 해줘.</span>
+      </div>
+      <div class="version-grid">
+        <div class="version-card">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <div class="card-actions">
+            <a class="btn-open" href="09_class_agent/test_B/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_B">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준</span>
+          <div class="card-actions">
+            <a class="btn-open" href="10_class_agent_v2/test_B/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_B">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 직접 선택</span>
+          <div class="card-actions">
+            <a class="btn-open" href="11_class_agent_v3/test_B/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_B">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="12_class_agent_v4/test_B/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_B">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="13_class_agent_v5/test_B/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_B">프롬프트</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- test_C -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT C</span>
+        <span class="prompt-text">친구한테 나를 소개하는 링크 만들고 싶어. 처음에 내 이름이랑 한 줄 소개 나오고, 다음에 내가 좋아하는 사진들 드래그로 넘길 수 있게, 그 다음에 내가 잘하는 것들 스크롤하면 하나씩 나타나게 해줘. 배경은 어둡게 해줘.</span>
+      </div>
+      <div class="version-grid">
+        <div class="version-card">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <div class="card-actions">
+            <a class="btn-open" href="09_class_agent/test_C/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_C">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준</span>
+          <div class="card-actions">
+            <a class="btn-open" href="10_class_agent_v2/test_C/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_C">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 직접 선택</span>
+          <div class="card-actions">
+            <a class="btn-open" href="11_class_agent_v3/test_C/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_C">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="12_class_agent_v4/test_C/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_C">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="13_class_agent_v5/test_C/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_C">프롬프트</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- test_D -->
+    <div class="prompt-group">
+      <div class="prompt-header">
+        <span class="prompt-icon">PROMPT D</span>
+        <span class="prompt-text">포트폴리오 페이지 만들어줘. 섹션 구성: 첫 번째 섹션에 내 이름 크게 화면 가득, 두 번째 섹션에 작품 사진 슬라이더(마우스 드래그로 넘기기), 세 번째 섹션에 내 스킬 목록 스크롤하면 하나씩 나타나게, 마지막 섹션에 연락처. 배경 검정, 글자 흰색, 포인트 컬러 있으면 좋겠어.</span>
+      </div>
+      <div class="version-grid">
+        <div class="version-card">
+          <span class="vtag v1">v1</span>
+          <span class="version-card-title">09_class_agent</span>
+          <span class="version-card-note">다크 고정, #00ff9d 포인트</span>
+          <div class="card-actions">
+            <a class="btn-open" href="09_class_agent/test_D/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_D">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v2">v2</span>
+          <span class="version-card-title">10_class_agent_v2</span>
+          <span class="version-card-note">Huemint score 기준</span>
+          <div class="card-actions">
+            <a class="btn-open" href="10_class_agent_v2/test_D/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_D">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v3">v3</span>
+          <span class="version-card-title">11_class_agent_v3</span>
+          <span class="version-card-note">채도 기준 + 직접 선택</span>
+          <div class="card-actions">
+            <a class="btn-open" href="11_class_agent_v3/test_D/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_D">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v4">v4</span>
+          <span class="version-card-title">12_class_agent_v4</span>
+          <span class="version-card-note">배경 해제 + luminance 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="12_class_agent_v4/test_D/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_D">프롬프트</button>
+          </div>
+        </div>
+        <div class="version-card">
+          <span class="vtag v5">v5</span>
+          <span class="version-card-title">13_class_agent_v5</span>
+          <span class="version-card-note">분위기 3단계 + 폰트 자동 판단</span>
+          <div class="card-actions">
+            <a class="btn-open" href="13_class_agent_v5/test_D/" target="_blank">열기 →</a>
+            <button class="btn-prompt" data-key="test_D">프롬프트</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v5 전용 E~G -->
+    <div class="round-header">v5 전용 테스트 (E~G)</div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">v5 / test_E</div>
+        <div class="card-title">카페 블로그</div>
+        <div class="card-prompt">카페 블로그 페이지 만들어줘. 따뜻하고 아늑한 느낌으로, 오늘의 메뉴 소개랑 카페 분위기 사진들 넣어줘.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/test_E/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="test_E">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">v5 / test_F</div>
+        <div class="card-title">여행 갤러리</div>
+        <div class="card-prompt">여행 사진 올릴 페이지 만들어줘. 나라 목록, 사진 갤러리, 여행 이야기. 밝고 상쾌한 느낌.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/test_F/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="test_F">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">v5 / test_G</div>
+        <div class="card-title">강아지 소개 페이지</div>
+        <div class="card-prompt">강아지 취미 소개 페이지 귀엽게 만들어줘. 슬라이더, 강아지 이름+특기, 간식 목록. 파스텔 색상.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/test_G/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="test_G">프롬프트</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 수업 예제 v5 -->
+  <section class="section" id="lesson">
+    <div class="section-header">
+      <span class="section-badge badge-lesson">Class v5</span>
+      <span class="section-title">수업 예제</span>
+      <span class="section-sub">13_class_agent_v5</span>
+    </div>
+    <p class="section-desc">4회차 수업용 예제. 프롬프트는 학생에게 제공되는 템플릿 기준입니다.</p>
+
+    <div class="round-header">1회차 — 마우스 인터랙션</div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">lesson1_ex1</div>
+        <div class="card-title">Magnetic Button + Cursor</div>
+        <div class="card-prompt">마그네틱 버튼 + 커스텀 커서 예제 페이지 만들어줘. 다크 배경, 마그네틱 버튼 3개, lerp 보간 커서.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson1_ex1/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson1_ex1">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">lesson1_ex2</div>
+        <div class="card-title">Flip Cards</div>
+        <div class="card-prompt">호버 카드 뒤집기(Flip Card) 예제. 카드 6개, 3열 그리드, CSS 3D rotateY 180도.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson1_ex2/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson1_ex2">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">lesson1_ex3</div>
+        <div class="card-title">Spotlight Effect</div>
+        <div class="card-prompt">마우스 Spotlight 효과. 완전 어두운 배경, 마우스 따라 radial-gradient 빛 이동.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson1_ex3/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson1_ex3">프롬프트</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="round-header">2회차 — 스크롤 + 타이핑</div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">lesson2_ex1</div>
+        <div class="card-title">수평 스크롤</div>
+        <div class="card-prompt">수평 스크롤 섹션. GSAP + ScrollTrigger pin, 세로 스크롤→가로 이동 변환, 패널 4개.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson2_ex1/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson2_ex1">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">lesson2_ex2</div>
+        <div class="card-title">텍스트 컬러 Reveal</div>
+        <div class="card-prompt">스크롤 텍스트 컬러 reveal. GSAP ScrollTrigger scrub, 회색→포인트 컬러 앞에서부터 채색.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson2_ex2/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson2_ex2">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">lesson2_ex3</div>
+        <div class="card-title">Typed.js 타이핑 히어로</div>
+        <div class="card-prompt">Typed.js 타이핑 효과 히어로. 풀스크린, 타이틀 자동 타이핑+삭제 반복, 3~4개 텍스트 순환.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson2_ex3/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson2_ex3">프롬프트</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="round-header">3회차 — 외부 라이브러리</div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">lesson3_ex1</div>
+        <div class="card-title">tsParticles</div>
+        <div class="card-prompt">tsParticles 인터랙티브 파티클 배경. 마우스에 반응, 연결선 생성, 네온 계열 색상.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson3_ex1/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson3_ex1">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">lesson3_ex2</div>
+        <div class="card-title">Three.js 3D</div>
+        <div class="card-prompt">Three.js GLTFLoader + DamagedHelmet GLB + OrbitControls. 스크롤 3섹션, 모바일 TorusKnot 폴백.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson3_ex2/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson3_ex2">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">lesson3_ex3</div>
+        <div class="card-title">VANTA.js</div>
+        <div class="card-prompt">VANTA.BIRDS WebGL 인터랙티브 배경. 마우스로 새 떼 방향 제어, Hero + About + Effects 3섹션.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson3_ex3/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson3_ex3">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">lesson3_ex4</div>
+        <div class="card-title">Canvas 2D</div>
+        <div class="card-prompt">순수 Canvas 2D 인터랙티브 파티클 별자리. 마우스 근처 파티클 연결선, 밀어내기 반응.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/lesson3_ex4/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="lesson3_ex4">프롬프트</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Awwwards 카피 예제 -->
+  <section class="section" id="awwwards">
+    <div class="section-header">
+      <span class="section-badge badge-awww">Awwwards</span>
+      <span class="section-title">Awwwards TOP6 카피</span>
+      <span class="section-sub">13_class_agent_v5 · awww_0N_*</span>
+    </div>
+    <p class="section-desc">Awwwards SOTD 수상작 TOP6를 v5 프롬프트로 재현한 예제입니다. 원본 레퍼런스와 생성 결과물을 함께 비교해보세요.</p>
+
+    <div class="awww-grid">
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_01_aupale/reference.png" alt="AUPALE VODKA 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_01_aupale</div>
+        <div class="card-title">AUPALE VODKA</div>
+        <div class="card-prompt">어두운 갈색 배경의 고급 음료 브랜딩. Locomotive 제작, Mar 17 SOTD.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://www.aupalevodka.com/en/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/aupale-vodka" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_01_aupale/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_02_dulcedo/reference.png" alt="DULCEDO 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_02_dulcedo</div>
+        <div class="card-title">DULCEDO</div>
+        <div class="card-prompt">검정+골드 럭셔리 모델 에이전시. 골드 세리프 타이포, Locomotive 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://dulcedo.com/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/dulcedo" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_02_dulcedo/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_03_1820/reference.png" alt="1820 PRODUCTIONS 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_03_1820</div>
+        <div class="card-title">1820 PRODUCTIONS</div>
+        <div class="card-prompt">빛번짐/글로우 파티클, 영화적 분위기. Balky Studio 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://www.1820productions.com" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/1820-productions" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_03_1820/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_04_griflan/reference.png" alt="GRIFLAN 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_04_griflan</div>
+        <div class="card-title">GRIFLAN</div>
+        <div class="card-prompt">불꽃 유니콘 일러스트, 판타지/게임 감성. 검정 배경.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://griflan.com/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/griflan-2" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_04_griflan/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_05_oceanx/reference.png" alt="OCEANX 2025 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_05_oceanx</div>
+        <div class="card-title">OCEANX 2025</div>
+        <div class="card-prompt">심해 탐험 테마, 박진감 스크롤 애니메이션. Unseen Studio 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://2025.oceanx.org/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/oceanx-2025" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_05_oceanx/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="13_class_agent_v5/awww_06_lightweight/reference.png" alt="LIGHTWEIGHT 원본 스크린샷">
+          <span class="card-thumb-tag">원본 스크린샷</span>
+        </div>
+        <div class="card-label">awww_06_lightweight</div>
+        <div class="card-title">LIGHTWEIGHT</div>
+        <div class="card-prompt">슈퍼 미니멀 다크, 자전거 휠 브랜딩. VKZ Studio 제작.</div>
+        <div class="card-actions">
+          <a class="btn-site" href="https://lightweight.info/" target="_blank">실제 사이트 →</a>
+          <a class="btn-open" href="https://www.awwwards.com/sites/lightweight" target="_blank">Awwwards →</a>
+          <a class="btn-open" href="13_class_agent_v5/awww_06_lightweight/" target="_blank">결과물 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 샘플 01~08 -->
+  <section class="section" id="samples">
+    <div class="section-header">
+      <span class="section-badge badge-sample">Samples</span>
+      <span class="section-title">샘플 예제</span>
+      <span class="section-sub">01~08</span>
+    </div>
+    <p class="section-desc">에이전트 개발 초기 단계의 인터랙션 샘플 및 라이브러리 테스트 예제입니다.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">01_scroll_gallery</div>
+        <div class="card-title">Scroll Gallery</div>
+        <div class="card-prompt">GSAP Card Stack 효과 재현. 순수 JS. 세로 스크롤→가로 이동, 네온 테두리 카드 6장.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="01_scroll_gallery/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="01_scroll_gallery">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">02_word_by_word</div>
+        <div class="card-title">Word by Word</div>
+        <div class="card-prompt">GSAP Word by Word 재현. 순수 JS. 단어별 stagger 애니메이션, 3섹션 방향 교차.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="02_word_by_word/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="02_word_by_word">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">03_card_shuffle</div>
+        <div class="card-title">Card Shuffle</div>
+        <div class="card-prompt">GSAP Card Shuffle 재현. 순수 JS. 아티스트 카드 6장 부채꼴, 클릭 시 셔플, 마우스 parallax.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="03_card_shuffle/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="03_card_shuffle">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">04_stacking_images</div>
+        <div class="card-title">Stacking Images</div>
+        <div class="card-prompt">GSAP Infinite Stacking Images 재현. 순수 JS. 스크롤에 따라 이미지 6장 콜라주처럼 쌓임.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="04_stacking_images/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="04_stacking_images">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">05_infinite_grid</div>
+        <div class="card-title">Infinite Grid</div>
+        <div class="card-prompt">GSAP Infinite Grid 재현. 순수 JS. 3열 타일 드래그로 무한 이동, modulo 루프, 관성 감속.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="05_infinite_grid/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="05_infinite_grid">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">06_test_gsap</div>
+        <div class="card-title">GSAP Test</div>
+        <div class="card-prompt">GSAP + ScrollTrigger CDN 사용 테스트. 사진 포트폴리오 4섹션, scrub + stagger.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="06_test_gsap/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="06_test_gsap">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">07_test_swiper</div>
+        <div class="card-title">Swiper Test</div>
+        <div class="card-prompt">Swiper.js CDN 테스트. 뮤직 컬렉션, Coverflow 메인 슬라이더 + freeMode 트랙 리스트.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="07_test_swiper/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="07_test_swiper">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">08_test_aos</div>
+        <div class="card-title">AOS Test</div>
+        <div class="card-prompt">AOS CDN 테스트. 브랜드 소개 5섹션, 모든 등장 효과를 data-aos 속성으로만 구현.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="08_test_aos/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="08_test_aos">프롬프트</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 에이전트 테스트 -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-badge badge-test">Test</span>
+      <span class="section-title">에이전트 테스트</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">v5 / test_canvas</div>
+        <div class="card-title">Canvas 2D 드로잉</div>
+        <div class="card-prompt">마우스로 그림을 그릴 수 있는 인터랙티브 드로잉. 색상 팔레트 6가지, 브러시 슬라이더, 지우개.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="13_class_agent_v5/test_canvas/" target="_blank">열기 →</a>
+          <button class="btn-prompt" data-key="test_canvas">프롬프트</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Playwright 실습용</div>
+        <div class="card-title">커뮤니티 사이트</div>
+        <div class="card-prompt">Playwright MCP 실습 전용. 회원가입/로그인/게시판/댓글/마이페이지. 단일 HTML + localStorage 기반.</div>
+        <div class="card-actions">
+          <a class="btn-open" href="playwright_demo/" target="_blank">열기 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  AI Agent Web &nbsp;/&nbsp; Woohee Industries &nbsp;/&nbsp; 408 에이전트 웹
+</footer>
+
+<script>
+const PROMPTS = {
+  test_A: `내 소개 페이지 만들어줘.`,
+
+  test_B: `나 음악 좋아하는데 음악 취미 소개 페이지 만들어줘. 좋아하는 앨범 사진 있고 스크롤하면 뭔가 나타나게 해줘.`,
+
+  test_C: `친구한테 나를 소개하는 링크 만들고 싶어. 처음에 내 이름이랑 한 줄 소개 나오고, 다음에 내가 좋아하는 사진들 드래그로 넘길 수 있게, 그 다음에 내가 잘하는 것들 스크롤하면 하나씩 나타나게 해줘. 배경은 어둡게 해줘.`,
+
+  test_D: `포트폴리오 페이지 만들어줘. 섹션 구성은 이렇게: 첫 번째 섹션에 내 이름 크게 화면 가득, 두 번째 섹션에 작품 사진 슬라이더 (마우스 드래그로 넘기기), 세 번째 섹션에 내 스킬 목록 스크롤하면 하나씩 나타나게, 마지막 섹션에 연락처. 배경 검정, 글자 흰색, 포인트 컬러 있으면 좋겠어.`,
+
+  test_E: `카페 블로그 페이지 만들어줘. 따뜻하고 아늑한 느낌으로, 오늘의 메뉴 소개랑 카페 분위기 사진들 넣어줘. 스크롤하면 내용들이 하나씩 나타나게 해줘.`,
+
+  test_F: `여행 사진 올릴 페이지 만들어줘. 지금까지 다녀온 나라 목록이랑, 사진 갤러리 드래그로 넘길 수 있게, 스크롤하면 여행 이야기들이 나타나게 해줘. 밝고 상쾌한 느낌으로 만들어줘.`,
+
+  test_G: `강아지 취미 소개 페이지 귀엽게 만들어줘. 내가 키우는 강아지 사진들 슬라이더로 넘길 수 있게, 강아지 이름이랑 특기 소개, 좋아하는 간식 목록도 넣어줘. 파스텔 색상으로 귀엽게 해줘.`,
+
+  test_canvas: `마우스로 그림을 그릴 수 있는 인터랙티브 드로잉 페이지 만들어줘. 색상 팔레트 6가지, 브러시 크기 조절 슬라이더, 지우개, 전체 지우기 버튼 포함. 감성적인 느낌.`,
+
+  lesson1_ex1: `마그네틱 버튼 + 커스텀 커서 예제 페이지 만들어줘.
+
+다크 배경에 큰 제목과 마그네틱 버튼 3개가 있는 한 페이지.
+마우스가 버튼 근처(80px 이내)에 오면 버튼이 마우스 쪽으로 끌려가는 magnetic 효과.
+기본 마우스 커서 숨기고 커스텀 원형 커서 2개(작은 점 + 큰 원)가 마우스를 따라다니게.
+큰 원 커서는 lerp 보간으로 부드럽게 따라오게.
+버튼 hover 시 커서 크기 커지는 효과.
+순수 JS로 구현 (mousemove + requestAnimationFrame).`,
+
+  lesson1_ex2: `호버 카드 뒤집기(Flip Card) 예제 페이지 만들어줘.
+
+카드 6개가 3열 그리드로 배치된 페이지.
+각 카드는 마우스 올리면 CSS 3D로 뒤집히면서 뒷면이 나타남 (rotateY 180도).
+앞면: 이미지 + 카드 제목.
+뒷면: 설명 텍스트 + 버튼.
+카드 뒤집기는 순수 CSS transition (transform-style: preserve-3d).
+이미지는 picsum 사용.`,
+
+  lesson1_ex3: `마우스 Spotlight 효과 예제 페이지 만들어줘.
+
+완전 어두운 배경(#000)에 텍스트 콘텐츠가 있는 페이지.
+마우스 위치에 따라 원형 빛(radial-gradient)이 따라다니며 주변을 밝혀주는 효과.
+빛이 없는 곳은 거의 안 보이고 마우스 근처만 보이는 극적인 연출.
+섹션 여러 개를 스크롤하면서 탐험하는 구조.
+순수 JS mousemove 이벤트로 CSS custom property 업데이트 방식으로 구현.`,
+
+  lesson2_ex1: `수평 스크롤 섹션 페이지 만들어줘.
+
+GSAP + ScrollTrigger 사용.
+세로로 스크롤하면 가로 방향으로 패널 4개가 슬라이드되는 효과 (horizontal scroll pinning).
+각 패널은 풀스크린이고 서로 다른 배경색과 콘텐츠.
+수평 스크롤 섹션 앞뒤로 일반 세로 섹션(히어로, 마무리) 포함.
+스크롤 진행 바 상단 포함.`,
+
+  lesson2_ex2: `스크롤 텍스트 컬러 reveal 페이지 만들어줘.
+
+GSAP + ScrollTrigger 사용.
+큰 문장 텍스트가 스크롤 진행에 따라 앞 글자부터 색이 채워지는 효과.
+처음엔 회색/흐린 텍스트, 스크롤하면 포인트 컬러로 앞에서부터 채색.
+이 reveal 섹션이 3~4개 이어지는 구조.
+각 섹션마다 다른 문장과 다른 포인트 컬러.`,
+
+  lesson2_ex3: `Typed.js 타이핑 효과 히어로 페이지 만들어줘.
+
+풀스크린 히어로 섹션에 큰 타이틀이 자동으로 타이핑되고 지워지는 효과.
+Typed.js CDN: https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js
+타이핑되는 텍스트 3~4개 순환 (예: Designer / Developer / Creator / Dreamer).
+히어로 아래로 소개 섹션, 스킬 섹션, 연락처 섹션 이어지는 구조.
+스크롤하면 각 섹션 등장 효과 포함.`,
+
+  lesson3_ex1: `tsParticles 인터랙티브 파티클 배경 페이지 만들어줘.
+
+tsParticles CDN: https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js
+다크 배경에 작은 파티클들이 떠다니고 마우스 가까이 오면 파티클이 반응(밀려나거나 연결선 생김).
+파티클 위에 히어로 텍스트와 버튼 오버레이.
+파티클 색상은 네온 계열 (민트나 보라 포인트).
+아래로 스크롤하면 서비스/작품 소개 섹션.`,
+
+  lesson3_ex2: `Three.js GLTFLoader로 실제 3D 모델을 로드하고 마우스/스크롤로 인터랙션하는 페이지 만들어줘.
+
+3D 모델: DamagedHelmet.glb (로컬 ./models/ 경로)
+Three.js ES 모듈 방식 (importmap + script type="module"):
+- three: https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js
+- GLTFLoader: three/addons/loaders/GLTFLoader.js
+- OrbitControls: three/addons/controls/OrbitControls.js
+
+씬 구성:
+- 배경: 딥 다크 (#0a0a0f)
+- ambient + directional + point light (금속 반사 극대화)
+- 모델 천천히 자동 회전 (Y축)
+
+인터랙션:
+- 마우스 드래그: OrbitControls로 360도 자유 회전
+- 마우스 휠: zoom in/out
+- 스크롤: progress에 따라 모델 위로 이동 + 아래 섹션 등장
+
+페이지 구조 (스크롤 가능, 3섹션):
+1. Hero: 3D 모델 중앙 + 타이틀 + SCROLL 힌트
+2. About: Three.js + GLTFLoader 소개 텍스트 + 스펙 카드
+3. Tech: WebGL 기술 스택 그리드 카드
+
+모바일 폴백: isMobile 감지 시 GLB 스킵 → TorusKnotGeometry 즉시 표시
+스타일: SF/테크 다크, 포인트 컬러 #e8b86d (골드), Orbitron + Rajdhani 폰트`,
+
+  lesson3_ex3: `VANTA.js 인터랙티브 배경 효과 페이지 만들어줘.
+
+VANTA.js CDN (Three.js 먼저 로드 필요):
+- Three.js: https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js
+- VANTA BIRDS: https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js
+
+새들이 배경에서 자유롭게 날아다니는 VANTA.BIRDS 효과를 전체 배경으로 적용.
+히어로 섹션에 타이틀, 서브텍스트, CTA 버튼 중앙 배치.
+스크롤하면 라이브러리 소개 섹션 2개 (VANTA.js란?, 다른 VANTA 효과 소개 카드 3장).
+카드에는 VANTA.WAVES / VANTA.FOG / VANTA.GLOBE 효과 이름과 설명.
+분위기: 어둡고 신비로운 느낌.`,
+
+  lesson3_ex4: `Canvas 2D로 인터랙티브 파티클 별자리 페이지를 만들어줘.
+
+검정 배경에 흰색/밝은 파티클 60개가 랜덤 위치에서 천천히 떠다니고, 마우스를 움직이면 마우스 근처 150px 이내의 파티클끼리 연결선이 생기는 효과. 마우스에 가까울수록 선이 밝고 뚜렷하게, 멀수록 희미하게. 파티클은 마우스에 반응해서 살짝 밀려나는 효과.
+
+외부 라이브러리 없이 순수 Canvas 2D로만 구현. requestAnimationFrame 루프 사용.
+
+페이지 구성:
+- 전체 화면 Canvas 배경 (파티클 애니메이션)
+- 중앙에 타이틀 "CONSTELLATION" 크게
+- 부제목: "Canvas 2D Interactive Particles"
+- 하단에 간단한 사용 설명 ("Move your mouse")
+- 다크 테마, 우주/별 느낌`,
+
+  '01_scroll_gallery': `GSAP ScrollTrigger "Card Stack" 효과 재현. 순수 JS로 구현 (GSAP CDN 사용 금지).
+
+전체 흐름:
+1. 첫 화면: 검정 배경 풀스크린, 상단 네비게이션, 화면 중앙에 "SCROLL" 텍스트 (pulse 애니메이션)
+2. 세로 스크롤하면 → 카드들이 오른쪽에서 왼쪽으로 수평 이동하며 등장 (세로 스크롤을 가로 이동으로 변환)
+3. 카드가 다 지나가면 → 다시 빈 화면
+4. 하단에 얇은 스크롤 진행 바
+
+구현 방식:
+- section을 position: sticky/fixed로 뷰포트에 고정 (pin)
+- body height: 500vh
+- scroll 이벤트로 스크롤 진행률(0~1) → 카드 translateX에 매핑
+- requestAnimationFrame + lerp (60fps)
+- translateX: +100vw ~ -(scrollWidth + 100vw)
+
+카드 디자인 (총 6장):
+- 크기: 320px x 440px, border-radius: 20~24px
+- 테두리: 10~14px, 네온 색상 (파랑/형광연두/시안/골드/핑크/빨강)
+- 하단: Bebas Neue 70~90px 텍스트, 카드 밖으로 삐져나옴
+- 각도: 각각 다르게 살짝 기울어짐
+- 이미지: picsum + mix-blend-mode
+
+스크롤 매핑:
+- progress 0.0 → translateX = window.innerWidth
+- progress 0.5 → 카드 화면 중앙
+- progress 1.0 → translateX = -(scrollWidth)`,
+
+  '02_word_by_word': `GSAP MadeWithGSAP "Word by Word" 효과 재현. 순수 JS로 구현 (GSAP CDN 사용 금지).
+
+전체 흐름:
+1. 검정 배경(#0d0d0d) 다중 섹션 페이지 (총 3섹션)
+2. 각 섹션 진입 시 단어들이 stagger 애니메이션으로 등장
+3. 섹션1: 단어가 오른쪽(translateX +120px)에서 등장
+4. 섹션2: 단어가 왼쪽(translateX -120px)에서 등장 (반대 방향)
+5. 섹션3: 단어가 아래(translateY +40px)에서 등장
+
+공통 레이아웃:
+- 좌측 상단 고정 헤더 + 우측 상단 고정 헤더 + 오른쪽 세로 진행 바
+
+섹션1: Henri Matisse 소개 인용구 (60~66px, Inter 300)
+- 단어 단위 split → span, translateX(120px) opacity:0 → 0 opacity:1
+- stagger: index * 0.07s
+
+섹션2: Fauvism 관련 단락 (52~58px, 우측 정렬)
+- translateX(-120px)에서 등장, stagger 0.07s
+
+섹션3: 명언 (44~50px, 중앙 정렬)
+- translateY(40px)에서 등장, stagger 0.08s
+
+공통: IntersectionObserver (threshold: 0.15), once 방식
+폰트: Inter + Space Mono (Google Fonts)`,
+
+  '03_card_shuffle': `GSAP MadeWithGSAP "Card Shuffle" 효과 재현. 순수 JS로 구현 (GSAP CDN 사용 금지).
+
+전체 흐름:
+1. 검정 배경(#0d0d0d) 풀스크린
+2. 상단 헤더: "SPOTIFY DATAS / YOUR MOST STREAM ARTIST IN 2024 / 6 ARTISTS"
+3. 페이지 로드 시 카드 6장이 화면 하단에서 올라오며 중앙에 부채꼴로 펼쳐짐
+4. 클릭하면 맨 앞 카드가 뒤로 이동 (shuffle)
+5. 하단 "CLICK TO SHUFFLE" 힌트 텍스트
+
+카드 디자인:
+- 6장 색상: 빨강/주황/노랑/그린/파랑/퍼플
+- 이미지 overlay (mix-blend-mode: multiply)
+- 카드 내부: 컬렉션명, 장르, AKA 뱃지, 아티스트명(52px Bebas Neue), 곡 목록
+- 아티스트: KEVIN / DEVONTE / JULIAN / CASABLANCAS / STEPHEN LEE / THUNDER CAT
+
+초기 배치 (부채꼴):
+- 각 카드 회전각: -20, -12, -5, 3, 11, 19 (deg)
+- translateX: -160, -96, -32, 32, 96, 160 (px)
+
+애니메이션:
+- 초기: translateY(+600px), opacity:0 → stagger 0.12s 등장
+- 클릭: 맨 앞 카드 translateY(+600px) 후 z-index 최하단 이동
+- 카드 덱 scale(0.96) → scale(1.0) bounce 피드백
+- lerp(0.05) 마우스 parallax (rotateX/Y 12도 범위)`,
+
+  '04_stacking_images': `GSAP MadeWithGSAP "Infinite Stacking Images" 효과 재현. 순수 JS로 구현 (GSAP CDN 사용 금지).
+
+전체 흐름:
+1. 흰 배경(#f5f5f0) 풀스크린, body height: 600vh
+2. 이미지 컨테이너 position: fixed, 뷰포트 중앙 고정
+3. 스크롤하면 이미지 6장이 하나씩 순차적으로 등장, 중앙에 쌓임
+4. 각 이미지는 서로 다른 위치/각도/크기로 콜라주처럼 겹침
+5. 6장 모두 등장 후: 마우스 parallax 효과 활성화
+
+이미지 데이터 (6장, picsum.photos):
+- img1: rotate -8deg, translateX -120px, translateY -40px, scale 0.85
+- img2: rotate 5deg, translateX 80px, translateY -80px, scale 0.9
+- img3: rotate -3deg, translateX -60px, translateY 60px, scale 0.95
+- img4: rotate 10deg, translateX 100px, translateY 20px, scale 0.88
+- img5: rotate -6deg, translateX -30px, translateY -60px, scale 0.92
+- img6: rotate 2deg, translateX 40px, translateY 40px, scale 1.0
+
+스크롤 매핑: 600vh를 6구간으로 분할, 각 100vh에서 이미지 1장씩 등장
+
+전체 등장 후 parallax:
+- 6장 모두 등장 시 (progress >= 0.95) 활성화
+- rotateX: -(mouseY/vh - 0.5) * 10, rotateY: (mouseX/vw - 0.5) * 10
+- lerp(0.06), perspective: 800px`,
+
+  '05_infinite_grid': `GSAP MadeWithGSAP "Infinite Grid" 효과 재현. 순수 JS로 구현 (GSAP CDN 사용 금지).
+
+전체 흐름:
+1. 검정 배경(#111) 풀스크린, overflow: hidden
+2. 페이지 로드 시 타일들이 stagger로 fade-in 등장 (index * 0.04s, duration 0.5s)
+3. 3열 x N행 이미지 그리드가 뷰포트를 채움
+4. 마우스 드래그로 어느 방향이든 이동 가능 (2D pan)
+5. 드래그를 놓으면 관성(inertia)으로 서서히 감속
+6. 그리드가 일정 범위를 벗어나면 반대쪽에서 타일이 다시 나타남 (무한 루프)
+
+그리드 구성:
+- 타일 크기: 280px x 280px, gap: 6px
+- 3열 고정, 9행 = 27개 타일
+- 이미지: picsum.photos/seed/{1~27}/280/280
+- 타일 hover: scale(1.04) + brightness(1.2)
+
+무한 루프: modulo 방식 (offsetX/Y 범위 초과 시 보정)
+
+드래그 인터랙션:
+- mousedown/mousemove/mouseup + touchstart/touchmove/touchend
+- 드래그 감도: 1.2배
+- 관성: velX/velY *= 0.92 감쇠
+- 첫 드래그 시 "DRAG TO EXPLORE" 힌트 페이드아웃`,
+
+  '06_test_gsap': `GSAP + ScrollTrigger CDN 사용 필수. 순수 JS scroll 이벤트 사용 금지.
+
+다크 배경(#0d0d0d) 사진 포트폴리오 페이지. 스크롤 내리면 섹션별 GSAP 애니메이션으로 등장.
+
+섹션1 - 히어로:
+- 큰 타이틀 "VISUAL WORKS" (Bebas Neue, 120px)
+- 페이지 로드 시 y:80→0, opacity:0→1, duration:1.2, ease:"power3.out"
+
+섹션2 - 이미지 그리드:
+- 3열 6개 이미지 카드 (loremflickr)
+- ScrollTrigger: 각 카드 y:60→0, opacity:0→1, stagger 0.15s
+
+섹션3 - 가로 텍스트 슬라이드:
+- 텍스트 라인 3개, x방향 scrub: true
+- 라인1 x:-200→0, 라인2 x:200→0, 라인3 x:-200→0
+
+섹션4 - CTA:
+- opacity:0→1, scale:0.9→1
+
+폰트: Space Mono + Bebas Neue (Google Fonts)`,
+
+  '07_test_swiper': `Swiper.js CDN 사용 필수. 드래그/슬라이드 인터랙션 모두 Swiper로 구현.
+
+다크 배경(#0d0d0d) 뮤직 컬렉션 페이지.
+
+섹션1 - 메인 슬라이더 (Coverflow):
+- effect: "coverflow", centeredSlides: true, slidesPerView: 2.5, loop: true, grabCursor: true
+- coverflowEffect: depth:200, rotate:20, stretch:0, modifier:1
+- 슬라이드 6장: 앨범 커버 + 앨범명 + 아티스트명
+- 활성 슬라이드: scale(1.0), 비활성: scale(0.85), opacity 0.6
+
+섹션2 - 트랙 리스트 슬라이더:
+- freeMode: true, grabCursor: true
+- slidesPerView: 1.2 (모바일) / 3 (데스크탑 breakpoint 768px)
+- 8개 트랙 카드
+
+폰트: Space Mono + Bebas Neue`,
+
+  '08_test_aos': `AOS (Animate On Scroll) CDN 사용 필수. 모든 스크롤 등장 효과는 data-aos 속성으로만 구현.
+
+AOS 초기화:
+- duration: 800, easing: 'ease-out-cubic', once: true, offset: 80
+
+5섹션 브랜드 소개 페이지:
+
+섹션1 - 히어로:
+- "WE BUILD / DIGITAL FUTURES" (Bebas Neue, 100px)
+- data-aos="fade-up", data-aos-delay="0/200"
+
+섹션2 - 숫자 통계 (3열):
+- "128+ Projects" / "40K Users" / "99% Satisfaction"
+- data-aos="fade-right/up/left", delay 0/150/300
+
+섹션3 - 서비스 카드 (3열):
+- data-aos="flip-left", delay 0/150/300
+
+섹션4 - 이미지 + 텍스트 (좌우 교차):
+- 행1: image fade-right + text fade-left
+- 행2: text fade-right + image fade-left
+
+섹션5 - CTA:
+- data-aos="zoom-in", 버튼 data-aos-delay="200"
+
+포인트 컬러: #00ff9d (네온 그린)`
+};
+
+const modal = document.getElementById('prompt-modal');
+const modalContent = document.getElementById('modal-content');
+const modalTitleText = document.getElementById('modal-title-text');
+const modalClose = document.getElementById('modal-close');
+
+document.querySelectorAll('.btn-prompt').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var key = btn.dataset.key;
+    var text = PROMPTS[key] || '프롬프트 내용 없음';
+    modalContent.textContent = text;
+    modalTitleText.textContent = '투입 프롬프트 — ' + key;
+    modal.classList.add('active');
+  });
+});
+
+modalClose.addEventListener('click', function() {
+  modal.classList.remove('active');
+});
+
+modal.addEventListener('click', function(e) {
+  if (e.target === modal) modal.classList.remove('active');
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') modal.classList.remove('active');
+});
+</script>
+
+</body>
+</html>

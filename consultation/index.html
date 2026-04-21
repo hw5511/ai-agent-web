@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 에이전트 웹 수업 — 상담자료</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;600;700;800&display=swap');
+
+/* ============================================
+   CSS Variables
+============================================ */
+:root {
+  --bg: #fff;
+  --fg: #0a0a0a;
+  --card: #fff;
+  --primary: #171717;
+  --primary-fg: #fafafa;
+  --secondary: #f5f5f5;
+  --secondary-fg: #171717;
+  --muted: #f5f5f5;
+  --muted-fg: #737373;
+  --border: #e5e5e5;
+  --accent: #2563eb;
+  --accent-fg: #fff;
+  --success: #16a34a;
+  --warning: #ca8a04;
+  --danger: #dc2626;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-lg: 1.125rem;
+  --font-xl: 1.25rem;
+  --font-2xl: 1.5rem;
+  --font-3xl: 2rem;
+  --font-4xl: clamp(2rem, 4vw, 3rem);
+  --font-5xl: clamp(3rem, 8vw, 7rem);
+
+  --radius: 0.5rem;
+  --radius-lg: 1rem;
+
+  --section-padding: clamp(1rem, 2vw, 2rem);
+  --hero-padding: clamp(2rem, 5vw, 5rem);
+  --content-max-width: 1400px;
+}
+
+/* ============================================
+   Reset & Base
+============================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; scroll-behavior: smooth; overflow-y: auto; }
+
+body {
+  font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* ============================================
+   Hero Section
+============================================ */
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: var(--primary-fg);
+  padding: var(--hero-padding);
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 30%, rgba(37, 99, 235, 0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(37, 99, 235, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: var(--content-max-width);
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 9999px;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.hero-title-main {
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #e8e8e8 0%, #fff 15%, #b0b0b0 30%, #fff 45%, #d0d0d0 55%, #fff 70%, #a8a8a8 85%, #e0e0e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  word-break: keep-all;
+}
+
+.hero-tagline {
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-weight: 400;
+  opacity: 0.5;
+  margin-top: var(--space-sm);
+  word-break: keep-all;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(var(--space-lg), 4vw, var(--space-2xl));
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  width: 100%;
+}
+
+.stat-item { text-align: center; }
+
+.stat-value {
+  display: block;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+  color: #fff;
+}
+
+.stat-label {
+  display: block;
+  font-size: clamp(0.7rem, 0.9vw, 0.9rem);
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hero-nav {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+.hero-nav a {
+  font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.hero-nav a:hover { color: rgba(255,255,255,0.9); }
+
+/* ============================================
+   Section
+============================================ */
+.section {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-2xl) var(--section-padding);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.section:nth-child(even) { background: var(--secondary); }
+
+.section--dark {
+  background: var(--primary) !important;
+  color: var(--primary-fg);
+}
+
+.section-container {
+  max-width: var(--content-max-width);
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* ============================================
+   Section Header
+============================================ */
+.section-header {
+  margin-bottom: var(--space-lg);
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 0.25rem var(--space-sm);
+  background: var(--primary);
+  color: var(--primary-fg);
+  border-radius: 9999px;
+  font-size: clamp(0.6rem, 0.75vw, 0.75rem);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.section--dark .section-badge {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.section-title {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+}
+
+.section--dark .section-title { color: var(--primary-fg); }
+
+.section-description {
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  color: var(--muted-fg);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.section--dark .section-description { color: rgba(255,255,255,0.5); }
+
+/* ============================================
+   Compare Grid
+============================================ */
+.compare-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.compare-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.compare-card--highlight {
+  background: var(--primary);
+  color: var(--primary-fg);
+  border-color: transparent;
+}
+
+.compare-header { margin-bottom: var(--space-sm); }
+
+.compare-label {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+}
+
+.compare-label--old { background: var(--muted); color: var(--muted-fg); }
+.compare-label--new { background: var(--accent); color: var(--accent-fg); }
+
+.compare-title {
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: 800;
+  word-break: keep-all;
+}
+
+.compare-steps {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.compare-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.compare-card--old .compare-step { border-bottom-color: var(--border); }
+.compare-step:last-child { border-bottom: none; }
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--muted);
+  color: var(--muted-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.compare-card--highlight .step-number {
+  background: rgba(255,255,255,0.12);
+  color: var(--primary-fg);
+}
+
+.step-content strong {
+  display: block;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  margin-bottom: 2px;
+}
+
+.step-content p {
+  font-size: clamp(0.78rem, 0.9vw, 0.85rem);
+  color: var(--muted-fg);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.compare-card--highlight .step-content p { color: rgba(255,255,255,0.55); }
+
+.compare-footer {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+  text-align: center;
+}
+
+.compare-footer--old {
+  border-top: 1px solid var(--border);
+  color: var(--muted-fg);
+}
+
+.compare-footer--new {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  opacity: 0.7;
+}
+
+/* Prompt box */
+.prompt-box {
+  margin-top: var(--space-lg);
+  background: var(--muted);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  border-left: 4px solid var(--accent);
+}
+
+.prompt-box-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-xs);
+}
+
+.prompt-box-text {
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.prompt-box-result {
+  margin-top: var(--space-sm);
+  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+  color: var(--muted-fg);
+}
+
+/* ============================================
+   Roadmap
+============================================ */
+.roadmap-row {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.roadmap-card {
+  flex: 1;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.roadmap-card--white {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.roadmap-card--blue {
+  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.12) 90%, rgba(255,255,255,0.06) 100%), var(--accent);
+  color: var(--accent-fg);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.roadmap-card--dark {
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.08) 85%, rgba(255,255,255,0.03) 100%), var(--primary);
+  color: var(--primary-fg);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.roadmap-step {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+}
+
+.roadmap-num {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+  opacity: 0.15;
+}
+
+.roadmap-title {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 800;
+  margin-bottom: var(--space-md);
+  word-break: keep-all;
+}
+
+.roadmap-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.roadmap-list li {
+  font-size: clamp(0.78rem, 0.9vw, 0.9rem);
+  opacity: 0.8;
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.roadmap-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  opacity: 0.5;
+}
+
+/* ============================================
+   Lesson Section Layout
+============================================ */
+.lesson-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.lesson-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+  flex: 1;
+  align-items: start;
+}
+
+.lesson-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lesson-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+
+.lesson-card-thumb {
+  aspect-ratio: 16/9;
+  background: var(--muted);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.lesson-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.lesson-card:hover .lesson-card-thumb img {
+  transform: scale(1.04);
+}
+
+.lesson-card-body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.lesson-card-title {
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-weight: 700;
+  word-break: keep-all;
+}
+
+.lesson-card-link {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+
+.lesson-card-link:hover { opacity: 0.7; }
+
+.lesson-footer {
+  padding: var(--space-md);
+  background: var(--muted);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.lesson-footer-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  flex-shrink: 0;
+}
+
+.lesson-footer a {
+  font-size: clamp(0.78rem, 0.9vw, 0.85rem);
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  word-break: break-all;
+  transition: opacity 0.2s;
+}
+
+.lesson-footer a:hover { opacity: 0.7; }
+
+/* Lesson Info Block */
+.lesson-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--muted);
+  border-radius: var(--radius-lg);
+}
+
+.lesson-info-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-sm);
+}
+
+.lesson-info-goal p {
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.75;
+  color: var(--fg);
+  word-break: keep-all;
+}
+
+.lesson-info-topics ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.lesson-info-topics li {
+  font-size: clamp(0.82rem, 0.9vw, 0.9rem);
+  color: var(--muted-fg);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.lesson-info-topics li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+}
+
+/* Examples label above thumbnail grid */
+.examples-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border);
+}
+
+/* lesson-card / awww-card as anchor */
+a.lesson-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.awww-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Feature cards (section 2) */
+.feature-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.feature-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.feature-card--accent {
+  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.12) 90%, rgba(255,255,255,0.06) 100%), var(--accent);
+  color: var(--accent-fg);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.feature-card--accent .feature-card-desc { color: rgba(255,255,255,0.75); }
+
+.feature-card-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.feature-card-title {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 800;
+  word-break: keep-all;
+}
+
+.feature-card-desc {
+  font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+  color: var(--muted-fg);
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+/* ============================================
+   Awwwards Cards (Section 8)
+============================================ */
+.awww-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.awww-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.awww-card-thumb {
+  aspect-ratio: 16/9;
+  background: var(--muted);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.awww-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.awww-card:hover .awww-card-thumb img {
+  transform: scale(1.04);
+}
+
+.awww-card-body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.awww-card-link {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.awww-card-link:hover { opacity: 0.7; }
+
+.awww-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+
+.awww-num {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.awww-title {
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.awww-desc {
+  font-size: clamp(0.78rem, 0.88vw, 0.88rem);
+  color: var(--muted-fg);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+/* ============================================
+   CTA Section
+============================================ */
+.cta-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  text-align: center;
+}
+
+.cta-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  color: var(--primary-fg);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  word-break: keep-all;
+}
+
+.cta-sub {
+  font-size: clamp(0.9rem, 1.3vw, 1.15rem);
+  opacity: 0.5;
+  max-width: 540px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 9999px;
+  font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(37,99,235,0.5);
+}
+
+.btn--outline {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.btn--outline:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.6);
+}
+
+/* ============================================
+   Reveal Animations
+============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-children > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-children.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-children.visible > *:nth-child(2) { transition-delay: 0.07s; }
+.reveal-children.visible > *:nth-child(3) { transition-delay: 0.14s; }
+.reveal-children.visible > *:nth-child(4) { transition-delay: 0.21s; }
+.reveal-children.visible > *:nth-child(5) { transition-delay: 0.28s; }
+.reveal-children.visible > *:nth-child(6) { transition-delay: 0.35s; }
+
+.reveal-children.visible > * { opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   Responsive
+============================================ */
+@media (max-width: 1024px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .awww-grid { grid-template-columns: repeat(2, 1fr); }
+  .roadmap-row { flex-direction: column; gap: var(--space-sm); }
+}
+
+@media (max-width: 768px) {
+  .compare-grid { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .awww-grid { grid-template-columns: 1fr; }
+  .lesson-cards { grid-template-columns: 1fr; }
+  .hero-stats { gap: var(--space-lg); }
+  .flow-roadmap { gap: var(--space-xs); }
+  .flow-arrow-large { display: none; }
+  .flow-roadmap { flex-direction: column; align-items: stretch; }
+  .flow-step { flex-direction: row; gap: var(--space-sm); text-align: left; min-width: auto; }
+  .flow-step--current { transform: none; }
+  .lesson-info { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   Full Curriculum Roadmap (Section 3.5)
+============================================ */
+.flow-roadmap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  padding: var(--space-xl) 0;
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--muted);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  min-width: 160px;
+  text-align: center;
+  position: relative;
+}
+
+.flow-step--current {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+  transform: scale(1.06);
+  box-shadow: 0 8px 28px rgba(37,99,235,0.22);
+}
+
+.flow-step--next {
+  background: #f0f7ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}
+
+.flow-step-num {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.flow-step--current .flow-step-num { color: rgba(255,255,255,0.75); opacity: 1; }
+.flow-step--next .flow-step-num { opacity: 0.7; }
+
+.flow-step-title {
+  font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+  font-weight: 700;
+}
+
+.flow-step-badge {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: var(--accent);
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  border: 1px solid var(--accent);
+  white-space: nowrap;
+}
+
+.flow-arrow-large {
+  font-size: 1.1rem;
+  color: var(--muted-fg);
+  flex-shrink: 0;
+  font-weight: 600;
+}
+  </style>
+</head>
+<body>
+
+<!-- ============================
+     SECTION 1: HERO
+============================ -->
+<section class="hero-section" id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">2026 AI Agent Web</div>
+
+    <div class="hero-title reveal">
+      <div class="hero-title-main">AI에이전트 웹</div>
+      <p class="hero-tagline">코딩을 몰라도, AI 에이전트에게 지시하면 완성된다</p>
+    </div>
+
+    <div class="hero-divider reveal"></div>
+
+    <div class="hero-stats reveal-children">
+      <div class="stat-item">
+        <span class="stat-value">4</span>
+        <span class="stat-label">회차</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">8+</span>
+        <span class="stat-label">예제 제작</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">100%</span>
+        <span class="stat-label">실습 중심</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">AI</span>
+        <span class="stat-label">에이전트 직접 생성</span>
+      </div>
+    </div>
+
+    <nav class="hero-nav reveal">
+      <a href="#intro">수업 소개</a>
+      <a href="#full-roadmap">로드맵</a>
+      <a href="#curriculum">커리큘럼</a>
+      <a href="#results">결과물</a>
+      <a href="#cta">수강 안내</a>
+    </nav>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 2: 수업 소개
+============================ -->
+<section class="section" id="intro">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">수업 소개</span>
+      <h2 class="section-title">AI 에이전트 웹 수업이란?</h2>
+      <p class="section-description">
+        코딩 없이 AI 에이전트에게 지시만 해서 실제 브라우저에서 동작하는 웹 페이지를 만드는 수업입니다.<br>
+        원하는 것을 말하면 AI 에이전트가 코드를 생성하고, 눈앞에서 완성된 결과물이 나옵니다.
+      </p>
+    </div>
+
+    <div class="feature-grid reveal-children">
+      <div class="feature-card feature-card--accent">
+        <div class="feature-card-title">코딩 지식 불필요</div>
+        <p class="feature-card-desc">
+          HTML, CSS, JavaScript를 몰라도 됩니다.<br>
+          원하는 웹 페이지를 말로 설명하면 AI 에이전트가 코드를 생성합니다.
+          지시어(프롬프트)만으로 웹을 완성합니다.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">코드가 눈에 보인다</div>
+        <p class="feature-card-desc">
+          AI 에이전트가 생성한 HTML/CSS/JS 코드를 직접 보게 됩니다.
+          코드가 어떻게 구조화되어 있는지, 어떻게 동작하는지 자연스럽게 이해하게 됩니다.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">고퀄리티 인터랙션</div>
+        <p class="feature-card-desc">
+          마우스 인터랙션, 스크롤 애니메이션, 3D 오브젝트, 파티클 효과까지.
+          고급 웹 기술도 AI 에이전트에게 지시하면 구현됩니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 3: 왜 배워야 하나
+============================ -->
+<section class="section" id="why">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">수업 경험</span>
+      <h2 class="section-title">AI로 시작하는 웹 개발 입문</h2>
+      <p class="section-description">
+        완성된 웹 페이지를 직접 만들어보는 경험이, 웹 개발의 가능성을 새롭게 보게 만듭니다.
+      </p>
+    </div>
+
+    <div class="compare-grid reveal-children">
+      <div class="compare-card compare-card--old">
+        <div class="compare-header">
+          <span class="compare-label compare-label--old">웹 개발이 막막한 이유</span>
+          <div class="compare-title">처음 시작이 어렵다</div>
+        </div>
+        <div class="compare-steps">
+          <div class="compare-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <strong>어디서 시작할지 모른다</strong>
+              <p>HTML, CSS, JavaScript 중 무엇부터 해야 할지 갈피 잡기가 쉽지 않습니다</p>
+            </div>
+          </div>
+          <div class="compare-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <strong>결과물이 안 나온다</strong>
+              <p>코드를 배우는 데 시간이 걸리고, 그동안 눈에 보이는 결과물이 없습니다</p>
+            </div>
+          </div>
+          <div class="compare-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <strong>동기를 잃기 쉽다</strong>
+              <p>이론만 쌓이고 실제 웹이 어떤 것인지 감이 잘 오지 않습니다</p>
+            </div>
+          </div>
+        </div>
+        <div class="compare-footer compare-footer--old">
+          웹 개발의 세계는 넓고, 맨땅에서의 진입은 쉽지 않습니다
+        </div>
+      </div>
+
+      <div class="compare-card compare-card--highlight">
+        <div class="compare-header">
+          <span class="compare-label compare-label--new">이 수업 이후 달라지는 것</span>
+          <div class="compare-title">웹이 다르게 보인다</div>
+        </div>
+        <div class="compare-steps">
+          <div class="compare-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <strong>결과물을 먼저 만들어본다</strong>
+              <p>원하는 웹 페이지를 말로 지시해 실제로 동작하는 결과물을 직접 완성합니다</p>
+            </div>
+          </div>
+          <div class="compare-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <strong>코드 구조가 눈에 들어온다</strong>
+              <p>AI가 생성한 코드를 보면서 HTML/CSS/JS가 어떤 역할을 하는지 자연스럽게 파악됩니다</p>
+            </div>
+          </div>
+          <div class="compare-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <strong>더 배우고 싶어진다</strong>
+              <p>실제 결과물을 경험한 후, 이것을 더 정교하게 만들고 싶다는 동기가 생깁니다</p>
+            </div>
+          </div>
+        </div>
+        <div class="compare-footer compare-footer--new">
+          웹의 가능성을 체험한 뒤, 본격적인 학습의 출발점이 됩니다
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-box reveal">
+      <div class="prompt-box-label">프롬프트 예시</div>
+      <div class="prompt-box-text">
+        "검정 배경에 마우스를 따라 빛이 퍼지는 인터랙티브 웹 페이지 만들어줘. 중앙에 큰 타이틀 텍스트가 있고 마우스를 올리면 글자가 흩어지는 효과도 넣어줘."
+      </div>
+      <div class="prompt-box-result">AI 에이전트가 HTML/CSS/JS 전체를 생성 — 즉시 브라우저에서 동작</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 3.5: 전체 커리큘럼 로드맵
+============================ -->
+<section class="section" id="full-roadmap">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">전체 커리큘럼</span>
+      <h2 class="section-title">웹 개발 학습 로드맵</h2>
+      <p class="section-description">
+        AI Agent 웹 수업은 전체 웹 커리큘럼의 첫 번째 관문입니다.<br>
+        AI로 먼저 결과물을 만들어보고, 그 다음 단계를 자연스럽게 밟아나가는 구조로 설계되어 있습니다.
+      </p>
+    </div>
+
+    <div class="flow-roadmap reveal-children">
+      <div class="flow-step">
+        <div class="flow-step-num">01</div>
+        <div class="flow-step-title">프롬프트<br>엔지니어링</div>
+      </div>
+      <div class="flow-arrow-large">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-step-num">02</div>
+        <div class="flow-step-title">AI Agent<br>기초</div>
+      </div>
+      <div class="flow-arrow-large">&rarr;</div>
+      <div class="flow-step flow-step--current">
+        <div class="flow-step-badge">현재 수업</div>
+        <div class="flow-step-num">03</div>
+        <div class="flow-step-title">AI Agent<br>웹</div>
+      </div>
+      <div class="flow-arrow-large">&rarr;</div>
+      <div class="flow-step flow-step--next">
+        <div class="flow-step-num">04</div>
+        <div class="flow-step-title">웹 이론</div>
+      </div>
+      <div class="flow-arrow-large">&rarr;</div>
+      <div class="flow-step flow-step--next">
+        <div class="flow-step-num">05</div>
+        <div class="flow-step-title">웹<br>1, 2, 3</div>
+      </div>
+      <div class="flow-arrow-large">&rarr;</div>
+      <div class="flow-step flow-step--next">
+        <div class="flow-step-num">06</div>
+        <div class="flow-step-title">AI Agent<br>웹 심화</div>
+      </div>
+      <div class="flow-arrow-large">&rarr;</div>
+      <div class="flow-step flow-step--next">
+        <div class="flow-step-num">07</div>
+        <div class="flow-step-title">포트폴리오</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 4: 커리큘럼 로드맵
+============================ -->
+<section class="section" id="curriculum">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">Curriculum</span>
+      <h2 class="section-title">4회차 커리큘럼 로드맵</h2>
+      <p class="section-description">기초 인터랙션부터 Awwwards 수상작 재현까지, 단계별로 실력을 쌓아갑니다.</p>
+    </div>
+
+    <div class="roadmap-row reveal-children">
+      <div class="roadmap-card roadmap-card--white">
+        <div class="roadmap-step">Step 01</div>
+        <div class="roadmap-num">01</div>
+        <div class="roadmap-title">기초 인터랙션</div>
+        <ul class="roadmap-list">
+          <li>마우스 따라다니는 커서 효과</li>
+          <li>자기장 버튼 (Magnetic Button)</li>
+          <li>스크롤 연동 타이핑 텍스트</li>
+          <li>CSS/JS 호버 카드 인터랙션</li>
+        </ul>
+      </div>
+      <div class="roadmap-card roadmap-card--blue">
+        <div class="roadmap-step">Step 02</div>
+        <div class="roadmap-num">02</div>
+        <div class="roadmap-title">고급 애니메이션</div>
+        <ul class="roadmap-list">
+          <li>GSAP ScrollTrigger 스크롤 핀</li>
+          <li>수평 스크롤 패널 전환</li>
+          <li>Swiper.js 드래그 슬라이더</li>
+          <li>AOS 스크롤 등장 애니메이션</li>
+        </ul>
+      </div>
+      <div class="roadmap-card roadmap-card--white">
+        <div class="roadmap-step">Step 03</div>
+        <div class="roadmap-num">03</div>
+        <div class="roadmap-title">라이브러리 &amp; 3D</div>
+        <ul class="roadmap-list">
+          <li>tsParticles 파티클 인터랙션</li>
+          <li>Three.js 3D 오브젝트</li>
+          <li>VANTA.js WebGL 인터랙티브 배경</li>
+          <li>Canvas 2D 파티클 (순수 JS)</li>
+        </ul>
+      </div>
+      <div class="roadmap-card roadmap-card--dark">
+        <div class="roadmap-step">Step 04</div>
+        <div class="roadmap-num">04</div>
+        <div class="roadmap-title">나만의 웹사이트 만들기</div>
+        <ul class="roadmap-list">
+          <li>SOTD 수상작 스크린샷 분석</li>
+          <li>AI 에이전트로 스타일 재현</li>
+          <li>6개 수상작 결과물 제작</li>
+          <li>GitHub Pages 최종 배포</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 5: 1회차 상세
+============================ -->
+<section class="section" id="lesson1">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">LESSON 01</span>
+      <h2 class="section-title">1회차 — 기초 인터랙션</h2>
+      <p class="section-description">마우스와 스크롤 이벤트를 활용한 인터랙티브 웹 페이지를 AI 에이전트 지시만으로 완성합니다.</p>
+    </div>
+
+    <div class="lesson-info reveal">
+      <div class="lesson-info-goal">
+        <div class="lesson-info-label">수업 목표</div>
+        <p>
+          "원하는 것을 말하면 완성된다"는 경험을 처음으로 합니다.
+          코딩 없이 AI 에이전트와 대화하는 것만으로 실제 브라우저에서 동작하는 인터랙티브 웹 페이지를 완성하며,
+          AI가 생성한 HTML/CSS/JS 코드가 어떻게 구조화되어 있는지 눈으로 익힙니다.
+        </p>
+      </div>
+      <div class="lesson-info-topics">
+        <div class="lesson-info-label">배우는 내용</div>
+        <ul>
+          <li>AI 에이전트에게 웹 기능을 지시하는 프롬프트 작성법</li>
+          <li>마우스 커서 커스터마이징 및 Magnetic(자기장) 버튼 구현</li>
+          <li>CSS 3D 변환을 이용한 플립 카드 호버 인터랙션</li>
+          <li>마우스 위치 기반 스포트라이트(빛 번짐) 효과</li>
+          <li>생성된 코드에서 HTML 구조와 CSS 역할 파악하기</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-layout">
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex1/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson1_ex1/thumbnail.png" alt="마우스 커서 + 자기장 버튼">
+          </div>
+        </a>
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex2/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson1_ex2/thumbnail.png" alt="3D 플립 카드">
+          </div>
+        </a>
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex3/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson1_ex3/thumbnail.png" alt="마우스 스포트라이트 효과">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 6: 2회차 상세
+============================ -->
+<section class="section" id="lesson2">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">LESSON 02</span>
+      <h2 class="section-title">2회차 — 고급 애니메이션</h2>
+      <p class="section-description">GSAP, Swiper, AOS 등 실무에서 널리 쓰이는 애니메이션 라이브러리를 AI 에이전트로 적용합니다.</p>
+    </div>
+
+    <div class="lesson-info reveal">
+      <div class="lesson-info-goal">
+        <div class="lesson-info-label">수업 목표</div>
+        <p>
+          코드 없이도 현업 수준의 애니메이션을 구현할 수 있다는 것을 체험합니다.
+          스크롤에 연동된 패널 전환, 텍스트 리빌, 드래그 슬라이더 등
+          실무 프로젝트에서 자주 등장하는 인터랙션을 AI 에이전트 지시만으로 완성합니다.
+        </p>
+      </div>
+      <div class="lesson-info-topics">
+        <div class="lesson-info-label">배우는 내용</div>
+        <ul>
+          <li>GSAP ScrollTrigger를 활용한 수평 스크롤 패널 구성</li>
+          <li>스크롤 진행도에 따라 텍스트 색이 바뀌는 컬러 리빌 효과</li>
+          <li>Swiper.js 드래그·스와이프 슬라이더 구현</li>
+          <li>AOS(Animate On Scroll) 카드 등장 애니메이션 적용</li>
+          <li>외부 라이브러리를 CDN으로 불러오는 방식 이해</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-layout">
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex1/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson2_ex1/thumbnail.png" alt="GSAP 수평 스크롤">
+          </div>
+        </a>
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex2/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson2_ex2/thumbnail.png" alt="스크롤 텍스트 컬러 리빌">
+          </div>
+        </a>
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex3/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson2_ex3/thumbnail.png" alt="AOS 포트폴리오">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 7: 3회차 상세
+============================ -->
+<section class="section" id="lesson3">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">LESSON 03</span>
+      <h2 class="section-title">3회차 — 라이브러리 &amp; 3D</h2>
+      <p class="section-description">파티클, 3D, WebGL까지 — 시각적으로 강렬한 인터랙티브 웹을 AI 에이전트로 구현합니다.</p>
+    </div>
+
+    <div class="lesson-info reveal">
+      <div class="lesson-info-goal">
+        <div class="lesson-info-label">수업 목표</div>
+        <p>
+          tsParticles, Three.js, VANTA.js 등 고급 시각 효과 라이브러리를 AI 에이전트로 구현합니다.
+          3D와 WebGL 기술이 어떻게 웹에 적용되는지 직접 눈으로 확인하며,
+          웹이 얼마나 강렬한 시각 경험을 만들 수 있는지 체감하는 수업입니다.
+        </p>
+      </div>
+      <div class="lesson-info-topics">
+        <div class="lesson-info-label">배우는 내용</div>
+        <ul>
+          <li>tsParticles로 마우스에 반응하는 인터랙티브 파티클 구현</li>
+          <li>Three.js를 활용한 3D 오브젝트 로딩, 회전, 조명 제어</li>
+          <li>VANTA.js WebGL 인터랙티브 배경 효과 적용</li>
+          <li>순수 Canvas 2D API로 별자리 연결 파티클 구현</li>
+          <li>라이브러리 옵션을 프롬프트로 조정하는 방법</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-layout">
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex1/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex1/thumbnail.png" alt="tsParticles 파티클">
+          </div>
+        </a>
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex2/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex2/thumbnail.png" alt="Three.js 3D 헬멧">
+          </div>
+        </a>
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex3/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex3/thumbnail.png" alt="VANTA.js WebGL 배경">
+          </div>
+        </a>
+        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex4/" target="_blank">
+          <div class="lesson-card-thumb">
+            <img src="../13_class_agent_v5/lesson3_ex4/thumbnail.png" alt="Canvas 2D 별자리 파티클">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 8: 4회차 상세
+============================ -->
+<section class="section" id="results">
+  <div class="section-container">
+    <div class="section-header reveal">
+      <span class="section-badge">LESSON 04</span>
+      <h2 class="section-title">4회차 — 나만의 웹사이트 만들기</h2>
+      <p class="section-description">
+        세계적인 웹 어워드 Awwwards SOTD 수상작을 스크린샷만으로 AI 에이전트가 재현합니다.
+      </p>
+    </div>
+
+    <div class="lesson-info reveal">
+      <div class="lesson-info-goal">
+        <div class="lesson-info-label">수업 목표</div>
+        <p>
+          원본 코드 없이 이미지(Vision) 정보만으로 고퀄리티 결과물을 만드는 경험을 합니다.
+          수상작의 스크린샷을 AI 에이전트에게 보여주고 스타일을 재현하는 방식으로,
+          AI 에이전트가 실무 수준의 디자인을 구현할 수 있다는 것을 직접 확인합니다.
+        </p>
+      </div>
+      <div class="lesson-info-topics">
+        <div class="lesson-info-label">배우는 내용</div>
+        <ul>
+          <li>Vision 기반 프롬프트: 이미지를 주고 스타일을 재현하는 방법</li>
+          <li>컬러·타이포그래피·레이아웃을 프롬프트로 지시하는 기술</li>
+          <li>럭셔리 브랜드, 에이전시, 영화, 게임, 환경 등 다양한 스타일 구현</li>
+          <li>결과물을 수정·개선하는 반복 프롬프팅 방법</li>
+          <li>AI 에이전트가 실무 수준의 결과물을 만드는 능력 직접 확인</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="examples-label reveal">수업 결과물 예시</div>
+    <div class="awww-grid reveal-children">
+      <a class="awww-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_01_aupale/" target="_blank">
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_01_aupale/reference.png" alt="AUPALE VODKA">
+        </div>
+      </a>
+      <a class="awww-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_02_dulcedo/" target="_blank">
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_02_dulcedo/reference.png" alt="DULCEDO">
+        </div>
+      </a>
+      <a class="awww-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_03_1820/" target="_blank">
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_03_1820/reference.png" alt="1820 PRODUCTIONS">
+        </div>
+      </a>
+      <a class="awww-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_04_griflan/" target="_blank">
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_04_griflan/reference.png" alt="GRIFLAN">
+        </div>
+      </a>
+      <a class="awww-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_05_oceanx/" target="_blank">
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_05_oceanx/reference.png" alt="OCEANX 2025">
+        </div>
+      </a>
+      <a class="awww-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/awww_06_lightweight/" target="_blank">
+        <div class="awww-card-thumb">
+          <img src="../13_class_agent_v5/awww_06_lightweight/reference.png" alt="LIGHTWEIGHT">
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 9: CTA
+============================ -->
+<section class="section section--dark" id="cta">
+  <div class="section-container">
+    <div class="cta-center">
+      <div class="reveal">
+        <span class="section-badge">수강 안내</span>
+      </div>
+
+      <h2 class="cta-title reveal">
+        AI 에이전트로<br>웹을 직접 만들어보세요
+      </h2>
+
+      <p class="cta-sub reveal">
+        코딩 경험이 없어도 괜찮습니다.<br>
+        원하는 것을 지시하는 방법만 배우면 됩니다.
+      </p>
+
+      <div class="cta-buttons reveal">
+        <a href="#" class="btn btn--primary">수강 상담 신청</a>
+        <a href="https://hw5511.github.io/ai-agent-web/" target="_blank" class="btn btn--outline">결과물 더 보기 &rarr;</a>
+      </div>
+
+      <div class="hero-stats reveal" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--space-lg); margin-top: var(--space-sm);">
+        <div class="stat-item">
+          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">4회차</span>
+          <span class="stat-label">총 수업 횟수</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">웹 입문</span>
+          <span class="stat-label">가장 빠른 시작</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">0 코딩</span>
+          <span class="stat-label">코딩 경험 불필요</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">Awwwards</span>
+          <span class="stat-label">수상작 수준 결과물</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+
+  // IntersectionObserver - reveal
+  var revealEls = document.querySelectorAll('.reveal, .reveal-children');
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(function(el) { observer.observe(el); });
+
+  // Hero reveal on load
+  var heroEls = document.querySelectorAll('.hero-section .reveal, .hero-section .reveal-children');
+  var delays = [0, 200, 400, 600, 800];
+  heroEls.forEach(function(el, i) {
+    setTimeout(function() {
+      el.classList.add('visible');
+    }, delays[i] || i * 150);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+v5 test_A start: 18:14:20
+v5 test_B start: 18:14:24
+v5 test_C start: 18:14:29
+v5 test_D start: 18:14:40
+v5 test_E start: 18:14:47
+v5 test_F start: 18:14:53
+v5 test_G start: 18:14:58
+lesson1_ex1 start: 23:27:05
+lesson1_ex2 start: 23:27:12
+lesson1_ex3 start: 23:27:21
+lesson2_ex1 start: 23:29:47
+lesson2_ex2 start: 23:29:56
+lesson2_ex3 start: 23:30:01
+lesson3_ex1 start: 23:30:08
+lesson3_ex2 start: 23:30:18
+lesson3_ex3 start: 23:30:25
+lesson4_ex1 start: 23:30:32
+lesson4_ex2 start: 23:30:40
+lesson4_ex3 start: 23:30:46

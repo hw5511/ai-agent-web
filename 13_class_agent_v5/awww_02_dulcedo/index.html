@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DULCEDO — Talent Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:   #000000;
+      --black2:  #0a0a0a;
+      --black3:  #111111;
+      --black4:  #1a1a1a;
+      --gold:    #c4a35a;
+      --gold2:   #e8c87a;
+      --gold3:   #8b6f35;
+      --white:   #ffffff;
+      --gray:    #888888;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       CUSTOM CURSOR
+    ============================================================ */
+    #cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      opacity: 0.7;
+      transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ============================================================
+       SCROLL PROGRESS BAR
+    ============================================================ */
+    #scroll-progress {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 2px;
+      height: 0%;
+      background: var(--gold);
+      z-index: 200;
+    }
+
+    /* ============================================================
+       TOP NAVIGATION
+    ============================================================ */
+    nav#top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      text-decoration: none;
+      position: relative;
+      cursor: none;
+      transition: color 0.3s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.35s ease;
+    }
+
+    .nav-link:hover { color: var(--gold); }
+    .nav-link:hover::after { width: 100%; }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      color: var(--gold);
+      text-decoration: none;
+      cursor: none;
+    }
+
+    /* ============================================================
+       SECTION 1 — HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    .hero-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      width: min(74vh, 68vw);
+      height: min(74vh, 68vw);
+      border-radius: 50%;
+      border: 1px solid rgba(196, 163, 90, 0.2);
+      pointer-events: none;
+    }
+
+    .hero-circle-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      width: min(54vh, 50vw);
+      height: min(54vh, 50vw);
+      border-radius: 50%;
+      border: 1px solid rgba(196, 163, 90, 0.07);
+      pointer-events: none;
+    }
+
+    .hero-model {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -53%);
+      height: 74vh;
+      width: auto;
+      object-fit: cover;
+      filter: brightness(0.82) contrast(1.08);
+    }
+
+    .hero-label-left {
+      position: absolute;
+      left: 52px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.26em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 1.4s ease 0.7s forwards;
+    }
+
+    .hero-label-right {
+      position: absolute;
+      right: 52px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.26em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 1.4s ease 0.95s forwards;
+    }
+
+    .hero-big-text {
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .hero-big-text h1 {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 10.8vw, 155px);
+      font-weight: 600;
+      color: var(--gold3);
+      letter-spacing: -0.01em;
+      line-height: 0.9;
+      white-space: nowrap;
+      padding-left: 44px;
+      opacity: 0;
+      transform: translateY(44px);
+      animation: slideUp 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
+    }
+
+    .hero-big-text .line2 {
+      display: block;
+      padding-left: 48px;
+    }
+
+    .hero-bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: rgba(12, 10, 6, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 64px;
+      border-top: 1px solid rgba(196, 163, 90, 0.14);
+    }
+
+    .hero-bottom-bar a {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: none;
+      transition: color 0.3s;
+    }
+
+    .hero-bottom-bar a:hover { color: var(--gold); }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ============================================================
+       SECTION 2 — MODELS / TALENT
+    ============================================================ */
+    #models {
+      background: var(--black2);
+      min-height: 100vh;
+      padding: 120px 52px 80px;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 64px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section-label.visible { opacity: 1; transform: translateY(0); }
+
+    .models-grid {
+      display: flex;
+      gap: 22px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .models-grid::-webkit-scrollbar { display: none; }
+
+    .model-card {
+      flex: 0 0 268px;
+      background: var(--black4);
+      border: 1px solid rgba(196, 163, 90, 0.09);
+      overflow: hidden;
+      cursor: none;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.35s, box-shadow 0.35s;
+    }
+
+    .model-card.visible { opacity: 1; transform: translateY(0); }
+    .model-card:nth-child(2) { transition-delay: 0.1s; }
+    .model-card:nth-child(3) { transition-delay: 0.2s; }
+    .model-card:nth-child(4) { transition-delay: 0.3s; }
+
+    .model-card:hover {
+      border-color: rgba(196, 163, 90, 0.48);
+      box-shadow: 0 0 32px rgba(196, 163, 90, 0.07);
+    }
+
+    .model-img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      background: #0e0e0e;
+    }
+
+    .model-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) brightness(0.82);
+      transition: transform 0.65s ease, filter 0.65s ease;
+      display: block;
+    }
+
+    .model-card:hover .model-img img {
+      transform: scale(1.04);
+      filter: grayscale(0%) brightness(0.9);
+    }
+
+    .model-info {
+      padding: 20px 22px 24px;
+    }
+
+    .model-info h3 {
+      font-family: var(--font-display);
+      font-size: 21px;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.07em;
+      margin-bottom: 5px;
+    }
+
+    .model-info span {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .models-footer {
+      margin-top: 56px;
+    }
+
+    .view-all-link {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: none;
+      position: relative;
+    }
+
+    .view-all-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.35s ease;
+    }
+
+    .view-all-link:hover::after { width: 100%; }
+
+    /* ============================================================
+       SECTION 3 — ABOUT
+    ============================================================ */
+    #about {
+      background: var(--black2);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 52px;
+      border-top: 1px solid rgba(196, 163, 90, 0.08);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      width: 100%;
+    }
+
+    .about-left {
+      opacity: 0;
+      transform: translateX(-48px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .about-left.visible { opacity: 1; transform: translateX(0); }
+
+    .about-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3.4vw, 52px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.28;
+      letter-spacing: 0.02em;
+    }
+
+    .about-left h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(48px);
+      transition: opacity 0.9s ease 0.18s, transform 0.9s ease 0.18s;
+    }
+
+    .about-right.visible { opacity: 1; transform: translateX(0); }
+
+    .about-right p {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.42);
+      line-height: 2.1;
+      letter-spacing: 0.04em;
+      margin-bottom: 52px;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 52px;
+      margin-bottom: 52px;
+    }
+
+    .stat { display: flex; flex-direction: column; gap: 7px; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 38px;
+      border: 1px solid var(--gold);
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+      width: fit-content;
+    }
+
+    .btn-outline::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform 0.4s ease;
+    }
+
+    .btn-outline:hover::before { transform: translateX(0); }
+    .btn-outline:hover { color: var(--black); }
+    .btn-outline span { position: relative; z-index: 1; transition: color 0.4s; }
+    .btn-outline:hover span { color: var(--black); }
+
+    /* ============================================================
+       SECTION 4 — CONTACT
+    ============================================================ */
+    #contact {
+      background: var(--black);
+      min-height: 65vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 52px;
+      border-top: 1px solid rgba(196, 163, 90, 0.1);
+    }
+
+    .contact-eyebrow {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 36px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .contact-eyebrow.visible { opacity: 1; transform: translateY(0); }
+
+    .contact-headline {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 5.5vw, 80px);
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s ease 0.14s, transform 0.9s ease 0.14s;
+    }
+
+    .contact-headline.visible { opacity: 1; transform: translateY(0); }
+
+    .contact-email {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      cursor: none;
+      transition: color 0.3s;
+      opacity: 0;
+      transition: opacity 0.8s ease 0.28s, color 0.3s;
+    }
+
+    .contact-email.visible { opacity: 1; }
+    .contact-email:hover { color: var(--gold); }
+
+    .contact-cities {
+      margin-top: 68px;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.8s ease 0.44s, transform 0.8s ease 0.44s;
+    }
+
+    .contact-cities.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(196, 163, 90, 0.1);
+      padding: 30px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      nav#top-nav { padding: 20px 24px; }
+      .hero-big-text h1 { font-size: clamp(38px, 12vw, 100px); padding-left: 22px; }
+      .hero-big-text .line2 { padding-left: 26px; }
+      .hero-label-left { left: 22px; }
+      .hero-label-right { right: 22px; }
+      #models { padding: 100px 24px 60px; }
+      .model-card { flex: 0 0 210px; }
+      #about { padding: 80px 24px; }
+      .about-inner { grid-template-columns: 1fr; gap: 52px; }
+      .about-left { transform: none; }
+      .about-right { transform: none; }
+      #contact { padding: 80px 24px; }
+      footer { flex-direction: column; gap: 20px; text-align: center; padding: 28px 24px; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-bottom-bar { gap: 24px; }
+      .about-stats { gap: 28px; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div id="scroll-progress"></div>
+
+  <!-- TOP NAV -->
+  <nav id="top-nav">
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#hero" class="nav-logo">DULCEDO</a>
+    <a href="#models" class="nav-link">My Cast (0)</a>
+  </nav>
+
+  <!-- ============================================================
+       SECTION 1 — HERO
+  ============================================================ -->
+  <section id="hero">
+
+    <div class="hero-circle"></div>
+    <div class="hero-circle-inner"></div>
+
+    <img
+      class="hero-model"
+      src="https://loremflickr.com/480/860/fashion,model,woman,black"
+      alt="Featured Talent"
+    />
+
+    <span class="hero-label-left">WE ARE</span>
+    <span class="hero-label-right">DULCEDO&reg;</span>
+
+    <div class="hero-big-text">
+      <h1>
+        WE ELEVATE TALENTS
+        <span class="line2">THAT SHINE</span>
+      </h1>
+    </div>
+
+    <div class="hero-bottom-bar">
+      <a href="#models">Talents</a>
+      <a href="#models">Models</a>
+      <a href="#about">Agency</a>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — MODELS
+  ============================================================ -->
+  <section id="models">
+
+    <div class="section-label">Our Talent</div>
+
+    <div class="models-grid">
+
+      <article class="model-card">
+        <div class="model-img">
+          <img src="https://loremflickr.com/400/600/woman,model,fashion" alt="Sophia Laurent" />
+        </div>
+        <div class="model-info">
+          <h3>Sophia Laurent</h3>
+          <span>Model &middot; Actress</span>
+        </div>
+      </article>
+
+      <article class="model-card">
+        <div class="model-img">
+          <img src="https://loremflickr.com/400/600/man,model,luxury" alt="Marcus Reed" />
+        </div>
+        <div class="model-info">
+          <h3>Marcus Reed</h3>
+          <span>Model &middot; Creative Director</span>
+        </div>
+      </article>
+
+      <article class="model-card">
+        <div class="model-img">
+          <img src="https://loremflickr.com/400/600/woman,editorial,beauty" alt="Elena Voss" />
+        </div>
+        <div class="model-info">
+          <h3>Elena Voss</h3>
+          <span>Talent &middot; Influencer</span>
+        </div>
+      </article>
+
+      <article class="model-card">
+        <div class="model-img">
+          <img src="https://loremflickr.com/400/600/man,portrait,actor" alt="James Calloway" />
+        </div>
+        <div class="model-info">
+          <h3>James Calloway</h3>
+          <span>Actor &middot; Host</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="models-footer">
+      <a href="#" class="view-all-link">View All Talent &rarr;</a>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — ABOUT
+  ============================================================ -->
+  <section id="about">
+    <div class="about-inner">
+
+      <div class="about-left">
+        <h2>We represent the<br /><em>best talents</em><br />in the world.</h2>
+      </div>
+
+      <div class="about-right">
+        <p>
+          DULCEDO is a premier talent and model management agency based in Montreal.
+          Since 2012, we have been connecting extraordinary individuals with the world's
+          leading brands, photographers, and creative directors. Our roster spans fashion,
+          film, music, and digital media — curated with precision and nurtured with care.
+        </p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">200+</span>
+            <span class="stat-label">Talents</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">12+</span>
+            <span class="stat-label">Years</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Cities</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn-outline"><span>Learn More</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — CONTACT
+  ============================================================ -->
+  <section id="contact">
+    <p class="contact-eyebrow">Get In Touch</p>
+    <h2 class="contact-headline">Let's Work Together</h2>
+    <a href="mailto:hello@dulcedo.com" class="contact-email">hello@dulcedo.com</a>
+    <p class="contact-cities">Montreal &nbsp;&middot;&nbsp; New York &nbsp;&middot;&nbsp; Paris</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">DULCEDO</span>
+    <span class="footer-copy">&copy; 2024 Dulcedo Management Inc. All rights reserved.</span>
+    <nav class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Instagram</a>
+    </nav>
+  </footer>
+
+  <!-- ============================================================
+       SCRIPTS
+  ============================================================ -->
+  <script>
+    /* ---- Custom Cursor ---- */
+    var dot   = document.getElementById('cursor-dot');
+    var ring  = document.getElementById('cursor-ring');
+    var mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
+    });
+
+    (function loopRing() {
+      rx += (mx - rx) * 0.13;
+      ry += (my - ry) * 0.13;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(loopRing);
+    })();
+
+    document.querySelectorAll('a, button, .model-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        ring.style.width  = '60px';
+        ring.style.height = '60px';
+        ring.style.opacity = '0.35';
+        dot.style.opacity = '0';
+      });
+      el.addEventListener('mouseleave', function() {
+        ring.style.width  = '40px';
+        ring.style.height = '40px';
+        ring.style.opacity = '0.7';
+        dot.style.opacity = '1';
+      });
+    });
+
+    /* ---- Scroll Progress ---- */
+    var bar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', function() {
+      var total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.height = (window.scrollY / total * 100) + '%';
+    }, { passive: true });
+
+    /* ---- IntersectionObserver Reveal ---- */
+    var targets = document.querySelectorAll(
+      '.section-label, .model-card, .about-left, .about-right, ' +
+      '.contact-eyebrow, .contact-headline, .contact-email, .contact-cities'
+    );
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    targets.forEach(function(el) { io.observe(el); });
+  </script>
+
+</body>
+</html>
