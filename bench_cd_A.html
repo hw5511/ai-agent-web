@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: oklch(12% 0.02 260);
+    --off-white: oklch(96% 0.01 90);
+    --accent: oklch(72% 0.22 30);
+    --accent2: oklch(65% 0.18 200);
+    --muted: oklch(50% 0.04 260);
+    --line: oklch(25% 0.03 260);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--off-white);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* custom cursor */
+  #cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: screen;
+  }
+  #cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid oklch(72% 0.22 30 / 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s linear, width 0.3s, height 0.3s;
+  }
+  body:has(a:hover) #cursor,
+  body:has(button:hover) #cursor { width: 20px; height: 20px; }
+
+  /* noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.6;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    padding: 60px;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-index {
+    grid-column: 1; grid-row: 1;
+    align-self: start;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+
+  .hero-name-block {
+    grid-column: 1 / 3; grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 180px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    display: block;
+  }
+
+  .hero-name span {
+    display: block;
+    transform: translateY(110%);
+  }
+
+  .hero-tagline {
+    grid-column: 2; grid-row: 1;
+    align-self: end;
+    justify-self: end;
+    text-align: right;
+    padding-bottom: 48px;
+    max-width: 280px;
+  }
+
+  .hero-tagline p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    opacity: 0;
+  }
+
+  .hero-bottom {
+    grid-column: 1 / 3; grid-row: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero-scroll-hint {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    opacity: 0;
+  }
+
+  .hero-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    opacity: 0;
+  }
+
+  /* accent line */
+  .accent-line {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    transform-origin: top;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-top: 6px;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    align-self: start;
+    height: fit-content;
+  }
+
+  .about-content h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  .about-content h2 span {
+    display: block;
+    transform: translateY(100%);
+  }
+
+  .about-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: oklch(75% 0.03 260);
+    max-width: 560px;
+    opacity: 0;
+  }
+
+  .about-text strong {
+    color: var(--off-white);
+    font-weight: 500;
+  }
+
+  /* ── SKILLS ── */
+  #skills {
+    padding: 120px 60px;
+    border-top: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skills-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+  }
+
+  .skills-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 100px);
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    color: var(--off-white);
+  }
+
+  .skills-header p {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    max-width: 200px;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .skill-item {
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(30px);
+    cursor: pointer;
+    transition: padding-left 0.3s ease;
+  }
+
+  .skill-item:hover { padding-left: 12px; }
+  .skill-item:not(:nth-child(3n+1)) { padding-left: 40px; border-left: 1px solid var(--line); }
+  .skill-item:hover:not(:nth-child(3n+1)) { padding-left: 52px; }
+
+  .skill-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+  }
+
+  .skill-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--off-white);
+    letter-spacing: 0.02em;
+  }
+
+  .skill-desc {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .skill-bar {
+    height: 1px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--accent);
+    width: 0;
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── WORK ── */
+  #work {
+    padding: 120px 60px;
+    border-top: 1px solid var(--line);
+  }
+
+  .work-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 80px;
+  }
+
+  .work-intro h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 7vw, 90px);
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+  }
+
+  .work-count {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto 80px;
+    align-items: center;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    gap: 40px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .work-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: oklch(20% 0.04 260);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+  }
+
+  .work-item:hover::after { transform: scaleX(1); }
+
+  .work-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+
+  .work-name {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(16px, 2.2vw, 24px);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--off-white);
+  }
+
+  .work-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .work-item:hover .tag {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .work-arrow {
+    font-size: 20px;
+    color: var(--muted);
+    text-align: right;
+    transition: transform 0.3s, color 0.3s;
+  }
+
+  .work-item:hover .work-arrow {
+    transform: translate(4px, -4px);
+    color: var(--accent);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 120px 60px 80px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .contact-cta h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(60px, 10vw, 130px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+    overflow: hidden;
+  }
+
+  .contact-cta h2 span {
+    display: block;
+    transform: translateY(100%);
+  }
+
+  .contact-cta h2 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 8px;
+  }
+
+  .contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--off-white);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .contact-link:hover { color: var(--accent); }
+
+  .contact-link span:last-child {
+    font-size: 18px;
+    transition: transform 0.3s;
+  }
+
+  .contact-link:hover span:last-child { transform: translate(4px, -4px); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 24px 60px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── FLOATING NAV ── */
+  nav {
+    position: fixed;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 200;
+    opacity: 0;
+  }
+
+  .nav-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--line);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    position: relative;
+  }
+
+  .nav-dot.active { background: var(--accent); transform: scale(1.4); }
+  .nav-dot:hover { background: oklch(72% 0.22 30 / 0.6); }
+
+  .nav-dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: 20px;
+    top: 50%; transform: translateY(-50%);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .nav-dot:hover::before { opacity: 1; }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 20s linear infinite;
+  }
+
+  .marquee-track span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    padding: 0 40px;
+    white-space: nowrap;
+  }
+
+  .marquee-track span.accent { color: var(--accent); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    #hero { padding: 40px 24px; grid-template-columns: 1fr; }
+    .hero-tagline { grid-column: 1; align-self: auto; justify-self: start; text-align: left; padding-bottom: 0; }
+    .accent-line { display: none; }
+    #about { padding: 80px 24px; grid-template-columns: 1fr; gap: 24px; }
+    .section-label { writing-mode: horizontal-tb; transform: none; }
+    #skills { padding: 80px 24px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skill-item:not(:nth-child(3n+1)) { padding-left: 0; border-left: none; }
+    #work { padding: 80px 24px; }
+    .work-item { grid-template-columns: 40px 1fr 40px; }
+    .work-tags { display: none; }
+    #contact { padding: 80px 24px; grid-template-columns: 1fr; gap: 48px; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- FLOATING NAV -->
+<nav id="floating-nav">
+  <div class="nav-dot active" data-label="Intro" data-target="hero"></div>
+  <div class="nav-dot" data-label="About" data-target="about"></div>
+  <div class="nav-dot" data-label="Skills" data-target="skills"></div>
+  <div class="nav-dot" data-label="Work" data-target="work"></div>
+  <div class="nav-dot" data-label="Contact" data-target="contact"></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-index">001 / INTRO</div>
+  <div class="hero-name-block">
+    <div class="hero-label">— Designer &amp; Developer</div>
+    <span class="hero-name"><span>YOUR</span></span>
+    <span class="hero-name"><span>NAME</span></span>
+  </div>
+  <div class="hero-tagline">
+    <p>웹과 AI의 경계에서<br>새로운 경험을 설계합니다.<br><br>디자인이 기술을 만나는 곳,<br>그곳에서 일합니다.</p>
+  </div>
+  <div class="hero-bottom">
+    <span class="hero-scroll-hint">Scroll to explore</span>
+    <span class="hero-year">Seoul, Korea &mdash; 2026</span>
+  </div>
+  <div class="accent-line" id="accent-line"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Web Design</span><span class="accent">&times;</span>
+    <span>Frontend Dev</span><span class="accent">&times;</span>
+    <span>AI Integration</span><span class="accent">&times;</span>
+    <span>Motion Design</span><span class="accent">&times;</span>
+    <span>UX Thinking</span><span class="accent">&times;</span>
+    <span>Creative Code</span><span class="accent">&times;</span>
+    <span>Web Design</span><span class="accent">&times;</span>
+    <span>Frontend Dev</span><span class="accent">&times;</span>
+    <span>AI Integration</span><span class="accent">&times;</span>
+    <span>Motion Design</span><span class="accent">&times;</span>
+    <span>UX Thinking</span><span class="accent">&times;</span>
+    <span>Creative Code</span><span class="accent">&times;</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">002 / About</div>
+  <div class="about-content">
+    <h2><span>코드로 만드는<br>살아있는 경험</span></h2>
+    <p class="about-text">
+      저는 <strong>웹 디자이너이자 프론트엔드 개발자</strong>입니다.<br>
+      UI가 단순한 화면이 아니라 사용자와 대화하는 매체라고 믿습니다.<br><br>
+      픽셀 하나의 움직임, 트랜지션 하나의 타이밍이<br>
+      사람의 감정을 바꾼다는 것을 알기에,<br>
+      저는 오늘도 <strong>디테일에 집착</strong>합니다.<br><br>
+      현재는 <strong>AI와 웹의 접점</strong>을 탐구하며<br>
+      새로운 인터랙션 패턴을 연구하고 있습니다.
+    </p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-header">
+    <h2>SKILLS<br>&amp; TOOLS</h2>
+    <p>003 / Skills<br>보유 역량 및<br>사용 도구</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-item" data-level="92">
+      <span class="skill-num">01</span>
+      <span class="skill-name">HTML / CSS</span>
+      <span class="skill-desc">CSS Grid, 스크롤 애니메이션,<br>clip-path, custom properties</span>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+    <div class="skill-item" data-level="85">
+      <span class="skill-num">02</span>
+      <span class="skill-name">JavaScript</span>
+      <span class="skill-desc">Vanilla JS, GSAP,<br>Canvas API, 인터랙티브 UI</span>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+    <div class="skill-item" data-level="78">
+      <span class="skill-num">03</span>
+      <span class="skill-name">React</span>
+      <span class="skill-desc">컴포넌트 설계, 상태관리,<br>성능 최적화</span>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+    <div class="skill-item" data-level="80">
+      <span class="skill-num">04</span>
+      <span class="skill-name">UI/UX Design</span>
+      <span class="skill-desc">Figma, 프로토타이핑,<br>사용자 경험 설계</span>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+    <div class="skill-item" data-level="70">
+      <span class="skill-num">05</span>
+      <span class="skill-name">AI Integration</span>
+      <span class="skill-desc">Claude API, 에이전트 설계,<br>LLM 기반 인터페이스</span>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+    <div class="skill-item" data-level="65">
+      <span class="skill-num">06</span>
+      <span class="skill-name">Motion Design</span>
+      <span class="skill-desc">GSAP ScrollTrigger,<br>WebGL, Three.js</span>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-intro">
+    <h2>SELECTED<br>WORK</h2>
+    <span class="work-count">004 / Work</span>
+  </div>
+  <div class="work-list">
+    <div class="work-item">
+      <span class="work-num">01</span>
+      <span class="work-name">AI Agent Web Platform</span>
+      <div class="work-tags"><span class="tag">React</span><span class="tag">AI</span><span class="tag">2025</span></div>
+      <span class="work-arrow">&#8599;</span>
+    </div>
+    <div class="work-item">
+      <span class="work-num">02</span>
+      <span class="work-name">Interactive Portfolio</span>
+      <div class="work-tags"><span class="tag">GSAP</span><span class="tag">WebGL</span><span class="tag">2025</span></div>
+      <span class="work-arrow">&#8599;</span>
+    </div>
+    <div class="work-item">
+      <span class="work-num">03</span>
+      <span class="work-name">Design System</span>
+      <div class="work-tags"><span class="tag">Figma</span><span class="tag">CSS</span><span class="tag">2024</span></div>
+      <span class="work-arrow">&#8599;</span>
+    </div>
+    <div class="work-item">
+      <span class="work-num">04</span>
+      <span class="work-name">Motion Gallery</span>
+      <div class="work-tags"><span class="tag">Canvas</span><span class="tag">JS</span><span class="tag">2024</span></div>
+      <span class="work-arrow">&#8599;</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-cta">
+    <h2>
+      <span>LET'S</span>
+      <span><em>WORK</em></span>
+      <span>TOGETHER</span>
+    </h2>
+  </div>
+  <div class="contact-info">
+    <p style="font-size:10px; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; margin-bottom:8px;">005 / Contact</p>
+    <a class="contact-link" href="mailto:your@email.com">
+      <span>your@email.com</span>
+      <span>&#8599;</span>
+    </a>
+    <a class="contact-link" href="#">
+      <span>GitHub</span>
+      <span>&#8599;</span>
+    </a>
+    <a class="contact-link" href="#">
+      <span>LinkedIn</span>
+      <span>&#8599;</span>
+    </a>
+    <a class="contact-link" href="#">
+      <span>Instagram</span>
+      <span>&#8599;</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Your Name. All rights reserved.</p>
+  <p>Designed &amp; Developed with intent.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+// ── CURSOR ──────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+(function animateCursor() {
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+})();
+
+// ── GSAP REGISTER ───────────────────────────────────
+gsap.registerPlugin(ScrollTrigger);
+
+// ── HERO ENTRANCE ───────────────────────────────────
+const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+tl.to('#accent-line', { height: '40vh', duration: 1.2, ease: 'power2.inOut' }, 0)
+  .to('.hero-name span', { y: '0%', duration: 1, stagger: 0.08 }, 0.2)
+  .to('.hero-label', { opacity: 1, y: 0, duration: 0.6 }, 0.6)
+  .to('.hero-tagline p', { opacity: 1, duration: 0.8 }, 0.8)
+  .to('.hero-scroll-hint', { opacity: 1, duration: 0.6 }, 1.0)
+  .to('.hero-year', { opacity: 1, duration: 0.6 }, 1.1)
+  .to('#floating-nav', { opacity: 1, duration: 0.6 }, 1.2);
+
+// ── ABOUT ────────────────────────────────────────────
+gsap.to('.about-content h2 span', {
+  y: '0%', duration: 1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#about', start: 'top 75%' }
+});
+gsap.to('.about-text', {
+  opacity: 1, duration: 0.8, delay: 0.3,
+  scrollTrigger: { trigger: '#about', start: 'top 75%' }
+});
+
+// ── SKILLS ───────────────────────────────────────────
+gsap.utils.toArray('.skill-item').forEach((item, i) => {
+  const level = item.dataset.level;
+  const bar = item.querySelector('.skill-bar-fill');
+  ScrollTrigger.create({
+    trigger: item,
+    start: 'top 85%',
+    onEnter: () => {
+      gsap.to(item, { opacity: 1, y: 0, duration: 0.6, delay: i * 0.08, ease: 'power2.out' });
+      gsap.to(bar, { width: level + '%', duration: 1.2, delay: i * 0.08 + 0.3, ease: 'power3.out' });
+    }
+  });
+});
+
+// ── WORK ─────────────────────────────────────────────
+gsap.utils.toArray('.work-item').forEach((item, i) => {
+  gsap.to(item, {
+    opacity: 1, x: 0, duration: 0.7, delay: i * 0.1, ease: 'power2.out',
+    scrollTrigger: { trigger: item, start: 'top 88%' }
+  });
+});
+
+// ── CONTACT ──────────────────────────────────────────
+gsap.utils.toArray('.contact-cta h2 span').forEach((span, i) => {
+  gsap.to(span, {
+    y: '0%', duration: 0.9, delay: i * 0.12, ease: 'power3.out',
+    scrollTrigger: { trigger: '#contact', start: 'top 70%' }
+  });
+});
+
+// ── NAV DOTS ─────────────────────────────────────────
+const sections = ['hero', 'about', 'skills', 'work', 'contact'];
+const dots = document.querySelectorAll('.nav-dot');
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const target = document.getElementById(dot.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+sections.forEach((id, i) => {
+  ScrollTrigger.create({
+    trigger: '#' + id,
+    start: 'top 50%',
+    end: 'bottom 50%',
+    onToggle: self => {
+      if (self.isActive) {
+        dots.forEach(d => d.classList.remove('active'));
+        dots[i].classList.add('active');
+      }
+    }
+  });
+});
+
+// ── PARALLAX ACCENT LINE ─────────────────────────────
+gsap.to('#accent-line', {
+  y: -120, ease: 'none',
+  scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison du Grain — 오늘의 카페</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: oklch(95% 0.025 80);
+      --warm-white: oklch(98% 0.01 80);
+      --espresso: oklch(22% 0.04 45);
+      --coffee: oklch(38% 0.07 50);
+      --latte: oklch(72% 0.08 65);
+      --caramel: oklch(78% 0.12 72);
+      --dusty-rose: oklch(80% 0.06 20);
+      --sage: oklch(72% 0.05 155);
+      --ink: oklch(18% 0.03 50);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--espresso);
+      font-family: 'Noto Sans KR', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      mix-blend-mode: multiply;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--espresso);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--coffee);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--espresso); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    .hero-text-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 4rem 6rem 5rem;
+      background: var(--warm-white);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Lora', serif;
+      font-size: 0.8rem;
+      font-style: italic;
+      letter-spacing: 0.15em;
+      color: var(--latte);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: var(--espresso);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--coffee);
+    }
+
+    .hero-sub {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--coffee);
+      max-width: 340px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-date-badge {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .badge-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--latte);
+    }
+
+    .badge-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--espresso);
+    }
+
+    .hero-image-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.85) brightness(0.95);
+      transition: transform 8s ease;
+    }
+
+    .hero-image-panel:hover img {
+      transform: scale(1.04);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, oklch(95% 0.025 80 / 0.3), transparent);
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 10;
+    }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--latte);
+      writing-mode: vertical-rl;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: var(--latte);
+      transform-origin: top;
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); opacity: 0; }
+      50% { transform: scaleY(1); opacity: 1; }
+      100% { transform: scaleY(0) translateY(60px); opacity: 0; }
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 7rem 5rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--latte);
+      margin-bottom: 1rem;
+      font-family: 'Lora', serif;
+      font-style: italic;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--espresso);
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--caramel);
+      margin: 1.8rem 0;
+    }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 4rem 5rem;
+      display: flex;
+      align-items: center;
+      gap: 6rem;
+    }
+
+    .intro-strip .big-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--caramel);
+      flex: 1;
+      opacity: 0;
+    }
+
+    .intro-strip .intro-body {
+      flex: 0 0 320px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 2;
+      color: oklch(85% 0.02 80);
+      opacity: 0;
+    }
+
+    /* ── TODAY MENU ── */
+    .menu-section {
+      background: var(--warm-white);
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4rem;
+    }
+
+    .menu-note {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--latte);
+      max-width: 260px;
+      line-height: 1.7;
+      padding-top: 0.5rem;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .menu-card {
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .menu-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      filter: saturate(0.8) brightness(0.96);
+      margin-bottom: 1.4rem;
+    }
+
+    .menu-card-category {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--latte);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--espresso);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .menu-card-desc {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--coffee);
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+
+    .menu-card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--caramel);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ATMOSPHERE ── */
+    .atmo-section {
+      background: var(--cream);
+      padding-bottom: 5rem;
+    }
+
+    .atmo-intro {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      align-items: end;
+    }
+
+    .atmo-body {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 2.1;
+      color: var(--coffee);
+      opacity: 0;
+    }
+
+    .atmo-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .atmo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.75) brightness(0.98);
+      display: block;
+      transition: filter 0.5s, transform 0.5s;
+    }
+
+    .atmo-img:hover {
+      filter: saturate(1) brightness(1.02);
+      transform: scale(1.01);
+    }
+
+    .atmo-item {
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.96);
+    }
+
+    .atmo-item--tall {
+      grid-row: span 2;
+      aspect-ratio: 3/4;
+    }
+
+    .atmo-item--wide {
+      aspect-ratio: 4/3;
+    }
+
+    .atmo-item--sq {
+      aspect-ratio: 1;
+    }
+
+    /* ── STORY ── */
+    .story-section {
+      background: oklch(30% 0.05 50);
+      color: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+
+    .story-img-wrap {
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+
+    .story-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.6) brightness(0.85);
+      transition: transform 6s ease;
+    }
+
+    .story-img-wrap:hover img {
+      transform: scale(1.06);
+    }
+
+    .story-text {
+      padding: 6rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .story-eyebrow {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--caramel);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+    }
+
+    .story-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--cream);
+      margin-bottom: 2rem;
+      opacity: 0;
+    }
+
+    .story-body {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 2.1;
+      color: oklch(82% 0.02 80);
+      max-width: 400px;
+      opacity: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 4rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .footer-brand .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: var(--caramel);
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-brand .brand-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--latte);
+    }
+
+    .footer-col h4 {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--caramel);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col p, .footer-col address {
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 2;
+      color: oklch(78% 0.02 80);
+      font-style: normal;
+    }
+
+    .footer-bottom {
+      background: var(--ink);
+      padding: 1.2rem 5rem;
+      font-size: 0.7rem;
+      color: oklch(55% 0.02 60);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; }
+      .hero-image-panel { height: 50vw; }
+      .hero-text-panel { padding: 7rem 2rem 4rem; }
+
+      .intro-strip { flex-direction: column; gap: 2rem; padding: 4rem 2rem; }
+
+      section { padding: 5rem 2rem; }
+
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-header { flex-direction: column; gap: 1rem; }
+
+      .atmo-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .atmo-grid { grid-template-columns: 1fr 1fr; }
+      .atmo-item--tall { grid-row: span 1; aspect-ratio: 4/3; }
+
+      .story-section { grid-template-columns: 1fr; }
+      .story-img-wrap { aspect-ratio: 16/9; }
+      .story-text { padding: 4rem 2rem; }
+
+      footer { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 2rem; }
+      .footer-bottom { padding: 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Maison du Grain</div>
+    <ul class="nav-links">
+      <li><a href="#menu">오늘의 메뉴</a></li>
+      <li><a href="#atmo">공간</a></li>
+      <li><a href="#story">스토리</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text-panel">
+      <p class="hero-eyebrow">A daily journal from our kitchen</p>
+      <h1 class="hero-title">따뜻한<br><em>한 잔의</em><br>시간</h1>
+      <p class="hero-sub">창가에 자리를 잡고, 손끝으로 따뜻한 머그를 감싸는 순간. 오늘도 우리는 당신을 위해 문을 엽니다.</p>
+      <div class="hero-date-badge">
+        <span class="badge-label">Today</span>
+        <span class="badge-date">2026년 4월 21일, 화요일</span>
+      </div>
+    </div>
+    <div class="hero-image-panel">
+      <img src="https://loremflickr.com/900/1200/cafe,coffee" alt="카페 분위기">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- INTRO STRIP -->
+  <div class="intro-strip">
+    <p class="big-quote">"좋은 커피는<br>하루를 다르게<br>만든다."</p>
+    <p class="intro-body">Maison du Grain은 매일 아침 직접 로스팅한 원두로 시작합니다. 계절의 흐름을 담은 디저트, 신선한 재료로 만든 브런치, 그리고 한 권의 책과 함께하기 좋은 구석 자리. 당신이 머무는 동안 이곳은 온전히 당신의 공간입니다.</p>
+  </div>
+
+  <!-- TODAY MENU -->
+  <section class="menu-section" id="menu">
+    <div class="menu-header">
+      <div>
+        <p class="section-label">Today's Offering</p>
+        <h2 class="section-title">오늘의 메뉴</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="menu-note">매일 오전 바리스타가 엄선한 원두와 제철 재료로 구성됩니다. 일부 메뉴는 수량이 한정될 수 있습니다.</p>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://loremflickr.com/600/450/espresso,coffee" alt="에스프레소">
+        <span class="menu-card-category">Espresso Bar</span>
+        <h3 class="menu-card-name">Ethiopia Yirgacheffe<br>싱글 오리진</h3>
+        <p class="menu-card-desc">블루베리와 자스민 향이 피어오르는 에티오피아 내추럴 프로세스 원두. 오늘 새벽 직접 로스팅했습니다. 깔끔하고 밝은 산미가 특징입니다.</p>
+        <span class="menu-card-price">6,500원</span>
+      </div>
+
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://loremflickr.com/600/450/latte,milk,coffee" alt="시그니처 라테">
+        <span class="menu-card-category">Signature</span>
+        <h3 class="menu-card-name">카라멜 얼그레이<br>라테</h3>
+        <p class="menu-card-desc">홍차 얼그레이 인퓨즈드 밀크에 에스프레소를 올린 하우스 시그니처. 버가못 향과 달콤한 카라멜이 부드럽게 어우러집니다.</p>
+        <span class="menu-card-price">7,800원</span>
+      </div>
+
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://loremflickr.com/600/450/croissant,pastry,bakery" alt="크루아상">
+        <span class="menu-card-category">Patisserie</span>
+        <h3 class="menu-card-name">버터 크루아상 &<br>리코타 피그 잼</h3>
+        <p class="menu-card-desc">매일 아침 6시에 굽는 버터 크루아상. 오늘의 스프레드는 수제 무화과 잼과 리코타 치즈. 오전 중 소진될 수 있습니다.</p>
+        <span class="menu-card-price">6,200원</span>
+      </div>
+
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://loremflickr.com/600/450/cake,dessert,chocolate" alt="계절 케이크">
+        <span class="menu-card-category">Seasonal Dessert</span>
+        <h3 class="menu-card-name">딸기 샹티이<br>레이어 케이크</h3>
+        <p class="menu-card-desc">봄 제철 딸기와 가벼운 샹티이 크림을 켜켜이 쌓은 4월의 케이크. 제누아즈는 버터밀크로 촉촉하게 완성합니다.</p>
+        <span class="menu-card-price">9,500원</span>
+      </div>
+
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://loremflickr.com/600/450/tea,herbs,drink" alt="허브티">
+        <span class="menu-card-category">Tea & Infusion</span>
+        <h3 class="menu-card-name">캐모마일 라벤더<br>허니 티</h3>
+        <p class="menu-card-desc">카페인 없이 쉬어가고 싶은 오후를 위한 블렌드. 독일산 캐모마일에 프랑스산 라벤더와 아카시아 꿀을 더했습니다.</p>
+        <span class="menu-card-price">7,000원</span>
+      </div>
+
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://loremflickr.com/600/450/sandwich,brunch,toast" alt="브런치">
+        <span class="menu-card-category">Brunch</span>
+        <h3 class="menu-card-name">아보카도 에그<br>오픈 토스트</h3>
+        <p class="menu-card-desc">사워도우 위에 스크램블드 에그와 아보카도 크림, 루꼴라와 체리 토마토. 올리브 오일과 플레이크 소금으로 마무리합니다.</p>
+        <span class="menu-card-price">12,500원</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATMOSPHERE -->
+  <section class="atmo-section" id="atmo">
+    <div class="atmo-intro">
+      <div>
+        <p class="section-label">Our Space</p>
+        <h2 class="section-title">공간의<br>온도</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="atmo-body">오래된 목재와 황동 조명, 창문으로 스며드는 오후의 햇살. Maison du Grain의 공간은 서두르지 않아도 되는 시간을 위해 설계되었습니다. 책 한 권, 노트 한 권, 혹은 아무것도 없어도 괜찮습니다. 이곳에서는 그냥 있는 것만으로 충분합니다.</p>
+    </div>
+
+    <div class="atmo-grid">
+      <div class="atmo-item atmo-item--tall">
+        <img class="atmo-img" src="https://loremflickr.com/700/950/cafe,interior,cozy" alt="카페 인테리어">
+      </div>
+      <div class="atmo-item atmo-item--wide">
+        <img class="atmo-img" src="https://loremflickr.com/500/375/coffee,window,light" alt="창가 자리">
+      </div>
+      <div class="atmo-item atmo-item--wide">
+        <img class="atmo-img" src="https://loremflickr.com/500/375/barista,coffee,making" alt="바리스타">
+      </div>
+      <div class="atmo-item atmo-item--sq">
+        <img class="atmo-img" src="https://loremflickr.com/400/400/plant,cafe,green" alt="인테리어 식물">
+      </div>
+      <div class="atmo-item atmo-item--sq">
+        <img class="atmo-img" src="https://loremflickr.com/400/400/book,coffee,reading" alt="독서와 커피">
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story-section" id="story">
+    <div class="story-img-wrap">
+      <img src="https://loremflickr.com/800/800/coffee,roasting,beans" alt="원두 로스팅">
+    </div>
+    <div class="story-text">
+      <p class="story-eyebrow">Our Story</p>
+      <h2 class="story-heading">커피 한 잔에<br>담긴 이야기</h2>
+      <p class="story-body">
+        2018년 봄, 작은 골목길 끝에 문을 열었습니다. 처음엔 열두 개의 좌석, 커피 한 종류, 그리고 오너 바리스타 한 명. 지금도 변한 건 그리 많지 않습니다.<br><br>
+        직접 로스팅한 원두, 제철 재료로 만든 베이커리, 그리고 손님 한 분 한 분과 나누는 짧지만 진심 어린 대화. 우리가 지키고 싶은 건 이것뿐입니다.<br><br>
+        오늘도 천천히, 당신을 위해 커피를 내립니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <div class="brand-name">Maison du Grain</div>
+      <div class="brand-sub">Since 2018 — Seoul</div>
+    </div>
+    <div class="footer-col">
+      <h4>Location & Hours</h4>
+      <address>
+        서울시 마포구 연남동 239-14<br>
+        월–금: 08:00 – 21:00<br>
+        주말: 09:00 – 22:00<br>
+        매월 첫째 월요일 휴무
+      </address>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>
+        02-1234-5678<br>
+        hello@maisondugrain.kr<br>
+        @maisondugrain
+      </p>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    &copy; 2026 Maison du Grain. All rights reserved.
+  </div>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    gsap.from('.hero-eyebrow', { duration: 1, y: 20, opacity: 0, delay: 0.4, ease: 'power3.out' });
+    gsap.from('.hero-title', { duration: 1.2, y: 40, opacity: 0, delay: 0.6, ease: 'power3.out' });
+    gsap.from('.hero-sub', { duration: 1, y: 20, opacity: 0, delay: 1.0, ease: 'power3.out' });
+    gsap.from('.hero-date-badge', { duration: 0.8, y: 16, opacity: 0, delay: 1.3, ease: 'power3.out' });
+    gsap.from('.hero-image-panel', { duration: 1.4, x: 60, opacity: 0, delay: 0.2, ease: 'power3.out' });
+
+    // Nav
+    gsap.from('nav', { duration: 0.8, y: -30, opacity: 0, delay: 0.1, ease: 'power3.out' });
+
+    // Intro strip
+    gsap.to('.intro-strip .big-quote', {
+      scrollTrigger: { trigger: '.intro-strip', start: 'top 75%' },
+      duration: 1.0, opacity: 1, x: 0,
+      from: { x: -40, opacity: 0 },
+      ease: 'power3.out'
+    });
+    gsap.from('.intro-strip .big-quote', {
+      scrollTrigger: { trigger: '.intro-strip', start: 'top 75%' },
+      duration: 1.0, x: -40, ease: 'power3.out'
+    });
+    gsap.to('.intro-strip .intro-body', {
+      scrollTrigger: { trigger: '.intro-strip', start: 'top 70%' },
+      duration: 1.0, opacity: 1, y: 0, delay: 0.2, ease: 'power3.out'
+    });
+    gsap.from('.intro-strip .intro-body', {
+      scrollTrigger: { trigger: '.intro-strip', start: 'top 70%' },
+      duration: 1.0, y: 30, ease: 'power3.out', delay: 0.2
+    });
+
+    // Menu cards
+    gsap.utils.toArray('.menu-card').forEach((card, i) => {
+      gsap.to(card, {
+        scrollTrigger: { trigger: card, start: 'top 82%' },
+        duration: 0.8,
+        opacity: 1,
+        y: 0,
+        delay: (i % 3) * 0.12,
+        ease: 'power3.out'
+      });
+    });
+
+    // Menu header
+    gsap.from('.menu-header', {
+      scrollTrigger: { trigger: '.menu-section', start: 'top 75%' },
+      duration: 0.9, y: 30, opacity: 0, ease: 'power3.out'
+    });
+
+    // Atmo body
+    gsap.to('.atmo-body', {
+      scrollTrigger: { trigger: '.atmo-section', start: 'top 75%' },
+      duration: 0.9, opacity: 1, y: 0, ease: 'power3.out', delay: 0.2
+    });
+    gsap.from('.atmo-body', {
+      scrollTrigger: { trigger: '.atmo-section', start: 'top 75%' },
+      duration: 0.9, y: 24, ease: 'power3.out', delay: 0.2
+    });
+
+    gsap.from('.atmo-intro > div', {
+      scrollTrigger: { trigger: '.atmo-section', start: 'top 78%' },
+      duration: 0.8, y: 30, opacity: 0, ease: 'power3.out'
+    });
+
+    // Atmo images
+    gsap.utils.toArray('.atmo-item').forEach((item, i) => {
+      gsap.to(item, {
+        scrollTrigger: { trigger: '.atmo-grid', start: 'top 80%' },
+        duration: 0.9,
+        opacity: 1,
+        scale: 1,
+        delay: i * 0.1,
+        ease: 'power3.out'
+      });
+    });
+
+    // Story
+    gsap.to('.story-eyebrow', {
+      scrollTrigger: { trigger: '.story-section', start: 'top 75%' },
+      duration: 0.7, opacity: 1, y: 0, ease: 'power3.out'
+    });
+    gsap.from('.story-eyebrow', {
+      scrollTrigger: { trigger: '.story-section', start: 'top 75%' },
+      duration: 0.7, y: 20, ease: 'power3.out'
+    });
+
+    gsap.to('.story-heading', {
+      scrollTrigger: { trigger: '.story-section', start: 'top 70%' },
+      duration: 0.9, opacity: 1, y: 0, delay: 0.15, ease: 'power3.out'
+    });
+    gsap.from('.story-heading', {
+      scrollTrigger: { trigger: '.story-section', start: 'top 70%' },
+      duration: 0.9, y: 30, delay: 0.15, ease: 'power3.out'
+    });
+
+    gsap.to('.story-body', {
+      scrollTrigger: { trigger: '.story-section', start: 'top 65%' },
+      duration: 0.9, opacity: 1, y: 0, delay: 0.3, ease: 'power3.out'
+    });
+    gsap.from('.story-body', {
+      scrollTrigger: { trigger: '.story-section', start: 'top 65%' },
+      duration: 0.9, y: 24, delay: 0.3, ease: 'power3.out'
+    });
+
+    // Parallax on hero image
+    gsap.to('.hero-image-panel img', {
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5
+      },
+      y: 80,
+      ease: 'none'
+    });
+  </script>
+</body>
+</html>

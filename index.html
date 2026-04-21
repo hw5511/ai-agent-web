@@ -453,6 +453,7 @@
   <a href="#lesson">수업 예제 v5</a>
   <a href="#awwwards">Awwwards 카피</a>
   <a href="#samples">샘플 01~08</a>
+  <a href="#benchmark">벤치마크 (v5 vs Claude Design)</a>
 </nav-tabs>
 
 <main>
@@ -1040,6 +1041,52 @@
         <div class="card-actions">
           <a class="btn-open" href="playwright_demo/" target="_blank">열기 →</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="benchmark">
+    <div class="section-header">
+      <span class="section-title">벤치마크</span>
+      <span class="section-sub">v5 vs Claude Design Style</span>
+    </div>
+    <p class="section-desc">동일 프롬프트 3종 — v5(Huemint+폰트매핑 시스템) vs Claude Design(oklch+AI슬롭금지 철학) 결과물 비교</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label tag-v5">v5 / bench_A</div>
+        <div class="card-title">내 소개 페이지 — v5</div>
+        <div class="card-prompt">분위기 불명확. v5 Huemint 팔레트 + 분위기 자동 판단.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v5_A.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / bench_A</div>
+        <div class="card-title">내 소개 페이지 — Claude Design</div>
+        <div class="card-prompt">분위기 불명확. oklch 색상 + AI 슬롭 금지 + 놀라게 하라 철학.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_cd_A.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label tag-v5">v5 / bench_E</div>
+        <div class="card-title">카페 블로그 — v5</div>
+        <div class="card-prompt">따뜻하고 아늑한 분위기. v5 Huemint 카페 팔레트 자동 선택.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v5_E.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / bench_E</div>
+        <div class="card-title">카페 블로그 — Claude Design</div>
+        <div class="card-prompt">따뜻하고 아늑한 분위기. 분할 레이아웃 + 프랑스 카페 컨셉.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_cd_E.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label tag-v5">v5 / bench_D</div>
+        <div class="card-title">포트폴리오 다크 — v5</div>
+        <div class="card-prompt">배경 검정, 흰 글자, 포인트 컬러. v5 다크 팔레트.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_v5_D.html" target="_blank">열기 →</a></div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="background:#8b3dcc;color:#fff">CD / bench_D</div>
+        <div class="card-title">포트폴리오 다크 — Claude Design</div>
+        <div class="card-prompt">배경 검정, 흰 글자, 포인트 컬러. Claude Design 다크 해석.</div>
+        <div class="card-actions"><a class="btn-open" href="bench_cd_D.html" target="_blank">열기 →</a></div>
       </div>
     </div>
   </section>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #f26100;
+      --color-accent: #f6fbfa;
+      --color-text: #ffffff;
+      --font-title: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      --font-body: 'Space Mono', 'Noto Sans KR', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+      will-change: transform;
+    }
+
+    .cursor-follower {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--color-primary);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease;
+      will-change: transform;
+      opacity: 0.6;
+    }
+
+    body:hover .cursor {
+      opacity: 1;
+    }
+
+    /* Scroll progress bar */
+    .scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--color-primary);
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      mix-blend-mode: difference;
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    /* ============================
+       SECTION 1 — HERO
+    ============================ */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 10vw;
+      overflow: hidden;
+    }
+
+    .hero-tag {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-name {
+      font-family: var(--font-title);
+      font-size: clamp(5rem, 14vw, 14rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--color-accent);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .hero-name span {
+      color: var(--color-primary);
+    }
+
+    .hero-subtitle {
+      margin-top: 28px;
+      font-family: var(--font-body);
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      letter-spacing: 0.06em;
+      color: rgba(246, 251, 250, 0.5);
+      max-width: 480px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.75s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1.5px solid var(--color-primary);
+      color: var(--color-primary);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: background 0.35s ease, color 0.35s ease;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1s forwards;
+      cursor: none;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-primary);
+      color: var(--color-bg);
+    }
+
+    /* Decorative grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-grid::before {
+      content: '';
+      position: absolute;
+      right: 12vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 60vh;
+      background: rgba(242, 97, 0, 0.15);
+    }
+
+    .hero-grid::after {
+      content: '';
+      position: absolute;
+      right: 18vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 40vh;
+      background: rgba(242, 97, 0, 0.08);
+    }
+
+    .hero-number {
+      position: absolute;
+      right: 9vw;
+      bottom: 12vh;
+      font-family: var(--font-title);
+      font-size: 10rem;
+      color: rgba(242, 97, 0, 0.06);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 10vw;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(246, 251, 250, 0.3);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1.3s forwards;
+    }
+
+    .scroll-hint::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================
+       SECTION 2 — WORKS SLIDER
+    ============================ */
+    #works {
+      padding: 120px 0;
+      overflow: hidden;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+      padding: 0 10vw;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      letter-spacing: 0.04em;
+      color: var(--color-accent);
+      margin-bottom: 60px;
+      padding: 0 10vw;
+      line-height: 1;
+    }
+
+    .swiper {
+      padding: 0 10vw 50px !important;
+      cursor: grab;
+    }
+
+    .swiper:active {
+      cursor: grabbing;
+    }
+
+    .swiper-slide {
+      width: 340px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.35s ease;
+    }
+
+    .swiper-slide:hover {
+      transform: translateY(-8px);
+    }
+
+    .slide-img {
+      display: block;
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      filter: grayscale(30%);
+      transition: filter 0.4s ease, transform 0.4s ease;
+    }
+
+    .swiper-slide:hover .slide-img {
+      filter: grayscale(0%);
+      transform: scale(1.03);
+    }
+
+    .slide-info {
+      padding: 20px 0 8px;
+    }
+
+    .slide-num {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .slide-title {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+    }
+
+    .slide-tag {
+      margin-top: 6px;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: rgba(246, 251, 250, 0.4);
+    }
+
+    .swiper-scrollbar {
+      background: rgba(255,255,255,0.08) !important;
+      height: 2px !important;
+    }
+
+    .swiper-scrollbar-drag {
+      background: var(--color-primary) !important;
+    }
+
+    /* ============================
+       SECTION 3 — SKILLS
+    ============================ */
+    #skills {
+      padding: 120px 10vw;
+      border-top: 1px solid rgba(242, 97, 0, 0.12);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 60px;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(246, 251, 250, 0.07);
+    }
+
+    .skill-item:nth-child(even) {
+      padding-left: 60px;
+      border-left: 1px solid rgba(246, 251, 250, 0.07);
+    }
+
+    .skill-index {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      color: var(--color-primary);
+      min-width: 36px;
+      letter-spacing: 0.04em;
+    }
+
+    .skill-content {
+      flex: 1;
+    }
+
+    .skill-name {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: var(--color-accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .skill-bar-wrap {
+      width: 100%;
+      height: 2px;
+      background: rgba(246, 251, 250, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .skill-bar.animated {
+      width: var(--target-width);
+    }
+
+    /* ============================
+       SECTION 4 — CONTACT
+    ============================ */
+    #contact {
+      padding: 120px 10vw 80px;
+      border-top: 1px solid rgba(242, 97, 0, 0.12);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
+    }
+
+    .contact-big {
+      font-family: var(--font-title);
+      font-size: clamp(3rem, 6vw, 6rem);
+      letter-spacing: 0.02em;
+      line-height: 0.95;
+      color: var(--color-accent);
+    }
+
+    .contact-big span {
+      color: var(--color-primary);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .contact-list li {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(246, 251, 250, 0.07);
+    }
+
+    .contact-list li:first-child {
+      border-top: 1px solid rgba(246, 251, 250, 0.07);
+    }
+
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+    }
+
+    .contact-value {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--color-accent);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a.contact-value:hover {
+      color: var(--color-primary);
+    }
+
+    .footer-bottom {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(246, 251, 250, 0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: rgba(246, 251, 250, 0.25);
+    }
+
+    .footer-logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: rgba(242, 97, 0, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+      #hero { padding: 0 6vw; }
+      .section-label, .section-title { padding: 0 6vw; }
+      .swiper { padding: 0 6vw 40px !important; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-item:nth-child(even) { padding-left: 0; border-left: none; }
+      #skills, #contact { padding: 80px 6vw; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-bar" id="scrollBar"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">PORTFOLIO</div>
+    <ul class="nav-links">
+      <li><a href="#works">Works</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-number">01</div>
+    <p class="hero-tag">Creative Developer</p>
+    <h1 class="hero-name">YOUR<br><span>NAME</span></h1>
+    <p class="hero-subtitle">
+      디지털 경험을 설계합니다.<br>
+      인터랙션, 모션, 코드로 아이디어를 현실로.
+    </p>
+    <a href="#works" class="hero-cta">View Works</a>
+    <div class="scroll-hint">Scroll to explore</div>
+  </section>
+
+  <!-- Section 2: Works Slider -->
+  <section id="works">
+    <p class="section-label" data-aos="fade-up">Selected Works</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">WORKS</h2>
+
+    <div class="swiper" id="worksSwiper">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div style="overflow:hidden;border-radius:4px;">
+            <img class="slide-img" src="https://loremflickr.com/680/480/design,portfolio" alt="work1">
+          </div>
+          <div class="slide-info">
+            <p class="slide-num">Project — 01</p>
+            <h3 class="slide-title">Brand Identity</h3>
+            <p class="slide-tag">Branding / Visual</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div style="overflow:hidden;border-radius:4px;">
+            <img class="slide-img" src="https://loremflickr.com/680/480/web,interface" alt="work2">
+          </div>
+          <div class="slide-info">
+            <p class="slide-num">Project — 02</p>
+            <h3 class="slide-title">Web Experience</h3>
+            <p class="slide-tag">UI / Motion</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div style="overflow:hidden;border-radius:4px;">
+            <img class="slide-img" src="https://loremflickr.com/680/480/photography,creative" alt="work3">
+          </div>
+          <div class="slide-info">
+            <p class="slide-num">Project — 03</p>
+            <h3 class="slide-title">Photography</h3>
+            <p class="slide-tag">Visual / Art</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div style="overflow:hidden;border-radius:4px;">
+            <img class="slide-img" src="https://loremflickr.com/680/480/mobile,app" alt="work4">
+          </div>
+          <div class="slide-info">
+            <p class="slide-num">Project — 04</p>
+            <h3 class="slide-title">Mobile App</h3>
+            <p class="slide-tag">UX / Development</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div style="overflow:hidden;border-radius:4px;">
+            <img class="slide-img" src="https://loremflickr.com/680/480/illustration,art" alt="work5">
+          </div>
+          <div class="slide-info">
+            <p class="slide-num">Project — 05</p>
+            <h3 class="slide-title">Illustration</h3>
+            <p class="slide-tag">Art / Concept</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div style="overflow:hidden;border-radius:4px;">
+            <img class="slide-img" src="https://loremflickr.com/680/480/motion,3d" alt="work6">
+          </div>
+          <div class="slide-info">
+            <p class="slide-num">Project — 06</p>
+            <h3 class="slide-title">Motion Design</h3>
+            <p class="slide-tag">3D / Animation</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-scrollbar"></div>
+    </div>
+  </section>
+
+  <!-- Section 3: Skills -->
+  <section id="skills">
+    <p class="section-label" data-aos="fade-up">What I Do</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">SKILLS</h2>
+
+    <div class="skills-grid">
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="0">
+        <span class="skill-index">01</span>
+        <div class="skill-content">
+          <p class="skill-name">HTML / CSS</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 95%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="60">
+        <span class="skill-index">02</span>
+        <div class="skill-content">
+          <p class="skill-name">JavaScript</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 88%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+        <span class="skill-index">03</span>
+        <div class="skill-content">
+          <p class="skill-name">React</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 80%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="160">
+        <span class="skill-index">04</span>
+        <div class="skill-content">
+          <p class="skill-name">GSAP / Motion</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 85%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
+        <span class="skill-index">05</span>
+        <div class="skill-content">
+          <p class="skill-name">Figma / UI Design</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 78%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="260">
+        <span class="skill-index">06</span>
+        <div class="skill-content">
+          <p class="skill-name">Three.js / WebGL</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 65%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
+        <span class="skill-index">07</span>
+        <div class="skill-content">
+          <p class="skill-name">Node.js</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 72%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="360">
+        <span class="skill-index">08</span>
+        <div class="skill-content">
+          <p class="skill-name">Branding / Visual</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" style="--target-width: 82%"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: Contact -->
+  <section id="contact">
+    <p class="section-label" data-aos="fade-up">Get In Touch</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">CONTACT</h2>
+
+    <div class="contact-inner">
+      <div data-aos="fade-up" data-aos-delay="100">
+        <h3 class="contact-big">LET'S<br>WORK<br><span>TOGETHER</span></h3>
+      </div>
+
+      <ul class="contact-list" data-aos="fade-up" data-aos-delay="180">
+        <li>
+          <p class="contact-label">Email</p>
+          <a class="contact-value" href="mailto:hello@yourname.com">hello@yourname.com</a>
+        </li>
+        <li>
+          <p class="contact-label">GitHub</p>
+          <a class="contact-value" href="#">github.com/yourname</a>
+        </li>
+        <li>
+          <p class="contact-label">Instagram</p>
+          <a class="contact-value" href="#">@yourname</a>
+        </li>
+        <li>
+          <p class="contact-label">Location</p>
+          <span class="contact-value">Seoul, South Korea</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">2026 &copy; Your Name. All rights reserved.</p>
+      <p class="footer-logo">PORTFOLIO</p>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // AOS init
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out',
+      once: true,
+      offset: 60
+    });
+
+    // Swiper init
+    new Swiper('#worksSwiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 28,
+      grabCursor: true,
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        draggable: true
+      },
+      breakpoints: {
+        768: { slidesPerView: 'auto' }
+      }
+    });
+
+    // Scroll progress bar
+    var scrollBar = document.getElementById('scrollBar');
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      scrollBar.style.width = (scrollTop / scrollHeight * 100) + '%';
+    }, { passive: true });
+
+    // Custom cursor
+    var cursor = document.getElementById('cursor');
+    var cursorFollower = document.getElementById('cursorFollower');
+    var mouseX = 0, mouseY = 0;
+    var followerX = 0, followerY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top  = mouseY + 'px';
+    });
+
+    (function animateFollower() {
+      followerX += (mouseX - followerX) * 0.12;
+      followerY += (mouseY - followerY) * 0.12;
+      cursorFollower.style.left = followerX + 'px';
+      cursorFollower.style.top  = followerY + 'px';
+      requestAnimationFrame(animateFollower);
+    })();
+
+    document.querySelectorAll('a, button, .swiper-slide').forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        cursorFollower.style.width = '52px';
+        cursorFollower.style.height = '52px';
+      });
+      el.addEventListener('mouseleave', function() {
+        cursor.style.width = '12px';
+        cursor.style.height = '12px';
+        cursorFollower.style.width = '36px';
+        cursorFollower.style.height = '36px';
+      });
+    });
+
+    // Skill bar animation on scroll
+    var skillBars = document.querySelectorAll('.skill-bar');
+    var skillObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    skillBars.forEach(function(bar) {
+      skillObserver.observe(bar);
+    });
+  </script>
+</body>
+</html>
