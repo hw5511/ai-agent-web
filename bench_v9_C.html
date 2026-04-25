@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>멍멍유치원 | Woof Kindergarten</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400..700&family=Jua&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:oklch(97% 0.025 75);
+  --pr:oklch(72% 0.22 48);
+  --pr-l:oklch(91% 0.10 48);
+  --pk:oklch(78% 0.17 320);
+  --pk-l:oklch(93% 0.08 320);
+  --mt:oklch(76% 0.15 162);
+  --mt-l:oklch(93% 0.07 162);
+  --lv:oklch(78% 0.13 280);
+  --lv-l:oklch(94% 0.06 280);
+  --yw:oklch(88% 0.18 88);
+  --yw-l:oklch(95% 0.10 88);
+  --tx:oklch(20% 0.01 0);
+  --tx-m:oklch(48% 0.01 0);
+  --wh:oklch(100% 0 0);
+  --r-s:18px;--r-m:32px;--r-l:48px;
+  --sh:0 6px 24px oklch(20% 0.01 0 / 0.08);
+}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--tx);font-family:'Quicksand','Jua',sans-serif;overflow-x:hidden;line-height:1.6}
+
+#prog{position:fixed;top:0;left:0;height:4px;background:var(--pr);transform-origin:left;transform:scaleX(0);z-index:999;border-radius:2px;will-change:transform}
+
+/* NAV */
+nav{
+  position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;
+  background:oklch(100% 0 0 / 0.88);backdrop-filter:blur(14px);
+  border:1.5px solid oklch(100% 0 0 / 0.9);border-radius:100px;
+  padding:11px 26px;display:flex;align-items:center;gap:22px;
+  box-shadow:0 4px 20px oklch(20% 0.01 0 / 0.10)
+}
+.n-logo{font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--pr)}
+.n-links{display:flex;gap:18px}
+.n-links a{font-size:0.82rem;font-weight:600;color:var(--tx-m);text-decoration:none;transition:color .2s}
+.n-links a:hover{color:var(--pr)}
+.n-btn{
+  background:var(--pr);color:var(--wh);border:none;border-radius:100px;
+  padding:8px 18px;font-size:0.82rem;font-weight:700;cursor:pointer;
+  font-family:inherit;box-shadow:0 4px 0 oklch(58% 0.22 48);
+  transition:transform .15s,box-shadow .15s;will-change:transform
+}
+.n-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 oklch(58% 0.22 48)}
+.n-btn:active{transform:translateY(2px);box-shadow:0 2px 0 oklch(58% 0.22 48)}
+
+/* HERO */
+#hero{
+  min-height:100vh;padding:110px 5% 70px;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;
+  position:relative;overflow:hidden
+}
+.h-shapes{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hs{position:absolute;will-change:transform}
+.hs-1{width:320px;height:320px;background:var(--pk-l);top:-80px;right:18%;border-radius:60% 40% 70% 30% / 40% 60% 40% 60%}
+.hs-2{width:200px;height:200px;background:var(--mt-l);bottom:8%;left:-40px;border-radius:40% 60% 30% 70%}
+.hs-3{width:110px;height:110px;background:var(--yw-l);top:32%;left:8%;border-radius:50%;opacity:.7}
+.hs-4{width:80px;height:80px;background:var(--lv-l);bottom:22%;right:4%;border-radius:40% 60% 55% 45%}
+
+.h-left{position:relative;z-index:1}
+.tag{
+  display:inline-block;font-size:0.78rem;font-weight:700;
+  padding:5px 14px;border-radius:100px;margin-bottom:18px;letter-spacing:.3px
+}
+.tag-pr{background:var(--pr-l);color:var(--pr)}
+.tag-mt{background:var(--mt-l);color:var(--mt)}
+.tag-pk{background:var(--pk-l);color:var(--pk)}
+.tag-lv{background:var(--lv-l);color:var(--lv)}
+.tag-yw{background:var(--yw-l);color:oklch(58% 0.18 88)}
+.tag-wh{background:oklch(100% 0 0 / 0.15);color:oklch(85% 0 0)}
+
+.h-title{font-family:'Jua',sans-serif;font-size:clamp(3.5rem,8vw,7rem);line-height:1.0;margin-bottom:8px}
+.h-title .ac{color:var(--pr)}
+.h-sub{font-family:'Jua',sans-serif;font-size:clamp(1.3rem,3vw,2rem);color:var(--tx-m);margin-bottom:22px}
+.h-desc{font-size:.97rem;color:var(--tx-m);max-width:420px;margin-bottom:34px;line-height:1.85}
+.h-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+.btn-p{
+  background:var(--pr);color:var(--wh);border:none;border-radius:100px;
+  padding:14px 30px;font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit;
+  box-shadow:0 6px 0 oklch(58% 0.22 48);transition:transform .15s,box-shadow .15s;will-change:transform
+}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 9px 0 oklch(58% 0.22 48)}
+.btn-p:active{transform:translateY(3px);box-shadow:0 3px 0 oklch(58% 0.22 48)}
+.btn-s{
+  background:transparent;color:var(--tx);border:2px solid oklch(20% 0.01 0 / 0.15);
+  border-radius:100px;padding:14px 30px;font-size:.92rem;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s
+}
+.btn-s:hover{border-color:var(--pr);color:var(--pr)}
+
+.h-right{position:relative;z-index:1;display:flex;align-items:center;justify-content:center}
+.h-cards{position:relative;width:340px;height:440px}
+.h-card{
+  position:absolute;width:296px;height:374px;border-radius:var(--r-l);
+  overflow:hidden;will-change:transform;
+}
+.h-card img{width:100%;height:100%;object-fit:cover;display:block}
+.hc-1{top:0;left:22px;transform:rotate(-6deg)}
+.hc-2{top:28px;left:4px;transform:rotate(3deg)}
+.hc-3{top:10px;left:12px;z-index:3}
+
+.fbadge{
+  position:absolute;background:var(--wh);border-radius:var(--r-m);
+  padding:10px 14px;box-shadow:0 8px 24px oklch(20% 0.01 0 / 0.13);
+  display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;
+  will-change:transform;white-space:nowrap;z-index:10
+}
+.fb-1{top:-18px;right:-8px}
+.fb-2{bottom:38px;left:-28px}
+.fbicon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.fb-num{font-size:1rem;font-weight:800}
+
+/* TICKER */
+#ticker{padding:18px 0;background:var(--pr);overflow:hidden}
+.tk-track{
+  display:flex;white-space:nowrap;will-change:transform;
+  animation:tk 22s linear infinite
+}
+.tk-item{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0 28px;color:var(--wh);
+  font-family:'Jua',sans-serif;font-size:.95rem
+}
+.tk-dot{width:5px;height:5px;background:oklch(100% 0 0 / 0.5);border-radius:50%;flex-shrink:0}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ABOUT */
+#about{
+  padding:100px 5%;display:grid;
+  grid-template-columns:1fr 1fr;gap:64px;align-items:center
+}
+.ab-img-wrap{position:relative}
+.ab-img-frame{
+  width:100%;aspect-ratio:1;
+  border-radius:40% 60% 55% 45% / 45% 40% 60% 55%;
+  overflow:hidden;background:var(--pk-l)
+}
+.ab-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.ab-float{
+  position:absolute;bottom:-16px;right:-16px;
+  background:var(--wh);border-radius:var(--r-m);padding:16px 20px;
+  box-shadow:var(--sh);will-change:transform
+}
+.ab-stat{font-family:'Jua',sans-serif;font-size:2.2rem;color:var(--pr)}
+.ab-sl{font-size:.78rem;color:var(--tx-m)}
+
+.sec-title{font-family:'Jua',sans-serif;font-size:clamp(2rem,4vw,2.8rem);line-height:1.2;margin-bottom:14px}
+.sec-desc{color:var(--tx-m);line-height:1.9;margin-bottom:26px}
+.feat-list{display:flex;flex-direction:column;gap:11px}
+.feat-item{display:flex;align-items:center;gap:11px;font-size:.88rem;font-weight:600}
+.feat-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* PROGRAMS */
+#programs{padding:80px 5%}
+.sec-header{text-align:center;margin-bottom:46px}
+
+.bento{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:14px
+}
+.bc{
+  background:var(--wh);border-radius:var(--r-m);padding:26px;
+  box-shadow:0 4px 16px oklch(20% 0.01 0 / 0.05);
+  cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;
+  will-change:transform;overflow:hidden;position:relative
+}
+.bc:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 18px 40px oklch(20% 0.01 0 / 0.11)}
+.bc-1{grid-column:1/4;background:var(--pr-l)}
+.bc-2{grid-column:4/7;background:var(--pk-l)}
+.bc-3{grid-column:1/3;background:var(--mt-l)}
+.bc-4{grid-column:3/5;background:var(--lv-l)}
+.bc-5{grid-column:5/7;background:var(--yw-l)}
+
+.bc-title{font-family:'Jua',sans-serif;font-size:1.3rem;margin:10px 0 8px;color:var(--tx)}
+.bc-1 .bc-title{font-size:1.7rem}
+.bc-desc{font-size:.82rem;color:var(--tx-m);line-height:1.7}
+
+.bc-1-inner{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+.bc-1-img{width:100%;aspect-ratio:1.1;border-radius:var(--r-s);overflow:hidden}
+.bc-1-img img{width:100%;height:100%;object-fit:cover;display:block}
+.bc-thumb{width:100%;height:110px;border-radius:var(--r-s);overflow:hidden;margin-bottom:10px}
+.bc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* GALLERY */
+#gallery{padding:80px 5%;background:oklch(18% 0.01 0)}
+.g-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:38px}
+.g-sub{font-size:.85rem;color:oklch(60% 0 0);max-width:280px;line-height:1.7}
+
+.masonry{columns:4;column-gap:11px}
+.m-item{
+  break-inside:avoid;margin-bottom:11px;border-radius:var(--r-s);
+  overflow:hidden;position:relative;cursor:pointer;will-change:transform
+}
+.m-item img{
+  width:100%;height:auto;display:block;
+  transition:transform .5s cubic-bezier(.25,1,.5,1);will-change:transform
+}
+.m-item:hover img{transform:scale(1.06)}
+.m-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,oklch(18% 0.01 0 / 0.7),transparent 55%);
+  opacity:0;transition:opacity .3s;
+  display:flex;align-items:flex-end;padding:14px;border-radius:var(--r-s)
+}
+.m-item:hover .m-ov{opacity:1}
+.m-lbl{color:var(--wh);font-size:.78rem;font-weight:700}
+
+/* SCHEDULE */
+#schedule{padding:80px 5%}
+.sch-header{text-align:center;margin-bottom:46px}
+
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;position:relative}
+.timeline::before{
+  content:'';position:absolute;top:50px;left:10%;right:10%;
+  height:3px;background:var(--pr-l);border-radius:2px;z-index:0
+}
+.t-item{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+  position:relative;z-index:1;padding:20px 10px;background:var(--wh);
+  border-radius:var(--r-m);box-shadow:var(--sh);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);will-change:transform;cursor:default
+}
+.t-item:hover{transform:translateY(-8px)}
+.t-time{
+  font-family:'Jua',sans-serif;font-size:.8rem;color:var(--pr);
+  background:var(--pr-l);padding:4px 12px;border-radius:100px
+}
+.t-icon{
+  width:50px;height:50px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:4px 0
+}
+.t-name{font-family:'Jua',sans-serif;font-size:.88rem}
+.t-sub{font-size:.72rem;color:var(--tx-m);line-height:1.5}
+
+/* TESTIMONIALS */
+#testi{padding:80px 5%;background:var(--pr-l);overflow:hidden}
+.testi-header{text-align:center;margin-bottom:38px}
+.tk-testi-wrap{overflow:hidden}
+.tk-testi{display:flex;gap:14px;will-change:transform}
+.t-card{
+  flex-shrink:0;width:290px;background:var(--wh);
+  border-radius:var(--r-m);padding:22px;box-shadow:var(--sh)
+}
+.t-stars{color:var(--pr);font-size:.82rem;margin-bottom:10px}
+.t-text{font-size:.85rem;color:var(--tx-m);line-height:1.8;margin-bottom:14px}
+.t-author{display:flex;align-items:center;gap:9px}
+.t-av{
+  width:34px;height:34px;border-radius:50%;
+  overflow:hidden;background:var(--pk-l);flex-shrink:0
+}
+.t-av img{width:100%;height:100%;object-fit:cover}
+.t-name{font-size:.8rem;font-weight:700}
+.t-dog{font-size:.72rem;color:var(--tx-m)}
+
+/* CTA */
+#cta{padding:100px 5%;text-align:center;position:relative;overflow:hidden}
+.cta-blobs{position:absolute;inset:0;pointer-events:none}
+.cb{position:absolute;border-radius:50%;opacity:.45;will-change:transform}
+.cb-1{width:380px;height:380px;background:var(--pk-l);top:-100px;left:-80px;border-radius:60% 40% 55% 45%}
+.cb-2{width:280px;height:280px;background:var(--mt-l);bottom:-70px;right:-50px;border-radius:40% 60% 45% 55%}
+.cta-inner{position:relative;z-index:1}
+.cta-title{font-family:'Jua',sans-serif;font-size:clamp(2rem,5vw,3.2rem);line-height:1.2;margin-bottom:14px}
+.cta-title .ac{color:var(--pr)}
+.cta-desc{color:var(--tx-m);font-size:.97rem;max-width:460px;margin:0 auto 34px;line-height:1.85}
+.cta-form{display:flex;gap:11px;max-width:400px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.cta-inp{
+  flex:1;min-width:190px;border:2px solid oklch(20% 0.01 0 / 0.12);
+  border-radius:100px;padding:13px 20px;font-size:.88rem;
+  font-family:inherit;background:var(--wh);color:var(--tx);
+  outline:none;transition:border-color .2s
+}
+.cta-inp:focus{border-color:var(--pr)}
+.cta-inp::placeholder{color:var(--tx-m)}
+.cta-note{margin-top:14px;font-size:.78rem;color:var(--tx-m)}
+
+/* FOOTER */
+footer{padding:36px 5%;background:oklch(18% 0.01 0);color:oklch(62% 0 0)}
+.ft-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.ft-logo{font-family:'Jua',sans-serif;font-size:1.15rem;color:var(--wh);margin-bottom:4px}
+.ft-info{font-size:.8rem;line-height:1.8}
+.ft-copy{font-size:.76rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;gap:40px;text-align:center}
+  .h-btns{justify-content:center}
+  .h-right{justify-content:center}
+  #about{grid-template-columns:1fr;gap:40px}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bc-1{grid-column:1/3}.bc-2{grid-column:1/2}.bc-3{grid-column:2/3}
+  .bc-4{grid-column:1/2}.bc-5{grid-column:2/3}
+  .masonry{columns:2}
+  .timeline{grid-template-columns:repeat(3,1fr)}
+  .n-links{display:none}
+}
+@media(max-width:600px){
+  .bento{grid-template-columns:1fr}
+  .bc-1,.bc-2,.bc-3,.bc-4,.bc-5{grid-column:1/2}
+  .bc-1-inner{grid-template-columns:1fr}
+  .masonry{columns:1}
+  .timeline{grid-template-columns:1fr 1fr}
+  .h-cards{width:270px;height:360px}
+  .h-card{width:250px;height:316px}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav>
+  <span class="n-logo">멍멍유치원</span>
+  <div class="n-links">
+    <a href="#about">소개</a>
+    <a href="#programs">프로그램</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#schedule">일과</a>
+  </div>
+  <button class="n-btn">입학 상담</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-shapes">
+    <div class="hs hs-1"></div>
+    <div class="hs hs-2"></div>
+    <div class="hs hs-3"></div>
+    <div class="hs hs-4"></div>
+  </div>
+  <div class="h-left">
+    <span class="tag tag-pr">서울 강남 No.1 강아지 유치원</span>
+    <h1 class="h-title"><span class="ac">멍멍</span><br>유치원</h1>
+    <p class="h-sub">우리 아이가 행복한 곳</p>
+    <p class="h-desc">전문 훈련사와 함께하는 안전하고 즐거운 하루. 강아지마다의 개성을 존중하며, 사회화부터 놀이, 교육까지 한 번에.</p>
+    <div class="h-btns">
+      <button class="btn-p">입학 신청하기</button>
+      <button class="btn-s">프로그램 보기</button>
+    </div>
+  </div>
+  <div class="h-right">
+    <div class="h-cards">
+      <div class="h-card hc-1"><img src="https://loremflickr.com/296/374/puppy" alt="강아지" loading="lazy"></div>
+      <div class="h-card hc-2"><img src="https://loremflickr.com/296/374/dog,cute" alt="강아지" loading="lazy"></div>
+      <div class="h-card hc-3"><img src="https://loremflickr.com/296/374/dog,play" alt="강아지" loading="lazy"></div>
+      <div class="fbadge fb-1">
+        <div class="fbicon" style="background:var(--pr-l)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--pr)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:.72rem;color:var(--tx-m)">보호자 만족도</div>
+          <div class="fb-num" style="color:var(--pr)">98%</div>
+        </div>
+      </div>
+      <div class="fbadge fb-2">
+        <div class="fbicon" style="background:var(--mt-l)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--mt)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:.72rem;color:var(--tx-m)">현재 재원</div>
+          <div class="fb-num" style="color:var(--mt)">42마리</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div id="ticker" aria-hidden="true">
+  <div class="tk-track">
+    <span class="tk-item"><span class="tk-dot"></span>기초 사회화 클래스</span>
+    <span class="tk-item"><span class="tk-dot"></span>야외 탐험 어드벤처</span>
+    <span class="tk-item"><span class="tk-dot"></span>수영 &amp; 워터플레이</span>
+    <span class="tk-item"><span class="tk-dot"></span>전문 그루밍 서비스</span>
+    <span class="tk-item"><span class="tk-dot"></span>1:1 맞춤 훈련</span>
+    <span class="tk-item"><span class="tk-dot"></span>건강 체크업</span>
+    <span class="tk-item"><span class="tk-dot"></span>강아지 생일 파티</span>
+    <span class="tk-item"><span class="tk-dot"></span>기초 사회화 클래스</span>
+    <span class="tk-item"><span class="tk-dot"></span>야외 탐험 어드벤처</span>
+    <span class="tk-item"><span class="tk-dot"></span>수영 &amp; 워터플레이</span>
+    <span class="tk-item"><span class="tk-dot"></span>전문 그루밍 서비스</span>
+    <span class="tk-item"><span class="tk-dot"></span>1:1 맞춤 훈련</span>
+    <span class="tk-item"><span class="tk-dot"></span>건강 체크업</span>
+    <span class="tk-item"><span class="tk-dot"></span>강아지 생일 파티</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="ab-img-wrap" data-reveal>
+    <div class="ab-img-frame">
+      <img src="https://loremflickr.com/520/520/dog,happy" alt="강아지들" loading="lazy">
+    </div>
+    <div class="ab-float">
+      <div class="ab-stat">5년+</div>
+      <div class="ab-sl">운영 경력</div>
+    </div>
+  </div>
+  <div data-reveal>
+    <span class="tag tag-mt">우리 유치원 소개</span>
+    <h2 class="sec-title">강아지가<br>진짜 행복한 공간</h2>
+    <p class="sec-desc">멍멍유치원은 단순한 놀이방이 아닙니다. 강아지의 신체적·정서적 발달을 함께 돌보는 전문 교육 공간입니다. 자격증을 보유한 전문 훈련사가 항상 함께하며, 각 강아지의 성격에 맞춘 맞춤형 케어를 제공합니다.</p>
+    <div class="feat-list">
+      <div class="feat-item"><div class="feat-dot" style="background:var(--pr)"></div>국가 공인 반려동물 훈련사 상주</div>
+      <div class="feat-item"><div class="feat-dot" style="background:var(--pk)"></div>24시간 CCTV 및 실시간 중계</div>
+      <div class="feat-item"><div class="feat-dot" style="background:var(--mt)"></div>소규모 그룹 운영 (최대 8마리)</div>
+      <div class="feat-item"><div class="feat-dot" style="background:var(--lv)"></div>매일 건강 리포트 발송</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="sec-header" data-reveal>
+    <span class="tag tag-lv">프로그램</span>
+    <h2 class="sec-title">다채로운 하루를<br>함께해요</h2>
+  </div>
+  <div class="bento">
+    <div class="bc bc-1" data-reveal>
+      <div class="bc-1-inner">
+        <div>
+          <span class="tag tag-pr">대표 프로그램</span>
+          <h3 class="bc-title">기초 사회화<br>클래스</h3>
+          <p class="bc-desc">다양한 강아지들과 어울리며 올바른 사회화를 배웁니다. 경계심 해소, 우호적 상호작용, 긍정적 경험을 차근차근 쌓아요.</p>
+        </div>
+        <div class="bc-1-img">
+          <img src="https://loremflickr.com/280/252/puppy,group" alt="사회화 클래스" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="bc bc-2" data-reveal>
+      <span class="tag tag-pk">야외 활동</span>
+      <div class="bc-thumb">
+        <img src="https://loremflickr.com/400/110/dog,outdoor" alt="야외 탐험" loading="lazy">
+      </div>
+      <h3 class="bc-title">야외 탐험 어드벤처</h3>
+      <p class="bc-desc">넓은 잔디밭과 자연 속에서 마음껏 뛰노는 시간. 산책과 탐험으로 신체 능력을 키워요.</p>
+    </div>
+    <div class="bc bc-3" data-reveal>
+      <span class="tag tag-mt">수영 클래스</span>
+      <h3 class="bc-title">워터<br>플레이</h3>
+      <p class="bc-desc">안전한 수영장에서 즐기는 물놀이. 관절에 부담 없는 최고의 전신 운동이에요.</p>
+    </div>
+    <div class="bc bc-4" data-reveal>
+      <span class="tag tag-lv">뷰티 케어</span>
+      <h3 class="bc-title">그루밍<br>&amp; 뷰티</h3>
+      <p class="bc-desc">전문 그루머의 손길로 더욱 예뻐지는 시간. 목욕, 드라이, 트리밍까지.</p>
+    </div>
+    <div class="bc bc-5" data-reveal>
+      <span class="tag tag-yw">맞춤 훈련</span>
+      <h3 class="bc-title">1:1<br>퍼스널</h3>
+      <p class="bc-desc">개별 성향에 맞춘 기초 훈련 및 행동 교정 프로그램.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="g-header">
+    <div>
+      <span class="tag tag-wh">갤러리</span>
+      <h2 class="sec-title" style="color:var(--wh);margin-top:10px">행복한 순간들</h2>
+    </div>
+    <p class="g-sub">매일 사진과 영상으로 우리 아이의 하루를 전달해 드려요.</p>
+  </div>
+  <div class="masonry" id="masonry">
+    <div class="m-item"><img src="https://loremflickr.com/400/500/dog,cute" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">사회화 시간</span></div></div>
+    <div class="m-item"><img src="https://loremflickr.com/400/300/puppy,play" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">야외 탐험</span></div></div>
+    <div class="m-item"><img src="https://loremflickr.com/400/460/dog,running" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">달리기 대회</span></div></div>
+    <div class="m-item"><img src="https://loremflickr.com/400/340/dog,water" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">수영 클래스</span></div></div>
+    <div class="m-item"><img src="https://loremflickr.com/400/410/puppy,cute" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">쉬는 시간</span></div></div>
+    <div class="m-item"><img src="https://loremflickr.com/400/520/dog,happy" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">점심 시간</span></div></div>
+    <div class="m-item"><img src="https://loremflickr.com/400/310/dog,grooming" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">그루밍</span></div></div>
+    <div class="m-item"><img src="https://loremflickr.com/400/480/puppy,friends" alt="강아지" loading="lazy"><div class="m-ov"><span class="m-lbl">친구들과 함께</span></div></div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="sch-header" data-reveal>
+    <span class="tag tag-pr">일일 일과</span>
+    <h2 class="sec-title" style="margin-top:10px">알찬 하루를 보내요</h2>
+  </div>
+  <div class="timeline">
+    <div class="t-item" data-reveal>
+      <span class="t-time">09:00</span>
+      <div class="t-icon" style="background:var(--pr-l)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+      </div>
+      <span class="t-name">등원 & 인사</span>
+      <span class="t-sub">건강 체크 및 컨디션 확인</span>
+    </div>
+    <div class="t-item" data-reveal>
+      <span class="t-time">10:00</span>
+      <div class="t-icon" style="background:var(--mt-l)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--mt)" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 20.83"/><path d="M21 8c-2.42 0-5.33.28-7.5.86"/><path d="M12 6c0 0-.33 2-.33 4.33 0 2 .33 4.67.33 4.67"/></svg>
+      </div>
+      <span class="t-name">야외 산책</span>
+      <span class="t-sub">그룹 탐험 & 자유 놀이</span>
+    </div>
+    <div class="t-item" data-reveal>
+      <span class="t-time">12:00</span>
+      <div class="t-icon" style="background:var(--pk-l)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--pk)" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <span class="t-name">점심 & 휴식</span>
+      <span class="t-sub">개별 식사 & 낮잠 시간</span>
+    </div>
+    <div class="t-item" data-reveal>
+      <span class="t-time">14:00</span>
+      <div class="t-icon" style="background:var(--lv-l)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--lv)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <span class="t-name">훈련 클래스</span>
+      <span class="t-sub">기초 명령어 & 행동 교육</span>
+    </div>
+    <div class="t-item" data-reveal>
+      <span class="t-time">17:00</span>
+      <div class="t-icon" style="background:var(--yw-l)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="oklch(58% 0.18 88)" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="t-name">귀원 준비</span>
+      <span class="t-sub">목욕 & 리포트 발송</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi">
+  <div class="testi-header" data-reveal>
+    <span class="tag tag-pr">보호자 후기</span>
+    <h2 class="sec-title" style="margin-top:10px">믿고 맡기는 이유</h2>
+  </div>
+  <div class="tk-testi-wrap">
+    <div class="tk-testi" id="testiTrack">
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"처음엔 낯선 환경에 힘들어했는데 한 달 만에 다른 강아지들과 너무 잘 어울려요. 매일 사진을 보내줘서 안심이 됩니다."</p>
+        <div class="t-author"><div class="t-av"><img src="https://loremflickr.com/34/34/dog,small" alt=""></div><div><div class="t-name">김지은 보호자</div><div class="t-dog">포메라니안 달달이</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"훈련사 선생님이 정말 전문적이에요. 집에서 말을 안 듣던 아이가 기본 명령어를 다 따르게 됐어요!"</p>
+        <div class="t-author"><div class="t-av"><img src="https://loremflickr.com/34/34/puppy,happy" alt=""></div><div><div class="t-name">박민준 보호자</div><div class="t-dog">비숑 구름이</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"수영 프로그램이 특히 좋아요. 관절이 좋지 않은 아이에게 딱 맞는 운동이라 주 3회 다니고 있어요."</p>
+        <div class="t-author"><div class="t-av"><img src="https://loremflickr.com/34/34/dog,cute" alt=""></div><div><div class="t-name">이서연 보호자</div><div class="t-dog">골든 리트리버 해피</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"입학 전 상담부터 꼼꼼하게 진행해 주셔서 믿음이 갔어요. 우리 아이에게 딱 맞는 프로그램 추천해 주셔서 감사해요."</p>
+        <div class="t-author"><div class="t-av"><img src="https://loremflickr.com/34/34/puppy,face" alt=""></div><div><div class="t-name">최예진 보호자</div><div class="t-dog">말티즈 솜이</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"2년째 다니고 있는데 선생님들이 모두 우리 아이를 기억하고 개인 성향을 파악해서 케어해 줘요. 너무 감동이에요."</p>
+        <div class="t-author"><div class="t-av"><img src="https://loremflickr.com/34/34/dog,face" alt=""></div><div><div class="t-name">정수현 보호자</div><div class="t-dog">시바이누 유키</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-blobs">
+    <div class="cb cb-1"></div>
+    <div class="cb cb-2"></div>
+  </div>
+  <div class="cta-inner" data-reveal>
+    <span class="tag tag-pr">지금 바로 시작해요</span>
+    <h2 class="cta-title" style="margin-top:14px">우리 아이의 첫 번째<br><span class="ac">행복한 하루</span></h2>
+    <p class="cta-desc">입학 전 무료 체험 수업을 신청하세요. 직접 눈으로 확인하고 결정하실 수 있어요.</p>
+    <div class="cta-form">
+      <input type="tel" class="cta-inp" placeholder="연락처를 입력하세요">
+      <button class="btn-p">무료 체험 신청</button>
+    </div>
+    <p class="cta-note">운영시간 : 평일 09:00 - 18:00 &nbsp;|&nbsp; 02-XXX-XXXX</p>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-logo">멍멍유치원</div>
+      <div class="ft-info">서울시 강남구 XX로 123 &nbsp;|&nbsp; 02-XXX-XXXX &nbsp;|&nbsp; dog@mungmung.kr</div>
+    </div>
+    <div class="ft-copy">© 2025 멍멍유치원. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+const prog = document.getElementById('prog');
+lenis.on('scroll', ({progress}) => { gsap.set(prog, {scaleX: progress}); });
+
+// hero entrance
+gsap.from('.h-left > *', {y:32, opacity:0, duration:.7, ease:'power3.out', stagger:.12});
+gsap.from('.hc-3', {scale:.85, opacity:0, duration:1, ease:'back.out(1.2)', delay:.4});
+gsap.from(['.hc-1','.hc-2'], {scale:.75, opacity:0, duration:.8, ease:'power3.out', stagger:.15, delay:.6});
+gsap.from(['.fb-1','.fb-2'], {scale:0, opacity:0, duration:.5, ease:'back.out(2)', stagger:.2, delay:1});
+
+// hero cards float
+gsap.to('.hc-1', {y:-10, rotation:-4, duration:3, ease:'sine.inOut', yoyo:true, repeat:-1});
+gsap.to('.hc-2', {y:9, rotation:5, duration:2.5, ease:'sine.inOut', yoyo:true, repeat:-1, delay:.6});
+
+// badges bob
+gsap.to('.fb-1', {y:-7, duration:2.2, ease:'sine.inOut', yoyo:true, repeat:-1});
+gsap.to('.fb-2', {y:7, duration:1.8, ease:'sine.inOut', yoyo:true, repeat:-1, delay:.9});
+
+// bg shapes parallax
+gsap.to('.hs-1', {yPercent:-28, ease:'none', scrollTrigger:{trigger:'#hero', scrub:1.5, start:'top top', end:'bottom top'}});
+gsap.to('.hs-2', {yPercent:-18, ease:'none', scrollTrigger:{trigger:'#hero', scrub:1, start:'top top', end:'bottom top'}});
+
+// mouse parallax
+document.addEventListener('mousemove', (e) => {
+  const dx = (e.clientX - window.innerWidth/2) / window.innerWidth;
+  const dy = (e.clientY - window.innerHeight/2) / window.innerHeight;
+  gsap.to('.hc-3', {x:dx*14, y:dy*9, duration:.9, ease:'power2.out'});
+  gsap.to('.hs-3', {x:dx*22, y:dy*16, duration:1.3, ease:'power2.out'});
+  gsap.to('.hs-4', {x:dx*-18, y:dy*-12, duration:1.6, ease:'power2.out'});
+});
+
+// reveal
+document.querySelectorAll('[data-reveal]').forEach((el, i) => {
+  gsap.from(el, {
+    y:38, opacity:0, duration:.8, ease:'power3.out',
+    scrollTrigger:{trigger:el, start:'top 88%', toggleActions:'play none none none'},
+    delay:(i % 3) * .08
+  });
+});
+
+// bento stagger
+gsap.from('.bc', {
+  y:50, opacity:0, duration:.7, ease:'power3.out', stagger:.09,
+  scrollTrigger:{trigger:'.bento', start:'top 80%'}
+});
+
+// gallery items
+gsap.from('.m-item', {
+  scale:.9, opacity:0, duration:.6, ease:'power2.out', stagger:.05,
+  scrollTrigger:{trigger:'#masonry', start:'top 85%'}
+});
+
+// timeline
+gsap.from('.t-item', {
+  y:28, opacity:0, duration:.6, ease:'back.out(1.5)', stagger:.11,
+  scrollTrigger:{trigger:'.timeline', start:'top 80%'}
+});
+
+// about float card bob
+gsap.to('.ab-float', {y:-8, duration:2.5, ease:'sine.inOut', yoyo:true, repeat:-1, delay:.5});
+
+// testimonials auto scroll
+const track = document.getElementById('testiTrack');
+track.innerHTML += track.innerHTML;
+let tx = 0;
+let paused = false;
+track.parentElement.addEventListener('mouseenter', () => paused = true);
+track.parentElement.addEventListener('mouseleave', () => paused = false);
+(function animT() {
+  if (!paused) {
+    tx -= .45;
+    if (Math.abs(tx) >= track.scrollWidth / 2) tx = 0;
+    gsap.set(track, {x: tx});
+  }
+  requestAnimationFrame(animT);
+})();
+
+// CTA blobs
+gsap.to('.cb-1', {x:18, y:-18, duration:5, ease:'sine.inOut', yoyo:true, repeat:-1});
+gsap.to('.cb-2', {x:-14, y:14, duration:4, ease:'sine.inOut', yoyo:true, repeat:-1, delay:1.2});
+</script>
+</body>
+</html>
