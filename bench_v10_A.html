@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HW — AI Developer & Educator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..900&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: oklch(8% 0.01 250);
+      --fg: oklch(96% 0.005 250);
+      --accent: oklch(78% 0.18 65);
+      --muted: oklch(45% 0.02 250);
+      --border: oklch(20% 0.02 250);
+    }
+
+    html { background: var(--bg); color: var(--fg); scroll-behavior: auto; }
+
+    body {
+      font-family: 'Roboto Flex', 'Noto Sans KR', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* 진행 바 */
+    #progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px; width: 0%;
+      background: var(--accent);
+      z-index: 1000;
+      will-change: width;
+    }
+
+    /* 커서 */
+    #cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+    #cursor-trail {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid oklch(78% 0.18 65 / 0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    /* 네비 */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 28px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 44px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* HERO */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 52px 88px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      will-change: transform;
+    }
+
+    /* SURPRISE: Variable Font — 스크롤 따라 wght 실시간 변화 */
+    .hero-name {
+      font-family: 'Roboto Flex', sans-serif;
+      font-size: clamp(72px, 13.5vw, 196px);
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+      will-change: transform, font-variation-settings;
+      font-variation-settings: 'wght' 900;
+    }
+
+    .hero-name .l1 { display: block; }
+    .hero-name .l2 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1.5px oklch(96% 0.005 250 / 0.35);
+    }
+
+    .hero-footer {
+      margin-top: 40px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 380px;
+      will-change: transform;
+    }
+
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: oklch(35% 0.02 250);
+    }
+
+    .scroll-bar {
+      width: 52px; height: 1px;
+      background: oklch(30% 0.02 250);
+      transform-origin: left;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .marquee-item {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 36px;
+    }
+    .marquee-item b {
+      color: var(--accent);
+      font-weight: 400;
+      margin: 0 6px;
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 152px 52px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 64px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 6px;
+    }
+
+    .about-statement {
+      font-size: clamp(26px, 3.2vw, 50px);
+      font-weight: 300;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      will-change: transform;
+    }
+    .about-statement strong {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .about-grid {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .about-cell {
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      margin: -1px 0 0 -1px;
+      transition: background 0.35s, border-color 0.35s;
+    }
+    .about-cell:hover {
+      background: oklch(12% 0.02 250);
+      border-color: var(--accent);
+      z-index: 1;
+    }
+
+    .cell-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .cell-value {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    /* WORK */
+    #work {
+      padding: 64px 52px 152px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 56px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .work-title-big {
+      font-family: 'Roboto Flex', sans-serif;
+      font-size: clamp(44px, 7vw, 104px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      font-variation-settings: 'wght' 900;
+      will-change: font-variation-settings;
+    }
+
+    .work-count {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    .work-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 140px 52px;
+      align-items: center;
+      gap: 40px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    .work-row::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .work-row:hover::after { transform: scaleX(1); }
+    .work-row > * { position: relative; z-index: 1; }
+    .work-row:hover { color: oklch(8% 0.01 250); }
+
+    .row-num {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+    .work-row:hover .row-num { color: oklch(8% 0.01 250 / 0.45); }
+
+    .row-name {
+      font-size: clamp(22px, 2.8vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .row-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .rtag {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .row-arrow {
+      font-size: 28px;
+      text-align: right;
+      transition: transform 0.35s;
+    }
+    .work-row:hover .row-arrow { transform: translateX(6px) rotate(-45deg); }
+
+    /* CONTACT */
+    #contact {
+      padding: 152px 52px 120px;
+      position: relative;
+    }
+
+    .contact-pre {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .contact-cta {
+      font-family: 'Roboto Flex', sans-serif;
+      font-size: clamp(44px, 8vw, 128px);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      font-variation-settings: 'wght' 300;
+      will-change: font-variation-settings;
+    }
+
+    .contact-cta a {
+      color: inherit;
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      transition: color 0.35s;
+    }
+    .contact-cta a::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -6px;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .contact-cta a:hover { color: var(--accent); }
+    .contact-cta a:hover::after { transform: scaleX(1); }
+
+    /* FOOTER */
+    footer {
+      padding: 28px 52px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer span {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: oklch(30% 0.02 250);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 0 24px 56px; }
+      #about { padding: 72px 24px; grid-template-columns: 1fr; gap: 28px; }
+      .about-grid { grid-template-columns: repeat(2, 1fr); }
+      #work { padding: 32px 24px 80px; }
+      .work-row { grid-template-columns: 48px 1fr 40px; gap: 16px; }
+      .row-tags { display: none; }
+      #contact { padding: 72px 24px 80px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<nav>
+  <a href="#" class="nav-logo">HW</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-noise"></div>
+  <p class="hero-eyebrow">AI Developer &amp; Educator</p>
+  <h1 class="hero-name">
+    <span class="l1">Hello,</span>
+    <span class="l2">World.</span>
+  </h1>
+  <div class="hero-footer">
+    <p class="hero-desc">
+      AI 에이전트와 웹의 경계를 실험하는 개발자.<br>
+      코드로 사람을 놀라게 하는 경험을 설계합니다.
+    </p>
+    <div class="hero-scroll">
+      <div class="scroll-bar"></div>
+      Scroll
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track" id="mTrack">
+    <span class="marquee-item">AI Agent<b>/</b></span>
+    <span class="marquee-item">Claude API<b>/</b></span>
+    <span class="marquee-item">Web Development<b>/</b></span>
+    <span class="marquee-item">GSAP<b>/</b></span>
+    <span class="marquee-item">Three.js<b>/</b></span>
+    <span class="marquee-item">Creative Coding<b>/</b></span>
+    <span class="marquee-item">Education<b>/</b></span>
+    <span class="marquee-item">Interactive Design<b>/</b></span>
+    <span class="marquee-item">AI Agent<b>/</b></span>
+    <span class="marquee-item">Claude API<b>/</b></span>
+    <span class="marquee-item">Web Development<b>/</b></span>
+    <span class="marquee-item">GSAP<b>/</b></span>
+    <span class="marquee-item">Three.js<b>/</b></span>
+    <span class="marquee-item">Creative Coding<b>/</b></span>
+    <span class="marquee-item">Education<b>/</b></span>
+    <span class="marquee-item">Interactive Design<b>/</b></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-label">About</div>
+  <div>
+    <p class="about-statement">
+      코드 한 줄이 <strong>누군가의 마음을</strong> 움직일 수 있다는 것.<br>
+      그것이 내가 개발하는 이유입니다.
+    </p>
+    <div class="about-grid">
+      <div class="about-cell">
+        <div class="cell-label">Focus</div>
+        <div class="cell-value">AI Agent<br>Web Dev</div>
+      </div>
+      <div class="about-cell">
+        <div class="cell-label">Role</div>
+        <div class="cell-value">Developer<br>Educator</div>
+      </div>
+      <div class="about-cell">
+        <div class="cell-label">Stack</div>
+        <div class="cell-value">Claude API<br>GSAP · Three.js</div>
+      </div>
+      <div class="about-cell">
+        <div class="cell-label">Location</div>
+        <div class="cell-value">Seoul<br>Korea</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="work-header">
+    <h2 class="work-title-big">Work</h2>
+    <span class="work-count">03 Projects</span>
+  </div>
+  <div>
+    <div class="work-row">
+      <span class="row-num">01</span>
+      <div class="row-name">AI Agent Web</div>
+      <div class="row-tags">
+        <span class="rtag">Claude API</span>
+        <span class="rtag">Anthropic SDK</span>
+        <span class="rtag">Interactive</span>
+      </div>
+      <div class="row-arrow">→</div>
+    </div>
+    <div class="work-row">
+      <span class="row-num">02</span>
+      <div class="row-name">Creative Coding</div>
+      <div class="row-tags">
+        <span class="rtag">GSAP</span>
+        <span class="rtag">Canvas · SVG</span>
+        <span class="rtag">Three.js</span>
+      </div>
+      <div class="row-arrow">→</div>
+    </div>
+    <div class="work-row">
+      <span class="row-num">03</span>
+      <div class="row-name">Education Platform</div>
+      <div class="row-tags">
+        <span class="rtag">Lecture</span>
+        <span class="rtag">Curriculum</span>
+        <span class="rtag">Mentoring</span>
+      </div>
+      <div class="row-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="contact-pre">Get in touch</p>
+  <div class="contact-cta">
+    <a href="mailto:computer.gangnam@gmail.com">Say Hello.</a>
+  </div>
+</section>
+
+<footer>
+  <span>HW — AI Developer &amp; Educator</span>
+  <span>Seoul, Korea · 2026</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Lenis 보일러플레이트
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  // 진행 바
+  lenis.on('scroll', ({ progress }) => {
+    document.getElementById('progress').style.width = (progress * 100) + '%';
+  });
+
+  // 커서
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursor-trail');
+  let mx = 0, my = 0, tx = 0, ty = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    gsap.to(cursor, { x: mx, y: my, duration: 0.08, ease: 'none' });
+  });
+
+  (function tickTrail() {
+    tx += (mx - tx) * 0.09;
+    ty += (my - ty) * 0.09;
+    gsap.set(trail, { x: tx, y: ty });
+    requestAnimationFrame(tickTrail);
+  })();
+
+  document.querySelectorAll('a, .work-row, .about-cell').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      gsap.to(cursor, { scale: 2.5, duration: 0.3 });
+      gsap.to(trail, { scale: 0, opacity: 0, duration: 0.3 });
+    });
+    el.addEventListener('mouseleave', () => {
+      gsap.to(cursor, { scale: 1, duration: 0.4 });
+      gsap.to(trail, { scale: 1, opacity: 1, duration: 0.4 });
+    });
+  });
+
+  // 히어로 진입
+  gsap.timeline({ delay: 0.2 })
+    .from('.hero-eyebrow', { y: 28, opacity: 0, duration: 0.9, ease: 'power3.out' })
+    .from('.hero-name .l1', { y: 64, opacity: 0, duration: 1.1, ease: 'power3.out' }, '-=0.5')
+    .from('.hero-name .l2', { y: 64, opacity: 0, duration: 1.1, ease: 'power3.out' }, '-=0.8')
+    .from('.hero-footer', { y: 28, opacity: 0, duration: 0.9, ease: 'power3.out' }, '-=0.5');
+
+  // SURPRISE: 스크롤 따라 Variable Font wght 실시간 변화 (hero)
+  ScrollTrigger.create({
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom top',
+    onUpdate: self => {
+      const w = Math.round(900 - self.progress * 620);
+      document.querySelector('.hero-name').style.fontVariationSettings = `'wght' ${w}`;
+    }
+  });
+
+  // work title wght 변화
+  ScrollTrigger.create({
+    trigger: '#work',
+    start: 'top 85%',
+    end: 'top 10%',
+    onUpdate: self => {
+      const w = Math.round(200 + self.progress * 700);
+      document.querySelector('.work-title-big').style.fontVariationSettings = `'wght' ${w}`;
+    }
+  });
+
+  // contact wght 변화
+  ScrollTrigger.create({
+    trigger: '#contact',
+    start: 'top 85%',
+    end: 'top 15%',
+    onUpdate: self => {
+      const w = Math.round(200 + self.progress * 700);
+      document.querySelector('.contact-cta').style.fontVariationSettings = `'wght' ${w}`;
+    }
+  });
+
+  // 마퀴
+  const mTrack = document.getElementById('mTrack');
+  const halfW = mTrack.scrollWidth / 2;
+  let mX = 0;
+  (function tickMarquee() {
+    mX -= 0.6;
+    if (Math.abs(mX) >= halfW) mX = 0;
+    gsap.set(mTrack, { x: mX });
+    requestAnimationFrame(tickMarquee);
+  })();
+
+  // 섹션 등장
+  gsap.from('.about-statement', {
+    scrollTrigger: { trigger: '#about', start: 'top 75%' },
+    y: 48, opacity: 0, duration: 1.1, ease: 'power3.out'
+  });
+
+  gsap.from('.about-cell', {
+    scrollTrigger: { trigger: '.about-grid', start: 'top 82%' },
+    y: 24, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'power3.out'
+  });
+
+  gsap.from('.work-row', {
+    scrollTrigger: { trigger: '#work', start: 'top 72%' },
+    x: -44, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out'
+  });
+
+  gsap.from('.contact-cta', {
+    scrollTrigger: { trigger: '#contact', start: 'top 75%' },
+    y: 40, opacity: 0, duration: 1.1, ease: 'power3.out'
+  });
+
+  // 히어로 마우스 시차
+  document.addEventListener('mousemove', e => {
+    const px = (e.clientX / window.innerWidth - 0.5);
+    const py = (e.clientY / window.innerHeight - 0.5);
+    gsap.to('.hero-name', { x: px * 22, y: py * 12, duration: 1.8, ease: 'power2.out' });
+    gsap.to('.hero-eyebrow', { x: px * 34, y: py * 18, duration: 2.0, ease: 'power2.out' });
+    gsap.to('.hero-desc', { x: px * 12, y: py * 8, duration: 1.5, ease: 'power2.out' });
+  });
+</script>
+</body>
+</html>
