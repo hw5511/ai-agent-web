@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mellow Days Café — 오늘의 일상</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      oklch(97% 0.015 72);
+      --bg2:     oklch(93% 0.025 66);
+      --text:    oklch(22% 0.04 45);
+      --text-m:  oklch(48% 0.05 52);
+      --accent:  oklch(40% 0.12 42);
+      --caramel: oklch(62% 0.14 56);
+      --cream:   oklch(99% 0.005 80);
+      --ring:    oklch(82% 0.06 62);
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      font-family: 'Noto Serif KR', serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Progress bar ─────────────────── */
+    #progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--caramel));
+      width: 0%;
+      z-index: 200;
+      will-change: width;
+    }
+
+    /* ── Global section rhythm ────────── */
+    section { padding: 100px 8vw; }
+
+    .sec-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 0.8rem;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 4rem;
+    }
+    .sec-title em { font-style: italic; color: var(--accent); }
+
+    /* ── HERO ─────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 8vw;
+      gap: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-blob {
+      position: absolute;
+      width: 580px; height: 580px;
+      border-radius: 50%;
+      background: oklch(91% 0.04 62);
+      right: -80px; top: 50%;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.36em;
+      color: var(--text-m);
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+      will-change: transform, opacity;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 7vw, 5.8rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+      will-change: transform, opacity;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      line-height: 1.9;
+      color: var(--text-m);
+      font-weight: 300;
+      max-width: 340px;
+      will-change: transform, opacity;
+    }
+
+    .hero-scroll {
+      margin-top: 2.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      color: var(--text-m);
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      will-change: transform, opacity;
+    }
+    .hero-scroll-line {
+      width: 38px; height: 1px;
+      background: var(--text-m);
+      animation: lineBreath 2.4s ease-in-out infinite;
+    }
+    @keyframes lineBreath {
+      0%, 100% { width: 38px; opacity: 1; }
+      50%       { width: 60px; opacity: 0.4; }
+    }
+
+    .hero-right {
+      position: relative; z-index: 1;
+      display: flex; justify-content: center; align-items: center;
+      will-change: transform, opacity;
+    }
+
+    .cup-wrap { width: 260px; height: 300px; }
+
+    .steam { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
+
+    /* ── MENU ─────────────────────────── */
+    .menu-section { background: var(--cream); }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-bottom: 7rem;
+      will-change: transform, opacity;
+    }
+    .menu-item:last-child { margin-bottom: 0; }
+    .menu-item.rev { direction: rtl; }
+    .menu-item.rev > * { direction: ltr; }
+
+    .menu-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      aspect-ratio: 4/3;
+    }
+    .menu-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+      will-change: transform;
+    }
+    .menu-img:hover img { transform: scale(1.06); }
+
+    .badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--accent);
+      color: var(--cream);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .menu-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      color: var(--ring);
+      line-height: 1;
+      margin-bottom: -0.6rem;
+    }
+    .menu-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .menu-name-ko {
+      font-size: 0.88rem;
+      color: var(--caramel);
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+    }
+    .menu-desc {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--text-m);
+      font-weight: 300;
+      margin-bottom: 1.4rem;
+    }
+    .menu-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border: 1px solid var(--ring);
+      border-radius: 20px;
+      color: var(--text-m);
+    }
+
+    /* ── GALLERY ──────────────────────── */
+    .gallery-section { background: var(--bg2); }
+
+    .g-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.9rem;
+    }
+    .g-item {
+      overflow: hidden;
+      border-radius: 5px;
+      will-change: transform, opacity;
+    }
+    .g-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+      will-change: transform;
+      display: block;
+    }
+    .g-item:hover img { transform: scale(1.07); }
+
+    .g1 { grid-column: 1 / 6;  aspect-ratio: 4/3; }
+    .g2 { grid-column: 6 / 9;  aspect-ratio: 3/4; }
+    .g3 { grid-column: 9 / 13; aspect-ratio: 4/3; }
+    .g4 { grid-column: 1 / 5;  aspect-ratio: 4/3; }
+    .g5 { grid-column: 5 / 10; aspect-ratio: 16/9; }
+    .g6 { grid-column: 10 / 13; aspect-ratio: 3/4; }
+
+    /* ── STORY ────────────────────────── */
+    .story-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: center;
+    }
+
+    .story-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--accent);
+      border-left: 3px solid var(--caramel);
+      padding-left: 1.8rem;
+      margin-bottom: 2rem;
+      will-change: transform, opacity;
+    }
+    .story-body {
+      font-size: 0.97rem;
+      line-height: 2.1;
+      color: var(--text-m);
+      font-weight: 300;
+      will-change: transform, opacity;
+    }
+
+    .story-img-wrap {
+      position: relative;
+      will-change: transform, opacity;
+    }
+    .story-img-wrap img {
+      width: 100%;
+      border-radius: 6px;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+    .story-deco {
+      position: absolute;
+      width: 78%; height: 78%;
+      border: 2px solid var(--ring);
+      border-radius: 6px;
+      bottom: -18px; right: -18px;
+      z-index: -1;
+    }
+
+    /* ── VISIT ────────────────────────── */
+    .visit-section {
+      background: var(--accent);
+      color: var(--cream);
+      text-align: center;
+    }
+    .visit-section .sec-label { color: var(--caramel); }
+    .visit-section .sec-title { color: var(--cream); margin-bottom: 3rem; }
+    .visit-section .sec-title em { color: var(--caramel); }
+
+    .v-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .v-card {
+      padding: 2rem 1.5rem;
+      border: 1px solid oklch(54% 0.10 42);
+      border-radius: 6px;
+      will-change: transform, opacity;
+    }
+    .v-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 1rem;
+    }
+    .v-card-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: var(--cream);
+    }
+
+    /* ── FOOTER ───────────────────────── */
+    footer {
+      background: oklch(18% 0.03 40);
+      color: oklch(68% 0.03 50);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── MOBILE ───────────────────────── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 60px 6vw;
+        min-height: 100dvh;
+      }
+      .hero-right, .hero-blob { display: none; }
+
+      .menu-item, .menu-item.rev {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .g-grid { grid-template-columns: 1fr 1fr; }
+      .g1 { grid-column: 1 / 3; aspect-ratio: 16/9; }
+      .g2 { grid-column: 1 / 2; aspect-ratio: 1; }
+      .g3 { grid-column: 2 / 3; aspect-ratio: 1; }
+      .g4 { grid-column: 1 / 2; aspect-ratio: 1; }
+      .g5 { grid-column: 2 / 3; aspect-ratio: 1; }
+      .g6 { display: none; }
+
+      .story-section { grid-template-columns: 1fr; gap: 3rem; }
+      .v-grid { grid-template-columns: 1fr; max-width: 340px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress"></div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero">
+    <div class="hero-blob"></div>
+
+    <div class="hero-left">
+      <p class="hero-date">April 25, 2026 · Friday</p>
+      <h1 class="hero-title">
+        Mellow<br>
+        <em>Days</em><br>
+        Café
+      </h1>
+      <p class="hero-sub">
+        오늘도 천천히, 따뜻하게.<br>
+        당신의 하루 한 잔이 머무는 곳.
+      </p>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="cup-wrap">
+        <svg viewBox="0 0 260 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Steam -->
+          <path class="steam" id="st1" d="M90 76 C90 58 110 48 108 30"/>
+          <path class="steam" id="st2" d="M130 68 C130 50 112 42 112 24"/>
+          <path class="steam" id="st3" d="M170 76 C170 58 150 48 152 30"/>
+
+          <!-- Saucer -->
+          <ellipse cx="130" cy="262" rx="86" ry="13"
+                   fill="oklch(88% 0.05 60)" stroke="oklch(72% 0.08 52)" stroke-width="1.5"/>
+
+          <!-- Cup body -->
+          <path d="M56 106 L74 234 C74 244 83 250 96 250 L164 250 C177 250 186 244 186 234 L204 106 Z"
+                fill="oklch(94% 0.04 64)" stroke="oklch(72% 0.08 52)" stroke-width="2"/>
+
+          <!-- Handle -->
+          <path d="M186 142 C226 142 226 206 186 206"
+                stroke="oklch(66% 0.10 52)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+          <!-- Coffee surface -->
+          <ellipse cx="130" cy="114" rx="68" ry="11" fill="oklch(36% 0.10 44)"/>
+
+          <!-- Latte art leaf -->
+          <path d="M130 114 C125 108 119 103 130 99 C141 103 135 108 130 114"
+                fill="oklch(68% 0.09 56)" opacity="0.75"/>
+          <line x1="130" y1="99" x2="130" y2="114"
+                stroke="oklch(68% 0.09 56)" stroke-width="1.2" opacity="0.75"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TODAY'S MENU ═══════════ -->
+  <section class="menu-section">
+    <p class="sec-label">Today's Menu</p>
+    <h2 class="sec-title">오늘의 <em>메뉴</em></h2>
+
+    <div class="menu-item" data-from="-1">
+      <div class="menu-img">
+        <img src="https://loremflickr.com/600/450/coffee,latte,art" alt="아인슈페너">
+        <span class="badge">오늘의 추천</span>
+      </div>
+      <div class="menu-info">
+        <div class="menu-num">01</div>
+        <h3 class="menu-name">Einspänner</h3>
+        <p class="menu-name-ko">아인슈페너</p>
+        <p class="menu-desc">
+          진한 에스프레소 위에 부드러운 생크림을 얹은 비엔나 커피.
+          달콤한 크림과 쌉싸름한 커피의 조화가
+          오늘 하루를 천천히 풀어줍니다.
+        </p>
+        <div class="menu-price">₩ 6,500</div>
+        <div class="tags">
+          <span class="tag">HOT · ICE</span>
+          <span class="tag">Signature</span>
+          <span class="tag">Whipped Cream</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item rev" data-from="1">
+      <div class="menu-img">
+        <img src="https://loremflickr.com/600/450/matcha,latte,green" alt="말차 라떼">
+      </div>
+      <div class="menu-info">
+        <div class="menu-num">02</div>
+        <h3 class="menu-name">Matcha Latte</h3>
+        <p class="menu-name-ko">말차 라떼</p>
+        <p class="menu-desc">
+          제주 유기농 말차를 고운 체로 걸러 우유와 섬세하게 블렌딩했습니다.
+          풀빛의 신선함과 우유의 부드러움이 입안 가득 퍼집니다.
+        </p>
+        <div class="menu-price">₩ 7,000</div>
+        <div class="tags">
+          <span class="tag">HOT · ICE</span>
+          <span class="tag">Jeju Organic</span>
+          <span class="tag">Sugar-free</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item" data-from="-1">
+      <div class="menu-img">
+        <img src="https://loremflickr.com/600/450/croissant,waffle,pastry" alt="크로플">
+      </div>
+      <div class="menu-info">
+        <div class="menu-num">03</div>
+        <h3 class="menu-name">Croffle</h3>
+        <p class="menu-name-ko">크로플</p>
+        <p class="menu-desc">
+          바삭한 크루아상 반죽을 와플 기계에 구워낸 오늘의 베이커리.
+          클로티드 크림과 제철 딸기잼을 곁들여 제공됩니다.
+        </p>
+        <div class="menu-price">₩ 5,500</div>
+        <div class="tags">
+          <span class="tag">Freshly Baked</span>
+          <span class="tag">Seasonal Jam</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item rev" data-from="1">
+      <div class="menu-img">
+        <img src="https://loremflickr.com/600/450/banana,bread,cake,homemade" alt="바나나 브레드">
+      </div>
+      <div class="menu-info">
+        <div class="menu-num">04</div>
+        <h3 class="menu-name">Banana Bread</h3>
+        <p class="menu-name-ko">바나나 브레드</p>
+        <p class="menu-desc">
+          잘 익은 바나나를 듬뿍 넣어 구운 촉촉한 한 조각.
+          버터 향이 은은하게 퍼지며 오후의 여유를 선물합니다.
+        </p>
+        <div class="menu-price">₩ 4,800</div>
+        <div class="tags">
+          <span class="tag">Homemade</span>
+          <span class="tag">Vegan option</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ GALLERY ═══════════ -->
+  <section class="gallery-section">
+    <p class="sec-label">Our Space</p>
+    <h2 class="sec-title">오늘의 <em>공간</em></h2>
+    <div class="g-grid">
+      <div class="g-item g1">
+        <img src="https://loremflickr.com/800/600/cafe,interior,cozy,warm" alt="카페 내부">
+      </div>
+      <div class="g-item g2">
+        <img src="https://loremflickr.com/400/534/coffee,espresso,cup" alt="에스프레소">
+      </div>
+      <div class="g-item g3">
+        <img src="https://loremflickr.com/600/450/cafe,window,sunlight" alt="창가">
+      </div>
+      <div class="g-item g4">
+        <img src="https://loremflickr.com/500/375/flowers,cafe,table" alt="꽃 테이블">
+      </div>
+      <div class="g-item g5">
+        <img src="https://loremflickr.com/700/394/barista,coffee,bar" alt="바리스타">
+      </div>
+      <div class="g-item g6">
+        <img src="https://loremflickr.com/400/534/book,reading,cafe" alt="독서">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ STORY ═══════════ -->
+  <section class="story-section">
+    <div class="story-left">
+      <p class="sec-label">Our Story</p>
+      <blockquote class="story-quote">
+        "좋은 커피 한 잔은<br>시간을 멈추게 한다."
+      </blockquote>
+      <p class="story-body">
+        Mellow Days는 2019년 봄, 작은 골목 끝에서 시작됐습니다.<br><br>
+        처음엔 작은 에스프레소 머신 하나와 낡은 테이블 두 개뿐이었지만,
+        매일 아침 갓 로스팅한 원두를 직접 갈고 우유를 데우는 일과에서
+        우리는 천천히 행복해지는 법을 배웠습니다.<br><br>
+        지금도 우리는 같은 마음으로 문을 엽니다.
+        당신의 하루 중 가장 조용하고 따뜻한 한 시간이 되고 싶습니다.
+      </p>
+    </div>
+    <div class="story-img-wrap">
+      <img src="https://loremflickr.com/500/667/cafe,morning,light,cozy" alt="카페 아침">
+      <div class="story-deco"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ VISIT ═══════════ -->
+  <section class="visit-section">
+    <p class="sec-label">Find Us</p>
+    <h2 class="sec-title">방문 <em>안내</em></h2>
+    <div class="v-grid">
+      <div class="v-card">
+        <p class="v-card-title">Hours</p>
+        <p class="v-card-val">
+          Mon — Fri<br>
+          08:00 — 21:00<br><br>
+          Sat — Sun<br>
+          09:00 — 22:00
+        </p>
+      </div>
+      <div class="v-card">
+        <p class="v-card-title">Location</p>
+        <p class="v-card-val">
+          서울시 마포구<br>
+          연남동 239-14<br><br>
+          2호선 홍대입구역<br>
+          3번 출구 도보 5분
+        </p>
+      </div>
+      <div class="v-card">
+        <p class="v-card-title">Contact</p>
+        <p class="v-card-val">
+          02-1234-5678<br><br>
+          @mellowdays_cafe<br><br>
+          hello@mellowdays.kr
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Mellow Days Café &nbsp;·&nbsp; All rights reserved</p>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ── Lenis smooth scroll ───────────────
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // ── Progress bar ──────────────────────
+    ScrollTrigger.create({
+      start: 0, end: 'max',
+      onUpdate: (self) => gsap.set('#progress', { width: (self.progress * 100) + '%' })
+    });
+
+    // ── Hero entrance ─────────────────────
+    const heroTl = gsap.timeline({ delay: 0.2 });
+    heroTl
+      .from('.hero-date',   { y: 24, opacity: 0, duration: 0.8, ease: 'power3.out' })
+      .from('.hero-title',  { y: 44, opacity: 0, duration: 1.0, ease: 'power3.out' }, '-=0.5')
+      .from('.hero-sub',    { y: 22, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+      .from('.hero-scroll', { y: 18, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+      .from('.hero-right',  { x: 50, opacity: 0, duration: 1.0, ease: 'power3.out' }, '-=1.2');
+
+    // ── Steam SVG animation ───────────────
+    // SURPRISE: SVG stroke-dashoffset으로 증기가 올라오며 사라지는 루프
+    ['st1', 'st2', 'st3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      const len = el.getTotalLength();
+      gsap.set(el, { strokeDasharray: len, strokeDashoffset: len, opacity: 0.7 });
+      gsap.to(el, {
+        strokeDashoffset: 0,
+        opacity: 0,
+        duration: 1.8 + i * 0.3,
+        repeat: -1,
+        delay: i * 0.7,
+        ease: 'power1.inOut',
+        repeatDelay: 0.4
+      });
+    });
+
+    // ── SURPRISE: 리듬 있는 반복의 미 ────
+    // 메뉴 카드가 홀수=왼쪽, 짝수=오른쪽으로 번갈아 슬라이드인
+    document.querySelectorAll('.menu-item').forEach((item) => {
+      const dir = parseInt(item.dataset.from, 10);
+      gsap.fromTo(item,
+        { x: dir * 90, opacity: 0 },
+        {
+          x: 0, opacity: 1,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 82%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    });
+
+    // ── Gallery reveal with stagger ───────
+    gsap.fromTo('.g-item',
+      { y: 45, opacity: 0 },
+      {
+        y: 0, opacity: 1,
+        duration: 0.9,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.g-grid',
+          start: 'top 76%',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
+
+    // ── Story section ─────────────────────
+    gsap.fromTo('.story-quote',
+      { x: -50, opacity: 0 },
+      {
+        x: 0, opacity: 1, duration: 1.0, ease: 'power3.out',
+        scrollTrigger: { trigger: '.story-section', start: 'top 72%', toggleActions: 'play none none reverse' }
+      }
+    );
+    gsap.fromTo('.story-body',
+      { x: -40, opacity: 0 },
+      {
+        x: 0, opacity: 1, duration: 1.0, ease: 'power3.out', delay: 0.2,
+        scrollTrigger: { trigger: '.story-section', start: 'top 72%', toggleActions: 'play none none reverse' }
+      }
+    );
+    gsap.fromTo('.story-img-wrap',
+      { x: 60, opacity: 0 },
+      {
+        x: 0, opacity: 1, duration: 1.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.story-section', start: 'top 72%', toggleActions: 'play none none reverse' }
+      }
+    );
+
+    // ── Visit cards ───────────────────────
+    gsap.fromTo('.v-card',
+      { y: 36, opacity: 0 },
+      {
+        y: 0, opacity: 1,
+        duration: 0.8,
+        stagger: 0.18,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.v-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
+
+    // ── Section titles ────────────────────
+    document.querySelectorAll('.sec-title, .sec-label').forEach(el => {
+      gsap.fromTo(el,
+        { y: 28, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    });
+  </script>
+</body>
+</html>

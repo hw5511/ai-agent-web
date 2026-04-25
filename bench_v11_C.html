@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>멍멍유치원 — 우리 아이의 두 번째 집</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Jua&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: oklch(97% 0.025 78);
+      --coral: oklch(72% 0.19 28);
+      --coral-dk: oklch(54% 0.19 28);
+      --mint: oklch(78% 0.13 168);
+      --mint-dk: oklch(58% 0.13 168);
+      --yellow: oklch(88% 0.16 95);
+      --yellow-dk: oklch(70% 0.16 95);
+      --lav: oklch(82% 0.12 292);
+      --lav-dk: oklch(63% 0.12 292);
+      --text: oklch(20% 0.03 30);
+      --soft: oklch(55% 0.04 30);
+      --white: oklch(99% 0.005 80);
+      --shadow: oklch(86% 0.04 78);
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Quicksand', sans-serif;
+      overflow-x: hidden;
+    }
+
+    button { cursor: pointer; }
+
+    /* Progress */
+    #progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: var(--coral);
+      width: 0%;
+      z-index: 1000;
+      border-radius: 0 2px 2px 0;
+      pointer-events: none;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(252, 248, 244, 0.88);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Jua', sans-serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      background: var(--coral);
+      color: var(--white);
+      border: none;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 4px 4px 0 var(--coral-dk);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+      will-change: transform;
+    }
+
+    .nav-cta:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 6px 6px 0 var(--coral-dk);
+    }
+
+    .nav-cta:active {
+      transform: translate(2px,2px);
+      box-shadow: 2px 2px 0 var(--coral-dk);
+    }
+
+    /* Hero */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 48px 60px;
+      gap: 40px;
+      overflow: hidden;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--text);
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      box-shadow: 3px 3px 0 var(--yellow-dk);
+    }
+
+    .hero-title {
+      font-family: 'Jua', sans-serif;
+      font-size: clamp(3rem, 6.5vw, 5.5rem);
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--coral);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--soft);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      font-weight: 500;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--coral);
+      color: var(--white);
+      border: none;
+      padding: 16px 38px;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 5px 5px 0 var(--coral-dk);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+      will-change: transform;
+    }
+
+    .btn-primary:hover {
+      transform: translate(-3px,-3px);
+      box-shadow: 8px 8px 0 var(--coral-dk);
+    }
+
+    .btn-primary:active {
+      transform: translate(2px,2px);
+      box-shadow: 3px 3px 0 var(--coral-dk);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 3px solid var(--text);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .btn-outline:hover {
+      background: var(--text);
+      color: var(--white);
+      transform: translate(-2px,-2px);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 72vh;
+    }
+
+    .hero-img {
+      width: 380px;
+      height: 480px;
+      border-radius: 200px 200px 80px 80px;
+      object-fit: cover;
+      box-shadow: 20px 20px 0 var(--mint);
+      will-change: transform;
+      display: block;
+    }
+
+    .chip {
+      position: absolute;
+      border-radius: 18px;
+      padding: 12px 18px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      will-change: transform;
+    }
+
+    .chip-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      opacity: 0.65;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .chip.a {
+      top: 10%; left: -4%;
+      background: var(--yellow);
+      box-shadow: 4px 4px 0 var(--yellow-dk);
+    }
+
+    .chip.b {
+      top: 28%; right: -4%;
+      background: var(--lav);
+      box-shadow: 4px 4px 0 var(--lav-dk);
+    }
+
+    .chip.c {
+      bottom: 18%; left: 0%;
+      background: var(--mint);
+      box-shadow: 4px 4px 0 var(--mint-dk);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--soft);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .scroll-ring {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2.5px solid var(--soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: abounce 1.6s ease-in-out infinite;
+    }
+
+    @keyframes abounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(7px); }
+    }
+
+    /* Section common */
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+
+    .sec-vert {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-family: 'Jua', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--soft);
+      flex-shrink: 0;
+    }
+
+    .sec-title {
+      font-family: 'Jua', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.25;
+    }
+
+    /* Gallery — CHOSEN_SPARK: 세로형 텍스트 + 비대칭 그리드 교차 */
+    #gallery {
+      padding: 100px 48px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr;
+      grid-template-rows: 340px 240px;
+      gap: 16px;
+    }
+
+    .gi {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      cursor: pointer;
+      will-change: transform;
+    }
+
+    .gi:nth-child(1) {
+      grid-row: 1 / 3;
+      border-radius: 40px;
+    }
+
+    .gi img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.34,1.2,0.64,1);
+      will-change: transform;
+    }
+
+    .gi:hover img { transform: scale(1.07); }
+
+    /* CHOSEN_SPARK: vertical text labels */
+    .gi-label {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%) rotate(180deg);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Jua', sans-serif;
+      font-size: 0.95rem;
+      color: white;
+      background: rgba(0,0,0,0.22);
+      padding: 10px 7px;
+      border-radius: 16px;
+      letter-spacing: 0.15em;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+
+    .gi-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .gi:hover .gi-overlay { opacity: 1; }
+
+    /* Programs */
+    #programs {
+      padding: 100px 48px;
+      background: oklch(94% 0.022 78);
+    }
+
+    .prog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .prog-card {
+      background: var(--white);
+      border-radius: 32px;
+      padding: 38px;
+      box-shadow: 8px 8px 0 var(--shadow);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      will-change: transform;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .prog-card:hover {
+      transform: translate(-6px,-6px);
+      box-shadow: 14px 14px 0 var(--shadow);
+    }
+
+    .prog-card:active {
+      transform: translate(2px,2px);
+      box-shadow: 4px 4px 0 var(--shadow);
+    }
+
+    .prog-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Jua', sans-serif;
+      font-size: 1.1rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .prog-card:nth-child(1) .prog-icon { background: var(--coral); }
+    .prog-card:nth-child(2) .prog-icon { background: var(--mint-dk); }
+    .prog-card:nth-child(3) .prog-icon { background: var(--yellow-dk); }
+    .prog-card:nth-child(4) .prog-icon { background: var(--lav-dk); }
+
+    .prog-name {
+      font-family: 'Jua', sans-serif;
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .prog-desc {
+      font-size: 0.92rem;
+      color: var(--soft);
+      line-height: 1.75;
+      font-weight: 500;
+    }
+
+    .prog-badge {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .prog-card:nth-child(1) .prog-badge { background: oklch(92% 0.12 28); color: oklch(40% 0.19 28); }
+    .prog-card:nth-child(2) .prog-badge { background: oklch(90% 0.10 168); color: oklch(38% 0.13 168); }
+    .prog-card:nth-child(3) .prog-badge { background: oklch(92% 0.13 95); color: oklch(48% 0.16 95); }
+    .prog-card:nth-child(4) .prog-badge { background: oklch(91% 0.09 292); color: oklch(42% 0.12 292); }
+
+    /* Marquee */
+    #marquee {
+      padding: 56px 0;
+      background: var(--coral);
+      overflow: hidden;
+    }
+
+    .mq-track {
+      display: flex;
+      width: max-content;
+      animation: mqrun 22s linear infinite;
+      white-space: nowrap;
+    }
+
+    .mq-item {
+      color: var(--white);
+      font-family: 'Jua', sans-serif;
+      font-size: 1.3rem;
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+
+    .mq-sep {
+      color: oklch(88% 0.12 28);
+      font-family: 'Jua', sans-serif;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    @keyframes mqrun {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* CTA */
+    #cta {
+      padding: 120px 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cta-bubble {
+      background: var(--yellow);
+      border-radius: 48px;
+      padding: 80px 96px;
+      box-shadow: 14px 14px 0 var(--yellow-dk);
+      text-align: center;
+      max-width: 780px;
+      width: 100%;
+    }
+
+    .cta-title {
+      font-family: 'Jua', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      color: var(--soft);
+      font-size: 1rem;
+      margin-bottom: 36px;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text);
+      color: oklch(70% 0.03 30);
+      padding: 44px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: 'Jua', sans-serif;
+      font-size: 1.4rem;
+      color: var(--white);
+    }
+
+    .footer-info {
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.7;
+      text-align: right;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 90px 24px 80px;
+        text-align: center;
+      }
+
+      .hero-actions { justify-content: center; }
+
+      .hero-visual { height: auto; min-height: 320px; }
+
+      .hero-img { width: 220px; height: 280px; }
+
+      .chip.a { top: 0; left: 0; font-size: 0.75rem; }
+      .chip.b { top: 15%; right: 0; font-size: 0.75rem; }
+      .chip.c { bottom: 5%; left: 0; font-size: 0.75rem; }
+
+      #gallery { padding: 60px 24px; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 160px 160px;
+      }
+
+      .gi:nth-child(1) { grid-column: 1 / 3; grid-row: 1; }
+      .gi:nth-child(2) { grid-column: 1; grid-row: 2; }
+      .gi:nth-child(3) { grid-column: 2; grid-row: 2; }
+      .gi:nth-child(4) { grid-column: 1; grid-row: 3; }
+      .gi:nth-child(5) { grid-column: 2; grid-row: 3; }
+
+      #programs { padding: 60px 24px; }
+      .prog-grid { grid-template-columns: 1fr; }
+
+      .cta-bubble { padding: 50px 28px; }
+
+      footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 36px 24px;
+      }
+
+      .footer-info { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="mainNav">
+  <a class="nav-logo" href="#">멍멍유치원</a>
+  <button class="nav-cta">입학 상담하기</button>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-tag">서울 마포구 · 2012년 개원</span>
+    <h1 class="hero-title">
+      우리 아이의<br>
+      <em>두 번째 집</em>
+    </h1>
+    <p class="hero-sub">
+      강아지들이 안전하고 행복하게 뛰어노는 공간.<br>
+      전문 훈련사와 함께하는 맞춤형 돌봄 프로그램.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary">프로그램 보기</button>
+      <button class="btn-outline">갤러리 보기</button>
+    </div>
+  </div>
+
+  <div class="hero-visual" id="heroVisual">
+    <img class="hero-img" id="heroImg"
+      src="https://loremflickr.com/420/520/dog,golden,puppy?lock=10"
+      alt="강아지">
+    <div class="chip a">
+      <span class="chip-label">오늘의 친구들</span>
+      코코 · 몽이 · 두부
+    </div>
+    <div class="chip b">
+      <span class="chip-label">매일 오후 3시</span>
+      야외 운동회
+    </div>
+    <div class="chip c">
+      <span class="chip-label">전담 선생님 비율</span>
+      1 : 4
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>스크롤</span>
+    <div class="scroll-ring">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+        <path d="M5.5 1v9M1 7l4.5 4 4.5-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery — CHOSEN_SPARK: 세로형 텍스트 + 비대칭 그리드 교차 -->
+<section id="gallery">
+  <div class="sec-head">
+    <span class="sec-vert">GALLERY · 갤러리</span>
+    <h2 class="sec-title">
+      오늘도<br>
+      신나게 놀았어요
+    </h2>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gi">
+      <img src="https://loremflickr.com/700/620/dog,puppy,playing?lock=11" alt="강아지">
+      <div class="gi-label">신나는 하루</div>
+      <div class="gi-overlay"></div>
+    </div>
+    <div class="gi">
+      <img src="https://loremflickr.com/400/340/golden,retriever?lock=12" alt="강아지">
+      <div class="gi-label">친구 사귀기</div>
+      <div class="gi-overlay"></div>
+    </div>
+    <div class="gi">
+      <img src="https://loremflickr.com/400/340/puppy,cute?lock=13" alt="강아지">
+      <div class="gi-label">야외 활동</div>
+      <div class="gi-overlay"></div>
+    </div>
+    <div class="gi">
+      <img src="https://loremflickr.com/400/240/dog,treat?lock=14" alt="강아지">
+      <div class="gi-label">간식 타임</div>
+      <div class="gi-overlay"></div>
+    </div>
+    <div class="gi">
+      <img src="https://loremflickr.com/400/240/puppy,sleeping?lock=15" alt="강아지">
+      <div class="gi-label">낮잠 시간</div>
+      <div class="gi-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Programs -->
+<section id="programs">
+  <div class="sec-head">
+    <span class="sec-vert">PROGRAMS · 프로그램</span>
+    <h2 class="sec-title">
+      맞춤형 돌봄<br>
+      프로그램
+    </h2>
+  </div>
+
+  <div class="prog-grid">
+    <div class="prog-card">
+      <div class="prog-icon">훈련</div>
+      <div>
+        <h3 class="prog-name">기초 훈련</h3>
+        <p class="prog-desc">전문 훈련사가 1:1로 진행하는 기초 예절 교육. 산책 예절부터 기본 명령어까지 체계적으로 배웁니다.</p>
+        <span class="prog-badge">매일 오전 10:00</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">사교</div>
+      <div>
+        <h3 class="prog-name">친구 사귀기</h3>
+        <p class="prog-desc">또래 강아지들과 안전한 환경에서 자유롭게 어울리는 시간. 사회성과 자신감을 함께 키워줍니다.</p>
+        <span class="prog-badge">매일 오전 11:00</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">야외</div>
+      <div>
+        <h3 class="prog-name">물놀이 &amp; 야외 활동</h3>
+        <p class="prog-desc">넓은 야외 운동장에서 신나게 뛰어놀고, 여름엔 안전한 물놀이 프로그램도 함께 진행합니다.</p>
+        <span class="prog-badge">매일 오후 3:00</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">케어</div>
+      <div>
+        <h3 class="prog-name">미용 &amp; 케어</h3>
+        <p class="prog-desc">전문 그루머의 목욕, 빗질, 발톱 정리. 건강한 피부와 털 관리로 늘 깨끗하고 뽀송하게 돌봐드립니다.</p>
+        <span class="prog-badge">예약제 운영</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div id="marquee">
+  <div class="mq-track">
+    <span class="mq-item">코코가 오늘 처음 앉기를 배웠어요</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">몽이는 새 친구를 3마리나 사귀었대요</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">두부가 오늘 수영에 도전했어요</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">하루 종일 잘 놀고 잘 먹었습니다</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">오늘의 베스트 학생은 보리예요</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">코코가 오늘 처음 앉기를 배웠어요</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">몽이는 새 친구를 3마리나 사귀었대요</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">두부가 오늘 수영에 도전했어요</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">하루 종일 잘 놀고 잘 먹었습니다</span>
+    <span class="mq-sep">·</span>
+    <span class="mq-item">오늘의 베스트 학생은 보리예요</span>
+    <span class="mq-sep">·</span>
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bubble">
+    <h2 class="cta-title">우리 아이도 입학할 준비됐나요?</h2>
+    <p class="cta-desc">
+      첫 방문 체험은 무료로 진행됩니다.<br>
+      편하게 연락 주시면 친절하게 안내해 드릴게요.
+    </p>
+    <button class="btn-primary" style="font-size:1.05rem;padding:18px 48px;">
+      무료 체험 신청하기
+    </button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">멍멍유치원</div>
+  <div class="footer-info">
+    서울 마포구 합정동 123-45 · 운영시간 07:00–20:00<br>
+    Tel. 02-1234-5678 · Instagram @멍멍유치원
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  lenis.on('scroll', ({ progress, scroll }) => {
+    document.getElementById('progress').style.width = (progress * 100) + '%';
+    document.getElementById('mainNav').classList.toggle('scrolled', scroll > 60);
+  });
+
+  // Hero entry
+  const tl = gsap.timeline({ delay: 0.15 });
+  tl.from('.hero-tag',    { opacity: 0, y: 16, duration: 0.7, ease: 'back.out(1.7)' })
+    .from('.hero-title',  { opacity: 0, y: 36, duration: 0.9, ease: 'back.out(1.4)' }, '-=0.4')
+    .from('.hero-sub',    { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+    .from('.hero-actions',{ opacity: 0, y: 16, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+    .from('#heroImg',     { opacity: 0, scale: 0.88, y: 24, duration: 1, ease: 'back.out(1.4)' }, '-=0.8')
+    .from('.chip',        { opacity: 0, scale: 0.75, stagger: 0.15, duration: 0.6, ease: 'back.out(2)' }, '-=0.5')
+    .from('.scroll-hint', { opacity: 0, y: 10, duration: 0.5 }, '-=0.2');
+
+  // Float idle
+  gsap.to('.chip.a', { y: -10, duration: 2.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  gsap.to('.chip.b', { y: 8,   duration: 2.0, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: 0.6 });
+  gsap.to('.chip.c', { y: -12, duration: 3.0, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: 1.2 });
+
+  // Mouse parallax on hero image
+  const hv = document.getElementById('heroVisual');
+  hv.addEventListener('mousemove', (e) => {
+    const r = hv.getBoundingClientRect();
+    const mx = (e.clientX - r.left - r.width / 2) / r.width;
+    gsap.to('#heroImg', { x: mx * 18, duration: 1.2, ease: 'power2.out' });
+  });
+  hv.addEventListener('mouseleave', () => {
+    gsap.to('#heroImg', { x: 0, duration: 1, ease: 'power2.out' });
+  });
+
+  // Gallery reveal
+  gsap.from('#gallery .sec-head', {
+    scrollTrigger: { trigger: '#gallery', start: 'top 80%' },
+    opacity: 0, x: -30, duration: 0.8, ease: 'power2.out'
+  });
+  gsap.from('.gi', {
+    scrollTrigger: { trigger: '.gallery-grid', start: 'top 72%' },
+    opacity: 0, y: 40, stagger: 0.1, duration: 0.75, ease: 'back.out(1.4)'
+  });
+
+  // Programs reveal
+  gsap.from('#programs .sec-head', {
+    scrollTrigger: { trigger: '#programs', start: 'top 80%' },
+    opacity: 0, x: -30, duration: 0.8, ease: 'power2.out'
+  });
+  gsap.from('.prog-card', {
+    scrollTrigger: { trigger: '.prog-grid', start: 'top 70%' },
+    opacity: 0, y: 36, stagger: 0.12, duration: 0.7, ease: 'back.out(1.4)'
+  });
+
+  // CTA reveal
+  gsap.from('.cta-bubble', {
+    scrollTrigger: { trigger: '#cta', start: 'top 70%' },
+    opacity: 0, y: 48, scale: 0.94, duration: 0.9, ease: 'back.out(1.7)'
+  });
+</script>
+</body>
+</html>

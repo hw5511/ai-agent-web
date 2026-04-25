@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HW — AI Developer & Educator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      oklch(7% 0.012 260);
+  --bg2:     oklch(11% 0.018 260);
+  --gold:    oklch(74% 0.155 87);
+  --goldd:   oklch(55% 0.10 87);
+  --goldf:   oklch(74% 0.155 87 / 0.12);
+  --text:    oklch(93% 0.015 87);
+  --muted:   oklch(52% 0.025 87);
+  --border:  oklch(22% 0.03 87);
+}
+
+html { background: var(--bg); scroll-behavior: auto; }
+
+body {
+  font-family: 'Syne', 'Black Han Sans', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+/* ── Progress ── */
+#prog {
+  position: fixed; top: 0; left: 0; z-index: 200;
+  height: 2px; width: 0%;
+  background: var(--gold);
+  will-change: width;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.8rem 6vw;
+}
+
+.nav-logo {
+  font-size: 1rem; font-weight: 800;
+  letter-spacing: 0.4em; color: var(--gold);
+}
+
+.nav-links {
+  list-style: none; display: flex; gap: 2.5rem;
+}
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* ── Hero ── */
+#hero {
+  height: 100vh; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 0 10vw;
+}
+
+.hero-deco {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+}
+
+.d-fan    { will-change: transform; transform-origin: 1380px -40px; }
+.d-arch   { will-change: transform; }
+.d-diamond{ will-change: transform; transform-origin: 1100px 460px; }
+
+.hero-label {
+  font-size: 0.72rem; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.6rem;
+  position: relative; z-index: 1; opacity: 0;
+}
+
+.hero-title {
+  font-size: clamp(3.8rem, 11vw, 9.5rem);
+  font-weight: 800; line-height: 0.92; letter-spacing: -0.02em;
+  position: relative; z-index: 1;
+}
+.hero-title .line {
+  display: block; overflow: hidden;
+}
+.hero-title .inner {
+  display: block;
+  transform: translateY(110%); opacity: 0;
+  will-change: transform, opacity;
+}
+.hero-title .gold { color: var(--gold); }
+
+.hero-body {
+  margin-top: 2.8rem; max-width: 38ch;
+  font-size: clamp(0.88rem, 1.6vw, 1.05rem);
+  line-height: 1.8; color: var(--muted);
+  position: relative; z-index: 1; opacity: 0;
+}
+
+.hero-cta {
+  margin-top: 3rem; position: relative; z-index: 1; opacity: 0;
+  display: inline-flex; align-items: center; gap: 1rem;
+  text-decoration: none; color: var(--gold);
+  font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+  border: 1px solid var(--goldd); padding: 0.9rem 2rem;
+  transition: background 0.3s, color 0.3s;
+  will-change: transform;
+}
+.hero-cta:hover {
+  background: var(--gold); color: var(--bg);
+}
+
+.scroll-hint {
+  position: absolute; bottom: 2.8rem; left: 10vw; z-index: 1;
+  display: flex; align-items: center; gap: 1.2rem;
+  color: var(--muted); font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+}
+.s-line {
+  width: 44px; height: 1px; background: var(--goldd);
+  transform-origin: left; transform: scaleX(0);
+}
+
+/* ── About ── */
+#about {
+  padding: 11rem 10vw; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 7rem; align-items: start;
+}
+
+.sec-label {
+  font-size: 0.68rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 3.5rem;
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.sec-label::before {
+  content: ''; display: block;
+  width: 28px; height: 1px; background: var(--gold);
+}
+
+.about-h {
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;
+}
+.about-h .gold { color: var(--gold); }
+
+.about-text {
+  font-size: 1rem; line-height: 1.85; color: var(--muted);
+}
+.about-text p + p { margin-top: 1.4em; }
+.about-text strong { color: var(--text); font-weight: 600; }
+
+/* ── Divider ── */
+.deco-div {
+  display: flex; align-items: center;
+  padding: 0 10vw 0; gap: 2.4rem; opacity: 0;
+}
+.deco-div .dl { flex: 1; height: 1px; background: var(--border); }
+
+/* ── Skills ── */
+#skills { background: var(--bg2); padding: 9rem 10vw; }
+
+.skills-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+}
+
+.sk {
+  padding: 2.6rem; border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden; cursor: default;
+}
+.sk:nth-child(3n)         { border-right: none; }
+.sk:nth-last-child(-n+3)  { border-bottom: none; }
+.sk::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--goldf), transparent);
+  opacity: 0; transition: opacity 0.4s;
+}
+.sk:hover::after { opacity: 1; }
+
+.sk-num  { font-size: 0.62rem; letter-spacing: 0.3em; color: var(--goldd); margin-bottom: 1.2rem; }
+.sk-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.7rem; }
+.sk-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+/* ── Works ── */
+#works { padding: 10rem 10vw; }
+
+.works-list { display: flex; flex-direction: column; }
+
+.wi {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: end; padding: 2.4rem 0;
+  border-bottom: 1px solid oklch(18% 0.02 0);
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.wi:first-child { border-top: 1px solid oklch(18% 0.02 0); }
+.wi::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: -100%; width: 100%;
+  background: oklch(74% 0.155 87 / 0.04);
+  transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.wi:hover::before { left: 0; }
+
+.wi-idx  { font-size: 0.62rem; letter-spacing: 0.25em; color: var(--goldd); margin-bottom: 0.5rem; }
+.wi-title {
+  font-size: clamp(1.4rem, 2.8vw, 2.3rem); font-weight: 800; line-height: 1;
+  transition: color 0.3s;
+}
+.wi:hover .wi-title { color: var(--gold); }
+.wi-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
+.tag {
+  font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--border);
+  padding: 0.18rem 0.55rem;
+}
+.wi-year { font-size: 0.7rem; letter-spacing: 0.18em; color: var(--muted); white-space: nowrap; }
+
+/* ── Contact ── */
+#contact {
+  padding: 10rem 10vw 8rem; text-align: center; position: relative; overflow: hidden;
+}
+.ct-deco { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.ct-pre {
+  font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2rem; position: relative; z-index: 1;
+}
+.ct-big {
+  font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 800;
+  line-height: 1.05; letter-spacing: -0.03em;
+  margin-bottom: 3.5rem; position: relative; z-index: 1;
+}
+.ct-email {
+  display: inline-block; color: var(--gold); text-decoration: none;
+  font-size: clamp(0.85rem, 1.8vw, 1.1rem); letter-spacing: 0.15em;
+  border-bottom: 1px solid var(--goldd); padding-bottom: 0.3rem;
+  transition: color 0.3s, border-color 0.3s;
+  position: relative; z-index: 1;
+}
+.ct-email:hover { color: var(--text); border-color: var(--muted); }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border); padding: 2rem 10vw;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.68rem; letter-spacing: 0.15em; color: var(--muted);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  nav { padding: 1.4rem 5vw; }
+  .nav-links { display: none; }
+  #hero { padding: 0 6vw; }
+  #about { grid-template-columns: 1fr; gap: 3.5rem; padding: 7rem 6vw; }
+  #skills { padding: 6rem 6vw; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .sk { border-right: none; }
+  .sk:nth-last-child(-n+1) { border-bottom: none; }
+  #works { padding: 7rem 6vw; }
+  #contact { padding: 7rem 6vw 6rem; }
+  footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav>
+  <div class="nav-logo">HW</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-deco">
+    <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <!-- Art Deco fan — top right -->
+      <g class="d-fan" fill="none" stroke="oklch(74% 0.155 87 / 0.10)" stroke-width="0.8">
+        <line x1="1380" y1="-40" x2="850"  y2="520"/>
+        <line x1="1380" y1="-40" x2="890"  y2="540"/>
+        <line x1="1380" y1="-40" x2="930"  y2="555"/>
+        <line x1="1380" y1="-40" x2="975"  y2="565"/>
+        <line x1="1380" y1="-40" x2="1020" y2="572"/>
+        <line x1="1380" y1="-40" x2="1065" y2="576"/>
+        <line x1="1380" y1="-40" x2="1110" y2="578"/>
+        <line x1="1380" y1="-40" x2="1155" y2="578"/>
+        <line x1="1380" y1="-40" x2="820"  y2="495"/>
+        <line x1="1380" y1="-40" x2="795"  y2="465"/>
+        <line x1="1380" y1="-40" x2="775"  y2="430"/>
+        <path d="M 980 520 Q 1180 200 1380 -40" stroke="oklch(74% 0.155 87 / 0.06)"/>
+        <path d="M 940 540 Q 1160 220 1380 -40" stroke="oklch(74% 0.155 87 / 0.04)"/>
+      </g>
+
+      <!-- Art Deco arch — bottom left -->
+      <g class="d-arch" fill="none" stroke="oklch(74% 0.155 87 / 0.07)" stroke-width="0.8">
+        <path d="M -100 900 Q 200 580 500 900"/>
+        <path d="M -60  900 Q 200 620 460 900"/>
+        <path d="M -20  900 Q 200 660 420 900"/>
+        <path d="M  20  900 Q 200 700 380 900"/>
+        <path d="M  60  900 Q 200 740 340 900"/>
+      </g>
+
+      <!-- Art Deco diamond — center right -->
+      <g class="d-diamond" fill="none" stroke="oklch(74% 0.155 87 / 0.09)" stroke-width="0.8">
+        <polygon points="1100,340 1200,460 1100,580 1000,460"/>
+        <polygon points="1100,370 1170,460 1100,550 1030,460"/>
+        <polygon points="1100,400 1145,460 1100,520 1055,460"/>
+        <line x1="1000" y1="460" x2="1200" y2="460" stroke-width="0.6"/>
+        <line x1="1100" y1="340" x2="1100" y2="580" stroke-width="0.6"/>
+        <line x1="1030" y1="390" x2="1170" y2="530" stroke-width="0.4"/>
+        <line x1="1170" y1="390" x2="1030" y2="530" stroke-width="0.4"/>
+      </g>
+
+      <!-- vertical accent lines left -->
+      <g stroke="oklch(74% 0.155 87 / 0.05)" stroke-width="0.8" fill="none">
+        <line x1="72"  y1="0" x2="72"  y2="900"/>
+        <line x1="68"  y1="0" x2="68"  y2="900"/>
+      </g>
+
+      <!-- horizontal accent bottom -->
+      <g stroke="oklch(74% 0.155 87 / 0.05)" stroke-width="0.8" fill="none">
+        <line x1="0" y1="830" x2="1440" y2="830"/>
+        <line x1="0" y1="834" x2="1440" y2="834"/>
+      </g>
+    </svg>
+  </div>
+
+  <p class="hero-label">AI Developer &amp; Educator</p>
+  <h1 class="hero-title">
+    <span class="line"><span class="inner">창조하는</span></span>
+    <span class="line"><span class="inner gold">개발자,</span></span>
+    <span class="line"><span class="inner">가르치는</span></span>
+    <span class="line"><span class="inner gold">빌더.</span></span>
+  </h1>
+  <p class="hero-body">
+    AI 에이전트와 웹 기술의 교차점에서 새로운 가능성을 탐구합니다.<br>
+    복잡한 기술을 아름다운 경험으로 전환하고, 그 방법을 나눕니다.
+  </p>
+  <a href="#contact" class="hero-cta">Contact me</a>
+
+  <div class="scroll-hint">
+    <div class="s-line"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div>
+    <p class="sec-label">About</p>
+    <h2 class="about-h">
+      개발과 교육,<br>두 세계를<br>잇는<br><span class="gold">빌더</span>
+    </h2>
+  </div>
+  <div>
+    <div class="about-text">
+      <p>
+        <strong>AI 에이전트 강의자</strong>이자 <strong>웹 개발자</strong>로서, 기술의 최전선에서 다음 세대 개발자들과 함께 미래를 만들어가고 있습니다.
+      </p>
+      <p>
+        SBS아카데미에서 AI 에이전트 개발부터 현대적 웹 제작까지 폭넓은 커리큘럼을 담당하며, 수강생들이 실무에서 바로 활용할 수 있는 살아있는 지식을 전달합니다.
+      </p>
+      <p>
+        단순한 기술 전달을 넘어, <strong>왜 만드는가</strong>에 대한 질문을 함께 탐구합니다. 코드 한 줄에도 목적과 의도가 담겨야 한다고 믿습니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Deco divider -->
+<div class="deco-div">
+  <div class="dl"></div>
+  <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+    <polygon points="28,4 52,28 28,52 4,28" stroke="var(--gold)" stroke-width="0.8"/>
+    <polygon points="28,14 42,28 28,42 14,28" stroke="var(--gold)" stroke-width="0.8"/>
+    <circle cx="28" cy="28" r="3" fill="var(--gold)"/>
+    <line x1="4" y1="28" x2="52" y2="28" stroke="var(--goldd)" stroke-width="0.6"/>
+    <line x1="28" y1="4" x2="28" y2="52" stroke="var(--goldd)" stroke-width="0.6"/>
+  </svg>
+  <div class="dl"></div>
+</div>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <p class="sec-label">Expertise</p>
+  <div class="skills-grid">
+    <div class="sk">
+      <p class="sk-num">01</p>
+      <h3 class="sk-name">AI Agent Dev</h3>
+      <p class="sk-desc">Claude API, MCP, LangChain 기반 에이전트 설계 및 구현. 실용적인 AI 워크플로우 구축.</p>
+    </div>
+    <div class="sk">
+      <p class="sk-num">02</p>
+      <h3 class="sk-name">Web Development</h3>
+      <p class="sk-desc">HTML/CSS/JS부터 React까지. 성능과 시각적 완성도를 동시에 추구하는 프론트엔드 개발.</p>
+    </div>
+    <div class="sk">
+      <p class="sk-num">03</p>
+      <h3 class="sk-name">Creative Coding</h3>
+      <p class="sk-desc">GSAP, Three.js, Canvas API를 활용한 인터랙티브 웹 경험. 기술로 감동을 만드는 작업.</p>
+    </div>
+    <div class="sk">
+      <p class="sk-num">04</p>
+      <h3 class="sk-name">Curriculum Design</h3>
+      <p class="sk-desc">실무 중심 교육 커리큘럼 설계. AI 시대에 필요한 역량을 체계적으로 전달하는 강의 설계.</p>
+    </div>
+    <div class="sk">
+      <p class="sk-num">05</p>
+      <h3 class="sk-name">UI/UX Design</h3>
+      <p class="sk-desc">사용자 목적에 맞는 인터페이스 설계. Data Slop 없이 핵심만 남기는 미니멀 디자인 철학.</p>
+    </div>
+    <div class="sk">
+      <p class="sk-num">06</p>
+      <h3 class="sk-name">System Architecture</h3>
+      <p class="sk-desc">Johnny Decimal 구조 기반 프로젝트 관리. 확장 가능하고 유지보수 용이한 시스템 설계.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORKS ── -->
+<section id="works">
+  <p class="sec-label">Selected Works</p>
+  <div class="works-list">
+    <div class="wi">
+      <div>
+        <p class="wi-idx">01</p>
+        <h3 class="wi-title">AI Agent Web Samples</h3>
+        <div class="wi-tags">
+          <span class="tag">GSAP</span>
+          <span class="tag">Claude API</span>
+          <span class="tag">Creative Coding</span>
+        </div>
+      </div>
+      <span class="wi-year">2025 — 2026</span>
+    </div>
+    <div class="wi">
+      <div>
+        <p class="wi-idx">02</p>
+        <h3 class="wi-title">Agent Lecture Curriculum</h3>
+        <div class="wi-tags">
+          <span class="tag">AI</span>
+          <span class="tag">Education</span>
+          <span class="tag">MCP</span>
+        </div>
+      </div>
+      <span class="wi-year">2025</span>
+    </div>
+    <div class="wi">
+      <div>
+        <p class="wi-idx">03</p>
+        <h3 class="wi-title">Vibe Coding Platform</h3>
+        <div class="wi-tags">
+          <span class="tag">React</span>
+          <span class="tag">Web</span>
+          <span class="tag">Platform</span>
+        </div>
+      </div>
+      <span class="wi-year">2025</span>
+    </div>
+    <div class="wi">
+      <div>
+        <p class="wi-idx">04</p>
+        <h3 class="wi-title">Interactive Web Gallery</h3>
+        <div class="wi-tags">
+          <span class="tag">Three.js</span>
+          <span class="tag">Canvas</span>
+          <span class="tag">Animation</span>
+        </div>
+      </div>
+      <span class="wi-year">2024</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="ct-deco">
+    <svg width="100%" height="100%" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+      <g transform="translate(720,300)" fill="none" stroke="oklch(74% 0.155 87 / 0.07)" stroke-width="0.8">
+        <circle r="380"/><circle r="320"/><circle r="260"/>
+        <line x1="-380" y1="0" x2="380" y2="0"/>
+        <line x1="0" y1="-380" x2="0" y2="380"/>
+        <line x1="-269" y1="-269" x2="269" y2="269"/>
+        <line x1="269" y1="-269" x2="-269" y2="269"/>
+        <polygon points="0,-380 380,0 0,380 -380,0" stroke-width="0.5"/>
+        <polygon points="0,-260 260,0 0,260 -260,0" stroke-width="0.5"/>
+      </g>
+    </svg>
+  </div>
+  <p class="ct-pre">Get in touch</p>
+  <h2 class="ct-big">함께<br>만들어요</h2>
+  <a href="mailto:computer.gangnam@gmail.com" class="ct-email">computer.gangnam@gmail.com</a>
+</section>
+
+<footer>
+  <span>HW &copy; 2026</span>
+  <span>AI Developer &amp; Educator</span>
+  <span>Seoul, KR</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Lenis
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// Progress bar
+gsap.to('#prog', {
+  width: '100%', ease: 'none',
+  scrollTrigger: { scrub: 1, start: 'top top', end: 'bottom bottom' }
+});
+
+// Hero entrance
+const heroTl = gsap.timeline({ delay: 0.2 });
+heroTl
+  .to('.hero-label', { opacity: 1, duration: 0.7, ease: 'power2.out' })
+  .to('.hero-title .inner', {
+    y: 0, opacity: 1, duration: 0.85, stagger: 0.1, ease: 'power3.out'
+  }, '-=0.3')
+  .to('.hero-body',  { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+  .to('.hero-cta',  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+  .to('.s-line', { scaleX: 1, duration: 0.8, ease: 'power2.out' }, '-=0.3');
+
+// Art Deco fan — scroll rotate (SURPRISE_ELEMENT: scrollTrigger-driven SVG geometry rotation)
+gsap.to('.d-fan', {
+  rotate: 18, ease: 'none',
+  scrollTrigger: {
+    trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 2
+  }
+});
+gsap.to('.d-diamond', {
+  rotate: 45, ease: 'none',
+  scrollTrigger: {
+    trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5
+  }
+});
+gsap.to('.d-arch', {
+  y: -60, ease: 'none',
+  scrollTrigger: {
+    trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1
+  }
+});
+
+// Mouse parallax — Art Deco geometry tracks cursor (CHOSEN_SPARK applied)
+document.addEventListener('mousemove', (e) => {
+  const xR = (e.clientX / window.innerWidth  - 0.5) * 2;
+  const yR = (e.clientY / window.innerHeight - 0.5) * 2;
+  gsap.to('.d-fan',     { x: xR * 18, y: yR * 12, duration: 1.8, ease: 'power2.out' });
+  gsap.to('.d-diamond', { x: xR * -12, y: yR * -8, duration: 2,  ease: 'power2.out' });
+  gsap.to('.d-arch',    { x: xR * 8,  y: yR * 6,  duration: 1.5, ease: 'power2.out' });
+});
+
+// About
+gsap.from('#about .about-h', {
+  y: 60, opacity: 0, duration: 1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#about', start: 'top 75%' }
+});
+gsap.from('#about .about-text', {
+  y: 40, opacity: 0, duration: 1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#about', start: 'top 68%' }
+});
+
+// Deco divider
+gsap.to('.deco-div', {
+  opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out',
+  scrollTrigger: { trigger: '.deco-div', start: 'top 82%' }
+});
+gsap.set('.deco-div', { scale: 0.85 });
+
+// Skills
+gsap.from('.sk', {
+  y: 36, opacity: 0, duration: 0.65, stagger: 0.07, ease: 'power2.out',
+  scrollTrigger: { trigger: '.skills-grid', start: 'top 75%' }
+});
+
+// Works
+gsap.from('.wi', {
+  x: -28, opacity: 0, duration: 0.65, stagger: 0.09, ease: 'power2.out',
+  scrollTrigger: { trigger: '.works-list', start: 'top 75%' }
+});
+
+// Contact
+gsap.from('.ct-big', {
+  y: 80, opacity: 0, duration: 1.1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#contact', start: 'top 72%' }
+});
+gsap.from('.ct-pre', {
+  y: 20, opacity: 0, duration: 0.7, ease: 'power2.out',
+  scrollTrigger: { trigger: '#contact', start: 'top 75%' }
+});
+gsap.from('.ct-email', {
+  y: 20, opacity: 0, duration: 0.7, ease: 'power2.out',
+  scrollTrigger: { trigger: '#contact', start: 'top 60%' }
+});
+
+// Section labels
+gsap.utils.toArray('.sec-label').forEach(el => {
+  gsap.from(el, {
+    x: -20, opacity: 0, duration: 0.55, ease: 'power2.out',
+    scrollTrigger: { trigger: el, start: 'top 85%' }
+  });
+});
+</script>
+</body>
+</html>
