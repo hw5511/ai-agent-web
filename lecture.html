@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 에이전트 수업자료</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+    <style>
+        /*
+         * Lecture App Style
+         * Source: lecture/css/style_lecture.css
+         *
+         * Sections:
+         *   1. Design Tokens
+         *   2. Reset & Base
+         *   3. App Header
+         *   4. Course Tabs
+         *   5. App Layout
+         *   6. Sidebar
+         *   7. Slide Area          — overflow:hidden, flex column, 스텝 전환
+         *   8. Slide Navigation
+         *   9. Session Content     — 2-col grid, 뷰포트 내 완전 수용
+         *  10. Badge Variants
+         */
+
+        /* ============================================
+           1. Design Tokens
+           ============================================ */
+        :root {
+            --bg:           #fff;
+            --fg:           #0a0a0a;
+            --card:         #fff;
+            --primary:      #171717;
+            --primary-fg:   #fafafa;
+            --secondary:    #f5f5f5;
+            --muted:        #f5f5f5;
+            --muted-fg:     #737373;
+            --border:       #e5e5e5;
+
+            --accent:        #2563eb;
+            --accent-muted:  #eff6ff;
+            --accent-border: #bfdbfe;
+
+            --advanced:       #7c3aed;
+            --advanced-muted: #fdf4ff;
+
+            --success:        #16a34a;
+            --success-muted:  #f0fdf4;
+            --success-border: #bbf7d0;
+
+            --radius:      0.5rem;
+            --radius-full: 9999px;
+
+            --font-xs:   0.75rem;
+            --font-sm:   0.875rem;
+            --font-base: 1rem;
+            --font-lg:   1.125rem;
+            --font-xl:   1.25rem;
+            --font-2xl:  1.5rem;
+
+            --sidebar-width:    260px;
+            --slide-nav-height: 52px;
+            --sidebar-transition: 0.22s ease;
+            --slide-transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           2. Reset & Base
+           ============================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            border: none;
+            background: transparent;
+            color: var(--muted-fg);
+            cursor: pointer;
+            transition: background 0.14s, color 0.14s;
+            flex-shrink: 0;
+        }
+
+        .sidebar-toggle:hover { background: var(--secondary); color: var(--fg); }
+
+        /* ============================================
+           4. Course Tabs
+           ============================================ */
+        .course-tabs {
+            display: flex;
+            gap: 0.2rem;
+            background: var(--secondary);
+            padding: 0.2rem;
+            border-radius: var(--radius-full);
+        }
+
+        .course-tab {
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-sm);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--muted-fg);
+            transition: background 0.18s, color 0.18s;
+            white-space: nowrap;
+        }
+
+        .course-tab.active { background: var(--primary); color: var(--primary-fg); }
+
+        /* ============================================
+           5. App Layout
+           ============================================ */
+        .app-body {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           6. Sidebar
+           ============================================ */
+        .sidebar {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            border-right: 1px solid var(--border);
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition:
+                width var(--sidebar-transition),
+                border-color var(--sidebar-transition);
+        }
+
+        .sidebar.collapsed {
+            width: 0;
+            border-right-color: transparent;
+        }
+
+        .sidebar-inner {
+            width: var(--sidebar-width);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 0.75rem 0.75rem 0.625rem;
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* 사이드바 상단: 과정 탭 + 접기 버튼 */
+        .sidebar-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* 사이드바 닫힌 상태에서 좌상단에 표시되는 재열기 버튼 */
+        .sidebar-reopen {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            z-index: 50;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--muted-fg);
+            cursor: pointer;
+            transition: background 0.14s, color 0.14s, opacity 0.2s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .sidebar-reopen.visible { opacity: 1; pointer-events: auto; }
+        .sidebar-reopen:hover { background: var(--secondary); color: var(--fg); }
+
+        .sidebar-course-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.625rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-course-badge.basic    { background: var(--accent-muted);   color: var(--accent); }
+        .sidebar-course-badge.advanced { background: var(--advanced-muted); color: var(--advanced); }
+
+        .sidebar-course-title {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--fg);
+            line-height: 1.4;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.375rem 0.75rem 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar       { width: 4px; }
+        .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .nav-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.625rem;
+            padding: 0.5rem 0.625rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background 0.13s;
+            margin-bottom: 0.125rem;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+        }
+
+        /* 비활성 그룹 흐리게 */
+        .nav-group {
+            opacity: 0.38;
+            transition: opacity 0.18s;
+        }
+        .nav-group:has(.nav-item.active) {
+            opacity: 1;
+        }
+        /* 비활성 그룹 호버: 검은색 테두리 */
+        .nav-group:not(:has(.nav-item.active)):hover {
+            opacity: 1;
+        }
+        .nav-group:not(:has(.nav-item.active)):hover .nav-item:hover {
+            background: transparent;
+            outline: 1.5px solid var(--fg);
+        }
+
+        .nav-item:hover          { background: var(--border); }
+        .nav-item.active         { background: var(--primary); }
+
+        .nav-num {
+            font-size: var(--font-xs);
+            font-weight: 700;
+            color: var(--muted-fg);
+            min-width: 18px;
+            padding-top: 0.15rem;
+            letter-spacing: 0.04em;
+            flex-shrink: 0;
+        }
+
+        .nav-item.active .nav-num { color: rgba(255,255,255,0.45); }
+
+        .nav-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+            min-width: 0;
+        }
+
+        .nav-title {
+            font-size: var(--font-sm);
+            font-weight: 600;
+            color: var(--fg);
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-item.active .nav-title { color: var(--primary-fg); }
+
+        .nav-hours {
+            font-size: var(--font-xs);
+            color: var(--muted-fg);
+        }
+
+        .nav-item.active .nav-hours { color: rgba(255,255,255,0.4); }
+
+
+        /* ============================================
+           7. Slide Area
+           — 스텝 전환: overflow:hidden, translateX
+           ============================================ */
+        .slide-area {
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .slides-container {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* 스텝 슬라이드 */
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 1.25rem 1.75rem 1rem;
+            transform: translateX(100%);
+            transition: transform var(--slide-transition);
+            will-change: transform;
+        }
+
+        .slide.is-prev   { transform: translateX(-100%); }
+        .slide.is-active { transform: translateX(0); }
+
+        /* ============================================
+           8. Slide Navigation
+           ============================================ */
+        .slide-nav {
+            height: var(--slide-nav-height);
+            min-height: var(--slide-nav-height);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            flex-shrink: 0;
+            background: var(--bg);
+            gap: 1rem;
+        }
+
+        .slide-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.35rem 0.875rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--fg);
+            font-size: var(--font-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.13s, border-color 0.13s, opacity 0.13s;
+            white-space: nowrap;
+        }
+
+        .slide-btn:hover:not(:disabled) { background: var(--secondary); border-color: #d4d4d4; }
+        .slide-btn:disabled             { opacity: 0.3; cursor: not-allowed; }
+
+        .slide-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .slide-counter {
+            font-size: var(--font-xs);
+            font-weight: 700;
+            color: var(--muted-fg);
+            letter-spacing: 0.06em;
+        }
+
+        .slide-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .slide-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            transition: background 0.18s, width 0.18s;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+
+        .slide-dot.active { background: var(--primary); width: 16px; }
+
+        /* ============================================
+           9. Session Content
+           — 상단: 제목 헤더
+           — 하단: 좌 2/3 이미지 슬라이더 + 우 1/3 설명 영역
+           — 세로 스크롤 없이 뷰포트 내 완전 수용
+           ============================================ */
+
+        .session-inner {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .session-header {
+            flex-shrink: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.875rem;
+            padding-bottom: 0.875rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .session-header-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .slide-action-box {
+            flex-shrink: 0;
+            min-width: 0;
+            max-width: 520px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.45rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .slide-action-box:empty {
+            display: none;
+        }
+
+        .action-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted-fg);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .action-copy-row {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            min-width: 0;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.35rem 0.5rem;
+            cursor: pointer;
+        }
+
+        .action-copy-row:hover { background: #f0f4ff; }
+
+        .action-item-desc {
+            font-size: 11px;
+            color: var(--muted-fg);
+            min-width: 36px;
+            flex-shrink: 0;
+        }
+
+        .action-copy-code {
+            flex: 1;
+            min-width: 0;
+            font-family: var(--mono, monospace);
+            font-size: 12px;
+            color: #374151;
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .action-copy-btn {
+            flex-shrink: 0;
+            font-size: 11px;
+            color: #9ca3af;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0 0 0 0.25rem;
+        }
+
+        .action-download-link {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 13px;
+            color: #1d4ed8;
+            text-decoration: none;
+            padding: 0.3rem 0;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .action-download-link:hover { text-decoration: underline; }
+
+        .session-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .session-title {
+            font-size: var(--font-2xl);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--fg);
+            line-height: 1.3;
+        }
+
+        /* 본문 — 이미지 슬라이더 단독 */
+        .session-body {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* 좌측 2/3 — 이미지 슬라이더 영역 */
+        .body-image {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* 이미지 슬라이더 우측 하단 전체화면 진입 버튼 */
+        .image-expand-btn {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            z-index: 10;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.35);
+            color: #fff;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.18s, background 0.18s;
+        }
+        .body-image:hover .image-expand-btn { opacity: 1; }
+        .image-expand-btn:hover { background: rgba(0,0,0,0.6); }
+
+        /* 전체화면 오버레이 */
+        .fs-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fs-overlay[hidden] { display: none; }
+
+        .fs-image-wrap {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fs-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .fs-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .fs-nav:hover    { background: rgba(255,255,255,0.25); }
+        .fs-nav:disabled { opacity: 0.2; cursor: default; }
+        .fs-nav.prev     { left: 1.25rem; }
+        .fs-nav.next     { right: 1.25rem; }
+
+        .fs-ui {
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .fs-counter {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.04em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        }
+        .fs-close {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .fs-close:hover { background: rgba(255,255,255,0.25); }
+
+        /* 이미지 슬라이더 — translateX 전환 */
+        .image-slider {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            border-radius: var(--radius);
+            background: #ffffff;
+            border: 1px solid var(--border);
+            min-height: 0;
+        }
+
+        /* 개별 이미지 슬라이드 */
+        .image-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+            transition: transform var(--slide-transition);
+            will-change: transform;
+        }
+
+        .image-slide.is-prev   { transform: translateX(-100%); }
+        .image-slide.is-active { transform: translateX(0); }
+
+        .image-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* 이미지 없을 때 플레이스홀더 */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+        }
+
+        .image-placeholder-icon  { opacity: 0.35; }
+        .image-placeholder-label { font-weight: 600; font-size: var(--font-sm); color: var(--muted-fg); }
+        .image-placeholder-sub   { font-size: var(--font-xs); color: var(--muted-fg); opacity: 0.7; }
+
+        /* 우측 1/3 — 설명 영역 */
+        .body-desc {
+            display: none;
+        }
+
+        .content-block {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            flex-shrink: 0;
+        }
+
+        .content-block.fill {
+            flex: 1;
+            min-height: 0;
+        }
+
+        .block-label {
+            font-size: var(--font-xs);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted-fg);
+            margin-bottom: 0.375rem;
+            flex-shrink: 0;
+        }
+
+        .goal-card {
+            padding: 0.75rem 1rem;
+            background: var(--accent-muted);
+            border: 1px solid var(--accent-border);
+            border-radius: var(--radius);
+        }
+
+        .goal-card p {
+            font-size: var(--font-sm);
+            color: var(--accent);
+            font-weight: 500;
+            line-height: 1.65;
+        }
+
+        .topic-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            list-style: none;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .topic-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.4rem 0.75rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: var(--font-sm);
+            color: var(--fg);
+            line-height: 1.4;
+            flex-shrink: 0;
+        }
+
+        .topic-item::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--muted-fg);
+            margin-top: 0.42rem;
+            flex-shrink: 0;
+        }
+
+        .practice-card {
+            padding: 0.75rem 1rem;
+            background: var(--success-muted);
+            border: 1px solid var(--success-border);
+            border-radius: var(--radius);
+        }
+
+        .practice-card p {
+            font-size: var(--font-sm);
+            color: var(--success);
+            font-weight: 500;
+            line-height: 1.65;
+        }
+
+        /* ============================================
+           10. Badge Variants
+           ============================================ */
+        .badge-basic {
+            background: var(--accent-muted);
+            color: var(--accent);
+            padding: 0.2rem 0.625rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .badge-advanced {
+            background: var(--advanced-muted);
+            color: var(--advanced);
+            padding: 0.2rem 0.625rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .badge-hours {
+            background: var(--secondary);
+            color: var(--muted-fg);
+            padding: 0.2rem 0.625rem;
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           Mobile Responsive (max-width: 768px)
+           ============================================ */
+        @media (max-width: 768px) {
+            html, body {
+                height: auto;
+                overflow: auto;
+            }
+
+            .app-body {
+                flex-direction: column;
+                min-height: 100vh;
+                overflow: auto;
+            }
+
+            /* 사이드바: overlay 방식으로 전환 */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 100;
+                box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+                width: var(--sidebar-width) !important;
+                transition: transform var(--sidebar-transition);
+                transform: translateX(0);
+            }
+
+            .sidebar.collapsed {
+                transform: translateX(-100%);
+                width: var(--sidebar-width) !important;
+                border-right-color: var(--border);
+            }
+
+            /* 메인 콘텐츠: 전체 너비 */
+            .slide-area {
+                flex: none;
+                width: 100%;
+                height: auto;
+                overflow: visible;
+            }
+
+            .slides-container {
+                height: auto;
+                overflow: visible;
+            }
+
+            .slide {
+                position: relative;
+                transform: none !important;
+                display: none;
+            }
+
+            .slide.is-active {
+                display: block;
+            }
+
+            /* 세션 콘텐츠: 세로 레이아웃 */
+            .session-inner {
+                overflow: visible;
+                height: auto;
+                padding: 1rem;
+            }
+
+            .session-header {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .slide-action-box {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .session-title {
+                font-size: var(--font-xl);
+            }
+
+            .session-body {
+                grid-template-columns: 1fr;
+                height: auto;
+                overflow: visible;
+            }
+
+            /* 이미지 슬라이더: 고정 높이 대신 비율 유지 */
+            .body-image {
+                overflow: visible;
+            }
+
+            .image-slider {
+                position: relative;
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 비율 (SVG 1280x720) */
+                overflow: hidden;
+            }
+
+            .image-slide {
+                position: absolute;
+                inset: 0;
+            }
+
+            /* 슬라이드 전환: 모바일에서 translateX 대신 opacity */
+            .image-slide { opacity: 0; transform: none !important; transition: opacity 0.22s; }
+            .image-slide.is-active { opacity: 1; }
+            .image-slide.is-prev   { opacity: 0; }
+
+            /* 사이드바 reopen 버튼: 항상 표시 */
+            .sidebar-reopen {
+                opacity: 1 !important;
+                pointer-events: auto !important;
+            }
+
+            /* 슬라이드 네비 */
+            .slide-nav {
+                padding: 0.5rem 1rem;
+            }
+
+            /* 슬라이드 dots 줄바꿈 허용 */
+            .slide-dots {
+                flex-wrap: wrap;
+                max-width: 60vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 5. App Layout -->
+    <div class="app-body">
+
+        <!-- 6. Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-inner">
+                <div class="sidebar-header">
+                    <div class="sidebar-top">
+                        <!-- 4. Course Tabs -->
+                        <div class="course-tabs">
+                            <button class="course-tab active" data-course="basic">기초</button>
+                            <button class="course-tab" data-course="advanced">심화</button>
+                        </div>
+                        <button class="sidebar-toggle" id="sidebar-toggle" title="사이드바 접기">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M9 2L3 7l6 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="sidebar-course-badge basic" id="sidebar-badge">BASIC</div>
+                    <div class="sidebar-course-title" id="sidebar-title">AI 에이전트 기초 과정</div>
+                </div>
+                <nav class="sidebar-nav" id="sidebar-nav"></nav>
+            </div>
+        </aside>
+
+        <!-- 7. Slide Area -->
+        <div class="slide-area">
+            <button class="sidebar-reopen" id="sidebar-reopen" title="사이드바 열기">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <rect x="0.5" y="2" width="13" height="1.5" rx="0.75" fill="currentColor"/>
+                    <rect x="0.5" y="6.25" width="13" height="1.5" rx="0.75" fill="currentColor"/>
+                    <rect x="0.5" y="10.5" width="13" height="1.5" rx="0.75" fill="currentColor"/>
+                </svg>
+            </button>
+            <div class="slides-container" id="slides-container"></div>
+
+            <!-- 8. Slide Navigation -->
+            <div class="slide-nav">
+                <button class="slide-btn" id="btn-prev">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    이전
+                </button>
+                <div class="slide-indicator">
+                    <span class="slide-counter" id="slide-counter">STEP 01 · 01 / 01</span>
+                    <div class="slide-dots" id="slide-dots"></div>
+                </div>
+                <button class="slide-btn" id="btn-next">
+                    다음
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        /* ============================================
+           Course Data
+           — slides: 각 스텝의 이미지 파일명 배열 (번호순)
+           — 경로: assets/{course}/step{NN}/{filename}
+           — 비어있으면 플레이스홀더 1장 표시
+           ============================================ */
+        const COURSES = {
+            basic: {
+                label: 'Basic · 8 Sessions',
+                badgeClass: 'basic',
+                badgeText: 'BASIC',
+                title: 'AI 에이전트 기초 과정',
+                sessions: [
+                    {
+                        num: 1, title: 'AI 에이전트 이해와 CLI 환경 구축', hours: '2시간',
+                        goal: 'AI 에이전트의 개념을 이해하고, 3종 CLI 에이전트(Gemini, GPT Codex, Claude Code)를 직접 설치하여 동작을 확인한다.',
+                        topics: ['AI 에이전트란? / 설치형 AI란?', 'Gemini CLI 설치 및 로그인', 'GPT CLI(Codex) 설치 및 로그인', 'Claude Code 설치 및 로그인', '세션 사용량 및 extra-usage'],
+                        practice: '3종 에이전트를 모두 설치하고 동일한 질문을 입력해 응답 차이를 비교한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg','17.svg','18.svg','19.svg','20.svg','21.svg','22.svg','23.svg','24.svg','25.svg','26.svg','27.svg','28.svg','29.svg','30.svg','31.svg','32.svg','33.svg','34.svg','35.svg'],
+                        slideDescs: [
+                            {
+                                goal: 'AI 에이전트의 개념과 SEE-THINK-PLAN-DO-FIX 동작 루프를 이해한다.',
+                                topics: ['에이전트(Agent)란 무엇인가?', 'SEE-THINK-PLAN-DO-FIX 루프', '도구(Tools) 활용 방식', '설치형 CLI 에이전트의 특징'],
+                                practice: null
+                            },
+                            {
+                                goal: '글로벌 AI 기업 3종의 CLI 에이전트 특징을 파악한다.',
+                                topics: ['GPT CLI (Codex) - OpenAI', 'Claude Code - Anthropic', 'Gemini CLI - Google', '각 에이전트의 특화 기능 비교'],
+                                practice: null
+                            },
+                            {
+                                goal: '사람이 직접 수행하는 기존 방식의 한계를 이해한다.',
+                                topics: ['웹 검색으로 명령어 찾기', '검색 결과 판단 및 복사', 'cmd 열기 → 붙여넣기 → 실행', '반복 작업의 비효율성'],
+                                practice: null
+                            },
+                            {
+                                goal: 'AI에게 질문하는 방식과 그 한계를 파악한다.',
+                                topics: ['ChatGPT에 자연어로 질문', 'AI가 명령어를 알려주는 방식', '여전히 사람이 직접 실행해야 함', '자동화와의 차이점'],
+                                practice: null
+                            },
+                            {
+                                goal: '에이전트 프로그램이 명령을 자동 감지·실행하는 원리를 이해한다.',
+                                topics: ['시스템 프롬프트로 출력 형식 지정', 'command{} 패턴 자동 감지', '터미널에서 명령 자동 실행', '지시 → 판단 → 행동의 에이전트 루프'],
+                                practice: '시스템 프롬프트를 작성하여 에이전트가 명령어를 자동 감지하고 실행하는 흐름을 직접 확인한다.'
+                            },
+                            {
+                                goal: '에이전트를 잘 다루려면 무엇이 필요한지 개발자/비개발자 관점으로 이해한다.',
+                                topics: ['개발자 — 기존 코드 능력 + 에이전트로 생산성 극대화', '비개발자 — 도메인 지식 + 에이전트로 업무 자동화', 'AI 동작 원리 이해가 공통 핵심 역량'],
+                                practice: null
+                            },
+                            {
+                                goal: 'AI 동작원리 4가지(컨텍스트/프롬프트/툴/토큰)를 이해하면 에이전트 활용 능력이 달라짐을 학습한다.',
+                                topics: ['컨텍스트 윈도우 — 대화 관리', '프롬프트 구조 — 정확한 요청', '도구(Tool) 개념 — 권한 설계', '토큰과 사용량 — 비용 효율'],
+                                practice: null
+                            },
+                            {
+                                goal: '이 강의에서 사용하는 Claude Pro 플랜의 특징과 효율적인 사용법을 이해한다.',
+                                topics: ['Claude Pro — 월 약 $20, 5시간 세션 초기화', '매일 사용 + 자기 분야 적용 = AI 전문가', '현재 사용량 확인: claude.ai/settings/usage'],
+                                practice: null,
+                                action: { label: '사용량 확인', download: { href: 'https://claude.ai/settings/usage', text: 'Claude 사용량 대시보드' } }
+                            },
+                            {
+                                goal: 'Git 설치 및 초기 설정을 완료한다.',
+                                topics: ['winget install git 명령어', 'Git 설치 확인 (git --version)', 'Git 사용자 정보 초기 설정', 'CLI 환경 준비 완료'],
+                                practice: 'winget으로 Git을 설치하고 git --version으로 정상 설치를 확인한다.'
+                            },
+                            {
+                                goal: 'Node.js 설치 및 npm 환경을 준비한다.',
+                                topics: ['winget install node.js 명령어', 'Node.js 설치 확인 (node --version)', 'npm 설치 확인 (npm --version)', '이후 CLI 에이전트 설치 환경 준비'],
+                                practice: 'winget으로 Node.js를 설치하고 node/npm 버전을 확인한다.'
+                            },
+                            {
+                                goal: 'Gemini CLI를 설치하고 Google 계정으로 로그인한다.',
+                                topics: ['npm install -g @google/gemini-cli', 'gemini 명령어 확인', 'Google 계정 인증 (gemini auth)', '첫 번째 응답 테스트'],
+                                practice: 'Gemini CLI를 설치하고 간단한 질문으로 첫 응답을 확인한다.'
+                            },
+                            {
+                                goal: 'GPT CLI(Codex)를 설치하고 OpenAI 계정으로 로그인한다.',
+                                topics: ['npm install -g @openai/codex', 'codex 명령어 확인', 'OpenAI API 키 설정', '첫 번째 응답 테스트'],
+                                practice: 'GPT CLI를 설치하고 동일한 질문으로 응답을 확인한다.'
+                            },
+                            {
+                                goal: 'Claude Code를 설치하고 Anthropic 계정으로 로그인한다.',
+                                topics: ['npm install -g @anthropic-ai/claude-code', 'claude 명령어 확인', 'Anthropic 계정 인증', '3종 에이전트 비교 테스트'],
+                                practice: '3종 에이전트에 동일한 질문을 입력하고 응답 방식의 차이를 비교한다.'
+                            },
+                            { goal: null, topics: null, practice: null, action: { label: '설치 명령어', copy: 'winget install Git.Git' } },
+                            null,
+                            null,
+                            { goal: null, topics: null, practice: null, action: { label: '설치 명령어', copy: 'winget install OpenJS.NodeJS' } },
+                            null,
+                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
+                                { desc: 'Homebrew 설치', copy: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"' },
+                                { desc: '버전 확인', copy: 'brew --version' }
+                            ] } },
+                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
+                                { desc: 'Node.js 설치', copy: 'brew install node' },
+                                { desc: '버전 확인', copy: 'node --version' }
+                            ] } },
+                            { goal: null, topics: null, practice: null, action: { label: '버전 확인', items: [
+                                { desc: 'Git', copy: 'git --version' },
+                                { desc: 'Node.js', copy: 'node --version' },
+                                { desc: 'npm', copy: 'npm --version' }
+                            ] } },
+                            null,
+                            { goal: null, topics: null, practice: null, action: { label: '실행 정책 변경', copy: 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser' } },
+                            null,
+                            { goal: null, topics: null, practice: null, action: { label: '버전 확인', items: [
+                                { desc: 'Git', copy: 'git --version' },
+                                { desc: 'Node.js', copy: 'node --version' },
+                                { desc: 'npm', copy: 'npm --version' }
+                            ] } },
+                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
+                                { desc: '설치', copy: 'npm install -g @google/gemini-cli' },
+                                { desc: '확인', copy: 'gemini --version' }
+                            ] } },
+                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
+                                { desc: '설치', copy: 'npm install -g @openai/codex' },
+                                { desc: '확인', copy: 'codex --version' }
+                            ] } },
+                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
+                                { desc: '설치', copy: 'npm install -g @anthropic-ai/claude-code' },
+                                { desc: '확인', copy: 'claude --version' }
+                            ] } },
+                            { goal: 'claude install로 네이티브 바이너리를 업데이트한다.', topics: ['npm 기반 설치 완료 후 실행', 'claude install — 네이티브 바이너리 업데이트', '업데이트 완료 후 claude 명령어 사용 가능'], practice: null, action: { label: '실행 명령어', copy: 'claude install' } },
+                            { goal: 'VS Code를 설치하고 에이전트 작업 환경을 구성한다.', topics: ['VS Code — 생성 파일 확인·수정에 활용', 'code.visualstudio.com 에서 다운로드', '비개발자도 파일 관리에 편리'], practice: null, action: { label: '다운로드', download: { href: 'https://code.visualstudio.com/', text: 'VS Code 다운로드 페이지' } } },
+                            { goal: 'VS Code에서 작업 폴더를 설정하는 방법을 익힌다.', topics: ['작업 폴더 생성 (예: C:\\ai-agent\\)', 'VS Code 실행 후 File > Open Folder', '폴더를 열면 에이전트 작업 기준 디렉토리 설정'], practice: null },
+                            { goal: 'VS Code 터미널에서 claude를 실행하는 방법을 익힌다.', topics: ['Terminal > New Terminal 또는 Ctrl+`', 'claude 입력 후 엔터', '종료: /exit 또는 Ctrl+C'], practice: null, action: { label: '실행 명령어', copy: 'claude' } },
+                            { goal: 'VS Code에서 claude 명령어 오류 시 PATH를 자동 설정한다.', topics: ["'claude is not recognized' 오류 발생 시", 'path_setup.ps1 — PowerShell에서 실행', 'Node.js · Git · Claude 경로 자동 탐색 및 영구 등록', 'VS Code 재시작 후 정상 실행'], practice: null, action: { label: 'PATH 자동 설정 스크립트 (Windows)', copy: "# 1. 추가할 경로 리스트 초기화\n$pathsToAdd = @()\n\n# 2. Node.js & Git 기본 경로 탐색\n$basePaths = @(\"C:\\Program Files\\nodejs\", \"C:\\Program Files\\Git\\cmd\")\nforeach ($bp in $basePaths) {\n    if (Test-Path $bp) { $pathsToAdd += $bp }\n}\n\n# 3. Claude Code 네이티브 설치 경로 (핵심)\n$claudeNativePath = Join-Path $env:USERPROFILE \".local\\bin\"\n$claudeAppDataPath = \"$env:LOCALAPPDATA\\Programs\\claude-code\"\n\nif (Test-Path $claudeNativePath) { $pathsToAdd += $claudeNativePath }\nif (Test-Path $claudeAppDataPath) { $pathsToAdd += $claudeAppDataPath }\n\n# 4. npm 관련 경로 (Global Prefix)\ntry {\n    $npmPrefix = (npm config get prefix).Trim()\n    if ($npmPrefix -and (Test-Path $npmPrefix)) { $pathsToAdd += $npmPrefix }\n} catch {}\n\n$defaultNpmPath = \"$env:APPDATA\\npm\"\nif (Test-Path $defaultNpmPath) { $pathsToAdd += $defaultNpmPath }\n\n# --- 경로 등록 로직 (중복 제거 및 영구 적용) ---\n$pathsToAdd = $pathsToAdd | Select-Object -Unique\n\n# 시스템의 현재 사용자 PATH 불러오기\n$userPath = [Environment]::GetEnvironmentVariable(\"Path\", \"User\")\n$currentUserPaths = $userPath.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries)\n\n# 없는 경로만 필터링\n$newPaths = $pathsToAdd | Where-Object { $currentUserPaths -notcontains $_ }\n\nif ($newPaths.Count -gt 0) {\n    $updatedPath = (($currentUserPaths + $newPaths) | Select-Object -Unique) -join ';'\n    [Environment]::SetEnvironmentVariable(\"Path\", $updatedPath, \"User\")\n    Write-Host \"PATH 환경 변수에 저장 완료:\" -ForegroundColor Green\n    $newPaths | ForEach-Object { Write-Host \" - $_\" }\n} else {\n    Write-Host \"모든 경로가 이미 등록되어 있습니다.\" -ForegroundColor Gray\n}\n\n# --- 현재 터미널 세션에 즉시 반영 ---\n$currentSessionPaths = $env:Path.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries)\n$env:Path = (($currentSessionPaths + $pathsToAdd) | Select-Object -Unique) -join ';'\n\n# --- 검증 및 경로 분석 로직 ---\nWrite-Host \"`n[설치 상태 및 버전 확인]\" -ForegroundColor Cyan\nWrite-Host \"--------------------------------\"\n\n# Claude 상세 분석\n$claudeCheck = where.exe claude 2>$null\nif ($claudeCheck) {\n    $firstClaude = ($claudeCheck | Select-Object -First 1)\n    Write-Host \"Claude 실행 위치: $firstClaude\"\n    if ($firstClaude -like \"*\\.local\\bin\\*\") {\n        Write-Host \"현재 '네이티브(Native)' 버전 사용 중\" -ForegroundColor Yellow\n    } else {\n        Write-Host \"현재 'npm' 패키지 버전 사용 중\" -ForegroundColor Gray\n    }\n    try { \n        $version = claude --version\n        Write-Host \"Claude 버전: $version\" \n    } catch {}\n} else {\n    Write-Host \"Claude를 찾을 수 없습니다.\" -ForegroundColor Red\n}\n\nWrite-Host \"--------------------------------\"\nWrite-Host \"Node.js: $(try{node -v}catch{'N/A'})\"\nWrite-Host \"npm:     $(try{npm -v}catch{'N/A'})\"\nWrite-Host \"Git:     $(try{git --version}catch{'N/A'})\"\nWrite-Host \"--------------------------------\"" } },
+                            { goal: 'Mac에서 claude 명령어 오류 시 PATH를 자동 설정한다.', topics: ["'claude: command not found' 오류 발생 시", 'bash 스크립트 — 터미널에서 실행', 'Homebrew · npm · Claude 경로 자동 탐색 및 ~/.zshrc 영구 등록', '심볼릭 링크 자동 복구 포함'], practice: null, action: { label: 'PATH 자동 설정 스크립트 (macOS)', copy: "#!/bin/bash\n\n# 1. 추가할 경로 리스트 초기화\npaths_to_add=()\n\n# 2. Homebrew 경로 탐색\nif [ -d \"/opt/homebrew/bin\" ]; then\n    paths_to_add+=(\"/opt/homebrew/bin\")\nfi\nif [ -d \"/usr/local/bin\" ]; then\n    paths_to_add+=(\"/usr/local/bin\")\nfi\n\n# 3. Claude Code 네이티브 설치 경로 (핵심)\nclaude_native_path=\"$HOME/.local/bin\"\nclaude_npm_path=\"$HOME/.npm-global/bin\"\n\nif [ -d \"$claude_native_path\" ]; then\n    paths_to_add+=(\"$claude_native_path\")\nfi\nif [ -d \"$claude_npm_path\" ]; then\n    paths_to_add+=(\"$claude_npm_path\")\nfi\n\n# 4. npm 관련 경로 (Global Prefix)\nif command -v npm &>/dev/null; then\n    npm_prefix=$(npm config get prefix 2>/dev/null)\n    if [ -n \"$npm_prefix\" ] && [ -d \"$npm_prefix/bin\" ]; then\n        paths_to_add+=(\"$npm_prefix/bin\")\n    fi\nfi\n\nnpm_global_default=\"$HOME/.npm-global/bin\"\nif [ -d \"$npm_global_default\" ]; then\n    paths_to_add+=(\"$npm_global_default\")\nfi\n\n# --- 경로 등록 로직 (중복 제거 및 영구 적용) ---\nshell_rc=\"$HOME/.zshrc\"\nif [ ! -f \"$shell_rc\" ]; then\n    shell_rc=\"$HOME/.bashrc\"\nfi\n\nadded_count=0\nfor p in \"${paths_to_add[@]}\"; do\n    if [[ \":$PATH:\" != *\":$p:\"* ]]; then\n        export PATH=\"$p:$PATH\"\n        if ! grep -qF \"$p\" \"$shell_rc\" 2>/dev/null; then\n            echo \"export PATH=\\\"$p:\\$PATH\\\"\" >> \"$shell_rc\"\n            echo \"  + $p (영구 등록)\"\n            added_count=$((added_count + 1))\n        fi\n    fi\ndone\n\nif [ $added_count -eq 0 ]; then\n    echo \"모든 경로가 이미 등록되어 있습니다.\"\nfi\n\n# --- Claude 심볼릭 링크 복구 (Homebrew 환경) ---\nif ! command -v claude &>/dev/null; then\n    npm_root=$(npm root -g 2>/dev/null)\n    claude_bin=\"$npm_root/@anthropic-ai/claude-code/bin/claude\"\n    if [ -f \"$claude_bin\" ]; then\n        brew_bin=\"/opt/homebrew/bin\"\n        if [ -d \"$brew_bin\" ]; then\n            rm -f \"$brew_bin/claude\"\n            ln -s \"$claude_bin\" \"$brew_bin/claude\"\n            echo \"Claude 심볼릭 링크 복구 완료: $brew_bin/claude\"\n        fi\n    fi\nfi\n\n# --- 검증 및 경로 분석 로직 ---\necho \"\"\necho \"[설치 상태 및 버전 확인]\"\necho \"--------------------------------\"\n\nclaude_path=$(which claude 2>/dev/null)\nif [ -n \"$claude_path\" ]; then\n    echo \"Claude 실행 위치: $claude_path\"\n    if [[ \"$claude_path\" == *\".local/bin\"* ]]; then\n        echo \"현재 '네이티브(Native)' 버전 사용 중\"\n    else\n        echo \"현재 'npm' 패키지 버전 사용 중\"\n    fi\n    claude --version 2>/dev/null || true\nelse\n    echo \"Claude를 찾을 수 없습니다.\"\n    echo \"터미널을 닫고 다시 열어서 재시도하세요.\"\nfi\n\necho \"--------------------------------\"\necho \"Node.js: $(node -v 2>/dev/null || echo 'N/A')\"\necho \"npm:     $(npm -v 2>/dev/null || echo 'N/A')\"\necho \"Git:     $(git --version 2>/dev/null || echo 'N/A')\"\necho \"--------------------------------\"" } },
+                            { goal: 'Claude Code 사용량을 확인하는 방법을 익힌다.', topics: ['claude.ai/settings/usage 페이지 접속', '현재 세션 사용량 (5시간마다 초기화)', '초기화 시간 확인 및 주간 사용량 체크'], practice: null, action: { label: '사용량 확인 페이지', copy: 'https://claude.ai/settings/usage' } },
+                            { goal: '추가 사용량 기능을 활성화하여 수업 중단을 방지한다.', topics: ['설정 페이지에서 추가 사용량 옵션 ON', '추가 사용량 구매 및 결제 등록', '초과 시 자동 차감 (사용한 만큼만 과금)'], practice: null, action: { label: '설정 페이지', copy: 'https://claude.ai/settings/usage' } }
+                        ]
+                    },
+                    {
+                        num: 2, title: 'Claude 에이전트 메모리와 파일/폴더 제어', hours: '2시간',
+                        goal: '에이전트에 메모리를 설정하고 이름을 부여하는 방법을 익히며, 파일과 폴더를 에이전트로 직접 제어한다.',
+                        topics: ['CLAUDE.md — 에이전트 이름·말투·역할 정의', '/init · /memory · Auto Memory', '.claude/rules/ 조건부 규칙', 'Read / Write / Edit / Bash 툴 실습'],
+                        practice: '나만의 에이전트에 이름을 부여하고, 각 툴(Read/Write/Edit/Bash)을 직접 실습한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg'],
+                        slideDescs: [
+            { goal: 'Step 2 목표와 VSCode 터미널 환경을 안내한다.', topics: ['Step 2 학습 목표', 'VSCode 터미널에서 Claude Code 실행', '오늘 배울 내용 미리보기'], practice: null },
+            { goal: 'CLAUDE.md의 개념과 역할을 이해한다.', topics: ['CLAUDE.md란?', '파일 위치와 적용 범위', '에이전트 정체성 부여 원리'], practice: null },
+            { goal: 'CLAUDE.md 실습 — 에이전트에 이름·말투·역할을 부여한다.', topics: ['claude 실행 후 너는 누구야? 질문', 'CLAUDE.md 파일 생성 + 이름/말투/역할 작성', '/clear 후 다시 질문해 변화 확인'], practice: 'CLAUDE.md를 직접 작성하고 에이전트가 달라지는 것을 확인한다.' },
+            { goal: '/init 명령어의 역할을 이해한다.', topics: ['/init이란?', 'CLAUDE.md 자동 생성 흐름', '직접 작성 vs 자동 생성'], practice: null },
+            { goal: '/init 실습 — 폴더 분석 후 CLAUDE.md 자동 생성을 체험한다.', topics: ['실습 자료 다운로드 후 작업 폴더에 배치', '기존 CLAUDE.md 삭제', '/init 실행 후 생성 결과 확인'], practice: '/init으로 자동 생성된 CLAUDE.md를 열어 내용을 확인한다.', action: { label: '실습 자료', download: { href: 'assets/basic/step02/practice/init_practice.zip', text: 'init_practice.zip 다운로드' } } },
+            { goal: '에이전트 메모리를 직접 확인하고 편집한다.', topics: ['/memory — 로드된 CLAUDE.md·rules 파일 목록', 'Project / User / Auto Memory 세 종류', '~/.claude/projects/<project>/memory/ 경로'], practice: null },
+            { goal: 'Auto Memory의 작동 원리를 이해한다.', topics: ['Claude가 스스로 MEMORY.md에 자동 기록', '기본값 ON — /memory에서 on/off 설정', '직접 요청: 이걸 기억해줘'], practice: null },
+            { goal: 'Write 툴의 역할을 이해한다.', topics: ['새 파일 생성·작성', '기존 파일 덮어쓰기 주의', 'Write vs Edit 차이'], practice: null },
+            { goal: 'Read 실습 — 파일·이미지·PDF를 읽어본다.', topics: ['실습 자료 다운로드 후 압축 해제', '"이 폴더의 파일들을 내용에 맞게 파일명을 정리해줘" 입력', 'Claude가 파일 하나씩 읽고 파일명 제안 확인'], practice: '실습 파일을 다운로드 후 Claude에게 파일명 정리를 요청한다.', action: { label: '실습 자료', download: { href: 'assets/basic/step02/practice/read_practice.zip', text: 'read_practice.zip 다운로드' } } },
+            { goal: 'Write 실습 — 새 파일을 만들어본다.', topics: ['자기소개 txt 파일 생성 요청', 'VS Code에서 파일 생성 확인', 'Read로 내용 검증'], practice: '에이전트에게 자기소개 파일을 만들어달라고 요청한다.' },
+            { goal: 'Edit 툴의 역할을 이해한다.', topics: ['기존 파일 일부 수정', '수정 전 내용 → 수정 후 내용', 'Read 후 Edit 순서'], practice: null },
+            { goal: 'Edit 실습 — 기존 파일의 일부를 수정해본다.', topics: ['파일 특정 줄 수정 요청', '수정 결과 Read로 확인', 'CLAUDE.md에 규칙 추가'], practice: '파일의 특정 내용을 변경해달라고 요청한다.' },
+            { goal: 'Read 툴이 읽을 수 있는 파일 종류를 이해한다.', topics: ['텍스트 파일: txt·md·py·html 등', '이미지 파일: jpg·png·gif·webp', 'PDF — 실제 내용 분석 (최대 100페이지/20MB)'], practice: null },
+            { goal: 'Bash 툴의 역할을 이해한다.', topics: ['컴퓨터 명령어 직접 실행', '폴더 생성·이름변경·복사·삭제', '프로그램 실행·패키지 설치'], practice: null },
+            { goal: 'Bash 주요 명령어를 파악한다.', topics: ['mkdir · cp · mv · rm', 'start 명령으로 파일 실행', 'python · node 스크립트 실행'], practice: null },
+            { goal: 'Bash 실습 — 폴더 생성·이동·복사·제거·프로그램 실행을 실습한다.', topics: ['폴더 생성: work + docs 서브폴더', '이동·복사·제거: note.txt 조작', '크롬 실행 — 네이버 뉴스 열기', '탐색기로 특정 폴더 열기'], practice: '폴더 만들기 → 파일 이동 → 크롬 실행 순서로 실습' }
+                        ]
+                    },
+                    {
+                        num: 3, title: 'Claude Code 환경 설정과 기본 명령어', hours: '2시간',
+                        goal: 'Claude Code의 보안 설정을 이해하고, 권한 모드·욜로 모드·모델 선택·주요 명령어를 실습을 통해 익힌다.',
+                        topics: ['Claude 개인정보 보안 설정', 'settings.json (파일 삭제 금지)', '권한 모드 (일반·편집자동승인·플랜)', '욜로 모드 / /model 모델 선택', '주요 슬래시 명령어', '웹 Search 툴 / Todos'],
+                        practice: '개인 환경에 맞는 보안 설정을 직접 구성하고, 권한 모드와 주요 명령어를 순서대로 실행해본다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg','17.svg','18.svg','19.svg'],
+                        slideDescs: [
+            { goal: 'Step 3 목표와 오늘 배울 내용을 안내한다.', topics: ['보안 설정', 'settings.json · 권한 규칙', '권한 모드 · 욜로 모드', '/model · 슬래시 명령어 · 웹 Search · Todos'], practice: null },
+            { goal: 'Claude Code의 파일 접근 범위와 개인정보 설정을 이해한다.', topics: ['파일 쓰기 범위 제한', '상위 폴더 접근 허가 방식', '개인정보 opt-out 설정'], practice: null, action: { label: '설정 페이지', download: { href: 'https://claude.ai/settings/data-privacy-controls', text: 'claude.ai 설정 바로가기' } } },
+            { goal: 'settings.json의 구조와 주요 설정 항목을 이해한다.', topics: ['3계층 설정 파일 (전역/프로젝트/로컬)', 'model — 기본 모델 지정', 'permissions — deny/allow 규칙 목록', 'env — 환경 변수 주입'], practice: null, action: { label: '공식 문서', download: { href: 'https://code.claude.com/docs/ko/settings', text: 'settings.json 공식 문서' } } },
+            { goal: 'settings.json 실습 — 파일 삭제 차단 규칙을 직접 추가한다.', topics: ['Claude에게 권한 제한 추가 요청', '차단 동작 확인 (rm 시도)', 'settings.json 파일 내용 확인'], practice: 'rm 차단 규칙을 Claude에게 추가하고 실제로 차단되는지 확인한다.' },
+            { goal: 'settings.json 파일 삭제 차단 규칙 추가를 직접 실습한다.', topics: ['Claude에게 권한 제한 추가 요청', '\'note.txt 파일을 삭제해줘\' 입력 후 차단 메시지 확인', '\'settings.json 파일 내용 보여줘\'로 규칙 추가 확인'], practice: 'rm 차단 규칙을 Claude에게 추가하고 실제로 차단되는지 확인한다.' },
+            { goal: '3가지 권한 모드의 차이를 이해하고 전환 방법을 익힌다.', topics: ['일반 모드 — 편집·명령 매번 승인', '편집 자동 승인 모드 — 파일 편집 자동', '플랜 모드 — 추천 선택지 중 선택'], practice: null },
+            { goal: '욜로 모드의 개념과 안전한 사용법을 이해한다.', topics: ['claude --dangerously-skip-permissions', '/exit 또는 Ctrl+C로 종료', '위쪽 방향키로 이전 명령 재실행'], practice: null },
+            { goal: '주요 슬래시 명령어의 역할을 파악한다.', topics: ['/clear · /model · /login · /logout', '/help — 전체 명령어 목록', 'Ctrl+C 또는 Esc로 종료'], practice: null, action: { label: '실행 명령어', copy: 'claude --dangerously-skip-permissions' } },
+            { goal: '/config 화면 구성을 이해한다 — Status · Config · Usage 3탭', topics: ['Status — 버전·세션·계정·모델·IDE·MCP 상태', 'Config — Claude Code 세부 동작 설정', 'Usage — 세션·주간 사용량 및 리셋 시간 확인'], practice: null },
+            { goal: '/config 설정 항목 (1/2) — UI·동작 관련 옵션을 이해한다.', topics: ['Auto-compact · Show tips · Reduce motion', 'Thinking mode · Rewind code · Verbose output', 'Terminal progress bar · Show turn duration · Default permission mode', 'Respect .gitignore · Always copy full response'], practice: null },
+            { goal: '/config 설정 항목 (2/2) — 업데이트·테마·모델 관련 옵션을 이해한다.', topics: ['Auto-update channel · Theme · Notifications', 'Output style · Language · Editor mode', 'Show PR status footer · Model · Auto-install IDE extension', 'Claude in Chrome · Enable Remote Control'], practice: null },
+            { goal: '상황에 맞는 Claude 모델을 선택하는 방법을 익힌다.', topics: ['Haiku 4.5 — 가장 빠름 (간단한 작업)', 'Sonnet 4.6 — 빠르고 강력 (기본 추천)', 'Opus 4.5 — 최고 성능 (복잡한 추론)'], practice: null },
+            { goal: '웹 Search 툴의 동작 원리를 이해한다.', topics: ['사용자 명령 불필요 — Claude 자동 판단', '최신 정보 필요 시 자동 검색', '"ㅇㅇㅇ 주제에 대해 웹조사해줘" 활용'], practice: null },
+            { goal: '웹 Search 실습을 진행한다.', topics: ['claude 실행', '최근 7일 이내 AI 에이전트 기사 조사 프롬프트 입력', '기사 제목·요약·출처 URL 포함 결과 확인'], practice: '최근 7일 이내 발행 기사를 조사하고 출처 링크를 함께 정리하도록 요청' },
+            { goal: 'Claude in Chrome의 개념과 7가지 기능을 이해한다.', topics: ['라이브 디버깅 · 디자인 검증 · 웹앱 테스트', '인증 웹앱 접근 (Google Docs · Gmail · Notion)', '데이터 추출 · 반복 자동화 · 세션 녹화', '지원 브라우저: Chrome · Edge (Brave · Arc 미지원)'], practice: null },
+            { goal: 'Claude in Chrome 설치와 활성화 방법을 익힌다.', topics: ['Chrome 웹스토어에서 확장 설치 (v1.0.36+)', 'claude --chrome 플래그로 실행 또는 /config에서 기본 활성화', '/mcp 입력 → chrome for claude 선택 → Enable'], practice: null, action: { label: '확장 설치', download: { href: 'https://claude.com/claude-for-chrome', text: 'Claude for Chrome 바로가기' } } },
+            { goal: 'Claude in Chrome 실습을 진행한다.', topics: ['챌린지 3종 직접 테스트 (페이지 내 챌린지 클릭)', '구글에서 AI 에이전트 트렌드 조사 명령 실행', '브라우저 자동화 결과 확인'], practice: '챌린지 3종 + 구글 트렌드 조사 실습', action: { label: '챌린지 페이지', download: { href: 'https://claude.com/claude-for-chrome', text: 'Claude for Chrome 바로가기' } } },
+            { goal: 'Todos 내장 툴을 이해한다.', topics: ['TodoWrite · TodoRead 내장 툴', 'pending → in_progress → completed', '"ㅇㅇㅇ 작업을 todo 리스트를 세워서 순차적으로 진행해줘"'], practice: null, action: { label: '실습 프롬프트', copy: '오늘 기준 최근 7일 이내에 발행된 AI 에이전트 관련 기사나 글을 웹조사해줘. 각 항목의 주요 내용과 실제 출처 링크(URL)도 함께 정리해줘.' } },
+            { goal: 'Todos 실습 — 다단계 작업을 순차 실행한다.', topics: ['claude 실행', '폴더 생성·파일 작성·트리 출력 3단계 프롬프트 입력', '각 단계 완료 시 completed 상태 업데이트 확인'], practice: 'practice 폴더 생성 → readme.txt 작성 → 트리 출력까지 TodoWrite로 순차 실행' },
+            { goal: 'Todos 실습을 직접 진행한다.', topics: ['claude 실행', '아래 프롬프트 입력', 'TodoWrite 계획 수립 → 단계별 completed 업데이트 → 트리 출력 확인'], practice: null, action: { label: '실습 프롬프트', copy: 'todo 리스트를 세워서 아래 작업을 순서대로 진행해줘.\n1) practice 폴더 생성, 그 안에 docs·images·code 서브폴더 생성\n2) docs/readme.txt 생성 후 \'문서 보관 폴더입니다. 생성일: 오늘 날짜\' 기록\n3) 완료 후 폴더 구조를 트리 형태로 출력' } }
+                        ]
+                    },
+                    {
+                        num: 4, title: '세션 관리와 백그라운드 작업', hours: '2시간',
+                        goal: '세션을 효율적으로 관리하는 방법을 익히고, Auto Compact와 백그라운드 프로세스를 활용하는 방법을 실습한다.',
+                        topics: ['/resume · /rename · --continue 세션 관리', '/rewind 대화 되돌리기', '/compact · Auto Compact 컨텍스트 관리', '백그라운드 프로세스 Ctrl+B', '/tasks 작업 목록 관리', '백그라운드 활용 패턴'],
+                        practice: '세션 저장·재개, Auto Compact 체감, 백그라운드 실행을 직접 실습한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg'],
+                        slideDescs: [
+            { goal: 'Step 4 목표와 오늘 배울 내용을 안내한다.', topics: ['세션 재개 · 이름 변경 · --continue', '/rewind · 컨텍스트 관리 · Auto Compact', 'Foreground / Background · 타임아웃 · Tasks', '백그라운드 활용법'], practice: null },
+            { goal: 'claude --resume와 /rename 명령어를 이해한다.', topics: ['claude --resume (대화형 선택기 · 이름 지정)', '/rename으로 세션에 이름 부여', '비개발자 예시: 여행계획, 쇼핑몰 리뷰분석'], practice: null },
+            { goal: '--continue와 CLI 내부 /resume의 차이를 이해한다.', topics: ['claude --continue (최근 대화 바로 이어서)', '/resume (대화 중 다른 세션으로 전환)', '--resume는 터미널에서, /resume는 대화 중에'], practice: null },
+            { goal: '/rewind로 대화를 되돌리는 방법을 이해한다.', topics: ['Esc 두 번 또는 /rewind 입력', '대화만 되돌리기 vs 파일 변경도 함께 되돌리기', 'Ctrl+Z처럼 실수를 빠르게 복구'], practice: null },
+            { goal: '세션 관리 실습을 진행한다.', topics: ['/rename으로 이름 부여 → /exit → --resume 재개', '--continue로 최근 대화 바로 이어가기', '/resume로 대화 중 세션 전환', 'Esc×2로 /rewind 체험'], practice: '/rename → --resume → --continue → /resume → /rewind 전체 실습' },
+            { goal: '/context · /compact · /clear 명령어로 컨텍스트를 관리하고, 압축 기준점을 조정한다.', topics: ['/context — 컨텍스트 사용량 시각화', '/compact — 대화 압축 (주제 지정 가능)', '/clear — 컨텍스트 완전 초기화', 'CLAUDE_AUTOCOMPACT_PCT_OVERRIDE — 압축 기준점 환경변수 조정'], practice: null, action: { label: '프롬프트 복사', copy: 'settings.json 의 env 항목에 CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=80 을 추가해줘' } },
+            { goal: 'Auto Compact 개념과 임계값 설정 방법을 이해한다.', topics: ['Auto Compact — 컨텍스트 ~95% 시 자동 압축', '프롬프트로 임계값 조정 가능', 'CLAUDE.md에 보존할 내용 지정'], practice: null },
+            { goal: 'Auto Compact 실습 — 자동 압축을 직접 체감한다.', topics: ['임계값을 20%로 낮추기 요청', '/context로 사용량 확인 → 대화 쌓기', 'Auto Compact 자동 발동 체감', '임계값을 원래대로 복구 요청'], practice: '자동 압축 기준 20% → 대화 쌓기 → 자동 압축 체감 → 기본값 복구' },
+            { goal: 'Foreground와 Background의 차이를 이해한다.', topics: ['Foreground — Claude가 완료를 기다림', 'Background — 비동기 실행, 즉시 고유 ID 반환', '전환: Claude에게 요청 또는 Ctrl+B'], practice: null },
+            { goal: '타임아웃의 개념과 두 가지 해결책을 이해한다.', topics: ['기본 타임아웃 120초 — 초과 시 Foreground 강제 종료', '해결책 1: 백그라운드로 전환 (Ctrl+B)', '해결책 2: settings.json bash.timeout 값 조정', '예: 18,000,000ms = 5시간 Foreground 유지'], practice: null, action: { label: '프롬프트 복사', copy: 'settings.json 의 bash timeout을 18000000 (5시간) 으로 설정해줘' } },
+            { goal: '/tasks 명령어로 백그라운드 작업 목록을 관리한다.', topics: ['/tasks — 백그라운드 작업 목록 조회·관리', '작업 상태: 실행 중 / 완료 / 보류 중', 'Ctrl+F — 모든 백그라운드 에이전트 종료'], practice: null },
+            { goal: '백그라운드 프로세스 실습을 진행한다.', topics: ['실습1 — count.md에 1초 간격으로 1~20 숫자 쓰기 스크립트를 백그라운드 실행', '실습2 — 같은 작업을 foreground로 시작 후 Ctrl+B 전환', '/tasks로 진행 확인 · 완료 후 count.md 열어보기'], practice: 'count.md 숫자 쓰기 스크립트 백그라운드 실행 + Ctrl+B 전환 실습' },
+            { goal: '백그라운드 활용 패턴 3가지를 이해한다.', topics: ['오래 걸리는 작업 백그라운드 전환', '개발 서버 + 코드 수정 병렬 진행', '에러 로그 감시 · 메시지 수신 대기 활용'], practice: null },
+            { goal: 'Step 4 학습 내용을 정리한다.', topics: ['/rename · --resume · --continue · /resume · /rewind', '/compact · Auto Compact · /context · 타임아웃', 'Ctrl+B · /tasks · 백그라운드 활용 패턴'], practice: null }
+                        ]
+                    },
+                    {
+                        num: 5, title: 'Sub Agent와 Hooks', hours: '2시간',
+                        goal: 'Sub Agent 개념을 이해하고, Hooks로 도구 동작을 자동화하며, MS Office 추가기능으로 Claude를 연동한다.',
+                        topics: ['Sub Agent 개념 · YAML 파일 형식', 'Sub Agent 활용 (만들기 · 병렬 실행) · 실습', 'Hooks 이벤트 18종 · 동작 구조 · 실습', 'MS Office 365 추가기능 Claude 설치'],
+                        practice: 'Sub Agent를 Claude와 함께 만들고, Hooks으로 위험 명령을 차단하는 설정을 추가한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg'],
+                        slideDescs: [
+            { goal: 'Step 5 목표와 오늘 배울 내용을 안내한다.', topics: ['Sub Agent 개념 · 파일 형식', 'Sub Agent 활용 · 실습', 'Agent Teams 개념', 'Hooks 이벤트 18종 · 동작 구조 · 실습', 'MS Office 추가기능 Claude 설치'], practice: null },
+            { goal: 'Sub Agent의 개념과 설정 파일 구조를 이해한다.', topics: ['독립 컨텍스트 윈도우로 실행', '역할 설명 기반 자동 위임', 'name · description · tools · model 필드', '/agents 명령어로 관리'], practice: null },
+            { goal: 'Sub Agent를 만들고 병렬 실행하는 방법을 익힌다.', topics: ['/agents → Generate with Claude로 자동 생성', '실무 예시: 보고서 작성·데이터 정리·번역 에이전트', '프롬프트로 여러 에이전트 병렬 실행'], practice: null },
+            { goal: 'Sub Agent 실습을 진행한다.', topics: ['/agents로 에이전트 만들기', '역할 설명 입력 후 자동 생성', '병렬 실행 프롬프트 실습'], practice: '/agents → Generate with Claude → 병렬 실행 프롬프트 실습' },
+            { goal: 'Claude Agent Teams의 구조와 활성화 방법을 이해한다.', topics: ['리더 1명 + 팀원 3-5명 (각자 독립 컨텍스트)', '팀원끼리 직접 메시지 / 공유 작업 목록 조율', 'CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 활성화', '병렬 코드 리뷰 · 경쟁 가설 디버깅 활용'], practice: null, action: { label: '환경변수 복사', copy: 'settings.json 의 env 항목에 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 을 추가해줘' } },
+            { goal: 'Agent Teams와 Sub Agent의 차이를 이해하고 팀 구성 예시를 배운다.', topics: ['Sub Agent: 메인 → 결과 단방향', 'Agent Teams: 팀원끼리 직접 대화 다방향', '프롬프트로 팀 구성 요청', '실험적 기능 — settings.json env 설정'], practice: null },
+            { goal: 'Hooks의 개념과 활용 목적을 이해한다.', topics: ['이벤트 감지 시 내 스크립트 자동 실행', '위험 명령 차단 · 작업 완료 알림 · 코드 자동 정리', 'settings.json hooks 키에 시점별 명령어 등록'], practice: null },
+            { goal: 'Hooks 이벤트 18종과 차단/관찰 구분을 이해한다.', topics: ['차단 가능: PreToolUse · UserPromptSubmit · Stop 등 9종', '관찰만: SessionStart · PostToolUse · PreCompact 등 9종', 'exit 2로 차단, exit 0으로 계속 진행'], practice: null },
+            { goal: 'Hooks 동작 구조를 다이어그램으로 이해한다.', topics: ['프롬프트 → PreToolUse → 도구실행 → PostToolUse → Stop', 'exit 2: 차단 + stderr → Claude 피드백', '활용 예시: 삭제 차단 · 자동 정렬 · PC 알림'], practice: null },
+            { goal: 'Hooks 실습을 진행한다.', topics: ['[실습1] BurntToast PC 알림 — Stop 이벤트', '[실습2] 위험 명령 차단 — PreToolUse 이벤트'], practice: '[실습1] BurntToast PC 알림 Hook · [실습2] 위험 명령 차단 Hook', action: { label: '실습 프롬프트', items: [{ desc: '실습1: BurntToast PC 알림', copy: 'settings.json에 Stop Hook을 추가해줘. BurntToast 모듈이 설치되어 있는지 먼저 확인하고, 없으면 Install-Module로 설치한 뒤, powershell.exe -NoProfile -Command 형식으로 Import-Module BurntToast 후 New-BurntToastNotification으로 작업 완료 알림을 띄워줘' }, { desc: '실습2: 위험 명령 차단', copy: 'settings.json에 PreToolUse Hook을 추가해줘. matcher는 Bash, type은 command로 설정하고, node -e 인라인 스크립트로 stdin JSON을 파싱해서 tool_input.command에 rm, rmdir, del, Remove-Item이 포함되면 hookSpecificOutput으로 hookEventName: PreToolUse, permissionDecision: deny, permissionDecisionReason: "삭제 명령어가 차단되었습니다. 삭제 명령어 사용 대신 archive/ 폴더로 이동시키세요. 주의: 한글 경로는 Git Bash mv 명령어가 실패할 수 있으므로 PowerShell Move-Item을 사용하세요." 를 JSON으로 출력하고 process.exit(0)으로 종료해줘' }] } },
+            { goal: 'MS Office 추가기능 Claude 설치 준비를 안내한다.', topics: ['Microsoft 365 구독 필요 (2026 최신버전)', 'Claude Pro/Max 계정 필요', 'PowerPoint/Excel 실행 → 홈 메뉴 → 추가기능'], practice: null },
+            { goal: '홈 메뉴에서 추가기능 버튼을 클릭한다.', topics: ['PowerPoint/Excel 홈 탭 우측에 추가기능 위치', '최신버전(2026) 기준 UI 안내'], practice: null },
+            { goal: '추가기능에서 Claude를 검색하고 추가한다.', topics: ['검색창에 Claude 입력', 'Claude for Microsoft 365 선택', '추가 버튼 클릭'], practice: null },
+            { goal: '설치 후 로그인하여 Claude를 사용한다.', topics: ['우측 패널에 Claude 창 열림', '로그인 버튼 클릭', 'claude.ai 계정으로 로그인 후 바로 사용'], practice: 'Sub Agent를 Claude와 함께 만들고, Hooks으로 위험 명령을 차단하는 설정을 추가한다.' }
+                        ]
+                    },
+                    {
+                        num: 6, title: 'MCP 개념 이해와 실습', hours: '2시간',
+                        goal: 'MCP(Model Context Protocol)의 개념을 이해하고, Trivago·Canva·Wix·Notion MCP를 설치하여 숙소 검색·디자인·웹사이트·문서 자동화를 구현한다.',
+                        topics: ['MCP란? 개념과 구조', 'MCP 설치 및 세팅 방법', 'Trivago MCP 설치·실습', 'Canva MCP 설치·실습', 'Wix MCP 설치·실습', 'Notion MCP 설치·실습'],
+                        practice: 'Trivago로 숙소 검색, Canva로 프레젠테이션 내보내기, Wix로 웹사이트 배포, Notion 페이지 생성을 실습한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg'],
+                        slideDescs: [
+            { goal: 'Step 6 목표와 오늘 배울 내용을 안내한다.', topics: ['MCP란 무엇인가', 'MCP 설치와 세팅', 'Trivago·Canva·Wix·Notion MCP 연동 실습'], practice: null },
+            { goal: 'MCP(Model Context Protocol)의 개념을 이해한다.', topics: ['AI와 외부 시스템 연결 개방형 표준', 'USB-C 비유 — 한 번 구축으로 어디서든 연결', '데이터베이스·SaaS·API 확장', 'Claude·ChatGPT·Cursor 모두 지원'], practice: null, action: { label: 'MCP 공식 문서', download: { href: 'https://code.claude.com/docs/ko/mcp', text: 'Claude Code MCP 가이드' } } },
+            { goal: 'claude mcp add 명령어로 MCP 서버를 등록한다.', topics: ['HTTP 방식 — 원격 서버 (권장)', 'stdio 방식 — 로컬 프로세스', 'claude mcp list · mcp remove', 'scope: local · project · user'], practice: null, action: { label: '명령어', items: [{ desc: 'mcp add', copy: 'claude mcp add --transport http trivago https://mcp.trivago.com/mcp' }, { desc: 'mcp 확인', copy: 'claude mcp list' }] } },
+            { goal: 'Trivago MCP를 등록하고 숙소 검색 기능을 이해한다.', topics: ['인증 없이 바로 사용 가능', 'claude mcp add --transport http trivago https://mcp.trivago.com/mcp', '국가·도시·날짜·인원 기반 숙소 검색', '가격·위치·리뷰 비교·필터링'], practice: null, action: { label: '명령어', copy: 'claude mcp add --transport http trivago https://mcp.trivago.com/mcp' } },
+            { goal: 'Trivago MCP 실습 — 자연어로 숙소를 검색한다.', topics: ['숙소 검색 프롬프트 입력', 'Claude가 Trivago 결과 제공 확인', '조건 변경 요청으로 필터링 동작 확인'], practice: 'Trivago MCP로 강남 지역 숙소를 검색하고 예산 조건을 변경하여 재검색한다.' },
+            { goal: 'Canva MCP를 등록하고 인증한다.', topics: ['claude mcp add --transport http canva https://mcp.canva.com/mcp', '/mcp → canva → Authenticate → 브라우저 Canva 로그인', '/mcp로 connected 상태 확인', '주요 기능: Search·Create·Autofill·Export'], practice: null, action: { label: '명령어', items: [{ desc: 'mcp 등록', copy: 'claude mcp add --transport http canva https://mcp.canva.com/mcp' }, { desc: '등록 확인', copy: 'claude mcp list' }] } },
+            { goal: 'Canva MCP 실습 — 자연어로 프레젠테이션을 만들고 내보낸다.', topics: ['프레젠테이션 생성 프롬프트', 'PDF 내보내기 링크 확인', 'Autofill로 슬라이드 제목 수정'], practice: 'AI 에이전트 소개 프레젠테이션을 Canva로 만들고 PDF로 내보낸다.' },
+            { goal: 'Wix MCP를 등록하고 웹사이트 생성 기능을 이해한다.', topics: ['claude mcp add wix --transport http https://mcp.wix.com/mcp', 'Google 계정으로 로그인 — 별도 가입 불필요', '사이트 생성·템플릿 적용·콘텐츠 편집·배포'], practice: null, action: { label: '명령어', copy: 'claude mcp add wix --transport http https://mcp.wix.com/mcp' } },
+            { goal: 'Wix MCP 실습 — 자연어로 웹사이트를 만들고 배포한다.', topics: ['쇼핑몰 사이트 생성 프롬프트', 'Claude가 사이트 생성 후 배포 URL 제공 확인', '세일 배너 추가 등 수정 요청'], practice: 'Wix MCP로 F/W 의류 쇼핑몰 사이트를 만들어서 배포하고 수정 요청을 테스트한다.' },
+            { goal: 'Notion MCP를 OAuth 방식으로 등록한다.', topics: ['토큰 발급 불필요 — OAuth 방식', 'claude mcp add --transport http notion https://mcp.notion.com/mcp', 'claude mcp list로 등록 확인', 'Notion Integration 없이 바로 인증 진행'], practice: null, action: { label: '명령어', items: [{ desc: 'mcp 등록', copy: 'claude mcp add --transport http notion https://mcp.notion.com/mcp' }, { desc: '등록 확인', copy: 'claude mcp list' }] } },
+            { goal: 'Notion MCP 인증 절차를 진행한다.', topics: ['claude --dangerously-skip-permissions 실행', '/mcp 입력 후 notion 선택', 'Authenticate 선택 → 브라우저 인증 페이지 열림'], practice: null, action: { label: '실행 명령어', copy: 'claude --dangerously-skip-permissions' } },
+            { goal: '브라우저에서 Notion 계정으로 인증을 완료한다.', topics: ['브라우저 인증 페이지 자동 열림', 'URL 신뢰 체크박스 선택', '계속하기 → Notion 계정 로그인 → 완료'], practice: null },
+            { goal: 'Notion MCP 실습 — 연결 확인 후 자연어로 Notion을 제어한다.', topics: ['/mcp로 connected 상태 확인', '페이지 생성·검색·수정', '데이터베이스 조회·항목 추가', '예시: "회의록 페이지 만들어줘" · "DB에 작업 항목 추가해줘"'], practice: 'Notion MCP를 연결하고 에이전트 명령어 하나로 Notion 페이지를 자동 생성한다.' }
+                        ]
+                    },
+                    {
+                        num: 7, title: 'Skills 활용과 Discord Plugin 고급 기능 실습', hours: '2시간',
+                        goal: 'Skills의 개념과 사용법을 익히고, Discord Plugin의 고급 기능(access.json 서버 채널 등록·react·edit_message)을 활용하여 서버 채널 대화를 구현한다.',
+                        topics: ['Skills란? 개념 이해', 'Skill 사용하기', 'access.json 서버 채널 등록', 'Plugin 고급 도구 활용', '기존 MCP vs Plugin 비교 · 서버 채널 실습'],
+                        practice: 'Discord Plugin으로 공부방 서버 채널에 접속하여 봇끼리 메시지를 주고받고 react/edit_message를 활용한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg','17.svg','18.svg'],
+                        slideDescs: [
+            { goal: 'Step 7 목표와 오늘 배울 내용을 안내한다.', topics: ['Skills 개념 · 사용법', '라이브러리 개념 · Pillow', '카드뉴스 실습 · 스킬화', 'Discord Plugin 고급 기능'], practice: null },
+            { goal: 'Skills의 개념과 파일 구조를 이해한다.', topics: ['.claude/skills/<이름>/SKILL.md (프로젝트)', '~/.claude/skills/<이름>/SKILL.md (전체)', '/skill-name 슬래시 명령어로 호출', '인수 전달 가능 · Claude 자동 로드'], practice: null },
+            { goal: 'SKILL.md 파일 구조와 기본 제공 Skill을 파악한다.', topics: ['YAML frontmatter + Markdown 지시사항', 'description 필드 · Claude 지침 본문', '/simplify · /batch · /debug · /loop', '커스텀 Skill 아이디어'], practice: null },
+            { goal: '라이브러리 개념과 설치 방법을 이해한다.', topics: ['라이브러리 = 남이 만든 기능 모음', 'Python — pip install / Node.js — npm install', '표준 라이브러리 vs 서드파티 라이브러리', 'import 한 줄로 수십 가지 기능 즉시 사용'], practice: null },
+            { goal: 'Pillow 라이브러리의 기능과 활용 범위를 파악한다.', topics: ['pip install pillow', 'Image.new() — 빈 캔버스 생성', 'ImageDraw — 도형·텍스트 그리기 / ImageFont — 폰트', 'resize · crop · save — 편집·변환·저장'], practice: null },
+            { goal: 'Claude에게 직접 카드뉴스 이미지 생성을 요청한다.', topics: ['자연어로 이미지 옵션 지정 (배경색·글자색·폰트·정렬)', 'Claude가 pillow 설치 + cardnews.py 자동 작성·실행', '결과 이미지(output.png) 확인', '"매번 이렇게 길게 요청해야 하나?" — 스킬의 필요성 체감'], practice: 'Claude에게 배경 남색, 제목 흰색 굵게, 본문 회색 카드뉴스 1080x1080 이미지를 요청하여 생성한다.' },
+            { goal: '카드뉴스 코드를 /cardnews 스킬로 변환한다.', topics: ['Claude에게 "이걸 /cardnews 스킬로 만들어줘" 요청', 'SKILL.md + cardnews.py 자동 생성', '배경색·글자색·제목·본문·사이즈를 인수로 받는 구조', '/cardnews 명령어로 즉시 재사용 가능'], practice: '방금 만든 카드뉴스 코드를 /cardnews 스킬로 만들어달라고 요청하고, 다른 옵션으로 반복 생성해본다.' },
+            { goal: '/cardnews 스킬을 다양한 옵션으로 활용한다.', topics: ['/cardnews 배경=남색 제목="AI가 바꾸는 세상" 즉시 생성', '사이즈 옵션: 정방형(1080x1080) · 스토리(1080x1350)', '리사이즈 옵션: 썸네일 360x360 동시 저장', 'Skill = 반복 작업을 한 줄 명령으로'], practice: '/cardnews 스킬에 다양한 배경색·제목·사이즈 옵션을 주어 카드뉴스를 반복 생성하고, 리사이즈 기능까지 테스트한다.' },
+            { goal: '나만의 Skill 만들기 워크플로우를 이해하고 자유 실습한다.', topics: ['원하는 기능 정하기 → Claude에게 라이브러리 추천 요청', 'Claude가 코드 작성·실행', '"이걸 스킬로 만들어줘" → 재사용 가능한 명령어 완성', '참고 예시: qrcode · pillow · zipfile · markdown'], practice: 'Claude에게 원하는 기능의 라이브러리를 조사해달라고 요청하고, 코드를 짠 뒤 스킬로 만들어보는 자유 실습을 진행한다.' },
+            { goal: 'Discord Plugin 연결에 필요한 Bot 토큰을 발급한다.', topics: ['discord.com/developers/applications → New Application', 'Bot 탭 → Reset Token → 토큰 복사', 'Message Content Intent 활성화 (Privileged Gateway Intents)', 'OAuth2 URL Generator → bot 권한 → 서버 초대 URL 생성'], practice: null, action: { label: '바로가기', items: [{ desc: 'Discord', link: { href: 'https://discord.com', text: 'discord.com' } }, { desc: 'Developer Portal', link: { href: 'https://discord.com/developers/applications', text: 'discord.com/developers' } }] } },
+            { goal: 'Claude Code에 Discord Plugin을 설치하고 활성화한다.', topics: ['--channels plugin:discord@claude-plugins-official 플래그로 실행', '/plugin install discord@claude-plugins-official (첫 설치 시)', '/reload-plugin 후 /mcp에서 discord enable', '처음 설치 후 이후에는 1단계만으로 자동 연결'], practice: null, action: { label: '실행 명령어', copy: 'claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions' } },
+            { goal: 'Bot 토큰을 .env 파일에 저장하고 Claude Code를 재실행한다.', topics: ['~/.claude/channels/discord/.env에 DISCORD_BOT_TOKEN 저장', 'Claude에게 "봇 토큰을 .env에 저장해줘" 요청 가능', 'Ctrl+C 종료 → 동일 명령어로 재실행', '토큰 저장 후 재실행해야 Plugin이 토큰을 인식'], practice: null },
+            { goal: 'DM 페어링으로 Discord와 Claude를 연결하고 서버 채널을 등록한다.', topics: ['Discord에서 본인 봇에게 DM → 페어링 코드 수신', 'Claude Code 터미널에 페어링 코드 입력 → 연결 완료', '개발자 모드 → 채널 우클릭 → 채널 ID 복사', '/discord:access group add <채널ID>로 서버 채널 등록'], practice: 'DM 페어링으로 봇 연결 후 서버 채널을 /discord:access로 등록한다.' },
+            { goal: 'access.json으로 서버 채널을 등록하는 방법을 이해한다.', topics: ['DM = 자동 페어링 / 서버 채널 = access.json 등록 필요', '/discord:access 명령어로 설정', 'groups에 채널 등록 → Claude가 해당 채널 접근 허용', 'requireMention: true로 노이즈 차단'], practice: null },
+            { goal: 'Plugin 고급 도구(react·edit_message·download_attachment)를 활용한다.', topics: ['react — 메시지에 이모지 반응 추가', 'edit_message — 이전에 보낸 메시지 수정', 'download_attachment — 첨부 파일 다운로드', '진행 중 → 완료로 메시지 업데이트 패턴'], practice: null },
+            { goal: '기존 MCP와 Plugin의 차이를 비교한다.', topics: ['기존 MCP — git clone + npm build, read/send 2가지만', 'Plugin — 자동 설치, 5가지 도구, 실시간 수신', 'MCP는 DM 전용 / Plugin은 서버 채널도 지원', 'Plugin이 공식 지원 + 더 강력'], practice: null },
+            { goal: '공부방 서버에 봇을 초대하고 채널을 등록한다.', topics: ['강사가 초대하는 Discord 서버 초대링크로 접속', '본인 봇을 공부방 서버에 초대', '/discord:access로 공부방 채널 등록', '채널 등록 후 Claude가 메시지 읽기·쓰기 가능'], practice: null },
+            { goal: '공부방 서버에서 봇끼리 대화를 실습한다.', topics: ['채널에 인사 메시지 전송 (reply)', '최근 메시지 읽기 (fetch_messages)', '수강생 A → B 봇 @멘션 → B가 확인 후 답장', '답장에 react로 이모지 반응 달기'], practice: 'Discord Plugin으로 공부방 서버에서 봇끼리 메시지를 주고받고 react/edit_message를 활용한다.' }
+                        ]
+                    },
+                    {
+                        num: 8, title: 'Claude Desktop 사용법', hours: '2시간',
+                        goal: 'Claude Desktop과 CLI 생태계를 이해하고, Agent Teams 협업 구조를 파악하며, GitHub CLI·Gemini CLI를 활용한 스킬을 직접 제작한다.',
+                        topics: ['일반 Claude Desktop 사용법', 'Desktop Claude Code 활용', 'Claude Cowork', 'CLI vs Desktop 비교', 'GitHub CLI 인증·스킬 제작', 'Gemini CLI 실습·스킬 제작'],
+                        practice: 'GitHub CLI와 Gemini CLI를 설치하고 인증한 뒤, Claude에게 각 CLI 기반 스킬을 자동 제작하도록 시킨다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg'],
+                        slideDescs: [
+            { goal: 'Step 8 목표와 오늘 배울 내용을 안내한다.', topics: ['일반 Desktop · Desktop Claude Code', 'Claude Cowork', 'CLI vs Desktop 비교', 'GitHub CLI · Gemini CLI 스킬'], practice: null },
+            { goal: '일반 Claude Desktop의 주요 기능을 이해한다.', topics: ['대화형 채팅 · 파일 첨부 및 분석', 'Projects — 프로젝트 단위 작업 관리', 'MCP 서버 연동 · 커스텀 Skill', 'claude.ai/downloads 설치'], practice: null, action: { label: 'Claude Desktop 다운로드', download: { href: 'https://claude.com/download', text: 'claude.com/download 열기' } } },
+            { goal: 'Desktop에서 Claude Code를 실행하는 방법을 이해한다.', topics: ['Desktop 앱 Code 탭으로 시작', 'claude --resume 로 CLI-Desktop 세션 공유', 'CLI → Desktop → 웹 자유로운 이동', '/ide 명령어로 VS Code 연결'], practice: null },
+            { goal: 'Claude Cowork의 개념과 주요 기능을 이해한다.', topics: ['Desktop Cowork 탭 → 폴더 지정 → Claude 직접 접근', 'AI에게 질문 → AI에게 일을 시키는 방식으로 전환', '다단계 작업 자동 계획·실행·완료 보고', 'Pro 이상 유료 플랜 / Claude Desktop 필수'], practice: null },
+            { goal: 'CLI와 Desktop 환경의 장단점과 선택 기준을 파악한다.', topics: ['CLI — 자동화·스크립팅·Hooks·파이프라인', 'Desktop — GUI·Projects·드래그앤드롭', 'CLI 단점: 터미널 지식 필요', 'Desktop 단점: Hooks·자동화 스크립팅 불가'], practice: 'Desktop 환경과 CLI 환경을 동일한 작업으로 비교 체험하고, 각자의 업무 스타일에 맞는 환경을 선택한다.' },
+            { goal: 'CLI의 개념과 우리가 배울 CLI 도구들을 파악한다.', topics: ['CLI = Command Line Interface', '공통 구조: [도구] [명령] [--옵션] [인수]', 'Claude Code · GitHub CLI · Gemini CLI', '스킬 자동화와 파이프라인의 기반'], practice: null },
+            { goal: 'GitHub 계정을 만들고 gh cli 설치를 준비한다.', topics: ['github.com 가입 · 이메일 인증', 'GitHub = 코드 버전 관리 + 원격 저장소', 'gh cli로 저장소·PR·이슈 터미널 관리', 'github.com/signup 접속'], practice: null, action: { label: 'GitHub 가입', download: { href: 'https://github.com/signup', text: 'github.com/signup' } } },
+            { goal: 'gh cli를 설치하고 --scopes 인증을 완료한다.', topics: ['winget install GitHub.cli (Windows)', 'brew install gh (macOS)', 'gh auth login --scopes repo,delete_repo,workflow,...', 'gh auth status 로 인증 확인'], practice: null, action: { label: '명령어', items: [
+                { desc: '설치 (Windows)', copy: 'winget install GitHub.cli' },
+                { desc: '설치 (macOS)', copy: 'brew install gh' },
+                { desc: '인증 (스코프 지정)', copy: 'gh auth login --scopes repo,delete_repo,workflow,gist,read:org,admin:public_key,write:packages' },
+                { desc: '인증 확인', copy: 'gh auth status' }
+            ] } },
+            { goal: 'Claude에게 gh cli 기반 스킬을 자동 제작시킨다.', topics: ['gh repo list / gh pr list 직접 실행', '"gh cli로 저장소 목록과 PR 정리 스킬 만들어줘"', 'Claude가 SKILL.md + 스크립트 자동 생성', '/내-저장소-요약 스킬 완성'], practice: 'Claude에게 gh cli 명령어 기반 스킬을 자동 제작하도록 시키고 실행한다.' },
+            { goal: 'Gemini CLI를 설치하고 터미널에서 질문하는 방법을 익힌다.', topics: ['npm install -g @google/gemini-cli', 'gemini -p "질문" — 비대화형 모드', 'Google 계정 로그인 (무료 1,000 req/day)', '1M 토큰 컨텍스트'], practice: null },
+            { goal: 'Gemini CLI를 실습하고 Claude에게 연동 스킬을 제작시킨다.', topics: ['gemini -p "질문" 터미널 실행', '"bash로 gemini -p 호출 스킬 만들어줘"', '/ask-gemini 스킬 완성', 'Claude + Gemini 두 AI 병행 워크플로우'], practice: 'Gemini CLI를 실행하고 Claude에게 bash gemini 기반 스킬을 자동 제작하도록 시킨다.' }
+                        ]
+                    }
+                ]
+            },
+            advanced: {
+                label: 'Advanced · 8 Sessions',
+                badgeClass: 'advanced',
+                badgeText: 'ADVANCED',
+                title: 'AI 에이전트 심화 과정',
+                sessions: [
+                    {
+                        num: 1, title: '엑셀 · 워드 · PPT · 한글 문서 자동 작성', hours: '2시간 · Tool & Automation',
+                        goal: '에이전트를 활용해 엑셀·워드·PPT·한글(hwpx) 4종 오피스 문서를 자동으로 생성하는 로컬 Python Skill을 구현하고 파이프라인으로 연결한다.',
+                        topics: ['엑셀 데이터 분석 Skill (openpyxl)', '워드 보고서 자동 생성 Skill (python-docx)', 'PPT 슬라이드 자동 생성 Skill (python-pptx)', '한글 문서 자동 생성 Skill (python-hwpx)', '4종 파이프라인 연결', 'GitHub 레포 → Skill 자동 제작'],
+                        practice: '템플릿 3종(엑셀·워드·PPT)을 활용해 분석 결과를 4종 보고서로 자동 출력하는 흐름을 완성한다.',
+                        slides: ['엑셀_·_워드_·_PPT_·_한글_문서_자동_작성.svg','라이브러리란.svg','엑셀_분석_Skill_—_openpyxl.svg','엑셀_분석_Skill_—_실습.svg','워드_보고서_Skill_—_python-docx.svg','워드_보고서_Skill_—_실습.svg','PPT_Skill_—_python-pptx.svg','PPT_Skill_—_실습.svg','한글_Skill_—_python-hwpx.svg','GitHub_레포_→_Skill_자동_제작.svg','GitHub_→_Skill_자동_제작_—_실습.svg','한글_Skill_—_실습.svg','4종_파이프라인_연결.svg','4종_파이프라인_—_실습.svg'],
+                        slideDescs: [
+            { goal: 'ADV 1 목표와 오늘 배울 내용을 안내한다.', topics: ['문서 자동화 개요 — Skill + 실습 세트 구성', '엑셀 분석 Skill (openpyxl) + 실습', '워드 보고서 Skill (python-docx) + 실습', 'PPT Skill (python-pptx) + 실습', '한글 Skill (python-hwpx) + 실습', '4종 파이프라인 연결 + 실습', 'GitHub 레포 → Skill 자동 제작 + 실습'], practice: null, action: { label: '템플릿 3종 다운로드', type: 'download-folder', path: 'assets/advanced/step01/templates' } },
+            { goal: '라이브러리 개념을 복습한다.', topics: ['라이브러리 = 누군가 미리 만들어 둔 기능 묶음', 'pip install [이름]으로 설치 → import [이름]으로 사용', '오늘 사용할 4종: openpyxl · python-docx · python-pptx · python-hwpx', 'Claude가 pip install과 import를 자동으로 처리'], practice: null },
+            { goal: 'openpyxl로 엑셀 데이터를 읽는 Skill을 제작한다.', topics: ['pip install openpyxl', 'load_workbook() + ws.active', "ws['매출 데이터'] 시트 접근", 'iter_rows(min_row=5) 행 반복'], practice: null, action: { label: '매출데이터_템플릿.xlsx', type: 'download', path: 'assets/advanced/step01/templates/매출데이터_템플릿.xlsx' } },
+            { goal: '매출데이터_템플릿.xlsx를 읽어 월별 합계·평균을 분석한다.', topics: ['매출 데이터 5건 이상 입력', '월별 합계와 최대 거래처 분석 요청', '분석 결과 화면 확인'], practice: '매출데이터_템플릿.xlsx 읽어서 월별 합계와 최대 거래처 분석해줘', action: { label: '매출데이터_템플릿.xlsx', type: 'download', path: 'assets/advanced/step01/templates/매출데이터_템플릿.xlsx' } },
+            { goal: 'python-docx로 워드 보고서를 생성하는 Skill을 제작한다.', topics: ['pip install python-docx', 'from docx import Document (import 주의)', '[ ] 플레이스홀더 치환 패턴', 'doc.save()로 .docx 출력'], practice: null, action: { label: '보고서_템플릿.docx', type: 'download', path: 'assets/advanced/step01/templates/보고서_템플릿.docx' } },
+            { goal: '보고서 템플릿에 엑셀 분석 결과를 자동 입력한다.', topics: ['보고서_템플릿.docx 구성 확인 (표지·목차·본문)', '엑셀 분석 결과로 템플릿 채우기 요청', '생성된 report.docx 내용·표 확인'], practice: '엑셀 분석 결과를 바탕으로 보고서_템플릿.docx 양식에 맞게 보고서 만들어줘', action: { label: '보고서_템플릿.docx', type: 'download', path: 'assets/advanced/step01/templates/보고서_템플릿.docx' } },
+            { goal: 'python-pptx로 PPT 슬라이드를 자동 생성하는 Skill을 제작한다.', topics: ['pip install python-pptx', 'Presentation() + slide_layouts', '회사_범용_템플릿.pptx 활용 패턴', 'prs.save()로 .pptx 출력'], practice: null, action: { label: '회사_범용_템플릿.pptx', type: 'download', path: 'assets/advanced/step01/templates/회사_범용_템플릿.pptx' } },
+            { goal: '주제를 웹조사하고 회사 템플릿으로 발표 자료를 만든다.', topics: ['회사_범용_템플릿.pptx 9장 구성 확인', '주제 선정 (AI 트렌드 / 팀 소개 / 프로젝트 현황)', '웹조사 + 템플릿 기반 PPT 생성 요청', '생성된 PPT 내용 확인'], practice: '2026 AI 트렌드 웹조사해서 회사_범용_템플릿.pptx 양식으로 발표자료 만들어줘', action: { label: '회사_범용_템플릿.pptx', type: 'download', path: 'assets/advanced/step01/templates/회사_범용_템플릿.pptx' } },
+            { goal: 'python-hwpx + gonggong 방식으로 한글 문서를 생성하는 Skill을 제작한다.', topics: ['pip install python-hwpx', 'hwpxskills 레포 클론', 'zip_replace() + fix_namespaces.py 4단계 워크플로우', '한글 앱 없이 동작'], practice: null, action: { label: 'hw5511/hwpxskills', type: 'link', url: 'https://github.com/hw5511/hwpxskills' } },
+            { goal: 'GitHub 레포 URL을 주고 Claude가 Skill을 자동 제작하는 패턴을 익힌다.', topics: ['neolord0/hwp2hwpx — hwp → hwpx 변환 라이브러리', 'GitHub URL + 목적 프롬프트만으로 Skill 제작 요청', 'Claude가 레포 분석 → 설계 → Skill 생성', '라이브러리를 몰라도, 언어가 달라도 Skill로 만들 수 있다'], practice: null, action: { label: 'github.com/neolord0/hwp2hwpx', type: 'link', url: 'https://github.com/neolord0/hwp2hwpx' } },
+            { goal: 'hwp2hwpx 레포를 주고 Claude가 Skill을 직접 만들도록 한다.', topics: ['프롬프트 그대로 입력 (hwp2hwpx URL 포함)', 'Claude의 레포 분석 → Skill 생성 과정 관찰', '생성된 hwp_to_hwpx.py Skill 내용 확인'], practice: 'https://github.com/neolord0/hwp2hwpx 참고해서 .hwp를 .hwpx로 변환하는 Skill 만들어줘', action: { label: 'github.com/neolord0/hwp2hwpx', copy: 'https://github.com/neolord0/hwp2hwpx 참고해서 .hwp 파일을 .hwpx로 변환하는 Python Skill을 만들어줘' } },
+            { goal: 'gonggong 템플릿으로 업무 보고서를 생성한다.', topics: ['hwpxskills Skill 제작 요청', 'report-template.hwpx 기반 보고서 생성', '생성된 .hwpx 파일을 폴라리스 오피스 웹버전에서 열기'], practice: 'gonggong report-template.hwpx로 [주제] 보고서 만들어줘', action: { label: '폴라리스 오피스 웹버전', type: 'link', url: 'https://hwp.polarisoffice.com/' } },
+            { goal: '4종 Skill을 파이프라인으로 연결해 자동화를 완성한다.', topics: ['엑셀 → 워드·PPT·한글 동시 생성 흐름', '에이전트 명령 하나로 전체 실행', 'Claude가 4개 Skill 순서 자동 조율', '최종 결과물 4종 동시 확인'], practice: null },
+            { goal: '명령 하나로 4종 문서를 동시에 생성한다.', topics: ['샘플 데이터 10행 입력', '"엑셀 읽어서 워드·PPT·한글 보고서 모두 만들어줘" 요청', '4종 파일(docx·pptx·hwpx) 모두 생성 확인'], practice: '매출데이터_템플릿.xlsx 읽어서 워드, PPT, 한글 보고서를 모두 동시에 만들어줘' }
+                        ]
+                    },
+                    {
+                        num: 2, title: '웹 브라우저 자동화', hours: '2시간 · Web Automation',
+                        goal: 'Playwright·Puppeteer·Selenium 원리를 이해하고, MCP로 AI를 연결해 books.toscrape → Wikipedia 레코딩 → 가상 커뮤니티 사이트 전체 탐색·스크린샷·PPT 생성까지 완성한다.',
+                        topics: ['웹 브라우저 제어 라이브러리 종류 및 원리 (Playwright·Puppeteer·Selenium)', 'AI와 브라우저의 소통 방식 — MCP · CDP · DOM 스냅샷', 'Playwright MCP 설치 (claude mcp add)', '실습 1: books.toscrape.com 스크래핑 연습', '실습 2: Wikipedia 레코딩 → 스크립트화 → 헤드리스 CLI', '실습 3: 가상 커뮤니티 HTML — 회원가입·로그인·탐색·스크린샷·PPT'],
+                        practice: '가상 커뮤니티 사이트를 AI가 직접 탐색해 전체 기능을 파악하고, 각 페이지 스크린샷으로 유저 플로우 PPT를 자동 생성한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg'],
+                        slideDescs: [
+            { goal: 'Playwright·Puppeteer·Selenium 차이와 AI가 MCP로 브라우저와 소통하는 원리를 이해한다.', topics: ['Playwright: Microsoft · Python/JS · 자동 대기 · MCP 공식 지원', 'Puppeteer: Google · Node.js 전용 · Chrome/Edge 최적화', 'Selenium: 가장 오래됨 · 명시적 대기 필요', 'AI 연동: Claude → MCP Tool → Playwright 서버 → CDP → 브라우저', 'AI는 DOM 스냅샷을 텍스트로 받아 판단한다'], practice: null },
+            { goal: '웹 자동화 원리와 Playwright vs Selenium 차이를 파악한다.', topics: ['코드 → 브라우저 제어 → 클릭·입력·데이터 추출', 'Playwright: 자동 대기 내장 · 설치 간단 (권장)', 'Selenium: 레거시 지원 · 명시적 대기 필요'], practice: null },
+            { goal: 'Playwright MCP를 설치하고 Claude Code에 연결한다.', topics: ['claude mcp add playwright npx @playwright/mcp@latest', 'Claude Code 재시작 후 /mcp 상태 확인', 'browser_navigate / browser_snapshot / browser_take_screenshot 툴 확인'], practice: null, action: { label: '설치 명령어', copy: 'claude mcp add playwright npx @playwright/mcp@latest' } },
+            { goal: 'books.toscrape.com에서 Playwright MCP 기본 조작을 익힌다.', topics: ['books.toscrape.com — 법적 제한 없는 학습 전용 사이트', '접속 → 스크린샷 → 책 제목·가격 수집', '수집 결과 확인'], practice: 'books.toscrape.com 접속해서 책 5권 제목과 가격 수집해줘', action: { label: 'books.toscrape.com', type: 'link', url: 'http://books.toscrape.com' } },
+            { goal: 'Wikipedia에 접속해 검색창 셀렉터를 분석한다.', topics: ['ko.wikipedia.org 접속 + 스냅샷', '검색창(input) 셀렉터 탐색', 'browser_snapshot으로 DOM 구조 파악'], practice: 'ko.wikipedia.org 접속하고 검색창 셀렉터 찾아줘', action: { label: '한국 위키피디아', type: 'link', url: 'https://ko.wikipedia.org' } },
+            { goal: '검색창에 키워드를 입력해 결과 페이지 내용을 읽는다.', topics: ["'인공지능' 키워드 입력 + 검색 실행", '결과 페이지 제목·첫 문단 수집', '레코딩 = 단계별 조작을 순서대로 관찰'], practice: "Wikipedia 검색창에 '인공지능' 입력 후 결과 첫 문단 가져와줘" },
+            { goal: '레코딩한 Wikipedia 검색 동작을 headless Python 스크립트로 변환한다.', topics: ['Python 스크립트 자동 생성 요청', 'headless=True 설정 → 브라우저 창 없이 실행', '터미널에 검색 결과 출력 확인'], practice: 'Wikipedia 키워드 검색 → 첫 문단 출력하는 headless Python 스크립트 만들어줘' },
+            { goal: '실습 3에서 사용할 가상 커뮤니티 HTML 사이트 구조를 파악한다.', topics: ['로컬스토리지 기반 — 서버 불필요', '기능: 회원가입·로그인·게시판·글쓰기·댓글·마이페이지·로그아웃', 'AI 탐색 시나리오 전체 흐름 확인'], practice: null, action: { label: '가상 커뮤니티 사이트', type: 'link', url: 'https://hw5511.github.io/ai-agent-web/playwright_demo/' } },
+            { goal: 'AI가 회원가입 폼을 찾아 직접 작성한다.', topics: ['HTML 파일 브라우저로 열기 (file:// 경로 확인)', '회원가입 버튼·입력란 탐색', '가입 완료 확인'], practice: 'file:///경로/community.html 접속해서 회원가입 버튼 찾아 회원가입해줘' },
+            { goal: '로그인 후 게시판으로 이동해 최신 글 목록을 파악한다.', topics: ['로그인 폼 찾아 계정 입력', '게시판 이동 + 최신 글 5개 제목 확인', '네비게이션 구조 파악'], practice: '로그인하고 게시판으로 이동해서 최신 글 5개 제목 알려줘' },
+            { goal: '게시물 작성·댓글 입력·스크롤 탐색을 단계별로 진행한다.', topics: ['글쓰기 버튼 탐색 → 게시물 작성', '댓글 입력란 찾아 댓글 달기', '댓글 영역 스크롤 탐색'], practice: '글쓰기 → 댓글 달기 → 댓글 영역 스크롤해서 전체 확인해줘' },
+            { goal: '전체 페이지 스크린샷 → python-pptx로 유저 플로우 PPT를 자동 생성한다.', topics: ['회원가입·로그인·게시판·게시물·댓글·마이페이지 스크린샷', 'ADV 01 python-pptx Skill 재사용', '페이지별 슬라이드 + 설명 자동 구성'], practice: '모든 페이지 스크린샷 찍고 유저 플로우 PPT 만들어줘' }
+                        ]
+                    },
+                    {
+                        num: 3, title: 'GWS CLI로 Google Workspace 자동화', hours: '2시간 · Tool & Automation',
+                        goal: 'GWS CLI + gcloud를 설치하고, Playwright MCP로 OAuth 설정을 안내받아 Drive·Gmail·Calendar·Sheets·Docs·Forms를 Claude가 직접 제어하는 파이프라인을 완성한다.',
+                        topics: ['통합 설치 프롬프트로 Claude가 gws 설치·인증 전 과정 처리', 'Playwright MCP로 OAuth 클라이언트 GCP Console 화면 안내', 'gws auth login -s drive,gmail,calendar,sheets,docs,forms', 'GWS CLI Skill 문서화 → 자연어 요청을 gws 명령으로 자동 변환', '실습 4종: Drive · Gmail · Calendar · Sheets/Docs/Forms'],
+                        practice: 'Claude가 Drive·Gmail·Calendar·Sheets를 gws 명령으로 직접 조작하고, 실습 결과를 Sheets로 자동 정리한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg'],
+                        slideDescs: [
+            { goal: 'ADV 3 목표와 GWS CLI 접근 방식을 안내한다.', topics: ['수강생은 명령어를 몰라도 됨 — Claude가 gws CLI를 직접 실행', '통합 설치 프롬프트로 설치·인증 자동 처리', 'GWS CLI Skill 문서화', '실습 4종 구성'], practice: null },
+            { goal: '통합 설치 프롬프트를 Claude에 붙여넣어 gws 설치·인증을 완료한다.', topics: ['npm install -g @googleworkspace/cli (일반 터미널)', 'gcloud SDK: Claude가 exe 다운로드 + 관리자 권한 실행 처리', 'gcloud auth login + GCP 프로젝트 생성', 'OAuth 클라이언트 — Playwright MCP로 화면 스냅샷 안내'], practice: null, action: { label: '통합 설치 프롬프트 복사', copy: 'GWS CLI 설치 및 인증을 처음부터 끝까지 도와줘.\n\n[설치]\n1. npm install -g @googleworkspace/cli 실행 (일반 터미널)\n2. gcloud SDK 설치 — 아래 PowerShell 명령을 실행해서 설치 파일 다운로드 후 관리자 권한으로 자동 실행해줘:\n   Invoke-WebRequest -Uri "https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe" -OutFile "$env:TEMP\\GoogleCloudSDKInstaller.exe"\n   Start-Process "$env:TEMP\\GoogleCloudSDKInstaller.exe" -Verb RunAs -Wait\n   (설치 마법사 팝업이 뜨면 내가 Next 클릭해서 설치 완료할게)\n3. gcloud auth login --launch-browser 로 gcloud 인증\n   Playwright MCP로 열린 브라우저에서 인증을 진행해줘.\n   브라우저가 자동으로 열리지 않으면: 10초 타임아웃 후 출력에서 인증 URL 추출 → Playwright MCP로 직접 열어서 인증 완료\n4. gcloud projects create [고유ID] --name=gws-workspace 프로젝트 생성\n5. gcloud config set project [프로젝트ID]\n6. gws auth setup --project [프로젝트ID] (Forms API 포함 활성화)\n\n[OAuth 클라이언트 — Playwright MCP로 브라우저 스냅샷 찍으며 단계별 안내]\n7. OAuth 동의 화면: External·앱이름·이메일 설정\n8. 테스트 사용자에 내 Gmail 추가 (필수)\n9. OAuth 클라이언트 ID 생성 (데스크톱 앱) → ID와 Secret 저장\n\n[환경변수 및 최종 인증]\n10. ~/.config/gws/.env 에 CLIENT_ID·SECRET·PROJECT_ID 저장\n11. gws auth login -s drive,gmail,calendar,sheets,docs,forms\n    Playwright MCP로 열린 브라우저에서 인증을 진행해줘.\n    브라우저가 자동으로 열리지 않으면: 10초 타임아웃 후 출력에서 인증 URL 추출 → Playwright MCP로 직접 열어서 인증 완료\n12. gws auth status 로 완료 확인' } },
+            { goal: 'gws auth login 성공을 확인하고 6개 서비스 인증 상태를 검증한다.', topics: ['gws auth login -s drive,gmail,calendar,sheets,docs,forms', '"Google에서 확인하지 않은 앱" 경고 처리 방법', 'gws auth status 로 인증 완료 확인', 'gws drive files list 테스트'], practice: null },
+            { goal: 'gws CLI 사용법 문서를 Skill로 만들어 자연어 요청을 명령으로 변환한다.', topics: ['Skill 문서 생성 요청: "gws CLI 사용법 gws_skill.md로 만들어줘"', 'drive/gmail/calendar/sheets 핵심 명령 패턴 포함', '이후 자연어 요청 → Claude가 gws 명령 자동 변환·실행'], practice: 'gws CLI 사용법 정리해서 gws_skill.md Skill 문서로 만들어줘' },
+            { goal: 'Claude가 gws drive로 파일 조회·업로드·다운로드를 수행한다.', topics: ['드라이브 최근 파일 5개 목록 조회', '텍스트 파일 생성 후 업로드', '업로드 파일 다운로드 확인'], practice: '내 드라이브 최근 파일 5개 목록 보여주고, 텍스트 파일 하나 만들어서 업로드해줘' },
+            { goal: 'Claude가 gws gmail로 메일을 조회하고 발송한다.', topics: ['안 읽은 메일 3개 제목·발신자 조회', '본인 이메일로 테스트 메일 발송', 'Gmail에서 수신 확인'], practice: '안 읽은 메일 3개 요약해주고, 나한테 실습 완료 메일 보내줘' },
+            { goal: 'Claude가 gws calendar로 일정을 조회하고 새 이벤트를 추가한다.', topics: ['이번 주 일정 목록 조회', '내일 오후 3시 테스트 일정 추가', 'Google Calendar에서 확인'], practice: '이번 주 일정 보여주고, 내일 오후 3시에 테스트 일정 하나 추가해줘' },
+            { goal: 'Claude가 gws로 Sheets·Docs·Forms를 각각 생성한다.', topics: ['Google Sheets — 월별 매출 표 생성', 'Google Docs — 회의록 문서 생성', 'Google Forms — 만족도 설문 3문항 생성'], practice: '구글 시트·닥스·폼 각 하나씩 만들어줘 (매출표 / 회의록 / 만족도 설문)' }
+                        ]
+                    },
+                    {
+                        num: 4, title: '외부 API로 AI 기능 확장하기', hours: '2시간 · Tool & Automation',
+                        goal: 'API 키 발급 방법을 익히고, 네이버 오픈 API·타입캐스트 TTS API를 Claude가 Skill로 제작·실행하는 전 과정을 완성한다.',
+                        topics: ['API 키 발급을 두려워하지 말자 — MCP/CLI가 적은 지금 핵심 스킬', '네이버 오픈 API 소개 · 종류 · 앱 등록 · 데이터랩 Skill 제작', '타입캐스트 TTS API — 소개 · 키 발급 · voice_id · Skill 제작', 'public-apis-4Kr — 원하는 API 직접 골라서 연결하기'],
+                        practice: '네이버 데이터랩 API와 타입캐스트 TTS API를 Claude가 Skill로 제작하고, public-apis-4Kr에서 원하는 API를 직접 선택해 연결한다.',
+                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg'],
+                        slideDescs: [
+            { goal: 'ADV 4 목표와 API 키 발급 중심 접근 방식을 안내한다.', topics: ['API 키 발급 = AI 활용의 첫 번째 실전 스킬', '네이버 오픈 API · 타입캐스트 · public-apis 구성', '카드 등록 없이 발급 가능한 API만 사용'], practice: null },
+            { goal: 'API 키 발급이 두렵지 않은 이유와 중요성을 이해한다.', topics: ['MCP/CLI가 아직 적은 서비스가 대부분 — API 키가 유일한 연결 수단', '발급 4단계: 회원가입 → 콘솔 → 키 생성 → 복사', 'Claude에게 발급 방법을 물으면 단계별 안내', 'API 키 = 어떤 서비스든 에이전트로 연결하는 열쇠'], practice: null },
+            { goal: '네이버 오픈 API의 특징과 이번 강의에서 사용할 API를 파악한다.', topics: ['무료 쿼터 · 카드 불필요 · 한국어 강점', '클라이언트 ID + Secret 두 가지 키로 전체 사용', '데이터랩: 검색어 트렌드 / 쇼핑인사이트'], practice: null },
+            { goal: '네이버 오픈 API 7개 카테고리와 30개 이상의 API 종류를 파악한다.', topics: ['인증 / AI·번역(Papago·Clova) / 지도·위치', '검색 12종 (블로그·뉴스·이미지·쇼핑 등)', '콘텐츠 작성 / 유틸리티 / 데이터랩'], practice: null },
+            { goal: '네이버 개발자 센터에서 애플리케이션을 등록하고 API를 선택한다.', topics: ['developers.naver.com/apps/#/list 접속', '애플리케이션 이름 입력', '데이터랩(검색어트렌드) + 데이터랩(쇼핑인사이트) 선택'], practice: null, action: { label: '네이버 개발자 센터', type: 'link', url: 'https://developers.naver.com/apps/#/list' } },
+            { goal: '환경 설정 완료 후 클라이언트 ID와 Secret을 복사한다.', topics: ['환경: Web 선택 → URL: http://localhost:3000', '클라이언트 ID 복사', '클라이언트 Secret 복사'], practice: null },
+            { goal: 'API 문서를 Claude에게 읽히고 데이터랩 CLI Skill을 제작한다.', topics: ['curl로 API 문서 2개 읽기 (검색어트렌드·쇼핑인사이트)', 'Client ID와 Secret 제공', 'CLI 스크립트 형태 Skill 제작 및 실행 테스트'], practice: '네이버 데이터랩 API 문서 읽고 Client ID/Secret으로 CLI Skill 만들어줘', action: { label: '데이터랩 API 문서', type: 'link', url: 'https://developers.naver.com/docs/serviceapi/datalab/search/search.md' } },
+            { goal: '타입캐스트가 무엇인지와 API 활용 시나리오를 이해한다.', topics: ['100개 이상 AI 캐릭터 목소리 · 한국어 특화', 'REST API: voice_id + text → MP3 파일 반환', '활용: 뉴스 요약 음성화 · 카드뉴스 내레이션'], practice: null },
+            { goal: '타입캐스트 개발자 페이지에서 API 키를 발급받는다.', topics: ['typecast.ai/developers/api 접속', '구글 계정으로 회원가입/로그인', 'API 키 탭 → 키 생성 → 복사'], practice: null, action: { label: '타입캐스트 API 페이지', type: 'link', url: 'https://typecast.ai/developers/api' } },
+            { goal: '원하는 AI 캐릭터를 선택하고 voice_id를 복사한다.', topics: ['캐릭터 목록 접속 → 미리 듣기로 목소리 선택', 'URL 또는 개발자 도구에서 voice_id 확인', 'voice_id 메모 (24자리 hex 형태)'], practice: null },
+            { goal: 'API 문서를 학습시키고 타입캐스트 TTS CLI Skill을 제작한다.', topics: ['typecast.ai/docs/overview 문서 읽기', 'API 키 + voice_id 제공', 'CLI TTS Skill 제작 및 실행 테스트'], practice: 'typecast.ai/docs/overview 읽고 API키와 voice_id로 TTS CLI Skill 만들어줘', action: { label: '타입캐스트 API 문서', type: 'link', url: 'https://typecast.ai/docs/overview' } },
+            { goal: 'public-apis-4Kr에서 API를 골라 직접 연결하는 Skill을 제작한다.', topics: ['github.com/yybmion/public-apis-4Kr — 한국 공개 API 목록', '원하는 API 선택 → 키 발급 → 문서 읽기 → Skill 제작', '나만의 API Skill 완성'], practice: '원하는 API 선택해서 키 발급받고 Claude에게 Skill 만들어줘', action: { label: 'public-apis-4Kr', type: 'link', url: 'https://github.com/yybmion/public-apis-4Kr?tab=readme-ov-file' } }
+                        ]
+                    },
+                    {
+                        num: 5, title: 'Notion DB + API 연결', hours: '2시간 · Workflow Automation',
+                        goal: 'Notion DB 구조를 이해하고 API 토큰을 발급하여 Claude가 스스로 Notion 조회 스킬을 만드는 전 과정을 완성한다.',
+                        topics: ['Notion이란 + DB가 필요한 이유', 'Notion MCP vs API 차이', 'API 토큰 발급 + Integration 연결', 'Claude가 스스로 스킬 자동 생성', '템플릿 복사 + DB 구조 파악'],
+                        practice: 'Notion API 토큰을 Claude에게 전달하면 Claude가 notion-query.py 스킬을 자동으로 생성하고 DB 구조를 파악한 뒤 샘플 데이터를 채운다.',
+                        slides: ['Step5_개요.svg','Notion이란.svg','데이터베이스가_필요한_이유.svg','Notion_DB란.svg','Notion_MCP_vs_Notion_API.svg','Notion_API_토큰_발급.svg','Integration_페이지_연결.svg','Claude에게_API_키_전달_스킬_자동_생성.svg','템플릿_복사와_세팅.svg','Claude에게_구조_파악_지시.svg'],
+                        slideDescs: [
+            { goal: 'Step 5의 학습 목표와 전체 구성을 이해한다.', topics: ['Notion DB + API 연결 수업 개요', 'Notion이란 / DB 필요성 / MCP vs API', 'API 토큰 발급 + Integration 연결', '실습: notion-query 스킬 자동 생성'], practice: null },
+            { goal: 'Notion이 무엇인지와 AI 에이전트와의 연결 구조를 이해한다.', topics: ['Notion = 문서 + DB + 칸반을 하나로', '왜 Notion인가 — API 공개, AI가 직접 읽고 씀', '작업 지시 등록 → Claude 자동 감지·실행 → 결과 저장', 'Notion MCP로 Claude와 연결'], practice: null },
+            { goal: 'AI가 기억하려면 저장 공간이 필요한 이유를 이해한다.', topics: ['세션 종료 시 기억 초기화 문제', 'Notion DB = AI의 외부 기억 장치', '지시 등록 → 감지 → 실행 → 결과 저장 흐름'], practice: null },
+            { goal: 'Notion DB가 무엇인지, 왜 단순 문서 대신 DB를 써야 하는지 이해한다.', topics: ['DB = 행(레코드) + 열(속성)로 구조화된 저장소', '단순 문서 vs DB — 필터·자동화 가능 여부 차이', '핵심 속성: Title · Status · Date · Relation'], practice: null },
+            { goal: 'Notion MCP와 Notion API의 차이를 이해하고 이번 수업 방향을 파악한다.', topics: ['MCP — 대화 중 직접 연결, 제한적 쿼리', 'API — Python으로 자유로운 CRUD', '이번 수업: API 방식으로 notion-query 스킬 제작'], practice: null },
+            { goal: 'Notion API 토큰을 발급한다.', topics: ['notion.so/my-integrations 접속', 'New integration → 이름 입력 → Submit', 'Internal Integration Token 복사 (secret_...)'], practice: null, action: { label: 'Notion Integrations', type: 'link', url: 'https://www.notion.so/my-integrations' } },
+            { goal: 'Integration을 페이지에 연결하고 DB ID를 확인한다.', topics: ['DB 페이지 → ... 메뉴 → Connections → Integration 선택', 'Confirm → 연결 완료', 'URL에서 DB ID 부분 복사'], practice: null },
+            { goal: 'Claude에게 API 키를 주면 Notion 조회 스킬을 자동으로 만들어준다.', topics: ['API 토큰 + DB ID 제공', 'Claude가 notion-query.py 자동 생성', 'DB 조회 결과 확인 → CLAUDE.md에 스킬 등록'], practice: 'Notion API 토큰과 DB ID를 Claude에게 주고 notion-query.py 스킬을 만들어줘' },
+            { goal: 'Notion 템플릿을 복사하고 Integration을 연결한다.', topics: ['notion.com/templates 접속 → 템플릿 선택', '"Duplicate" 클릭 → 내 워크스페이스에 복사', 'Integration 연결 후 DB ID 복사'], practice: null, action: { label: 'Task Tracker 템플릿', type: 'link', url: 'https://www.notion.com/ko/templates/to-do-list-501' } },
+            { goal: 'Claude에게 DB 구조 파악과 샘플 데이터 채우기를 지시한다.', topics: ['DB 구조 분석 지시 → 속성 목록 확인', '구조에 맞춰 샘플 데이터 5개 자동 입력', '모든 과정을 Claude가 자동 처리'], practice: 'Notion DB 구조 파악해서 샘플 데이터 5개 채워줘' }
+                        ]
+                    },
+                    {
+                        num: 6, title: '세컨드 브레인 — AI 메모 자동 분류', hours: '2시간 · Workflow Automation',
+                        goal: '트리거 키워드를 입력하면 Claude가 메모를 분류하고 Notion DB 4종에 자동으로 저장하는 세컨드 브레인 시스템을 구축한다.',
+                        topics: ['세컨드 브레인 개념 + 4가지 메모 종류와 트리거 키워드', 'Notion DB 4종 구조 + 스키마 설계', 'SKILL.md 스킬 관리 + CLAUDE.md 분류 규칙 작성', '실습: 터미널 메모 자동 저장 + 중요도 자동 태깅'],
+                        practice: '트리거 키워드를 붙인 메모를 입력하면 Claude가 분류하고 해당 Notion DB에 자동으로 저장하는 세컨드 브레인 파이프라인을 완성한다.',
+                        slides: ['세컨드_브레인이란.svg','4가지_메모_종류와_트리거.svg','Notion_DB_4종_구조.svg','스키마란.svg','DB_스키마_구조.svg','SKILL_md로_스킬_관리.svg','CLAUDE_md_분류_규칙_작성.svg','실습_터미널_메모_자동_분류.svg','중요도_자동_태깅.svg'],
+                        slideDescs: [
+            { goal: '세컨드 브레인 개념과 이번 수업에서 구축할 시스템을 이해한다.', topics: ['세컨드 브레인 = 외부 두뇌, 기록이 지식이 됨', '기존 방식의 문제 — 앱 분산, 검색 불가', '트리거 키워드 → Claude 분류 → Notion DB 저장 흐름', 'ADV 05 Notion DB + 이번 메모 자동화 연결'], practice: null },
+            { goal: '4가지 메모 종류와 트리거 키워드를 이해한다.', topics: ['!할일: Personal Tasks DB로 저장', '@업무: Work Tasks DB로 저장', '#메모: Notes DB로 저장', '$배움: Docs DB로 저장'], practice: null },
+            { goal: 'Notion DB 4종 구조와 Step5와의 연결 방식을 이해한다.', topics: ['Personal Tasks / Work Tasks / Notes / Docs — 4종 DB', 'Step5에서 만든 DB에 Step6 구조 연결', '각 DB의 역할과 관계', 'Claude가 트리거에 따라 저장 위치 결정'], practice: null },
+            { goal: '스키마의 개념을 이해한다.', topics: ['스키마 = DB의 컬럼 구조 설계도', '엑셀 헤더 = 스키마 비유', '컬럼 이름·데이터 타입·선택 옵션 3요소', 'Claude에게 스키마를 주면 DB를 자동 생성'], practice: null },
+            { goal: 'DB 4종의 스키마 구조를 파악한다.', topics: ['Title / Status / Due Date / Tag / Priority / Date 속성 구성', 'Personal·Work Tasks: Status + Due Date 포함', 'Notes: Date 자동 저장, Docs: Topic 자동 분류', 'Priority: 높음/보통/낮음 자동 태깅'], practice: null },
+            { goal: 'SKILL.md로 스킬을 관리하는 방법을 익힌다.', topics: ['SKILL.md = Claude가 읽는 스킬 목록 파일', '스킬명 + 경로 + 사용법을 SKILL.md에 등록', 'Claude가 SKILL.md를 읽고 실행 방법 이해', 'notion-save-personal / notion-save-work 스킬 등록'], practice: null },
+            { goal: 'CLAUDE.md에 트리거 → DB 분류 규칙을 작성한다.', topics: ['트리거 키워드 → DB 매핑 지시문 작성', '!할일 → notion-save-personal 스킬 실행', '@업무 → notion-save-work 스킬 실행', '#메모/#배움 → Notes/Docs 스킬 실행'], practice: null },
+            { goal: '터미널 메모 입력 → Notion 자동 저장 실습을 진행한다.', topics: ['트리거 키워드 입력 → Claude 분류 확인', '스킬 자동 실행 → Notion DB 저장 확인', '4가지 트리거 모두 테스트', 'Status·Due Date·Priority 자동 추출 확인'], practice: '!할일 내일까지 보고서 제출' },
+            { goal: '중요도 자동 태깅 기능을 추가한다.', topics: ['메모 내용에서 긴급도 자동 판단', '"긴급", "오늘까지" → Priority=높음', 'CLAUDE.md에 태깅 규칙 추가', '자동 태깅 결과 Notion에서 확인'], practice: '#메모 긴급 내일 발표 준비 필요' }
+                        ]
+                    },
+                    {
+                        num: 7, title: 'PM 에이전트 — Notion Work DB 자동화', hours: '2시간 · Workflow Automation',
+                        goal: 'Step6에서 만든 Notion Work DB에 오늘 task를 등록하면 Claude가 유형 속성을 읽고 캘린더 등록·데이터랩 조사·시트 생성·이메일 발송을 자동으로 처리하는 PM 에이전트를 구축한다.',
+                        topics: ['PM 에이전트 개념 — Notion을 보고 알아서 처리', 'Work DB 유형 속성(미팅/리서치/문서/이메일) 기반 분류', 'CLAUDE.md 처리 규칙 + Status 자동 업데이트', '케이스 4종: 캘린더·데이터랩·시트·이메일'],
+                        practice: 'Work DB에 task 4개를 등록하고 "Work에서 오늘 처리해야 하는 것들 찾아서 처리해줘"라고 명령하면 Claude가 유형 속성을 읽고 4가지 스킬을 자동 실행한다.',
+                        slides: ['PM_에이전트란.svg','한_번_명령의_위력.svg','전체_흐름도.svg','Notion_실시간_대시보드.svg','Status_자동_업데이트_설계.svg','task_분류_로직_설계.svg','스킬_세팅_확인.svg','work-meeting_스킬_만들기.svg','work-research_스킬_만들기.svg','work-docs_스킬_만들기.svg','work-email_스킬_만들기.svg','CLAUDE_md_처리_규칙_작성.svg','실습_준비_Notion_task_등록.svg','케이스1_캘린더_등록.svg','케이스2_데이터랩_조사.svg','케이스3_시트_생성.svg','케이스4_지메일_발송.svg','실습_명령_후_Notion_관찰.svg','2라운드_나만의_task_입력.svg','2라운드_실습_나만의_결과.svg'],
+                        slideDescs: [
+            { goal: 'PM 에이전트의 개념과 기존 방식과의 차이를 이해한다.', topics: ['기존 방식 — 사람이 스킬을 하나씩 수동 호출', 'PM 에이전트 — Notion을 읽고 유형 판단 후 자동 실행', 'Work DB가 에이전트의 작업 지시 목록', '한 번 명령으로 4가지 업무 자동 처리'], practice: null },
+            { goal: '한 번 명령으로 오늘 할 일 전체가 처리되는 흐름을 이해한다.', topics: ['사용자 명령 1회 → Notion 조회 → 유형 분류 → 스킬 실행 → 완료 보고', '유형 속성 기반 분류 로직', '4단계 자동 처리 구조'], practice: 'Work에서 오늘 처리해야 하는 것들 찾아서 처리해줘' },
+            { goal: 'Notion task 하나가 처리되는 전체 흐름을 파악한다.', topics: ['사용자 명령 → Notion 조회 → task 수신 → 유형 판단', 'task 처리 루프 — 목록이 빌 때까지 반복', 'Status: 진행중 → 스킬 실행 → Status: 완료'], practice: null },
+            { goal: 'Notion이 실시간 작업 현황 대시보드가 되는 원리를 이해한다.', topics: ['Status 3단계: 진행전 → 진행중 → 완료', 'Claude가 Notion API로 직접 Status 변경', 'Notion을 열어두면 처리 과정을 실시간 확인 가능'], practice: null },
+            { goal: 'Status 자동 업데이트 설계 규칙을 작성한다.', topics: ['처리 시작 직전 → 상태 = 진행 중', '처리 완료 직후 → 상태 = 완료', '오류 발생 시 → 메모에 [오류] 기록 후 다음 task 진행'], practice: null },
+            { goal: 'Work DB 유형 속성 기반 task 분류 로직을 설계한다.', topics: ['유형 = 미팅 → work-meeting 스킬', '유형 = 리서치 → work-research 스킬', '유형 = 문서 → work-docs 스킬', '유형 = 이메일 → work-email 스킬'], practice: null },
+            { goal: 'Step3/4/6에서 만든 스킬 파일이 있는지 확인한다.', topics: ['gws_skill.md — Step3 GWS CLI 통합 스킬', 'naver-datalab.md — Step4 네이버 API 스킬', 'notion-work.md — Step6 Work DB 조회 스킬', '.claude/skills/ 폴더에 3개 모두 존재 확인'], practice: null, action: { label: '스킬 폴더 확인 명령어 복사', copy: 'ls .claude/skills/' } },
+            { goal: 'Work DB task 유형별로 필요한 행동과 사용 도구를 파악한다.', topics: ['미팅 task → 캘린더에 일정 등록 → gws calendar', '리서치 task → 트렌드 조사 후 결과 저장 → naver datalab', '문서 task → 구글 시트 생성 → gws sheets', '이메일 task → 이메일 작성 후 발송 → gws gmail'], practice: null },
+            { goal: '각 유형의 처리 방식을 내 말로 설명해서 Claude와 대화로 스킬 파일 4개를 만든다.', topics: ['복사 버튼 없이 — 처리 방식을 직접 설명하며 Claude에게 요청', '미팅: 날짜·시간 파악 → calendar 등록 → 완료 처리', '리서치: 키워드 추출 → datalab 조사 → 메모 저장', '문서: 내용 파악 → sheets 생성 / 이메일: 수신자·용건 → gmail 발송'], practice: null },
+            { goal: 'CLAUDE.md에 분류 규칙 + Status 업데이트 규칙을 통합 작성한다.', topics: ['PM 에이전트 처리 규칙 전체 지시문 구성', '유형 → 작업방식 스킬 매핑 규칙', '오류 처리 + 다음 task 진행 규칙'], practice: null, action: { label: 'CLAUDE.md 처리 규칙 복사', items: [{ desc: '전체 복사', copy: '## PM 에이전트 처리 규칙\n\n\'Work에서 오늘 처리해야 하는 것들 찾아서 처리해줘\' 명령 수신 시:\n\n1. notion-work 스킬로 오늘 마감일인 Work DB task 목록 조회\n2. 각 task를 순서대로 처리:\n   - 처리 시작 전: 상태 = \'진행 중\' 으로 변경\n   - 아래 유형별 스킬 실행\n   - 처리 완료 후: 상태 = \'완료\' 로 변경\n   - 오류 발생 시: 메모에 \'[오류] 사유\' 기록 후 상태는 그대로 두고 다음 task 진행\n\ntask 유형별 실행 스킬:\n- 유형 = \'미팅\'   \u2192 work-meeting 스킬: 태스크명에서 일정 파악 후 캘린더 등록\n- 유형 = \'리서치\' \u2192 work-research 스킬: 핵심 키워드 조사 후 결과를 메모에 저장\n- 유형 = \'문서\'   \u2192 work-docs 스킬: 관련 데이터 정리 시트 생성\n- 유형 = \'이메일\' \u2192 work-email 스킬: 태스크명 기반으로 이메일 작성 후 발송' }] } },
+            { goal: '1라운드 준비 — 템플릿을 복제하고 더미 task 마감일을 오늘로 설정한다.', topics: ['강사 템플릿 Duplicate → 내 워크스페이스로 복제', '더미 task 9개 자동 포함 확인', '오늘 처리할 4개 task 마감일을 오늘로 수정', '상태 = 시작 전 확인 → 실습 명령 준비'], practice: null, action: { label: 'Work DB 템플릿 복제', items: [{ link: { href: 'https://www.notion.so/woohee5511/PM-Work-Step-7-345ea273b92681b1a3b6c6fc914aabc3?source=copy_link', text: 'PM 에이전트 Work 플레이북 복제하기' }, desc: 'Duplicate 클릭 → 내 워크스페이스로 복제' }] } },
+            { goal: '케이스 1 — 유형=미팅: 미팅 일정을 캘린더에 자동 등록한다.', topics: ['"팀장님과 신규 프로젝트 킥오프 미팅 일정 확인" task 처리', '태스크명 분석 → work-meeting 스킬 실행', 'Google Calendar에 미팅 일정 생성', '상태: 완료 자동 반영'], practice: null },
+            { goal: '케이스 2 — 유형=리서치: 핵심 키워드 조사를 실행하고 메모에 저장한다.', topics: ['"경쟁사 AI 도구 도입 사례 조사" task 처리', '핵심 키워드 추출 → work-research 스킬 실행', '조사 결과 Work DB 메모 자동 저장', '상태: 완료 자동 반영'], practice: null },
+            { goal: '케이스 3 — 유형=문서: 업무 데이터를 구글 시트로 자동 생성한다.', topics: ['"이번달 업무 성과 정리 시트 작성" task 처리', '태스크명 분석 → work-docs 스킬 실행', '업무/성과/지표 컬럼 시트 자동 생성', '상태: 완료 자동 반영'], practice: null },
+            { goal: '케이스 4 — 유형=이메일: 업무 이메일을 자동 작성하고 발송한다.', topics: ['"거래처 담당자에게 프로젝트 진행 현황 이메일 발송" task 처리', '태스크명 분석 → Claude 이메일 작성', 'work-email 스킬로 업무 이메일 자동 발송', '상태: 완료 자동 반영'], practice: null },
+            { goal: '1라운드 실습 — 명령 후 Notion에서 더미 task가 자동 처리되는 과정을 실시간 관찰한다.', topics: ['실습 명령 1회 전송 후 Notion 화면 열어두기', 'Status가 하나씩 바뀌는 과정 실시간 관찰', '터미널 로그에서 실행 스킬 확인', '캘린더·시트·이메일 결과물 직접 확인'], practice: 'Work에서 오늘 처리해야 하는 것들 찾아서 처리해줘', action: { copy: 'Work에서 오늘 처리해야 하는 것들 찾아서 처리해줘' } },
+            { goal: '2라운드 준비 — 내 실제 업무 task 4개를 Work DB에 직접 입력한다.', topics: ['1라운드 완료 후 내 실제 업무 상황으로 task 입력', '유형 4가지(미팅/리서치/문서/이메일) 각 1개씩 등록', '마감일=오늘, 상태=시작 전으로 설정 (에이전트 조건)', '입력 완료 후 동일 명령 재실행'], practice: null, action: { label: 'Work DB 템플릿 복제', items: [{ link: { href: 'https://www.notion.so/woohee5511/PM-Work-Step-7-345ea273b92681b1a3b6c6fc914aabc3?source=copy_link', text: 'PM 에이전트 Work 플레이북 복제하기' }, desc: 'Duplicate 클릭 → 내 워크스페이스로 복제' }] } },
+            { goal: '2라운드 실습 — 내가 입력한 task가 자동 처리되며 에이전트 완성을 체감한다.', topics: ['동일 명령 1회로 내 실제 업무 4개 자동 처리', '더미가 아닌 내 캘린더 / 내 시트 / 내 이메일 생성', '명령은 같지만 결과는 내 업무 — context 기반 판단 확인', '이 에이전트에 내 업무를 맡길 수 있음을 체감'], practice: 'Work에서 오늘 처리해야 하는 것들 찾아서 처리해줘', action: { copy: 'Work에서 오늘 처리해야 하는 것들 찾아서 처리해줘' } }
+                        ]
+                    },
+                    {
+                        num: 8, title: '하네스 엔지니어링 — 나만의 에이전트 완성', hours: '2시간 · Capstone',
+                        goal: 'Step5~7에서 배운 Notion API·SKILL.md·PM 에이전트를 하나로 합쳐 멀티 에이전트 협업 시스템을 직접 세팅·실행하며 심화 과정을 수료한다.',
+                        topics: ['하네스 엔지니어링 개념 + 8가지 완성 요소', 'Step5 Notion + Step6 SKILL.md + Step7 PM → 캡스톤', '멀티 에이전트 시연 (PM + 5담당자 동시 실행)', 'Notion 세팅 + 폴링 실행 + 결과 확인 실습'],
+                        practice: '리허설_공유용/ 폴더를 세팅하고 PM에게 회의록을 투입하면 5명의 담당자가 동시에 자기 일을 처리한다.',
+                        slides: ['하네스_엔지니어링이란.svg','하네스_엔지니어링_완성_구조.svg','오늘_목표.svg','AI_이미지_생성_스킬.svg','멀티에이전트_데모_예고.svg','멀티에이전트_구조_해설.svg','시연_시나리오_신상품_기획회의.svg','실습_로드맵.svg','세팅_가이드.svg','실습_직접_세팅_테스트.svg','결과_공유_심화_수료.svg'],
+                        slideDescs: [
+            { goal: '하네스 엔지니어링의 개념과 역할을 이해한다.', topics: ['하네스 = CLAUDE.md + Skills + Hooks + 정책의 조합', 'AI를 단순 도우미 → 자율 실행 시스템으로 만드는 설계', '기초 과정(설치/환경)에서 심화(자동화 시스템)으로'], practice: null },
+            { goal: '하네스 엔지니어링 완성 구조 8요소를 파악한다.', topics: ['Before(트리거/Context/Input) → During(Logic/State) → After(Output/Report) → Control(Rules)', '8가지 요소가 조합된 자율 실행 에이전트 구조', 'ADV 01~07에서 배운 Skills이 하네스의 핵심 부품'], practice: null },
+            { goal: '오늘 최종 목표를 확인한다.', topics: ['Step5+6+7의 캡스톤 — 모든 스킬이 하나로 합쳐집니다', '멀티 에이전트 시연 관찰 (PM + 5명 동시 실행)', 'Notion 세팅 + 폴링 실행 + 결과 확인', '완성 결과를 서로 공유하며 수료'], practice: null },
+            { goal: 'Stability AI API로 이미지 생성 스킬을 만들고 하네스에 연결한다.', topics: ['platform.stability.ai에서 API 키 발급', 'Stable Diffusion 3.5 Flash (sd3.5-flash) 모델 사용', 'Claude에게 스킬 제작 요청 → SKILL.md + generate.py 자동 생성', '활용: 최주임 담당자 에이전트에 이 스킬이 그대로 사용됩니다'], practice: 'stability.ai API로 이미지 생성 스킬 만들어줘. 모델: sd3.5-flash, API 키: .env의 STABILITY_API_KEY, 입력: 이미지 설명, 출력: output/ 폴더에 PNG 저장', action: { label: 'Stability AI 플랫폼', items: [{ link: { href: 'https://platform.stability.ai/', text: 'platform.stability.ai — API 키 발급' }, desc: '우상단 Login → Sign Up → Dashboard → API Keys → Create Key' }] } },
+            { goal: '멀티 에이전트 시연에서 무엇을 볼지 미리 파악한다.', topics: ['PM + 5명 담당자 각 역할 확인', '방금 만든 이미지 생성 스킬 → 최주임 담당자에 적용', 'VSCode 6-split 화면에서 동시 실행', 'Notion DB 상태 변화 (시작 전 → 진행 중 → 완료)'], practice: null, action: { label: '시연 체크리스트', copy: '[ ] 리허설_공유용/ 폴더 VSCode에서 열기\n[ ] 터미널 6개 스플릿 준비\n[ ] 5명 폴링 대기 상태 확인\n[ ] PM 회의록 링크 준비\n→ 시연 완료 후 슬라이드로 복귀' } },
+            { goal: '방금 본 멀티 에이전트 구조를 이해한다.', topics: ['리허설_공유용/ 폴더 구조 — PM + 5담당자 .claude/ 분리', 'notion_poller.py 10초 폴링 → 감지 → 스킬 호출 흐름', 'Notion Work DB 스키마 (task/담당자/유형/상태/메모)', 'Step5 Notion + Step6 SKILL.md + Step7 PM이 조립된 결과'], practice: null, action: { label: '폴더 구조 복사', copy: '리허설_공유용/\n├── PM/.claude/ (회의록→DB등록)\n├── 박부장/.claude/ (시장조사, 경쟁사분석)\n├── 이과장/.claude/ (인플루언서, 예산안)\n├── 정대리/.claude/ (일정표, 외주컨택)\n├── 최주임/.claude/ (AI이미지 시안)\n├── 김대표/.claude/ (이사회보고서)\n└── _공용/ (notion_poller.py, .env.example)' } },
+            { goal: '멀티 에이전트 시연 시나리오 — 회의록에서 5개 산출물까지의 전체 흐름을 이해한다.', topics: ['회의록 Google Docs → PM 분석 → Notion DB 5개 task 등록', '담당자 5명 폴링 감지 → 동시 처리 시작', '각 담당자 스킬 호출 → 산출물 생성 (Sheets/Gmail/Drive/Slides)', 'Notion DB 상태 변화로 실시간 진행 확인'], practice: null, action: { label: '회의메모 열기', items: [{ link: { href: 'https://docs.google.com/document/d/1xou1GeVB5REq6aMME2FtS7RzINTkmqHmWh6Xeq3sKeQ/edit?usp=sharing', text: '신상품 기획회의 회의록 열기' }, desc: 'PM에게 투입할 Google Docs 링크' }] } },
+            { goal: '7단계 실습 로드맵을 파악하고 순서를 이해한다.', topics: ['Step1 Notion 템플릿 복제 + Integration 연결', 'Step2 .env 파일 3줄 설정', 'Step3 VSCode 터미널 6개 + claude 실행', 'Step4~7 폴링 시작 → 회의록 투입 → 결과 확인'], practice: null, action: { label: '실습 자료', items: [{ link: { href: 'https://github.com/hw5511/ai-agent-class/releases/download/step8-materials/rehearsal_shared.zip', text: 'rehearsal_shared.zip 다운로드' }, desc: '실습용 리허설_공유용/ 폴더 ZIP' }, { link: { href: 'https://www.notion.so/woohee5511/PM-347ea273b92681e191d3ce9586ffaa16?source=copy_link', text: 'Work DB 템플릿 복제하기' }, desc: '우상단 복제 버튼 클릭 → 내 워크스페이스에 복제' }] } },
+            { goal: '세팅 3단계(Notion 복제 / .env 설정 / 터미널 실행)를 완료한다.', topics: ['Notion 템플릿 복제 + Integration 연결 + DB ID 확인', '.env.example → .env 복사 후 토큰 3개 입력', 'VSCode 터미널 6개 분할 + 각 폴더 claude 실행', '담당자 5명 "폴링 시작" 입력 + 대기 상태 확인'], practice: 'guide.md 내용대로 세팅 도와줘', action: { label: '.env 설정 복사', copy: 'NOTION_TOKEN=secret_xxx\nREHEARSAL_DB_ID=xxx\nSTABILITY_API_KEY=sk-xxx\n\n# _공용/.env.example 파일을 .env로 복사 후 위 값 입력' } },
+            { goal: '직접 폴링 실행 + 회의록 투입 + 결과 확인으로 멀티 에이전트를 완성한다.', topics: ['담당자 5명 터미널에 "폴링 시작" 입력', 'PM 터미널에 회의록 Google Docs 링크 투입', 'Notion DB 상태 실시간 확인 (시작 전 → 진행 중 → 완료)', 'outputs/ 폴더 산출물 확인'], practice: '아래 회의록 분석해서 담당자별 task를 Notion Work DB에 등록해줘.\n\nhttps://docs.google.com/document/d/1xou1GeVB5REq6aMME2FtS7RzINTkmqHmWh6Xeq3sKeQ/edit?usp=sharing', action: { label: '실습 자료 + 프롬프트', items: [{ link: { href: 'https://github.com/hw5511/ai-agent-class/releases/download/step8-materials/rehearsal_shared.zip', text: '실습 자료 다운로드 (ZIP)' }, desc: '리허설_공유용/ 폴더 ZIP 파일' }, { link: { href: 'https://docs.google.com/document/d/1xou1GeVB5REq6aMME2FtS7RzINTkmqHmWh6Xeq3sKeQ/edit?usp=sharing', text: '회의메모 열기 (Google Docs)' }, desc: 'PM에게 투입할 회의록 공유 링크' }, { link: { href: 'https://www.notion.so/woohee5511/PM-347ea273b92681e191d3ce9586ffaa16?source=copy_link', text: 'Work DB 템플릿 복제 (Notion)' }, desc: '우상단 복제 → 내 워크스페이스에 복제' }], copy: '아래 회의록 분석해서 담당자별 task를 Notion Work DB에 등록해줘.\n\nhttps://docs.google.com/document/d/1xou1GeVB5REq6aMME2FtS7RzINTkmqHmWh6Xeq3sKeQ/edit?usp=sharing' } },
+            { goal: '각자 실행한 결과를 공유하고 심화 과정을 수료한다.', topics: ['완성된 멀티 에이전트 결과 공유 (1인당 3분)', 'ADV 01~08 핵심 스킬 조합 정리', '나만의 멀티 에이전트 확장 방향', '심화 과정 전체 수료'], practice: null }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        /* ============================================
+           State
+           ============================================ */
+        let currentCourse  = 'basic';
+        let currentSession = 0;   // 현재 스텝 인덱스
+        let currentSlide   = 0;   // 현재 스텝 내 이미지 슬라이드 인덱스
+        let sidebarOpen    = true;
+
+        /* ============================================
+           URL Hash State  (#course/sessionIdx/slideIdx)
+           ============================================ */
+        function pushHash() {
+            const hash = '#' + currentCourse + '/' + (currentSession + 1) + '/' + (currentSlide + 1);
+            if (location.hash !== hash) {
+                history.replaceState(null, '', hash);
+            }
+        }
+
+        function readHash() {
+            const raw = location.hash.replace('#', '');
+            if (!raw) return;
+            const parts = raw.split('/');
+            if (parts.length < 1) return;
+            const course = parts[0];
+            if (!COURSES[course]) return;
+            currentCourse = course;
+            const sessionIdx = Math.max((parseInt(parts[1]) || 1) - 1, 0);
+            const slideIdx   = Math.max((parseInt(parts[2]) || 1) - 1, 0);
+            const sessions   = COURSES[course].sessions;
+            currentSession = Math.min(Math.max(sessionIdx, 0), sessions.length - 1);
+            const slideCount = getSlideCount(sessions[currentSession]);
+            currentSlide = Math.min(Math.max(slideIdx, 0), slideCount - 1);
+            // 탭 UI 동기화
+            document.querySelectorAll('.course-tab').forEach(t => {
+                t.classList.toggle('active', t.dataset.course === currentCourse);
+            });
+        }
+
+        /* ============================================
+           Helper
+           ============================================ */
+        function getSlideCount(session) {
+            return (session.slides && session.slides.length > 0) ? session.slides.length : 1;
+        }
+
+        function getImagePath(course, stepNum, filename) {
+            const stepFolder = 'step' + String(stepNum).padStart(2, '0');
+            return 'assets/' + course + '/' + stepFolder + '/' + filename;
+        }
+
+        /* ============================================
+           Slide Rendering
+           ============================================ */
+        function renderSlides(course) {
+            const container = document.getElementById('slides-container');
+            const data      = COURSES[course];
+
+            container.innerHTML = data.sessions.map((s, i) => {
+                const bc  = data.badgeClass;
+                const num = String(s.num).padStart(2, '0');
+
+                // 이미지 슬라이드 HTML 생성
+                let imageSlidesHtml;
+                if (s.slides && s.slides.length > 0) {
+                    imageSlidesHtml = s.slides.map((filename, j) => {
+                        const src = getImagePath(course, s.num, filename);
+                        // 현재 세션의 첫 슬라이드만 즉시 로드, 나머지는 lazy (data-src)
+                        const imgAttr = (i === currentSession && j === 0)
+                            ? `src="${src}"`
+                            : `data-src="${src}"`;
+                        return `<div class="image-slide${j === 0 ? ' is-active' : ''}" data-img-index="${j}">
+                            <img ${imgAttr} alt="${s.title} - ${j + 1}"
+                                onerror="if(!this.dataset.src){this.style.display='none';this.nextElementSibling.style.display='flex'}">
+                            <div class="image-placeholder" style="display:none">
+                                <svg class="image-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <rect x="4" y="8" width="32" height="24" rx="3" stroke="#a3a3a3" stroke-width="2"/>
+                                    <circle cx="14" cy="17" r="3" stroke="#a3a3a3" stroke-width="1.5"/>
+                                    <path d="M4 26l8-6 6 5 6-4 12 8" stroke="#a3a3a3" stroke-width="1.5" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="image-placeholder-label">이미지 준비 중</span>
+                                <span class="image-placeholder-sub">${s.title} · 슬라이드 ${j + 1}</span>
+                            </div>
+                        </div>`;
+                    }).join('');
+                } else {
+                    imageSlidesHtml = `<div class="image-slide is-active" data-img-index="0">
+                        <div class="image-placeholder">
+                            <svg class="image-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <rect x="4" y="8" width="32" height="24" rx="3" stroke="#a3a3a3" stroke-width="2"/>
+                                <circle cx="14" cy="17" r="3" stroke="#a3a3a3" stroke-width="1.5"/>
+                                <path d="M4 26l8-6 6 5 6-4 12 8" stroke="#a3a3a3" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                            <span class="image-placeholder-label">이미지 / 실습 화면</span>
+                            <span class="image-placeholder-sub">${s.title}</span>
+                        </div>
+                    </div>`;
+                }
+
+                return `
+                <div class="slide${i === currentSession ? ' is-active' : ''}" data-step-index="${i}">
+                    <div class="session-inner">
+
+                        <div class="session-header">
+                            <div class="session-header-left">
+                                <div class="session-meta">
+                                    <span class="badge-${bc}">${data.badgeText} ${num}</span>
+                                    <span class="badge-hours">${s.hours}</span>
+                                </div>
+                                <h1 class="session-title">${s.title}</h1>
+                            </div>
+                            <div class="slide-action-box"></div>
+                        </div>
+
+                        <div class="session-body">
+
+                            <div class="body-image">
+                                <div class="image-slider" data-step="${i}">
+                                    ${imageSlidesHtml}
+                                </div>
+                                <button class="image-expand-btn" title="전체화면 (슬라이드 모드)">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="body-desc">
+                                <div class="content-block">
+                                    <div class="block-label">학습 목표</div>
+                                    <div class="goal-card"><p class="desc-goal">${s.goal}</p></div>
+                                </div>
+                                <div class="content-block fill">
+                                    <div class="block-label">주요 내용</div>
+                                    <ul class="topic-list desc-topics">
+                                        ${s.topics.map(t => `<li class="topic-item">${t}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                <div class="content-block">
+                                    <div class="block-label">실습</div>
+                                    <div class="practice-card"><p class="desc-practice">${s.practice}</p></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        /* ============================================
+           Step (스텝) 위치 적용
+           ============================================ */
+        function applySlidePositions() {
+            document.querySelectorAll('.slide').forEach((el, i) => {
+                el.classList.remove('is-prev', 'is-active');
+                if (i < currentSession)       el.classList.add('is-prev');
+                else if (i === currentSession) {
+                    el.classList.add('is-active');
+                    // 세션 전환 시 첫 번째 슬라이드 lazy load
+                    const firstImg = el.querySelector('.image-slide[data-img-index="0"] img[data-src]');
+                    if (firstImg && firstImg.dataset.src) {
+                        firstImg.src = firstImg.dataset.src;
+                        delete firstImg.dataset.src;
+                    }
+                }
+            });
+        }
+
+        /* ============================================
+           Image Slide (스텝 내 이미지) 위치 적용
+           ============================================ */
+        function applyImageSlidePositions() {
+            document.querySelectorAll('.slide').forEach((slideEl, stepIdx) => {
+                slideEl.querySelectorAll('.image-slide').forEach((imgSlide, imgIdx) => {
+                    imgSlide.classList.remove('is-prev', 'is-active');
+                    if (stepIdx === currentSession) {
+                        // 현재 스텝: currentSlide 기준으로 위치 설정
+                        if (imgIdx < currentSlide)       imgSlide.classList.add('is-prev');
+                        else if (imgIdx === currentSlide) imgSlide.classList.add('is-active');
+                        // lazy load: 현재 + 다음 슬라이드 미리 로드
+                        if (imgIdx === currentSlide || imgIdx === currentSlide + 1) {
+                            const img = imgSlide.querySelector('img[data-src]');
+                            if (img && img.dataset.src) {
+                                img.src = img.dataset.src;
+                                delete img.dataset.src;
+                            }
+                        }
+                    } else {
+                        // 다른 스텝: 첫 번째 이미지만 active로 초기화
+                        if (imgIdx === 0) imgSlide.classList.add('is-active');
+                    }
+                });
+            });
+        }
+
+        /* ============================================
+           Navigation Indicator
+           ============================================ */
+        function renderDots(count) {
+            const dots = document.getElementById('slide-dots');
+            dots.innerHTML = Array.from({ length: count }, (_, i) =>
+                `<button class="slide-dot${i === currentSlide ? ' active' : ''}" data-index="${i}"></button>`
+            ).join('');
+            dots.querySelectorAll('.slide-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const idx = parseInt(dot.dataset.index);
+                    currentSlide = idx;
+                    applyImageSlidePositions();
+                    updateIndicator();
+                });
+            });
+        }
+
+        function updateIndicator() {
+            const session    = COURSES[currentCourse].sessions[currentSession];
+            const slideCount = getSlideCount(session);
+            const stepNum    = String(currentSession + 1).padStart(2, '0');
+
+            document.getElementById('slide-counter').textContent =
+                `${String(currentSlide + 1).padStart(2, '0')} / ${String(slideCount).padStart(2, '0')}`;
+
+            document.querySelectorAll('.slide-dot').forEach((d, i) =>
+                d.classList.toggle('active', i === currentSlide)
+            );
+
+            const totalSessions = COURSES[currentCourse].sessions.length;
+            const isFirst = currentSession === 0 && currentSlide === 0;
+            const isLast  = currentSession === totalSessions - 1 && currentSlide === slideCount - 1;
+
+            document.getElementById('btn-prev').disabled = isFirst;
+            document.getElementById('btn-next').disabled = isLast;
+        }
+
+        /* ============================================
+           Sidebar
+           ============================================ */
+        function renderSidebar(course) {
+            const data = COURSES[course];
+            document.getElementById('sidebar-badge').className = `sidebar-course-badge ${data.badgeClass}`;
+            document.getElementById('sidebar-badge').textContent = data.badgeText;
+            document.getElementById('sidebar-title').textContent = data.title;
+
+            const nav = document.getElementById('sidebar-nav');
+            nav.innerHTML = data.sessions.map((s, i) => {
+                const isActive = i === currentSession;
+                return `<div class="nav-group" data-group="${i}">
+                    <button class="nav-item${isActive ? ' active' : ''}" data-index="${i}">
+                        <span class="nav-num">${String(s.num).padStart(2, '0')}</span>
+                        <span class="nav-info">
+                            <span class="nav-title">${s.title}</span>
+                            <span class="nav-hours">${s.hours}</span>
+                        </span>
+                    </button>
+                </div>`;
+            }).join('');
+
+            nav.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    goToSession(parseInt(item.dataset.index));
+                });
+            });
+        }
+
+        function updateSidebarActive() {
+            document.querySelectorAll('.nav-item').forEach((item, i) => {
+                item.classList.toggle('active', i === currentSession);
+            });
+        }
+
+        /* ============================================
+           Navigation Logic
+           ============================================ */
+
+        // 스텝 내 이미지 슬라이드 이동 (경계에서 스텝 전환)
+        function goToSlide(delta) {
+            const session    = COURSES[currentCourse].sessions[currentSession];
+            const slideCount = getSlideCount(session);
+            const next       = currentSlide + delta;
+            const totalSessions = COURSES[currentCourse].sessions.length;
+
+            if (next < 0) {
+                // 이전 스텝으로 이동 (마지막 슬라이드로)
+                if (currentSession > 0) {
+                    const prevSession    = COURSES[currentCourse].sessions[currentSession - 1];
+                    const prevSlideCount = getSlideCount(prevSession);
+                    goToSession(currentSession - 1, prevSlideCount - 1);
+                }
+            } else if (next >= slideCount) {
+                // 다음 스텝으로 이동 (첫 슬라이드로)
+                if (currentSession < totalSessions - 1) {
+                    goToSession(currentSession + 1, 0);
+                }
+            } else {
+                currentSlide = next;
+                applyImageSlidePositions();
+                updateIndicator();
+                updateSidebarActive();
+                updateDescPanel();
+                pushHash();
+            }
+        }
+
+        // 특정 스텝으로 이동
+        function goToSession(index, slideIndex = 0) {
+            const count = COURSES[currentCourse].sessions.length;
+            if (index < 0 || index >= count) return;
+            currentSession = index;
+            currentSlide   = slideIndex;
+            applySlidePositions();
+            applyImageSlidePositions();
+            renderDots(getSlideCount(COURSES[currentCourse].sessions[currentSession]));
+            updateIndicator();
+            updateSidebarActive();
+            updateDescPanel();
+            pushHash();
+        }
+
+        /* ============================================
+           Desc Panel Update (슬라이드별 우측 패널 갱신)
+           ============================================ */
+        function updateDescPanel() {
+            const activeEl = document.querySelector('.slide.is-active');
+            if (!activeEl) return;
+
+            const session = COURSES[currentCourse].sessions[currentSession];
+            const sd      = session.slideDescs && session.slideDescs[currentSlide];
+
+            const goalEl   = activeEl.querySelector('.desc-goal');
+            const topicsEl = activeEl.querySelector('.desc-topics');
+            const pracEl   = activeEl.querySelector('.desc-practice');
+
+            if (goalEl)   goalEl.textContent   = (sd && sd.goal)     ? sd.goal     : session.goal;
+            if (pracEl)   pracEl.textContent   = (sd && sd.practice) ? sd.practice : session.practice;
+
+            const items = (sd && sd.topics) ? sd.topics : session.topics;
+            if (topicsEl) topicsEl.innerHTML = items.map(t => `<li class="topic-item">${t}</li>`).join('');
+
+            const actionBox = activeEl.querySelector('.slide-action-box');
+            if (actionBox) {
+                const act = sd && sd.action;
+                if (act) {
+                    const enc = s => s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                    let html = '';
+                    if (act.label) html += `<div class="action-label">${act.label}</div>`;
+                    if (act.copy) {
+                        html += `<div class="action-copy-row" data-copy="${enc(act.copy)}" onclick="copyToClipboard(this.dataset.copy,this)"><code class="action-copy-code">${enc(act.copy)}</code><span class="action-copy-btn">복사</span></div>`;
+                    }
+                    if (act.items) {
+                        act.items.forEach(item => {
+                            if (item.link) {
+                                html += `<a class="action-download-link" href="${enc(item.link.href)}" target="_blank" rel="noopener">`;
+                                if (item.desc) html += `${item.desc} — `;
+                                html += `${item.link.text}</a>`;
+                            } else {
+                                html += `<div class="action-copy-row" data-copy="${enc(item.copy)}" onclick="copyToClipboard(this.dataset.copy,this)">`;
+                                if (item.desc) html += `<span class="action-item-desc">${item.desc}</span>`;
+                                html += `<code class="action-copy-code">${enc(item.copy)}</code><span class="action-copy-btn">복사</span></div>`;
+                            }
+                        });
+                    }
+                    if (act.download) html += `<a class="action-download-link" href="${enc(act.download.href)}" target="_blank" rel="noopener">↓ ${act.download.text}</a>`;
+                    if (act.type === 'download' && act.path) {
+                        const fname = act.path.split('/').pop();
+                        html += `<a class="action-download-link" href="${enc(act.path)}" download>↓ ${enc(act.label || fname)}</a>`;
+                    } else if (act.type === 'download-folder' && act.path) {
+                        const zipPath = act.path.endsWith('.zip') ? act.path : act.path + '.zip';
+                        html += `<a class="action-download-link" href="${enc(zipPath)}" download>↓ ${enc(act.label || '템플릿 다운로드')} (zip)</a>`;
+                    } else if (act.type === 'link' && act.url) {
+                        html += `<a class="action-download-link" href="${enc(act.url)}" target="_blank" rel="noopener">→ ${enc(act.label || act.url)}</a>`;
+                    }
+                    actionBox.innerHTML = html;
+                } else {
+                    actionBox.innerHTML = '';
+                }
+            }
+        }
+
+        function copyToClipboard(text, el) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = el.querySelector('.action-copy-btn');
+                if (btn) { btn.textContent = '완료'; setTimeout(() => { btn.textContent = '복사'; }, 1500); }
+            });
+        }
+
+        /* ============================================
+           Event Listeners
+           ============================================ */
+        document.getElementById('sidebar-toggle').addEventListener('click', () => {
+            sidebarOpen = false;
+            document.getElementById('sidebar').classList.add('collapsed');
+            document.getElementById('sidebar-reopen').classList.add('visible');
+        });
+
+        document.getElementById('sidebar-reopen').addEventListener('click', () => {
+            sidebarOpen = true;
+            document.getElementById('sidebar').classList.remove('collapsed');
+            document.getElementById('sidebar-reopen').classList.remove('visible');
+        });
+
+        document.getElementById('btn-prev').addEventListener('click', () => goToSlide(-1));
+        document.getElementById('btn-next').addEventListener('click', () => goToSlide(1));
+
+        document.addEventListener('keydown', e => {
+            const fsOpen = !document.getElementById('fs-overlay').hidden;
+            if (e.key === 'ArrowLeft')  { goToSlide(-1); if (fsOpen) fsUpdateImage(); }
+            if (e.key === 'ArrowRight') { goToSlide(1);  if (fsOpen) fsUpdateImage(); }
+        });
+
+        /* ============================================
+           Course Tab Switch
+           ============================================ */
+        document.querySelectorAll('.course-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentCourse  = tab.dataset.course;
+                currentSession = 0;
+                currentSlide   = 0;
+                renderSlides(currentCourse);
+                renderDots(getSlideCount(COURSES[currentCourse].sessions[0]));
+                renderSidebar(currentCourse);
+                updateIndicator();
+                pushHash();
+            });
+        });
+
+        /* ============================================
+           Fullscreen Mode
+           ============================================ */
+        function fsUpdateImage() {
+            const session    = COURSES[currentCourse].sessions[currentSession];
+            const slideCount = getSlideCount(session);
+            const img        = document.getElementById('fs-img');
+
+            if (session.slides && session.slides.length > 0) {
+                img.src = getImagePath(currentCourse, session.num, session.slides[currentSlide]);
+                img.alt = session.title + ' - ' + (currentSlide + 1);
+            } else {
+                img.src = '';
+                img.alt = '';
+            }
+
+            document.getElementById('fs-counter').textContent =
+                String(currentSlide + 1).padStart(2, '0') + ' / ' + String(slideCount).padStart(2, '0');
+
+            const totalSessions = COURSES[currentCourse].sessions.length;
+            document.getElementById('fs-prev').disabled = currentSession === 0 && currentSlide === 0;
+            document.getElementById('fs-next').disabled =
+                currentSession === totalSessions - 1 && currentSlide === slideCount - 1;
+        }
+
+        function openFullscreen() {
+            document.getElementById('fs-overlay').removeAttribute('hidden');
+            document.body.style.overflow = 'hidden';
+            fsUpdateImage();
+        }
+
+        function closeFullscreen() {
+            document.getElementById('fs-overlay').setAttribute('hidden', '');
+            document.body.style.overflow = '';
+        }
+
+        /* ============================================
+           Slides JSON Loader
+           각 step 폴더의 slides.json을 fetch하여
+           COURSES 오브젝트의 slides 배열을 덮어씀.
+           slides.json이 없으면 기존 배열 유지 (fallback).
+           순서 변경 시 slides.json만 수정하면 됨.
+           ============================================ */
+        async function loadAllSlides() {
+            const promises = [];
+            for (const [courseName, course] of Object.entries(COURSES)) {
+                for (const session of course.sessions) {
+                    const stepFolder = 'step' + String(session.num).padStart(2, '0');
+                    const url = 'assets/' + courseName + '/' + stepFolder + '/slides.json';
+                    promises.push(
+                        fetch(url)
+                            .then(r => r.ok ? r.json() : null)
+                            .then(data => { if (data && data.slides) session.slides = data.slides; })
+                            .catch(() => {})
+                    );
+                }
+            }
+            await Promise.all(promises);
+        }
+
+        /* ============================================
+           Init
+           ============================================ */
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadAllSlides();   // slides.json 로드 (순서/파일명 갱신)
+            readHash();   // URL 해시에서 course/session/slide 복원
+            renderSlides(currentCourse);
+            applySlidePositions();           // 복원된 세션 위치 반영
+            applyImageSlidePositions();      // 복원된 슬라이드 위치 반영
+            renderDots(getSlideCount(COURSES[currentCourse].sessions[currentSession]));
+            renderSidebar(currentCourse);
+            updateIndicator();
+            pushHash();   // 초기 상태를 URL에 반영
+
+            // 전체화면 진입 버튼 이벤트 (renderSlides 후 등록)
+            document.getElementById('slides-container').addEventListener('click', e => {
+                if (e.target.closest('.image-expand-btn')) openFullscreen();
+            });
+
+            // 전체화면 오버레이 버튼
+            document.getElementById('fs-prev').addEventListener('click', () => {
+                goToSlide(-1);
+                fsUpdateImage();
+            });
+            document.getElementById('fs-next').addEventListener('click', () => {
+                goToSlide(1);
+                fsUpdateImage();
+            });
+            document.getElementById('fs-close').addEventListener('click', closeFullscreen);
+
+            // ESC로 종료
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && !document.getElementById('fs-overlay').hidden) {
+                    closeFullscreen();
+                }
+            });
+        });
+    </script>
+
+    <!-- 전체화면 슬라이드 오버레이 -->
+    <div class="fs-overlay" id="fs-overlay" hidden>
+        <button class="fs-nav prev" id="fs-prev">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="fs-image-wrap">
+            <img id="fs-img" src="" alt="">
+        </div>
+        <button class="fs-nav next" id="fs-next">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="fs-ui">
+            <span class="fs-counter" id="fs-counter"></span>
+            <button class="fs-close" id="fs-close" title="닫기 (ESC)">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
