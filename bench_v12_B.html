@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZERO·K — PRODUCER</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:auto;}
+
+:root{
+  --bg:oklch(5% 0.015 270);
+  --ng:#00ffaa;
+  --nm:#ff00cc;
+  --nb:#0088ff;
+  --tx:rgba(238,238,238,0.92);
+  --mu:rgba(255,255,255,0.32);
+  --br:rgba(255,255,255,0.07);
+  --fm:'Space Mono',monospace;
+  --fs:'Pretendard',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--tx);
+  font-family:var(--fs);
+  overflow-x:hidden;
+}
+
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);
+  pointer-events:none;
+  z-index:998;
+}
+
+#v12-canvas{
+  position:fixed;top:0;left:0;
+  width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
+
+#v12-bar{
+  position:fixed;top:0;left:0;
+  height:2px;width:0%;
+  background:linear-gradient(90deg,var(--ng),var(--nm));
+  box-shadow:0 0 8px var(--ng);
+  z-index:100;
+  will-change:width;
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:50;
+  padding:28px 56px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+
+.nav-logo{
+  font-family:var(--fm);
+  font-size:1rem;font-weight:700;
+  letter-spacing:0.12em;
+  color:var(--ng);
+  text-shadow:0 0 20px var(--ng);
+}
+
+.nav-links{display:flex;gap:44px;list-style:none;}
+.nav-links a{
+  font-family:var(--fm);font-size:0.7rem;
+  letter-spacing:0.18em;color:var(--mu);
+  text-decoration:none;text-transform:uppercase;
+  cursor:pointer;
+  transition:color 0.3s,text-shadow 0.3s;
+}
+.nav-links a:hover{color:var(--ng);text-shadow:0 0 12px var(--ng);}
+
+/* HERO */
+.hero{
+  height:100vh;min-height:600px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 56px 88px;
+  position:relative;z-index:1;overflow:hidden;
+}
+
+.hero-meta{
+  font-family:var(--fm);font-size:0.68rem;
+  letter-spacing:0.32em;color:var(--mu);
+  text-transform:uppercase;margin-bottom:20px;
+  will-change:transform,opacity;
+}
+
+.hero-name{
+  font-family:var(--fm);font-weight:700;
+  font-size:clamp(4.5rem,14vw,13rem);
+  line-height:0.88;letter-spacing:-0.02em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(238,238,238,0.88);
+  position:relative;
+  will-change:transform,opacity;
+}
+
+.hero-name::before,.hero-name::after{
+  content:'ZERO·K';
+  position:absolute;inset:0;
+  -webkit-text-stroke:0px;
+}
+.hero-name::before{
+  color:var(--nm);
+  animation:v12ga 5s infinite;
+  clip-path:polygon(0 12%,100% 12%,100% 32%,0 32%);
+  opacity:0;
+}
+.hero-name::after{
+  color:var(--nb);
+  animation:v12gb 5s infinite 0.18s;
+  clip-path:polygon(0 64%,100% 64%,100% 80%,0 80%);
+  opacity:0;
+}
+
+@keyframes v12ga{
+  0%,90%,100%{transform:translateX(0);opacity:0;}
+  91%{transform:translateX(-7px);opacity:0.65;}
+  92%{transform:translateX(5px);opacity:0.65;}
+  93%{transform:translateX(-3px);opacity:0.65;}
+  94%{transform:translateX(0);opacity:0;}
+}
+@keyframes v12gb{
+  0%,88%,100%{transform:translateX(0);opacity:0;}
+  89%{transform:translateX(6px);opacity:0.5;}
+  90%{transform:translateX(-4px);opacity:0.5;}
+  91.5%{transform:translateX(0);opacity:0;}
+}
+
+.hero-subtitle{
+  font-family:var(--fm);font-size:0.78rem;
+  letter-spacing:0.38em;color:var(--nm);
+  text-transform:uppercase;
+  margin-top:28px;
+  text-shadow:0 0 16px var(--nm);
+  will-change:transform,opacity;
+}
+
+.hero-divider{
+  width:48px;height:1px;
+  background:var(--nm);box-shadow:0 0 8px var(--nm);
+  margin-top:20px;margin-bottom:0;
+}
+
+.hero-cta{
+  margin-top:40px;
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--fm);font-size:0.72rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--bg);background:var(--ng);
+  padding:15px 34px;
+  cursor:pointer;width:fit-content;
+  transition:box-shadow 0.3s,transform 0.2s;
+  will-change:transform;
+}
+.hero-cta:hover{
+  box-shadow:0 0 32px var(--ng),0 0 64px rgba(0,255,170,0.35);
+  transform:translateY(-2px);
+}
+.hero-cta:active{transform:translateY(0);}
+
+.hero-scroll{
+  position:absolute;right:56px;bottom:88px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:var(--fm);font-size:0.6rem;
+  letter-spacing:0.22em;color:var(--mu);
+  text-transform:uppercase;writing-mode:vertical-rl;
+}
+.hero-scroll::after{
+  content:'';width:1px;height:44px;
+  background:linear-gradient(to bottom,var(--mu),transparent);
+  margin-top:8px;
+}
+
+/* SECTIONS */
+main{position:relative;z-index:1;}
+
+.sec{padding:120px 56px;position:relative;}
+
+.sec-label{
+  font-family:var(--fm);font-size:0.66rem;
+  letter-spacing:0.4em;color:var(--nm);
+  text-transform:uppercase;
+  text-shadow:0 0 10px var(--nm);
+  margin-bottom:52px;
+}
+
+.sec-title{
+  font-family:var(--fm);font-weight:700;
+  font-size:clamp(2.2rem,5.5vw,4.5rem);
+  line-height:1;letter-spacing:-0.01em;
+  margin-bottom:72px;color:var(--tx);
+}
+
+/* TRACKS */
+.tracks-sec{
+  background:rgba(5,4,16,0.88);
+  backdrop-filter:blur(48px);
+}
+
+.track-item{
+  display:grid;
+  grid-template-columns:52px 1fr 130px 56px;
+  align-items:center;gap:28px;
+  padding:30px 0;
+  border-top:1px solid var(--br);
+  cursor:pointer;position:relative;
+  overflow:hidden;
+  transition:background 0.3s;
+  will-change:transform,opacity;
+}
+.track-item:last-of-type{border-bottom:1px solid var(--br);}
+
+.track-item::after{
+  content:'';position:absolute;
+  left:-100%;top:0;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(0,255,170,0.05),transparent);
+  transition:left 0.55s ease;
+  pointer-events:none;
+}
+.track-item:hover::after{left:100%;}
+
+.t-num{
+  font-family:var(--fm);font-size:0.68rem;
+  color:var(--mu);text-align:right;
+}
+.t-name{
+  font-family:var(--fs);font-size:1.05rem;font-weight:500;
+  letter-spacing:0.04em;color:var(--tx);
+  transition:color 0.3s,text-shadow 0.3s;
+}
+.track-item:hover .t-name{
+  color:var(--ng);text-shadow:0 0 14px var(--ng);
+}
+.t-tag{
+  font-family:var(--fm);font-size:0.62rem;
+  letter-spacing:0.12em;color:var(--mu);
+  text-transform:uppercase;margin-top:5px;
+}
+.t-wave{
+  width:130px;height:28px;
+  opacity:0.25;
+  transition:opacity 0.35s,filter 0.35s;
+}
+.track-item:hover .t-wave{
+  opacity:1;filter:drop-shadow(0 0 5px var(--ng));
+}
+.t-dur{
+  font-family:var(--fm);font-size:0.82rem;
+  color:var(--mu);text-align:right;
+}
+
+/* SCHEDULE */
+.sched-sec{
+  background:rgba(3,2,12,0.92);
+  backdrop-filter:blur(48px);
+}
+
+.sched-item{
+  display:grid;
+  grid-template-columns:155px 1fr auto;
+  align-items:center;gap:36px;
+  padding:40px 0;
+  border-top:1px solid var(--br);
+  transition:background 0.3s;
+  will-change:transform,opacity;
+}
+.sched-item:last-of-type{border-bottom:1px solid var(--br);}
+.sched-item:hover{background:rgba(0,255,170,0.02);}
+
+.sched-date{
+  font-family:var(--fm);font-size:2.2rem;font-weight:700;
+  color:var(--ng);text-shadow:0 0 22px var(--ng);line-height:1;
+}
+.sched-year{
+  display:block;font-size:0.62rem;font-weight:400;
+  color:var(--mu);letter-spacing:0.2em;margin-top:5px;
+}
+.sched-venue{
+  font-family:var(--fs);font-size:1.45rem;font-weight:700;
+  letter-spacing:0.02em;color:var(--tx);
+}
+.sched-city{
+  font-family:var(--fm);font-size:0.68rem;
+  letter-spacing:0.2em;color:var(--mu);
+  text-transform:uppercase;margin-top:7px;
+}
+.sched-badge{
+  font-family:var(--fm);font-size:0.62rem;
+  letter-spacing:0.16em;text-transform:uppercase;
+  padding:7px 14px;border:1px solid;
+  cursor:pointer;transition:box-shadow 0.3s;
+}
+.badge-on{color:var(--ng);border-color:var(--ng);}
+.badge-on:hover{box-shadow:0 0 12px rgba(0,255,170,0.3);}
+.badge-off{color:var(--mu);border-color:rgba(255,255,255,0.15);cursor:default;}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  padding:80px 56px;
+  background:rgba(3,2,12,0.96);
+  backdrop-filter:blur(48px);
+  border-top:1px solid var(--br);
+}
+.ft-inner{
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.ft-brand{
+  font-family:var(--fm);font-size:3.5rem;font-weight:700;
+  color:var(--ng);
+  text-shadow:0 0 30px var(--ng),0 0 60px rgba(0,255,170,0.28);
+  line-height:1;
+}
+.ft-copy{
+  font-family:var(--fm);font-size:0.62rem;
+  color:var(--mu);letter-spacing:0.1em;margin-top:14px;
+}
+.ft-links{
+  display:flex;flex-direction:column;
+  align-items:flex-end;gap:16px;
+}
+.ft-links a{
+  font-family:var(--fm);font-size:0.7rem;
+  letter-spacing:0.18em;color:var(--mu);
+  text-decoration:none;text-transform:uppercase;
+  cursor:pointer;transition:color 0.3s,text-shadow 0.3s;
+}
+.ft-links a:hover{color:var(--nm);text-shadow:0 0 10px var(--nm);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:20px 28px;}
+  .nav-links{display:none;}
+  .hero{padding:0 28px 64px;}
+  .hero-scroll{display:none;}
+  .sec{padding:80px 28px;}
+  .track-item{grid-template-columns:40px 1fr 56px;}
+  .t-wave{display:none;}
+  .sched-item{grid-template-columns:110px 1fr;}
+  .sched-badge{display:none;}
+  .sched-date{font-size:1.6rem;}
+  footer{padding:60px 28px;}
+  .ft-inner{flex-direction:column;gap:40px;align-items:flex-start;}
+  .ft-links{align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="v12-canvas"></canvas>
+<div id="v12-bar"></div>
+
+<nav>
+  <div class="nav-logo">ZERO·K</div>
+  <ul class="nav-links">
+    <li><a data-scroll="tracks">Tracks</a></li>
+    <li><a data-scroll="schedule">Schedule</a></li>
+    <li><a>Booking</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="hero-meta">Electronic Music Producer &nbsp;·&nbsp; Seoul &nbsp;·&nbsp; Est. 2018</div>
+  <h1 class="hero-name">ZERO·K</h1>
+  <div class="hero-subtitle">Architect of the Synthetic Void</div>
+  <div class="hero-divider"></div>
+  <div class="hero-cta">Explore Tracks <span>&#8594;</span></div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<section class="sec tracks-sec" id="tracks">
+  <div class="sec-label">// DISCOGRAPHY</div>
+  <div class="sec-title">TRACKS</div>
+  <div id="v12-tlist"></div>
+</section>
+
+<section class="sec sched-sec" id="schedule">
+  <div class="sec-label">// LIVE DATES 2026</div>
+  <div class="sec-title">UPCOMING</div>
+  <div id="v12-slist"></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-brand">ZERO·K</div>
+      <div class="ft-copy">&#169; 2026 ZERO&#183;K &#8212; All rights reserved</div>
+    </div>
+    <div class="ft-links">
+      <a>Soundcloud</a>
+      <a>Instagram</a>
+      <a>Spotify</a>
+      <a>Booking Inquiry</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* DATA */
+  const v12_tracks = [
+    { n:'01', name:'VOID PROTOCOL',    tag:'Techno · 136 BPM',       dur:'4:23' },
+    { n:'02', name:'NEURAL CASCADE',   tag:'Industrial · 142 BPM',   dur:'6:11' },
+    { n:'03', name:'FRACTURED SIGNAL', tag:'Ambient · 90 BPM',       dur:'3:58' },
+    { n:'04', name:'HYPERVOID',        tag:'Hard Techno · 148 BPM',  dur:'5:44' },
+    { n:'05', name:'DARK MATTER',      tag:'Dub Techno · 128 BPM',   dur:'7:02' },
+    { n:'06', name:'SYNTHETIC DAWN',   tag:'Melodic · 122 BPM',      dur:'4:37' },
+  ];
+
+  const v12_sched = [
+    { date:'05.03', venue:'BERGHAIN',    city:'Berlin, Germany',    on:true  },
+    { date:'05.17', venue:'FABRIC',      city:'London, UK',         on:false },
+    { date:'06.07', venue:'TRESOR',      city:'Berlin, Germany',    on:true  },
+    { date:'06.21', venue:'REX CLUB',    city:'Paris, France',      on:true  },
+    { date:'07.05', venue:'SHELTER',     city:'Amsterdam, NL',      on:true  },
+    { date:'07.19', venue:'BOILER ROOM', city:'Tokyo, Japan',       on:false },
+  ];
+
+  /* SVG WAVEFORM */
+  function v12_wave(seed) {
+    const lines = [];
+    for (let i = 0; i <= 50; i++) {
+      const x = (i / 50) * 130;
+      const h = 5 + Math.abs(Math.sin(i * seed * 0.61 + 1) * Math.cos(i * 0.41) * 9);
+      lines.push(`<line x1="${x.toFixed(1)}" y1="${(14 - h).toFixed(1)}" x2="${x.toFixed(1)}" y2="${(14 + h).toFixed(1)}" stroke="url(#wg${seed})" stroke-width="1.8"/>`);
+    }
+    return `<svg class="t-wave" viewBox="0 0 130 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="wg${seed}" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="#00ffaa"/><stop offset="100%" stop-color="#ff00cc"/>
+      </linearGradient></defs>${lines.join('')}</svg>`;
+  }
+
+  /* RENDER TRACKS */
+  const v12_tEl = document.getElementById('v12-tlist');
+  v12_tracks.forEach((t, i) => {
+    const el = document.createElement('div');
+    el.className = 'track-item';
+    el.innerHTML = `
+      <span class="t-num">${t.n}</span>
+      <div><div class="t-name">${t.name}</div><div class="t-tag">${t.tag}</div></div>
+      ${v12_wave(i + 1)}
+      <span class="t-dur">${t.dur}</span>`;
+    v12_tEl.appendChild(el);
+  });
+
+  /* RENDER SCHEDULE */
+  const v12_sEl = document.getElementById('v12-slist');
+  v12_sched.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'sched-item';
+    el.innerHTML = `
+      <div class="sched-date">${s.date}<span class="sched-year">2026</span></div>
+      <div><div class="sched-venue">${s.venue}</div><div class="sched-city">${s.city}</div></div>
+      <div class="sched-badge ${s.on ? 'badge-on' : 'badge-off'}">${s.on ? 'Tickets' : 'Sold Out'}</div>`;
+    v12_sEl.appendChild(el);
+  });
+
+  /* WEBGL RAYMARCHING */
+  const v12_cvs = document.getElementById('v12-canvas');
+  const v12_gl = v12_cvs.getContext('webgl') || v12_cvs.getContext('experimental-webgl');
+
+  if (v12_gl) {
+    const v12_vsSrc = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
+
+    const v12_fsSrc = `
+precision mediump float;
+uniform float u_t;
+uniform vec2 u_m;
+uniform vec2 u_r;
+uniform float u_s;
+
+mat2 vRot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
+float vSph(vec3 p,float r){return length(p)-r;}
+float vTor(vec3 p,vec2 t){vec2 q=vec2(length(p.xz)-t.x,p.y);return length(q)-t.y;}
+float vSmin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
+
+float vMap(vec3 p){
+  float sc=clamp(u_s*0.00035,0.,1.);
+  p.xz*=vRot(u_t*.22+u_m.x*2.2);
+  p.xy*=vRot(u_t*.16+u_m.y*1.8);
+  float tr=mix(1.28,.78,sc);
+  float ta=mix(.42,.58,sc);
+  float f1=vTor(p,vec2(tr,ta));
+  float f2=vSph(p-vec3(sin(u_t*1.06)*1.68,cos(u_t*.74)*.38,0.),.28);
+  float f3=vSph(p-vec3(-sin(u_t*.81)*1.68,-cos(u_t*1.19)*.38,0.),.28);
+  return vSmin(vSmin(f1,f2,.48),f3,.48);
+}
+
+vec3 vNrm(vec3 p){
+  const float e=.001;
+  return normalize(vec3(
+    vMap(p+vec3(e,0,0))-vMap(p-vec3(e,0,0)),
+    vMap(p+vec3(0,e,0))-vMap(p-vec3(0,e,0)),
+    vMap(p+vec3(0,0,e))-vMap(p-vec3(0,0,e))
+  ));
+}
+
+void main(){
+  vec2 uv=(gl_FragCoord.xy-u_r*.5)/u_r.y;
+  vec3 ro=vec3(0.,0.,4.2);
+  vec3 rd=normalize(vec3(uv,-1.));
+  float t=0.,d=0.;
+  for(int i=0;i<80;i++){
+    d=vMap(ro+rd*t);t+=d;
+    if(abs(d)<.001||t>12.)break;
+  }
+  vec3 col=vec3(.018,.016,.042);
+  if(d<.001){
+    vec3 p=ro+rd*t;
+    vec3 n=vNrm(p);
+    vec3 lv=normalize(vec3(2.,3.,1.5));
+    float diff=max(dot(n,lv),0.);
+    float sp=pow(max(dot(reflect(-lv,n),-rd),0.),52.);
+    float rim=pow(1.-abs(dot(n,-rd)),3.);
+    vec3 g=vec3(0.,.98,.65);
+    vec3 m=vec3(.98,0.,.78);
+    vec3 base=mix(g,m,n.y*.5+.5+sin(u_t*.28)*.18);
+    col=base*(.06+.62*diff)+vec3(1.)*sp*.55+m*rim*1.1;
+    col*=1.-smoothstep(2.5,10.,t)*.45;
+  }
+  vec2 gv=abs(fract(uv*6.)-.5);
+  float grid=smoothstep(.47,.5,max(gv.x,gv.y));
+  col+=vec3(0.,.12,.06)*grid*.1;
+  col*=max(1.-length(uv)*.88,0.);
+  gl_FragColor=vec4(col,1.);
+}`;
+
+    function v12_mkSh(type, src) {
+      const sh = v12_gl.createShader(type);
+      v12_gl.shaderSource(sh, src);
+      v12_gl.compileShader(sh);
+      return sh;
+    }
+
+    const v12_prog = v12_gl.createProgram();
+    v12_gl.attachShader(v12_prog, v12_mkSh(v12_gl.VERTEX_SHADER, v12_vsSrc));
+    v12_gl.attachShader(v12_prog, v12_mkSh(v12_gl.FRAGMENT_SHADER, v12_fsSrc));
+    v12_gl.linkProgram(v12_prog);
+    v12_gl.useProgram(v12_prog);
+
+    const v12_vbuf = v12_gl.createBuffer();
+    v12_gl.bindBuffer(v12_gl.ARRAY_BUFFER, v12_vbuf);
+    v12_gl.bufferData(v12_gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), v12_gl.STATIC_DRAW);
+    const v12_aLoc = v12_gl.getAttribLocation(v12_prog, 'a');
+    v12_gl.enableVertexAttribArray(v12_aLoc);
+    v12_gl.vertexAttribPointer(v12_aLoc, 2, v12_gl.FLOAT, false, 0, 0);
+
+    const v12_uT  = v12_gl.getUniformLocation(v12_prog, 'u_t');
+    const v12_uM  = v12_gl.getUniformLocation(v12_prog, 'u_m');
+    const v12_uR  = v12_gl.getUniformLocation(v12_prog, 'u_r');
+    const v12_uS  = v12_gl.getUniformLocation(v12_prog, 'u_s');
+
+    let v12_mx = 0;
+    let v12_my = 0;
+    let v12_sy = 0;
+
+    function v12_resize() {
+      v12_cvs.width  = window.innerWidth;
+      v12_cvs.height = window.innerHeight;
+      v12_gl.viewport(0, 0, v12_cvs.width, v12_cvs.height);
+    }
+    v12_resize();
+    window.addEventListener('resize', v12_resize);
+
+    document.addEventListener('mousemove', e => {
+      v12_mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      v12_my = -(e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function v12_draw(ts) {
+      v12_gl.uniform1f(v12_uT, ts * 0.001);
+      v12_gl.uniform2f(v12_uM, v12_mx, v12_my);
+      v12_gl.uniform2f(v12_uR, v12_cvs.width, v12_cvs.height);
+      v12_gl.uniform1f(v12_uS, v12_sy);
+      v12_gl.drawArrays(v12_gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(v12_draw);
+    }
+    requestAnimationFrame(v12_draw);
+
+    /* expose scroll sync */
+    window._v12_setSy = v => { v12_sy = v; };
+  }
+
+  /* LENIS */
+  gsap.registerPlugin(ScrollTrigger);
+
+  const v12_lenis = new Lenis({
+    duration: 1.2,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(time => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  /* PROGRESS BAR */
+  const v12_barEl = document.getElementById('v12-bar');
+  v12_lenis.on('scroll', ({ scroll, limit }) => {
+    if (window._v12_setSy) window._v12_setSy(scroll);
+    v12_barEl.style.width = (scroll / limit * 100) + '%';
+  });
+
+  /* NAV SCROLL */
+  document.querySelectorAll('[data-scroll]').forEach(el => {
+    el.addEventListener('click', () => {
+      const target = document.getElementById(el.dataset.scroll);
+      if (target) v12_lenis.scrollTo(target, { offset: -60, duration: 1.5 });
+    });
+  });
+
+  document.querySelector('.hero-cta').addEventListener('click', () => {
+    v12_lenis.scrollTo(document.getElementById('tracks'), { offset: -60, duration: 1.5 });
+  });
+
+  /* DECODE EFFECT */
+  function v12_decode(el) {
+    const final = el.textContent;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/·';
+    let frame = 0;
+    const total = 20;
+    const iv = setInterval(() => {
+      let out = '';
+      for (let i = 0; i < final.length; i++) {
+        if (final[i] === ' ') { out += ' '; continue; }
+        out += (frame / total > i / final.length) ? final[i] : chars[Math.floor(Math.random() * chars.length)];
+      }
+      el.textContent = out;
+      if (++frame > total) { el.textContent = final; clearInterval(iv); }
+    }, 48);
+  }
+
+  /* GSAP ANIMATIONS */
+  gsap.set(['.hero-meta', '.hero-name', '.hero-subtitle', '.hero-divider', '.hero-cta'], { opacity: 0, y: 28 });
+  gsap.timeline({ delay: 0.35 })
+    .to('.hero-meta',     { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' })
+    .to('.hero-name',     { opacity: 1, y: 0, duration: 1.0,  ease: 'power3.out' }, '-=0.4')
+    .to('.hero-subtitle', { opacity: 1, y: 0, duration: 0.7,  ease: 'power3.out' }, '-=0.5')
+    .to('.hero-divider',  { opacity: 1, y: 0, duration: 0.5,  ease: 'power3.out' }, '-=0.4')
+    .to('.hero-cta',      { opacity: 1, y: 0, duration: 0.6,  ease: 'power3.out' }, '-=0.3');
+
+  gsap.to('.hero-name', {
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
+    y: -80, opacity: 0, ease: 'none'
+  });
+
+  document.querySelectorAll('.sec-title').forEach(el => {
+    ScrollTrigger.create({
+      trigger: el, start: 'top 85%',
+      onEnter: () => v12_decode(el)
+    });
+  });
+
+  gsap.utils.toArray('.sec-label').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%' },
+      opacity: 0, x: -16, duration: 0.55, ease: 'power2.out'
+    });
+  });
+
+  gsap.set('.track-item', { opacity: 0, x: -24 });
+  ScrollTrigger.create({
+    trigger: '#tracks', start: 'top 78%',
+    onEnter: () => gsap.to('.track-item', { opacity: 1, x: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out' })
+  });
+
+  gsap.set('.sched-item', { opacity: 0, x: 24 });
+  ScrollTrigger.create({
+    trigger: '#schedule', start: 'top 78%',
+    onEnter: () => gsap.to('.sched-item', { opacity: 1, x: 0, duration: 0.6, stagger: 0.09, ease: 'power3.out' })
+  });
+
+})();
+</script>
+</body>
+</html>

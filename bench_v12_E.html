@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pause · 오늘의 카페</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      oklch(96% 0.014 68);
+      --surface: oklch(92% 0.018 62);
+      --text:    oklch(18% 0.03 52);
+      --text2:   oklch(50% 0.04 58);
+      --accent:  oklch(52% 0.13 58);
+      --mist:    oklch(85% 0.06 68);
+      --serif:   'Noto Serif KR', serif;
+      --display: 'Playfair Display', serif;
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      font-family: var(--serif);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    #v12-bar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      z-index: 9999;
+      will-change: width;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(2.5rem, 6vw, 5rem);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://picsum.photos/seed/cafe-atmo/1600/1000') center/cover no-repeat;
+      will-change: transform;
+    }
+
+    .hero-blur {
+      position: absolute;
+      inset: -20px;
+      background: url('https://picsum.photos/seed/cafe-atmo/1600/1000') center/cover no-repeat;
+      filter: blur(28px);
+      opacity: 0.35;
+      transform: scale(1.04);
+    }
+
+    .hero-dim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        oklch(12% 0.025 52 / 0.85) 0%,
+        oklch(12% 0.025 52 / 0.15) 55%,
+        transparent 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: oklch(97% 0.01 68);
+    }
+
+    .hero-eyebrow {
+      font-size: clamp(0.65rem, 1.4vw, 0.82rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 1.5rem;
+      will-change: transform, opacity;
+    }
+
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(4rem, 11vw, 10rem);
+      font-weight: 400;
+      line-height: 0.88;
+      margin-bottom: 2rem;
+      will-change: transform, opacity;
+    }
+
+    .hero-title em {
+      display: block;
+      font-style: italic;
+      font-size: 0.44em;
+      opacity: 0.65;
+      margin-top: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.82rem, 1.6vw, 0.98rem);
+      font-weight: 400;
+      opacity: 0.72;
+      line-height: 2;
+      max-width: 26ch;
+      will-change: transform, opacity;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: clamp(2rem, 4vw, 3rem);
+      right: clamp(2.5rem, 6vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      color: oklch(97% 0.01 68 / 0.45);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: currentColor;
+      transform-origin: top;
+      animation: v12-pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes v12-pulse {
+      0%, 100% { transform: scaleY(1);   opacity: 0.45; }
+      50%       { transform: scaleY(0.3); opacity: 1;    }
+    }
+
+    /* ---- QUOTE ---- */
+    .quote {
+      min-height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(6rem, 14vw, 12rem) clamp(2rem, 8vw, 10rem);
+    }
+
+    .quote-inner {
+      text-align: center;
+      max-width: 560px;
+      will-change: transform, opacity;
+    }
+
+    .quote-glyph {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: clamp(5rem, 12vw, 9rem);
+      color: var(--mist);
+      line-height: 0.45;
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+
+    .quote-text {
+      font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+      font-weight: 400;
+      line-height: 2;
+      letter-spacing: 0.04em;
+    }
+
+    .quote-by {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--text2);
+    }
+
+    /* ---- MENU ---- */
+    .menu { padding: clamp(3rem, 6vw, 6rem) 0; }
+
+    .menu-head {
+      padding: 0 clamp(2rem, 6vw, 6rem);
+      margin-bottom: clamp(3rem, 5vw, 4.5rem);
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      will-change: transform, opacity;
+    }
+
+    .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text2);
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .menu-date {
+      margin-left: auto;
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--text2);
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+    }
+
+    .menu-list { display: grid; grid-template-columns: 1fr; }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      will-change: transform, opacity;
+    }
+
+    .menu-item:nth-child(even) { direction: rtl; }
+    .menu-item:nth-child(even) > * { direction: ltr; }
+
+    .menu-img-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: clamp(260px, 42vw, 480px);
+    }
+
+    .menu-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      will-change: transform;
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-img-wrap:hover img { transform: scale(1.05); }
+
+    .menu-blur-layer {
+      position: absolute;
+      inset: -20px;
+      background-size: cover;
+      background-position: center;
+      filter: blur(22px);
+      transform: scale(1.05);
+      z-index: 1;
+      will-change: opacity;
+    }
+
+    .menu-info {
+      padding: clamp(2.5rem, 5vw, 4.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--surface);
+    }
+
+    .menu-num {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: clamp(3rem, 6vw, 5rem);
+      color: var(--mist);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .menu-name {
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .menu-desc {
+      font-size: clamp(0.82rem, 1.4vw, 0.98rem);
+      font-weight: 400;
+      color: var(--text2);
+      line-height: 2;
+    }
+
+    .menu-price {
+      margin-top: 2rem;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--accent);
+    }
+
+    /* ---- GALLERY ---- */
+    .gallery { padding: clamp(4rem, 8vw, 8rem) 0; }
+
+    .gallery-head {
+      padding: 0 clamp(2rem, 6vw, 6rem);
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+      will-change: transform, opacity;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 5px;
+    }
+
+    .gal-item {
+      overflow: hidden;
+      will-change: transform, opacity;
+    }
+
+    .gal-item:nth-child(1) {
+      grid-row: 1 / 3;
+      height: 602px;
+    }
+
+    .gal-item:not(:nth-child(1)) { height: 298.5px; }
+
+    .gal-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      will-change: transform;
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gal-item:hover img { transform: scale(1.04); }
+
+    /* ---- CLOSING ---- */
+    .closing {
+      padding: clamp(8rem, 16vw, 14rem) clamp(2rem, 6vw, 6rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2.5rem;
+      will-change: transform, opacity;
+    }
+
+    .closing-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .closing-word {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: clamp(4.5rem, 13vw, 11rem);
+      font-weight: 400;
+      color: var(--mist);
+      line-height: 1;
+    }
+
+    .closing-text {
+      font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+      color: var(--text2);
+      line-height: 2.2;
+      max-width: 34ch;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      padding: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 6vw, 6rem);
+      border-top: 1px solid oklch(84% 0.016 65);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text2);
+      letter-spacing: 0.04em;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .menu-item { grid-template-columns: 1fr; }
+      .menu-item:nth-child(even) { direction: ltr; }
+      .menu-img-wrap { min-height: 240px; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+      }
+      .gal-item:nth-child(1) {
+        grid-row: auto;
+        grid-column: 1 / -1;
+        height: 240px;
+      }
+      .gal-item:not(:nth-child(1)) { height: 170px; }
+
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="v12-bar"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="v12-heroBg"></div>
+  <div class="hero-blur"></div>
+  <div class="hero-dim"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="v12-hEye">2026 · 04 · 26 &nbsp;·&nbsp; 오늘의 카페</p>
+    <h1 class="hero-title" id="v12-hTitle">
+      Pause
+      <em>잠시 멈추는 곳</em>
+    </h1>
+    <p class="hero-sub" id="v12-hSub">
+      커피 한 잔이 식기 전,<br>
+      이 공간에서 숨을 고르세요.
+    </p>
+  </div>
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="quote-inner" id="v12-quote">
+    <span class="quote-glyph">"</span>
+    <p class="quote-text">
+      좋은 커피는 기억처럼 천천히 퍼진다.<br>
+      오늘도, 여기서, 그렇게.
+    </p>
+    <p class="quote-by">— Pause Café, 2026</p>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu">
+  <div class="menu-head" id="v12-menuHead">
+    <span class="label">Today's Menu</span>
+    <h2 class="section-title">오늘의 메뉴</h2>
+    <span class="menu-date">April 26th</span>
+  </div>
+
+  <div class="menu-list">
+
+    <div class="menu-item" id="v12-m1">
+      <div class="menu-img-wrap">
+        <div class="menu-blur-layer" id="v12-bl1"
+          style="background-image:url('https://picsum.photos/seed/espresso77/800/600')"></div>
+        <img src="https://picsum.photos/seed/espresso77/800/600" alt="에스프레소 콘파나">
+      </div>
+      <div class="menu-info">
+        <div class="menu-num">01</div>
+        <h3 class="menu-name">에스프레소<br>콘파나</h3>
+        <p class="menu-desc">
+          짙은 에스프레소 위에<br>
+          살며시 얹은 생크림 한 겹.<br>
+          쓴맛과 부드러움이<br>
+          순서대로 녹아든다.
+        </p>
+        <div class="menu-price">5,500원</div>
+      </div>
+    </div>
+
+    <div class="menu-item" id="v12-m2">
+      <div class="menu-img-wrap">
+        <div class="menu-blur-layer" id="v12-bl2"
+          style="background-image:url('https://picsum.photos/seed/latte43/800/600')"></div>
+        <img src="https://picsum.photos/seed/latte43/800/600" alt="오트 라떼">
+      </div>
+      <div class="menu-info">
+        <div class="menu-num">02</div>
+        <h3 class="menu-name">오트 라떼</h3>
+        <p class="menu-desc">
+          귀리의 고소함이<br>
+          커피의 산미를 감싸는,<br>
+          조용하고 따뜻한<br>
+          한 잔의 위로.
+        </p>
+        <div class="menu-price">6,000원</div>
+      </div>
+    </div>
+
+    <div class="menu-item" id="v12-m3">
+      <div class="menu-img-wrap">
+        <div class="menu-blur-layer" id="v12-bl3"
+          style="background-image:url('https://picsum.photos/seed/basque29/800/600')"></div>
+        <img src="https://picsum.photos/seed/basque29/800/600" alt="바스크 치즈케이크">
+      </div>
+      <div class="menu-info">
+        <div class="menu-num">03</div>
+        <h3 class="menu-name">바스크<br>치즈케이크</h3>
+        <p class="menu-desc">
+          겉은 탄듯 어둡고<br>
+          속은 부드러운 반숙.<br>
+          불완전함이 만든<br>
+          가장 완전한 맛.
+        </p>
+        <div class="menu-price">7,500원</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="gallery-head" id="v12-galHead">
+    <p class="label">Atmosphere</p>
+    <h2 class="section-title">오늘의 공간</h2>
+  </div>
+  <div class="gallery-grid" id="v12-galGrid">
+    <div class="gal-item" id="v12-g1">
+      <img src="https://picsum.photos/seed/caferoom11/800/1200" alt="카페 내부">
+    </div>
+    <div class="gal-item" id="v12-g2">
+      <img src="https://picsum.photos/seed/cafewindow/600/600" alt="창가">
+    </div>
+    <div class="gal-item" id="v12-g3">
+      <img src="https://picsum.photos/seed/cafelight/600/600" alt="조명">
+    </div>
+    <div class="gal-item" id="v12-g4">
+      <img src="https://picsum.photos/seed/cafebook/600/600" alt="책상">
+    </div>
+    <div class="gal-item" id="v12-g5">
+      <img src="https://picsum.photos/seed/cafeplant/600/600" alt="식물">
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing" id="v12-closing">
+  <div class="closing-rule"></div>
+  <div class="closing-word">Stay</div>
+  <p class="closing-text">
+    서두르지 않아도 괜찮습니다.<br>
+    이 공간은 당신의 속도로<br>
+    흘러갑니다.
+  </p>
+  <div class="closing-rule"></div>
+</section>
+
+<footer>
+  <span>Pause Café</span>
+  <span>서울 마포구 어딘가 &nbsp;·&nbsp; 매일 08:00 – 22:00</span>
+</footer>
+
+<script>
+{
+  gsap.registerPlugin(ScrollTrigger);
+
+  const v12_lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  // Progress bar
+  const v12_bar = document.getElementById('v12-bar');
+  v12_lenis.on('scroll', ({ progress }) => {
+    v12_bar.style.width = (progress * 100) + '%';
+  });
+
+  // Hero parallax
+  gsap.to('#v12-heroBg', {
+    yPercent: 28,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1
+    }
+  });
+
+  // Hero content reveal (on load)
+  const v12_heroTl = gsap.timeline({ delay: 0.3 });
+  v12_heroTl
+    .fromTo('#v12-hEye',   { opacity: 0, yPercent: 12 }, { opacity: 1, yPercent: 0, duration: 0.9, ease: 'power2.out' })
+    .fromTo('#v12-hTitle', { opacity: 0, yPercent: 8  }, { opacity: 1, yPercent: 0, duration: 1.1, ease: 'power2.out' }, '-=0.5')
+    .fromTo('#v12-hSub',   { opacity: 0, yPercent: 8  }, { opacity: 1, yPercent: 0, duration: 0.9, ease: 'power2.out' }, '-=0.6');
+
+  // Quote reveal
+  gsap.fromTo('#v12-quote',
+    { opacity: 0, yPercent: 7 },
+    {
+      opacity: 1, yPercent: 0,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#v12-quote',
+        start: 'top 78%',
+        end: 'top 42%',
+        scrub: 1
+      }
+    }
+  );
+
+  // Menu header
+  gsap.fromTo('#v12-menuHead',
+    { opacity: 0, xPercent: -4 },
+    {
+      opacity: 1, xPercent: 0,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#v12-menuHead',
+        start: 'top 82%',
+        end: 'top 55%',
+        scrub: 1
+      }
+    }
+  );
+
+  // Menu items: slide in + SURPRISE: blur-to-clear (공기의 밀도)
+  const v12_menuData = [
+    { item: '#v12-m1', blur: '#v12-bl1', dir:  5 },
+    { item: '#v12-m2', blur: '#v12-bl2', dir: -5 },
+    { item: '#v12-m3', blur: '#v12-bl3', dir:  5 }
+  ];
+
+  v12_menuData.forEach(({ item, blur, dir }) => {
+    gsap.fromTo(item,
+      { opacity: 0, xPercent: dir },
+      {
+        opacity: 1, xPercent: 0,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 82%',
+          end: 'top 40%',
+          scrub: 1
+        }
+      }
+    );
+    // Blur layer fades out as item enters — reveals sharp image (static blur, opacity only)
+    gsap.fromTo(blur,
+      { opacity: 1 },
+      {
+        opacity: 0,
+        ease: 'power1.inOut',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 72%',
+          end: 'top 18%',
+          scrub: 1
+        }
+      }
+    );
+  });
+
+  // Gallery header
+  gsap.fromTo('#v12-galHead',
+    { opacity: 0, yPercent: 6 },
+    {
+      opacity: 1, yPercent: 0,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#v12-galHead',
+        start: 'top 82%',
+        end: 'top 55%',
+        scrub: 1
+      }
+    }
+  );
+
+  // Gallery items stagger via timeline
+  const v12_galTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#v12-galGrid',
+      start: 'top 78%',
+      end: 'bottom 55%',
+      scrub: 1
+    }
+  });
+
+  ['#v12-g1','#v12-g2','#v12-g3','#v12-g4','#v12-g5'].forEach((sel, i) => {
+    v12_galTl.fromTo(sel,
+      { opacity: 0, yPercent: 5 },
+      { opacity: 1, yPercent: 0, ease: 'power2.out', duration: 0.4 },
+      i * 0.12
+    );
+  });
+
+  // Closing
+  gsap.fromTo('#v12-closing',
+    { opacity: 0, yPercent: 5 },
+    {
+      opacity: 1, yPercent: 0,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#v12-closing',
+        start: 'top 85%',
+        end: 'top 52%',
+        scrub: 1
+      }
+    }
+  );
+}
+</script>
+</body>
+</html>
