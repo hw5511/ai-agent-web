@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">CSS 스타일 체계 + 워크플로우</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">CSS는 4가지 영역으로 페이지의 외형을 결정한다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- CSS 4가지 영역 -->
+  <rect x="60" y="232" width="260" height="90" rx="12" fill="#fdf4ff" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="190" y="267" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#7c3aed">색상 · 배경</text>
+  <text x="190" y="291" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b21a8">글자색, 배경색, 그라데이션</text>
+  <text x="190" y="311" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b21a8">예: "어두운 네이비 배경"</text>
+  <rect x="350" y="232" width="260" height="90" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="480" y="267" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#d97706">폰트 · 타이포</text>
+  <text x="480" y="291" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e">크기, 굵기, 줄간격, 폰트 종류</text>
+  <text x="480" y="311" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e">예: "제목은 크고 굵게"</text>
+  <rect x="640" y="232" width="260" height="90" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="770" y="267" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#2563eb">간격 · 여백</text>
+  <text x="770" y="291" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">padding, margin, gap</text>
+  <text x="770" y="311" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">예: "요소 사이 넉넉히 띄워줘"</text>
+  <rect x="930" y="232" width="260" height="90" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1060" y="267" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#16a34a">레이아웃 · 배치</text>
+  <text x="1060" y="291" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">flex, grid, 중앙 정렬</text>
+  <text x="1060" y="311" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">예: "가로로 나란히 배치"</text>
+  <!-- Claude Code 워크플로우 -->
+  <text x="60" y="370" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">Claude Code 워크플로우</text>
+  <!-- 단계 박스들 -->
+  <rect x="60" y="390" width="240" height="64" rx="10" fill="#171717"/>
+  <text x="180" y="418" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">① 지시</text>
+  <text x="180" y="442" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#d1d5db">원하는 것을 말로</text>
+  <text x="316" y="426" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+  <rect x="340" y="390" width="240" height="64" rx="10" fill="#374151"/>
+  <text x="460" y="418" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">② 생성</text>
+  <text x="460" y="442" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#d1d5db">Claude가 코드 작성</text>
+  <text x="596" y="426" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+  <rect x="620" y="390" width="240" height="64" rx="10" fill="#374151"/>
+  <text x="740" y="418" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">③ 확인</text>
+  <text x="740" y="442" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#d1d5db">브라우저에서 결과</text>
+  <text x="876" y="426" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+  <rect x="900" y="390" width="240" height="64" rx="10" fill="#2563eb"/>
+  <text x="1020" y="418" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">④ 수정</text>
+  <text x="1020" y="442" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#dbeafe">"이 부분 바꿔줘"</text>
+  <!-- 순환 화살표 -->
+  <text x="1155" y="426" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">↺</text>
+  <text x="60" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">이 사이클을 반복하면서 완성도를 높여갑니다</text>
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">CSS는 직접 쓰지 않아도 됩니다 — "어두운 배경, 흰 글씨" 라고 말하면 됩니다</text>
+</svg>

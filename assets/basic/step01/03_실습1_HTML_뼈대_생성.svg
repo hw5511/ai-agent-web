@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="600" fill="#d97706">실습 1</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" font-weight="700" fill="#171717">HTML 뼈대 생성</text>
+  <text x="60" y="174" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#6b7280">스타일 없이 구조만 먼저 — Claude에게 이렇게 지시합니다</text>
+  <line x1="60" y1="200" x2="1220" y2="200" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- 지시문 박스 -->
+  <rect x="60" y="218" width="120" height="22" rx="11" fill="#2563eb"/>
+  <text x="120" y="233" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">Claude 지시문</text>
+  <rect x="60" y="248" width="1160" height="90" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="90" y="284" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1d4ed8">"내 이름, 직업, 소개글, 연락 버튼이 있는 랜딩페이지</text>
+  <text x="90" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1d4ed8">HTML 뼈대를 만들어줘. 스타일은 없이 구조만."</text>
+  <!-- 포인트 설명 -->
+  <text x="60" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">이 지시문의 핵심</text>
+  <rect x="60" y="396" width="540" height="70" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="82" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#374151">구체적인 항목 명시</text>
+  <text x="82" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">이름 · 직업 · 소개글 · 버튼 — 원하는 요소를 나열한다</text>
+  <rect x="640" y="396" width="540" height="70" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="662" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#374151">"스타일은 없이" 명시</text>
+  <text x="662" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">구조와 디자인을 분리하면 수정이 쉬워진다</text>
+  <!-- 연습 섹션 -->
+  <rect x="60" y="486" width="120" height="22" rx="11" fill="#059669"/>
+  <text x="120" y="501" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">연습해보세요</text>
+  <rect x="60" y="514" width="1160" height="80" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="90" y="545" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">• 내 이름과 직업을 넣어서 그대로 Claude에게 입력해보세요</text>
+  <text x="90" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">• 항목을 바꿔서 시도해보세요: "포트폴리오 섹션도 추가해줘"</text>
+  <rect x="60" y="620" width="1160" height="48" rx="10" fill="#f3f4f6"/>
+  <text x="640" y="650" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">결과물이 투박해도 괜찮습니다 — 다음 단계에서 CSS를 입힙니다</text>
+</svg>

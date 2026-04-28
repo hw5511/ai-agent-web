@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">1회차 핵심 정리</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 배운 것 3가지</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- 3가지 핵심 -->
+  <rect x="60" y="240" width="350" height="290" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <text x="235" y="290" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" fill="#d97706">01</text>
+  <text x="235" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">역할 분담</text>
+  <line x1="90" y1="346" x2="380" y2="346" stroke="#fcd34d" stroke-width="1"/>
+  <text x="235" y="380" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">HTML = 뼈대</text>
+  <text x="235" y="408" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">CSS = 스타일</text>
+  <text x="235" y="436" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">JS = 행동</text>
+  <text x="235" y="508" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e">세 언어가 협력해서 웹을 만든다</text>
+  <rect x="460" y="240" width="350" height="290" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <text x="635" y="290" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" fill="#2563eb">02</text>
+  <text x="635" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">분리 지시</text>
+  <line x1="490" y1="346" x2="780" y2="346" stroke="#93c5fd" stroke-width="1"/>
+  <text x="635" y="380" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">뼈대 먼저 → CSS 입히기</text>
+  <text x="635" y="408" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">한 번에 다 요청하는 것보다</text>
+  <text x="635" y="436" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">단계별이 결과가 좋다</text>
+  <text x="635" y="508" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">구조와 스타일을 분리해서 지시하라</text>
+  <rect x="860" y="240" width="350" height="290" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="1035" y="290" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" fill="#16a34a">03</text>
+  <text x="1035" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">수정 사이클</text>
+  <line x1="890" y1="346" x2="1180" y2="346" stroke="#86efac" stroke-width="1"/>
+  <text x="1035" y="380" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#14532d">지시 → 생성 → 확인 → 수정</text>
+  <text x="1035" y="408" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#14532d">한 번에 완벽하지 않아도 된다</text>
+  <text x="1035" y="436" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#14532d">반복하면서 완성해간다</text>
+  <text x="1035" y="508" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">Claude와의 대화가 곧 개발이다</text>
+  <rect x="60" y="572" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="603" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">다음 2회차 — 색상과 폰트로 퀄리티를 높인다</text>
+</svg>

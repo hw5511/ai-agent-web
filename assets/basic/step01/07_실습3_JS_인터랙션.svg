@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="600" fill="#d97706">실습 3</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" font-weight="700" fill="#171717">JS 버튼 인터랙션 추가</text>
+  <text x="60" y="174" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#6b7280">실습2 결과물에 JS를 추가해 버튼이 반응하게 만듭니다</text>
+  <line x1="60" y1="200" x2="1220" y2="200" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- 지시문 -->
+  <rect x="60" y="218" width="120" height="22" rx="11" fill="#2563eb"/>
+  <text x="120" y="233" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">Claude 지시문</text>
+  <rect x="60" y="248" width="1160" height="90" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="90" y="284" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1d4ed8">"연락하기 버튼을 클릭하면 '감사합니다!고 연락드리겠습니다.'</text>
+  <text x="90" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1d4ed8">라는 메시지가 화면에 나타나는 JS를 추가해줘."</text>
+  <!-- 동작 흐름 -->
+  <text x="60" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">동작 흐름</text>
+  <rect x="60" y="398" width="220" height="64" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="170" y="424" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#374151">사용자</text>
+  <text x="170" y="448" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">버튼 클릭</text>
+  <text x="296" y="432" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+  <rect x="320" y="398" width="220" height="64" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="430" y="424" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#15803d">JS 트리거</text>
+  <text x="430" y="448" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#166534">click 이벤트 감지</text>
+  <text x="556" y="432" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+  <rect x="580" y="398" width="220" height="64" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="690" y="424" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#1e40af">JS 동작</text>
+  <text x="690" y="448" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e3a8a">메시지 생성</text>
+  <text x="816" y="432" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+  <rect x="840" y="398" width="340" height="64" rx="10" fill="#171717"/>
+  <text x="1010" y="424" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#ffffff">화면 반응</text>
+  <text x="1010" y="448" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">"감사합니다!" 메시지 표시</text>
+  <!-- 연습 -->
+  <rect x="60" y="490" width="120" height="22" rx="11" fill="#059669"/>
+  <text x="120" y="505" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">연습해보세요</text>
+  <rect x="60" y="518" width="1160" height="80" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="90" y="549" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">• 메시지 내용을 바꿔보세요: "연락 주시면 24시간 내로 답변드립니다."</text>
+  <text x="90" y="579" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">• 버튼 색상도 클릭 시 바뀌도록 추가 지시해보세요</text>
+  <rect x="60" y="620" width="1160" height="48" rx="10" fill="#f3f4f6"/>
+  <text x="640" y="650" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">트리거(click) + 동작(메시지 표시) — 이것이 JS의 기본 패턴입니다</text>
+</svg>

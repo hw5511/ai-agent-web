@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">HTML · CSS · JS 역할 분담</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">브라우저는 이 세 파일을 조합해서 화면을 만든다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- HTML 카드 -->
+  <rect x="60" y="240" width="350" height="330" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <text x="235" y="298" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="42" font-weight="900" fill="#d97706">HTML</text>
+  <text x="235" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#92400e">뼈대</text>
+  <line x1="90" y1="348" x2="380" y2="348" stroke="#fcd34d" stroke-width="1"/>
+  <text x="90" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">• 제목이 어디에 있는지</text>
+  <text x="90" y="410" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">• 단락이 몇 개인지</text>
+  <text x="90" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">• 버튼이 어디에 있는지</text>
+  <text x="235" y="530" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e">건물의 기둥과 벽</text>
+  <!-- CSS 카드 -->
+  <rect x="460" y="240" width="350" height="330" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <text x="635" y="298" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="42" font-weight="900" fill="#2563eb">CSS</text>
+  <text x="635" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">피부 · 옷</text>
+  <line x1="490" y1="348" x2="780" y2="348" stroke="#93c5fd" stroke-width="1"/>
+  <text x="490" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• 색상이 무엇인지</text>
+  <text x="490" y="410" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• 글자 크기가 얼마인지</text>
+  <text x="490" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• 여백과 배치가 어떤지</text>
+  <text x="635" y="530" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">인테리어와 도색</text>
+  <!-- JS 카드 -->
+  <rect x="860" y="240" width="350" height="330" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="1035" y="298" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="42" font-weight="900" fill="#16a34a">JS</text>
+  <text x="1035" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">근육 · 행동</text>
+  <line x1="890" y1="348" x2="1180" y2="348" stroke="#86efac" stroke-width="1"/>
+  <text x="890" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#14532d">• 버튼 클릭 시 반응</text>
+  <text x="890" y="410" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#14532d">• 메뉴가 열리고 닫힘</text>
+  <text x="890" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#14532d">• 스크롤에 따라 변화</text>
+  <text x="1035" y="530" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">엘리베이터와 자동문</text>
+  <!-- 브라우저 렌더링 흐름 -->
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">브라우저가 HTML → CSS → JS 순서로 읽어 화면을 조립한다</text>
+</svg>
