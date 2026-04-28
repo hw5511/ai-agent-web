@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#d97706" text-anchor="middle">실습 1</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">GSAP ScrollTrigger 기본 효과</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">스크롤 시 요소가 나타나는 페이드인 효과를 만듭니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="110" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="90" y="258" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">"1회차 랜딩페이지에 GSAP ScrollTrigger를 추가해줘.</text>
+  <text x="90" y="286" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">각 섹션이 스크롤할 때 아래에서 위로 페이드인 되도록."</text>
+  <text x="90" y="314" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#93c5fd">— Claude 지시문</text>
+
+  <!-- 동작 흐름 라벨 -->
+  <text x="60" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600" letter-spacing="0.04em">동작 흐름</text>
+
+  <!-- step1 -->
+  <rect x="60" y="383" width="220" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="170" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#374151" text-anchor="middle">페이지 로드</text>
+  <text x="170" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af" text-anchor="middle">초기 상태</text>
+
+  <text x="298" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#d1d5db" text-anchor="middle">→</text>
+
+  <!-- step2 -->
+  <rect x="320" y="383" width="220" height="64" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="430" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#d97706" text-anchor="middle">스크롤 시작</text>
+  <text x="430" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#fbbf24" text-anchor="middle">위치 감지</text>
+
+  <text x="558" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#d1d5db" text-anchor="middle">→</text>
+
+  <!-- step3 -->
+  <rect x="580" y="383" width="220" height="64" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="690" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#1e40af" text-anchor="middle">트리거 발동</text>
+  <text x="690" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#3b82f6" text-anchor="middle">요소 진입</text>
+
+  <text x="818" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#d1d5db" text-anchor="middle">→</text>
+
+  <!-- step4 -->
+  <rect x="840" y="383" width="400" height="64" rx="8" fill="#171717"/>
+  <text x="1040" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">애니메이션</text>
+  <text x="1040" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#d1d5db" text-anchor="middle">페이드인 완료</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="480" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="90" y="516" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">• 페이드인 대신 왼쪽에서 슬라이드 인 효과로 바꿔보세요</text>
+  <text x="90" y="544" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">• 각 섹션마다 다른 방향에서 들어오도록 지시해보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="612" width="1160" height="56" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="645" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151" text-anchor="middle" font-weight="600">라이브러리 CDN 링크도 Claude가 알아서 추가해준다</text>
+</svg>

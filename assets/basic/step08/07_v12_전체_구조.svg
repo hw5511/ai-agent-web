@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 08</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">v12 프롬프트 전체 구조</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">3-SPARK + AESTHETIC_PINCH + FONT JUDGMENT의 완전한 조합</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- v12 구조도 라벨 -->
+  <text x="60" y="250" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600">v12 구조도</text>
+
+  <!-- 레이어1 - 3-SPARK -->
+  <rect x="60" y="268" width="1160" height="100" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="90" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#d97706">Layer 1: 3-SPARK</text>
+  <text x="90" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#92400e">방향성 — 무엇을 만들지, 어떤 효과의 중심으로 갈지</text>
+
+  <!-- 화살표 1 -->
+  <line x1="640" y1="368" x2="640" y2="388" stroke="#d1d5db" stroke-width="2"/>
+  <polygon points="634,384 646,384 640,394" fill="#d1d5db"/>
+
+  <!-- 레이어2 - AESTHETIC_PINCH -->
+  <rect x="60" y="388" width="1160" height="100" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="90" y="428" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#2563eb">Layer 2: AESTHETIC_PINCH</text>
+  <text x="90" y="460" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af">분위기 — 어떤 미적 감성을 입힐지, 텍스처/공간감/디테일</text>
+
+  <!-- 화살표 2 -->
+  <line x1="640" y1="488" x2="640" y2="508" stroke="#d1d5db" stroke-width="2"/>
+  <polygon points="634,504 646,504 640,514" fill="#d1d5db"/>
+
+  <!-- 레이어3 - FONT JUDGMENT -->
+  <rect x="60" y="508" width="1160" height="100" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="90" y="548" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#16a34a">Layer 3: FONT JUDGMENT</text>
+  <text x="90" y="580" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">타이포 — 가독성과 분위기에 맞는 폰트 조합 확정</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="630" width="1160" height="56" rx="10" fill="#171717"/>
+  <text x="640" y="664" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">3개 레이어를 순서대로 쌓으면 전문가 수준의 프롬프트가 완성된다</text>
+</svg>

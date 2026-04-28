@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" letter-spacing="0.05em">WEB 02</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">실습 3</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">나만의 색상 + 폰트 조합 만들기</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">지금까지 배운 것을 조합해서 자신만의 스타일을 만듭니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="110" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <rect x="80" y="234" width="88" height="20" rx="10" fill="#2563eb"/>
+  <text x="124" y="248" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Claude 지시문</text>
+  <text x="80" y="286" font-size="14" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">"1회차에서 만든 랜딩페이지를 업그레이드해줘.</text>
+  <text x="80" y="308" font-size="14" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">배경 #1a1a2e, 포인트 #e94560, Noto Sans KR 폰트 적용. 버튼은 둥글게."</text>
+
+  <!-- 조합 아이디어 라벨 -->
+  <text x="60" y="368" font-size="14" font-weight="600" fill="#9ca3af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">조합 아이디어</text>
+
+  <!-- 카드1: 다크 테크 -->
+  <rect x="60" y="388" width="340" height="100" rx="12" fill="#0f172a" stroke="#1e40af" stroke-width="1"/>
+  <text x="230" y="428" font-size="16" font-weight="700" fill="#38bdf8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">다크 테크</text>
+  <text x="230" y="456" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">어두운 배경 + Inter + 하늘색</text>
+
+  <!-- 카드2: 밝은 감성 -->
+  <rect x="450" y="388" width="340" height="100" rx="12" fill="#fefce8" stroke="#fde68a" stroke-width="1"/>
+  <text x="620" y="428" font-size="16" font-weight="700" fill="#d97706" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">밝은 감성</text>
+  <text x="620" y="456" font-size="13" fill="#92400e" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">흰 배경 + Playfair + 황금색</text>
+
+  <!-- 카드3: 내추럴 -->
+  <rect x="840" y="388" width="340" height="100" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="1010" y="428" font-size="16" font-weight="700" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">내추럴</text>
+  <text x="1010" y="456" font-size="13" fill="#166534" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">크림 배경 + Noto + 초록색</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="520" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <rect x="80" y="536" width="100" height="20" rx="10" fill="#16a34a"/>
+  <text x="130" y="550" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">연습해보세요</text>
+  <text x="80" y="574" font-size="13" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• 위 3가지 중 하나를 선택해서 직접 Claude에게 지시해보세요</text>
+  <text x="80" y="592" font-size="13" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• '이 느낌을 좀 더 고급스럽게 바꿔줘'처럼 자연어로 수정 요청도 해보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="622" width="1160" height="52" rx="10" fill="#f3f4f6"/>
+  <text x="640" y="653" font-size="15" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Claude에게 '분위기'를 말하면 색상+폰트+여백을 함께 잡아준다</text>
+</svg>

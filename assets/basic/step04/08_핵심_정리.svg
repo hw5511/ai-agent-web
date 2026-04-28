@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">WEB 04</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">4회차 핵심 정리</text>
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">오늘 배운 것 3가지</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb"/>
+
+  <!-- 카드1: 마그네틱 버튼 -->
+  <rect x="60" y="240" width="350" height="380" rx="16" fill="#fce7f3" stroke="#f9a8d4" stroke-width="1"/>
+  <text x="235" y="300" font-size="36" font-weight="700" fill="#be185d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">01</text>
+  <text x="235" y="344" font-size="20" font-weight="700" fill="#9d174d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">마그네틱 버튼</text>
+  <line x1="100" y1="364" x2="370" y2="364" stroke="#f9a8d4"/>
+  <text x="235" y="396" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">거리 계산으로 이동</text>
+  <text x="235" y="422" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">mousemove 실시간 추적</text>
+  <text x="235" y="448" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">transform으로 적용</text>
+  <rect x="100" y="480" width="270" height="40" rx="8" fill="#fdf2f8"/>
+  <text x="235" y="505" font-size="13" font-weight="700" fill="#9d174d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">커서가 당기는 효과</text>
+
+  <!-- 카드2: Flip Card -->
+  <rect x="460" y="240" width="350" height="380" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="635" y="300" font-size="36" font-weight="700" fill="#16a34a" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">02</text>
+  <text x="635" y="344" font-size="20" font-weight="700" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Flip Card</text>
+  <line x1="500" y1="364" x2="770" y2="364" stroke="#86efac"/>
+  <text x="635" y="396" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">CSS rotateY</text>
+  <text x="635" y="422" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">perspective 필수</text>
+  <text x="635" y="448" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">hover 트리거</text>
+  <rect x="500" y="480" width="270" height="40" rx="8" fill="#f0fdf4"/>
+  <text x="635" y="505" font-size="13" font-weight="700" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">CSS만으로 3D 뒤집기</text>
+
+  <!-- 카드3: Spotlight -->
+  <rect x="860" y="240" width="350" height="380" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="1035" y="300" font-size="36" font-weight="700" fill="#2563eb" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">03</text>
+  <text x="1035" y="344" font-size="20" font-weight="700" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Spotlight</text>
+  <line x1="900" y1="364" x2="1170" y2="364" stroke="#93c5fd"/>
+  <text x="1035" y="396" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">radial-gradient 이동</text>
+  <text x="1035" y="422" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">커서 좌표 → CSS 변수</text>
+  <text x="1035" y="448" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">다크 배경 필수</text>
+  <rect x="900" y="480" width="270" height="40" rx="8" fill="#eff6ff"/>
+  <text x="1035" y="505" font-size="13" font-weight="700" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">좌표로 빛을 조종한다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="0" y="660" width="1280" height="60" fill="#171717"/>
+  <text x="640" y="697" font-size="15" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">다음 5회차 — 라이브러리와 3D로 웹을 확장한다</text>
+</svg>

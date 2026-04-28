@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#ffffff">
+  <defs>
+    <style>text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }</style>
+  </defs>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 07</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">7회차 핵심 정리</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">오늘 배운 것 3가지</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드1: 나쁜 프롬프트 -->
+  <rect x="60" y="240" width="350" height="340" rx="20" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="235" y="290" font-size="28" font-weight="900" fill="#dc2626" text-anchor="middle">01</text>
+  <text x="235" y="328" font-size="20" font-weight="700" fill="#991b1b" text-anchor="middle">나쁜 프롬프트</text>
+  <line x1="90" y1="348" x2="380" y2="348" stroke="#fca5a5" stroke-width="1"/>
+  <text x="235" y="378" font-size="13" fill="#991b1b" text-anchor="middle">모호한 지시 = 낮은 퀄리티</text>
+  <text x="235" y="404" font-size="13" fill="#991b1b" text-anchor="middle">'예쁘게'는 지시가 아님</text>
+  <text x="235" y="430" font-size="13" fill="#991b1b" text-anchor="middle">Claude도 추측할 뿐</text>
+  <line x1="90" y1="456" x2="380" y2="456" stroke="#fca5a5" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="235" y="484" font-size="13" font-weight="600" fill="#dc2626" text-anchor="middle">구체성이 없으면 결과도 없다</text>
+  <rect x="90" y="498" width="290" height="62" rx="10" fill="#fee2e2"/>
+  <text x="235" y="534" font-size="12" fill="#b91c1c" text-anchor="middle">구체성이 없으면 결과도 없다</text>
+
+  <!-- 카드2: 4요소 프롬프트 -->
+  <rect x="465" y="240" width="350" height="340" rx="20" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="640" y="290" font-size="28" font-weight="900" fill="#2563eb" text-anchor="middle">02</text>
+  <text x="640" y="328" font-size="20" font-weight="700" fill="#1e40af" text-anchor="middle">4요소 프롬프트</text>
+  <line x1="495" y1="348" x2="785" y2="348" stroke="#93c5fd" stroke-width="1"/>
+  <text x="640" y="378" font-size="13" fill="#1e3a8a" text-anchor="middle">대상 + 스타일 + 수치 + 범위</text>
+  <text x="640" y="404" font-size="13" fill="#1e3a8a" text-anchor="middle">첫 시도 완성률 UP</text>
+  <text x="640" y="430" font-size="13" fill="#1e3a8a" text-anchor="middle">수정 횟수 DOWN</text>
+  <line x1="495" y1="456" x2="785" y2="456" stroke="#93c5fd" stroke-width="1" stroke-dasharray="4,3"/>
+  <rect x="495" y="470" width="290" height="80" rx="10" fill="#bfdbfe"/>
+  <text x="640" y="506" font-size="12" fill="#1e3a8a" text-anchor="middle">4가지를 갖추면</text>
+  <text x="640" y="528" font-size="12" fill="#1e3a8a" text-anchor="middle">원하는 결과</text>
+
+  <!-- 카드3: 통합 실습 -->
+  <rect x="870" y="240" width="350" height="340" rx="20" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1045" y="290" font-size="28" font-weight="900" fill="#16a34a" text-anchor="middle">03</text>
+  <text x="1045" y="328" font-size="20" font-weight="700" fill="#15803d" text-anchor="middle">통합 실습</text>
+  <line x1="900" y1="348" x2="1190" y2="348" stroke="#86efac" stroke-width="1"/>
+  <text x="1045" y="378" font-size="13" fill="#166534" text-anchor="middle">1~6회차 기술 총동원</text>
+  <text x="1045" y="404" font-size="13" fill="#166534" text-anchor="middle">하나의 프롬프트로 완성</text>
+  <text x="1045" y="430" font-size="13" fill="#166534" text-anchor="middle">기획서 = 프롬프트</text>
+  <line x1="900" y1="456" x2="1190" y2="456" stroke="#86efac" stroke-width="1" stroke-dasharray="4,3"/>
+  <rect x="900" y="470" width="290" height="80" rx="10" fill="#bbf7d0"/>
+  <text x="1045" y="506" font-size="12" fill="#14532d" text-anchor="middle">프롬프트가 곧</text>
+  <text x="1045" y="528" font-size="12" fill="#14532d" text-anchor="middle">기획이다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="624" width="1160" height="52" rx="12" fill="#171717"/>
+  <text x="640" y="656" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">다음 8회차 — v12 프롬프트로 전문가 수준의 결과물을 만든다</text>
+</svg>

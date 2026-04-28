@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#ffffff">
+  <defs>
+    <style>text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }</style>
+  </defs>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 07</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">7회차 — 기획이 곧 프롬프트다</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">좋은 지시가 좋은 결과를 만든다는 것을 직접 체험합니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드 3개 -->
+  <!-- 카드1 -->
+  <rect x="60" y="238" width="340" height="200" rx="16" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="230" y="290" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">나쁜 프롬프트 vs 좋은 프롬프트</text>
+  <line x1="90" y1="305" x2="370" y2="305" stroke="#fca5a5" stroke-width="1"/>
+  <text x="230" y="335" font-size="14" fill="#991b1b" text-anchor="middle">같은 요청, 다른 결과 비교</text>
+  <text x="230" y="360" font-size="13" fill="#b91c1c" text-anchor="middle">프롬프트 퀄리티의 차이를</text>
+  <text x="230" y="382" font-size="13" fill="#b91c1c" text-anchor="middle">직접 눈으로 확인합니다</text>
+
+  <!-- 카드2 -->
+  <rect x="470" y="238" width="340" height="200" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="640" y="290" font-size="15" font-weight="700" fill="#1e40af" text-anchor="middle">구체적 지시의 힘</text>
+  <line x1="500" y1="305" x2="780" y2="305" stroke="#93c5fd" stroke-width="1"/>
+  <text x="640" y="335" font-size="14" fill="#1e3a8a" text-anchor="middle">수치와 상세 명세가 퀄리티를 높인다</text>
+  <text x="640" y="360" font-size="13" fill="#1d4ed8" text-anchor="middle">4가지 프롬프트 요소로</text>
+  <text x="640" y="382" font-size="13" fill="#1d4ed8" text-anchor="middle">원하는 결과를 첫 시도에</text>
+
+  <!-- 카드3 -->
+  <rect x="880" y="238" width="340" height="200" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1050" y="290" font-size="15" font-weight="700" fill="#15803d" text-anchor="middle">통합 실습</text>
+  <line x1="910" y1="305" x2="1190" y2="305" stroke="#86efac" stroke-width="1"/>
+  <text x="1050" y="335" font-size="14" fill="#166534" text-anchor="middle">1~6회차 기술 모두 적용한 랜딩페이지</text>
+  <text x="1050" y="360" font-size="13" fill="#15803d" text-anchor="middle">지금까지 배운 모든 것을</text>
+  <text x="1050" y="382" font-size="13" fill="#15803d" text-anchor="middle">하나의 페이지로 완성</text>
+
+  <!-- 수업 흐름 -->
+  <text x="60" y="490" font-size="14" font-weight="600" fill="#374151">수업 흐름</text>
+  <rect x="60" y="504" width="1160" height="48" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 흐름 단계 -->
+  <text x="120" y="534" font-size="13" fill="#374151" text-anchor="middle">이론</text>
+  <text x="210" y="534" font-size="12" fill="#9ca3af" text-anchor="middle">→</text>
+  <text x="300" y="534" font-size="13" fill="#d97706" text-anchor="middle">실습</text>
+  <text x="390" y="534" font-size="12" fill="#9ca3af" text-anchor="middle">→</text>
+  <text x="480" y="534" font-size="13" fill="#374151" text-anchor="middle">이론</text>
+  <text x="570" y="534" font-size="12" fill="#9ca3af" text-anchor="middle">→</text>
+  <text x="660" y="534" font-size="13" fill="#d97706" text-anchor="middle">실습</text>
+  <text x="750" y="534" font-size="12" fill="#9ca3af" text-anchor="middle">→</text>
+  <text x="840" y="534" font-size="13" fill="#374151" text-anchor="middle">이론</text>
+  <text x="930" y="534" font-size="12" fill="#9ca3af" text-anchor="middle">→</text>
+  <text x="1020" y="534" font-size="13" fill="#d97706" text-anchor="middle">실습</text>
+  <text x="1110" y="534" font-size="12" fill="#9ca3af" text-anchor="middle">→</text>
+  <text x="1190" y="534" font-size="13" fill="#374151" text-anchor="middle">정리</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="624" width="1160" height="52" rx="12" fill="#171717"/>
+  <text x="640" y="656" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">프롬프트가 곧 기획서다</text>
+</svg>

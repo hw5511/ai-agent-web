@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  </style>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" letter-spacing="0.05em">WEB 05</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle">실습 1</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">tsParticles 파티클 배경 추가</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">떠다니는 파티클이 배경을 채우는 효과를 만듭니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="110" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="90" y="256" font-size="16" font-weight="600" fill="#1e40af">"히어로 섹션 배경에 tsParticles 파티클 효과를 추가해줘.</text>
+  <text x="90" y="284" font-size="16" fill="#1e40af">작은 흰 점들이 천천히 움직이고 마우스 근처로 반응하도록."</text>
+  <text x="1190" y="320" font-size="12" fill="#93c5fd" text-anchor="end">Claude 지시문</text>
+
+  <!-- 설정 옵션 라벨 -->
+  <text x="60" y="368" font-size="15" font-weight="600" fill="#374151">설정 옵션</text>
+
+  <!-- 설정 카드 3개 -->
+  <!-- 파티클 수 -->
+  <rect x="60" y="388" width="340" height="90" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="230" y="422" font-size="16" font-weight="700" fill="#374151" text-anchor="middle">파티클 수</text>
+  <text x="230" y="448" font-size="14" fill="#6b7280" text-anchor="middle">number: 80</text>
+  <text x="230" y="468" font-size="13" fill="#9ca3af" text-anchor="middle">(적당한 밀도)</text>
+
+  <!-- 반응 거리 -->
+  <rect x="460" y="388" width="340" height="90" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="630" y="422" font-size="16" font-weight="700" fill="#d97706" text-anchor="middle">반응 거리</text>
+  <text x="630" y="448" font-size="14" fill="#92400e" text-anchor="middle">distance: 150</text>
+  <text x="630" y="468" font-size="13" fill="#b45309" text-anchor="middle">(마우스 반응)</text>
+
+  <!-- 파티클 색 -->
+  <rect x="860" y="388" width="360" height="90" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="1040" y="422" font-size="16" font-weight="700" fill="#2563eb" text-anchor="middle">파티클 색</text>
+  <text x="1040" y="448" font-size="14" fill="#1e40af" text-anchor="middle">color: '#ffffff'</text>
+  <text x="1040" y="468" font-size="13" fill="#3b82f6" text-anchor="middle">(다크 배경)</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="510" width="1160" height="80" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="90" y="546" font-size="15" fill="#166534">• 파티클 색상을 하늘색 '#38bdf8'으로 바꿔보세요</text>
+  <text x="90" y="572" font-size="15" fill="#166534">• 파티클 모양을 원형에서 별 모양으로 변경해보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="620" width="1160" height="56" rx="12" fill="#171717"/>
+  <text x="640" y="655" font-size="15" fill="#ffffff" text-anchor="middle">'눈처럼 떨어지는 효과' 처럼 원하는 느낌을 말하면 Claude가 설정을 바꿔준다</text>
+</svg>

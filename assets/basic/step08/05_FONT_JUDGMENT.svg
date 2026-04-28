@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 08</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">FONT JUDGMENT — 폰트로 완성도를 높인다</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">폰트 선택 기준을 시스템화해서 매번 좋은 폰트를 쓴다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- FONT JUDGMENT 기준 라벨 -->
+  <text x="60" y="250" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600">FONT JUDGMENT 기준</text>
+
+  <!-- 기준 카드 1 - 가독성 -->
+  <rect x="60" y="268" width="260" height="120" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="190" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151" text-anchor="middle">가독성</text>
+  <text x="190" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">bold_readability</text>
+  <text x="190" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" text-anchor="middle">Small 크기에서 선명한가</text>
+
+  <!-- 기준 카드 2 - 분위기 -->
+  <rect x="380" y="268" width="260" height="120" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="510" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#d97706" text-anchor="middle">분위기</text>
+  <text x="510" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#92400e" text-anchor="middle">vibe_tag</text>
+  <text x="510" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e" text-anchor="middle">사이트 톤과 맞는가</text>
+
+  <!-- 기준 카드 3 - 조합 -->
+  <rect x="700" y="268" width="260" height="120" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="830" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#2563eb" text-anchor="middle">조합</text>
+  <text x="830" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#1e40af" text-anchor="middle">pairing</text>
+  <text x="830" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af" text-anchor="middle">헤드+본문 어울리는가</text>
+
+  <!-- 기준 카드 4 - 한글 -->
+  <rect x="1020" y="268" width="200" height="120" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1120" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#16a34a" text-anchor="middle">한글</text>
+  <text x="1120" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#15803d" text-anchor="middle">korean_support</text>
+  <text x="1120" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d" text-anchor="middle">한글 지원 여부</text>
+
+  <!-- v12 추천 폰트 조합 라벨 -->
+  <text x="60" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600">v12 추천 폰트 조합</text>
+
+  <!-- 테이블 헤더 -->
+  <rect x="60" y="438" width="1160" height="36" rx="4" fill="#171717"/>
+  <text x="200" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">분위기</text>
+  <text x="540" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">헤드라인</text>
+  <text x="880" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">본문</text>
+  <text x="1160" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">한글</text>
+
+  <!-- 행1 -->
+  <rect x="60" y="474" width="1160" height="52" rx="0" fill="#f9fafb"/>
+  <line x1="60" y1="474" x2="1220" y2="474" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="200" y="505" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">다크 테크</text>
+  <text x="540" y="505" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">Inter</text>
+  <text x="880" y="505" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">JetBrains Mono</text>
+  <text x="1160" y="505" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">Noto Sans</text>
+
+  <!-- 행2 -->
+  <rect x="60" y="526" width="1160" height="52" rx="0" fill="#f9fafb"/>
+  <line x1="60" y1="526" x2="1220" y2="526" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="200" y="557" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">고급 감성</text>
+  <text x="540" y="557" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">Playfair Display</text>
+  <text x="880" y="557" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">Lato</text>
+  <text x="1160" y="557" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">Noto Serif</text>
+  <line x1="60" y1="578" x2="1220" y2="578" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="622" width="1160" height="56" rx="10" fill="#171717"/>
+  <text x="640" y="656" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">FONT JUDGMENT에서 bold_readability 등급이 높은 폰트를 우선 선택한다</text>
+</svg>

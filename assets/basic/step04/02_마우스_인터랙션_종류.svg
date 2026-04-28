@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">WEB 04</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">마우스 인터랙션 — 3가지 트리거</text>
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">hover, click, mousemove가 만드는 다양한 효과</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb"/>
+
+  <!-- 카드1: hover -->
+  <rect x="60" y="240" width="340" height="160" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="230" y="295" font-size="24" font-weight="700" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">hover</text>
+  <line x1="100" y1="312" x2="360" y2="312" stroke="#93c5fd"/>
+  <text x="230" y="345" font-size="14" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">마우스가 올라갔을 때</text>
+  <text x="230" y="370" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">예: 색상 변화, 확대</text>
+
+  <!-- 카드2: click -->
+  <rect x="470" y="240" width="340" height="160" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="640" y="295" font-size="24" font-weight="700" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">click</text>
+  <line x1="510" y1="312" x2="770" y2="312" stroke="#86efac"/>
+  <text x="640" y="345" font-size="14" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">클릭했을 때</text>
+  <text x="640" y="370" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">예: 펼쳐지는 효과</text>
+
+  <!-- 카드3: mousemove -->
+  <rect x="880" y="240" width="340" height="160" rx="16" fill="#fce7f3" stroke="#f9a8d4" stroke-width="1"/>
+  <text x="1050" y="295" font-size="24" font-weight="700" fill="#be185d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">mousemove</text>
+  <line x1="920" y1="312" x2="1180" y2="312" stroke="#f9a8d4"/>
+  <text x="1050" y="345" font-size="14" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">마우스가 움직일 때</text>
+  <text x="1050" y="370" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">예: 빛 추적, 자기 효과</text>
+
+  <!-- 인터랙션이 중요한 이유 -->
+  <text x="60" y="440" font-size="14" fill="#9ca3af" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">인터랙션이 중요한 이유</text>
+
+  <!-- 이유 박스 1 -->
+  <rect x="60" y="460" width="540" height="80" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="330" y="493" font-size="16" font-weight="700" fill="#171717" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">기억에 남는 경험</text>
+  <text x="330" y="520" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">정적인 사이트보다 2배 오래 기억된다</text>
+
+  <!-- 이유 박스 2 -->
+  <rect x="660" y="460" width="540" height="80" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="930" y="493" font-size="16" font-weight="700" fill="#171717" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">전문가 느낌</text>
+  <text x="930" y="520" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">작은 인터랙션이 퀄리티를 높인다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="0" y="660" width="1280" height="60" fill="#171717"/>
+  <text x="640" y="697" font-size="15" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">인터랙션은 '마우스 올리면', '클릭하면', '움직이면'으로 Claude에게 설명한다</text>
+</svg>

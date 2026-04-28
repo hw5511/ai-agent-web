@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#ffffff">
+  <defs>
+    <style>text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }</style>
+  </defs>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 07</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">퀄리티 차이는 어디서 오는가</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">프롬프트 구체성이 곧 결과물의 퀄리티입니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 퀄리티 요소 라벨 -->
+  <text x="60" y="252" font-size="14" font-weight="600" fill="#374151">퀄리티 요소</text>
+
+  <!-- 4가지 퀄리티 요소 가로 카드 -->
+  <rect x="60" y="268" width="270" height="120" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="195" y="320" font-size="16" font-weight="700" fill="#374151" text-anchor="middle">레이아웃</text>
+  <text x="195" y="348" font-size="13" fill="#6b7280" text-anchor="middle">여백, 정렬, 그리드</text>
+
+  <rect x="390" y="268" width="270" height="120" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="525" y="320" font-size="16" font-weight="700" fill="#1e40af" text-anchor="middle">타이포그래피</text>
+  <text x="525" y="348" font-size="13" fill="#1e3a8a" text-anchor="middle">폰트, 크기, 행간</text>
+
+  <rect x="720" y="268" width="270" height="120" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="855" y="320" font-size="16" font-weight="700" fill="#15803d" text-anchor="middle">색상 대비</text>
+  <text x="855" y="348" font-size="13" fill="#166534" text-anchor="middle">배경/텍스트 명도차</text>
+
+  <rect x="1050" y="268" width="170" height="120" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="1135" y="320" font-size="16" font-weight="700" fill="#d97706" text-anchor="middle">인터랙션</text>
+  <text x="1135" y="348" font-size="13" fill="#92400e" text-anchor="middle">hover, 애니</text>
+
+  <!-- 프롬프트 수준별 결과 라벨 -->
+  <text x="60" y="424" font-size="14" font-weight="600" fill="#374151">프롬프트 수준별 결과</text>
+
+  <!-- 테이블 헤더 -->
+  <rect x="60" y="440" width="400" height="36" rx="0" fill="#171717"/>
+  <rect x="60" y="440" width="400" height="36" rx="6" fill="#171717"/>
+  <text x="260" y="464" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">프롬프트 수준</text>
+
+  <rect x="520" y="440" width="400" height="36" fill="#171717"/>
+  <text x="720" y="464" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">결과물</text>
+
+  <rect x="980" y="440" width="260" height="36" rx="0" fill="#171717"/>
+  <rect x="980" y="440" width="260" height="36" rx="6" fill="#171717"/>
+  <text x="1110" y="464" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">수정 횟수</text>
+
+  <!-- 행1 -->
+  <rect x="60" y="476" width="400" height="52" rx="0" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="260" y="508" font-size="13" fill="#dc2626" text-anchor="middle">모호함 ("예쁘게")</text>
+  <rect x="520" y="476" width="400" height="52" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="720" y="508" font-size="13" fill="#dc2626" text-anchor="middle">예측 불가 결과</text>
+  <rect x="980" y="476" width="260" height="52" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="1110" y="508" font-size="13" fill="#dc2626" text-anchor="middle">3~5회</text>
+
+  <!-- 행2 -->
+  <rect x="60" y="528" width="400" height="52" rx="0" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="260" y="560" font-size="13" fill="#d97706" text-anchor="middle">부분 구체적</text>
+  <rect x="520" y="528" width="400" height="52" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="720" y="560" font-size="13" fill="#d97706" text-anchor="middle">방향은 맞지만 디테일 부족</text>
+  <rect x="980" y="528" width="260" height="52" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="1110" y="560" font-size="13" fill="#d97706" text-anchor="middle">1~2회</text>
+
+  <!-- 행3 -->
+  <rect x="60" y="580" width="400" height="52" rx="0" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="260" y="612" font-size="13" fill="#15803d" text-anchor="middle">완전 구체적 (4요소)</text>
+  <rect x="520" y="580" width="400" height="52" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="720" y="612" font-size="13" fill="#15803d" text-anchor="middle">첫 시도에서 완성</text>
+  <rect x="980" y="580" width="260" height="52" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="1110" y="612" font-size="13" fill="#15803d" text-anchor="middle">0~1회</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="646" width="1160" height="52" rx="12" fill="#171717"/>
+  <text x="640" y="678" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">프롬프트 작성 시간 5분이 수정 시간 30분을 줄인다</text>
+</svg>

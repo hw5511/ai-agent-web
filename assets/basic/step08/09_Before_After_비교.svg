@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 08</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">Before vs After — 1회차와 8회차의 차이</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">v12 프롬프트가 결과물을 어떻게 바꾸는지 비교합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 비교 타이틀 라벨 -->
+  <text x="60" y="250" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600">1회차 vs 8회차 비교</text>
+
+  <!-- 왼쪽 비교 박스 - Before -->
+  <rect x="60" y="268" width="540" height="300" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="330" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#6b7280" text-anchor="middle">1회차 — 기본 프롬프트</text>
+  <line x1="80" y1="324" x2="580" y2="324" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="330" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151" text-anchor="middle">HTML 뼈대 + CSS 입히기</text>
+  <text x="330" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280" text-anchor="middle">색상/폰트 기본 적용</text>
+  <text x="330" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af" text-anchor="middle">인터랙션 없음</text>
+  <text x="330" y="456" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#d1d5db" text-anchor="middle">투박한 완성도</text>
+
+  <!-- 오른쪽 비교 박스 - After -->
+  <rect x="660" y="268" width="540" height="300" rx="16" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="930" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#38bdf8" text-anchor="middle">8회차 — v12 프롬프트</text>
+  <line x1="680" y1="324" x2="1180" y2="324" stroke="#334155" stroke-width="1"/>
+  <text x="930" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#e2e8f0" text-anchor="middle">3-SPARK 방향성 적용</text>
+  <text x="930" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#94a3b8" text-anchor="middle">PINCH 미감 레이어</text>
+  <text x="930" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#94a3b8" text-anchor="middle">FONT JUDGMENT 타이포</text>
+  <text x="930" y="456" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#38bdf8" text-anchor="middle">전문가 수준 완성도</text>
+
+  <!-- 핵심 문장 -->
+  <text x="640" y="608" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151" text-anchor="middle">프롬프트 시스템을 갖추면 매번 높은 퀄리티를 재현할 수 있습니다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="636" width="1160" height="56" rx="10" fill="#171717"/>
+  <text x="640" y="670" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">v12 = 결과 재현 가능한 프롬프트 시스템</text>
+</svg>

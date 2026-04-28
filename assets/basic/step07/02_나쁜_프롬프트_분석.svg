@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#ffffff">
+  <defs>
+    <style>text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }</style>
+  </defs>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 07</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">나쁜 프롬프트가 나쁜 결과를 만든다</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">어디서 퀄리티 차이가 생기는지 분석합니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 나쁜 프롬프트 패턴 라벨 -->
+  <text x="60" y="252" font-size="14" font-weight="600" fill="#dc2626">나쁜 프롬프트 패턴</text>
+
+  <!-- 나쁜 패턴 3개 박스 -->
+  <rect x="60" y="268" width="340" height="80" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="230" y="302" font-size="14" font-weight="700" fill="#dc2626" text-anchor="middle">모호한 지시</text>
+  <text x="230" y="328" font-size="13" fill="#991b1b" text-anchor="middle">"예쁘게 만들어줘"</text>
+
+  <rect x="460" y="268" width="340" height="80" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="630" y="302" font-size="14" font-weight="700" fill="#dc2626" text-anchor="middle">추상적 수식어</text>
+  <text x="630" y="328" font-size="13" fill="#991b1b" text-anchor="middle">"고급스럽고 세련되게"</text>
+
+  <rect x="860" y="268" width="360" height="80" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="1040" y="302" font-size="14" font-weight="700" fill="#dc2626" text-anchor="middle">범위 없는 지시</text>
+  <text x="1040" y="328" font-size="13" fill="#991b1b" text-anchor="middle">"웹사이트 만들어줘"</text>
+
+  <!-- 좋은 프롬프트 패턴 라벨 -->
+  <text x="60" y="390" font-size="14" font-weight="600" fill="#15803d">좋은 프롬프트 패턴</text>
+
+  <!-- 좋은 패턴 3개 박스 -->
+  <rect x="60" y="406" width="340" height="80" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="230" y="440" font-size="14" font-weight="700" fill="#15803d" text-anchor="middle">구체적 수치</text>
+  <text x="230" y="466" font-size="13" fill="#166534" text-anchor="middle">"배경 #0f172a, 버튼 radius 20px"</text>
+
+  <rect x="460" y="406" width="340" height="80" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="630" y="440" font-size="14" font-weight="700" fill="#15803d" text-anchor="middle">참고 키워드</text>
+  <text x="630" y="466" font-size="13" fill="#166534" text-anchor="middle">"Apple 사이트 스타일로"</text>
+
+  <rect x="860" y="406" width="360" height="80" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1040" y="440" font-size="14" font-weight="700" fill="#15803d" text-anchor="middle">범위 명시</text>
+  <text x="1040" y="466" font-size="13" fill="#166534" text-anchor="middle">"히어로 섹션만, CSS만 수정"</text>
+
+  <!-- 화살표 구분 -->
+  <text x="640" y="520" font-size="28" fill="#d1d5db" text-anchor="middle">↓</text>
+
+  <!-- 비교 요약 -->
+  <rect x="200" y="544" width="380" height="52" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="390" y="576" font-size="14" fill="#991b1b" text-anchor="middle">모호 → Claude가 임의로 판단</text>
+
+  <rect x="700" y="544" width="380" height="52" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="890" y="576" font-size="14" fill="#166534" text-anchor="middle">구체 → 의도한 대로 구현</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="624" width="1160" height="52" rx="12" fill="#171717"/>
+  <text x="640" y="656" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">모호한 지시 → 평범한 결과 / 구체적 지시 → 원하는 결과</text>
+</svg>

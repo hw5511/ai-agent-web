@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 08</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#d97706" text-anchor="middle">실습 1</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">3-SPARK 정의하고 적용하기</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">내 포트폴리오의 SPARK 3개를 먼저 정하고 프롬프트에 담습니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- SPARK 선택 가이드 라벨 -->
+  <text x="60" y="230" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600">SPARK 선택 가이드</text>
+
+  <!-- Layout SPARK 카드 -->
+  <rect x="60" y="248" width="340" height="140" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="230" y="285" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">Layout SPARK</text>
+  <line x1="80" y1="296" x2="380" y2="296" stroke="#fcd34d" stroke-width="1"/>
+  <text x="230" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f" text-anchor="middle">전면 다크 배경</text>
+  <text x="230" y="344" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f" text-anchor="middle">그리드 갤러리</text>
+  <text x="230" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f" text-anchor="middle">수평 스크롤</text>
+
+  <!-- Interaction SPARK 카드 -->
+  <rect x="470" y="248" width="340" height="140" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="640" y="285" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">Interaction SPARK</text>
+  <line x1="490" y1="296" x2="790" y2="296" stroke="#93c5fd" stroke-width="1"/>
+  <text x="640" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af" text-anchor="middle">마그네틱 버튼</text>
+  <text x="640" y="344" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af" text-anchor="middle">Spotlight Follow</text>
+  <text x="640" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af" text-anchor="middle">Flip Card</text>
+
+  <!-- Visual SPARK 카드 -->
+  <rect x="880" y="248" width="340" height="140" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1050" y="285" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">Visual SPARK</text>
+  <line x1="900" y1="296" x2="1200" y2="296" stroke="#86efac" stroke-width="1"/>
+  <text x="1050" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d" text-anchor="middle">파티클 배경</text>
+  <text x="1050" y="344" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d" text-anchor="middle">텍스트 Reveal</text>
+  <text x="1050" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d" text-anchor="middle">3D 오브젝트</text>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="420" width="1160" height="90" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="90" y="456" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1d4ed8">"SPARK-1: [선택], SPARK-2: [선택], SPARK-3: [선택]</text>
+  <text x="90" y="482" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1d4ed8"> 이 3가지를 중심으로 포트폴리오 페이지를 제작해줘."</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="536" width="1160" height="66" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="90" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">• 위 카드에서 각 카테고리별로 1개씩 선택해서 나만의 SPARK 3개를 정해보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="626" width="1160" height="56" rx="10" fill="#171717"/>
+  <text x="640" y="660" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">SPARK를 먼저 정하면 나머지 디테일은 Claude가 채운다</text>
+</svg>

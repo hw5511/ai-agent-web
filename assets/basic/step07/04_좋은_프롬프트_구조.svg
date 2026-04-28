@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#ffffff">
+  <defs>
+    <style>text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }</style>
+  </defs>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 07</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">좋은 프롬프트의 4가지 구성 요소</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">이 4가지를 갖추면 원하는 결과를 처음부터 얻습니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드 2x2 배치 -->
+  <!-- 카드1: 01 대상 -->
+  <rect x="60" y="240" width="530" height="160" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="325" y="285" font-size="22" font-weight="700" fill="#1e40af" text-anchor="middle">01 대상</text>
+  <line x1="90" y1="300" x2="560" y2="300" stroke="#93c5fd" stroke-width="1"/>
+  <text x="325" y="330" font-size="14" fill="#1e3a8a" text-anchor="middle">무엇을 만들어달라고</text>
+  <text x="325" y="358" font-size="13" fill="#1e3a8a" text-anchor="middle">"히어로 섹션의 배경"</text>
+
+  <!-- 카드2: 02 스타일 -->
+  <rect x="660" y="240" width="530" height="160" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="925" y="285" font-size="22" font-weight="700" fill="#15803d" text-anchor="middle">02 스타일</text>
+  <line x1="690" y1="300" x2="1160" y2="300" stroke="#86efac" stroke-width="1"/>
+  <text x="925" y="330" font-size="14" fill="#166534" text-anchor="middle">어떤 느낌으로</text>
+  <text x="925" y="358" font-size="13" fill="#166534" text-anchor="middle">"다크, 네온, 미니멀"</text>
+
+  <!-- 카드3: 03 수치 -->
+  <rect x="60" y="430" width="530" height="160" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="325" y="475" font-size="22" font-weight="700" fill="#d97706" text-anchor="middle">03 수치</text>
+  <line x1="90" y1="490" x2="560" y2="490" stroke="#fcd34d" stroke-width="1"/>
+  <text x="325" y="520" font-size="14" fill="#92400e" text-anchor="middle">구체적인 값으로</text>
+  <text x="325" y="548" font-size="13" fill="#92400e" text-anchor="middle">"#0f172a, font-size 48px"</text>
+
+  <!-- 카드4: 04 범위 -->
+  <rect x="660" y="430" width="530" height="160" rx="16" fill="#fce7f3" stroke="#f9a8d4" stroke-width="1.5"/>
+  <text x="925" y="475" font-size="22" font-weight="700" fill="#be185d" text-anchor="middle">04 범위</text>
+  <line x1="690" y1="490" x2="1160" y2="490" stroke="#f9a8d4" stroke-width="1"/>
+  <text x="925" y="520" font-size="14" fill="#9d174d" text-anchor="middle">어디까지 바꿀지</text>
+  <text x="925" y="548" font-size="13" fill="#9d174d" text-anchor="middle">"CSS만, 이 섹션만"</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="624" width="1160" height="52" rx="12" fill="#171717"/>
+  <text x="640" y="656" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">대상 + 스타일 + 수치 + 범위 — 이 4가지면 원하는 결과가 나온다</text>
+</svg>

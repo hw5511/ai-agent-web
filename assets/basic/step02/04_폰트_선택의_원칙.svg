@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" letter-spacing="0.05em">WEB 02</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">폰트가 사이트의 성격을 만든다</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">같은 문장, 다른 폰트 — 느낌이 완전히 달라집니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 폰트 분류 라벨 -->
+  <text x="60" y="270" font-size="14" font-weight="600" fill="#9ca3af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">폰트 분류</text>
+
+  <!-- 카드1: Serif -->
+  <rect x="60" y="290" width="340" height="130" rx="12" fill="#fef9f0" stroke="#fed7aa" stroke-width="1"/>
+  <text x="230" y="340" font-size="18" font-weight="700" fill="#c2410c" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Serif 계열</text>
+  <text x="230" y="370" font-size="13" fill="#9a3412" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Playfair Display, Georgia</text>
+  <text x="230" y="396" font-size="13" fill="#9a3412" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">고급스러운, 신뢰감</text>
+
+  <!-- 카드2: Sans-Serif -->
+  <rect x="450" y="290" width="340" height="130" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="620" y="340" font-size="18" font-weight="700" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Sans-Serif 계열</text>
+  <text x="620" y="370" font-size="13" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Inter, Noto Sans KR</text>
+  <text x="620" y="396" font-size="13" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">깔끔한, 현대적인</text>
+
+  <!-- 카드3: Display -->
+  <rect x="840" y="290" width="340" height="130" rx="12" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="1010" y="340" font-size="18" font-weight="700" fill="#7c3aed" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Display 계열</text>
+  <text x="1010" y="370" font-size="13" fill="#7c3aed" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Bebas Neue, Oswald</text>
+  <text x="1010" y="396" font-size="13" fill="#7c3aed" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">강렬한, 임팩트</text>
+
+  <!-- Google Fonts 섹션 라벨 -->
+  <text x="60" y="462" font-size="14" font-weight="600" fill="#9ca3af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Google Fonts 사용법</text>
+
+  <!-- 코드 박스 -->
+  <rect x="60" y="480" width="1160" height="56" rx="8" fill="#171717"/>
+  <text x="90" y="515" font-size="14" fill="#a3e635" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">&lt;link href="https://fonts.googleapis.com/css2?family=Inter&amp;display=swap" rel="stylesheet"&gt;</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="572" width="1160" height="48" rx="10" fill="#f3f4f6"/>
+  <text x="640" y="602" font-size="15" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Google Fonts에서 무료로 수천 가지 폰트를 쓸 수 있다</text>
+</svg>

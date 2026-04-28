@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#d97706" text-anchor="middle">실습 3</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">텍스트 컬러 Reveal 구현</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">스크롤에 따라 글자가 하나씩 밝아지는 효과를 만듭니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="110" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="90" y="258" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">"히어로 섹션의 헤드라인 텍스트를 스크롤 reveal 효과로 만들어줘.</text>
+  <text x="90" y="286" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">스크롤 진행률에 따라 글자가 회색에서 검정으로 밝아지도록."</text>
+  <text x="90" y="314" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#93c5fd">— Claude 지시문</text>
+
+  <!-- 핵심 매핑 라벨 -->
+  <text x="60" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600" letter-spacing="0.04em">핵심 매핑</text>
+
+  <!-- 매핑 박스 1: 스크롤 0% -->
+  <rect x="60" y="383" width="340" height="64" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="230" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" text-anchor="middle">스크롤 0%</text>
+  <text x="230" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#d1d5db" text-anchor="middle">흐린 회색</text>
+
+  <text x="418" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#d1d5db" text-anchor="middle">→</text>
+
+  <!-- 매핑 박스 2: 스크롤 50% -->
+  <rect x="450" y="383" width="340" height="64" rx="8" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="620" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" text-anchor="middle">스크롤 50%</text>
+  <text x="620" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#6b7280" text-anchor="middle">중간 회색</text>
+
+  <text x="808" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#d1d5db" text-anchor="middle">→</text>
+
+  <!-- 매핑 박스 3: 스크롤 100% -->
+  <rect x="840" y="383" width="400" height="64" rx="8" fill="#171717"/>
+  <text x="1040" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" text-anchor="middle">스크롤 100%</text>
+  <text x="1040" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">선명한 검정</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="490" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="90" y="526" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">• 회색 → 검정 대신 흰색 → 파란색으로 바꿔보세요</text>
+  <text x="90" y="554" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">• 한 단어씩 순서대로 reveal 되도록 추가 지시해보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="618" width="1160" height="48" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="647" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle" font-weight="600">숫자 0, 0.5, 1.0의 상태를 명시하면 Claude가 정확히 구현합니다</text>
+</svg>

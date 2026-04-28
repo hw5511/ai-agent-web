@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">WEB 04</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">실습 3</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Spotlight Follow 구현</text>
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">커서 위치에 빛이 따라오는 효과를 만듭니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="110" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="90" y="256" font-size="15" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">"히어로 섹션에 마우스를 따라다니는 빛 효과를 추가해줘.</text>
+  <text x="90" y="284" font-size="15" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">다크 배경에서 커서 위치 주변만 밝아지는 spotlight 효과."</text>
+  <text x="90" y="312" font-size="13" fill="#93c5fd" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Claude 지시 예시</text>
+
+  <!-- 구현 결과 라벨 -->
+  <text x="60" y="368" font-size="14" fill="#9ca3af" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">구현 결과</text>
+
+  <!-- 결과 미리보기 박스 -->
+  <rect x="200" y="388" width="880" height="160" rx="16" fill="#0f172a"/>
+  <!-- spotlight 원 시각화 -->
+  <circle cx="640" cy="468" r="60" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="1"/>
+  <circle cx="640" cy="468" r="40" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+  <circle cx="640" cy="468" r="20" fill="#ffffff" fill-opacity="0.05"/>
+  <text x="640" y="460" font-size="16" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">커서 위치에 빛이 따라옵니다</text>
+  <text x="640" y="490" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">다크 섹션에서 더욱 효과적</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="576" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="90" y="612" font-size="14" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• 빛의 크기(반지름)를 더 크게/작게 조정해보세요</text>
+  <text x="90" y="640" font-size="14" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• 빛의 색상을 흰색에서 하늘색으로 바꿔보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="0" y="660" width="1280" height="60" fill="#171717"/>
+  <text x="640" y="697" font-size="15" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">e.clientX, e.clientY 두 값만 알면 모든 마우스 추적 효과를 만들 수 있습니다</text>
+</svg>

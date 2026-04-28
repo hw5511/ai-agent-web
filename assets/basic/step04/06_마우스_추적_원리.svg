@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">WEB 04</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Spotlight Follow — 마우스를 빛이 따라간다</text>
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">mousemove 이벤트로 커서 위치에 조명 효과를 만듭니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb"/>
+
+  <!-- 원리 흐름 라벨 -->
+  <text x="60" y="250" font-size="14" fill="#9ca3af" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">원리 흐름</text>
+
+  <!-- 흐름 4단계 -->
+  <rect x="60" y="270" width="240" height="80" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="180" y="304" font-size="14" font-weight="700" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">mousemove 이벤트</text>
+  <text x="180" y="328" font-size="12" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">e.clientX, e.clientY</text>
+
+  <text x="340" y="314" font-size="20" fill="#9ca3af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">→</text>
+
+  <rect x="360" y="270" width="240" height="80" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="480" y="304" font-size="14" font-weight="700" fill="#92400e" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">좌표 변환</text>
+  <text x="480" y="328" font-size="12" fill="#78350f" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">박스 내 상대 좌표 계산</text>
+
+  <text x="640" y="314" font-size="20" fill="#9ca3af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">→</text>
+
+  <rect x="660" y="270" width="240" height="80" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="780" y="304" font-size="14" font-weight="700" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">그라디언트 이동</text>
+  <text x="780" y="328" font-size="12" fill="#3b82f6" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">radial-gradient 중심 변경</text>
+
+  <text x="940" y="314" font-size="20" fill="#9ca3af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">→</text>
+
+  <rect x="960" y="270" width="280" height="80" rx="10" fill="#171717"/>
+  <text x="1100" y="304" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">시각 효과</text>
+  <text x="1100" y="328" font-size="12" fill="#d1d5db" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">커서 위치에 빛 표시</text>
+
+  <!-- 구현 방법 라벨 -->
+  <text x="60" y="390" font-size="14" fill="#9ca3af" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">구현 방법</text>
+
+  <!-- 구현 박스 -->
+  <rect x="60" y="408" width="1160" height="80" rx="12" fill="#0f172a"/>
+  <text x="90" y="454" font-size="14" fill="#a3e635" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">background: radial-gradient(circle at {x}px {y}px, rgba(255,255,255,0.15), transparent)</text>
+
+  <!-- 사용 예시 -->
+  <rect x="60" y="516" width="540" height="64" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="330" y="544" font-size="15" font-weight="700" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">다크 배경 섹션 강조</text>
+  <text x="330" y="566" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">커서가 가는 곳에 빛이 생김</text>
+
+  <rect x="660" y="516" width="540" height="64" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="930" y="544" font-size="15" font-weight="700" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">카드 갤러리</text>
+  <text x="930" y="566" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">현재 보는 카드가 밝아짐</text>
+
+  <!-- 하단 배너 -->
+  <rect x="0" y="660" width="1280" height="60" fill="#171717"/>
+  <text x="640" y="697" font-size="15" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">CSS 변수와 radial-gradient만으로 구현 가능한 강력한 효과입니다</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  </style>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" letter-spacing="0.05em">WEB 05</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">5회차 핵심 정리</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">오늘 배운 것 3가지</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드1: CDN 라이브러리 -->
+  <rect x="60" y="248" width="350" height="340" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <!-- 번호 -->
+  <text x="235" y="300" font-size="36" font-weight="900" fill="#d97706" text-anchor="middle">01</text>
+  <!-- 소제목 -->
+  <text x="235" y="344" font-size="22" font-weight="700" fill="#92400e" text-anchor="middle">CDN 라이브러리</text>
+  <!-- 구분 -->
+  <line x1="100" y1="366" x2="370" y2="366" stroke="#fcd34d" stroke-width="1"/>
+  <!-- 내용 -->
+  <text x="235" y="400" font-size="14" fill="#78350f" text-anchor="middle">script 태그 1줄</text>
+  <text x="235" y="426" font-size="14" fill="#78350f" text-anchor="middle">이름만 알면 사용 가능</text>
+  <text x="235" y="452" font-size="14" fill="#78350f" text-anchor="middle">Claude가 설정 작성</text>
+  <!-- 하단 강조 -->
+  <rect x="80" y="530" width="310" height="36" rx="8" fill="#fde68a"/>
+  <text x="235" y="553" font-size="13" font-weight="600" fill="#92400e" text-anchor="middle">라이브러리 = 이름이 곧 열쇠</text>
+
+  <!-- 카드2: 파티클+타이핑 -->
+  <rect x="460" y="248" width="350" height="340" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <!-- 번호 -->
+  <text x="635" y="300" font-size="36" font-weight="900" fill="#2563eb" text-anchor="middle">02</text>
+  <!-- 소제목 -->
+  <text x="635" y="344" font-size="22" font-weight="700" fill="#1e40af" text-anchor="middle">파티클+타이핑</text>
+  <!-- 구분 -->
+  <line x1="500" y1="366" x2="770" y2="366" stroke="#93c5fd" stroke-width="1"/>
+  <!-- 내용 -->
+  <text x="635" y="400" font-size="14" fill="#1d4ed8" text-anchor="middle">tsParticles 배경</text>
+  <text x="635" y="426" font-size="14" fill="#1d4ed8" text-anchor="middle">Typed.js 직함</text>
+  <text x="635" y="452" font-size="14" fill="#1d4ed8" text-anchor="middle">설정값으로 커스텀</text>
+  <!-- 하단 강조 -->
+  <rect x="480" y="530" width="310" height="36" rx="8" fill="#bfdbfe"/>
+  <text x="635" y="553" font-size="13" font-weight="600" fill="#1e40af" text-anchor="middle">숫자 설정으로 느낌을 조절한다</text>
+
+  <!-- 카드3: Three.js 3D -->
+  <rect x="860" y="248" width="350" height="340" rx="16" fill="#faf5ff" stroke="#d8b4fe" stroke-width="2"/>
+  <!-- 번호 -->
+  <text x="1035" y="300" font-size="36" font-weight="900" fill="#7c3aed" text-anchor="middle">03</text>
+  <!-- 소제목 -->
+  <text x="1035" y="344" font-size="22" font-weight="700" fill="#6d28d9" text-anchor="middle">Three.js 3D</text>
+  <!-- 구분 -->
+  <line x1="900" y1="366" x2="1170" y2="366" stroke="#d8b4fe" stroke-width="1"/>
+  <!-- 내용 -->
+  <text x="1035" y="400" font-size="14" fill="#7c3aed" text-anchor="middle">Scene + Camera + Renderer</text>
+  <text x="1035" y="426" font-size="14" fill="#7c3aed" text-anchor="middle">형태·색·움직임 지시</text>
+  <text x="1035" y="452" font-size="14" fill="#7c3aed" text-anchor="middle">배경 활용 최적</text>
+  <!-- 하단 강조 -->
+  <rect x="880" y="530" width="310" height="36" rx="8" fill="#ede9fe"/>
+  <text x="1035" y="553" font-size="13" font-weight="600" fill="#6d28d9" text-anchor="middle">3D도 Claude에게 말로 설명한다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="624" width="1160" height="52" rx="12" fill="#171717"/>
+  <text x="640" y="657" font-size="16" fill="#ffffff" text-anchor="middle">다음 6회차 — 배경 전체를 효과로 채운다</text>
+</svg>

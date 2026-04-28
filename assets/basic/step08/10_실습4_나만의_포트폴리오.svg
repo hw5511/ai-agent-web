@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 08</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#d97706" text-anchor="middle">실습 4</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">나만의 포트폴리오 완성</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">v12 프롬프트 시스템으로 최종 포트폴리오를 완성합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 최종 체크리스트 라벨 -->
+  <text x="60" y="230" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600">최종 체크리스트</text>
+
+  <!-- 체크 항목 1 -->
+  <rect x="60" y="248" width="1160" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="80" y="262" width="12" height="12" rx="2" fill="#d1d5db"/>
+  <text x="106" y="275" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">3-SPARK 3개 모두 정의했다</text>
+
+  <!-- 체크 항목 2 -->
+  <rect x="60" y="298" width="1160" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="80" y="312" width="12" height="12" rx="2" fill="#d1d5db"/>
+  <text x="106" y="325" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">AESTHETIC_PINCH 2~3개 선택했다</text>
+
+  <!-- 체크 항목 3 -->
+  <rect x="60" y="348" width="1160" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="80" y="362" width="12" height="12" rx="2" fill="#d1d5db"/>
+  <text x="106" y="375" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">FONT JUDGMENT로 폰트 조합 확정했다</text>
+
+  <!-- 체크 항목 4 -->
+  <rect x="60" y="398" width="1160" height="44" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <rect x="80" y="412" width="12" height="12" rx="2" fill="#fcd34d"/>
+  <text x="106" y="425" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">색상 팔레트 (배경/포인트/텍스트) 정했다</text>
+
+  <!-- 체크 항목 5 -->
+  <rect x="60" y="448" width="1160" height="44" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <rect x="80" y="462" width="12" height="12" rx="2" fill="#93c5fd"/>
+  <text x="106" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">1~6회차 기술 중 3가지 이상 적용했다</text>
+
+  <!-- 체크 항목 6 -->
+  <rect x="60" y="498" width="1160" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="80" y="512" width="12" height="12" rx="2" fill="#d1d5db"/>
+  <text x="106" y="525" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">모바일에서도 레이아웃이 깨지지 않는다</text>
+
+  <!-- 체크 항목 7 -->
+  <rect x="60" y="548" width="1160" height="44" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="80" y="562" width="12" height="12" rx="2" fill="#d1d5db"/>
+  <text x="106" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">텍스트 가독성 (배경 대비) 확보됐다</text>
+
+  <!-- 체크 항목 8 -->
+  <rect x="60" y="598" width="1160" height="44" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <rect x="80" y="612" width="12" height="12" rx="2" fill="#86efac"/>
+  <text x="106" y="625" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">나만의 콘텐츠(이름, 소개, 프로젝트) 들어갔다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="658" width="1160" height="50" rx="10" fill="#171717"/>
+  <text x="640" y="689" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">이 체크리스트를 모두 채우면 포트폴리오 사이트 완성입니다</text>
+</svg>

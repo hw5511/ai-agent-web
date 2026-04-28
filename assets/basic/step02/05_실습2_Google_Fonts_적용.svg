@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" letter-spacing="0.05em">WEB 02</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">실습 2</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Google Fonts 적용하기</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">CDN 한 줄 추가로 폰트를 바꿉니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="248" width="1160" height="90" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <rect x="80" y="264" width="88" height="20" rx="10" fill="#2563eb"/>
+  <text x="124" y="278" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Claude 지시문</text>
+  <text x="80" y="318" font-size="14" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">"위 페이지에 Google Fonts의 Noto Sans KR 폰트를 적용해줘. link 태그를 head에 추가하고 body font-family에 적용해줘."</text>
+
+  <!-- 적용 순서 라벨 -->
+  <text x="60" y="382" font-size="14" font-weight="600" fill="#9ca3af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">적용 순서</text>
+
+  <!-- step1 -->
+  <rect x="60" y="398" width="240" height="64" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="180" y="426" font-size="13" font-weight="600" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Google Fonts 선택</text>
+  <text x="180" y="448" font-size="12" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">원하는 폰트 고르기</text>
+
+  <!-- 화살표 1 -->
+  <text x="316" y="434" font-size="18" fill="#9ca3af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">→</text>
+
+  <!-- step2 -->
+  <rect x="340" y="398" width="240" height="64" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="460" y="426" font-size="13" font-weight="600" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">link 태그 복사</text>
+  <text x="460" y="448" font-size="12" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">head에 붙여넣기</text>
+
+  <!-- 화살표 2 -->
+  <text x="596" y="434" font-size="18" fill="#9ca3af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">→</text>
+
+  <!-- step3 -->
+  <rect x="620" y="398" width="240" height="64" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="740" y="426" font-size="13" font-weight="600" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">font-family 지정</text>
+  <text x="740" y="448" font-size="12" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">CSS에 폰트명 입력</text>
+
+  <!-- 화살표 3 -->
+  <text x="876" y="434" font-size="18" fill="#9ca3af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">→</text>
+
+  <!-- step4 -->
+  <rect x="900" y="398" width="340" height="64" rx="10" fill="#171717"/>
+  <text x="1070" y="426" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">적용 완료</text>
+  <text x="1070" y="448" font-size="12" fill="#d1d5db" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">폰트 변경 확인</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="490" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <rect x="80" y="506" width="100" height="20" rx="10" fill="#16a34a"/>
+  <text x="130" y="520" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">연습해보세요</text>
+  <text x="80" y="544" font-size="13" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• Playfair Display로 바꿔서 고급스러운 느낌 체험</text>
+  <text x="80" y="562" font-size="13" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• Bebas Neue로 바꿔서 강렬한 헤더 체험</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="604" width="1160" height="48" rx="10" fill="#f3f4f6"/>
+  <text x="640" y="634" font-size="15" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">폰트 이름만 알려주면 Claude가 link 태그와 CSS까지 작성해준다</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 08</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">8회차 — v12 프롬프트 완전 이해 파이널</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">전문가 수준 프롬프트 시스템으로 1회차를 다시 만들어 비교합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 오늘의 목표 카드 3개 -->
+  <rect x="60" y="240" width="340" height="130" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="230" y="280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#d97706" text-anchor="middle">3-SPARK 구조</text>
+  <line x1="80" y1="292" x2="380" y2="292" stroke="#fcd34d" stroke-width="1"/>
+  <text x="230" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#92400e" text-anchor="middle">핵심 아이디어 3개로 방향 설정</text>
+
+  <rect x="470" y="240" width="340" height="130" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="640" y="280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#2563eb" text-anchor="middle">AESTHETIC_PINCH</text>
+  <line x1="490" y1="292" x2="790" y2="292" stroke="#93c5fd" stroke-width="1"/>
+  <text x="640" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af" text-anchor="middle">미감 핀치로 분위기 강화</text>
+
+  <rect x="880" y="240" width="340" height="130" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1050" y="280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#16a34a" text-anchor="middle">FONT JUDGMENT</text>
+  <line x1="900" y1="292" x2="1200" y2="292" stroke="#86efac" stroke-width="1"/>
+  <text x="1050" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d" text-anchor="middle">폰트 판단 기준으로 타이포 완성</text>
+
+  <!-- 수업 흐름 -->
+  <text x="60" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600">수업 흐름</text>
+  <rect x="60" y="434" width="1160" height="48" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="464" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">이론 — 이론 — 실습 — 이론 — 실습 — 이론 — 실습 — 이론 — 실습 — 정리</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="610" width="1160" height="56" rx="10" fill="#171717"/>
+  <text x="640" y="644" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">v12는 결과가 아닌 과정을 바꾼다</text>
+</svg>

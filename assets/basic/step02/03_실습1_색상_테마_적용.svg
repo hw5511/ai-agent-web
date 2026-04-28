@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" letter-spacing="0.05em">WEB 02</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">실습 1</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">색상 테마 바꾸기</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">1회차 결과물의 색상을 Claude에게 지시합니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="248" width="1160" height="90" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <rect x="80" y="264" width="88" height="20" rx="10" fill="#2563eb"/>
+  <text x="124" y="278" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Claude 지시문</text>
+  <text x="80" y="318" font-size="14" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">"위 HTML에 색상 테마를 적용해줘. 배경 #0f172a, 텍스트 흰색, 포인트 색상 #38bdf8으로."</text>
+
+  <!-- 변화 포인트 라벨 -->
+  <text x="60" y="382" font-size="14" font-weight="600" fill="#9ca3af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">변화 포인트</text>
+
+  <!-- Before 박스 -->
+  <rect x="60" y="398" width="550" height="110" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="335" y="440" font-size="15" font-weight="700" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">변경 전</text>
+  <text x="335" y="470" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">흰 배경, 기본 검정 텍스트</text>
+
+  <!-- After 박스 -->
+  <rect x="650" y="398" width="550" height="110" rx="10" fill="#0f172a"/>
+  <text x="925" y="440" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">변경 후</text>
+  <text x="925" y="470" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">어두운 배경, 하늘색 포인트</text>
+
+  <!-- 연습해보세요 배지 + 박스 -->
+  <rect x="60" y="530" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <rect x="80" y="546" width="100" height="20" rx="10" fill="#16a34a"/>
+  <text x="130" y="560" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">연습해보세요</text>
+  <text x="80" y="584" font-size="13" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• 배경색을 #1a1a2e, 포인트를 #e94560으로 바꿔보세요</text>
+  <text x="80" y="602" font-size="13" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• 밝은 테마(흰 배경, 파란 포인트)도 시도해보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="634" width="1160" height="48" rx="10" fill="#f3f4f6"/>
+  <text x="640" y="664" font-size="15" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">색상 코드를 몰라도 됩니다 — '하늘색', '네이비' 등 말로 설명하면 됩니다</text>
+</svg>

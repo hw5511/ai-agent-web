@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <style>text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }</style>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 06</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">Canvas 2D — 픽셀로 그리는 그래픽</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">HTML canvas 태그로 직접 그래픽을 그립니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Canvas 기본 개념 라벨 -->
+  <text x="60" y="250" font-size="13" font-weight="600" fill="#374151">Canvas 기본 개념</text>
+
+  <!-- 개념 비교 (y=268 height=120) -->
+  <!-- 왼쪽: 일반 HTML/CSS -->
+  <rect x="60" y="268" width="530" height="120" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="325" y="310" font-size="16" font-weight="700" fill="#374151" text-anchor="middle">일반 HTML/CSS</text>
+  <line x1="80" y1="328" x2="570" y2="328" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="325" y="358" font-size="14" fill="#6b7280" text-anchor="middle">미리 만들어진 요소를 배치</text>
+  <text x="325" y="380" font-size="14" fill="#6b7280" text-anchor="middle">정해진 모양만 표현 가능</text>
+
+  <!-- 오른쪽: Canvas 2D -->
+  <rect x="660" y="268" width="560" height="120" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="940" y="310" font-size="16" font-weight="700" fill="#a3e635" text-anchor="middle">Canvas 2D</text>
+  <line x1="680" y1="328" x2="1200" y2="328" stroke="#334155" stroke-width="1"/>
+  <text x="940" y="358" font-size="14" fill="#d1d5db" text-anchor="middle">픽셀 단위로 직접 그림</text>
+  <text x="940" y="380" font-size="14" fill="#d1d5db" text-anchor="middle">어떤 모양이든 표현 가능</text>
+
+  <!-- Canvas 주요 메서드 박스 -->
+  <rect x="60" y="420" width="1160" height="100" rx="12" fill="#1a1a2a"/>
+  <text x="90" y="452" font-size="13" fill="#a3e635" font-family="'Courier New', monospace">ctx.beginPath()</text>
+  <text x="90" y="476" font-size="13" fill="#a3e635" font-family="'Courier New', monospace">ctx.arc(x, y, r, 0, Math.PI*2)</text>
+  <text x="440" y="476" font-size="13" fill="#6b7280" font-family="'Courier New', monospace">→ 원</text>
+  <text x="90" y="500" font-size="13" fill="#a3e635" font-family="'Courier New', monospace">ctx.fillRect(x, y, w, h)</text>
+  <text x="440" y="500" font-size="13" fill="#6b7280" font-family="'Courier New', monospace">→ 사각형</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="620" width="1160" height="56" rx="12" fill="#171717"/>
+  <text x="640" y="655" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">별자리 파티클처럼 복잡한 효과도 원 그리기 + 선 긋기 두 가지로 만들어진다</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  </style>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" letter-spacing="0.05em">WEB 05</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">5회차 — 라이브러리 + 3D 확장</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">CDN 한 줄로 파티클, 타이핑, 3D 효과를 추가합니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드 3개 -->
+  <!-- 카드1: tsParticles -->
+  <rect x="60" y="248" width="340" height="160" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="230" y="300" font-size="20" font-weight="700" fill="#d97706" text-anchor="middle">tsParticles</text>
+  <text x="230" y="334" font-size="15" fill="#92400e" text-anchor="middle">부유하는 파티클 배경</text>
+  <text x="230" y="368" font-size="13" fill="#b45309" text-anchor="middle">배경에 입자가 떠다니는</text>
+  <text x="230" y="388" font-size="13" fill="#b45309" text-anchor="middle">인터랙티브 효과</text>
+
+  <!-- 카드2: Typed.js -->
+  <rect x="470" y="248" width="340" height="160" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="640" y="300" font-size="20" font-weight="700" fill="#2563eb" text-anchor="middle">Typed.js</text>
+  <text x="640" y="334" font-size="15" fill="#1e40af" text-anchor="middle">자동 타이핑 애니메이션</text>
+  <text x="640" y="368" font-size="13" fill="#3b82f6" text-anchor="middle">텍스트가 자동으로 입력되고</text>
+  <text x="640" y="388" font-size="13" fill="#3b82f6" text-anchor="middle">지워지는 효과</text>
+
+  <!-- 카드3: Three.js -->
+  <rect x="880" y="248" width="340" height="160" rx="14" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="1050" y="300" font-size="20" font-weight="700" fill="#7c3aed" text-anchor="middle">Three.js</text>
+  <text x="1050" y="334" font-size="15" fill="#6d28d9" text-anchor="middle">브라우저에서 3D 렌더링</text>
+  <text x="1050" y="368" font-size="13" fill="#8b5cf6" text-anchor="middle">WebGL 기반 3D 그래픽을</text>
+  <text x="1050" y="388" font-size="13" fill="#8b5cf6" text-anchor="middle">쉽게 구현</text>
+
+  <!-- 수업 흐름 -->
+  <text x="60" y="454" font-size="15" font-weight="600" fill="#374151">수업 흐름</text>
+  <line x1="60" y1="464" x2="1220" y2="464" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 흐름 단계 -->
+  <rect x="60" y="476" width="220" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="170" y="497" font-size="13" font-weight="600" fill="#374151" text-anchor="middle">CDN 개념</text>
+  <text x="170" y="515" font-size="12" fill="#6b7280" text-anchor="middle">라이브러리 활용 원리</text>
+
+  <text x="296" y="504" font-size="18" fill="#9ca3af" text-anchor="middle">→</text>
+
+  <rect x="310" y="476" width="220" height="48" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="420" y="497" font-size="13" font-weight="600" fill="#d97706" text-anchor="middle">실습 1</text>
+  <text x="420" y="515" font-size="12" fill="#92400e" text-anchor="middle">tsParticles 파티클</text>
+
+  <text x="546" y="504" font-size="18" fill="#9ca3af" text-anchor="middle">→</text>
+
+  <rect x="560" y="476" width="220" height="48" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="670" y="497" font-size="13" font-weight="600" fill="#2563eb" text-anchor="middle">실습 2</text>
+  <text x="670" y="515" font-size="12" fill="#1e40af" text-anchor="middle">Typed.js 타이핑</text>
+
+  <text x="796" y="504" font-size="18" fill="#9ca3af" text-anchor="middle">→</text>
+
+  <rect x="810" y="476" width="220" height="48" rx="8" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="920" y="497" font-size="13" font-weight="600" fill="#7c3aed" text-anchor="middle">실습 3</text>
+  <text x="920" y="515" font-size="12" fill="#6d28d9" text-anchor="middle">Three.js 회전 큐브</text>
+
+  <text x="1046" y="504" font-size="18" fill="#9ca3af" text-anchor="middle">→</text>
+
+  <rect x="1060" y="476" width="160" height="48" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="1140" y="497" font-size="13" font-weight="600" fill="#374151" text-anchor="middle">정리</text>
+  <text x="1140" y="515" font-size="12" fill="#6b7280" text-anchor="middle">핵심 요약</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="608" width="1160" height="56" rx="12" fill="#171717"/>
+  <text x="640" y="643" font-size="16" fill="#ffffff" text-anchor="middle">라이브러리 = Claude에게 '어떤 효과를 쓸지' 이름만 말하면 된다</text>
+</svg>

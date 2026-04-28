@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">스크롤 트리거 — 위치가 애니메이션을 켠다</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">사용자가 스크롤할 때 특정 지점에서 효과가 발동합니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 동작 원리 라벨 -->
+  <text x="60" y="258" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af" font-weight="600" letter-spacing="0.04em">동작 원리</text>
+
+  <!-- step1 -->
+  <rect x="240" y="275" width="800" height="64" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="313" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151" text-anchor="middle">1. 브라우저가 스크롤 위치를 감지한다</text>
+
+  <!-- 화살표1 -->
+  <text x="640" y="362" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af" text-anchor="middle">↓</text>
+
+  <!-- step2 -->
+  <rect x="240" y="370" width="800" height="64" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="640" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e40af" text-anchor="middle">2. 요소가 화면에 들어오는 순간 트리거 발동</text>
+
+  <!-- 화살표2 -->
+  <text x="640" y="457" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af" text-anchor="middle">↓</text>
+
+  <!-- step3 -->
+  <rect x="240" y="465" width="800" height="64" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="640" y="503" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#15803d" text-anchor="middle">3. 지정된 애니메이션이 실행된다 (페이드인, 이동, 색상 변화 등)</text>
+
+  <!-- GSAP 소개 박스 -->
+  <rect x="240" y="565" width="800" height="60" rx="10" fill="#0f172a"/>
+  <text x="640" y="601" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#a3e635" text-anchor="middle">GSAP ScrollTrigger — 업계 표준 스크롤 애니메이션 라이브러리</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="648" width="1160" height="48" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="677" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">Claude에게 '스크롤하면 나타나는 효과' 라고 말하면 GSAP 코드를 작성해준다</text>
+</svg>

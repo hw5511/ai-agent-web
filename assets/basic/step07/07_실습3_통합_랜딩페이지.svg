@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#ffffff">
+  <defs>
+    <style>text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }</style>
+  </defs>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 07</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle">실습 3</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">1~6회차 통합 랜딩페이지 제작</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">지금까지 배운 모든 기술을 하나의 페이지에 담습니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="150" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="90" y="256" font-size="14" fill="#1d4ed8">"포트폴리오 랜딩페이지를 완성해줘.</text>
+  <text x="90" y="280" font-size="14" fill="#1d4ed8">• 히어로: VANTA 배경 + Typed.js 직함 타이핑</text>
+  <text x="90" y="302" font-size="14" fill="#1d4ed8">• 스크롤: GSAP 페이드인 효과</text>
+  <text x="90" y="324" font-size="14" fill="#1d4ed8">• 카드: hover 시 확대 + 클릭 시 상세 표시</text>
+  <text x="90" y="346" font-size="14" fill="#1d4ed8">• 색상: 다크 테크(#0f172a + #38bdf8) + Noto Sans KR"</text>
+
+  <!-- 체크리스트 라벨 -->
+  <text x="60" y="400" font-size="14" font-weight="600" fill="#374151">체크리스트</text>
+
+  <!-- 체크 항목 -->
+  <rect x="68" y="418" width="14" height="14" rx="3" fill="none" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="90" y="430" font-size="14" fill="#374151">1~2회차: 색상 팔레트 + 폰트 적용</text>
+
+  <rect x="68" y="464" width="14" height="14" rx="3" fill="none" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="90" y="476" font-size="14" fill="#374151">3회차: 스크롤 트리거 효과</text>
+
+  <rect x="68" y="510" width="14" height="14" rx="3" fill="none" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="90" y="522" font-size="14" fill="#374151">4회차: 마우스 인터랙션</text>
+
+  <rect x="68" y="556" width="14" height="14" rx="3" fill="none" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="90" y="568" font-size="14" fill="#374151">5~6회차: 라이브러리 + 배경 효과</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="624" width="1160" height="52" rx="12" fill="#171717"/>
+  <text x="640" y="656" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">하나의 프롬프트에 전체 요구사항을 담아서 한 번에 완성한다</text>
+</svg>

@@ -1058,59 +1058,125 @@
                     },
                     {
                         num: 2, title: '색상과 폰트로 퀄리티가 달라진다', hours: '2시간',
-                        goal: 'v12 Lightbulb 시스템의 폰트·색상 원리를 이해하고 1회차 결과물을 리디자인한다.',
-                        topics: ['색상 팔레트 선정 원칙', '폰트 bold_readability 등급 이해', 'mood_tags로 분위기 설정', 'v12 Lightbulb 시스템 소개 (fonts.json, ideas.json)', '1회차 랜딩페이지 before/after 비교'],
-                        practice: '1회차 랜딩페이지를 v12 폰트·색상 조합으로 재지시하고 결과를 나란히 비교한다.',
-                        slides: [],
-                        slideDescs: []
+                        goal: '색상 팔레트와 Google Fonts 적용 원리를 이해하고 1회차 결과물을 리디자인한다.',
+                        topics: ['색상 팔레트 선정 원칙', '웜/쿨/뉴트럴/다크 색상 유형', 'Google Fonts CDN 적용법', 'Serif/Sans-Serif/Display 폰트 분류', '1회차 랜딩페이지 before/after 비교'],
+                        practice: '색상 테마와 Google Fonts를 적용해서 1회차 랜딩페이지를 나란히 비교한다.',
+                        slides: ['01_오늘의_목표.svg','02_색상이_분위기를_만든다.svg','03_실습1_색상_테마_적용.svg','04_폰트_선택의_원칙.svg','05_실습2_Google_Fonts_적용.svg','06_Before_After_비교.svg','07_실습3_나만의_조합.svg','08_핵심_정리.svg'],
+                        slideDescs: [
+            { goal: '2회차 목표와 수업 흐름을 안내한다.', topics: ['색상 팔레트 선정', 'Google Fonts 적용', 'Before/After 비교'], practice: null },
+            { goal: '색상 유형(웜/쿨/뉴트럴/다크)과 분위기 관계를 이해한다.', topics: ['웜 컬러: 빨강·주황·노랑', '쿨 컬러: 파랑·보라·청록', '뉴트럴: 흰색·회색·검정', '다크 모드: 어두운 배경+밝은 텍스트'], practice: null },
+            { goal: 'Claude에게 색상 테마를 지시해서 적용한다.', topics: ['색상 코드 없이 말로 지시', '배경/텍스트/포인트 색상 명시', 'before/after 변화 확인'], practice: '위 HTML에 색상 테마를 적용해줘. 배경 #0f172a, 텍스트 흰색, 포인트 색상 #38bdf8으로.' },
+            { goal: 'Serif/Sans-Serif/Display 폰트 분류와 선택 원칙을 이해한다.', topics: ['Serif: 고급스러운, 신뢰감', 'Sans-Serif: 깔끔한, 현대적인', 'Display: 강렬한, 임팩트'], practice: null },
+            { goal: 'Google Fonts CDN을 추가해서 폰트를 변경한다.', topics: ['link 태그 한 줄 추가', 'font-family CSS 적용', '폰트별 느낌 차이 체험'], practice: '위 페이지에 Google Fonts의 Noto Sans KR 폰트를 적용해줘.' },
+            { goal: '색상+폰트 변경 전후를 나란히 비교한다.', topics: ['같은 HTML, 다른 CSS', 'CSS만으로 퀄리티 차이', '말로 설명하면 Claude가 변환'], practice: null },
+            { goal: '색상+폰트 조합을 자유롭게 실험한다.', topics: ['다크 테크 / 밝은 감성 / 내추럴 조합', '자연어로 수정 요청', '나만의 스타일 완성'], practice: '1회차 랜딩페이지에 배경 #1a1a2e, 포인트 #e94560, Noto Sans KR 폰트 적용해줘.' },
+            { goal: '2회차 핵심 3가지를 정리하고 3회차를 예고한다.', topics: ['색상 언어: 말로 설명하면 된다', 'Google Fonts: 폰트 이름만 말하면', 'Before/After: CSS만으로 다른 사이트'], practice: null }
+                        ]
                     },
                     {
                         num: 3, title: '스크롤 트리거를 설계한다', hours: '2시간',
                         goal: 'JS 트리거 개념을 이해하고 GSAP ScrollTrigger로 스크롤 인터랙션을 구현한다.',
-                        topics: ['스크롤 = UX 트리거 개념', 'JS 이벤트 트리거 입문 (scroll, wheel)', 'GSAP 개념 및 CDN 로드 방식', 'ScrollTrigger 구조 소개', '수평 스크롤 + 시차(parallax) 효과'],
-                        practice: 'GSAP ScrollTrigger로 수평 스크롤과 텍스트 컬러 reveal 효과를 구현한다.',
-                        slides: [],
-                        slideDescs: []
+                        topics: ['스크롤 트리거 개념', 'GSAP ScrollTrigger CDN 로드', '페이드인 효과 구현', '수평 스크롤 원리 (pin + translateX)', '텍스트 컬러 reveal (progress 0~1)'],
+                        practice: 'GSAP ScrollTrigger로 페이드인, 수평 스크롤, 텍스트 컬러 reveal 효과를 구현한다.',
+                        slides: ['01_오늘의_목표.svg','02_스크롤_트리거_개념.svg','03_실습1_ScrollTrigger_기본.svg','04_수평_스크롤_원리.svg','05_실습2_수평스크롤_구현.svg','06_텍스트_reveal_원리.svg','07_실습3_텍스트_컬러_reveal.svg','08_핵심_정리.svg'],
+                        slideDescs: [
+            { goal: '3회차 목표와 수업 흐름을 안내한다.', topics: ['스크롤 트리거 개념', '수평 스크롤', '텍스트 컬러 Reveal'], practice: null },
+            { goal: '스크롤 트리거의 동작 원리와 GSAP 라이브러리를 이해한다.', topics: ['스크롤 위치 감지', '요소 진입 시 트리거 발동', 'GSAP ScrollTrigger 소개'], practice: null },
+            { goal: 'GSAP ScrollTrigger로 기본 페이드인 효과를 구현한다.', topics: ['CDN script 태그 추가', '요소 진입 시 페이드인', 'from/to 애니메이션 설정'], practice: '1회차 랜딩페이지에 GSAP ScrollTrigger를 추가해줘. 각 섹션이 스크롤할 때 아래에서 위로 페이드인 되도록.' },
+            { goal: '수평 스크롤의 동작 원리와 활용 사례를 이해한다.', topics: ['세로 스크롤 → 가로 이동 변환', 'pin + translateX 패턴', '갤러리/스텝별 소개에 활용'], practice: null },
+            { goal: '수평 스크롤 갤러리를 구현한다.', topics: ['pin으로 섹션 고정', 'translateX로 가로 이동', 'scrub으로 부드러운 연결'], practice: '작품 갤러리 섹션을 추가해줘. 카드 4개가 가로로 나열되고, 세로로 스크롤하면 옆으로 이동하는 수평 스크롤 효과.' },
+            { goal: '텍스트 컬러 reveal의 원리(progress 0~1 매핑)를 이해한다.', topics: ['스크롤 진행률 0~1', '회색 → 검정 색상 변화', '스토리텔링 효과'], practice: null },
+            { goal: '스크롤에 따라 텍스트가 밝아지는 reveal 효과를 구현한다.', topics: ['progress값과 색상 연결', '0%: 회색 / 100%: 검정', '한 단어씩 순서대로 reveal'], practice: '히어로 섹션의 헤드라인 텍스트를 스크롤 reveal 효과로 만들어줘. 스크롤 진행률에 따라 글자가 회색에서 검정으로 밝아지도록.' },
+            { goal: '3회차 핵심 3가지를 정리하고 4회차를 예고한다.', topics: ['트리거 개념: 위치가 애니메이션을 켠다', '수평 스크롤: 스크롤 방향을 바꾼다', '텍스트 Reveal: 숫자로 상태를 정의한다'], practice: null }
+                        ]
                     },
                     {
                         num: 4, title: '호버·클릭·드래그 트리거', hours: '2시간',
-                        goal: '다양한 인터랙션 트리거 유형을 이해하고 마그네틱 버튼·flip card·spotlight를 구현한다.',
-                        topics: ['인터랙션 트리거 종류: hover / click / drag / mouseMove', '각 트리거의 UX 적용 시나리오', '프롬프트에 트리거 유형 명시하는 법', '마그네틱 버튼 (mousemove)', 'flip card (hover)', 'spotlight follow (mousemove)'],
-                        practice: '마그네틱 버튼, flip card, spotlight를 하나의 페이지에 통합한다.',
-                        slides: [],
-                        slideDescs: []
+                        goal: '마우스 인터랙션 트리거 유형을 이해하고 마그네틱 버튼·Flip Card·Spotlight를 구현한다.',
+                        topics: ['hover / click / mousemove 트리거', '마그네틱 버튼 (거리 계산 + transform)', 'CSS Transform vs JS 동적 제어', 'Flip Card (rotateY + backface-visibility)', 'Spotlight Follow (radial-gradient 이동)'],
+                        practice: '마그네틱 버튼, Flip Card, Spotlight Follow를 순서대로 구현한다.',
+                        slides: ['01_오늘의_목표.svg','02_마우스_인터랙션_종류.svg','03_실습1_마그네틱_버튼.svg','04_CSS_Transform_vs_JS.svg','05_실습2_Flip_Card.svg','06_마우스_추적_원리.svg','07_실습3_Spotlight_Follow.svg','08_핵심_정리.svg'],
+                        slideDescs: [
+            { goal: '4회차 목표와 수업 흐름을 안내한다.', topics: ['마그네틱 버튼', 'Flip Card', 'Spotlight Follow'], practice: null },
+            { goal: 'hover/click/mousemove 3가지 트리거와 활용 예시를 이해한다.', topics: ['hover: 색상 변화, 확대', 'click: 펼쳐지는 효과', 'mousemove: 자기 효과, 빛 추적'], practice: null },
+            { goal: '마그네틱 버튼 효과를 구현한다.', topics: ['mousemove로 커서 좌표 추적', '버튼까지 거리 계산', 'transform으로 버튼 이동'], practice: '연락하기 버튼에 마그네틱 효과를 추가해줘. 마우스가 버튼 근처에 오면 버튼이 마우스 방향으로 살짝 당겨지는 효과.' },
+            { goal: 'CSS Transform과 JS 동적 제어의 차이를 이해한다.', topics: ['CSS: hover 트리거, rotateY/scale', 'JS: 실시간 좌표 계산, 물리 효과', '적합한 상황 판단법'], practice: null },
+            { goal: 'Flip Card 효과를 구현한다.', topics: ['CSS rotateY(180deg)', 'perspective + backface-visibility', 'hover 트리거'], practice: '포트폴리오 카드를 Flip Card로 만들어줘. 앞면에 이미지와 제목, 뒷면에 프로젝트 설명이 보이도록.' },
+            { goal: 'Spotlight Follow의 원리(radial-gradient 이동)를 이해한다.', topics: ['e.clientX, e.clientY 좌표', 'radial-gradient 중심 이동', '다크 배경에서 효과적'], practice: null },
+            { goal: 'Spotlight Follow 효과를 구현한다.', topics: ['커서 위치에 빛 표시', '다크 히어로 섹션 적용', '빛 크기/색상 조정'], practice: '히어로 섹션에 마우스를 따라다니는 빛 효과를 추가해줘. 다크 배경에서 커서 위치 주변만 밝아지는 spotlight 효과.' },
+            { goal: '4회차 핵심 3가지를 정리하고 5회차를 예고한다.', topics: ['마그네틱: 커서가 당기는 효과', 'Flip Card: CSS만으로 3D 뒤집기', 'Spotlight: 좌표로 빛을 조종한다'], practice: null }
+                        ]
                     },
                     {
                         num: 5, title: '라이브러리 + 3D 확장', hours: '2시간',
                         goal: 'CDN 라이브러리 활용법을 익히고 tsParticles·Typed.js·Three.js로 풍부한 시각 효과를 구현한다.',
-                        topics: ['CDN 라이브러리란 무엇인가', '프롬프트에 라이브러리 명시하는 법', 'tsParticles — 파티클 배경 효과', 'Typed.js — 타이핑 히어로 섹션', 'Three.js — 웹 3D 기초 개념', '3D 오브젝트 배치 + 회전 인터랙션'],
-                        practice: 'tsParticles 파티클 배경, Typed.js 타이핑 효과, Three.js 3D 오브젝트를 각각 구현한다.',
-                        slides: [],
-                        slideDescs: []
+                        topics: ['CDN script 태그 한 줄 추가', 'tsParticles — 파티클 배경 효과', 'Typed.js — 타이핑 히어로 섹션', 'Three.js 3요소 (Scene/Camera/Renderer)', '3D 큐브 회전 인터랙션'],
+                        practice: 'tsParticles 파티클 배경, Typed.js 타이핑 효과, Three.js 회전 큐브를 각각 구현한다.',
+                        slides: ['01_오늘의_목표.svg','02_CDN_라이브러리_활용법.svg','03_실습1_tsParticles_파티클.svg','04_타이핑_애니메이션_원리.svg','05_실습2_Typedjs_타이핑.svg','06_3D_웹의_세계.svg','07_실습3_Threejs_회전큐브.svg','08_핵심_정리.svg'],
+                        slideDescs: [
+            { goal: '5회차 목표와 수업 흐름을 안내한다.', topics: ['tsParticles', 'Typed.js', 'Three.js'], practice: null },
+            { goal: 'CDN 라이브러리의 개념과 활용법을 이해한다.', topics: ['script 태그 1줄 = 수천 줄 기능', '이름만 알면 Claude가 CDN 링크 작성', '주요 라이브러리 3종 소개'], practice: null },
+            { goal: 'tsParticles 파티클 배경을 구현한다.', topics: ['파티클 수/색상/반응 거리 설정', '마우스 반응 옵션', '다크 배경에서 효과적'], practice: '히어로 섹션 배경에 tsParticles 파티클 효과를 추가해줘. 작은 흰 점들이 천천히 움직이고 마우스 근처로 반응하도록.' },
+            { goal: 'Typed.js의 동작 원리와 주요 설정을 이해한다.', topics: ['문자열 배열 → 타이핑 → 삭제 반복', 'typeSpeed / backSpeed / loop 설정', '포트폴리오 직함에 활용'], practice: null },
+            { goal: 'Typed.js 타이핑 효과를 구현한다.', topics: ['span#typed 위치 지정', 'CDN 추가 + 초기화 코드', '나만의 직함 배열 입력'], practice: '히어로 섹션의 직함 부분에 Typed.js를 적용해줘. "웹 개발자", "UI 디자이너", "Claude 전문가"가 순서대로 타이핑되도록.' },
+            { goal: 'Three.js의 3요소(Scene/Camera/Renderer)와 활용 사례를 이해한다.', topics: ['Scene: 3D 공간(무대)', 'Camera: 시점(눈)', 'Renderer: Canvas에 출력'], practice: null },
+            { goal: 'Three.js 회전 큐브를 구현한다.', topics: ['BoxGeometry + MeshBasicMaterial', 'requestAnimationFrame으로 회전', '형태·색·움직임을 Claude에게 지시'], practice: '히어로 섹션 오른쪽에 Three.js로 만든 3D 큐브를 추가해줘. 네온 파란색 와이어프레임 큐브가 천천히 회전하도록.' },
+            { goal: '5회차 핵심 3가지를 정리하고 6회차를 예고한다.', topics: ['CDN 라이브러리: 이름이 곧 열쇠', '파티클+타이핑: 숫자로 느낌 조절', 'Three.js 3D: 말로 설명하면 된다'], practice: null }
+                        ]
                     },
                     {
                         num: 6, title: '배경 효과와 순수 Canvas', hours: '2시간',
                         goal: 'VANTA.js와 순수 Canvas 2D를 비교하며 각각의 인터랙티브 배경 효과를 구현한다.',
-                        topics: ['라이브러리(VANTA.js) vs 순수 Canvas 트레이드오프', 'VANTA.js 인터랙티브 배경 (NET·WAVES)', 'Canvas 2D API 기초 개념', '별자리 파티클 — 순수 JS 구현', '두 방식의 장단점 비교'],
-                        practice: 'VANTA.js 인터랙티브 배경과 Canvas 2D 별자리 파티클을 각각 구현하고 비교한다.',
-                        slides: [],
-                        slideDescs: []
+                        topics: ['VANTA.js 6가지 효과 (WAVES/NET/BIRDS 등)', 'Canvas 2D API 기초 (beginPath/arc/fillRect)', '별자리 파티클 — 순수 JS 구현', '배경 효과 선택 가이드', '목적별 배경 추천'],
+                        practice: 'VANTA.js 배경과 Canvas 2D 별자리 파티클을 각각 구현하고 나만의 배경을 완성한다.',
+                        slides: ['01_오늘의_목표.svg','02_VANTAjs_배경_라이브러리.svg','03_실습1_VANTA_배경_적용.svg','04_Canvas_2D_기초.svg','05_실습2_별자리_파티클.svg','06_배경효과_선택_가이드.svg','07_실습3_나만의_배경_조합.svg','08_핵심_정리.svg'],
+                        slideDescs: [
+            { goal: '6회차 목표와 수업 흐름을 안내한다.', topics: ['VANTA.js', 'Canvas 2D', '별자리 파티클'], practice: null },
+            { goal: 'VANTA.js의 6가지 효과 종류와 사용법을 이해한다.', topics: ['WAVES/NET/BIRDS/FLAMES/FOG/DOTS', 'backgroundColor + color 설정', 'mouseControls로 인터랙션'], practice: null },
+            { goal: 'VANTA 배경을 히어로 섹션에 적용한다.', topics: ['VANTA.NET 효과 적용', '색상 설정 커스텀', '다른 효과로 교체 연습'], practice: '히어로 섹션 배경에 VANTA.NET 효과를 적용해줘. 어두운 배경에 하늘색 네트워크 선이 움직이도록.' },
+            { goal: 'Canvas 2D API 기초 개념과 일반 HTML과의 차이를 이해한다.', topics: ['픽셀 단위 드로잉', 'beginPath/arc/fillRect 메서드', 'requestAnimationFrame 루프'], practice: null },
+            { goal: 'Canvas 별자리 파티클 배경을 구현한다.', topics: ['파티클 생성 + 이동', '가까운 점끼리 선 연결', '마우스 반발 효과'], practice: 'Canvas로 별자리 파티클 배경을 만들어줘. 작은 점들이 천천히 움직이고, 가까운 점끼리 선으로 연결되며, 마우스에 반응하도록.' },
+            { goal: '사이트 목적별 배경 효과 선택 기준을 이해한다.', topics: ['포트폴리오: VANTA WAVES/NET', '스타트업: Canvas 파티클', '크리에이티브: VANTA FLAMES/BIRDS'], practice: null },
+            { goal: '나만의 배경 조합을 완성한다.', topics: ['효과 선택 + 색상 설정', '텍스트 가독성 확인', '1~6회차 통합 확인'], practice: '지금까지 만든 포트폴리오에 배경 효과를 적용해줘.' },
+            { goal: '6회차 핵심 3가지를 정리하고 7회차를 예고한다.', topics: ['VANTA.js: 3D 배경도 이름만', 'Canvas: 원+선 = 모든 효과', '배경 선택: 분위기를 만든다'], practice: null }
+                        ]
                     },
                     {
                         num: 7, title: '기획이 곧 프롬프트다', hours: '2시간',
-                        goal: '좋은 프롬프트와 나쁜 프롬프트의 차이를 직접 비교하고 구체적인 프롬프트 작성법을 익힌다.',
-                        topics: ['좋은 프롬프트 vs 나쁜 프롬프트 구조 비교', '기획을 잘해야 결과물이 잘 나온다', '색상값·수치·트리거를 명시하는 구체적 작성법', '같은 주제로 나쁜/좋은 프롬프트 각각 생성', '퀄리티 차이 분석'],
-                        practice: '가구 브랜드 랜딩페이지를 나쁜/좋은 프롬프트 각각으로 생성하고 결과를 비교한다.',
-                        slides: [],
-                        slideDescs: []
+                        goal: '좋은 프롬프트와 나쁜 프롬프트의 차이를 직접 비교하고 4요소 구체적 작성법을 익힌다.',
+                        topics: ['나쁜 패턴: 모호한/추상적/범위없는 지시', '좋은 패턴: 구체적 수치/참고 키워드/범위 명시', '4요소: 대상 + 스타일 + 수치 + 범위', '프롬프트 수준별 결과 비교', '1~6회차 통합 랜딩페이지 실습'],
+                        practice: '나쁜/좋은 프롬프트를 각각 체험하고 4요소를 갖춘 통합 랜딩페이지를 완성한다.',
+                        slides: ['01_오늘의_목표.svg','02_나쁜_프롬프트_분석.svg','03_실습1_나쁜프롬프트_체험.svg','04_좋은_프롬프트_구조.svg','05_실습2_좋은프롬프트_실험.svg','06_퀄리티_차이_분석.svg','07_실습3_통합_랜딩페이지.svg','08_핵심_정리.svg'],
+                        slideDescs: [
+            { goal: '7회차 목표와 수업 흐름을 안내한다.', topics: ['나쁜 vs 좋은 프롬프트', '4요소 구조', '통합 실습'], practice: null },
+            { goal: '나쁜 프롬프트의 패턴과 좋은 프롬프트의 패턴을 비교한다.', topics: ['나쁜: 모호함/추상적/범위없음', '좋은: 구체적 수치/참고/범위 명시', '패턴 인식 훈련'], practice: null },
+            { goal: '나쁜 프롬프트로 직접 결과를 체험한다.', topics: ['"예쁘게 만들어줘" 지시', 'Claude의 임의 해석', '수정 반복의 비효율'], practice: '웹사이트를 예쁘고 고급스럽게 만들어줘.' },
+            { goal: '좋은 프롬프트의 4요소 구조를 이해한다.', topics: ['대상: 무엇을', '스타일: 어떤 느낌으로', '수치: 구체적 값', '범위: 어디까지'], practice: null },
+            { goal: '4요소를 갖춘 프롬프트로 결과를 비교한다.', topics: ['첫 시도 완성률 UP', '수정 횟수 DOWN', '4요소 직접 작성'], practice: '히어로 섹션의 배경(대상)을 다크 테크 스타일(스타일)로 바꿔줘. 배경 #0f172a, 텍스트 흰색, 포인트 #38bdf8(수치). CSS만 수정해줘(범위).' },
+            { goal: '프롬프트 구체성과 결과물 퀄리티의 관계를 분석한다.', topics: ['퀄리티 4요소: 레이아웃/타이포/색상 대비/인터랙션', '수준별 수정 횟수 비교', '5분 투자 = 30분 절약'], practice: null },
+            { goal: '1~6회차 기술을 통합한 랜딩페이지를 완성한다.', topics: ['VANTA 배경 + Typed.js', 'GSAP 스크롤 효과', '색상 팔레트 + 폰트'], practice: '포트폴리오 랜딩페이지를 완성해줘. 히어로: VANTA 배경 + Typed.js 직함, 스크롤: GSAP 페이드인, 색상: 다크 테크(#0f172a + #38bdf8) + Noto Sans KR.' },
+            { goal: '7회차 핵심 3가지를 정리하고 8회차를 예고한다.', topics: ['나쁜 프롬프트: 구체성 없으면 결과 없다', '4요소: 갖추면 원하는 결과', '통합 실습: 프롬프트가 곧 기획'], practice: null }
+                        ]
                     },
                     {
                         num: 8, title: 'v12 프롬프트 완전 이해 (파이널)', hours: '2시간',
                         goal: 'v12 프롬프트 3개 레이어 구조를 이해하고 1회차 결과물과 v12 결과물을 나란히 비교한다.',
-                        topics: ['3-SPARK — LAYOUT / INTERACTION / VISUAL spark 선택', 'AESTHETIC_PINCH — 미감 핀치 30개 중 선택', 'FONT JUDGMENT — bold_readability 등급 기반 폰트', 'v12로 1회차 랜딩페이지 재생성', '1회차 결과물 vs v12 결과물 비교', '수강생 주제로 v12 직접 작성'],
+                        topics: ['3-SPARK: Layout/Interaction/Visual 방향 설정', 'AESTHETIC_PINCH: 미감 핀치 레이어 (텍스처/공간감/디테일)', 'FONT JUDGMENT: 가독성/분위기/조합/한글 기준', 'v12로 1회차 랜딩페이지 재생성', '파이널 포트폴리오 완성'],
                         practice: 'v12 프롬프트로 1회차 랜딩페이지를 재생성하고 처음 결과물과 나란히 비교한다.',
-                        slides: [],
-                        slideDescs: []
+                        slides: ['01_오늘의_목표.svg','02_3SPARK_구조.svg','03_AESTHETIC_PINCH_레이어.svg','04_실습1_SPARK_적용.svg','05_FONT_JUDGMENT.svg','06_실습2_폰트_JUDGMENT_적용.svg','07_v12_전체_구조.svg','08_실습3_1회차_v12_재생성.svg','09_Before_After_비교.svg','10_실습4_나만의_포트폴리오.svg','11_파이널_핵심_정리.svg'],
+                        slideDescs: [
+            { goal: '8회차 목표와 수업 흐름을 안내한다.', topics: ['3-SPARK 구조', 'AESTHETIC_PINCH', 'FONT JUDGMENT'], practice: null },
+            { goal: '3-SPARK의 개념과 3가지 SPARK 카테고리를 이해한다.', topics: ['SPARK = 시각적 핵심 아이디어', 'Layout/Interaction/Visual SPARK', 'SPARK 없으면 Claude가 임의 결정'], practice: null },
+            { goal: 'AESTHETIC_PINCH 레이어의 개념과 적용 방법을 이해한다.', topics: ['PINCH = 미적 감각의 언어화', '텍스처/공간감/디테일/분위기', '프롬프트에 PINCH 명시'], practice: null },
+            { goal: '3-SPARK를 정의하고 프롬프트에 적용한다.', topics: ['Layout/Interaction/Visual 각 1개 선택', 'SPARK 3개 프롬프트 작성', '방향성 있는 결과 확인'], practice: 'SPARK-1: [선택], SPARK-2: [선택], SPARK-3: [선택]. 이 3가지를 중심으로 포트폴리오 페이지를 제작해줘.' },
+            { goal: 'FONT JUDGMENT 4가지 기준(가독성/분위기/조합/한글)을 이해한다.', topics: ['bold_readability 등급', 'vibe_tag로 분위기 매칭', 'pairing 조합법'], practice: null },
+            { goal: 'FONT JUDGMENT 기준으로 최적 폰트 조합을 선택하고 적용한다.', topics: ['다크 테크: Inter + Noto Sans KR', '고급 감성: Playfair + Noto Serif', '적용 체크리스트 확인'], practice: 'FONT JUDGMENT 기준으로 폰트를 적용해줘. 사이트 분위기: 다크 테크 / 헤드라인: Inter / 본문: Noto Sans KR.' },
+            { goal: 'v12 프롬프트 전체 구조(3레이어)를 이해한다.', topics: ['Layer 1: 3-SPARK (방향성)', 'Layer 2: AESTHETIC_PINCH (분위기)', 'Layer 3: FONT JUDGMENT (타이포)'], practice: null },
+            { goal: 'v12 프롬프트로 1회차 랜딩페이지를 재생성한다.', topics: ['3레이어 통합 프롬프트 작성', 'SPARK + PINCH + FONT 한번에', '1회차 결과물과 비교 준비'], practice: '[SPARK-1] 전면 다크 배경 + 네온 포인트 / [SPARK-2] 마그네틱 CTA 버튼 / [SPARK-3] 스크롤 페이드인 / [AESTHETIC_PINCH] noisy-gradient + cinematic-spacing / [FONT] Inter(헤드) + Noto Sans KR(본문) — 위 설정으로 포트폴리오 랜딩페이지를 제작해줘.' },
+            { goal: '1회차 결과물과 v12 결과물을 나란히 비교한다.', topics: ['HTML 구조 동일', 'CSS/스타일 완전히 다름', 'v12 = 결과 재현 가능'], practice: null },
+            { goal: '최종 포트폴리오를 완성한다.', topics: ['8회차 체크리스트 확인', 'SPARK/PINCH/FONT 모두 적용', '나만의 콘텐츠 완성'], practice: null },
+            { goal: '8회차 전체 여정을 정리하고 파이널을 축하한다.', topics: ['1~8회차 여정 요약', 'v12 시스템 습득', 'AI Agent Web 개발자 완성'], practice: null }
+                        ]
                     }
                 ]
             },

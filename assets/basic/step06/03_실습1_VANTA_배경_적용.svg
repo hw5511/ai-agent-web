@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <style>text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }</style>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle">WEB 06</text>
+
+  <!-- 실습 배지 -->
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle">실습 1</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717">VANTA 배경 적용하기</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280">히어로 섹션에 움직이는 3D 배경을 추가합니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="110" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="90" y="256" font-size="15" fill="#1d4ed8">"히어로 섹션 배경에 VANTA.NET 효과를 적용해줘.</text>
+  <text x="90" y="284" font-size="15" fill="#1d4ed8">어두운 배경에 하늘색 네트워크 선이 움직이도록."</text>
+  <text x="90" y="312" font-size="12" fill="#93c5fd">Claude 지시문 예시</text>
+
+  <!-- 주요 설정 라벨 -->
+  <text x="60" y="368" font-size="13" font-weight="600" fill="#374151">주요 설정</text>
+
+  <!-- 설정 카드 3개 (y=388 height=100) -->
+  <!-- backgroundColor -->
+  <rect x="60" y="388" width="340" height="100" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="230" y="426" font-size="14" font-weight="700" fill="#38bdf8" text-anchor="middle">backgroundColor</text>
+  <text x="230" y="458" font-size="13" fill="#94a3b8" text-anchor="middle">배경 색상: 0x0f172a</text>
+
+  <!-- color -->
+  <rect x="460" y="388" width="340" height="100" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="630" y="426" font-size="14" font-weight="700" fill="#374151" text-anchor="middle">color</text>
+  <text x="630" y="458" font-size="13" fill="#6b7280" text-anchor="middle">선 색상: 0x38bdf8</text>
+
+  <!-- mouseControls -->
+  <rect x="860" y="388" width="360" height="100" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="1040" y="426" font-size="14" font-weight="700" fill="#d97706" text-anchor="middle">mouseControls</text>
+  <text x="1040" y="458" font-size="13" fill="#92400e" text-anchor="middle">마우스 인터랙션: true</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="516" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="90" y="550" font-size="14" fill="#15803d">• WAVES, BIRDS, FLAMES 등 다른 효과로 바꿔보세요</text>
+  <text x="90" y="578" font-size="14" fill="#15803d">• 색상과 속도(speed)를 조정해서 분위기를 바꿔보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="620" width="1160" height="56" rx="12" fill="#171717"/>
+  <text x="640" y="655" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle">backgroundColor와 color 두 값만 바꿔도 분위기가 완전히 달라집니다</text>
+</svg>

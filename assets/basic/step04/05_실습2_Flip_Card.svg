@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" letter-spacing="0.05em" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">WEB 04</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" font-size="11" fill="#d97706" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">실습 2</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Flip Card 만들기</text>
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">마우스를 올리면 카드가 3D로 뒤집힙니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="218" width="1160" height="110" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="90" y="256" font-size="15" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">"포트폴리오 카드를 Flip Card로 만들어줘.</text>
+  <text x="90" y="284" font-size="15" fill="#1e40af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">앞면에 이미지와 제목, 뒷면에 프로젝트 설명이 보이도록."</text>
+  <text x="90" y="312" font-size="13" fill="#93c5fd" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Claude 지시 예시</text>
+
+  <!-- 카드 구조 라벨 -->
+  <text x="60" y="368" font-size="14" fill="#9ca3af" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">카드 구조</text>
+
+  <!-- 앞면 -->
+  <rect x="200" y="388" width="260" height="160" rx="12" fill="#171717"/>
+  <text x="330" y="458" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">앞면</text>
+  <text x="330" y="488" font-size="14" fill="#d1d5db" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">이미지 + 제목</text>
+  <text x="330" y="532" font-size="12" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">hover 시 뒤집힘</text>
+
+  <!-- 화살표 -->
+  <text x="590" y="475" font-size="28" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">hover</text>
+  <text x="590" y="510" font-size="14" fill="#9ca3af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">카드 뒤집힘</text>
+
+  <!-- 뒷면 -->
+  <rect x="820" y="388" width="260" height="160" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="950" y="458" font-size="18" font-weight="700" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">뒷면</text>
+  <text x="950" y="488" font-size="14" fill="#3b82f6" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">설명 + 링크</text>
+
+  <!-- 연습 박스 -->
+  <rect x="60" y="576" width="1160" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="90" y="612" font-size="14" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• 뒷면에 GitHub 링크 버튼을 추가해보세요</text>
+  <text x="90" y="640" font-size="14" fill="#166534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">• 뒤집히는 방향을 수직(Y축)에서 수평(X축)으로 바꿔보세요</text>
+
+  <!-- 하단 배너 -->
+  <rect x="0" y="660" width="1280" height="60" fill="#171717"/>
+  <text x="640" y="697" font-size="15" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">perspective + rotateY + backface-visibility 세 CSS가 3D 뒤집기의 핵심입니다</text>
+</svg>

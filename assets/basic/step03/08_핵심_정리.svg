@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">3회차 핵심 정리</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 배운 것 3가지</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드 1: 트리거 개념 -->
+  <rect x="60" y="240" width="350" height="290" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="235" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#d97706" text-anchor="middle">01</text>
+  <text x="235" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717" text-anchor="middle">트리거 개념</text>
+  <line x1="100" y1="352" x2="370" y2="352" stroke="#fcd34d" stroke-width="1"/>
+  <text x="235" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">스크롤 위치로 발동</text>
+  <text x="235" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">GSAP ScrollTrigger</text>
+  <text x="235" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">진입 = 애니메이션 시작</text>
+  <text x="235" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#d97706" text-anchor="middle">위치가 애니메이션을 켠다</text>
+
+  <!-- 카드 2: 수평 스크롤 -->
+  <rect x="460" y="240" width="350" height="290" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="635" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#1e40af" text-anchor="middle">02</text>
+  <text x="635" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717" text-anchor="middle">수평 스크롤</text>
+  <line x1="500" y1="352" x2="770" y2="352" stroke="#93c5fd" stroke-width="1"/>
+  <text x="635" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">세로 스크롤→가로 이동</text>
+  <text x="635" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">pin + translateX</text>
+  <text x="635" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">갤러리에 최적</text>
+  <text x="635" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#1e40af" text-anchor="middle">스크롤 방향을 바꾼다</text>
+
+  <!-- 카드 3: 텍스트 Reveal -->
+  <rect x="860" y="240" width="350" height="290" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="1035" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#15803d" text-anchor="middle">03</text>
+  <text x="1035" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717" text-anchor="middle">텍스트 Reveal</text>
+  <line x1="900" y1="352" x2="1170" y2="352" stroke="#86efac" stroke-width="1"/>
+  <text x="1035" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">진행률 0~1 매핑</text>
+  <text x="1035" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">색상으로 강조</text>
+  <text x="1035" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">스토리텔링 효과</text>
+  <text x="1035" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#15803d" text-anchor="middle">숫자로 상태를 정의한다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="576" width="1160" height="56" rx="12" fill="#171717"/>
+  <text x="640" y="609" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="600">다음 4회차 — 마우스 움직임에 반응하는 인터랙션을 만든다</text>
+</svg>

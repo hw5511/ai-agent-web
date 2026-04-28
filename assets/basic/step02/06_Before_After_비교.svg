@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" letter-spacing="0.05em">WEB 02</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">같은 HTML — 완전히 다른 퀄리티</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">색상과 폰트만 바꿨을 때의 차이를 봅니다</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 비교 라벨 -->
+  <text x="60" y="250" font-size="14" font-weight="600" fill="#9ca3af" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">비교</text>
+
+  <!-- Before 박스 -->
+  <rect x="60" y="270" width="540" height="260" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="330" y="310" font-size="13" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Before — 1회차 결과물</text>
+  <line x1="80" y1="326" x2="580" y2="326" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="330" y="356" font-size="20" font-weight="700" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">홍길동</text>
+  <text x="330" y="384" font-size="14" fill="#6b7280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">웹 개발자</text>
+  <rect x="270" y="395" width="120" height="30" rx="4" fill="#e5e7eb"/>
+  <text x="330" y="415" font-size="13" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">연락하기</text>
+
+  <!-- After 박스 -->
+  <rect x="660" y="270" width="540" height="260" rx="16" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="930" y="310" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">After — 색상+폰트 적용</text>
+  <line x1="680" y1="326" x2="1180" y2="326" stroke="#334155" stroke-width="1"/>
+  <text x="930" y="356" font-size="20" font-weight="700" fill="#f1f5f9" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">홍길동</text>
+  <text x="930" y="384" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">웹 개발자</text>
+  <rect x="870" y="395" width="120" height="30" rx="15" fill="#38bdf8"/>
+  <text x="930" y="415" font-size="13" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">연락하기</text>
+
+  <!-- 핵심 문장 -->
+  <text x="640" y="580" font-size="18" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">HTML 한 줄도 안 바꾸고 CSS만으로 이렇게 달라집니다</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="618" width="1160" height="48" rx="10" fill="#f3f4f6"/>
+  <text x="640" y="648" font-size="15" fill="#374151" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">코드가 아니라 '느낌'을 말하면 Claude가 CSS를 만들어준다</text>
+</svg>

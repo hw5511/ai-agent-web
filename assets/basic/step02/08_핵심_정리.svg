@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 회차 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" letter-spacing="0.05em">WEB 02</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">2회차 핵심 정리</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-size="19" fill="#6b7280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">오늘 배운 것 3가지</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드1: 색상 언어 -->
+  <rect x="60" y="240" width="350" height="290" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="235" y="290" font-size="40" font-weight="700" fill="#d97706" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">01</text>
+  <text x="235" y="330" font-size="18" font-weight="700" fill="#92400e" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">색상 언어</text>
+  <line x1="80" y1="346" x2="390" y2="346" stroke="#fcd34d" stroke-width="1"/>
+  <text x="235" y="380" font-size="14" fill="#78350f" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">웜/쿨/뉴트럴/다크 구분</text>
+  <text x="235" y="408" font-size="14" fill="#78350f" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">hex 코드 없이 말로 지시</text>
+  <text x="235" y="436" font-size="14" fill="#78350f" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">분위기 = 색상 선택</text>
+  <text x="235" y="508" font-size="13" font-weight="600" fill="#92400e" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">색상은 말로 설명하면 된다</text>
+
+  <!-- 카드2: Google Fonts -->
+  <rect x="460" y="240" width="350" height="290" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="635" y="290" font-size="40" font-weight="700" fill="#2563eb" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">02</text>
+  <text x="635" y="330" font-size="18" font-weight="700" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Google Fonts</text>
+  <line x1="480" y1="346" x2="790" y2="346" stroke="#93c5fd" stroke-width="1"/>
+  <text x="635" y="380" font-size="14" fill="#1e3a8a" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">link 태그 한 줄 추가</text>
+  <text x="635" y="408" font-size="14" fill="#1e3a8a" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Serif/Sans/Display 선택</text>
+  <text x="635" y="436" font-size="14" fill="#1e3a8a" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">폰트 이름만 말하면 됨</text>
+  <text x="635" y="508" font-size="13" font-weight="600" fill="#1e40af" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">폰트는 느낌으로 선택한다</text>
+
+  <!-- 카드3: Before/After -->
+  <rect x="860" y="240" width="350" height="290" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="1035" y="290" font-size="40" font-weight="700" fill="#16a34a" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">03</text>
+  <text x="1035" y="330" font-size="18" font-weight="700" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">Before/After</text>
+  <line x1="880" y1="346" x2="1190" y2="346" stroke="#86efac" stroke-width="1"/>
+  <text x="1035" y="380" font-size="14" fill="#14532d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">HTML 변경 없이 CSS만</text>
+  <text x="1035" y="408" font-size="14" fill="#14532d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">색상+폰트 = 퀄리티</text>
+  <text x="1035" y="436" font-size="14" fill="#14532d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">반복 수정으로 완성</text>
+  <text x="1035" y="508" font-size="13" font-weight="600" fill="#15803d" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">같은 HTML, 다른 CSS = 다른 사이트</text>
+
+  <!-- 하단 배너 -->
+  <rect x="60" y="572" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="604" font-size="16" fill="#ffffff" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">다음 3회차 — 스크롤할 때 반응하는 사이트를 만든다</text>
+</svg>
