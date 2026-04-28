@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 에이전트 수업자료</title>
+    <title>AI Agent Web 수업자료</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
     <style>
@@ -1037,310 +1037,79 @@
                 label: 'Basic · 8 Sessions',
                 badgeClass: 'basic',
                 badgeText: 'BASIC',
-                title: 'AI 에이전트 기초 과정',
+                title: 'AI Agent Web 기초 과정',
                 sessions: [
                     {
-                        num: 1, title: 'AI 에이전트 이해와 CLI 환경 구축', hours: '2시간',
-                        goal: 'AI 에이전트의 개념을 이해하고, 3종 CLI 에이전트(Gemini, GPT Codex, Claude Code)를 직접 설치하여 동작을 확인한다.',
-                        topics: ['AI 에이전트란? / 설치형 AI란?', 'Gemini CLI 설치 및 로그인', 'GPT CLI(Codex) 설치 및 로그인', 'Claude Code 설치 및 로그인', '세션 사용량 및 extra-usage'],
-                        practice: '3종 에이전트를 모두 설치하고 동일한 질문을 입력해 응답 차이를 비교한다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg','17.svg','18.svg','19.svg','20.svg','21.svg','22.svg','23.svg','24.svg','25.svg','26.svg','27.svg','28.svg','29.svg','30.svg','31.svg','32.svg','33.svg','34.svg','35.svg'],
-                        slideDescs: [
-                            {
-                                goal: 'AI 에이전트의 개념과 SEE-THINK-PLAN-DO-FIX 동작 루프를 이해한다.',
-                                topics: ['에이전트(Agent)란 무엇인가?', 'SEE-THINK-PLAN-DO-FIX 루프', '도구(Tools) 활용 방식', '설치형 CLI 에이전트의 특징'],
-                                practice: null
-                            },
-                            {
-                                goal: '글로벌 AI 기업 3종의 CLI 에이전트 특징을 파악한다.',
-                                topics: ['GPT CLI (Codex) - OpenAI', 'Claude Code - Anthropic', 'Gemini CLI - Google', '각 에이전트의 특화 기능 비교'],
-                                practice: null
-                            },
-                            {
-                                goal: '사람이 직접 수행하는 기존 방식의 한계를 이해한다.',
-                                topics: ['웹 검색으로 명령어 찾기', '검색 결과 판단 및 복사', 'cmd 열기 → 붙여넣기 → 실행', '반복 작업의 비효율성'],
-                                practice: null
-                            },
-                            {
-                                goal: 'AI에게 질문하는 방식과 그 한계를 파악한다.',
-                                topics: ['ChatGPT에 자연어로 질문', 'AI가 명령어를 알려주는 방식', '여전히 사람이 직접 실행해야 함', '자동화와의 차이점'],
-                                practice: null
-                            },
-                            {
-                                goal: '에이전트 프로그램이 명령을 자동 감지·실행하는 원리를 이해한다.',
-                                topics: ['시스템 프롬프트로 출력 형식 지정', 'command{} 패턴 자동 감지', '터미널에서 명령 자동 실행', '지시 → 판단 → 행동의 에이전트 루프'],
-                                practice: '시스템 프롬프트를 작성하여 에이전트가 명령어를 자동 감지하고 실행하는 흐름을 직접 확인한다.'
-                            },
-                            {
-                                goal: '에이전트를 잘 다루려면 무엇이 필요한지 개발자/비개발자 관점으로 이해한다.',
-                                topics: ['개발자 — 기존 코드 능력 + 에이전트로 생산성 극대화', '비개발자 — 도메인 지식 + 에이전트로 업무 자동화', 'AI 동작 원리 이해가 공통 핵심 역량'],
-                                practice: null
-                            },
-                            {
-                                goal: 'AI 동작원리 4가지(컨텍스트/프롬프트/툴/토큰)를 이해하면 에이전트 활용 능력이 달라짐을 학습한다.',
-                                topics: ['컨텍스트 윈도우 — 대화 관리', '프롬프트 구조 — 정확한 요청', '도구(Tool) 개념 — 권한 설계', '토큰과 사용량 — 비용 효율'],
-                                practice: null
-                            },
-                            {
-                                goal: '이 강의에서 사용하는 Claude Pro 플랜의 특징과 효율적인 사용법을 이해한다.',
-                                topics: ['Claude Pro — 월 약 $20, 5시간 세션 초기화', '매일 사용 + 자기 분야 적용 = AI 전문가', '현재 사용량 확인: claude.ai/settings/usage'],
-                                practice: null,
-                                action: { label: '사용량 확인', download: { href: 'https://claude.ai/settings/usage', text: 'Claude 사용량 대시보드' } }
-                            },
-                            {
-                                goal: 'Git 설치 및 초기 설정을 완료한다.',
-                                topics: ['winget install git 명령어', 'Git 설치 확인 (git --version)', 'Git 사용자 정보 초기 설정', 'CLI 환경 준비 완료'],
-                                practice: 'winget으로 Git을 설치하고 git --version으로 정상 설치를 확인한다.'
-                            },
-                            {
-                                goal: 'Node.js 설치 및 npm 환경을 준비한다.',
-                                topics: ['winget install node.js 명령어', 'Node.js 설치 확인 (node --version)', 'npm 설치 확인 (npm --version)', '이후 CLI 에이전트 설치 환경 준비'],
-                                practice: 'winget으로 Node.js를 설치하고 node/npm 버전을 확인한다.'
-                            },
-                            {
-                                goal: 'Gemini CLI를 설치하고 Google 계정으로 로그인한다.',
-                                topics: ['npm install -g @google/gemini-cli', 'gemini 명령어 확인', 'Google 계정 인증 (gemini auth)', '첫 번째 응답 테스트'],
-                                practice: 'Gemini CLI를 설치하고 간단한 질문으로 첫 응답을 확인한다.'
-                            },
-                            {
-                                goal: 'GPT CLI(Codex)를 설치하고 OpenAI 계정으로 로그인한다.',
-                                topics: ['npm install -g @openai/codex', 'codex 명령어 확인', 'OpenAI API 키 설정', '첫 번째 응답 테스트'],
-                                practice: 'GPT CLI를 설치하고 동일한 질문으로 응답을 확인한다.'
-                            },
-                            {
-                                goal: 'Claude Code를 설치하고 Anthropic 계정으로 로그인한다.',
-                                topics: ['npm install -g @anthropic-ai/claude-code', 'claude 명령어 확인', 'Anthropic 계정 인증', '3종 에이전트 비교 테스트'],
-                                practice: '3종 에이전트에 동일한 질문을 입력하고 응답 방식의 차이를 비교한다.'
-                            },
-                            { goal: null, topics: null, practice: null, action: { label: '설치 명령어', copy: 'winget install Git.Git' } },
-                            null,
-                            null,
-                            { goal: null, topics: null, practice: null, action: { label: '설치 명령어', copy: 'winget install OpenJS.NodeJS' } },
-                            null,
-                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
-                                { desc: 'Homebrew 설치', copy: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"' },
-                                { desc: '버전 확인', copy: 'brew --version' }
-                            ] } },
-                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
-                                { desc: 'Node.js 설치', copy: 'brew install node' },
-                                { desc: '버전 확인', copy: 'node --version' }
-                            ] } },
-                            { goal: null, topics: null, practice: null, action: { label: '버전 확인', items: [
-                                { desc: 'Git', copy: 'git --version' },
-                                { desc: 'Node.js', copy: 'node --version' },
-                                { desc: 'npm', copy: 'npm --version' }
-                            ] } },
-                            null,
-                            { goal: null, topics: null, practice: null, action: { label: '실행 정책 변경', copy: 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser' } },
-                            null,
-                            { goal: null, topics: null, practice: null, action: { label: '버전 확인', items: [
-                                { desc: 'Git', copy: 'git --version' },
-                                { desc: 'Node.js', copy: 'node --version' },
-                                { desc: 'npm', copy: 'npm --version' }
-                            ] } },
-                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
-                                { desc: '설치', copy: 'npm install -g @google/gemini-cli' },
-                                { desc: '확인', copy: 'gemini --version' }
-                            ] } },
-                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
-                                { desc: '설치', copy: 'npm install -g @openai/codex' },
-                                { desc: '확인', copy: 'codex --version' }
-                            ] } },
-                            { goal: null, topics: null, practice: null, action: { label: '명령어', items: [
-                                { desc: '설치', copy: 'npm install -g @anthropic-ai/claude-code' },
-                                { desc: '확인', copy: 'claude --version' }
-                            ] } },
-                            { goal: 'claude install로 네이티브 바이너리를 업데이트한다.', topics: ['npm 기반 설치 완료 후 실행', 'claude install — 네이티브 바이너리 업데이트', '업데이트 완료 후 claude 명령어 사용 가능'], practice: null, action: { label: '실행 명령어', copy: 'claude install' } },
-                            { goal: 'VS Code를 설치하고 에이전트 작업 환경을 구성한다.', topics: ['VS Code — 생성 파일 확인·수정에 활용', 'code.visualstudio.com 에서 다운로드', '비개발자도 파일 관리에 편리'], practice: null, action: { label: '다운로드', download: { href: 'https://code.visualstudio.com/', text: 'VS Code 다운로드 페이지' } } },
-                            { goal: 'VS Code에서 작업 폴더를 설정하는 방법을 익힌다.', topics: ['작업 폴더 생성 (예: C:\\ai-agent\\)', 'VS Code 실행 후 File > Open Folder', '폴더를 열면 에이전트 작업 기준 디렉토리 설정'], practice: null },
-                            { goal: 'VS Code 터미널에서 claude를 실행하는 방법을 익힌다.', topics: ['Terminal > New Terminal 또는 Ctrl+`', 'claude 입력 후 엔터', '종료: /exit 또는 Ctrl+C'], practice: null, action: { label: '실행 명령어', copy: 'claude' } },
-                            { goal: 'VS Code에서 claude 명령어 오류 시 PATH를 자동 설정한다.', topics: ["'claude is not recognized' 오류 발생 시", 'path_setup.ps1 — PowerShell에서 실행', 'Node.js · Git · Claude 경로 자동 탐색 및 영구 등록', 'VS Code 재시작 후 정상 실행'], practice: null, action: { label: 'PATH 자동 설정 스크립트 (Windows)', copy: "# 1. 추가할 경로 리스트 초기화\n$pathsToAdd = @()\n\n# 2. Node.js & Git 기본 경로 탐색\n$basePaths = @(\"C:\\Program Files\\nodejs\", \"C:\\Program Files\\Git\\cmd\")\nforeach ($bp in $basePaths) {\n    if (Test-Path $bp) { $pathsToAdd += $bp }\n}\n\n# 3. Claude Code 네이티브 설치 경로 (핵심)\n$claudeNativePath = Join-Path $env:USERPROFILE \".local\\bin\"\n$claudeAppDataPath = \"$env:LOCALAPPDATA\\Programs\\claude-code\"\n\nif (Test-Path $claudeNativePath) { $pathsToAdd += $claudeNativePath }\nif (Test-Path $claudeAppDataPath) { $pathsToAdd += $claudeAppDataPath }\n\n# 4. npm 관련 경로 (Global Prefix)\ntry {\n    $npmPrefix = (npm config get prefix).Trim()\n    if ($npmPrefix -and (Test-Path $npmPrefix)) { $pathsToAdd += $npmPrefix }\n} catch {}\n\n$defaultNpmPath = \"$env:APPDATA\\npm\"\nif (Test-Path $defaultNpmPath) { $pathsToAdd += $defaultNpmPath }\n\n# --- 경로 등록 로직 (중복 제거 및 영구 적용) ---\n$pathsToAdd = $pathsToAdd | Select-Object -Unique\n\n# 시스템의 현재 사용자 PATH 불러오기\n$userPath = [Environment]::GetEnvironmentVariable(\"Path\", \"User\")\n$currentUserPaths = $userPath.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries)\n\n# 없는 경로만 필터링\n$newPaths = $pathsToAdd | Where-Object { $currentUserPaths -notcontains $_ }\n\nif ($newPaths.Count -gt 0) {\n    $updatedPath = (($currentUserPaths + $newPaths) | Select-Object -Unique) -join ';'\n    [Environment]::SetEnvironmentVariable(\"Path\", $updatedPath, \"User\")\n    Write-Host \"PATH 환경 변수에 저장 완료:\" -ForegroundColor Green\n    $newPaths | ForEach-Object { Write-Host \" - $_\" }\n} else {\n    Write-Host \"모든 경로가 이미 등록되어 있습니다.\" -ForegroundColor Gray\n}\n\n# --- 현재 터미널 세션에 즉시 반영 ---\n$currentSessionPaths = $env:Path.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries)\n$env:Path = (($currentSessionPaths + $pathsToAdd) | Select-Object -Unique) -join ';'\n\n# --- 검증 및 경로 분석 로직 ---\nWrite-Host \"`n[설치 상태 및 버전 확인]\" -ForegroundColor Cyan\nWrite-Host \"--------------------------------\"\n\n# Claude 상세 분석\n$claudeCheck = where.exe claude 2>$null\nif ($claudeCheck) {\n    $firstClaude = ($claudeCheck | Select-Object -First 1)\n    Write-Host \"Claude 실행 위치: $firstClaude\"\n    if ($firstClaude -like \"*\\.local\\bin\\*\") {\n        Write-Host \"현재 '네이티브(Native)' 버전 사용 중\" -ForegroundColor Yellow\n    } else {\n        Write-Host \"현재 'npm' 패키지 버전 사용 중\" -ForegroundColor Gray\n    }\n    try { \n        $version = claude --version\n        Write-Host \"Claude 버전: $version\" \n    } catch {}\n} else {\n    Write-Host \"Claude를 찾을 수 없습니다.\" -ForegroundColor Red\n}\n\nWrite-Host \"--------------------------------\"\nWrite-Host \"Node.js: $(try{node -v}catch{'N/A'})\"\nWrite-Host \"npm:     $(try{npm -v}catch{'N/A'})\"\nWrite-Host \"Git:     $(try{git --version}catch{'N/A'})\"\nWrite-Host \"--------------------------------\"" } },
-                            { goal: 'Mac에서 claude 명령어 오류 시 PATH를 자동 설정한다.', topics: ["'claude: command not found' 오류 발생 시", 'bash 스크립트 — 터미널에서 실행', 'Homebrew · npm · Claude 경로 자동 탐색 및 ~/.zshrc 영구 등록', '심볼릭 링크 자동 복구 포함'], practice: null, action: { label: 'PATH 자동 설정 스크립트 (macOS)', copy: "#!/bin/bash\n\n# 1. 추가할 경로 리스트 초기화\npaths_to_add=()\n\n# 2. Homebrew 경로 탐색\nif [ -d \"/opt/homebrew/bin\" ]; then\n    paths_to_add+=(\"/opt/homebrew/bin\")\nfi\nif [ -d \"/usr/local/bin\" ]; then\n    paths_to_add+=(\"/usr/local/bin\")\nfi\n\n# 3. Claude Code 네이티브 설치 경로 (핵심)\nclaude_native_path=\"$HOME/.local/bin\"\nclaude_npm_path=\"$HOME/.npm-global/bin\"\n\nif [ -d \"$claude_native_path\" ]; then\n    paths_to_add+=(\"$claude_native_path\")\nfi\nif [ -d \"$claude_npm_path\" ]; then\n    paths_to_add+=(\"$claude_npm_path\")\nfi\n\n# 4. npm 관련 경로 (Global Prefix)\nif command -v npm &>/dev/null; then\n    npm_prefix=$(npm config get prefix 2>/dev/null)\n    if [ -n \"$npm_prefix\" ] && [ -d \"$npm_prefix/bin\" ]; then\n        paths_to_add+=(\"$npm_prefix/bin\")\n    fi\nfi\n\nnpm_global_default=\"$HOME/.npm-global/bin\"\nif [ -d \"$npm_global_default\" ]; then\n    paths_to_add+=(\"$npm_global_default\")\nfi\n\n# --- 경로 등록 로직 (중복 제거 및 영구 적용) ---\nshell_rc=\"$HOME/.zshrc\"\nif [ ! -f \"$shell_rc\" ]; then\n    shell_rc=\"$HOME/.bashrc\"\nfi\n\nadded_count=0\nfor p in \"${paths_to_add[@]}\"; do\n    if [[ \":$PATH:\" != *\":$p:\"* ]]; then\n        export PATH=\"$p:$PATH\"\n        if ! grep -qF \"$p\" \"$shell_rc\" 2>/dev/null; then\n            echo \"export PATH=\\\"$p:\\$PATH\\\"\" >> \"$shell_rc\"\n            echo \"  + $p (영구 등록)\"\n            added_count=$((added_count + 1))\n        fi\n    fi\ndone\n\nif [ $added_count -eq 0 ]; then\n    echo \"모든 경로가 이미 등록되어 있습니다.\"\nfi\n\n# --- Claude 심볼릭 링크 복구 (Homebrew 환경) ---\nif ! command -v claude &>/dev/null; then\n    npm_root=$(npm root -g 2>/dev/null)\n    claude_bin=\"$npm_root/@anthropic-ai/claude-code/bin/claude\"\n    if [ -f \"$claude_bin\" ]; then\n        brew_bin=\"/opt/homebrew/bin\"\n        if [ -d \"$brew_bin\" ]; then\n            rm -f \"$brew_bin/claude\"\n            ln -s \"$claude_bin\" \"$brew_bin/claude\"\n            echo \"Claude 심볼릭 링크 복구 완료: $brew_bin/claude\"\n        fi\n    fi\nfi\n\n# --- 검증 및 경로 분석 로직 ---\necho \"\"\necho \"[설치 상태 및 버전 확인]\"\necho \"--------------------------------\"\n\nclaude_path=$(which claude 2>/dev/null)\nif [ -n \"$claude_path\" ]; then\n    echo \"Claude 실행 위치: $claude_path\"\n    if [[ \"$claude_path\" == *\".local/bin\"* ]]; then\n        echo \"현재 '네이티브(Native)' 버전 사용 중\"\n    else\n        echo \"현재 'npm' 패키지 버전 사용 중\"\n    fi\n    claude --version 2>/dev/null || true\nelse\n    echo \"Claude를 찾을 수 없습니다.\"\n    echo \"터미널을 닫고 다시 열어서 재시도하세요.\"\nfi\n\necho \"--------------------------------\"\necho \"Node.js: $(node -v 2>/dev/null || echo 'N/A')\"\necho \"npm:     $(npm -v 2>/dev/null || echo 'N/A')\"\necho \"Git:     $(git --version 2>/dev/null || echo 'N/A')\"\necho \"--------------------------------\"" } },
-                            { goal: 'Claude Code 사용량을 확인하는 방법을 익힌다.', topics: ['claude.ai/settings/usage 페이지 접속', '현재 세션 사용량 (5시간마다 초기화)', '초기화 시간 확인 및 주간 사용량 체크'], practice: null, action: { label: '사용량 확인 페이지', copy: 'https://claude.ai/settings/usage' } },
-                            { goal: '추가 사용량 기능을 활성화하여 수업 중단을 방지한다.', topics: ['설정 페이지에서 추가 사용량 옵션 ON', '추가 사용량 구매 및 결제 등록', '초과 시 자동 차감 (사용한 만큼만 과금)'], practice: null, action: { label: '설정 페이지', copy: 'https://claude.ai/settings/usage' } }
-                        ]
+                        num: 1, title: '웹의 언어를 만나다', hours: '2시간',
+                        goal: 'HTML/CSS/JS의 역할을 이해하고 클로드 지시로 랜딩페이지를 완성한다.',
+                        topics: ['HTML — 뼈대 (구조)', 'CSS — 스타일 (디자인)', 'JS — 행동 (인터랙션)', '클로드에게 지시하는 기본 워크플로우', '투박하게 시작 → CSS 입히면서 달라지는 과정 체감'],
+                        practice: '클로드로 랜딩페이지를 생성하고 CSS를 단계별로 추가하며 변화를 확인한다.',
+                        slides: [],
+                        slideDescs: []
                     },
                     {
-                        num: 2, title: 'Claude 에이전트 메모리와 파일/폴더 제어', hours: '2시간',
-                        goal: '에이전트에 메모리를 설정하고 이름을 부여하는 방법을 익히며, 파일과 폴더를 에이전트로 직접 제어한다.',
-                        topics: ['CLAUDE.md — 에이전트 이름·말투·역할 정의', '/init · /memory · Auto Memory', '.claude/rules/ 조건부 규칙', 'Read / Write / Edit / Bash 툴 실습'],
-                        practice: '나만의 에이전트에 이름을 부여하고, 각 툴(Read/Write/Edit/Bash)을 직접 실습한다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg'],
-                        slideDescs: [
-            { goal: 'Step 2 목표와 VSCode 터미널 환경을 안내한다.', topics: ['Step 2 학습 목표', 'VSCode 터미널에서 Claude Code 실행', '오늘 배울 내용 미리보기'], practice: null },
-            { goal: 'CLAUDE.md의 개념과 역할을 이해한다.', topics: ['CLAUDE.md란?', '파일 위치와 적용 범위', '에이전트 정체성 부여 원리'], practice: null },
-            { goal: 'CLAUDE.md 실습 — 에이전트에 이름·말투·역할을 부여한다.', topics: ['claude 실행 후 너는 누구야? 질문', 'CLAUDE.md 파일 생성 + 이름/말투/역할 작성', '/clear 후 다시 질문해 변화 확인'], practice: 'CLAUDE.md를 직접 작성하고 에이전트가 달라지는 것을 확인한다.' },
-            { goal: '/init 명령어의 역할을 이해한다.', topics: ['/init이란?', 'CLAUDE.md 자동 생성 흐름', '직접 작성 vs 자동 생성'], practice: null },
-            { goal: '/init 실습 — 폴더 분석 후 CLAUDE.md 자동 생성을 체험한다.', topics: ['실습 자료 다운로드 후 작업 폴더에 배치', '기존 CLAUDE.md 삭제', '/init 실행 후 생성 결과 확인'], practice: '/init으로 자동 생성된 CLAUDE.md를 열어 내용을 확인한다.', action: { label: '실습 자료', download: { href: 'assets/basic/step02/practice/init_practice.zip', text: 'init_practice.zip 다운로드' } } },
-            { goal: '에이전트 메모리를 직접 확인하고 편집한다.', topics: ['/memory — 로드된 CLAUDE.md·rules 파일 목록', 'Project / User / Auto Memory 세 종류', '~/.claude/projects/<project>/memory/ 경로'], practice: null },
-            { goal: 'Auto Memory의 작동 원리를 이해한다.', topics: ['Claude가 스스로 MEMORY.md에 자동 기록', '기본값 ON — /memory에서 on/off 설정', '직접 요청: 이걸 기억해줘'], practice: null },
-            { goal: 'Write 툴의 역할을 이해한다.', topics: ['새 파일 생성·작성', '기존 파일 덮어쓰기 주의', 'Write vs Edit 차이'], practice: null },
-            { goal: 'Read 실습 — 파일·이미지·PDF를 읽어본다.', topics: ['실습 자료 다운로드 후 압축 해제', '"이 폴더의 파일들을 내용에 맞게 파일명을 정리해줘" 입력', 'Claude가 파일 하나씩 읽고 파일명 제안 확인'], practice: '실습 파일을 다운로드 후 Claude에게 파일명 정리를 요청한다.', action: { label: '실습 자료', download: { href: 'assets/basic/step02/practice/read_practice.zip', text: 'read_practice.zip 다운로드' } } },
-            { goal: 'Write 실습 — 새 파일을 만들어본다.', topics: ['자기소개 txt 파일 생성 요청', 'VS Code에서 파일 생성 확인', 'Read로 내용 검증'], practice: '에이전트에게 자기소개 파일을 만들어달라고 요청한다.' },
-            { goal: 'Edit 툴의 역할을 이해한다.', topics: ['기존 파일 일부 수정', '수정 전 내용 → 수정 후 내용', 'Read 후 Edit 순서'], practice: null },
-            { goal: 'Edit 실습 — 기존 파일의 일부를 수정해본다.', topics: ['파일 특정 줄 수정 요청', '수정 결과 Read로 확인', 'CLAUDE.md에 규칙 추가'], practice: '파일의 특정 내용을 변경해달라고 요청한다.' },
-            { goal: 'Read 툴이 읽을 수 있는 파일 종류를 이해한다.', topics: ['텍스트 파일: txt·md·py·html 등', '이미지 파일: jpg·png·gif·webp', 'PDF — 실제 내용 분석 (최대 100페이지/20MB)'], practice: null },
-            { goal: 'Bash 툴의 역할을 이해한다.', topics: ['컴퓨터 명령어 직접 실행', '폴더 생성·이름변경·복사·삭제', '프로그램 실행·패키지 설치'], practice: null },
-            { goal: 'Bash 주요 명령어를 파악한다.', topics: ['mkdir · cp · mv · rm', 'start 명령으로 파일 실행', 'python · node 스크립트 실행'], practice: null },
-            { goal: 'Bash 실습 — 폴더 생성·이동·복사·제거·프로그램 실행을 실습한다.', topics: ['폴더 생성: work + docs 서브폴더', '이동·복사·제거: note.txt 조작', '크롬 실행 — 네이버 뉴스 열기', '탐색기로 특정 폴더 열기'], practice: '폴더 만들기 → 파일 이동 → 크롬 실행 순서로 실습' }
-                        ]
+                        num: 2, title: '색상과 폰트로 퀄리티가 달라진다', hours: '2시간',
+                        goal: 'v12 Lightbulb 시스템의 폰트·색상 원리를 이해하고 1회차 결과물을 리디자인한다.',
+                        topics: ['색상 팔레트 선정 원칙', '폰트 bold_readability 등급 이해', 'mood_tags로 분위기 설정', 'v12 Lightbulb 시스템 소개 (fonts.json, ideas.json)', '1회차 랜딩페이지 before/after 비교'],
+                        practice: '1회차 랜딩페이지를 v12 폰트·색상 조합으로 재지시하고 결과를 나란히 비교한다.',
+                        slides: [],
+                        slideDescs: []
                     },
                     {
-                        num: 3, title: 'Claude Code 환경 설정과 기본 명령어', hours: '2시간',
-                        goal: 'Claude Code의 보안 설정을 이해하고, 권한 모드·욜로 모드·모델 선택·주요 명령어를 실습을 통해 익힌다.',
-                        topics: ['Claude 개인정보 보안 설정', 'settings.json (파일 삭제 금지)', '권한 모드 (일반·편집자동승인·플랜)', '욜로 모드 / /model 모델 선택', '주요 슬래시 명령어', '웹 Search 툴 / Todos'],
-                        practice: '개인 환경에 맞는 보안 설정을 직접 구성하고, 권한 모드와 주요 명령어를 순서대로 실행해본다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg','17.svg','18.svg','19.svg'],
-                        slideDescs: [
-            { goal: 'Step 3 목표와 오늘 배울 내용을 안내한다.', topics: ['보안 설정', 'settings.json · 권한 규칙', '권한 모드 · 욜로 모드', '/model · 슬래시 명령어 · 웹 Search · Todos'], practice: null },
-            { goal: 'Claude Code의 파일 접근 범위와 개인정보 설정을 이해한다.', topics: ['파일 쓰기 범위 제한', '상위 폴더 접근 허가 방식', '개인정보 opt-out 설정'], practice: null, action: { label: '설정 페이지', download: { href: 'https://claude.ai/settings/data-privacy-controls', text: 'claude.ai 설정 바로가기' } } },
-            { goal: 'settings.json의 구조와 주요 설정 항목을 이해한다.', topics: ['3계층 설정 파일 (전역/프로젝트/로컬)', 'model — 기본 모델 지정', 'permissions — deny/allow 규칙 목록', 'env — 환경 변수 주입'], practice: null, action: { label: '공식 문서', download: { href: 'https://code.claude.com/docs/ko/settings', text: 'settings.json 공식 문서' } } },
-            { goal: 'settings.json 실습 — 파일 삭제 차단 규칙을 직접 추가한다.', topics: ['Claude에게 권한 제한 추가 요청', '차단 동작 확인 (rm 시도)', 'settings.json 파일 내용 확인'], practice: 'rm 차단 규칙을 Claude에게 추가하고 실제로 차단되는지 확인한다.' },
-            { goal: 'settings.json 파일 삭제 차단 규칙 추가를 직접 실습한다.', topics: ['Claude에게 권한 제한 추가 요청', '\'note.txt 파일을 삭제해줘\' 입력 후 차단 메시지 확인', '\'settings.json 파일 내용 보여줘\'로 규칙 추가 확인'], practice: 'rm 차단 규칙을 Claude에게 추가하고 실제로 차단되는지 확인한다.' },
-            { goal: '3가지 권한 모드의 차이를 이해하고 전환 방법을 익힌다.', topics: ['일반 모드 — 편집·명령 매번 승인', '편집 자동 승인 모드 — 파일 편집 자동', '플랜 모드 — 추천 선택지 중 선택'], practice: null },
-            { goal: '욜로 모드의 개념과 안전한 사용법을 이해한다.', topics: ['claude --dangerously-skip-permissions', '/exit 또는 Ctrl+C로 종료', '위쪽 방향키로 이전 명령 재실행'], practice: null },
-            { goal: '주요 슬래시 명령어의 역할을 파악한다.', topics: ['/clear · /model · /login · /logout', '/help — 전체 명령어 목록', 'Ctrl+C 또는 Esc로 종료'], practice: null, action: { label: '실행 명령어', copy: 'claude --dangerously-skip-permissions' } },
-            { goal: '/config 화면 구성을 이해한다 — Status · Config · Usage 3탭', topics: ['Status — 버전·세션·계정·모델·IDE·MCP 상태', 'Config — Claude Code 세부 동작 설정', 'Usage — 세션·주간 사용량 및 리셋 시간 확인'], practice: null },
-            { goal: '/config 설정 항목 (1/2) — UI·동작 관련 옵션을 이해한다.', topics: ['Auto-compact · Show tips · Reduce motion', 'Thinking mode · Rewind code · Verbose output', 'Terminal progress bar · Show turn duration · Default permission mode', 'Respect .gitignore · Always copy full response'], practice: null },
-            { goal: '/config 설정 항목 (2/2) — 업데이트·테마·모델 관련 옵션을 이해한다.', topics: ['Auto-update channel · Theme · Notifications', 'Output style · Language · Editor mode', 'Show PR status footer · Model · Auto-install IDE extension', 'Claude in Chrome · Enable Remote Control'], practice: null },
-            { goal: '상황에 맞는 Claude 모델을 선택하는 방법을 익힌다.', topics: ['Haiku 4.5 — 가장 빠름 (간단한 작업)', 'Sonnet 4.6 — 빠르고 강력 (기본 추천)', 'Opus 4.5 — 최고 성능 (복잡한 추론)'], practice: null },
-            { goal: '웹 Search 툴의 동작 원리를 이해한다.', topics: ['사용자 명령 불필요 — Claude 자동 판단', '최신 정보 필요 시 자동 검색', '"ㅇㅇㅇ 주제에 대해 웹조사해줘" 활용'], practice: null },
-            { goal: '웹 Search 실습을 진행한다.', topics: ['claude 실행', '최근 7일 이내 AI 에이전트 기사 조사 프롬프트 입력', '기사 제목·요약·출처 URL 포함 결과 확인'], practice: '최근 7일 이내 발행 기사를 조사하고 출처 링크를 함께 정리하도록 요청' },
-            { goal: 'Claude in Chrome의 개념과 7가지 기능을 이해한다.', topics: ['라이브 디버깅 · 디자인 검증 · 웹앱 테스트', '인증 웹앱 접근 (Google Docs · Gmail · Notion)', '데이터 추출 · 반복 자동화 · 세션 녹화', '지원 브라우저: Chrome · Edge (Brave · Arc 미지원)'], practice: null },
-            { goal: 'Claude in Chrome 설치와 활성화 방법을 익힌다.', topics: ['Chrome 웹스토어에서 확장 설치 (v1.0.36+)', 'claude --chrome 플래그로 실행 또는 /config에서 기본 활성화', '/mcp 입력 → chrome for claude 선택 → Enable'], practice: null, action: { label: '확장 설치', download: { href: 'https://claude.com/claude-for-chrome', text: 'Claude for Chrome 바로가기' } } },
-            { goal: 'Claude in Chrome 실습을 진행한다.', topics: ['챌린지 3종 직접 테스트 (페이지 내 챌린지 클릭)', '구글에서 AI 에이전트 트렌드 조사 명령 실행', '브라우저 자동화 결과 확인'], practice: '챌린지 3종 + 구글 트렌드 조사 실습', action: { label: '챌린지 페이지', download: { href: 'https://claude.com/claude-for-chrome', text: 'Claude for Chrome 바로가기' } } },
-            { goal: 'Todos 내장 툴을 이해한다.', topics: ['TodoWrite · TodoRead 내장 툴', 'pending → in_progress → completed', '"ㅇㅇㅇ 작업을 todo 리스트를 세워서 순차적으로 진행해줘"'], practice: null, action: { label: '실습 프롬프트', copy: '오늘 기준 최근 7일 이내에 발행된 AI 에이전트 관련 기사나 글을 웹조사해줘. 각 항목의 주요 내용과 실제 출처 링크(URL)도 함께 정리해줘.' } },
-            { goal: 'Todos 실습 — 다단계 작업을 순차 실행한다.', topics: ['claude 실행', '폴더 생성·파일 작성·트리 출력 3단계 프롬프트 입력', '각 단계 완료 시 completed 상태 업데이트 확인'], practice: 'practice 폴더 생성 → readme.txt 작성 → 트리 출력까지 TodoWrite로 순차 실행' },
-            { goal: 'Todos 실습을 직접 진행한다.', topics: ['claude 실행', '아래 프롬프트 입력', 'TodoWrite 계획 수립 → 단계별 completed 업데이트 → 트리 출력 확인'], practice: null, action: { label: '실습 프롬프트', copy: 'todo 리스트를 세워서 아래 작업을 순서대로 진행해줘.\n1) practice 폴더 생성, 그 안에 docs·images·code 서브폴더 생성\n2) docs/readme.txt 생성 후 \'문서 보관 폴더입니다. 생성일: 오늘 날짜\' 기록\n3) 완료 후 폴더 구조를 트리 형태로 출력' } }
-                        ]
+                        num: 3, title: '스크롤 트리거를 설계한다', hours: '2시간',
+                        goal: 'JS 트리거 개념을 이해하고 GSAP ScrollTrigger로 스크롤 인터랙션을 구현한다.',
+                        topics: ['스크롤 = UX 트리거 개념', 'JS 이벤트 트리거 입문 (scroll, wheel)', 'GSAP 개념 및 CDN 로드 방식', 'ScrollTrigger 구조 소개', '수평 스크롤 + 시차(parallax) 효과'],
+                        practice: 'GSAP ScrollTrigger로 수평 스크롤과 텍스트 컬러 reveal 효과를 구현한다.',
+                        slides: [],
+                        slideDescs: []
                     },
                     {
-                        num: 4, title: '세션 관리와 백그라운드 작업', hours: '2시간',
-                        goal: '세션을 효율적으로 관리하는 방법을 익히고, Auto Compact와 백그라운드 프로세스를 활용하는 방법을 실습한다.',
-                        topics: ['/resume · /rename · --continue 세션 관리', '/rewind 대화 되돌리기', '/compact · Auto Compact 컨텍스트 관리', '백그라운드 프로세스 Ctrl+B', '/tasks 작업 목록 관리', '백그라운드 활용 패턴'],
-                        practice: '세션 저장·재개, Auto Compact 체감, 백그라운드 실행을 직접 실습한다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg'],
-                        slideDescs: [
-            { goal: 'Step 4 목표와 오늘 배울 내용을 안내한다.', topics: ['세션 재개 · 이름 변경 · --continue', '/rewind · 컨텍스트 관리 · Auto Compact', 'Foreground / Background · 타임아웃 · Tasks', '백그라운드 활용법'], practice: null },
-            { goal: 'claude --resume와 /rename 명령어를 이해한다.', topics: ['claude --resume (대화형 선택기 · 이름 지정)', '/rename으로 세션에 이름 부여', '비개발자 예시: 여행계획, 쇼핑몰 리뷰분석'], practice: null },
-            { goal: '--continue와 CLI 내부 /resume의 차이를 이해한다.', topics: ['claude --continue (최근 대화 바로 이어서)', '/resume (대화 중 다른 세션으로 전환)', '--resume는 터미널에서, /resume는 대화 중에'], practice: null },
-            { goal: '/rewind로 대화를 되돌리는 방법을 이해한다.', topics: ['Esc 두 번 또는 /rewind 입력', '대화만 되돌리기 vs 파일 변경도 함께 되돌리기', 'Ctrl+Z처럼 실수를 빠르게 복구'], practice: null },
-            { goal: '세션 관리 실습을 진행한다.', topics: ['/rename으로 이름 부여 → /exit → --resume 재개', '--continue로 최근 대화 바로 이어가기', '/resume로 대화 중 세션 전환', 'Esc×2로 /rewind 체험'], practice: '/rename → --resume → --continue → /resume → /rewind 전체 실습' },
-            { goal: '/context · /compact · /clear 명령어로 컨텍스트를 관리하고, 압축 기준점을 조정한다.', topics: ['/context — 컨텍스트 사용량 시각화', '/compact — 대화 압축 (주제 지정 가능)', '/clear — 컨텍스트 완전 초기화', 'CLAUDE_AUTOCOMPACT_PCT_OVERRIDE — 압축 기준점 환경변수 조정'], practice: null, action: { label: '프롬프트 복사', copy: 'settings.json 의 env 항목에 CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=80 을 추가해줘' } },
-            { goal: 'Auto Compact 개념과 임계값 설정 방법을 이해한다.', topics: ['Auto Compact — 컨텍스트 ~95% 시 자동 압축', '프롬프트로 임계값 조정 가능', 'CLAUDE.md에 보존할 내용 지정'], practice: null },
-            { goal: 'Auto Compact 실습 — 자동 압축을 직접 체감한다.', topics: ['임계값을 20%로 낮추기 요청', '/context로 사용량 확인 → 대화 쌓기', 'Auto Compact 자동 발동 체감', '임계값을 원래대로 복구 요청'], practice: '자동 압축 기준 20% → 대화 쌓기 → 자동 압축 체감 → 기본값 복구' },
-            { goal: 'Foreground와 Background의 차이를 이해한다.', topics: ['Foreground — Claude가 완료를 기다림', 'Background — 비동기 실행, 즉시 고유 ID 반환', '전환: Claude에게 요청 또는 Ctrl+B'], practice: null },
-            { goal: '타임아웃의 개념과 두 가지 해결책을 이해한다.', topics: ['기본 타임아웃 120초 — 초과 시 Foreground 강제 종료', '해결책 1: 백그라운드로 전환 (Ctrl+B)', '해결책 2: settings.json bash.timeout 값 조정', '예: 18,000,000ms = 5시간 Foreground 유지'], practice: null, action: { label: '프롬프트 복사', copy: 'settings.json 의 bash timeout을 18000000 (5시간) 으로 설정해줘' } },
-            { goal: '/tasks 명령어로 백그라운드 작업 목록을 관리한다.', topics: ['/tasks — 백그라운드 작업 목록 조회·관리', '작업 상태: 실행 중 / 완료 / 보류 중', 'Ctrl+F — 모든 백그라운드 에이전트 종료'], practice: null },
-            { goal: '백그라운드 프로세스 실습을 진행한다.', topics: ['실습1 — count.md에 1초 간격으로 1~20 숫자 쓰기 스크립트를 백그라운드 실행', '실습2 — 같은 작업을 foreground로 시작 후 Ctrl+B 전환', '/tasks로 진행 확인 · 완료 후 count.md 열어보기'], practice: 'count.md 숫자 쓰기 스크립트 백그라운드 실행 + Ctrl+B 전환 실습' },
-            { goal: '백그라운드 활용 패턴 3가지를 이해한다.', topics: ['오래 걸리는 작업 백그라운드 전환', '개발 서버 + 코드 수정 병렬 진행', '에러 로그 감시 · 메시지 수신 대기 활용'], practice: null },
-            { goal: 'Step 4 학습 내용을 정리한다.', topics: ['/rename · --resume · --continue · /resume · /rewind', '/compact · Auto Compact · /context · 타임아웃', 'Ctrl+B · /tasks · 백그라운드 활용 패턴'], practice: null }
-                        ]
+                        num: 4, title: '호버·클릭·드래그 트리거', hours: '2시간',
+                        goal: '다양한 인터랙션 트리거 유형을 이해하고 마그네틱 버튼·flip card·spotlight를 구현한다.',
+                        topics: ['인터랙션 트리거 종류: hover / click / drag / mouseMove', '각 트리거의 UX 적용 시나리오', '프롬프트에 트리거 유형 명시하는 법', '마그네틱 버튼 (mousemove)', 'flip card (hover)', 'spotlight follow (mousemove)'],
+                        practice: '마그네틱 버튼, flip card, spotlight를 하나의 페이지에 통합한다.',
+                        slides: [],
+                        slideDescs: []
                     },
                     {
-                        num: 5, title: 'Sub Agent와 Hooks', hours: '2시간',
-                        goal: 'Sub Agent 개념을 이해하고, Hooks로 도구 동작을 자동화하며, MS Office 추가기능으로 Claude를 연동한다.',
-                        topics: ['Sub Agent 개념 · YAML 파일 형식', 'Sub Agent 활용 (만들기 · 병렬 실행) · 실습', 'Hooks 이벤트 18종 · 동작 구조 · 실습', 'MS Office 365 추가기능 Claude 설치'],
-                        practice: 'Sub Agent를 Claude와 함께 만들고, Hooks으로 위험 명령을 차단하는 설정을 추가한다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg'],
-                        slideDescs: [
-            { goal: 'Step 5 목표와 오늘 배울 내용을 안내한다.', topics: ['Sub Agent 개념 · 파일 형식', 'Sub Agent 활용 · 실습', 'Agent Teams 개념', 'Hooks 이벤트 18종 · 동작 구조 · 실습', 'MS Office 추가기능 Claude 설치'], practice: null },
-            { goal: 'Sub Agent의 개념과 설정 파일 구조를 이해한다.', topics: ['독립 컨텍스트 윈도우로 실행', '역할 설명 기반 자동 위임', 'name · description · tools · model 필드', '/agents 명령어로 관리'], practice: null },
-            { goal: 'Sub Agent를 만들고 병렬 실행하는 방법을 익힌다.', topics: ['/agents → Generate with Claude로 자동 생성', '실무 예시: 보고서 작성·데이터 정리·번역 에이전트', '프롬프트로 여러 에이전트 병렬 실행'], practice: null },
-            { goal: 'Sub Agent 실습을 진행한다.', topics: ['/agents로 에이전트 만들기', '역할 설명 입력 후 자동 생성', '병렬 실행 프롬프트 실습'], practice: '/agents → Generate with Claude → 병렬 실행 프롬프트 실습' },
-            { goal: 'Claude Agent Teams의 구조와 활성화 방법을 이해한다.', topics: ['리더 1명 + 팀원 3-5명 (각자 독립 컨텍스트)', '팀원끼리 직접 메시지 / 공유 작업 목록 조율', 'CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 활성화', '병렬 코드 리뷰 · 경쟁 가설 디버깅 활용'], practice: null, action: { label: '환경변수 복사', copy: 'settings.json 의 env 항목에 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 을 추가해줘' } },
-            { goal: 'Agent Teams와 Sub Agent의 차이를 이해하고 팀 구성 예시를 배운다.', topics: ['Sub Agent: 메인 → 결과 단방향', 'Agent Teams: 팀원끼리 직접 대화 다방향', '프롬프트로 팀 구성 요청', '실험적 기능 — settings.json env 설정'], practice: null },
-            { goal: 'Hooks의 개념과 활용 목적을 이해한다.', topics: ['이벤트 감지 시 내 스크립트 자동 실행', '위험 명령 차단 · 작업 완료 알림 · 코드 자동 정리', 'settings.json hooks 키에 시점별 명령어 등록'], practice: null },
-            { goal: 'Hooks 이벤트 18종과 차단/관찰 구분을 이해한다.', topics: ['차단 가능: PreToolUse · UserPromptSubmit · Stop 등 9종', '관찰만: SessionStart · PostToolUse · PreCompact 등 9종', 'exit 2로 차단, exit 0으로 계속 진행'], practice: null },
-            { goal: 'Hooks 동작 구조를 다이어그램으로 이해한다.', topics: ['프롬프트 → PreToolUse → 도구실행 → PostToolUse → Stop', 'exit 2: 차단 + stderr → Claude 피드백', '활용 예시: 삭제 차단 · 자동 정렬 · PC 알림'], practice: null },
-            { goal: 'Hooks 실습을 진행한다.', topics: ['[실습1] BurntToast PC 알림 — Stop 이벤트', '[실습2] 위험 명령 차단 — PreToolUse 이벤트'], practice: '[실습1] BurntToast PC 알림 Hook · [실습2] 위험 명령 차단 Hook', action: { label: '실습 프롬프트', items: [{ desc: '실습1: BurntToast PC 알림', copy: 'settings.json에 Stop Hook을 추가해줘. BurntToast 모듈이 설치되어 있는지 먼저 확인하고, 없으면 Install-Module로 설치한 뒤, powershell.exe -NoProfile -Command 형식으로 Import-Module BurntToast 후 New-BurntToastNotification으로 작업 완료 알림을 띄워줘' }, { desc: '실습2: 위험 명령 차단', copy: 'settings.json에 PreToolUse Hook을 추가해줘. matcher는 Bash, type은 command로 설정하고, node -e 인라인 스크립트로 stdin JSON을 파싱해서 tool_input.command에 rm, rmdir, del, Remove-Item이 포함되면 hookSpecificOutput으로 hookEventName: PreToolUse, permissionDecision: deny, permissionDecisionReason: "삭제 명령어가 차단되었습니다. 삭제 명령어 사용 대신 archive/ 폴더로 이동시키세요. 주의: 한글 경로는 Git Bash mv 명령어가 실패할 수 있으므로 PowerShell Move-Item을 사용하세요." 를 JSON으로 출력하고 process.exit(0)으로 종료해줘' }] } },
-            { goal: 'MS Office 추가기능 Claude 설치 준비를 안내한다.', topics: ['Microsoft 365 구독 필요 (2026 최신버전)', 'Claude Pro/Max 계정 필요', 'PowerPoint/Excel 실행 → 홈 메뉴 → 추가기능'], practice: null },
-            { goal: '홈 메뉴에서 추가기능 버튼을 클릭한다.', topics: ['PowerPoint/Excel 홈 탭 우측에 추가기능 위치', '최신버전(2026) 기준 UI 안내'], practice: null },
-            { goal: '추가기능에서 Claude를 검색하고 추가한다.', topics: ['검색창에 Claude 입력', 'Claude for Microsoft 365 선택', '추가 버튼 클릭'], practice: null },
-            { goal: '설치 후 로그인하여 Claude를 사용한다.', topics: ['우측 패널에 Claude 창 열림', '로그인 버튼 클릭', 'claude.ai 계정으로 로그인 후 바로 사용'], practice: 'Sub Agent를 Claude와 함께 만들고, Hooks으로 위험 명령을 차단하는 설정을 추가한다.' }
-                        ]
+                        num: 5, title: '라이브러리 + 3D 확장', hours: '2시간',
+                        goal: 'CDN 라이브러리 활용법을 익히고 tsParticles·Typed.js·Three.js로 풍부한 시각 효과를 구현한다.',
+                        topics: ['CDN 라이브러리란 무엇인가', '프롬프트에 라이브러리 명시하는 법', 'tsParticles — 파티클 배경 효과', 'Typed.js — 타이핑 히어로 섹션', 'Three.js — 웹 3D 기초 개념', '3D 오브젝트 배치 + 회전 인터랙션'],
+                        practice: 'tsParticles 파티클 배경, Typed.js 타이핑 효과, Three.js 3D 오브젝트를 각각 구현한다.',
+                        slides: [],
+                        slideDescs: []
                     },
                     {
-                        num: 6, title: 'MCP 개념 이해와 실습', hours: '2시간',
-                        goal: 'MCP(Model Context Protocol)의 개념을 이해하고, Trivago·Canva·Wix·Notion MCP를 설치하여 숙소 검색·디자인·웹사이트·문서 자동화를 구현한다.',
-                        topics: ['MCP란? 개념과 구조', 'MCP 설치 및 세팅 방법', 'Trivago MCP 설치·실습', 'Canva MCP 설치·실습', 'Wix MCP 설치·실습', 'Notion MCP 설치·실습'],
-                        practice: 'Trivago로 숙소 검색, Canva로 프레젠테이션 내보내기, Wix로 웹사이트 배포, Notion 페이지 생성을 실습한다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg'],
-                        slideDescs: [
-            { goal: 'Step 6 목표와 오늘 배울 내용을 안내한다.', topics: ['MCP란 무엇인가', 'MCP 설치와 세팅', 'Trivago·Canva·Wix·Notion MCP 연동 실습'], practice: null },
-            { goal: 'MCP(Model Context Protocol)의 개념을 이해한다.', topics: ['AI와 외부 시스템 연결 개방형 표준', 'USB-C 비유 — 한 번 구축으로 어디서든 연결', '데이터베이스·SaaS·API 확장', 'Claude·ChatGPT·Cursor 모두 지원'], practice: null, action: { label: 'MCP 공식 문서', download: { href: 'https://code.claude.com/docs/ko/mcp', text: 'Claude Code MCP 가이드' } } },
-            { goal: 'claude mcp add 명령어로 MCP 서버를 등록한다.', topics: ['HTTP 방식 — 원격 서버 (권장)', 'stdio 방식 — 로컬 프로세스', 'claude mcp list · mcp remove', 'scope: local · project · user'], practice: null, action: { label: '명령어', items: [{ desc: 'mcp add', copy: 'claude mcp add --transport http trivago https://mcp.trivago.com/mcp' }, { desc: 'mcp 확인', copy: 'claude mcp list' }] } },
-            { goal: 'Trivago MCP를 등록하고 숙소 검색 기능을 이해한다.', topics: ['인증 없이 바로 사용 가능', 'claude mcp add --transport http trivago https://mcp.trivago.com/mcp', '국가·도시·날짜·인원 기반 숙소 검색', '가격·위치·리뷰 비교·필터링'], practice: null, action: { label: '명령어', copy: 'claude mcp add --transport http trivago https://mcp.trivago.com/mcp' } },
-            { goal: 'Trivago MCP 실습 — 자연어로 숙소를 검색한다.', topics: ['숙소 검색 프롬프트 입력', 'Claude가 Trivago 결과 제공 확인', '조건 변경 요청으로 필터링 동작 확인'], practice: 'Trivago MCP로 강남 지역 숙소를 검색하고 예산 조건을 변경하여 재검색한다.' },
-            { goal: 'Canva MCP를 등록하고 인증한다.', topics: ['claude mcp add --transport http canva https://mcp.canva.com/mcp', '/mcp → canva → Authenticate → 브라우저 Canva 로그인', '/mcp로 connected 상태 확인', '주요 기능: Search·Create·Autofill·Export'], practice: null, action: { label: '명령어', items: [{ desc: 'mcp 등록', copy: 'claude mcp add --transport http canva https://mcp.canva.com/mcp' }, { desc: '등록 확인', copy: 'claude mcp list' }] } },
-            { goal: 'Canva MCP 실습 — 자연어로 프레젠테이션을 만들고 내보낸다.', topics: ['프레젠테이션 생성 프롬프트', 'PDF 내보내기 링크 확인', 'Autofill로 슬라이드 제목 수정'], practice: 'AI 에이전트 소개 프레젠테이션을 Canva로 만들고 PDF로 내보낸다.' },
-            { goal: 'Wix MCP를 등록하고 웹사이트 생성 기능을 이해한다.', topics: ['claude mcp add wix --transport http https://mcp.wix.com/mcp', 'Google 계정으로 로그인 — 별도 가입 불필요', '사이트 생성·템플릿 적용·콘텐츠 편집·배포'], practice: null, action: { label: '명령어', copy: 'claude mcp add wix --transport http https://mcp.wix.com/mcp' } },
-            { goal: 'Wix MCP 실습 — 자연어로 웹사이트를 만들고 배포한다.', topics: ['쇼핑몰 사이트 생성 프롬프트', 'Claude가 사이트 생성 후 배포 URL 제공 확인', '세일 배너 추가 등 수정 요청'], practice: 'Wix MCP로 F/W 의류 쇼핑몰 사이트를 만들어서 배포하고 수정 요청을 테스트한다.' },
-            { goal: 'Notion MCP를 OAuth 방식으로 등록한다.', topics: ['토큰 발급 불필요 — OAuth 방식', 'claude mcp add --transport http notion https://mcp.notion.com/mcp', 'claude mcp list로 등록 확인', 'Notion Integration 없이 바로 인증 진행'], practice: null, action: { label: '명령어', items: [{ desc: 'mcp 등록', copy: 'claude mcp add --transport http notion https://mcp.notion.com/mcp' }, { desc: '등록 확인', copy: 'claude mcp list' }] } },
-            { goal: 'Notion MCP 인증 절차를 진행한다.', topics: ['claude --dangerously-skip-permissions 실행', '/mcp 입력 후 notion 선택', 'Authenticate 선택 → 브라우저 인증 페이지 열림'], practice: null, action: { label: '실행 명령어', copy: 'claude --dangerously-skip-permissions' } },
-            { goal: '브라우저에서 Notion 계정으로 인증을 완료한다.', topics: ['브라우저 인증 페이지 자동 열림', 'URL 신뢰 체크박스 선택', '계속하기 → Notion 계정 로그인 → 완료'], practice: null },
-            { goal: 'Notion MCP 실습 — 연결 확인 후 자연어로 Notion을 제어한다.', topics: ['/mcp로 connected 상태 확인', '페이지 생성·검색·수정', '데이터베이스 조회·항목 추가', '예시: "회의록 페이지 만들어줘" · "DB에 작업 항목 추가해줘"'], practice: 'Notion MCP를 연결하고 에이전트 명령어 하나로 Notion 페이지를 자동 생성한다.' }
-                        ]
+                        num: 6, title: '배경 효과와 순수 Canvas', hours: '2시간',
+                        goal: 'VANTA.js와 순수 Canvas 2D를 비교하며 각각의 인터랙티브 배경 효과를 구현한다.',
+                        topics: ['라이브러리(VANTA.js) vs 순수 Canvas 트레이드오프', 'VANTA.js 인터랙티브 배경 (NET·WAVES)', 'Canvas 2D API 기초 개념', '별자리 파티클 — 순수 JS 구현', '두 방식의 장단점 비교'],
+                        practice: 'VANTA.js 인터랙티브 배경과 Canvas 2D 별자리 파티클을 각각 구현하고 비교한다.',
+                        slides: [],
+                        slideDescs: []
                     },
                     {
-                        num: 7, title: 'Skills 활용과 Discord Plugin 고급 기능 실습', hours: '2시간',
-                        goal: 'Skills의 개념과 사용법을 익히고, Discord Plugin의 고급 기능(access.json 서버 채널 등록·react·edit_message)을 활용하여 서버 채널 대화를 구현한다.',
-                        topics: ['Skills란? 개념 이해', 'Skill 사용하기', 'access.json 서버 채널 등록', 'Plugin 고급 도구 활용', '기존 MCP vs Plugin 비교 · 서버 채널 실습'],
-                        practice: 'Discord Plugin으로 공부방 서버 채널에 접속하여 봇끼리 메시지를 주고받고 react/edit_message를 활용한다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg','12.svg','13.svg','14.svg','15.svg','16.svg','17.svg','18.svg'],
-                        slideDescs: [
-            { goal: 'Step 7 목표와 오늘 배울 내용을 안내한다.', topics: ['Skills 개념 · 사용법', '라이브러리 개념 · Pillow', '카드뉴스 실습 · 스킬화', 'Discord Plugin 고급 기능'], practice: null },
-            { goal: 'Skills의 개념과 파일 구조를 이해한다.', topics: ['.claude/skills/<이름>/SKILL.md (프로젝트)', '~/.claude/skills/<이름>/SKILL.md (전체)', '/skill-name 슬래시 명령어로 호출', '인수 전달 가능 · Claude 자동 로드'], practice: null },
-            { goal: 'SKILL.md 파일 구조와 기본 제공 Skill을 파악한다.', topics: ['YAML frontmatter + Markdown 지시사항', 'description 필드 · Claude 지침 본문', '/simplify · /batch · /debug · /loop', '커스텀 Skill 아이디어'], practice: null },
-            { goal: '라이브러리 개념과 설치 방법을 이해한다.', topics: ['라이브러리 = 남이 만든 기능 모음', 'Python — pip install / Node.js — npm install', '표준 라이브러리 vs 서드파티 라이브러리', 'import 한 줄로 수십 가지 기능 즉시 사용'], practice: null },
-            { goal: 'Pillow 라이브러리의 기능과 활용 범위를 파악한다.', topics: ['pip install pillow', 'Image.new() — 빈 캔버스 생성', 'ImageDraw — 도형·텍스트 그리기 / ImageFont — 폰트', 'resize · crop · save — 편집·변환·저장'], practice: null },
-            { goal: 'Claude에게 직접 카드뉴스 이미지 생성을 요청한다.', topics: ['자연어로 이미지 옵션 지정 (배경색·글자색·폰트·정렬)', 'Claude가 pillow 설치 + cardnews.py 자동 작성·실행', '결과 이미지(output.png) 확인', '"매번 이렇게 길게 요청해야 하나?" — 스킬의 필요성 체감'], practice: 'Claude에게 배경 남색, 제목 흰색 굵게, 본문 회색 카드뉴스 1080x1080 이미지를 요청하여 생성한다.' },
-            { goal: '카드뉴스 코드를 /cardnews 스킬로 변환한다.', topics: ['Claude에게 "이걸 /cardnews 스킬로 만들어줘" 요청', 'SKILL.md + cardnews.py 자동 생성', '배경색·글자색·제목·본문·사이즈를 인수로 받는 구조', '/cardnews 명령어로 즉시 재사용 가능'], practice: '방금 만든 카드뉴스 코드를 /cardnews 스킬로 만들어달라고 요청하고, 다른 옵션으로 반복 생성해본다.' },
-            { goal: '/cardnews 스킬을 다양한 옵션으로 활용한다.', topics: ['/cardnews 배경=남색 제목="AI가 바꾸는 세상" 즉시 생성', '사이즈 옵션: 정방형(1080x1080) · 스토리(1080x1350)', '리사이즈 옵션: 썸네일 360x360 동시 저장', 'Skill = 반복 작업을 한 줄 명령으로'], practice: '/cardnews 스킬에 다양한 배경색·제목·사이즈 옵션을 주어 카드뉴스를 반복 생성하고, 리사이즈 기능까지 테스트한다.' },
-            { goal: '나만의 Skill 만들기 워크플로우를 이해하고 자유 실습한다.', topics: ['원하는 기능 정하기 → Claude에게 라이브러리 추천 요청', 'Claude가 코드 작성·실행', '"이걸 스킬로 만들어줘" → 재사용 가능한 명령어 완성', '참고 예시: qrcode · pillow · zipfile · markdown'], practice: 'Claude에게 원하는 기능의 라이브러리를 조사해달라고 요청하고, 코드를 짠 뒤 스킬로 만들어보는 자유 실습을 진행한다.' },
-            { goal: 'Discord Plugin 연결에 필요한 Bot 토큰을 발급한다.', topics: ['discord.com/developers/applications → New Application', 'Bot 탭 → Reset Token → 토큰 복사', 'Message Content Intent 활성화 (Privileged Gateway Intents)', 'OAuth2 URL Generator → bot 권한 → 서버 초대 URL 생성'], practice: null, action: { label: '바로가기', items: [{ desc: 'Discord', link: { href: 'https://discord.com', text: 'discord.com' } }, { desc: 'Developer Portal', link: { href: 'https://discord.com/developers/applications', text: 'discord.com/developers' } }] } },
-            { goal: 'Claude Code에 Discord Plugin을 설치하고 활성화한다.', topics: ['--channels plugin:discord@claude-plugins-official 플래그로 실행', '/plugin install discord@claude-plugins-official (첫 설치 시)', '/reload-plugin 후 /mcp에서 discord enable', '처음 설치 후 이후에는 1단계만으로 자동 연결'], practice: null, action: { label: '실행 명령어', copy: 'claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions' } },
-            { goal: 'Bot 토큰을 .env 파일에 저장하고 Claude Code를 재실행한다.', topics: ['~/.claude/channels/discord/.env에 DISCORD_BOT_TOKEN 저장', 'Claude에게 "봇 토큰을 .env에 저장해줘" 요청 가능', 'Ctrl+C 종료 → 동일 명령어로 재실행', '토큰 저장 후 재실행해야 Plugin이 토큰을 인식'], practice: null },
-            { goal: 'DM 페어링으로 Discord와 Claude를 연결하고 서버 채널을 등록한다.', topics: ['Discord에서 본인 봇에게 DM → 페어링 코드 수신', 'Claude Code 터미널에 페어링 코드 입력 → 연결 완료', '개발자 모드 → 채널 우클릭 → 채널 ID 복사', '/discord:access group add <채널ID>로 서버 채널 등록'], practice: 'DM 페어링으로 봇 연결 후 서버 채널을 /discord:access로 등록한다.' },
-            { goal: 'access.json으로 서버 채널을 등록하는 방법을 이해한다.', topics: ['DM = 자동 페어링 / 서버 채널 = access.json 등록 필요', '/discord:access 명령어로 설정', 'groups에 채널 등록 → Claude가 해당 채널 접근 허용', 'requireMention: true로 노이즈 차단'], practice: null },
-            { goal: 'Plugin 고급 도구(react·edit_message·download_attachment)를 활용한다.', topics: ['react — 메시지에 이모지 반응 추가', 'edit_message — 이전에 보낸 메시지 수정', 'download_attachment — 첨부 파일 다운로드', '진행 중 → 완료로 메시지 업데이트 패턴'], practice: null },
-            { goal: '기존 MCP와 Plugin의 차이를 비교한다.', topics: ['기존 MCP — git clone + npm build, read/send 2가지만', 'Plugin — 자동 설치, 5가지 도구, 실시간 수신', 'MCP는 DM 전용 / Plugin은 서버 채널도 지원', 'Plugin이 공식 지원 + 더 강력'], practice: null },
-            { goal: '공부방 서버에 봇을 초대하고 채널을 등록한다.', topics: ['강사가 초대하는 Discord 서버 초대링크로 접속', '본인 봇을 공부방 서버에 초대', '/discord:access로 공부방 채널 등록', '채널 등록 후 Claude가 메시지 읽기·쓰기 가능'], practice: null },
-            { goal: '공부방 서버에서 봇끼리 대화를 실습한다.', topics: ['채널에 인사 메시지 전송 (reply)', '최근 메시지 읽기 (fetch_messages)', '수강생 A → B 봇 @멘션 → B가 확인 후 답장', '답장에 react로 이모지 반응 달기'], practice: 'Discord Plugin으로 공부방 서버에서 봇끼리 메시지를 주고받고 react/edit_message를 활용한다.' }
-                        ]
+                        num: 7, title: '기획이 곧 프롬프트다', hours: '2시간',
+                        goal: '좋은 프롬프트와 나쁜 프롬프트의 차이를 직접 비교하고 구체적인 프롬프트 작성법을 익힌다.',
+                        topics: ['좋은 프롬프트 vs 나쁜 프롬프트 구조 비교', '기획을 잘해야 결과물이 잘 나온다', '색상값·수치·트리거를 명시하는 구체적 작성법', '같은 주제로 나쁜/좋은 프롬프트 각각 생성', '퀄리티 차이 분석'],
+                        practice: '가구 브랜드 랜딩페이지를 나쁜/좋은 프롬프트 각각으로 생성하고 결과를 비교한다.',
+                        slides: [],
+                        slideDescs: []
                     },
                     {
-                        num: 8, title: 'Claude Desktop 사용법', hours: '2시간',
-                        goal: 'Claude Desktop과 CLI 생태계를 이해하고, Agent Teams 협업 구조를 파악하며, GitHub CLI·Gemini CLI를 활용한 스킬을 직접 제작한다.',
-                        topics: ['일반 Claude Desktop 사용법', 'Desktop Claude Code 활용', 'Claude Cowork', 'CLI vs Desktop 비교', 'GitHub CLI 인증·스킬 제작', 'Gemini CLI 실습·스킬 제작'],
-                        practice: 'GitHub CLI와 Gemini CLI를 설치하고 인증한 뒤, Claude에게 각 CLI 기반 스킬을 자동 제작하도록 시킨다.',
-                        slides: ['01.svg','02.svg','03.svg','04.svg','05.svg','06.svg','07.svg','08.svg','09.svg','10.svg','11.svg'],
-                        slideDescs: [
-            { goal: 'Step 8 목표와 오늘 배울 내용을 안내한다.', topics: ['일반 Desktop · Desktop Claude Code', 'Claude Cowork', 'CLI vs Desktop 비교', 'GitHub CLI · Gemini CLI 스킬'], practice: null },
-            { goal: '일반 Claude Desktop의 주요 기능을 이해한다.', topics: ['대화형 채팅 · 파일 첨부 및 분석', 'Projects — 프로젝트 단위 작업 관리', 'MCP 서버 연동 · 커스텀 Skill', 'claude.ai/downloads 설치'], practice: null, action: { label: 'Claude Desktop 다운로드', download: { href: 'https://claude.com/download', text: 'claude.com/download 열기' } } },
-            { goal: 'Desktop에서 Claude Code를 실행하는 방법을 이해한다.', topics: ['Desktop 앱 Code 탭으로 시작', 'claude --resume 로 CLI-Desktop 세션 공유', 'CLI → Desktop → 웹 자유로운 이동', '/ide 명령어로 VS Code 연결'], practice: null },
-            { goal: 'Claude Cowork의 개념과 주요 기능을 이해한다.', topics: ['Desktop Cowork 탭 → 폴더 지정 → Claude 직접 접근', 'AI에게 질문 → AI에게 일을 시키는 방식으로 전환', '다단계 작업 자동 계획·실행·완료 보고', 'Pro 이상 유료 플랜 / Claude Desktop 필수'], practice: null },
-            { goal: 'CLI와 Desktop 환경의 장단점과 선택 기준을 파악한다.', topics: ['CLI — 자동화·스크립팅·Hooks·파이프라인', 'Desktop — GUI·Projects·드래그앤드롭', 'CLI 단점: 터미널 지식 필요', 'Desktop 단점: Hooks·자동화 스크립팅 불가'], practice: 'Desktop 환경과 CLI 환경을 동일한 작업으로 비교 체험하고, 각자의 업무 스타일에 맞는 환경을 선택한다.' },
-            { goal: 'CLI의 개념과 우리가 배울 CLI 도구들을 파악한다.', topics: ['CLI = Command Line Interface', '공통 구조: [도구] [명령] [--옵션] [인수]', 'Claude Code · GitHub CLI · Gemini CLI', '스킬 자동화와 파이프라인의 기반'], practice: null },
-            { goal: 'GitHub 계정을 만들고 gh cli 설치를 준비한다.', topics: ['github.com 가입 · 이메일 인증', 'GitHub = 코드 버전 관리 + 원격 저장소', 'gh cli로 저장소·PR·이슈 터미널 관리', 'github.com/signup 접속'], practice: null, action: { label: 'GitHub 가입', download: { href: 'https://github.com/signup', text: 'github.com/signup' } } },
-            { goal: 'gh cli를 설치하고 --scopes 인증을 완료한다.', topics: ['winget install GitHub.cli (Windows)', 'brew install gh (macOS)', 'gh auth login --scopes repo,delete_repo,workflow,...', 'gh auth status 로 인증 확인'], practice: null, action: { label: '명령어', items: [
-                { desc: '설치 (Windows)', copy: 'winget install GitHub.cli' },
-                { desc: '설치 (macOS)', copy: 'brew install gh' },
-                { desc: '인증 (스코프 지정)', copy: 'gh auth login --scopes repo,delete_repo,workflow,gist,read:org,admin:public_key,write:packages' },
-                { desc: '인증 확인', copy: 'gh auth status' }
-            ] } },
-            { goal: 'Claude에게 gh cli 기반 스킬을 자동 제작시킨다.', topics: ['gh repo list / gh pr list 직접 실행', '"gh cli로 저장소 목록과 PR 정리 스킬 만들어줘"', 'Claude가 SKILL.md + 스크립트 자동 생성', '/내-저장소-요약 스킬 완성'], practice: 'Claude에게 gh cli 명령어 기반 스킬을 자동 제작하도록 시키고 실행한다.' },
-            { goal: 'Gemini CLI를 설치하고 터미널에서 질문하는 방법을 익힌다.', topics: ['npm install -g @google/gemini-cli', 'gemini -p "질문" — 비대화형 모드', 'Google 계정 로그인 (무료 1,000 req/day)', '1M 토큰 컨텍스트'], practice: null },
-            { goal: 'Gemini CLI를 실습하고 Claude에게 연동 스킬을 제작시킨다.', topics: ['gemini -p "질문" 터미널 실행', '"bash로 gemini -p 호출 스킬 만들어줘"', '/ask-gemini 스킬 완성', 'Claude + Gemini 두 AI 병행 워크플로우'], practice: 'Gemini CLI를 실행하고 Claude에게 bash gemini 기반 스킬을 자동 제작하도록 시킨다.' }
-                        ]
+                        num: 8, title: 'v12 프롬프트 완전 이해 (파이널)', hours: '2시간',
+                        goal: 'v12 프롬프트 3개 레이어 구조를 이해하고 1회차 결과물과 v12 결과물을 나란히 비교한다.',
+                        topics: ['3-SPARK — LAYOUT / INTERACTION / VISUAL spark 선택', 'AESTHETIC_PINCH — 미감 핀치 30개 중 선택', 'FONT JUDGMENT — bold_readability 등급 기반 폰트', 'v12로 1회차 랜딩페이지 재생성', '1회차 결과물 vs v12 결과물 비교', '수강생 주제로 v12 직접 작성'],
+                        practice: 'v12 프롬프트로 1회차 랜딩페이지를 재생성하고 처음 결과물과 나란히 비교한다.',
+                        slides: [],
+                        slideDescs: []
                     }
                 ]
             },
             advanced: {
-                label: 'Advanced · 8 Sessions',
+                label: 'Advanced · Coming Soon',
                 badgeClass: 'advanced',
                 badgeText: 'ADVANCED',
-                title: 'AI 에이전트 심화 과정',
+                title: 'AI Agent Web 심화 과정 (준비 중)',
                 sessions: [
                     {
                         num: 1, title: '엑셀 · 워드 · PPT · 한글 문서 자동 작성', hours: '2시간 · Tool & Automation',
