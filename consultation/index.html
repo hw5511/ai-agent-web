@@ -954,11 +954,18 @@ a.awww-card {
 /* ============================================
    Full Curriculum Roadmap (Section 3.5)
 ============================================ */
+#full-roadmap .section-container {
+  max-width: 100%;
+  overflow: visible;
+  padding-left: var(--space-xl);
+  padding-right: var(--space-xl);
+}
+
 .flow-roadmap {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   justify-content: center;
   padding: var(--space-xl) 0;
   overflow-x: auto;
@@ -972,11 +979,12 @@ a.awww-card {
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  padding: var(--space-md) var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
   background: var(--muted);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  min-width: 160px;
+  min-width: 120px;
+  flex-shrink: 0;
   text-align: center;
   position: relative;
 }
