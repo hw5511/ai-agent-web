@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>봄날 플라워 — BOM_NAL.FLW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: oklch(8% 0.01 0);
+  --fg: oklch(93% 0.01 0);
+  --pink: oklch(70% 0.25 350);
+  --green: oklch(72% 0.22 145);
+  --muted: oklch(38% 0.02 0);
+  --border: oklch(18% 0.01 0);
+}
+
+html { background: var(--bg); color: var(--fg); font-family: 'Noto Serif KR', serif; overflow-x: hidden; }
+body { overflow-x: hidden; }
+
+#v12_progress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: var(--pink);
+  z-index: 9999;
+  box-shadow: 0 0 10px var(--pink);
+}
+
+#v12_nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  mix-blend-mode: difference;
+}
+.nav-logo {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem; letter-spacing: 0.35em; color: var(--fg);
+}
+.nav-links {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+.nav-links a {
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem; letter-spacing: 0.25em;
+  color: var(--fg); text-decoration: none;
+}
+
+/* ── HERO ── */
+#v12_hero {
+  height: 100vh; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(oklch(22% 0.05 145 / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(22% 0.05 145 / 0.12) 1px, transparent 1px);
+  background-size: 64px 64px;
+  will-change: transform;
+}
+.hero-noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+}
+.hero-eyebrow {
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem; letter-spacing: 0.5em;
+  color: var(--green); margin-bottom: 2rem; opacity: 0;
+}
+.hero-title {
+  font-size: clamp(4.5rem, 14vw, 11rem);
+  font-weight: 700; line-height: 0.88; letter-spacing: -0.02em;
+}
+.ht-1 { display: block; color: var(--fg); }
+.ht-2 {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--pink);
+}
+.glitch-wrap { position: relative; display: inline-block; }
+.glitch-wrap::before,
+.glitch-wrap::after {
+  content: attr(data-text);
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.glitch-wrap::before {
+  color: var(--pink);
+  animation: v12_g1 2.8s infinite linear;
+  opacity: 0;
+}
+.glitch-wrap::after {
+  color: var(--green);
+  animation: v12_g2 3.3s infinite linear 0.15s;
+  opacity: 0;
+}
+.glitch-on .glitch-wrap::before,
+.glitch-on .glitch-wrap::after { opacity: 1; }
+
+@keyframes v12_g1 {
+  0%,100%  { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+  8%  { clip-path: inset(8% 0 55% 0);  transform: translateX(-5px); }
+  18% { clip-path: inset(45% 0 28% 0); transform: translateX(5px); }
+  28% { clip-path: inset(65% 0 12% 0); transform: translateX(-3px); }
+  38% { clip-path: inset(22% 0 68% 0); transform: translateX(7px); }
+  48% { clip-path: inset(78% 0 4% 0);  transform: translateX(-4px); }
+}
+@keyframes v12_g2 {
+  0%,100%  { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+  12% { clip-path: inset(48% 0 22% 0); transform: translateX(5px); }
+  22% { clip-path: inset(12% 0 62% 0); transform: translateX(-7px); }
+  32% { clip-path: inset(72% 0 6% 0);  transform: translateX(3px); }
+  42% { clip-path: inset(28% 0 52% 0); transform: translateX(-5px); }
+}
+.hero-sub {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem; letter-spacing: 0.55em;
+  color: var(--muted); margin-top: 2.2rem; opacity: 0;
+}
+
+/* floating data fragments */
+.v12_frag {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: 0.58rem; color: var(--green);
+  opacity: 0.28; pointer-events: none;
+  will-change: transform;
+}
+
+/* ── SERVICE ── */
+#v12_service { background: var(--bg); }
+
+.sec-header {
+  padding: 5.5rem 3rem 2rem;
+  display: flex; align-items: baseline; gap: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.sec-num {
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem; letter-spacing: 0.3em; color: var(--pink);
+}
+.sec-title {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700; letter-spacing: -0.02em;
+}
+
+.svc-visual {
+  height: 38vh; overflow: hidden; position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.svc-visual img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(25%) contrast(1.08) brightness(0.85);
+  will-change: transform;
+}
+.svc-visual-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, oklch(70% 0.25 350 / 0.08) 0%, transparent 50%, oklch(72% 0.22 145 / 0.06) 100%);
+}
+
+.svc-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.svc-item {
+  padding: 3rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  cursor: pointer;
+}
+.svc-item:nth-child(2n) { border-right: none; }
+.svc-item-overlay {
+  position: absolute; inset: 0;
+  background: var(--pink); opacity: 0;
+  mix-blend-mode: overlay;
+  transition: opacity 0.4s ease;
+}
+.svc-item:hover .svc-item-overlay { opacity: 0.12; }
+.svc-item-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: var(--green);
+  transform: scaleX(0); transform-origin: left;
+  will-change: transform;
+  transition: transform 0.45s ease;
+}
+.svc-item:hover .svc-item-bar { transform: scaleX(1); }
+
+.svc-id {
+  font-family: 'Courier New', monospace;
+  font-size: 0.58rem; letter-spacing: 0.3em;
+  color: var(--muted); margin-bottom: 1.4rem;
+}
+.svc-name {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700; margin-bottom: 1rem; line-height: 1.1;
+}
+.svc-desc {
+  font-size: 0.88rem; color: oklch(68% 0.01 0);
+  line-height: 1.85; font-weight: 400;
+}
+.svc-price {
+  margin-top: 1.8rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem; letter-spacing: 0.2em; color: var(--pink);
+}
+
+/* ── DELIVERY ── */
+#v12_delivery {
+  display: grid; grid-template-columns: 56% 44%;
+  border-top: 1px solid var(--border);
+}
+.dlv-left {
+  padding: 5.5rem 3rem;
+  border-right: 1px solid var(--border);
+}
+.dlv-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.1; margin: 1rem 0 2.5rem;
+}
+.dlv-row {
+  display: flex; align-items: flex-start; gap: 2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid oklch(14% 0.01 0);
+  will-change: transform;
+}
+.dlv-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem; letter-spacing: 0.3em;
+  color: var(--green); min-width: 90px; padding-top: 0.15rem;
+}
+.dlv-val {
+  font-size: 0.9rem; color: oklch(78% 0.01 0);
+  line-height: 1.75; font-weight: 400;
+}
+.dlv-cta {
+  display: inline-flex; align-items: center; gap: 1rem;
+  margin-top: 2.5rem;
+  padding: 0.9rem 1.8rem;
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem; letter-spacing: 0.3em;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: color 0.35s;
+}
+.dlv-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--pink);
+  transform: translateX(-100%);
+  will-change: transform;
+  transition: transform 0.4s ease;
+}
+.dlv-cta:hover::before { transform: translateX(0); }
+.dlv-cta:hover { color: var(--bg); }
+.dlv-cta span { position: relative; z-index: 1; }
+
+.dlv-right {
+  padding: 5.5rem 3rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.stat-block { padding: 2rem 0; border-bottom: 1px solid oklch(14% 0.01 0); }
+.stat-block:last-child { border-bottom: none; }
+.stat-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.58rem; letter-spacing: 0.3em;
+  color: var(--muted); margin-bottom: 0.5rem;
+}
+.stat-val {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700; line-height: 1;
+}
+
+/* ── LOCATION ── */
+#v12_location {
+  padding: 5.5rem 3rem;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 38% 62%;
+  gap: 5rem; align-items: center;
+  min-height: 70vh;
+}
+.loc-tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.62rem; letter-spacing: 0.4em;
+  color: var(--pink); margin-bottom: 1.5rem;
+}
+.loc-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.1; margin-bottom: 1.8rem;
+}
+.loc-addr {
+  font-size: 1rem; color: oklch(74% 0.01 0);
+  line-height: 1.9; font-weight: 400; margin-bottom: 2rem;
+}
+.loc-hours {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem; letter-spacing: 0.12em;
+  color: var(--muted); line-height: 2.2;
+}
+.loc-hours .hl { color: var(--green); }
+.loc-hours .hc { color: var(--pink); }
+
+.loc-map {
+  height: 420px; position: relative;
+  background: oklch(11% 0.01 0);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.map-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(oklch(28% 0.05 145 / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(28% 0.05 145 / 0.1) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.map-scan {
+  position: absolute; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0.4; will-change: transform;
+  animation: v12_scan 3.2s linear infinite;
+}
+@keyframes v12_scan { 0% { top: 0; } 100% { top: 100%; } }
+
+.map-pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.map-dot {
+  width: 14px; height: 14px;
+  background: var(--pink); border-radius: 50%;
+  margin: 0 auto 0.6rem;
+  box-shadow: 0 0 20px var(--pink), 0 0 45px var(--pink);
+  animation: v12_pulse 2s ease infinite;
+}
+@keyframes v12_pulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.35); opacity: 0.7; }
+}
+.map-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem; color: var(--pink);
+  letter-spacing: 0.3em; line-height: 1.7;
+  white-space: nowrap;
+}
+.map-meta {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: 0.52rem; color: oklch(28% 0.05 145 / 0.65);
+  line-height: 1.6;
+}
+.map-meta.tl { top: 1rem; left: 1rem; }
+.map-meta.br { bottom: 1rem; right: 1rem; text-align: right; }
+
+/* ── FOOTER ── */
+#v12_footer {
+  padding: 2.5rem 3rem;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem; color: var(--muted);
+  letter-spacing: 0.2em;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  #v12_nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .sec-header { padding: 4rem 1.5rem 1.5rem; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-item { border-right: none; }
+  .svc-item:nth-child(2n) { border-right: none; }
+  #v12_delivery { grid-template-columns: 1fr; }
+  .dlv-left { border-right: none; border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; }
+  .dlv-right { padding: 3rem 1.5rem; }
+  #v12_location { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+  #v12_footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="v12_progress"></div>
+
+<nav id="v12_nav">
+  <div class="nav-logo">BOM_NAL.FLW / 봄날플라워</div>
+  <ul class="nav-links">
+    <li><a href="#v12_service">SVC</a></li>
+    <li><a href="#v12_delivery">DLV</a></li>
+    <li><a href="#v12_location">LOC</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="v12_hero">
+  <div class="hero-grid" id="v12_heroGrid"></div>
+  <div class="hero-noise"></div>
+
+  <span class="v12_frag" style="top:14%;left:7%;"   id="v12_f1">FLWR_DATA_0x4F2A</span>
+  <span class="v12_frag" style="top:73%;left:5%;"   id="v12_f2">LAT:37.4979°N</span>
+  <span class="v12_frag" style="top:18%;right:8%;"  id="v12_f3">BLOOM::INIT</span>
+  <span class="v12_frag" style="top:78%;right:9%;"  id="v12_f4">LNG:127.0276°E</span>
+  <span class="v12_frag" style="top:47%;right:5%;"  id="v12_f5">STS:OPEN</span>
+  <span class="v12_frag" style="top:56%;left:6%;"   id="v12_f6">ERR_BEAUTY::NULL</span>
+
+  <div class="hero-content" id="v12_heroContent">
+    <p class="hero-eyebrow" id="v12_eyebrow">// LOCAL_FLORIST.EXE</p>
+    <h1 class="hero-title">
+      <span class="ht-1 glitch-wrap" data-text="봄날" id="v12_ht1">봄날</span><br>
+      <span class="ht-2 glitch-wrap" data-text="플라워" id="v12_ht2">플라워</span>
+    </h1>
+    <p class="hero-sub" id="v12_heroSub">BLOSSOM_STUDIO / EST.2018 / KR-SEO</p>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section id="v12_service">
+  <div class="sec-header">
+    <span class="sec-num">// 001</span>
+    <h2 class="sec-title">꽃다발 서비스</h2>
+  </div>
+
+  <div class="svc-visual">
+    <img src="https://loremflickr.com/1400/480/flowers,bouquet,floral" alt="꽃다발" id="v12_svcImg">
+    <div class="svc-visual-overlay"></div>
+  </div>
+
+  <div class="svc-grid">
+    <div class="svc-item" id="v12_s1">
+      <div class="svc-item-overlay"></div>
+      <div class="svc-item-bar"></div>
+      <div class="svc-id">SVC::01</div>
+      <h3 class="svc-name">시즌 꽃다발</h3>
+      <p class="svc-desc">제철에 피어난 꽃들로 구성한 봄날만의 시그니처 꽃다발. 자연의 리듬에 맞춰 매달 새롭게 큐레이션됩니다.</p>
+      <div class="svc-price">₩35,000 ~</div>
+    </div>
+
+    <div class="svc-item" id="v12_s2">
+      <div class="svc-item-overlay"></div>
+      <div class="svc-item-bar"></div>
+      <div class="svc-id">SVC::02</div>
+      <h3 class="svc-name">맞춤 꽃다발</h3>
+      <p class="svc-desc">받는 분의 취향과 메시지를 담아 한 송이 한 송이 골라드립니다. 세상에 하나뿐인 꽃다발.</p>
+      <div class="svc-price">₩50,000 ~</div>
+    </div>
+
+    <div class="svc-item" id="v12_s3">
+      <div class="svc-item-overlay"></div>
+      <div class="svc-item-bar"></div>
+      <div class="svc-id">SVC::03</div>
+      <h3 class="svc-name">웨딩 플라워</h3>
+      <p class="svc-desc">소중한 날을 위한 부케, 테이블 플라워, 공간 장식. 상담부터 현장 설치까지 함께합니다.</p>
+      <div class="svc-price">별도 문의</div>
+    </div>
+
+    <div class="svc-item" id="v12_s4">
+      <div class="svc-item-overlay"></div>
+      <div class="svc-item-bar"></div>
+      <div class="svc-id">SVC::04</div>
+      <h3 class="svc-name">플라워 박스</h3>
+      <p class="svc-desc">고급 박스에 담은 꽃 선물. 개봉하는 순간의 감동까지 설계한 봄날의 프리미엄 패키지.</p>
+      <div class="svc-price">₩65,000 ~</div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section id="v12_delivery">
+  <div class="dlv-left">
+    <span class="sec-num">// 002</span>
+    <h2 class="dlv-title">배달 안내</h2>
+
+    <div class="dlv-row" id="v12_d1">
+      <div class="dlv-label">AREA</div>
+      <div class="dlv-val">서울 전 지역 배달 가능<br>경기 일부 지역 (사전 협의)</div>
+    </div>
+    <div class="dlv-row" id="v12_d2">
+      <div class="dlv-label">TIME</div>
+      <div class="dlv-val">당일 배달 — 오전 11시 이전 주문 시<br>예약 배달 — 3일 전 주문 권장</div>
+    </div>
+    <div class="dlv-row" id="v12_d3">
+      <div class="dlv-label">FEE</div>
+      <div class="dlv-val">기본 배달료 ₩5,000<br>강남·서초·송파 무료 배달</div>
+    </div>
+    <div class="dlv-row" id="v12_d4">
+      <div class="dlv-label">ORDER</div>
+      <div class="dlv-val">카카오톡 채널: @봄날플라워<br>전화: 02-000-0000</div>
+    </div>
+
+    <div class="dlv-cta" id="v12_cta" role="button" tabindex="0">
+      <span>주문하기 →</span>
+    </div>
+  </div>
+
+  <div class="dlv-right">
+    <div class="stat-block">
+      <div class="stat-label">OPERATION_HOURS</div>
+      <div class="stat-val">10—19</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">DELIVERY_RADIUS</div>
+      <div class="stat-val" style="color:var(--pink);">30km</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">CLOSED_ON</div>
+      <div class="stat-val" style="font-size:1.6rem;color:var(--muted);">일요일 휴무</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">CONTACT</div>
+      <div class="stat-val" style="font-size:1.4rem;color:var(--green);">카톡 즉시 답변</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="v12_location">
+  <div class="loc-left" id="v12_locLeft">
+    <p class="loc-tag">// 003_LOCATION</p>
+    <h2 class="loc-title">오시는 길</h2>
+    <p class="loc-addr">
+      서울특별시 서초구<br>
+      봄날로 23-5, 1층<br>
+      봄날 플라워
+    </p>
+    <div class="loc-hours">
+      <div>월–토 &nbsp;<span class="hl">10:00 — 19:00</span></div>
+      <div>일요일 &nbsp;<span class="hc">CLOSED</span></div>
+      <div style="margin-top:1rem;">
+        지하철 강남역 3번 출구<br>도보 5분
+      </div>
+    </div>
+  </div>
+
+  <div class="loc-map" id="v12_map">
+    <div class="map-grid"></div>
+    <div class="map-scan"></div>
+    <div class="map-meta tl">
+      MAP_INIT...<br>COORD_LOCK: OK<br>GPS_STS: ACTIVE
+    </div>
+    <div class="map-pin">
+      <div class="map-dot"></div>
+      <div class="map-label">봄날 플라워<br>BOM_NAL.FLW</div>
+    </div>
+    <div class="map-meta br">
+      ZOOM: 15x<br>LAT: 37.4979° N
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="v12_footer">
+  <div>© 2018–2026 봄날 플라워 / BOM_NAL.FLW</div>
+  <div>BLOSSOM_DATA_V12 / ALL_RIGHTS_RESERVED</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+{
+  gsap.registerPlugin(ScrollTrigger);
+
+  const v12_lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  // progress bar
+  v12_lenis.on('scroll', ({ progress }) => {
+    document.getElementById('v12_progress').style.width = (progress * 100) + '%';
+  });
+
+  // hero entrance
+  const v12_heroTl = gsap.timeline({ delay: 0.2 });
+  v12_heroTl
+    .from('#v12_heroGrid', { opacity: 0, duration: 1, ease: 'power2.out' })
+    .to('#v12_eyebrow', { opacity: 1, duration: 0.5, ease: 'power2.out' }, '-=0.4')
+    .from('#v12_ht1', { y: 70, opacity: 0, duration: 0.85, ease: 'power3.out' }, '-=0.2')
+    .from('#v12_ht2', { y: 70, opacity: 0, duration: 0.85, ease: 'power3.out' }, '-=0.65')
+    .to('#v12_heroSub', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+  // glitch activation
+  gsap.delayedCall(1.8, () => {
+    const v12_hc = document.getElementById('v12_heroContent');
+    v12_hc.classList.add('glitch-on');
+    const v12_glitchCycle = () => {
+      v12_hc.classList.remove('glitch-on');
+      gsap.delayedCall(0.08 + Math.random() * 0.25, () => {
+        v12_hc.classList.add('glitch-on');
+        gsap.delayedCall(2.5 + Math.random() * 2, v12_glitchCycle);
+      });
+    };
+    gsap.delayedCall(3 + Math.random() * 2, v12_glitchCycle);
+  });
+
+  // floating fragments
+  ['v12_f1','v12_f2','v12_f3','v12_f4','v12_f5','v12_f6'].forEach((id, i) => {
+    gsap.to('#' + id, {
+      y: -18 + Math.random() * 36,
+      x: -8 + Math.random() * 16,
+      duration: 2.8 + Math.random() * 2.2,
+      repeat: -1, yoyo: true,
+      ease: 'sine.inOut',
+      delay: i * 0.25
+    });
+  });
+
+  // hero grid parallax
+  gsap.to('#v12_heroGrid', {
+    yPercent: 28, ease: 'none',
+    scrollTrigger: {
+      trigger: '#v12_hero', start: 'top top', end: 'bottom top', scrub: 1
+    }
+  });
+
+  // hero content fade
+  gsap.to('#v12_heroContent', {
+    yPercent: 18, opacity: 0, ease: 'none',
+    scrollTrigger: {
+      trigger: '#v12_hero', start: 'top top', end: '55% top', scrub: 1
+    }
+  });
+
+  // service image parallax
+  gsap.to('#v12_svcImg', {
+    yPercent: -8, ease: 'none',
+    scrollTrigger: {
+      trigger: '.svc-visual', start: 'top bottom', end: 'bottom top', scrub: 1
+    }
+  });
+
+  // service items entrance
+  ['#v12_s1','#v12_s2','#v12_s3','#v12_s4'].forEach((sel, i) => {
+    gsap.from(sel, {
+      y: 36, opacity: 0, duration: 0.75, ease: 'power3.out',
+      delay: (i % 2) * 0.12,
+      scrollTrigger: {
+        trigger: sel, start: 'top 88%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
+  // delivery rows entrance
+  ['#v12_d1','#v12_d2','#v12_d3','#v12_d4'].forEach((sel, i) => {
+    gsap.from(sel, {
+      x: -28, opacity: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.08,
+      scrollTrigger: {
+        trigger: sel, start: 'top 87%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
+  // location entrance
+  gsap.from('#v12_locLeft', {
+    x: -36, opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#v12_location', start: 'top 78%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+  gsap.from('#v12_map', {
+    x: 36, opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#v12_location', start: 'top 78%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+
+  // scroll glitch — random micro-shift on svc items
+  const v12_svcEls = document.querySelectorAll('.svc-item');
+  ScrollTrigger.create({
+    trigger: '#v12_service', start: 'top center', end: 'bottom center',
+    onUpdate: () => {
+      if (Math.random() > 0.975) {
+        const v12_el = v12_svcEls[Math.floor(Math.random() * v12_svcEls.length)];
+        gsap.to(v12_el, {
+          x: (Math.random() - 0.5) * 7, duration: 0.04,
+          onComplete: () => gsap.to(v12_el, { x: 0, duration: 0.12 })
+        });
+      }
+    }
+  });
+
+  // cta glitch hover
+  document.getElementById('v12_cta').addEventListener('mouseenter', () => {
+    gsap.to('#v12_cta', {
+      x: 2, duration: 0.04, yoyo: true, repeat: 4, ease: 'none'
+    });
+  });
+
+  // nav backdrop on scroll
+  ScrollTrigger.create({
+    start: '80px top',
+    onEnter: () => {
+      document.getElementById('v12_nav').style.backdropFilter = 'blur(12px)';
+    },
+    onLeaveBack: () => {
+      document.getElementById('v12_nav').style.backdropFilter = 'none';
+    }
+  });
+
+  // nav link smooth scroll
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const v12_target = document.querySelector(link.getAttribute('href'));
+      if (v12_target) v12_lenis.scrollTo(v12_target, { offset: -80, duration: 1.4 });
+    });
+  });
+}
+</script>
+</body>
+</html>

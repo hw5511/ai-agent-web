@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>냥이네 — 고양이 카페</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          oklch(7% 0.012 245);
+      --surface:     oklch(12% 0.018 240);
+      --accent:      oklch(72% 0.14 62);
+      --accent-cool: oklch(68% 0.10 195);
+      --text:        oklch(88% 0.008 240);
+      --muted:       oklch(52% 0.010 240);
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      font-family: 'Noto Serif KR', serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── cursor ─────────────────────────────── */
+    .cursor {
+      position: fixed; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%); will-change: transform;
+    }
+    .cursor-ring {
+      position: fixed; width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(220,150,55,0.35); pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%); will-change: transform;
+    }
+
+    /* ── progress bar ────────────────────────── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-cool));
+      transform-origin: left; transform: scaleX(0);
+      z-index: 1000; will-change: transform;
+    }
+
+    /* ── depth meter ─────────────────────────── */
+    .depth-meter {
+      position: fixed; right: 32px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      z-index: 100;
+    }
+    .depth-label {
+      font-family: 'Cormorant Garamond', serif; font-size: 9px;
+      letter-spacing: 0.25em; color: var(--muted);
+      writing-mode: vertical-rl; text-transform: uppercase;
+    }
+    .depth-track {
+      width: 1px; height: 120px; background: oklch(30% 0.01 240); position: relative;
+    }
+    .depth-dot {
+      position: absolute; top: 0; left: -2px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+      will-change: transform;
+    }
+
+    /* ── canvas ──────────────────────────────── */
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; }
+
+    /* ── glow follow ─────────────────────────── */
+    .depth-glow {
+      position: fixed; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(220,150,55,0.045) 0%, transparent 70%);
+      pointer-events: none; z-index: 2; transform: translate(-50%,-50%);
+      will-change: transform;
+    }
+
+    /* ── nav ─────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+    }
+    .nav-logo { font-size: 18px; font-weight: 700; letter-spacing: 0.05em; }
+    .nav-logo em { color: var(--accent); font-style: normal; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; letter-spacing: 0.14em; color: var(--muted);
+      text-decoration: none; transition: color 0.3s; cursor: none;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── main ────────────────────────────────── */
+    main { position: relative; z-index: 1; }
+
+    /* ── hero ────────────────────────────────── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; position: relative;
+    }
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif; font-size: 11px;
+      letter-spacing: 0.45em; color: var(--muted); text-transform: uppercase;
+      margin-bottom: 48px; opacity: 0;
+    }
+    .hero-title {
+      font-size: clamp(80px, 13vw, 170px); font-weight: 700; line-height: 0.88;
+      text-align: center; position: relative; will-change: transform;
+    }
+    .hero-title .kor { display: block; opacity: 0; }
+    .hero-title .eng {
+      display: block; font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 0.38em;
+      color: var(--accent); letter-spacing: 0.28em;
+      margin-top: 20px; opacity: 0;
+    }
+    .hero-sub {
+      margin-top: 60px; font-size: 14px; letter-spacing: 0.06em;
+      color: var(--muted); line-height: 2.2; text-align: center;
+      max-width: 400px; opacity: 0;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 48px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .hero-scroll span {
+      font-size: 9px; letter-spacing: 0.35em; color: var(--muted); text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: linePulse 2.4s ease-in-out infinite;
+    }
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.35; transform: scaleY(0.9); }
+      50%       { opacity: 1;    transform: scaleY(1.15); }
+    }
+
+    /* ── section base ────────────────────────── */
+    .sec { position: relative; padding: 160px 60px; }
+    .sec-tag {
+      font-family: 'Cormorant Garamond', serif; font-size: 10px;
+      letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase;
+      margin-bottom: 20px; opacity: 0;
+    }
+    .sec-title {
+      font-size: clamp(36px, 5vw, 64px); font-weight: 700; line-height: 1.18;
+      margin-bottom: 28px; opacity: 0;
+    }
+    .sec-desc {
+      font-size: 14px; line-height: 2.2; color: var(--muted);
+      max-width: 540px; opacity: 0;
+    }
+
+    /* ── about ───────────────────────────────── */
+    .about-inner { max-width: 1200px; margin: 0 auto; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; margin-top: 80px; align-items: center;
+    }
+    .about-img-wrap {
+      aspect-ratio: 4/5; overflow: hidden; border-radius: 3px;
+      position: relative; opacity: 0;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.8) saturate(0.75);
+    }
+    .about-img-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, var(--bg) 0%, transparent 45%);
+    }
+    .about-text { opacity: 0; }
+    .about-body {
+      font-size: 14px; line-height: 2.3; color: var(--muted); margin-bottom: 48px;
+    }
+    .features { display: flex; flex-direction: column; gap: 32px; }
+    .feature { display: flex; gap: 24px; align-items: flex-start; }
+    .feat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 38px;
+      color: var(--accent); line-height: 1; flex-shrink: 0; opacity: 0.35;
+    }
+    .feat-body h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .feat-body p  { font-size: 13px; line-height: 1.9; color: var(--muted); }
+
+    /* ── cats ────────────────────────────────── */
+    .cats-sec {
+      background: var(--surface);
+      clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+      padding: 200px 60px;
+    }
+    .cats-inner { max-width: 1200px; margin: 0 auto; }
+    .cats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 44px; margin-top: 80px;
+    }
+    .cat-card { opacity: 0; cursor: none; }
+    .cat-card-img {
+      aspect-ratio: 3/4; overflow: hidden; border-radius: 3px; margin-bottom: 22px;
+    }
+    .cat-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.85) saturate(0.65);
+      transition: transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change: transform;
+    }
+    .cat-card:hover .cat-card-img img { transform: scale(1.05); }
+    .cat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 11px;
+      letter-spacing: 0.3em; color: var(--accent); margin-bottom: 8px;
+    }
+    .cat-name  { font-size: 20px; font-weight: 700; margin-bottom: 5px; }
+    .cat-breed { font-size: 12px; letter-spacing: 0.1em; color: var(--accent-cool); margin-bottom: 12px; }
+    .cat-desc  { font-size: 13px; line-height: 1.95; color: var(--muted); }
+
+    /* ── howto ───────────────────────────────── */
+    .howto-inner { max-width: 860px; margin: 0 auto; }
+    .steps { margin-top: 80px; position: relative; }
+    .steps::before {
+      content: ''; position: absolute; left: 27px; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, rgba(220,150,55,0.3), rgba(80,190,200,0.2), transparent);
+    }
+    .step {
+      display: flex; gap: 48px; margin-bottom: 72px;
+      opacity: 0;
+    }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+      border: 1px solid rgba(220,150,55,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 24px;
+      color: var(--accent); background: var(--bg); position: relative; z-index: 1;
+    }
+    .step-body h3 { font-size: 19px; font-weight: 700; margin-bottom: 12px; margin-top: 10px; }
+    .step-body p  { font-size: 14px; line-height: 2.1; color: var(--muted); }
+    .step-note {
+      display: inline-block; margin-top: 14px; padding: 8px 16px;
+      border: 1px solid rgba(220,150,55,0.25); border-radius: 2px;
+      font-size: 12px; letter-spacing: 0.06em; color: var(--accent);
+    }
+    .info-card {
+      margin-top: 40px; padding: 40px; background: var(--surface);
+      border-left: 2px solid var(--accent); border-radius: 2px; opacity: 0;
+    }
+    .info-card h3 {
+      font-size: 11px; letter-spacing: 0.25em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .info-row { display: flex; gap: 32px; margin-bottom: 14px; font-size: 14px; line-height: 1.7; }
+    .info-row .lbl { color: var(--muted); min-width: 76px; flex-shrink: 0; }
+
+    /* ── footer ──────────────────────────────── */
+    footer {
+      padding: 72px 60px 56px;
+      border-top: 1px solid oklch(22% 0.01 240);
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .foot-logo { font-size: 20px; font-weight: 700; }
+    .foot-logo em { color: var(--accent); font-style: normal; }
+    .foot-copy { font-size: 12px; letter-spacing: 0.1em; color: var(--muted); }
+
+    /* ── responsive ──────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 28px; }
+      nav .nav-links { display: none; }
+      .sec { padding: 120px 28px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .cats-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .depth-meter { display: none; }
+      footer { flex-direction: column; gap: 20px; padding: 56px 28px 40px; }
+    }
+    @media (max-width: 520px) {
+      .cats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="depth-glow" id="js-glow"></div>
+  <div class="cursor"      id="js-cursor"></div>
+  <div class="cursor-ring" id="js-ring"></div>
+  <div class="progress-bar" id="js-progress"></div>
+
+  <div class="depth-meter">
+    <span class="depth-label">depth</span>
+    <div class="depth-track">
+      <div class="depth-dot" id="js-depth-dot"></div>
+    </div>
+  </div>
+
+  <nav>
+    <div class="nav-logo">냥이<em>네</em></div>
+    <ul class="nav-links">
+      <li><a href="#about">카페 소개</a></li>
+      <li><a href="#cats">고양이들</a></li>
+      <li><a href="#howto">이용 안내</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <p class="hero-eyebrow" id="js-eyebrow">Surface · 0 m</p>
+      <h1 class="hero-title" id="js-htitle">
+        <span class="kor" id="js-kor">냥이네</span>
+        <span class="eng" id="js-eng">Cat Café</span>
+      </h1>
+      <p class="hero-sub" id="js-hsub">
+        고요한 심연처럼, 시간이 천천히 흐르는 곳.<br>
+        작은 생명들과 함께하는 깊은 쉼의 공간.
+      </p>
+      <div class="hero-scroll">
+        <span>Scroll to Dive</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="sec" id="about">
+      <div class="about-inner">
+        <p class="sec-tag" id="js-atag">Layer 1 · 30 m</p>
+        <h2 class="sec-title" id="js-atitle">고요한 쉼의<br>공간, 냥이네</h2>
+        <div class="about-grid">
+          <div class="about-img-wrap" id="js-aimg">
+            <img src="https://loremflickr.com/600/750/cat,interior,cozy" alt="냥이네 카페 내부">
+          </div>
+          <div class="about-text" id="js-atext">
+            <p class="about-body">
+              냥이네는 일상의 소음으로부터 벗어나 고양이들과 함께<br>
+              진정한 휴식을 경험할 수 있는 공간입니다.<br><br>
+              어두운 조명 아래 따스한 고양이의 온기와 함께,<br>
+              깊은 바다처럼 고요한 시간을 선물합니다.
+            </p>
+            <div class="features">
+              <div class="feature">
+                <span class="feat-num">01</span>
+                <div class="feat-body">
+                  <h3>스페셜티 음료</h3>
+                  <p>직접 로스팅한 커피와 수제 음료를 제공합니다. 고양이들과 함께하는 시간이 더 깊어집니다.</p>
+                </div>
+              </div>
+              <div class="feature">
+                <span class="feat-num">02</span>
+                <div class="feat-body">
+                  <h3>7마리의 고양이 가족</h3>
+                  <p>각기 다른 품종과 성격을 가진 고양이들이 여러분을 기다립니다. 모두 건강 검진을 마친 친구들입니다.</p>
+                </div>
+              </div>
+              <div class="feature">
+                <span class="feat-num">03</span>
+                <div class="feat-body">
+                  <h3>쾌적한 환경</h3>
+                  <p>HEPA 공기청정 시스템과 철저한 위생 관리로 알레르기가 있는 분들도 편안하게 머물 수 있습니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATS -->
+    <section class="cats-sec" id="cats">
+      <div class="cats-inner">
+        <p class="sec-tag" id="js-ctag">Layer 2 · 80 m</p>
+        <h2 class="sec-title" id="js-ctitle">우리 고양이들을<br>소개합니다</h2>
+        <p class="sec-desc" id="js-cdesc">각자의 개성으로 빛나는 여섯 마리. 조용히 다가가면 먼저 인사를 건넬지도 모릅니다.</p>
+        <div class="cats-grid">
+          <div class="cat-card" id="js-cat0">
+            <div class="cat-card-img">
+              <img src="https://loremflickr.com/400/533/british,shorthair,cat" alt="루나">
+            </div>
+            <p class="cat-num">No.01</p>
+            <h3 class="cat-name">루나</h3>
+            <p class="cat-breed">British Shorthair · 4살</p>
+            <p class="cat-desc">조용하고 품위 있는 여왕님. 선택받은 손님에게만 조용히 다가와 무릎을 허락합니다.</p>
+          </div>
+          <div class="cat-card" id="js-cat1">
+            <div class="cat-card-img">
+              <img src="https://loremflickr.com/400/533/scottish,fold,cat" alt="코코">
+            </div>
+            <p class="cat-num">No.02</p>
+            <h3 class="cat-name">코코</h3>
+            <p class="cat-breed">Scottish Fold · 2살</p>
+            <p class="cat-desc">언제나 창가에서 바깥을 바라보는 몽상가. 접힌 귀와 동그란 눈이 시그니처입니다.</p>
+          </div>
+          <div class="cat-card" id="js-cat2">
+            <div class="cat-card-img">
+              <img src="https://loremflickr.com/400/533/ragdoll,fluffy,cat" alt="솜사탕">
+            </div>
+            <p class="cat-num">No.03</p>
+            <h3 class="cat-name">솜사탕</h3>
+            <p class="cat-breed">Ragdoll · 3살</p>
+            <p class="cat-desc">이름처럼 보들보들하고 순한 성격. 안겨 있는 것을 가장 좋아하는 애교쟁이입니다.</p>
+          </div>
+          <div class="cat-card" id="js-cat3">
+            <div class="cat-card-img">
+              <img src="https://loremflickr.com/400/533/maine,coon,cat" alt="레오">
+            </div>
+            <p class="cat-num">No.04</p>
+            <h3 class="cat-name">레오</h3>
+            <p class="cat-breed">Maine Coon · 5살</p>
+            <p class="cat-desc">냥이네의 든든한 큰 형님. 묵직한 존재감으로 카페를 지키는 수호자입니다.</p>
+          </div>
+          <div class="cat-card" id="js-cat4">
+            <div class="cat-card-img">
+              <img src="https://loremflickr.com/400/533/siamese,cat,blue" alt="나비">
+            </div>
+            <p class="cat-num">No.05</p>
+            <h3 class="cat-name">나비</h3>
+            <p class="cat-breed">Siamese · 3살</p>
+            <p class="cat-desc">수다스럽고 활기찬 분위기 메이커. 파란 눈으로 끊임없이 이야기를 걸어옵니다.</p>
+          </div>
+          <div class="cat-card" id="js-cat5">
+            <div class="cat-card-img">
+              <img src="https://loremflickr.com/400/533/persian,cat,white" alt="모모">
+            </div>
+            <p class="cat-num">No.06</p>
+            <h3 class="cat-name">모모</h3>
+            <p class="cat-breed">Persian · 6살</p>
+            <p class="cat-desc">철학자 같은 눈빛으로 손님들을 관찰하는 현자. 고요한 구석을 좋아하는 내성적인 영혼입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOWTO -->
+    <section class="sec" id="howto">
+      <div class="howto-inner">
+        <p class="sec-tag" id="js-htag">Layer 3 · 150 m</p>
+        <h2 class="sec-title" id="js-hwtitle">이용 안내</h2>
+        <p class="sec-desc" id="js-hwdesc">처음 방문하시는 분들을 위한 안내입니다. 천천히, 고양이들의 속도에 맞춰 주세요.</p>
+
+        <div class="steps" id="js-steps">
+          <div class="step" id="js-step0">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>예약하기</h3>
+              <p>네이버 예약 또는 전화로 사전 예약을 해주세요. 주말·공휴일은 최소 3일 전 예약이 필요합니다. 당일 예약은 자리 여유가 있을 경우에만 가능합니다.</p>
+              <span class="step-note">02-1234-5678 · 네이버 예약</span>
+            </div>
+          </div>
+          <div class="step" id="js-step1">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>입장 및 오리엔테이션</h3>
+              <p>입장 시 손 소독 후 고양이 케어 방법에 대한 간단한 안내를 받습니다. 고양이들이 스트레스 받지 않도록 큰 소리와 급격한 움직임은 삼가주세요.</p>
+              <span class="step-note">이용 시간 : 최소 60분 · 최대 2시간</span>
+            </div>
+          </div>
+          <div class="step" id="js-step2">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>음료 주문</h3>
+              <p>입장료에는 음료 1잔이 포함됩니다. 추가 주문은 테이블에서 자유롭게 하실 수 있습니다. 모든 음료는 직접 만든 수제 메뉴입니다.</p>
+              <span class="step-note">입장료 : 평일 12,000원 · 주말 15,000원</span>
+            </div>
+          </div>
+          <div class="step" id="js-step3">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>고양이와 교감하기</h3>
+              <p>고양이가 먼저 다가올 때까지 기다려주세요. 억지로 안거나 뒤쫓는 행동은 삼가주시고, 고양이의 의사를 존중해 주세요. 간식 주기는 직원 안내에 따라 진행됩니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card" id="js-info">
+          <h3>방문 정보</h3>
+          <div class="info-row">
+            <span class="lbl">운영시간</span>
+            <span>평일 12:00 — 21:00 · 주말 11:00 — 22:00 (월요일 휴무)</span>
+          </div>
+          <div class="info-row">
+            <span class="lbl">위치</span>
+            <span>서울시 마포구 연남동 냥이네길 12</span>
+          </div>
+          <div class="info-row">
+            <span class="lbl">주의사항</span>
+            <span>음식물 반입 금지 · 플래시 촬영 금지 · 어린이 동반 시 보호자 필수</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="foot-logo">냥이<em>네</em></div>
+    <p class="foot-copy">2024 Nyangi-ne Cat Cafe · Seoul, Korea</p>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ── Lenis ──────────────────────────────────────
+    const v12_lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    v12_lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // ── Nav anchor links ───────────────────────────
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) v12_lenis.scrollTo(target, { offset: -80 });
+      });
+    });
+
+    // ── Canvas bioluminescence ─────────────────────
+    {
+      const v12_canvas = document.getElementById('bg-canvas');
+      const v12_ctx    = v12_canvas.getContext('2d');
+
+      const resizeCanvas = () => {
+        v12_canvas.width  = window.innerWidth;
+        v12_canvas.height = window.innerHeight;
+      };
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      class Orb {
+        constructor() { this.init(); }
+        init() {
+          this.x  = Math.random() * v12_canvas.width;
+          this.y  = Math.random() * v12_canvas.height;
+          this.vx = (Math.random() - 0.5) * 0.18;
+          this.vy = (Math.random() - 0.5) * 0.14 - 0.04;
+          this.r  = Math.random() * 2.2 + 0.4;
+          this.a  = Math.random() * 0.45 + 0.08;
+          this.da = (Math.random() * 0.002 + 0.0008) * (Math.random() > 0.5 ? 1 : -1);
+          this.warm = Math.random() > 0.65;
+        }
+        tick() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.a += this.da;
+          if (this.a > 0.55 || this.a < 0.04) this.da *= -1;
+          if (this.y < -12 || this.x < -12 || this.x > v12_canvas.width + 12) this.init();
+        }
+      }
+
+      const v12_orbs = Array.from({ length: 90 }, () => new Orb());
+
+      const drawOrbs = () => {
+        v12_ctx.clearRect(0, 0, v12_canvas.width, v12_canvas.height);
+        v12_ctx.beginPath();
+        v12_orbs.forEach(o => {
+          if (o.warm) { o.tick(); v12_ctx.moveTo(o.x + o.r, o.y); v12_ctx.arc(o.x, o.y, o.r, 0, 6.283); }
+        });
+        v12_ctx.fillStyle = 'rgba(220,150,55,0.55)';
+        v12_ctx.fill();
+        v12_ctx.beginPath();
+        v12_orbs.forEach(o => {
+          if (!o.warm) { v12_ctx.moveTo(o.x + o.r, o.y); v12_ctx.arc(o.x, o.y, o.r, 0, 6.283); }
+        });
+        v12_ctx.fillStyle = 'rgba(80,190,200,0.45)';
+        v12_ctx.fill();
+        requestAnimationFrame(drawOrbs);
+      };
+      drawOrbs();
+    }
+
+    // ── Cursor ─────────────────────────────────────
+    {
+      const v12_cur  = document.getElementById('js-cursor');
+      const v12_ring = document.getElementById('js-ring');
+      const v12_glow = document.getElementById('js-glow');
+      let v12_rx = 0, v12_ry = 0, v12_mx = 0, v12_my = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        v12_mx = e.clientX; v12_my = e.clientY;
+        gsap.set(v12_cur,  { x: v12_mx, y: v12_my });
+        gsap.set(v12_glow, { x: v12_mx, y: v12_my });
+      });
+
+      const tickRing = () => {
+        v12_rx += (v12_mx - v12_rx) * 0.09;
+        v12_ry += (v12_my - v12_ry) * 0.09;
+        gsap.set(v12_ring, { x: v12_rx, y: v12_ry });
+        requestAnimationFrame(tickRing);
+      };
+      tickRing();
+
+      document.querySelectorAll('a, .cat-card').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(v12_cur,  { scale: 3.2, duration: 0.3 });
+          gsap.to(v12_ring, { scale: 1.6, opacity: 0.4, duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => {
+          gsap.to(v12_cur,  { scale: 1, duration: 0.3 });
+          gsap.to(v12_ring, { scale: 1, opacity: 1, duration: 0.3 });
+        });
+      });
+    }
+
+    // ── Progress + Depth dot ───────────────────────
+    {
+      const v12_bar = document.getElementById('js-progress');
+      const v12_dot = document.getElementById('js-depth-dot');
+      v12_bar.style.width = '100%';
+
+      ScrollTrigger.create({
+        trigger: document.body, start: 'top top', end: 'bottom bottom',
+        onUpdate: (self) => {
+          gsap.set(v12_bar, { scaleX: self.progress });
+          gsap.set(v12_dot, { y: self.progress * 115 });
+        }
+      });
+    }
+
+    // ── Hero entrance ──────────────────────────────
+    {
+      const v12_heroTl = gsap.timeline({ delay: 0.5 });
+      v12_heroTl
+        .fromTo('#js-eyebrow', { opacity: 0 },              { opacity: 1, duration: 1.4, ease: 'power2.out' })
+        .fromTo('#js-kor',     { opacity: 0, y: 48 },       { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' }, '-=0.9')
+        .fromTo('#js-eng',     { opacity: 0, y: 24 },       { opacity: 1, y: 0, duration: 1.3, ease: 'power3.out' }, '-=1.0')
+        .fromTo('#js-hsub',    { opacity: 0 },              { opacity: 1, duration: 1.2, ease: 'power2.out' }, '-=0.6');
+    }
+
+    // ── Hero parallax ──────────────────────────────
+    gsap.to('#js-htitle', {
+      yPercent: -22, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+
+    // ── Section reveals ────────────────────────────
+    const v12_reveal = (id, vars, trigger) => {
+      gsap.fromTo(id, { opacity: 0, ...vars }, {
+        opacity: 1, ...Object.fromEntries(Object.keys(vars).map(k => [k, 0])),
+        duration: 1.2, ease: 'power3.out',
+        scrollTrigger: { trigger: trigger || id, start: 'top 82%' }
+      });
+    };
+
+    v12_reveal('#js-atag',   {}, '#js-atag');
+    v12_reveal('#js-atitle', { y: 32 });
+    gsap.fromTo('#js-aimg',  { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '#js-aimg', start: 'top 80%' } });
+    gsap.fromTo('#js-atext', { opacity: 0, x:  40 }, { opacity: 1, x: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '#js-atext', start: 'top 80%' } });
+
+    v12_reveal('#js-ctag',   {}, '#js-ctag');
+    v12_reveal('#js-ctitle', { y: 32 });
+    v12_reveal('#js-cdesc',  {});
+
+    for (let i = 0; i < 6; i++) {
+      gsap.fromTo(`#js-cat${i}`,
+        { opacity: 0, y: 52 },
+        { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: (i % 3) * 0.1,
+          scrollTrigger: { trigger: `#js-cat${i}`, start: 'top 87%' } }
+      );
+    }
+
+    v12_reveal('#js-htag',    {}, '#js-htag');
+    v12_reveal('#js-hwtitle', { y: 32 });
+    v12_reveal('#js-hwdesc',  {});
+
+    for (let j = 0; j < 4; j++) {
+      gsap.fromTo(`#js-step${j}`,
+        { opacity: 0, x: -32 },
+        { opacity: 1, x: 0, duration: 1.1, ease: 'power3.out',
+          scrollTrigger: { trigger: `#js-step${j}`, start: 'top 84%' } }
+      );
+    }
+
+    gsap.fromTo('#js-info', { opacity: 0 }, {
+      opacity: 1, duration: 1.2, ease: 'power2.out',
+      scrollTrigger: { trigger: '#js-info', start: 'top 86%' }
+    });
+
+    // ── About image subtle parallax ────────────────
+    gsap.to('#js-aimg', {
+      yPercent: -6, ease: 'none',
+      scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+  </script>
+
+</body>
+</html>
