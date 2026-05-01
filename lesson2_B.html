@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>페이퍼스케이프 — 독립 서점</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+:root {
+  --cream: oklch(96% 0.025 75);
+  --cream-warm: oklch(91% 0.03 68);
+  --terra: oklch(55% 0.14 42);
+  --terra-light: oklch(72% 0.10 48);
+  --terra-dark: oklch(34% 0.12 35);
+  --ink: oklch(14% 0.015 40);
+  --ink-soft: oklch(42% 0.025 40);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Noto Serif KR', serif;
+  overflow-x: hidden;
+}
+#v12_progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--terra);
+  z-index: 1000;
+  will-change: width;
+  transition: none;
+}
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 1.6rem 3rem;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra-dark);
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+.nav-links a {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.nav-links a:hover { color: var(--terra); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 4rem 8rem 8rem;
+}
+.hero-arc {
+  position: absolute;
+  top: 4vh;
+  right: -10vw;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  border: 1px solid var(--terra);
+  opacity: 0.18;
+  will-change: transform;
+}
+.hero-arc-inner {
+  position: absolute;
+  top: 18vh;
+  right: -2vw;
+  width: 28vw;
+  height: 28vw;
+  border-radius: 50%;
+  border: 1px solid var(--terra);
+  opacity: 0.1;
+  will-change: transform;
+}
+.hero-spot {
+  position: absolute;
+  bottom: 15vh;
+  left: -6vw;
+  width: 32vw;
+  height: 32vw;
+  border-radius: 50%;
+  background: var(--terra);
+  opacity: 0.05;
+}
+.hero-side {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center center;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--terra);
+  white-space: nowrap;
+  opacity: 0.65;
+  will-change: opacity;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+.hero-overline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  color: var(--terra);
+  opacity: 0.75;
+  margin-bottom: 1.8rem;
+  will-change: opacity;
+}
+.hero-title-en {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(5.5rem, 15vw, 17rem);
+  line-height: 0.87;
+  color: var(--terra);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  transform: translateX(5%);
+  will-change: transform, opacity;
+}
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 3rem;
+  gap: 2rem;
+}
+.hero-title-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 2vw, 2rem);
+  letter-spacing: 0.5em;
+  color: var(--ink);
+  will-change: transform, opacity;
+}
+.hero-desc {
+  max-width: 300px;
+  font-size: 0.85rem;
+  line-height: 2;
+  color: var(--ink-soft);
+  text-align: right;
+  will-change: opacity;
+}
+.hero-rule {
+  position: absolute;
+  bottom: 8rem;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--terra);
+  opacity: 0.12;
+}
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0.4;
+}
+.hero-scroll-cue span {
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.worm {
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(to bottom, transparent, var(--terra));
+  animation: wormAnim 2.4s ease-in-out infinite;
+  transform-origin: top;
+  will-change: transform, opacity;
+}
+@keyframes wormAnim {
+  0% { transform: scaleY(0); opacity: 0; transform-origin: top; }
+  45% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+  46% { transform-origin: bottom; }
+  90% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
+  100% { transform: scaleY(0); opacity: 0; transform-origin: top; }
+}
+
+/* ===== SCENE LABEL ===== */
+.scene-label {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 4rem;
+  will-change: transform, opacity;
+}
+.scene-label::after {
+  content: '';
+  width: 48px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* ===== NEW BOOKS ===== */
+.new-books {
+  padding: 11rem 4rem 10rem 8rem;
+  position: relative;
+  overflow: hidden;
+}
+.section-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: 5rem;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
+  line-height: 1.1;
+  color: var(--ink);
+  will-change: transform, opacity;
+}
+.section-sub {
+  font-size: 0.86rem;
+  line-height: 1.95;
+  color: var(--ink-soft);
+  will-change: opacity;
+}
+.books-stage {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+.book-card {
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+.book-card:nth-child(1) { grid-column: 1 / 5; }
+.book-card:nth-child(2) { grid-column: 5 / 7; margin-top: 6rem; }
+.book-card:nth-child(3) { grid-column: 7 / 10; margin-top: -2rem; }
+.book-card:nth-child(4) { grid-column: 10 / 13; margin-top: 4.5rem; }
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.book-card:hover .book-cover {
+  transform: scale(1.04) translateY(-7px);
+}
+.book-meta { padding: 1rem 0 0; }
+.book-genre {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 0.45rem;
+}
+.book-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.book-author {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+/* ===== CURATION ===== */
+.curation {
+  padding: 14rem 4rem 13rem 8rem;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+}
+.curation-ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(10rem, 22vw, 30rem);
+  color: var(--cream);
+  opacity: 0.025;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+.curation .scene-label { color: var(--terra-light); }
+.theme-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 5.5rem;
+}
+.theme-statement {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.8vw, 4.2rem);
+  line-height: 1.45;
+  color: var(--cream);
+  will-change: transform, opacity;
+}
+.theme-statement em {
+  font-style: italic;
+  color: var(--terra-light);
+}
+.theme-desc {
+  font-size: 0.85rem;
+  line-height: 2;
+  color: oklch(56% 0.02 40);
+  will-change: opacity;
+}
+.curation-books {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  align-items: end;
+}
+.c-book {
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+.c-book:nth-child(1) { grid-column: 1 / 5; }
+.c-book:nth-child(2) { grid-column: 5 / 9; margin-top: -5rem; }
+.c-book:nth-child(3) { grid-column: 9 / 13; }
+.c-book .book-cover { border: 1px solid oklch(22% 0.02 40); }
+.c-book .book-genre { color: var(--terra-light); }
+.c-book .book-title { color: var(--cream); }
+.c-book .book-author { color: oklch(50% 0.025 40); }
+
+/* ===== MANIFESTO ===== */
+.manifesto {
+  padding: 13rem 4rem 12rem 8rem;
+  position: relative;
+  overflow: hidden;
+}
+.manifesto-rule {
+  position: absolute;
+  top: 0;
+  left: 8rem; right: 4rem;
+  height: 1px;
+  background: var(--terra);
+  opacity: 0.18;
+}
+.manifesto-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(2.2rem, 4.8vw, 6rem);
+  line-height: 1.3;
+  color: var(--ink);
+  max-width: 880px;
+  will-change: transform, opacity;
+}
+.manifesto-quote span { color: var(--terra); }
+.manifesto-credit {
+  margin-top: 2.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  will-change: opacity;
+}
+.manifesto-deco {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22vw;
+  height: 22vw;
+  will-change: transform;
+}
+.manifesto-deco circle {
+  fill: none;
+  stroke: var(--terra);
+  stroke-width: 1;
+  opacity: 0.14;
+  stroke-dasharray: 14 9;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--terra-dark);
+  padding: 6rem 4rem 4rem 8rem;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid oklch(28% 0.07 35);
+  margin-bottom: 2.5rem;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+.footer-tagline {
+  font-size: 0.86rem;
+  line-height: 2;
+  color: oklch(70% 0.04 60);
+}
+.footer-col-title {
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--terra-light);
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+}
+.footer-col p {
+  font-size: 0.82rem;
+  line-height: 2.1;
+  color: oklch(63% 0.04 55);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: oklch(44% 0.03 40);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .hero { padding: 0 1.5rem 8rem 2.5rem; }
+  .hero-side { display: none; }
+  .hero-title-en { font-size: clamp(3.8rem, 16vw, 8rem); transform: none; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
+  .hero-desc { text-align: left; }
+
+  .new-books { padding: 7rem 1.5rem 6rem 1.5rem; }
+  .curation { padding: 9rem 1.5rem 8rem 1.5rem; }
+  .manifesto { padding: 9rem 1.5rem 8rem 1.5rem; }
+  .manifesto-rule { left: 1.5rem; right: 1.5rem; }
+  footer { padding: 5rem 1.5rem 3.5rem; }
+
+  .section-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .books-stage { grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .book-card:nth-child(1) { grid-column: 1; grid-row: 1; margin: 0; }
+  .book-card:nth-child(2) { grid-column: 2; grid-row: 1; margin: 0; }
+  .book-card:nth-child(3) { grid-column: 1; grid-row: 2; margin: 0; }
+  .book-card:nth-child(4) { grid-column: 2; grid-row: 2; margin: 0; }
+
+  .theme-intro { grid-template-columns: 1fr; gap: 2rem; }
+  .curation-books { grid-template-columns: 1fr; }
+  .c-book:nth-child(1), .c-book:nth-child(2), .c-book:nth-child(3) {
+    grid-column: 1; margin: 0;
+  }
+
+  .manifesto-deco { display: none; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="v12_progress"></div>
+
+<nav>
+  <div class="nav-logo">Paperscape</div>
+  <ul class="nav-links">
+    <li><a href="#new-books">신간</a></li>
+    <li><a href="#curation">큐레이션</a></li>
+    <li><a href="#store">서점 정보</a></li>
+  </ul>
+</nav>
+
+<!-- ░░ HERO ░░ -->
+<section class="hero">
+  <div class="hero-arc" id="v12_arcOuter"></div>
+  <div class="hero-arc-inner" id="v12_arcInner"></div>
+  <div class="hero-spot"></div>
+  <div class="hero-rule"></div>
+  <p class="hero-side" id="v12_heroSide">독립 서점 · 연남동 · 서울 마포구</p>
+
+  <div class="hero-content">
+    <p class="hero-overline" id="v12_overline">Curated Independent Bookstore</p>
+    <h1 class="hero-title-en" id="v12_titleEn">PAPER<br>SCAPE</h1>
+    <div class="hero-bottom">
+      <p class="hero-title-ko" id="v12_titleKo">페이퍼스케이프</p>
+      <p class="hero-desc" id="v12_heroDesc">
+        책 한 권이 삶의 풍경을 바꾼다.<br>
+        우리는 그 장면들을 모아두는 곳.<br>
+        당신의 다음 이야기가 여기 있습니다.
+      </p>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue">
+    <div class="worm"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ░░ SCENE 01 — 신간 추천 ░░ -->
+<section class="new-books" id="new-books">
+  <p class="scene-label" id="v12_scene01">Scene 01 · 신간 추천</p>
+
+  <div class="section-header">
+    <h2 class="section-title" id="v12_st01">이번 주<br>들어온 책</h2>
+    <p class="section-sub" id="v12_ss01">
+      큐레이터가 직접 읽고 선별한 신간입니다.<br>
+      모든 책에는 손글씨 추천사가 함께합니다.
+    </p>
+  </div>
+
+  <div class="books-stage">
+    <div class="book-card" id="v12_bk1">
+      <img class="book-cover" src="https://picsum.photos/seed/psp01/400/600" alt="어느 날의 끝에서">
+      <div class="book-meta">
+        <p class="book-genre">소설 · 한국</p>
+        <p class="book-title">어느 날의 끝에서</p>
+        <p class="book-author">김지은</p>
+      </div>
+    </div>
+    <div class="book-card" id="v12_bk2">
+      <img class="book-cover" src="https://picsum.photos/seed/psp02/300/450" alt="무너지지 않는 방법">
+      <div class="book-meta">
+        <p class="book-genre">에세이</p>
+        <p class="book-title">무너지지 않는 방법</p>
+        <p class="book-author">박서준</p>
+      </div>
+    </div>
+    <div class="book-card" id="v12_bk3">
+      <img class="book-cover" src="https://picsum.photos/seed/psp03/360/540" alt="빗소리 수집가">
+      <div class="book-meta">
+        <p class="book-genre">시집</p>
+        <p class="book-title">빗소리 수집가</p>
+        <p class="book-author">이채원</p>
+      </div>
+    </div>
+    <div class="book-card" id="v12_bk4">
+      <img class="book-cover" src="https://picsum.photos/seed/psp04/360/540" alt="그림자의 문법">
+      <div class="book-meta">
+        <p class="book-genre">번역소설</p>
+        <p class="book-title">그림자의 문법</p>
+        <p class="book-author">클레어 키건</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ SCENE 02 — 큐레이션 ░░ -->
+<section class="curation" id="curation">
+  <div class="curation-ghost" id="v12_cGhost">CURATE</div>
+  <p class="scene-label" id="v12_scene02">Scene 02 · 이달의 큐레이션</p>
+
+  <div class="theme-intro">
+    <p class="theme-statement" id="v12_themeStmt">
+      5월의 테마:<br>
+      <em>고독을 배우는</em><br>
+      시간
+    </p>
+    <p class="theme-desc" id="v12_themeDesc">
+      혼자인 시간을 두려워하지 않는 법에 대하여.<br>
+      페이퍼스케이프 큐레이터가 한 달에 한 번,<br>
+      하나의 주제로 세 권의 책을 엮습니다.
+    </p>
+  </div>
+
+  <div class="curation-books">
+    <div class="c-book" id="v12_cb1">
+      <img class="book-cover" src="https://picsum.photos/seed/psp05/400/600" alt="혼자 있는 시간의 힘">
+      <div class="book-meta">
+        <p class="book-genre">철학 · 에세이</p>
+        <p class="book-title">혼자 있는 시간의 힘</p>
+        <p class="book-author">사라 메이틀랜드</p>
+      </div>
+    </div>
+    <div class="c-book" id="v12_cb2">
+      <img class="book-cover" src="https://picsum.photos/seed/psp06/400/600" alt="나는 고독을 선택했다">
+      <div class="book-meta">
+        <p class="book-genre">소설</p>
+        <p class="book-title">나는 고독을 선택했다</p>
+        <p class="book-author">헤르만 헤세</p>
+      </div>
+    </div>
+    <div class="c-book" id="v12_cb3">
+      <img class="book-cover" src="https://picsum.photos/seed/psp07/400/600" alt="밤의 목록">
+      <div class="book-meta">
+        <p class="book-genre">시선집</p>
+        <p class="book-title">밤의 목록</p>
+        <p class="book-author">라이너 마리아 릴케</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ MANIFESTO ░░ -->
+<section class="manifesto">
+  <div class="manifesto-rule"></div>
+  <blockquote class="manifesto-quote" id="v12_mQuote">
+    "모든 책은<br>
+    <span>누군가의 인생</span>을<br>
+    바꿀 준비가 되어 있다."
+  </blockquote>
+  <p class="manifesto-credit" id="v12_mCredit">— 페이퍼스케이프 큐레이터 노트 중에서</p>
+  <svg class="manifesto-deco" id="v12_mDeco" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="46"/>
+    <circle cx="50" cy="50" r="34"/>
+    <circle cx="50" cy="50" r="20"/>
+  </svg>
+</section>
+
+<!-- ░░ FOOTER ░░ -->
+<footer id="store">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Paperscape</div>
+      <p class="footer-tagline">
+        책이 쌓이는 곳이 아니라<br>
+        이야기가 시작되는 곳.<br>
+        서울 마포구 연남동 골목 안.
+      </p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">방문 안내</p>
+      <p>
+        화 — 일 운영<br>
+        오전 11시 — 오후 8시<br>
+        월요일 정기 휴무
+      </p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">찾아오시는 길</p>
+      <p>
+        서울 마포구 연남동 567-8<br>
+        지하철 2호선 홍대입구역<br>
+        3번 출구 도보 8분
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Paperscape. All rights reserved.</p>
+    <p class="footer-copy">Instagram · Newsletter</p>
+  </div>
+</footer>
+
+<script>
+{
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Lenis ── */
+  const v12_lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  /* ── Nav anchor links ── */
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) v12_lenis.scrollTo(target, { offset: -80 });
+    });
+  });
+
+  /* ── Progress bar ── */
+  const v12_prog = document.getElementById('v12_progress');
+  ScrollTrigger.create({
+    start: 0,
+    end: 'max',
+    onUpdate: (self) => { v12_prog.style.width = (self.progress * 100) + '%'; }
+  });
+
+  /* ── Hero: arcs parallax ── */
+  gsap.to('#v12_arcOuter', {
+    yPercent: 30,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
+  });
+  gsap.to('#v12_arcInner', {
+    yPercent: 18,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+  });
+
+  /* ── Hero: entrance timeline ── */
+  const v12_heroTl = gsap.timeline({ delay: 0.35 });
+  v12_heroTl
+    .from('#v12_overline', { opacity: 0, duration: 0.7, ease: 'power2.out' })
+    .from('#v12_titleEn', {
+      yPercent: 45,
+      opacity: 0,
+      duration: 1.6,
+      ease: 'power4.out'
+    }, '-=0.3')
+    .from('#v12_titleKo', {
+      xPercent: -12,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out'
+    }, '-=0.85')
+    .from('#v12_heroDesc', { opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.65')
+    .from('#v12_heroSide', { opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.5');
+
+  /* ── Hero title parallax on scroll ── */
+  gsap.to('#v12_titleEn', {
+    yPercent: -12,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+  });
+
+  /* ── Scene 01 reveals ── */
+  gsap.from('#v12_scene01', {
+    xPercent: -12, opacity: 0, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_scene01', start: 'top 87%' }
+  });
+  gsap.from('#v12_st01', {
+    yPercent: 22, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_st01', start: 'top 82%' }
+  });
+  gsap.from('#v12_ss01', {
+    opacity: 0, xPercent: 8, duration: 0.85, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_ss01', start: 'top 82%' }
+  });
+
+  /* ── Books: cinematic entry from different directions ── */
+  const v12_bookEntries = [
+    { id: '#v12_bk1', from: { xPercent: -14, yPercent: 18 } },
+    { id: '#v12_bk2', from: { yPercent: 32 } },
+    { id: '#v12_bk3', from: { xPercent: 10, yPercent: 14 } },
+    { id: '#v12_bk4', from: { xPercent: 22, yPercent: 24 } }
+  ];
+  v12_bookEntries.forEach((b, i) => {
+    gsap.from(b.id, {
+      ...b.from,
+      opacity: 0,
+      duration: 1.15,
+      ease: 'power3.out',
+      delay: i * 0.11,
+      scrollTrigger: { trigger: '.books-stage', start: 'top 78%' }
+    });
+  });
+
+  /* ── Scene 02 reveals ── */
+  gsap.from('#v12_scene02', {
+    xPercent: -12, opacity: 0, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_scene02', start: 'top 87%' }
+  });
+  gsap.from('#v12_themeStmt', {
+    yPercent: 18, opacity: 0, duration: 1.25, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_themeStmt', start: 'top 80%' }
+  });
+  gsap.from('#v12_themeDesc', {
+    opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_themeDesc', start: 'top 82%' }
+  });
+
+  /* ── Ghost text parallax ── */
+  gsap.to('#v12_cGhost', {
+    xPercent: -28,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.curation',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 2
+    }
+  });
+
+  /* ── Curation books staggered ── */
+  ['#v12_cb1', '#v12_cb2', '#v12_cb3'].forEach((id, i) => {
+    gsap.from(id, {
+      yPercent: 28 + i * 6,
+      opacity: 0,
+      duration: 1.05,
+      ease: 'power3.out',
+      delay: i * 0.14,
+      scrollTrigger: { trigger: '.curation-books', start: 'top 80%' }
+    });
+  });
+
+  /* ── Manifesto ── */
+  gsap.from('#v12_mQuote', {
+    yPercent: 16, opacity: 0, duration: 1.5, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_mQuote', start: 'top 78%' }
+  });
+  gsap.from('#v12_mCredit', {
+    opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '#v12_mCredit', start: 'top 85%' }
+  });
+
+  /* ── Manifesto deco: slow rotation + parallax ── */
+  gsap.to('#v12_mDeco', {
+    rotation: 200,
+    transformOrigin: '50% 50%',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.manifesto',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 2
+    }
+  });
+}
+</script>
+</body>
+</html>

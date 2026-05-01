@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>그린루트 — Vegan Skincare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          oklch(97% 0.012 140);
+      --bg-green:    oklch(91% 0.055 145);
+      --green-deep:  oklch(36% 0.115 148);
+      --green-mid:   oklch(55% 0.11  145);
+      --green-light: oklch(76% 0.075 145);
+      --text:        oklch(20% 0.025 145);
+      --text-soft:   oklch(50% 0.04  145);
+      --white:       oklch(99% 0.005 140);
+    }
+
+    html { font-size: clamp(13px, 1vw, 15px); scroll-behavior: auto; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif KR', serif;
+      overflow-x: hidden;
+    }
+
+    #v12_progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--green-mid);
+      z-index: 1000;
+      will-change: width;
+      transition: width 0.08s linear;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem 4rem;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--green-deep);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--text-soft);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--green-deep); }
+
+    /* ─── HERO ─── */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .hero-orb {
+      position: absolute;
+      right: -8%;
+      top: 50%;
+      width: 56vw;
+      height: 56vw;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, var(--bg-green) 0%, transparent 68%);
+      transform: translateY(-50%);
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.45em;
+      color: var(--green-mid);
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      will-change: transform, opacity;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(3.8rem, 9.5vw, 9rem);
+      font-weight: 700;
+      line-height: 1.0;
+      color: var(--green-deep);
+      margin-bottom: 1.2rem;
+      will-change: transform, opacity;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--green-mid);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.08em;
+      font-weight: 300;
+    }
+
+    .hero-sub {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-soft);
+      max-width: 26rem;
+      line-height: 1.95;
+      margin-bottom: 3rem;
+      will-change: transform, opacity;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--white);
+      background: var(--green-deep);
+      padding: 1.05rem 2.8rem;
+      letter-spacing: 0.09em;
+      cursor: pointer;
+      border: none;
+      transition: background 0.35s;
+      will-change: transform, opacity;
+    }
+    .hero-cta:hover { background: var(--green-mid); }
+
+    .hero-foot-label {
+      position: absolute;
+      bottom: 3rem;
+      left: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--green-light);
+      text-transform: uppercase;
+    }
+    .hero-foot-label::before {
+      content: '';
+      display: block;
+      width: 38px;
+      height: 1px;
+      background: var(--green-light);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      right: 4rem;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .scroll-indicator span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      color: var(--green-light);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .scroll-line-el {
+      width: 1px;
+      height: 56px;
+      background: linear-gradient(to bottom, var(--green-mid), transparent);
+      transform-origin: top;
+      will-change: transform;
+    }
+
+    /* ─── BRAND ─── */
+    #brand {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .brand-text {
+      padding: 10rem 5rem 10rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.73rem;
+      letter-spacing: 0.42em;
+      color: var(--green-mid);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      will-change: transform, opacity;
+    }
+
+    .brand-heading {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.38;
+      color: var(--green-deep);
+      margin-bottom: 2rem;
+      will-change: transform, opacity;
+    }
+
+    .brand-body {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.94rem;
+      font-weight: 400;
+      line-height: 2.05;
+      color: var(--text-soft);
+      will-change: transform, opacity;
+    }
+
+    .brand-values {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      will-change: transform, opacity;
+    }
+    .brand-value-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .brand-value-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--green-mid);
+      text-transform: uppercase;
+    }
+    .brand-value-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.82rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .brand-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-green);
+    }
+    .brand-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+
+    /* ─── INGREDIENTS ─── */
+    #ingredients {
+      padding: 10rem 4rem;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ingredients-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 6rem;
+    }
+
+    .ingredients-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      line-height: 1.18;
+      will-change: transform, opacity;
+    }
+
+    .ingredients-desc {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.94rem;
+      color: var(--text-soft);
+      line-height: 2.05;
+      align-self: end;
+      will-change: transform, opacity;
+    }
+
+    /* SURPRISE: SVG connector between cards */
+    .ingredients-svg-connector {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .connect-path {
+      fill: none;
+      stroke: var(--green-light);
+      stroke-width: 1;
+      stroke-dasharray: 5 5;
+      opacity: 0.6;
+    }
+
+    .ingredient-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      position: relative;
+    }
+
+    .ingredient-card {
+      background: var(--bg);
+      padding: 2.8rem 2.2rem;
+      will-change: transform, opacity;
+      position: relative;
+    }
+
+    .ingredient-dot {
+      position: absolute;
+      top: 2.2rem;
+      right: 2.2rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-light);
+    }
+
+    .ingredient-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 300;
+      color: var(--green-light);
+      line-height: 1;
+      margin-bottom: 1.8rem;
+    }
+
+    .ingredient-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.4rem;
+    }
+
+    .ingredient-name-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--green-mid);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .ingredient-desc-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      line-height: 1.95;
+    }
+
+    /* ─── PRODUCTS ─── */
+    #products {
+      padding: 10rem 4rem;
+      background: var(--bg);
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+
+    .products-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.38em;
+      color: var(--green-mid);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .products-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      will-change: transform, opacity;
+    }
+
+    .products-count {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: var(--text-soft);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      overflow: hidden;
+      cursor: pointer;
+      will-change: transform, opacity;
+      position: relative;
+    }
+    .product-card:nth-child(1) { grid-column: span 5; }
+    .product-card:nth-child(2) { grid-column: span 7; }
+    .product-card:nth-child(3) { grid-column: span 4; }
+    .product-card:nth-child(4) { grid-column: span 4; }
+    .product-card:nth-child(5) { grid-column: span 4; }
+
+    .product-img {
+      width: 100%;
+      object-fit: cover;
+      will-change: transform;
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: block;
+    }
+    .product-card:nth-child(1) .product-img { aspect-ratio: 3 / 4; }
+    .product-card:nth-child(2) .product-img { aspect-ratio: 16 / 9; }
+    .product-card:nth-child(3) .product-img,
+    .product-card:nth-child(4) .product-img,
+    .product-card:nth-child(5) .product-img { aspect-ratio: 4 / 5; }
+
+    .product-card:hover .product-img { transform: scale(1.045); }
+
+    .product-info {
+      padding: 1.4rem 1.8rem 2rem;
+    }
+
+    .product-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      color: var(--green-mid);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    .product-add-btn {
+      position: absolute;
+      bottom: 1.6rem;
+      right: 1.8rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      background: var(--green-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .product-add-btn svg {
+      width: 1rem; height: 1rem;
+      stroke: var(--white);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+    .product-card:hover .product-add-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── CTA ─── */
+    #cta {
+      background: var(--green-deep);
+      padding: 12rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid oklch(44% 0.10 148);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .cta-ring-1 { width: 65vw; height: 65vw; }
+    .cta-ring-2 { width: 45vw; height: 45vw; }
+    .cta-ring-3 { width: 25vw; height: 25vw; }
+
+    .cta-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.42em;
+      color: var(--green-light);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      will-change: transform, opacity;
+    }
+
+    .cta-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      will-change: transform, opacity;
+    }
+
+    .cta-body {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.95rem;
+      color: oklch(78% 0.05 145);
+      line-height: 2.05;
+      max-width: 28rem;
+      margin-bottom: 3.5rem;
+      will-change: transform, opacity;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--green-deep);
+      background: var(--white);
+      padding: 1.15rem 3.2rem;
+      letter-spacing: 0.09em;
+      cursor: pointer;
+      border: none;
+      transition: background 0.35s;
+      will-change: transform, opacity;
+    }
+    .cta-btn:hover { background: var(--bg-green); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: oklch(14% 0.02 148);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.22em;
+      color: var(--green-light);
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.72rem;
+      color: oklch(50% 0.04 145);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.72rem;
+      color: oklch(40% 0.03 145);
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; }
+      .nav-links { display: none; }
+
+      #hero { padding: 0 2rem; }
+      .hero-foot-label { left: 2rem; }
+      .scroll-indicator { right: 2rem; }
+
+      #brand { grid-template-columns: 1fr; }
+      .brand-image { height: 55vw; }
+      .brand-text { padding: 5rem 2rem; }
+
+      #ingredients { padding: 6rem 2rem; }
+      .ingredients-header { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; }
+      .ingredient-grid { grid-template-columns: 1fr 1fr; }
+
+      #products { padding: 6rem 2rem; }
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        display: grid;
+      }
+      .product-card:nth-child(1) { grid-column: span 2; }
+      .product-card:nth-child(2) { grid-column: span 2; }
+      .product-card:nth-child(3),
+      .product-card:nth-child(4),
+      .product-card:nth-child(5) { grid-column: span 1; }
+
+      #cta { padding: 7rem 2rem; }
+      .cta-ring-1 { width: 100vw; height: 100vw; }
+      .cta-ring-2 { width: 70vw; height: 70vw; }
+      .cta-ring-3 { width: 40vw; height: 40vw; }
+
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="v12_progress"></div>
+
+  <nav>
+    <div class="nav-logo">GreenRoot</div>
+    <ul class="nav-links">
+      <li><a onclick="v12_nav('#brand')">브랜드</a></li>
+      <li><a onclick="v12_nav('#ingredients')">성분</a></li>
+      <li><a onclick="v12_nav('#products')">제품</a></li>
+      <li><a onclick="v12_nav('#cta')">구매하기</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-orb"></div>
+    <div class="hero-eyebrow">Pure Vegan &amp; Clean Beauty</div>
+    <h1 class="hero-title">
+      뿌리에서<br>
+      <em>피어나는</em><br>
+      순수함
+    </h1>
+    <p class="hero-sub">자연의 가장 깊은 곳에서 엄선한 성분으로<br>피부가 본래 지닌 아름다움을 되살립니다.</p>
+    <button class="hero-cta" onclick="v12_nav('#products')">제품 살펴보기</button>
+    <div class="hero-foot-label">Scroll to explore</div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line-el" id="v12_scrollLine"></div>
+    </div>
+  </section>
+
+  <section id="brand">
+    <div class="brand-text">
+      <div class="section-label">Our Philosophy</div>
+      <h2 class="brand-heading">자연이<br>가장 잘 안다</h2>
+      <p class="brand-body">
+        그린루트는 "식물이 스스로를 치유하는 방식"에서 영감을 받았습니다. 뿌리가 땅 속 깊은 곳의 영양분을 끌어올리듯, 저희는 자연의 정수를 담아 피부 깊숙이 전달합니다.<br><br>
+        100% 비건, 동물실험 없음. 불필요한 성분은 단 하나도 사용하지 않습니다. 피부가 원하는 것, 오직 그것만.
+      </p>
+      <div class="brand-values">
+        <div class="brand-value-item">
+          <span class="brand-value-tag">Vegan</span>
+          <span class="brand-value-text">100% 식물성</span>
+        </div>
+        <div class="brand-value-item">
+          <span class="brand-value-tag">Cruelty-Free</span>
+          <span class="brand-value-text">동물실험 없음</span>
+        </div>
+        <div class="brand-value-item">
+          <span class="brand-value-tag">Sustainable</span>
+          <span class="brand-value-text">지속가능한 수확</span>
+        </div>
+      </div>
+    </div>
+    <div class="brand-image">
+      <img src="https://picsum.photos/seed/greenroot_brand/800/1000" alt="그린루트 브랜드 이미지" loading="lazy">
+    </div>
+  </section>
+
+  <section id="ingredients">
+    <div class="ingredients-header">
+      <h2 class="ingredients-title">
+        자연이<br>선택한<br>성분들
+      </h2>
+      <p class="ingredients-desc">
+        수백 가지 식물성 원료를 탐구한 끝에 선별한 4가지 핵심 성분. 각 성분은 임상 연구를 통해 효능이 입증됐으며, 지속가능한 방식으로 수확됩니다.
+      </p>
+    </div>
+
+    <div class="ingredient-grid" id="v12_ingredGrid">
+      <div class="ingredient-card">
+        <div class="ingredient-dot"></div>
+        <div class="ingredient-number">01</div>
+        <div class="ingredient-name">녹차 추출물</div>
+        <div class="ingredient-name-en">Green Tea Extract</div>
+        <p class="ingredient-desc-text">강력한 항산화 성분 EGCG가 피부의 산화 스트레스를 차단합니다. 제주 유기농 녹차잎에서 콜드프레스 방식으로 추출.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-dot"></div>
+        <div class="ingredient-number">02</div>
+        <div class="ingredient-name">히알루론산</div>
+        <div class="ingredient-name-en">Hyaluronic Acid</div>
+        <p class="ingredient-desc-text">발효 유래 100% 식물성. 자기 무게의 1,000배 수분을 머금어 피부 장벽을 강화하고 탄력을 유지합니다.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-dot"></div>
+        <div class="ingredient-number">03</div>
+        <div class="ingredient-name">식물성 세라마이드</div>
+        <div class="ingredient-name-en">Plant Ceramide</div>
+        <p class="ingredient-desc-text">쌀겨에서 추출한 식물성 세라마이드. 피부 지질 구조를 복원하고 수분 증발을 막아 건강한 피부막을 유지합니다.</p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-dot"></div>
+        <div class="ingredient-number">04</div>
+        <div class="ingredient-name">마데카소사이드</div>
+        <div class="ingredient-name-en">Madecassoside</div>
+        <p class="ingredient-desc-text">센텔라 아시아티카에서 분리한 고순도 성분. 피부 진정과 콜라겐 합성을 촉진해 피부 회복력을 높입니다.</p>
+      </div>
+
+      <!-- SURPRISE: SVG connector paths between cards -->
+      <svg class="ingredients-svg-connector" id="v12_svg" aria-hidden="true"></svg>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="products-header">
+      <div>
+        <div class="products-subtitle">Product Line</div>
+        <h2 class="products-title">제품 라인업</h2>
+      </div>
+      <div class="products-count">총 5종</div>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img class="product-img" src="https://picsum.photos/seed/gr_p1/480/640" alt="루트 딥 에센스" loading="lazy">
+        <div class="product-info">
+          <div class="product-tag">Best Seller</div>
+          <div class="product-name">루트 딥 에센스</div>
+          <div class="product-price">₩ 58,000</div>
+        </div>
+        <div class="product-add-btn" aria-label="장바구니 추가">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
+      <div class="product-card">
+        <img class="product-img" src="https://picsum.photos/seed/gr_p2/800/450" alt="클린 소프트닝 토너" loading="lazy">
+        <div class="product-info">
+          <div class="product-tag">New</div>
+          <div class="product-name">클린 소프트닝 토너</div>
+          <div class="product-price">₩ 38,000</div>
+        </div>
+        <div class="product-add-btn" aria-label="장바구니 추가">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
+      <div class="product-card">
+        <img class="product-img" src="https://picsum.photos/seed/gr_p3/400/500" alt="배리어 크림" loading="lazy">
+        <div class="product-info">
+          <div class="product-tag">Soothing</div>
+          <div class="product-name">배리어 크림</div>
+          <div class="product-price">₩ 62,000</div>
+        </div>
+        <div class="product-add-btn" aria-label="장바구니 추가">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
+      <div class="product-card">
+        <img class="product-img" src="https://picsum.photos/seed/gr_p4/400/500" alt="선 세럼" loading="lazy">
+        <div class="product-info">
+          <div class="product-tag">SPF 50+</div>
+          <div class="product-name">선 세럼</div>
+          <div class="product-price">₩ 45,000</div>
+        </div>
+        <div class="product-add-btn" aria-label="장바구니 추가">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
+      <div class="product-card">
+        <img class="product-img" src="https://picsum.photos/seed/gr_p5/400/500" alt="나이트 리페어 마스크" loading="lazy">
+        <div class="product-info">
+          <div class="product-tag">Overnight</div>
+          <div class="product-name">나이트 리페어 마스크</div>
+          <div class="product-price">₩ 54,000</div>
+        </div>
+        <div class="product-add-btn" aria-label="장바구니 추가">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="cta-ring cta-ring-1"></div>
+    <div class="cta-ring cta-ring-2"></div>
+    <div class="cta-ring cta-ring-3"></div>
+    <div class="cta-eyebrow">Start Your Journey</div>
+    <h2 class="cta-title">피부가 기억하는<br>자연의 감촉</h2>
+    <p class="cta-body">그린루트의 첫 제품을 경험해보세요. 자연에서 비롯된 순수한 아름다움이 일상을 바꿉니다.</p>
+    <button class="cta-btn">스타터 키트 보기</button>
+  </section>
+
+  <footer>
+    <div class="footer-logo">GreenRoot</div>
+    <ul class="footer-links">
+      <li><a href="#">브랜드 스토리</a></li>
+      <li><a href="#">성분 연구소</a></li>
+      <li><a href="#">고객센터</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 그린루트. All rights reserved.</div>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Lenis boilerplate
+    const v12_lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    v12_lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // Progress bar
+    const v12_progressEl = document.getElementById('v12_progress');
+    v12_lenis.on('scroll', ({ progress }) => {
+      v12_progressEl.style.width = (progress * 100) + '%';
+    });
+
+    // Nav scroll helper (global for onclick)
+    window.v12_nav = (target) => {
+      v12_lenis.scrollTo(document.querySelector(target), { offset: -60 });
+    };
+
+    // Scroll line animation
+    {
+      const v12_lineEl = document.getElementById('v12_scrollLine');
+      gsap.to(v12_lineEl, {
+        scaleY: 0,
+        duration: 1.3,
+        ease: 'power2.inOut',
+        repeat: -1,
+        transformOrigin: 'top center'
+      });
+    }
+
+    // Hero entrance
+    {
+      const v12_heroTl = gsap.timeline({ delay: 0.25 });
+      v12_heroTl
+        .from('.hero-eyebrow',     { y: 24, opacity: 0, duration: 0.75, ease: 'power3.out' })
+        .from('.hero-title',       { y: 50, opacity: 0, duration: 1.05, ease: 'power3.out' }, '-=0.5')
+        .from('.hero-sub',         { y: 24, opacity: 0, duration: 0.8,  ease: 'power3.out' }, '-=0.6')
+        .from('.hero-cta',         { y: 18, opacity: 0, duration: 0.7,  ease: 'power3.out' }, '-=0.5')
+        .from('.hero-foot-label',  { opacity: 0, duration: 0.6 }, '-=0.3')
+        .from('.scroll-indicator', { opacity: 0, duration: 0.6 }, '-=0.4');
+    }
+
+    // Hero orb parallax
+    {
+      const v12_orbEl = document.querySelector('.hero-orb');
+      gsap.to(v12_orbEl, {
+        yPercent: 18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5
+        }
+      });
+    }
+
+    // Hero mouse parallax
+    {
+      const v12_heroSection = document.querySelector('#hero');
+      let v12_rafId = null;
+      v12_heroSection.addEventListener('mousemove', (e) => {
+        if (v12_rafId) return;
+        v12_rafId = requestAnimationFrame(() => {
+          const v12_rect = v12_heroSection.getBoundingClientRect();
+          const v12_mx = (e.clientX - v12_rect.left) / v12_rect.width - 0.5;
+          const v12_my = (e.clientY - v12_rect.top)  / v12_rect.height - 0.5;
+          gsap.to('.hero-title', { x: v12_mx * 18, y: v12_my * 12, duration: 1.4, ease: 'power2.out' });
+          gsap.to('.hero-orb',   { x: v12_mx * -28, y: v12_my * -18, duration: 1.6, ease: 'power2.out' });
+          v12_rafId = null;
+        });
+      });
+    }
+
+    // Brand section
+    {
+      const v12_brandTl = gsap.timeline({
+        scrollTrigger: { trigger: '#brand', start: 'top 72%' }
+      });
+      v12_brandTl
+        .from('.section-label',  { y: 18, opacity: 0, duration: 0.7, ease: 'power3.out' })
+        .from('.brand-heading',  { y: 32, opacity: 0, duration: 0.9, ease: 'power3.out' }, '-=0.4')
+        .from('.brand-body',     { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+        .from('.brand-values',   { y: 16, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4');
+
+      gsap.to('.brand-image img', {
+        yPercent: -12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#brand',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.8
+        }
+      });
+    }
+
+    // Ingredients header
+    {
+      gsap.from('.ingredients-title', {
+        y: 40, opacity: 0, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: '#ingredients', start: 'top 75%' }
+      });
+      gsap.from('.ingredients-desc', {
+        y: 28, opacity: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: '#ingredients', start: 'top 70%' }
+      });
+
+      // SURPRISE: ingredient cards stagger + SVG line draw
+      const v12_ingCards = document.querySelectorAll('.ingredient-card');
+
+      gsap.from(v12_ingCards, {
+        y: 60, opacity: 0,
+        duration: 0.95,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.ingredient-grid',
+          start: 'top 78%',
+          onEnter: () => { v12_drawConnectors(); }
+        }
+      });
+    }
+
+    // SVG connector draw between ingredient dots
+    const v12_drawConnectors = () => {
+      const v12_svgEl = document.getElementById('v12_svg');
+      const v12_dots = document.querySelectorAll('.ingredient-dot');
+      if (v12_dots.length < 2) return;
+
+      const v12_gridRect = document.getElementById('v12_ingredGrid').getBoundingClientRect();
+
+      for (let i = 0; i < v12_dots.length - 1; i++) {
+        const v12_a = v12_dots[i].getBoundingClientRect();
+        const v12_b = v12_dots[i + 1].getBoundingClientRect();
+        const v12_x1 = v12_a.left - v12_gridRect.left + v12_a.width / 2;
+        const v12_y1 = v12_a.top  - v12_gridRect.top  + v12_a.height / 2;
+        const v12_x2 = v12_b.left - v12_gridRect.left + v12_b.width / 2;
+        const v12_y2 = v12_b.top  - v12_gridRect.top  + v12_b.height / 2;
+
+        const v12_line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        v12_line.setAttribute('x1', v12_x1);
+        v12_line.setAttribute('y1', v12_y1);
+        v12_line.setAttribute('x2', v12_x2);
+        v12_line.setAttribute('y2', v12_y2);
+        v12_line.classList.add('connect-path');
+
+        const v12_len = Math.hypot(v12_x2 - v12_x1, v12_y2 - v12_y1);
+        v12_line.style.strokeDasharray = v12_len;
+        v12_line.style.strokeDashoffset = v12_len;
+        v12_svgEl.appendChild(v12_line);
+
+        gsap.to(v12_line, {
+          strokeDashoffset: 0,
+          duration: 1.2,
+          delay: i * 0.15 + 0.5,
+          ease: 'power2.inOut'
+        });
+      }
+    };
+
+    // Products
+    {
+      gsap.from('.products-title', {
+        y: 28, opacity: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: '#products', start: 'top 80%' }
+      });
+
+      const v12_prodCards = document.querySelectorAll('.product-card');
+      v12_prodCards.forEach((card, i) => {
+        gsap.from(card, {
+          y: 55, opacity: 0,
+          duration: 0.9,
+          delay: i * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '#products', start: 'top 70%' }
+        });
+      });
+    }
+
+    // CTA
+    {
+      const v12_ctaTl = gsap.timeline({
+        scrollTrigger: { trigger: '#cta', start: 'top 65%' }
+      });
+      v12_ctaTl
+        .from('.cta-eyebrow', { y: 20, opacity: 0, duration: 0.7, ease: 'power3.out' })
+        .from('.cta-title',   { y: 40, opacity: 0, duration: 0.9, ease: 'power3.out' }, '-=0.4')
+        .from('.cta-body',    { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+        .from('.cta-btn',     { y: 18, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4');
+
+      // Slowly rotating rings
+      gsap.to('.cta-ring-1', { rotation: 360,  duration: 50, repeat: -1, ease: 'none', transformOrigin: 'center center' });
+      gsap.to('.cta-ring-2', { rotation: -360, duration: 38, repeat: -1, ease: 'none', transformOrigin: 'center center' });
+      gsap.to('.cta-ring-3', { rotation: 360,  duration: 24, repeat: -1, ease: 'none', transformOrigin: 'center center' });
+    }
+  </script>
+</body>
+</html>
