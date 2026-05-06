@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>흙과 손 — 로컬 파머스 마켓</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f7f2eb;
+  --bg2: #ede5d8;
+  --earth: #8c6a3c;
+  --green: #4a6a3c;
+  --text: #2c2010;
+  --muted: #7a6a50;
+  --border: rgba(44,32,16,0.1);
+  --font-serif: 'Noto Serif KR', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 300; overflow-x: hidden; line-height: 1.75; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--green); z-index: 1000; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 52px;
+}
+.nav-logo { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; letter-spacing: 0.05em; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-link { font-size: 0.75rem; color: var(--muted); text-decoration: none; }
+.nav-sub { font-size: 0.7rem; background: var(--green); color: #fff; text-decoration: none; padding: 8px 20px; transition: opacity 0.3s; }
+.nav-sub:hover { opacity: 0.85; }
+
+/* 히어로 */
+#hero {
+  min-height: 90vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 80px 52px;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #f0e8d8 0%, #e4d8c0 60%, #d8c8a8 100%); }
+.hero-pattern {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(100,80,40,0.05) 48px, rgba(100,80,40,0.05) 49px),
+    repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(100,80,40,0.05) 48px, rgba(100,80,40,0.05) 49px);
+}
+.hero-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--earth); margin-bottom: 16px; position: relative; z-index: 1; opacity: 0; }
+.hero-title { font-family: var(--font-serif); font-size: clamp(44px, 8vw, 110px); font-weight: 700; line-height: 0.95; letter-spacing: -0.02em; position: relative; z-index: 1; margin-bottom: 28px; opacity: 0; transform: translateY(40px); }
+.hero-sub { font-size: 0.9rem; color: var(--muted); max-width: 500px; line-height: 2; margin-bottom: 40px; position: relative; z-index: 1; opacity: 0; }
+.hero-actions { display: flex; gap: 16px; position: relative; z-index: 1; opacity: 0; }
+.btn-earth { background: var(--earth); color: #fff; font-size: 0.8rem; letter-spacing: 0.08em; text-decoration: none; padding: 13px 28px; transition: opacity 0.3s; will-change: transform; }
+.btn-earth:hover { opacity: 0.85; }
+.btn-green { background: var(--green); color: #fff; font-size: 0.8rem; letter-spacing: 0.08em; text-decoration: none; padding: 13px 28px; transition: opacity 0.3s; will-change: transform; }
+.btn-green:hover { opacity: 0.85; }
+
+/* 이번 주 제철 */
+#seasonal {
+  padding: 80px 52px; border-bottom: 1px solid var(--border);
+}
+.seasonal-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+.seasonal-title { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 44px); font-weight: 700; line-height: 1.2; }
+.seasonal-week { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); border: 1px solid rgba(74,106,60,0.3); padding: 7px 16px; }
+.produce-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); }
+.produce-card { background: var(--bg); padding: 32px 24px; }
+.produce-img { aspect-ratio: 1; margin-bottom: 16px; overflow: hidden; }
+.produce-img-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+.produce-name { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+.produce-farm { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 8px; }
+.produce-price { font-size: 0.9rem; color: var(--earth); font-weight: 400; }
+
+/* 생산자 스토리 */
+#farmers {
+  padding: 80px 52px; background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.farmers-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--earth); margin-bottom: 48px; }
+.farmers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.farmer-card { border-top: 3px solid var(--earth); padding-top: 24px; }
+.farmer-area { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+.farmer-name { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+.farmer-story { font-size: 0.82rem; color: var(--muted); line-height: 2; margin-bottom: 16px; }
+.farmer-items { font-size: 0.7rem; color: var(--earth); letter-spacing: 0.1em; }
+
+/* 마켓 일정 */
+#market {
+  padding: 80px 52px; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.market-title { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 42px); font-weight: 700; margin-bottom: 36px; }
+.schedule-list { display: flex; flex-direction: column; gap: 0; }
+.schedule-row { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--border); }
+.sched-day { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 700; }
+.sched-time { font-size: 0.78rem; color: var(--muted); }
+.sched-location { font-size: 0.7rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.sub-box { background: var(--earth); color: #fff; padding: 40px; }
+.sub-title { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
+.sub-desc { font-size: 0.82rem; line-height: 1.9; margin-bottom: 24px; opacity: 0.85; }
+.sub-form { display: flex; gap: 8px; }
+.sub-input { flex: 1; padding: 12px 14px; border: none; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.82rem; outline: none; }
+.sub-input::placeholder { color: rgba(255,255,255,0.5); }
+.sub-btn { background: #fff; color: var(--earth); font-size: 0.75rem; letter-spacing: 0.12em; font-weight: 700; padding: 12px 20px; border: none; cursor: pointer; transition: opacity 0.3s; }
+.sub-btn:hover { opacity: 0.85; }
+
+footer {
+  padding: 40px 52px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; }
+.footer-copy { font-size: 0.65rem; color: var(--muted); }
+
+@media (max-width: 768px) {
+  nav { padding: 12px 20px; }
+  #hero, #seasonal, #farmers, #market, footer { padding-left: 20px; padding-right: 20px; }
+  .produce-grid { grid-template-columns: 1fr 1fr; }
+  .farmers-grid { grid-template-columns: 1fr; }
+  #market { grid-template-columns: 1fr; gap: 48px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-logo">흙과 손</div>
+  <div class="nav-links">
+    <a href="#" class="nav-link">이번 주 장터</a>
+    <a href="#" class="nav-link">생산자</a>
+    <a href="#" class="nav-link">구독 박스</a>
+    <a href="#" class="nav-sub">구독 신청</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <p class="hero-label">로컬 파머스 마켓 · 매주 토요일</p>
+  <h1 class="hero-title">흙에서 손으로,<br>손에서 식탁으로</h1>
+  <p class="hero-sub">농부와 소비자가 직접 만나는 로컬 파머스 마켓. 제철 식재료를 키운 사람에게서 직접 받아 가세요. 신선함 뒤에는 땅과 사람의 이야기가 있습니다.</p>
+  <div class="hero-actions">
+    <a href="#seasonal" class="btn-earth" id="hero-btn1">이번 주 제철 확인</a>
+    <a href="#market" class="btn-green" id="hero-btn2">마켓 일정 보기</a>
+  </div>
+</section>
+
+<section id="seasonal">
+  <div class="seasonal-header">
+    <h2 class="seasonal-title">이번 주<br>제철 식재료</h2>
+    <div class="seasonal-week">2024년 5월 2주차</div>
+  </div>
+  <div class="produce-grid">
+    <div class="produce-card">
+      <div class="produce-img"><div class="produce-img-inner">🍓</div></div>
+      <h3 class="produce-name">논산 딸기</h3>
+      <p class="produce-farm">박동수 농장 · 충남 논산</p>
+      <p class="produce-price">500g 8,000원</p>
+    </div>
+    <div class="produce-card">
+      <div class="produce-img"><div class="produce-img-inner">🥬</div></div>
+      <h3 class="produce-name">여주 쌈채소</h3>
+      <p class="produce-farm">이순자 농장 · 경기 여주</p>
+      <p class="produce-price">1묶음 3,500원</p>
+    </div>
+    <div class="produce-card">
+      <div class="produce-img"><div class="produce-img-inner">🫛</div></div>
+      <h3 class="produce-name">강릉 완두콩</h3>
+      <p class="produce-farm">최현준 농장 · 강원 강릉</p>
+      <p class="produce-price">300g 5,500원</p>
+    </div>
+    <div class="produce-card">
+      <div class="produce-img"><div class="produce-img-inner">🌿</div></div>
+      <h3 class="produce-name">제주 방울토마토</h3>
+      <p class="produce-farm">고성실 농장 · 제주</p>
+      <p class="produce-price">1kg 9,500원</p>
+    </div>
+  </div>
+</section>
+
+<section id="farmers">
+  <p class="farmers-label">Farmer Stories</p>
+  <div class="farmers-grid">
+    <div class="farmer-card">
+      <p class="farmer-area">충남 논산</p>
+      <h3 class="farmer-name">박동수 · 아내 이정화</h3>
+      <p class="farmer-story">3대째 논산에서 딸기를 키우는 농부 부부입니다. "농약을 최소한으로 쓰는 건 땅 욕심이 아니라 우리 아이들도 이 땅에서 살아야 하기 때문"이라고 말합니다.</p>
+      <p class="farmer-items">딸기, 방울토마토, 참외</p>
+    </div>
+    <div class="farmer-card">
+      <p class="farmer-area">경기 여주</p>
+      <h3 class="farmer-name">이순자</h3>
+      <p class="farmer-story">귀농 15년차. 도시에서 디자이너로 일하다 땅으로 돌아왔습니다. 채소 하나하나에 이름을 붙이고, 파종 일기를 씁니다. "식물이 자라는 속도로 살고 싶었어요."</p>
+      <p class="farmer-items">쌈채소 27종, 허브, 식용꽃</p>
+    </div>
+    <div class="farmer-card">
+      <p class="farmer-area">강원 강릉</p>
+      <h3 class="farmer-name">최현준</h3>
+      <p class="farmer-story">강릉 바닷바람이 만드는 완두콩의 단맛은 다른 곳에서 흉내 낼 수 없다고 말합니다. "제철에, 그 땅에서 자란 것만 팝니다. 1년 중 2주만 나오는 완두콩."</p>
+      <p class="farmer-items">완두콩, 강낭콩, 옥수수</p>
+    </div>
+  </div>
+</section>
+
+<section id="market">
+  <div>
+    <h2 class="market-title">마켓<br>일정 & 위치</h2>
+    <div class="schedule-list">
+      <div class="schedule-row">
+        <span class="sched-day">매주 토요일</span>
+        <span class="sched-time">08:00–13:00</span>
+        <span class="sched-location">마포 홍대점</span>
+      </div>
+      <div class="schedule-row">
+        <span class="sched-day">격주 일요일</span>
+        <span class="sched-time">09:00–14:00</span>
+        <span class="sched-location">서초 반포점</span>
+      </div>
+      <div class="schedule-row">
+        <span class="sched-day">매월 첫째주 수</span>
+        <span class="sched-time">10:00–16:00</span>
+        <span class="sched-location">성동 성수점</span>
+      </div>
+    </div>
+  </div>
+  <div class="sub-box">
+    <h3 class="sub-title">주간 구독 박스</h3>
+    <p class="sub-desc">매주 수요일, 이번 주 가장 신선한 제철 식재료를 엄선해서 집으로 보내드립니다. 농부의 레시피 카드 포함.</p>
+    <div class="sub-form">
+      <input class="sub-input" type="email" placeholder="이메일 주소">
+      <button class="sub-btn">신청하기</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">흙과 손</div>
+  <div class="footer-copy">© 2024 흙과 손 파머스 마켓 · 서울 마포구</div>
+</footer>
+
+<script>
+(function() {
+  const v12_lenis = new Lenis({ duration: 1.1, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  v12_lenis.on('scroll', ({ progress }) => { document.getElementById('progress-bar').style.width = (progress * 100) + '%'; });
+
+  gsap.to('.hero-label', { opacity: 1, duration: 0.8, delay: 0.2, ease: 'power2.out' });
+  gsap.to('.hero-title', { opacity: 1, y: 0, duration: 1.0, delay: 0.4, ease: 'power3.out' });
+  gsap.to('.hero-sub', { opacity: 1, duration: 0.8, delay: 0.6, ease: 'power2.out' });
+  gsap.to('.hero-actions', { opacity: 1, duration: 0.7, delay: 0.8, ease: 'power2.out' });
+
+  document.querySelectorAll('.produce-card, .farmer-card').forEach(el => {
+    gsap.from(el, { opacity: 0, y: 28, scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 55%', scrub: 1 } });
+  });
+
+  [document.getElementById('hero-btn1'), document.getElementById('hero-btn2')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.2}px, ${(e.clientY - r.top - r.height/2) * 0.2}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    });
+  });
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>

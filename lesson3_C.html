@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOID Gallery — 전시 소개</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f3ee;
+  --bg-dark: #0d0c0b;
+  --text: #111110;
+  --text-inv: #e8e4dc;
+  --muted: #8a8680;
+  --muted-inv: #6a6560;
+  --accent: #c22e2e;
+  --border: rgba(17,17,16,0.1);
+  --border-inv: rgba(232,228,220,0.12);
+  --font-serif: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  --font-kr: 'Noto Serif KR', 'Cormorant Garamond', serif;
+}
+html { scroll-behavior: auto; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-kr);
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* 진행 바 */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: var(--accent);
+  z-index: 1000;
+}
+
+/* 네비게이션 */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 56px;
+  mix-blend-mode: multiply;
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.nav-right {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+.nav-link {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-link:hover { color: var(--text); }
+.nav-ticket {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  padding: 8px 20px;
+  transition: all 0.3s;
+}
+.nav-ticket:hover { background: var(--accent); color: #fff; }
+
+/* 히어로 */
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 56px 72px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.hero-year {
+  position: absolute;
+  top: 50%;
+  right: 56px;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-size: clamp(80px, 14vw, 180px);
+  font-weight: 300;
+  color: rgba(17,17,16,0.05);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  user-select: none;
+}
+.hero-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(16px);
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 7.5vw, 110px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  max-width: 700px;
+  opacity: 0;
+  transform: translateY(36px);
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-bottom {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  opacity: 0;
+}
+.hero-period {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  line-height: 2;
+}
+.hero-scroll-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-scroll-text::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ── 작품 섹션 공통 ── */
+.artwork-section {
+  position: relative;
+}
+.artwork-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 작품 이미지 패널 */
+.artwork-image-panel {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.artwork-bg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+.artwork-frame {
+  position: relative;
+  z-index: 2;
+  width: 72%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.22);
+}
+.artwork-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* 작품 텍스트 패널 */
+.artwork-text-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px;
+  overflow: hidden;
+  border-left: 1px solid var(--border);
+}
+.artwork-number {
+  font-family: var(--font-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 28px;
+  transform: translateY(30px);
+  opacity: 0;
+}
+.artwork-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  transform: translateY(40px);
+  opacity: 0;
+}
+.artwork-artist {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  margin-bottom: 40px;
+  transform: translateY(30px);
+  opacity: 0;
+}
+.artwork-description {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 400px;
+  transform: translateY(24px);
+  opacity: 0;
+}
+.artwork-tags {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  transform: translateY(20px);
+  opacity: 0;
+}
+.tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+}
+
+/* 다크 배경 변형 */
+.artwork-section.dark .artwork-sticky {
+  background: var(--bg-dark);
+  color: var(--text-inv);
+}
+.artwork-section.dark .artwork-title { color: var(--text-inv); }
+.artwork-section.dark .artwork-number { color: #c9a96e; }
+.artwork-section.dark .artwork-artist { color: var(--muted-inv); }
+.artwork-section.dark .artwork-description { color: var(--muted-inv); }
+.artwork-section.dark .artwork-text-panel { border-left-color: var(--border-inv); }
+.artwork-section.dark .tag { border-color: var(--border-inv); color: var(--muted-inv); }
+
+/* SURPRISE: 글리치 오버레이 */
+.glitch-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  mix-blend-mode: overlay;
+}
+.glitch-strip {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: rgba(194,46,46,0.8);
+  transform: translateX(-100%);
+}
+
+/* 큐레이터 노트 */
+#curator {
+  padding: 160px 56px 120px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.curator-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 8px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  height: fit-content;
+}
+.curator-content {}
+.curator-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.5vw, 50px);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  max-width: 700px;
+  margin-bottom: 48px;
+}
+.curator-quote em { font-style: italic; color: var(--accent); }
+.curator-bio {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.curator-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.curator-avatar-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #d4c9b4, #a89880);
+}
+.curator-name {
+  font-size: 0.82rem;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.curator-role {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+}
+
+/* 티켓 섹션 */
+#ticket-section {
+  background: var(--bg-dark);
+  color: var(--text-inv);
+  padding: 120px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ticket-left {}
+.ticket-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.ticket-subtitle {
+  font-size: 0.82rem;
+  color: var(--muted-inv);
+  letter-spacing: 0.1em;
+}
+.ticket-btn {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bg-dark);
+  background: #e8e4dc;
+  text-decoration: none;
+  padding: 20px 48px;
+  transition: all 0.3s;
+  will-change: transform;
+  font-family: var(--font-kr);
+}
+.ticket-btn:hover { background: var(--accent); color: #fff; }
+
+footer {
+  border-top: 1px solid var(--border-inv);
+  background: var(--bg-dark);
+  color: var(--text-inv);
+  padding: 40px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.25em; }
+.footer-copy { font-size: 0.65rem; color: var(--muted-inv); letter-spacing: 0.12em; }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-right .nav-link { display: none; }
+  #hero { padding: 0 24px 56px; }
+  .artwork-sticky { grid-template-columns: 1fr; }
+  .artwork-image-panel { height: 50vh; }
+  .artwork-text-panel { padding: 40px 24px; border-left: none; border-top: 1px solid var(--border); }
+  #curator { grid-template-columns: 1fr; }
+  .curator-label { writing-mode: horizontal-tb; transform: none; margin-bottom: 24px; }
+  #ticket-section { flex-direction: column; gap: 40px; padding: 80px 24px; }
+  footer { flex-direction: column; gap: 16px; padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-logo">Void Gallery</div>
+  <div class="nav-right">
+    <a href="#" class="nav-link">Current</a>
+    <a href="#" class="nav-link">Archive</a>
+    <a href="#" class="nav-ticket">Ticket</a>
+  </div>
+</nav>
+
+<!-- 히어로 -->
+<section id="hero">
+  <div class="hero-year" aria-hidden="true">2024</div>
+  <p class="hero-label">Current Exhibition · 2024.05 — 2024.08</p>
+  <h1 class="hero-title"><em>빈 공간이</em><br>말을 건넬 때</h1>
+  <div class="hero-bottom">
+    <div class="hero-period">
+      <p>VOID Gallery Seoul</p>
+      <p>서울시 종로구 삼청로 · 화–일 10:00–19:00</p>
+    </div>
+    <div class="hero-scroll-text">Scroll to enter</div>
+  </div>
+</section>
+
+<!-- 작품 01 - 밝은 섹션 -->
+<div class="artwork-section" style="height: 250vh;" id="art-01">
+  <div class="artwork-sticky">
+    <div class="artwork-image-panel" id="img-01">
+      <div class="artwork-bg" style="background: #ede8e0;"></div>
+      <div class="artwork-frame">
+        <canvas class="artwork-canvas" id="canvas-01" width="600" height="800"></canvas>
+      </div>
+      <div class="glitch-overlay" id="glitch-01">
+        <div class="glitch-strip" style="top: 30%; animation: none;"></div>
+        <div class="glitch-strip" style="top: 65%; animation: none;"></div>
+      </div>
+    </div>
+    <div class="artwork-text-panel">
+      <p class="artwork-number">Work 01 / 04</p>
+      <h2 class="artwork-title">Silence has<br>Weight</h2>
+      <p class="artwork-artist">김지연 · 2024 · Oil on linen · 180×240cm</p>
+      <p class="artwork-description">
+        10년의 침묵 끝에 완성된 이 작품은 흰 화면 위에 지각할 수 없을 만큼 미세한 붓터치만을 남긴다.
+        관람자가 충분히 가까이 다가설 때 비로소 드러나는 무수한 흔적들 — 그것이 침묵의 질량이다.
+      </p>
+      <div class="artwork-tags">
+        <span class="tag">Painting</span>
+        <span class="tag">Minimalism</span>
+        <span class="tag">Silence</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 작품 02 - 다크 섹션 -->
+<div class="artwork-section dark" style="height: 250vh;" id="art-02">
+  <div class="artwork-sticky">
+    <div class="artwork-image-panel" id="img-02">
+      <div class="artwork-bg" style="background: #0d0c0b;"></div>
+      <div class="artwork-frame" style="aspect-ratio: 1/1;">
+        <canvas class="artwork-canvas" id="canvas-02" width="600" height="600"></canvas>
+      </div>
+      <div class="glitch-overlay" id="glitch-02">
+        <div class="glitch-strip" style="top: 20%;"></div>
+        <div class="glitch-strip" style="top: 58%;"></div>
+        <div class="glitch-strip" style="top: 80%;"></div>
+      </div>
+    </div>
+    <div class="artwork-text-panel">
+      <p class="artwork-number">Work 02 / 04</p>
+      <h2 class="artwork-title">Void<br>Frequency</h2>
+      <p class="artwork-artist">박상현 · 2023 · Generative Installation · Variable</p>
+      <p class="artwork-description">
+        실시간 대기 소음 데이터를 시각화하는 생성 예술 설치물.
+        도시의 소음이 화면 위에서 진동 패턴으로 변환되며 보이지 않던 소리를 공간에 물질화한다.
+        작품은 매 순간 다른 형태로 존재한다.
+      </p>
+      <div class="artwork-tags">
+        <span class="tag">Generative</span>
+        <span class="tag">Sound Data</span>
+        <span class="tag">Installation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 작품 03 - 밝은 섹션 -->
+<div class="artwork-section" style="height: 250vh;" id="art-03">
+  <div class="artwork-sticky">
+    <div class="artwork-image-panel" id="img-03">
+      <div class="artwork-bg" style="background: #f0ebe1;"></div>
+      <div class="artwork-frame" style="aspect-ratio: 4/3;">
+        <canvas class="artwork-canvas" id="canvas-03" width="800" height="600"></canvas>
+      </div>
+    </div>
+    <div class="artwork-text-panel">
+      <p class="artwork-number">Work 03 / 04</p>
+      <h2 class="artwork-title">After<br>the Rain</h2>
+      <p class="artwork-artist">이수민 · 2024 · Photography, Archival Pigment · 120×80cm</p>
+      <p class="artwork-description">
+        폭우가 멈춘 직후 5분 동안만 볼 수 있는 빛을 8년간 추적한 프로젝트.
+        촬영된 312장의 사진 중 단 한 장 — 완벽한 빛과 수면의 교차점이 포착된 그 찰나가 이 공간에 걸려있다.
+      </p>
+      <div class="artwork-tags">
+        <span class="tag">Photography</span>
+        <span class="tag">Light</span>
+        <span class="tag">Time</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 작품 04 - 다크 섹션 -->
+<div class="artwork-section dark" style="height: 250vh;" id="art-04">
+  <div class="artwork-sticky">
+    <div class="artwork-image-panel" id="img-04">
+      <div class="artwork-bg" style="background: #0a0908;"></div>
+      <div class="artwork-frame">
+        <canvas class="artwork-canvas" id="canvas-04" width="600" height="800"></canvas>
+      </div>
+    </div>
+    <div class="artwork-text-panel">
+      <p class="artwork-number">Work 04 / 04</p>
+      <h2 class="artwork-title">Threshold<br>of Memory</h2>
+      <p class="artwork-artist">Yohan Kern · 2022 · Mixed Media · 200×300cm</p>
+      <p class="artwork-description">
+        기억과 망각의 경계에 놓인 반투명한 레이어들.
+        독일과 한국의 재료를 교차하여 사용한 이 작품은 문화적 정체성이 겹치고 흐릿해지는 방식을 탐구한다.
+        가까이서 볼수록 멀어지는 무언가.
+      </p>
+      <div class="artwork-tags">
+        <span class="tag">Mixed Media</span>
+        <span class="tag">Identity</span>
+        <span class="tag">Memory</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 큐레이터 노트 -->
+<section id="curator">
+  <p class="curator-label">Curator's Note</p>
+  <div class="curator-content">
+    <blockquote class="curator-quote">
+      "우리는 무언가가 <em>없는</em> 상태에 특별한 이름을 붙여야 한다고 생각했습니다.
+      그 공백이 얼마나 많은 것을 말하고 있는지 — 이 전시가 그것을 보여줍니다."
+    </blockquote>
+    <div class="curator-bio">
+      <div class="curator-avatar"><div class="curator-avatar-inner"></div></div>
+      <div>
+        <p class="curator-name">정아름 / Areum Jeong</p>
+        <p class="curator-role">Chief Curator · VOID Gallery Seoul</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 티켓 -->
+<section id="ticket-section">
+  <div class="ticket-left">
+    <h2 class="ticket-title">전시 관람하기</h2>
+    <p class="ticket-subtitle">2024. 05. 10 — 08. 31 · 화–일 10:00–19:00</p>
+  </div>
+  <a href="#" class="ticket-btn">티켓 예매</a>
+</section>
+
+<footer>
+  <div class="footer-logo">Void Gallery</div>
+  <div class="footer-copy">© 2024 VOID Gallery. 서울시 종로구 삼청로 14</div>
+</footer>
+
+<script>
+(function() {
+  const v12_lenis = new Lenis({
+    duration: 1.35,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  // 진행 바
+  v12_lenis.on('scroll', ({ progress }) => {
+    document.getElementById('progress-bar').style.width = (progress * 100) + '%';
+  });
+
+  // 히어로 애니메이션
+  const v12_heroTl = gsap.timeline({ delay: 0.2 });
+  v12_heroTl
+    .to('.hero-label', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+    .to('.hero-title', { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, '-=0.4')
+    .to('.hero-bottom', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.3');
+
+  // ── 캔버스 아트 렌더링 ──
+  function v12_drawCanvas01() {
+    const v12_cv = document.getElementById('canvas-01');
+    const v12_ctx = v12_cv.getContext('2d');
+    const w = v12_cv.width, h = v12_cv.height;
+    v12_ctx.fillStyle = '#ede8e0';
+    v12_ctx.fillRect(0, 0, w, h);
+    // 미세한 붓터치 패턴
+    for (let i = 0; i < 2000; i++) {
+      const v12_x = Math.random() * w;
+      const v12_y = Math.random() * h;
+      const v12_r = Math.random() * 2.5 + 0.5;
+      const v12_a = Math.random() * 0.06 + 0.01;
+      v12_ctx.beginPath();
+      v12_ctx.arc(v12_x, v12_y, v12_r, 0, Math.PI * 2);
+      v12_ctx.fillStyle = `rgba(160,148,130,${v12_a})`;
+      v12_ctx.fill();
+    }
+    // 중앙 농도 집중
+    for (let i = 0; i < 800; i++) {
+      const v12_x = w/2 + (Math.random() - 0.5) * w * 0.5;
+      const v12_y = h/2 + (Math.random() - 0.5) * h * 0.4;
+      v12_ctx.beginPath();
+      v12_ctx.arc(v12_x, v12_y, Math.random() * 1.5, 0, Math.PI * 2);
+      v12_ctx.fillStyle = `rgba(120,108,90,${Math.random() * 0.08 + 0.02})`;
+      v12_ctx.fill();
+    }
+  }
+
+  function v12_drawCanvas02() {
+    const v12_cv = document.getElementById('canvas-02');
+    const v12_ctx = v12_cv.getContext('2d');
+    const w = v12_cv.width, h = v12_cv.height;
+    v12_ctx.fillStyle = '#0d0c0b';
+    v12_ctx.fillRect(0, 0, w, h);
+    // 주파수 바 시각화 (생성 예술)
+    for (let i = 0; i < 80; i++) {
+      const v12_x = (i / 80) * w;
+      const v12_barH = (Math.sin(i * 0.35) * 0.3 + Math.sin(i * 0.08) * 0.5 + 0.1) * h * 0.7;
+      const v12_a = 0.15 + Math.random() * 0.25;
+      v12_ctx.fillStyle = `rgba(201,169,110,${v12_a})`;
+      v12_ctx.fillRect(v12_x, h/2 - v12_barH/2, w/80 - 1, v12_barH);
+    }
+    // 중앙 선
+    v12_ctx.strokeStyle = 'rgba(201,169,110,0.18)';
+    v12_ctx.lineWidth = 1;
+    v12_ctx.beginPath();
+    v12_ctx.moveTo(0, h/2); v12_ctx.lineTo(w, h/2);
+    v12_ctx.stroke();
+  }
+
+  function v12_drawCanvas03() {
+    const v12_cv = document.getElementById('canvas-03');
+    const v12_ctx = v12_cv.getContext('2d');
+    const w = v12_cv.width, h = v12_cv.height;
+    v12_ctx.fillStyle = '#c8c0b0';
+    v12_ctx.fillRect(0, 0, w, h);
+    // 비 온 후 수면 반사
+    const v12_grad = v12_ctx.createLinearGradient(0, 0, 0, h);
+    v12_grad.addColorStop(0, 'rgba(200,216,228,0.7)');
+    v12_grad.addColorStop(0.4, 'rgba(180,200,216,0.4)');
+    v12_grad.addColorStop(1, 'rgba(140,155,160,0.3)');
+    v12_ctx.fillStyle = v12_grad;
+    v12_ctx.fillRect(0, h * 0.45, w, h * 0.55);
+    for (let i = 0; i < 40; i++) {
+      const v12_rx = Math.random() * w;
+      const v12_ry = h * 0.5 + Math.random() * h * 0.4;
+      const v12_rw = Math.random() * 30 + 8;
+      v12_ctx.beginPath();
+      v12_ctx.ellipse(v12_rx, v12_ry, v12_rw, v12_rw * 0.25, 0, 0, Math.PI * 2);
+      v12_ctx.strokeStyle = `rgba(255,255,255,${Math.random() * 0.2 + 0.05})`;
+      v12_ctx.lineWidth = 0.5;
+      v12_ctx.stroke();
+    }
+    // 빛 줄기
+    const v12_lGrad = v12_ctx.createRadialGradient(w*0.6, 0, 0, w*0.6, 0, h*0.8);
+    v12_lGrad.addColorStop(0, 'rgba(255,240,200,0.35)');
+    v12_lGrad.addColorStop(1, 'rgba(255,240,200,0)');
+    v12_ctx.fillStyle = v12_lGrad;
+    v12_ctx.fillRect(0, 0, w, h);
+  }
+
+  function v12_drawCanvas04() {
+    const v12_cv = document.getElementById('canvas-04');
+    const v12_ctx = v12_cv.getContext('2d');
+    const w = v12_cv.width, h = v12_cv.height;
+    v12_ctx.fillStyle = '#0a0908';
+    v12_ctx.fillRect(0, 0, w, h);
+    // 반투명 레이어들
+    const v12_colors = ['rgba(180,160,130,', 'rgba(100,120,150,', 'rgba(150,100,100,'];
+    for (let li = 0; li < 5; li++) {
+      const v12_c = v12_colors[li % 3];
+      for (let i = 0; i < 8; i++) {
+        const v12_y = li * (h/5) + i * (h/40);
+        v12_ctx.fillStyle = `${v12_c}${(0.04 + li * 0.01).toFixed(2)})`;
+        v12_ctx.fillRect(0, v12_y, w, h / 40 - 1);
+      }
+    }
+    // 가로 분리선들
+    for (let i = 0; i < 20; i++) {
+      const v12_y = (i / 20) * h;
+      v12_ctx.strokeStyle = `rgba(180,160,130,${0.03 + Math.random() * 0.04})`;
+      v12_ctx.lineWidth = 1;
+      v12_ctx.beginPath();
+      v12_ctx.moveTo(0, v12_y); v12_ctx.lineTo(w, v12_y);
+      v12_ctx.stroke();
+    }
+  }
+
+  v12_drawCanvas01();
+  v12_drawCanvas02();
+  v12_drawCanvas03();
+  v12_drawCanvas04();
+
+  // ── 작품 섹션별 pin + 텍스트 reveal ──
+  const v12_artSections = [
+    { id: '#art-01', glitchId: 'glitch-01', dark: false },
+    { id: '#art-02', glitchId: 'glitch-02', dark: true },
+    { id: '#art-03', glitchId: null, dark: false },
+    { id: '#art-04', glitchId: null, dark: true }
+  ];
+
+  v12_artSections.forEach(({ id, glitchId }) => {
+    const v12_section = document.querySelector(id);
+    if (!v12_section) return;
+    const v12_textEls = v12_section.querySelectorAll(
+      '.artwork-number, .artwork-title, .artwork-artist, .artwork-description, .artwork-tags'
+    );
+
+    ScrollTrigger.create({
+      trigger: v12_section,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1,
+      onUpdate: (self) => {
+        const p = self.progress;
+        // 텍스트 reveal 순차적으로
+        v12_textEls.forEach((el, i) => {
+          const v12_elP = Math.max(0, Math.min(1, (p - i * 0.08) / 0.35));
+          gsap.set(el, {
+            opacity: v12_elP,
+            y: (1 - v12_elP) * (30 - i * 5)
+          });
+        });
+
+        // SURPRISE: 글리치 효과 (작품 진입 시)
+        if (glitchId) {
+          const v12_glitch = document.getElementById(glitchId);
+          if (v12_glitch && p > 0.05 && p < 0.25) {
+            const v12_gA = Math.sin((p - 0.05) * Math.PI / 0.2) * 0.6;
+            gsap.set(v12_glitch, { opacity: v12_gA });
+            const v12_strips = v12_glitch.querySelectorAll('.glitch-strip');
+            v12_strips.forEach((s, i) => {
+              gsap.set(s, {
+                x: Math.sin((p * 200) + i * 2.4) * 30 + (i % 2 === 0 ? -20 : 20),
+                scaleX: 0.3 + Math.sin(p * 150 + i) * 0.7
+              });
+            });
+          } else if (v12_glitch) {
+            gsap.set(v12_glitch, { opacity: 0 });
+          }
+        }
+
+        // 이미지 패널 미세 parallax
+        const v12_imgPanel = v12_section.querySelector('.artwork-image-panel');
+        if (v12_imgPanel) {
+          gsap.set(v12_imgPanel.querySelector('.artwork-frame'), {
+            y: (p - 0.5) * -30
+          });
+        }
+      }
+    });
+  });
+
+  // 큐레이터 섹션 애니메이션
+  gsap.from('.curator-quote', {
+    opacity: 0, y: 48,
+    scrollTrigger: { trigger: '#curator', start: 'top 70%', end: 'top 30%', scrub: 1 }
+  });
+  gsap.from('.curator-bio', {
+    opacity: 0, y: 24,
+    scrollTrigger: { trigger: '#curator', start: 'top 55%', end: 'top 15%', scrub: 1 }
+  });
+
+  // 마그네틱 티켓 버튼
+  const v12_btn = document.querySelector('.ticket-btn');
+  v12_btn.addEventListener('mousemove', (e) => {
+    const r = v12_btn.getBoundingClientRect();
+    const v12_dx = e.clientX - (r.left + r.width / 2);
+    const v12_dy = e.clientY - (r.top + r.height / 2);
+    gsap.to(v12_btn, { x: v12_dx * 0.2, y: v12_dy * 0.2, duration: 0.4, ease: 'power2.out' });
+  });
+  v12_btn.addEventListener('mouseleave', () => {
+    gsap.to(v12_btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+  });
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YEON — Graphic Designer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f2f0ec;
+  --bg2: #e8e4de;
+  --text: #121110;
+  --muted: #8c8880;
+  --accent: #1a1a1a;
+  --tinted: rgba(18,17,16,0.06);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', -apple-system, sans-serif;
+}
+* { cursor: none; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* 커스텀 커서 */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: multiply;
+}
+#cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(18,17,16,0.35);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+body:has(.flip-card:hover) #cursor { width: 60px; height: 60px; background: rgba(18,17,16,0.12); }
+body:has(.flip-card:hover) #cursor-ring { opacity: 0; }
+
+/* Spotlight */
+#spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(600px circle at 50% 50%, rgba(255,248,230,0.35) 0%, transparent 70%);
+  transition: none;
+  mix-blend-mode: overlay;
+}
+
+/* 진행 바 */
+#progress-bar { position: fixed; top: 0; left: 0; height: 1px; width: 0%; background: var(--text); z-index: 1000; }
+
+/* 네비게이션 */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 52px;
+}
+.nav-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; letter-spacing: 0.1em; }
+.nav-status { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+/* 히어로 */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 0 52px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-bg-text {
+  position: absolute; top: 50%; left: -2%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(120px, 20vw, 260px);
+  font-weight: 300; letter-spacing: -0.04em;
+  color: var(--tinted); line-height: 1;
+  user-select: none; pointer-events: none;
+  white-space: nowrap;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 300; line-height: 1.05;
+  letter-spacing: -0.02em; max-width: 600px;
+  opacity: 0; transform: translateY(40px);
+}
+.hero-title em { font-style: italic; }
+.hero-desc {
+  margin-top: 28px; font-size: 0.85rem;
+  color: var(--muted); max-width: 380px; line-height: 1.9;
+  opacity: 0; transform: translateY(20px);
+}
+.hero-meta {
+  position: absolute; right: 52px; bottom: 80px;
+  text-align: right; opacity: 0;
+}
+.hero-meta p { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); line-height: 2.2; }
+
+/* Works 섹션 */
+#works { padding: 120px 52px; }
+.section-label {
+  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 64px;
+  display: flex; align-items: center; gap: 20px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--tinted); }
+
+/* Flip Card 그리드 */
+.cards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.flip-card {
+  aspect-ratio: 3/4; perspective: 1000px;
+  position: relative;
+}
+.flip-card-inner {
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+}
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.flip-card-front {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 28px;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: var(--text); color: var(--bg);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 36px;
+}
+.card-bg {
+  position: absolute; inset: 0;
+  transition: transform 0.8s ease;
+}
+.flip-card:hover .card-bg { transform: scale(1.04); }
+.card-label {
+  position: relative; z-index: 2;
+  font-size: 0.62rem; letter-spacing: 0.22em;
+  text-transform: uppercase; margin-bottom: 8px;
+  color: rgba(242,240,236,0.7);
+}
+.card-title {
+  position: relative; z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.2vw, 28px); font-weight: 400;
+  line-height: 1.2; color: var(--bg);
+}
+.back-category {
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(242,240,236,0.5); margin-bottom: 20px;
+}
+.back-title {
+  font-family: var(--font-display); font-size: 1.9rem; font-weight: 300;
+  line-height: 1.15; margin-bottom: 20px;
+}
+.back-desc { font-size: 0.78rem; line-height: 1.8; color: rgba(242,240,236,0.72); margin-bottom: 28px; }
+.back-year { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(242,240,236,0.4); }
+
+/* About */
+#about {
+  padding: 120px 52px; border-top: 1px solid rgba(18,17,16,0.1);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.about-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 58px); font-weight: 300;
+  line-height: 1.25; letter-spacing: -0.01em;
+}
+.about-title em { font-style: italic; }
+.about-text { font-size: 0.86rem; color: var(--muted); line-height: 2; margin-top: 20px; }
+.skills-list { display: flex; flex-direction: column; gap: 1px; }
+.skill-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; border-bottom: 1px solid rgba(18,17,16,0.08);
+}
+.skill-name { font-size: 0.88rem; }
+.skill-bar { width: 140px; height: 1px; background: rgba(18,17,16,0.12); position: relative; }
+.skill-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--text); }
+
+footer {
+  padding: 48px 52px; border-top: 1px solid rgba(18,17,16,0.1);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-contact {
+  font-family: var(--font-display); font-size: clamp(24px, 4vw, 52px);
+  font-weight: 300; color: var(--text); text-decoration: none;
+  letter-spacing: -0.01em; will-change: transform;
+}
+.footer-copy { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.12em; }
+
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  #hero { padding: 0 24px 56px; }
+  .cards-grid { grid-template-columns: 1fr 1fr; }
+  #about { grid-template-columns: 1fr; padding: 80px 24px; }
+  #works { padding: 80px 24px; }
+  footer { flex-direction: column; gap: 20px; padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="spotlight"></div>
+
+<nav>
+  <div class="nav-name">Yeon Studio</div>
+  <div class="nav-status">Available for 2024 →</div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-text" aria-hidden="true">DESIGN</div>
+  <h1 class="hero-title">그래픽<br><em>디자이너</em><br>연지현</h1>
+  <p class="hero-desc">브랜드 아이덴티티와 타이포그래피를 중심으로 — 눈에 보이는 모든 것에 의미를 만듭니다.</p>
+  <div class="hero-meta">
+    <p>Seoul, Korea</p>
+    <p>Graphic Design / Branding</p>
+    <p>2018 — Present</p>
+  </div>
+</section>
+
+<section id="works">
+  <p class="section-label">Selected Works</p>
+  <div class="cards-grid">
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="card-bg" style="background: linear-gradient(145deg, #2a2420, #1a1510);"></div>
+          <p class="card-label">Branding</p>
+          <h3 class="card-title">Bloom<br>Coffee</h3>
+        </div>
+        <div class="flip-card-back">
+          <p class="back-category">Brand Identity</p>
+          <h3 class="back-title">Bloom Coffee Roasters</h3>
+          <p class="back-desc">제주 스페셜티 커피 브랜드의 아이덴티티. 커피 체리의 생장 주기에서 영감 받은 유기적 그래픽 시스템.</p>
+          <p class="back-year">2024</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="card-bg" style="background: linear-gradient(160deg, #1c2a3a, #0f1a28);"></div>
+          <p class="card-label">Editorial</p>
+          <h3 class="card-title">Silence<br>Magazine</h3>
+        </div>
+        <div class="flip-card-back">
+          <p class="back-category">Editorial Design</p>
+          <h3 class="back-title">Silence Magazine</h3>
+          <p class="back-desc">느림과 침묵을 다루는 계간 문화잡지. 여백의 미학을 그리드 시스템에 적용한 에디토리얼 디자인.</p>
+          <p class="back-year">2023</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="card-bg" style="background: linear-gradient(135deg, #2e1a10, #1e1008);"></div>
+          <p class="card-label">Packaging</p>
+          <h3 class="card-title">Ceramic<br>Studio</h3>
+        </div>
+        <div class="flip-card-back">
+          <p class="back-category">Package Design</p>
+          <h3 class="back-title">흙작업실 패키지</h3>
+          <p class="back-desc">핸드메이드 도자기 공방의 패키지 시스템. 흙의 질감을 종이와 인쇄 기법으로 번역한 촉각적 디자인.</p>
+          <p class="back-year">2023</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="card-bg" style="background: linear-gradient(150deg, #141c2a, #0c121e);"></div>
+          <p class="card-label">Motion</p>
+          <h3 class="card-title">NABI<br>Festival</h3>
+        </div>
+        <div class="flip-card-back">
+          <p class="back-category">Motion Identity</p>
+          <h3 class="back-title">나비 문화축제</h3>
+          <p class="back-desc">전통 민화의 나비 문양을 현대적 모션 그래픽으로 해석한 문화 페스티벌 비주얼 시스템.</p>
+          <p class="back-year">2022</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="card-bg" style="background: linear-gradient(140deg, #1e2018, #141612);"></div>
+          <p class="card-label">Type Design</p>
+          <h3 class="card-title">Hangul<br>Variable</h3>
+        </div>
+        <div class="flip-card-back">
+          <p class="back-category">Typography</p>
+          <h3 class="back-title">한글 가변 서체 연구</h3>
+          <p class="back-desc">한글 자소의 가변 폰트 가능성 탐구. 획의 굵기와 기울기가 실시간으로 변화하는 실험적 서체 프로젝트.</p>
+          <p class="back-year">2022</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="card-bg" style="background: linear-gradient(155deg, #28201a, #1a140e);"></div>
+          <p class="card-label">Identity</p>
+          <h3 class="card-title">Avant<br>Gallery</h3>
+        </div>
+        <div class="flip-card-back">
+          <p class="back-category">Visual Identity</p>
+          <h3 class="back-title">Avant Contemporary Gallery</h3>
+          <p class="back-desc">현대미술 갤러리의 유동적 아이덴티티. 매 전시마다 변화하는 로고 시스템과 고정된 타이포그래피의 공존.</p>
+          <p class="back-year">2021</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <div>
+    <h2 class="about-title">디자인은<br><em>질문이다</em></h2>
+    <p class="about-text">
+      브랜드가 세상에 던지는 질문 — 그것을 가장 정확하고 아름다운 형태로 시각화하는 일.
+      그것이 제가 매일 하는 일입니다.
+    </p>
+  </div>
+  <div class="skills-list">
+    <div class="skill-item">
+      <span class="skill-name">Brand Identity</span>
+      <div class="skill-bar"><div class="skill-fill" style="width: 92%;"></div></div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-name">Editorial Design</span>
+      <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-name">Motion Graphics</span>
+      <div class="skill-bar"><div class="skill-fill" style="width: 78%;"></div></div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-name">Type Design</span>
+      <div class="skill-bar"><div class="skill-fill" style="width: 65%;"></div></div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-name">Packaging</span>
+      <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="mailto:yeon@studio.kr" class="footer-contact">Let's work →</a>
+  <div class="footer-copy">© 2024 Yeon Studio</div>
+</footer>
+
+<script>
+(function() {
+  const v12_lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  v12_lenis.on('scroll', ({ progress }) => {
+    document.getElementById('progress-bar').style.width = (progress * 100) + '%';
+  });
+
+  // 커스텀 커서
+  const v12_cursor = document.getElementById('cursor');
+  const v12_ring = document.getElementById('cursor-ring');
+  const v12_spotlight = document.getElementById('spotlight');
+  let v12_mx = 0, v12_my = 0;
+  let v12_rx = 0, v12_ry = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    v12_mx = e.clientX; v12_my = e.clientY;
+    gsap.set(v12_cursor, { x: v12_mx, y: v12_my });
+    // Spotlight 효과 (SURPRISE)
+    v12_spotlight.style.background = `radial-gradient(500px circle at ${v12_mx}px ${v12_my}px, rgba(255,248,200,0.3) 0%, transparent 70%)`;
+  });
+
+  // 링 커서 지연
+  gsap.ticker.add(() => {
+    v12_rx += (v12_mx - v12_rx) * 0.12;
+    v12_ry += (v12_my - v12_ry) * 0.12;
+    gsap.set(v12_ring, { x: v12_rx, y: v12_ry });
+  });
+
+  // 히어로 애니메이션
+  gsap.timeline({ delay: 0.3 })
+    .to('.hero-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+    .to('.hero-desc', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+    .to('.hero-meta', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.4');
+
+  // 카드 진입 애니메이션
+  document.querySelectorAll('.flip-card').forEach((card, i) => {
+    gsap.from(card, {
+      opacity: 0, y: 40, scale: 0.97,
+      scrollTrigger: { trigger: card, start: 'top 82%', end: 'top 55%', scrub: 1 }
+    });
+  });
+
+  // 스킬 바 애니메이션
+  document.querySelectorAll('.skill-fill').forEach(fill => {
+    const targetW = fill.style.width;
+    fill.style.width = '0%';
+    gsap.to(fill, {
+      width: targetW,
+      scrollTrigger: { trigger: fill, start: 'top 80%', end: 'top 50%', scrub: 1 }
+    });
+  });
+
+  // About 섹션
+  gsap.from('.about-title', {
+    opacity: 0, y: 40,
+    scrollTrigger: { trigger: '#about', start: 'top 72%', end: 'top 40%', scrub: 1 }
+  });
+  gsap.from('.about-text', {
+    opacity: 0, y: 24,
+    scrollTrigger: { trigger: '#about', start: 'top 65%', end: 'top 35%', scrub: 1 }
+  });
+
+  // 마그네틱 footer contact
+  const v12_fc = document.querySelector('.footer-contact');
+  v12_fc.addEventListener('mousemove', (e) => {
+    const r = v12_fc.getBoundingClientRect();
+    const v12_dx = e.clientX - (r.left + r.width / 2);
+    const v12_dy = e.clientY - (r.top + r.height / 2);
+    gsap.to(v12_fc, { x: v12_dx * 0.22, y: v12_dy * 0.22, duration: 0.4, ease: 'power2.out' });
+  });
+  v12_fc.addEventListener('mouseleave', () => {
+    gsap.to(v12_fc, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+  });
+})();
+</script>
+</body>
+</html>

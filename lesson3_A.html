@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARKH Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      oklch(8%  0.01 260);
+      --fg:      oklch(94% 0.01 260);
+      --accent:  oklch(75% 0.18  45);
+      --muted:   oklch(42% 0.02 260);
+      --line:    oklch(18% 0.02 260);
+    }
+
+    html { background: var(--bg); }
+
+    body {
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+
+    /* progress */
+    #v12_progress {
+      position: fixed; top: 0; left: 0;
+      height: 1px; width: 0%;
+      background: var(--accent);
+      z-index: 1000;
+      will-change: width;
+    }
+
+    /* side decoration */
+    .v12_side_text {
+      position: fixed; left: 20px; top: 50%;
+      transform: translateY(-50%) rotate(180deg);
+      writing-mode: vertical-rl;
+      font-size: 9px; letter-spacing: 0.3em;
+      color: var(--line);
+      pointer-events: none; z-index: 50;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; padding: 32px 56px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+
+    .nav-logo {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px; font-weight: 400;
+      letter-spacing: 0.3em; color: var(--fg);
+    }
+
+    .nav-right {
+      display: flex; gap: 40px; align-items: center;
+    }
+
+    .nav-tag {
+      font-size: 10px; letter-spacing: 0.2em;
+      color: var(--muted); font-family: 'Space Mono', monospace;
+    }
+
+    /* hero */
+    .hero {
+      height: 100vh; display: flex;
+      align-items: flex-end; padding: 0 56px 72px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 64px; width: 100%; align-items: end;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px; letter-spacing: 0.3em;
+      color: var(--muted); margin-bottom: 28px;
+      font-family: 'Space Mono', monospace;
+      opacity: 0; transform: translateY(16px);
+      will-change: transform, opacity;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(52px, 9vw, 128px);
+      font-weight: 700; line-height: 0.88;
+      color: var(--fg);
+    }
+
+    .hero-title-line {
+      display: block; overflow: hidden;
+    }
+
+    .hero-title-inner {
+      display: block;
+      transform: translateY(110%);
+      will-change: transform;
+    }
+
+    .hero-title-inner em {
+      font-style: italic; color: var(--accent);
+    }
+
+    .hero-meta-row {
+      display: flex; gap: 48px;
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid var(--line);
+      opacity: 0; transform: translateY(16px);
+      will-change: transform, opacity;
+    }
+
+    .hero-meta-item {
+      font-size: 10px; letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .hero-meta-item span {
+      display: block; color: var(--fg);
+      font-size: 13px; margin-top: 6px; font-weight: 400;
+    }
+
+    .hero-vert {
+      writing-mode: vertical-rl;
+      font-size: 10px; letter-spacing: 0.28em;
+      color: var(--muted); font-weight: 300;
+      font-family: 'Space Mono', monospace;
+      padding-bottom: 6px;
+    }
+
+    .scroll-cue {
+      position: absolute; bottom: 36px; right: 56px;
+      font-size: 9px; letter-spacing: 0.22em;
+      color: var(--muted); display: flex;
+      align-items: center; gap: 14px;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .scroll-cue::before {
+      content: '';
+      width: 48px; height: 1px; background: var(--muted);
+    }
+
+    /* horizontal gallery */
+    #v12_hpin {
+      height: 100vh; overflow: hidden;
+    }
+
+    #v12_htrack {
+      display: flex; width: max-content;
+      will-change: transform;
+    }
+
+    .p-card {
+      width: 58vw; height: 100vh;
+      flex-shrink: 0;
+      padding: 100px 56px 72px;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--line);
+      position: relative; cursor: pointer;
+    }
+
+    .p-card:first-child { padding-left: 56px; }
+
+    .p-coord {
+      position: absolute; top: 100px; right: 56px;
+      font-size: 9px; line-height: 1.9;
+      color: var(--muted); text-align: right;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.1em;
+    }
+
+    .p-img-wrap {
+      flex: 1; position: relative;
+      overflow: hidden; margin-bottom: 36px;
+    }
+
+    .p-img {
+      width: 100%; height: 100%; object-fit: cover;
+      will-change: transform;
+      /* AESTHETIC_PINCH: fading memory edges */
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%, black 10%,
+        black 82%, transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%, black 10%,
+        black 82%, transparent 100%
+      );
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .p-card:hover .p-img { transform: scale(1.05); }
+
+    /* SURPRISE: blueprint overlay (VISUAL_SPARK — conceptual art) */
+    .p-blueprint {
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .p-card:hover .p-blueprint { opacity: 1; }
+
+    .p-info { position: relative; }
+
+    .p-num {
+      font-size: 9px; letter-spacing: 0.28em;
+      color: var(--muted); margin-bottom: 14px;
+      font-family: 'Space Mono', monospace;
+      opacity: 0; transform: translateY(18px);
+      will-change: transform, opacity;
+    }
+
+    .p-name {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(26px, 3.2vw, 44px);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 22px; overflow: hidden;
+    }
+
+    .p-name-inner {
+      display: block;
+      transform: translateY(105%);
+      will-change: transform;
+    }
+
+    .p-details {
+      display: flex; gap: 40px;
+      opacity: 0; transform: translateY(14px);
+      will-change: transform, opacity;
+    }
+
+    .p-detail {
+      font-size: 10px; letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    .p-detail span {
+      display: block; color: var(--fg);
+      font-size: 12px; margin-top: 5px; font-weight: 400;
+    }
+
+    /* end section */
+    .end-sec {
+      height: 100vh; display: flex;
+      align-items: center; justify-content: center;
+      padding: 56px; position: relative;
+    }
+
+    .end-inner {
+      text-align: center; max-width: 560px;
+    }
+
+    .end-pre {
+      font-size: 10px; letter-spacing: 0.3em;
+      color: var(--muted); margin-bottom: 28px;
+      font-family: 'Space Mono', monospace;
+      opacity: 0; transform: translateY(16px);
+      will-change: transform, opacity;
+    }
+
+    .end-h {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(30px, 4.5vw, 60px);
+      font-weight: 700; line-height: 1.2;
+      margin-bottom: 28px;
+      opacity: 0; transform: translateY(36px);
+      will-change: transform, opacity;
+    }
+
+    .end-p {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.85; margin-bottom: 48px;
+      font-weight: 300;
+      opacity: 0; transform: translateY(20px);
+      will-change: transform, opacity;
+    }
+
+    .end-btn {
+      display: inline-flex; align-items: center;
+      gap: 16px; padding: 15px 32px;
+      border: 1px solid var(--line);
+      font-size: 11px; letter-spacing: 0.22em;
+      color: var(--fg); text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      opacity: 0; transform: translateY(14px);
+      will-change: transform, opacity;
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .end-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    /* footer */
+    footer {
+      padding: 40px 56px;
+      border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .ft-logo {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 12px; letter-spacing: 0.25em;
+      color: var(--muted); font-weight: 400;
+    }
+
+    .ft-copy {
+      font-size: 10px; color: var(--muted);
+      letter-spacing: 0.12em;
+      font-family: 'Space Mono', monospace;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 24px; }
+      .hero { padding: 0 24px 60px; }
+      .hero-title { font-size: 40px; }
+      .p-card { width: 88vw; padding: 80px 24px 60px; }
+      .p-coord { right: 24px; }
+      footer { flex-direction: column; gap: 14px; text-align: center; }
+      .v12_side_text { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="v12_progress"></div>
+  <div class="v12_side_text">ARKH STUDIO — SPACE &amp; STRUCTURE — 2014</div>
+
+  <nav>
+    <div class="nav-logo">ARKH</div>
+    <div class="nav-right">
+      <span class="nav-tag">포트폴리오 2020–2024</span>
+    </div>
+  </nav>
+
+  <section class="hero" id="v12_hero">
+    <svg class="hero-grid" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="25" y1="0" x2="25" y2="100" stroke="oklch(16% 0.01 260)" stroke-width="0.08" vector-effect="non-scaling-stroke"/>
+      <line x1="50" y1="0" x2="50" y2="100" stroke="oklch(16% 0.01 260)" stroke-width="0.08" vector-effect="non-scaling-stroke"/>
+      <line x1="75" y1="0" x2="75" y2="100" stroke="oklch(16% 0.01 260)" stroke-width="0.08" vector-effect="non-scaling-stroke"/>
+      <line x1="0" y1="40" x2="100" y2="40" stroke="oklch(16% 0.01 260)" stroke-width="0.08" vector-effect="non-scaling-stroke"/>
+      <line x1="0" y1="70" x2="100" y2="70" stroke="oklch(16% 0.01 260)" stroke-width="0.08" vector-effect="non-scaling-stroke"/>
+    </svg>
+
+    <div class="hero-content">
+      <div>
+        <div class="hero-eyebrow" id="v12_h_eye">ARCHITECTURE &amp; SPATIAL DESIGN</div>
+        <h1 class="hero-title">
+          <span class="hero-title-line">
+            <span class="hero-title-inner" id="v12_tl1">공간이</span>
+          </span>
+          <span class="hero-title-line">
+            <span class="hero-title-inner" id="v12_tl2"><em>말한다</em></span>
+          </span>
+        </h1>
+        <div class="hero-meta-row" id="v12_h_meta">
+          <div class="hero-meta-item">설립<span>2014</span></div>
+          <div class="hero-meta-item">완공<span>47</span></div>
+          <div class="hero-meta-item">도시<span>서울 · 도쿄 · 베를린</span></div>
+        </div>
+      </div>
+      <div class="hero-vert">IMMERSIVE SPACE / ARCHITECTURE / INTERIOR</div>
+    </div>
+
+    <div class="scroll-cue">SCROLL TO EXPLORE</div>
+  </section>
+
+  <div id="v12_hpin">
+    <div id="v12_htrack">
+
+      <div class="p-card" data-idx="0">
+        <div class="p-coord">37°33′N<br>126°59′E</div>
+        <div class="p-img-wrap">
+          <img class="p-img" src="https://picsum.photos/seed/arkh1/960/640" alt="침묵의 집">
+          <svg class="p-blueprint" viewBox="0 0 960 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect x="48" y="48" width="864" height="544" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.6" opacity="0.55"/>
+            <line x1="48" y1="320" x2="912" y2="320" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.35"/>
+            <line x1="480" y1="48" x2="480" y2="592" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.35"/>
+            <circle cx="480" cy="320" r="130" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.28"/>
+            <text x="58" y="68" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">A-101 / PLAN VIEW</text>
+            <text x="58" y="582" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">SCALE 1:100 — HOUSE OF SILENCE</text>
+          </svg>
+        </div>
+        <div class="p-info">
+          <div class="p-num">01 / 05</div>
+          <h2 class="p-name"><span class="p-name-inner">침묵의 집</span></h2>
+          <div class="p-details">
+            <div class="p-detail">위치<span>서울, 성북구</span></div>
+            <div class="p-detail">연도<span>2024</span></div>
+            <div class="p-detail">규모<span>340㎡</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-idx="1">
+        <div class="p-coord">35°41′N<br>139°41′E</div>
+        <div class="p-img-wrap">
+          <img class="p-img" src="https://picsum.photos/seed/arkh2/960/640" alt="유리 자오선">
+          <svg class="p-blueprint" viewBox="0 0 960 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect x="80" y="72" width="800" height="496" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.6" opacity="0.55"/>
+            <line x1="80" y1="72" x2="880" y2="568" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.28"/>
+            <line x1="880" y1="72" x2="80" y2="568" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.28"/>
+            <rect x="320" y="200" width="320" height="240" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.4"/>
+            <text x="90" y="92" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">B-202 / SECTION</text>
+            <text x="90" y="558" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">GLASS MERIDIAN — TOKYO</text>
+          </svg>
+        </div>
+        <div class="p-info">
+          <div class="p-num">02 / 05</div>
+          <h2 class="p-name"><span class="p-name-inner">유리 자오선</span></h2>
+          <div class="p-details">
+            <div class="p-detail">위치<span>도쿄, 미나토구</span></div>
+            <div class="p-detail">연도<span>2023</span></div>
+            <div class="p-detail">규모<span>1,200㎡</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-idx="2">
+        <div class="p-coord">52°31′N<br>13°24′E</div>
+        <div class="p-img-wrap">
+          <img class="p-img" src="https://picsum.photos/seed/arkh3/960/640" alt="콘크리트 시">
+          <svg class="p-blueprint" viewBox="0 0 960 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect x="56" y="56" width="848" height="528" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.6" opacity="0.55"/>
+            <rect x="180" y="160" width="220" height="320" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.4"/>
+            <rect x="560" y="160" width="220" height="320" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.4"/>
+            <line x1="56" y1="320" x2="904" y2="320" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.2"/>
+            <text x="66" y="76" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">C-303 / ELEVATION</text>
+            <text x="66" y="574" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">CONCRETE POEM — BERLIN</text>
+          </svg>
+        </div>
+        <div class="p-info">
+          <div class="p-num">03 / 05</div>
+          <h2 class="p-name"><span class="p-name-inner">콘크리트 시</span></h2>
+          <div class="p-details">
+            <div class="p-detail">위치<span>베를린, 미테</span></div>
+            <div class="p-detail">연도<span>2022</span></div>
+            <div class="p-detail">규모<span>890㎡</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-idx="3">
+        <div class="p-coord">37°34′N<br>126°58′E</div>
+        <div class="p-img-wrap">
+          <img class="p-img" src="https://picsum.photos/seed/arkh4/960/640" alt="보이드 정원">
+          <svg class="p-blueprint" viewBox="0 0 960 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect x="64" y="64" width="832" height="512" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.6" opacity="0.55"/>
+            <ellipse cx="480" cy="320" rx="300" ry="190" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.38"/>
+            <ellipse cx="480" cy="320" rx="150" ry="95" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.28"/>
+            <circle cx="480" cy="320" r="30" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.8" opacity="0.7"/>
+            <text x="74" y="84" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">D-404 / ROOF PLAN</text>
+            <text x="74" y="566" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">VOID GARDEN — SEOUL</text>
+          </svg>
+        </div>
+        <div class="p-info">
+          <div class="p-num">04 / 05</div>
+          <h2 class="p-name"><span class="p-name-inner">보이드 정원</span></h2>
+          <div class="p-details">
+            <div class="p-detail">위치<span>서울, 마포구</span></div>
+            <div class="p-detail">연도<span>2024</span></div>
+            <div class="p-detail">규모<span>560㎡</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-idx="4">
+        <div class="p-coord">55°41′N<br>12°34′E</div>
+        <div class="p-img-wrap">
+          <img class="p-img" src="https://picsum.photos/seed/arkh5/960/640" alt="문턱">
+          <svg class="p-blueprint" viewBox="0 0 960 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect x="48" y="48" width="864" height="544" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="0.6" opacity="0.55"/>
+            <line x1="48" y1="48"  x2="480" y2="320" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.3"/>
+            <line x1="912" y1="48"  x2="480" y2="320" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.3"/>
+            <line x1="48" y1="592" x2="480" y2="320" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.3"/>
+            <line x1="912" y1="592" x2="480" y2="320" stroke="oklch(75% 0.18 45)" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="480" cy="320" r="28" fill="none" stroke="oklch(75% 0.18 45)" stroke-width="1" opacity="0.85"/>
+            <text x="58" y="68" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">E-505 / PERSPECTIVE</text>
+            <text x="58" y="582" fill="oklch(75% 0.18 45)" font-size="9" font-family="'Space Mono',monospace" opacity="0.75">THE THRESHOLD — COPENHAGEN</text>
+          </svg>
+        </div>
+        <div class="p-info">
+          <div class="p-num">05 / 05</div>
+          <h2 class="p-name"><span class="p-name-inner">문턱</span></h2>
+          <div class="p-details">
+            <div class="p-detail">위치<span>코펜하겐, 외레스타드</span></div>
+            <div class="p-detail">연도<span>2023</span></div>
+            <div class="p-detail">규모<span>2,100㎡</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="end-sec">
+    <div class="end-inner">
+      <p class="end-pre" id="v12_e_pre">CONTACT US</p>
+      <h2 class="end-h" id="v12_e_h">새로운 공간을<br>함께 만들어요</h2>
+      <p class="end-p" id="v12_e_p">
+        건축은 건물을 짓는 일이 아닙니다.<br>
+        사람과 공간, 빛과 그림자가 만나는 이야기를 설계합니다.
+      </p>
+      <a href="mailto:contact@arkh.studio" class="end-btn" id="v12_e_btn">
+        프로젝트 문의하기
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-logo">ARKH STUDIO</div>
+    <div class="ft-copy">© 2024 ARKH STUDIO. ALL RIGHTS RESERVED.</div>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const v12_lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    v12_lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // progress bar
+    gsap.to('#v12_progress', {
+      width: '100%', ease: 'none',
+      scrollTrigger: { start: 'top top', end: 'bottom bottom', scrub: 1 }
+    });
+
+    // hero entrance
+    const v12_heroTl = gsap.timeline({ delay: 0.2 });
+    v12_heroTl
+      .to('#v12_tl1', { y: '0%', duration: 1.1, ease: 'power4.out' })
+      .to('#v12_tl2', { y: '0%', duration: 1.1, ease: 'power4.out' }, '-=0.75')
+      .to('#v12_h_eye',  { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+      .to('#v12_h_meta', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4');
+
+    // horizontal scroll
+    const v12_track = document.getElementById('v12_htrack');
+
+    const v12_hScrollTween = gsap.to(v12_track, {
+      x: () => -(v12_track.scrollWidth - window.innerWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#v12_hpin',
+        start: 'top top',
+        end: () => `+=${v12_track.scrollWidth - window.innerWidth}`,
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    // per-card reveal via containerAnimation
+    document.querySelectorAll('.p-card').forEach((card) => {
+      const v12_num     = card.querySelector('.p-num');
+      const v12_inner   = card.querySelector('.p-name-inner');
+      const v12_details = card.querySelector('.p-details');
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: card,
+          containerAnimation: v12_hScrollTween,
+          start: 'left 88%',
+          end: 'left 40%',
+          scrub: 1
+        }
+      })
+      .to(v12_num,     { opacity: 1, y: 0, duration: 0.6 })
+      .to(v12_inner,   { y: '0%', duration: 0.8, ease: 'power3.out' }, '<0.2')
+      .to(v12_details, { opacity: 1, y: 0, duration: 0.6 }, '<0.2');
+    });
+
+    // end section
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.end-sec',
+        start: 'top 72%', end: 'top 28%', scrub: 1
+      }
+    })
+    .to('#v12_e_pre', { opacity: 1, y: 0, duration: 0.5 })
+    .to('#v12_e_h',   { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '<0.2')
+    .to('#v12_e_p',   { opacity: 1, y: 0, duration: 0.7 }, '<0.2')
+    .to('#v12_e_btn', { opacity: 1, y: 0, duration: 0.5 }, '<0.2');
+
+    window.addEventListener('resize', () => ScrollTrigger.refresh());
+  </script>
+</body>
+</html>
