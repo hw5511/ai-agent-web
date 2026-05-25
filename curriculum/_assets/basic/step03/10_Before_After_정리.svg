@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 03 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.015em">핵심 정리</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">같은 뼈대, 전혀 다른 옷 · 클래스로 재사용</text>
+  <rect x="60" y="212" width="1160" height="1" fill="#e5e7eb"/>
+
+  <!-- 좌측: 오늘 가져갈 것 -->
+  <text x="60" y="258" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 가져갈 것</text>
+
+  <text x="80" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">색은 분위기로 시킨다 · '다크', '웜', '미니멀'</text>
+
+  <text x="80" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">폰트는 Google Fonts에서 한 줄로 가져온다</text>
+
+  <text x="80" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#16a34a">─</text>
+  <text x="120" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">CSS 클래스·컴포넌트로 스타일을 재사용·통일한다</text>
+
+  <text x="80" y="468" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="468" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">여백은 padding·margin으로 숨통을 튼다</text>
+
+  <!-- 그린 구분선 -->
+  <rect x="60" y="506" width="80" height="3" rx="1.5" fill="#16a34a"/>
+
+  <!-- Before / After 한 줄 비교 -->
+  <text x="60" y="548" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">변화</text>
+  <text x="60" y="582" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#374151">Before · 흰 배경 + 시스템 폰트 + 빡빡한 여백</text>
+  <text x="60" y="610" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#374151">After  · 다크 분위기 + Inter·Noto Sans KR + 트인 여백</text>
+
+  <!-- 다음 회차 안내 -->
+  <text x="60" y="668" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">다음 회차 · WEB 04 · JavaScript — 버튼을 누르면 반응하는 페이지</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 03 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">CSS 클래스란</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">CSS도 '표시(markup)'하는 언어다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 좌: 핵심 글머리 -->
+  <text x="80" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" fill="#9ca3af">─</text>
+  <text x="120" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">HTML은 '의미'를 표시했다면, CSS는 '스타일'을 표시한다</text>
+
+  <text x="80" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" fill="#9ca3af">─</text>
+  <text x="120" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">클래스 = 글자를 이런 색·이런 크기로 정리해 이름 붙여두는 것</text>
+
+  <text x="80" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" fill="#9ca3af">─</text>
+  <text x="120" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">한 번 정의한 클래스를 여러 요소에 재사용</text>
+
+  <text x="80" y="474" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" fill="#9ca3af">─</text>
+  <text x="120" y="474" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">글자뿐 아니라 박스·버튼 등 시각 요소까지 디자인</text>
+
+  <!-- 그린 핵심 한 줄 -->
+  <text x="60" y="612" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#16a34a">스타일에 '이름표'를 붙여 재사용하는 것</text>
+
+  <!-- 우: 시각 예시 카드 (한 클래스를 여러 요소에 재사용) -->
+  <rect x="700" y="296" width="520" height="320" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+
+  <text x="724" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">클래스 한 번 정의</text>
+  <text x="724" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="700" fill="#171717">.btn</text>
+  <text x="784" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">= 짙은 배경·둥근 모서리·밝은 글자</text>
+
+  <!-- 같은 클래스를 적용한 버튼 3개 (재사용) -->
+  <rect x="724" y="410" width="130" height="44" rx="8" fill="#171717"/>
+  <rect x="748" y="429" width="82" height="6" rx="3" fill="#ffffff"/>
+
+  <rect x="874" y="410" width="130" height="44" rx="8" fill="#171717"/>
+  <rect x="898" y="429" width="82" height="6" rx="3" fill="#ffffff"/>
+
+  <rect x="1024" y="410" width="130" height="44" rx="8" fill="#171717"/>
+  <rect x="1048" y="429" width="82" height="6" rx="3" fill="#ffffff"/>
+
+  <!-- 라벨: 각 버튼 .btn -->
+  <text x="789" y="480" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">.btn</text>
+  <text x="939" y="480" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">.btn</text>
+  <text x="1089" y="480" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">.btn</text>
+
+  <line x1="724" y1="518" x2="1196" y2="518" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 캡션 -->
+  <text x="724" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#171717">같은 클래스 → 어디서나 똑같이</text>
+  <text x="724" y="590" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">한 번 정의하면 버튼 수십 개도 일관된 모양</text>
+</svg>
