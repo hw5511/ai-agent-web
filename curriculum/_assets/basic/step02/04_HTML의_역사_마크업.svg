@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 02</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">왜 'Markup(표시)' 언어일까</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">HTML 이름 안에 답이 들어 있다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Hero: HyperText Markup Language (Markup 강조 + 밑줄) -->
+  <text x="60" y="270" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="700"><tspan fill="#9ca3af" font-weight="400">HyperText </tspan><tspan fill="#16a34a">Markup</tspan><tspan fill="#9ca3af" font-weight="400"> Language</tspan></text>
+  <rect x="201" y="281" width="118" height="3" rx="1.5" fill="#16a34a"/>
+
+  <!-- 스토리 글머리 -->
+  <text x="80" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">논문·문서를 인터넷으로 서로 공유해 보고 싶었다</text>
+
+  <text x="80" y="386" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="386" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">종이의 글을 컴퓨터로 옮기니 — 밋밋한 텍스트뿐</text>
+
+  <text x="80" y="434" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="434" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">눈으로 볼 때 어디가 제목·본문인지 모른다</text>
+
+  <text x="80" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">"여기는 제목, 이 단어는 굵게" 표시해두면?</text>
+
+  <!-- 정의 -->
+  <text x="60" y="566" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">그래서 마크업이란</text>
+  <text x="60" y="606" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="25" font-weight="700" fill="#16a34a">문서의 구조와 배치를 '표시(markup)'하는 언어</text>
+  <text x="60" y="642" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">→ 그 '표시'를 맡는 게 다음에 배울 시맨틱 태그</text>
+
+  <!-- 시각 예시 카드: 표시 전 → 표시 후 -->
+  <rect x="700" y="296" width="520" height="320" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+
+  <text x="724" y="334" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">표시 전 · 그냥 텍스트</text>
+  <rect x="724" y="350" width="220" height="12" rx="2" fill="#e5e7eb"/>
+  <rect x="724" y="372" width="220" height="12" rx="2" fill="#e5e7eb"/>
+  <rect x="724" y="394" width="170" height="12" rx="2" fill="#e5e7eb"/>
+
+  <text x="960" y="438" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" fill="#9ca3af">↓</text>
+
+  <text x="724" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">표시 후 · 구조가 보인다</text>
+  <rect x="724" y="500" width="240" height="22" rx="3" fill="#171717"/>
+  <rect x="724" y="536" width="300" height="11" rx="2" fill="#9ca3af"/>
+  <rect x="724" y="556" width="120" height="11" rx="2" fill="#9ca3af"/>
+  <rect x="852" y="553" width="74" height="15" rx="3" fill="#171717"/>
+  <rect x="934" y="556" width="90" height="11" rx="2" fill="#9ca3af"/>
+  <text x="1196" y="600" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">제목 크게 · 본문 작게 · 강조는 굵게</text>
+</svg>
