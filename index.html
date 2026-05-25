@@ -1055,285 +1055,297 @@
                 badgeText: 'BASIC',
                 title: 'AI Agent Web 기초 과정',
                 sessions: [
-                    {
-                        num: 1, title: '웹의 언어를 만나다', hours: '2시간',
-                        goal: 'HTML/CSS/JS의 역할을 이해하고 클로드 지시로 랜딩페이지를 완성한다.',
-                        topics: ['HTML — 뼈대 (구조)', 'CSS — 스타일 (디자인)', 'JS — 행동 (인터랙션)', '클로드에게 지시하는 기본 워크플로우', '투박하게 시작 → CSS 입히면서 달라지는 과정 체감'],
-                        practice: '클로드로 랜딩페이지를 생성하고 CSS를 단계별로 추가하며 변화를 확인한다.',
-                        slides: ['01_오늘의_목표.svg','02_HTML_CSS_JS_역할분담.svg','03_실습1_HTML_뼈대_생성.svg','04_CSS_스타일_체계.svg','05_실습2_CSS_스타일_입히기.svg','06_JS의_역할.svg','07_실습3_JS_인터랙션.svg','08_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '1회차 목표와 수업 흐름을 안내한다.', topics: ['HTML·CSS·JS 역할 이해', 'Claude로 랜딩페이지 제작', '구조와 스타일 분리 지시법'], practice: null },
-            { goal: 'HTML/CSS/JS 역할 분담과 브라우저 렌더링 원리를 이해한다.', topics: ['HTML = 뼈대 (건물 기둥)', 'CSS = 피부·옷 (인테리어)', 'JS = 근육·행동 (엘리베이터)', '브라우저가 HTML→CSS→JS 순서로 읽어 화면 조립'], practice: null },
-            { goal: 'HTML 뼈대만 먼저 생성하는 분리 지시법을 익힌다.', topics: ['구체적 항목 명시 (이름·직업·소개글·버튼)', '"스타일은 없이" 명시의 중요성', '구조와 디자인 분리하면 수정이 쉬워진다'], practice: '내 이름, 직업, 소개글, 연락 버튼이 있는 랜딩페이지 HTML 뼈대를 만들어줘. 스타일은 없이 구조만.' },
-            { goal: 'CSS 4대 영역과 Claude Code 워크플로우를 이해한다.', topics: ['색상·배경 / 폰트·타이포 / 간격·여백 / 레이아웃·배치', '지시→생성→확인→수정 4단계 사이클', 'CSS 직접 쓰지 않아도 말로 설명하면 된다'], practice: null },
-            { goal: 'CSS를 입혀서 before/after 변화를 직접 체감한다.', topics: ['같은 HTML — 완전히 다른 인상', '어두운 배경·흰 글씨·파란 버튼 지시 패턴', 'CSS의 힘을 시각적으로 확인'], practice: '위 HTML에 현대적인 CSS를 입혀줘. 어두운 배경, 흰 글씨, 버튼은 파란색으로.' },
-            { goal: 'JS가 정적 페이지에 행동을 추가하는 원리를 이해한다.', topics: ['HTML+CSS = 고정된 화면 (사진)', 'JS 추가 = 사용자 행동에 반응', 'click·scroll·mousemove 3대 트리거 소개'], practice: null },
-            { goal: '버튼 클릭 JS 인터랙션을 직접 추가해본다.', topics: ['트리거(click) + 동작(메시지 표시) 기본 패턴', '사용자→JS 트리거→JS 동작→화면 반응 흐름', '메시지·색상 변경 추가 지시 연습'], practice: '연락하기 버튼을 클릭하면 "감사합니다! 곧 연락드리겠습니다." 라는 메시지가 화면에 나타나는 JS를 추가해줘.' },
-            { goal: '1회차 핵심 3가지를 정리하고 2회차를 예고한다.', topics: ['역할 분담: HTML/CSS/JS', '분리 지시: 뼈대 먼저 → CSS 입히기', '수정 사이클: 반복하면서 완성'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 2, title: '색상과 폰트로 퀄리티가 달라진다', hours: '2시간',
-                        goal: '색상 팔레트와 Google Fonts 적용 원리를 이해하고 1회차 결과물을 리디자인한다.',
-                        topics: ['색상 팔레트 선정 원칙', '웜/쿨/뉴트럴/다크 색상 유형', 'Google Fonts CDN 적용법', 'Serif/Sans-Serif/Display 폰트 분류', '1회차 랜딩페이지 before/after 비교'],
-                        practice: '색상 테마와 Google Fonts를 적용해서 1회차 랜딩페이지를 나란히 비교한다.',
-                        slides: ['01_오늘의_목표.svg','02_색상이_분위기를_만든다.svg','03_실습1_색상_테마_적용.svg','04_폰트_선택의_원칙.svg','05_실습2_Google_Fonts_적용.svg','06_Before_After_비교.svg','07_실습3_나만의_조합.svg','08_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '2회차 목표와 수업 흐름을 안내한다.', topics: ['색상 팔레트 선정', 'Google Fonts 적용', 'Before/After 비교'], practice: null },
-            { goal: '색상 유형(웜/쿨/뉴트럴/다크)과 분위기 관계를 이해한다.', topics: ['웜 컬러: 빨강·주황·노랑', '쿨 컬러: 파랑·보라·청록', '뉴트럴: 흰색·회색·검정', '다크 모드: 어두운 배경+밝은 텍스트'], practice: null },
-            { goal: 'Claude에게 색상 테마를 지시해서 적용한다.', topics: ['색상 코드 없이 말로 지시', '배경/텍스트/포인트 색상 명시', 'before/after 변화 확인'], practice: '위 HTML에 색상 테마를 적용해줘. 배경 #0f172a, 텍스트 흰색, 포인트 색상 #38bdf8으로.' },
-            { goal: 'Serif/Sans-Serif/Display 폰트 분류와 선택 원칙을 이해한다.', topics: ['Serif: 고급스러운, 신뢰감', 'Sans-Serif: 깔끔한, 현대적인', 'Display: 강렬한, 임팩트'], practice: null },
-            { goal: 'Google Fonts CDN을 추가해서 폰트를 변경한다.', topics: ['link 태그 한 줄 추가', 'font-family CSS 적용', '폰트별 느낌 차이 체험'], practice: '위 페이지에 Google Fonts의 Noto Sans KR 폰트를 적용해줘.' },
-            { goal: '색상+폰트 변경 전후를 나란히 비교한다.', topics: ['같은 HTML, 다른 CSS', 'CSS만으로 퀄리티 차이', '말로 설명하면 Claude가 변환'], practice: null },
-            { goal: '색상+폰트 조합을 자유롭게 실험한다.', topics: ['다크 테크 / 밝은 감성 / 내추럴 조합', '자연어로 수정 요청', '나만의 스타일 완성'], practice: '1회차 랜딩페이지에 배경 #1a1a2e, 포인트 #e94560, Noto Sans KR 폰트 적용해줘.' },
-            { goal: '2회차 핵심 3가지를 정리하고 3회차를 예고한다.', topics: ['색상 언어: 말로 설명하면 된다', 'Google Fonts: 폰트 이름만 말하면', 'Before/After: CSS만으로 다른 사이트'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 3, title: '스크롤 트리거를 설계한다', hours: '2시간',
-                        goal: 'JS 트리거 개념을 이해하고 GSAP ScrollTrigger로 스크롤 인터랙션을 구현한다.',
-                        topics: ['스크롤 트리거 개념', 'GSAP ScrollTrigger CDN 로드', '페이드인 효과 구현', '수평 스크롤 원리 (pin + translateX)', '텍스트 컬러 reveal (progress 0~1)'],
-                        practice: 'GSAP ScrollTrigger로 페이드인, 수평 스크롤, 텍스트 컬러 reveal 효과를 구현한다.',
-                        slides: ['01_오늘의_목표.svg','02_스크롤_트리거_개념.svg','03_실습1_ScrollTrigger_기본.svg','04_수평_스크롤_원리.svg','05_실습2_수평스크롤_구현.svg','06_텍스트_reveal_원리.svg','07_실습3_텍스트_컬러_reveal.svg','08_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '3회차 목표와 수업 흐름을 안내한다.', topics: ['스크롤 트리거 개념', '수평 스크롤', '텍스트 컬러 Reveal'], practice: null },
-            { goal: '스크롤 트리거의 동작 원리와 GSAP 라이브러리를 이해한다.', topics: ['스크롤 위치 감지', '요소 진입 시 트리거 발동', 'GSAP ScrollTrigger 소개'], practice: null },
-            { goal: 'GSAP ScrollTrigger로 기본 페이드인 효과를 구현한다.', topics: ['CDN script 태그 추가', '요소 진입 시 페이드인', 'from/to 애니메이션 설정'], practice: '1회차 랜딩페이지에 GSAP ScrollTrigger를 추가해줘. 각 섹션이 스크롤할 때 아래에서 위로 페이드인 되도록.' },
-            { goal: '수평 스크롤의 동작 원리와 활용 사례를 이해한다.', topics: ['세로 스크롤 → 가로 이동 변환', 'pin + translateX 패턴', '갤러리/스텝별 소개에 활용'], practice: null },
-            { goal: '수평 스크롤 갤러리를 구현한다.', topics: ['pin으로 섹션 고정', 'translateX로 가로 이동', 'scrub으로 부드러운 연결'], practice: '작품 갤러리 섹션을 추가해줘. 카드 4개가 가로로 나열되고, 세로로 스크롤하면 옆으로 이동하는 수평 스크롤 효과.' },
-            { goal: '텍스트 컬러 reveal의 원리(progress 0~1 매핑)를 이해한다.', topics: ['스크롤 진행률 0~1', '회색 → 검정 색상 변화', '스토리텔링 효과'], practice: null },
-            { goal: '스크롤에 따라 텍스트가 밝아지는 reveal 효과를 구현한다.', topics: ['progress값과 색상 연결', '0%: 회색 / 100%: 검정', '한 단어씩 순서대로 reveal'], practice: '히어로 섹션의 헤드라인 텍스트를 스크롤 reveal 효과로 만들어줘. 스크롤 진행률에 따라 글자가 회색에서 검정으로 밝아지도록.' },
-            { goal: '3회차 핵심 3가지를 정리하고 4회차를 예고한다.', topics: ['트리거 개념: 위치가 애니메이션을 켠다', '수평 스크롤: 스크롤 방향을 바꾼다', '텍스트 Reveal: 숫자로 상태를 정의한다'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 4, title: '호버·클릭·드래그 트리거', hours: '2시간',
-                        goal: '마우스 인터랙션 트리거 유형을 이해하고 마그네틱 버튼·Flip Card·Spotlight를 구현한다.',
-                        topics: ['hover / click / mousemove 트리거', '마그네틱 버튼 (거리 계산 + transform)', 'CSS Transform vs JS 동적 제어', 'Flip Card (rotateY + backface-visibility)', 'Spotlight Follow (radial-gradient 이동)'],
-                        practice: '마그네틱 버튼, Flip Card, Spotlight Follow를 순서대로 구현한다.',
-                        slides: ['01_오늘의_목표.svg','02_마우스_인터랙션_종류.svg','03_실습1_마그네틱_버튼.svg','04_CSS_Transform_vs_JS.svg','05_실습2_Flip_Card.svg','06_마우스_추적_원리.svg','07_실습3_Spotlight_Follow.svg','08_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '4회차 목표와 수업 흐름을 안내한다.', topics: ['마그네틱 버튼', 'Flip Card', 'Spotlight Follow'], practice: null },
-            { goal: 'hover/click/mousemove 3가지 트리거와 활용 예시를 이해한다.', topics: ['hover: 색상 변화, 확대', 'click: 펼쳐지는 효과', 'mousemove: 자기 효과, 빛 추적'], practice: null },
-            { goal: '마그네틱 버튼 효과를 구현한다.', topics: ['mousemove로 커서 좌표 추적', '버튼까지 거리 계산', 'transform으로 버튼 이동'], practice: '연락하기 버튼에 마그네틱 효과를 추가해줘. 마우스가 버튼 근처에 오면 버튼이 마우스 방향으로 살짝 당겨지는 효과.' },
-            { goal: 'CSS Transform과 JS 동적 제어의 차이를 이해한다.', topics: ['CSS: hover 트리거, rotateY/scale', 'JS: 실시간 좌표 계산, 물리 효과', '적합한 상황 판단법'], practice: null },
-            { goal: 'Flip Card 효과를 구현한다.', topics: ['CSS rotateY(180deg)', 'perspective + backface-visibility', 'hover 트리거'], practice: '포트폴리오 카드를 Flip Card로 만들어줘. 앞면에 이미지와 제목, 뒷면에 프로젝트 설명이 보이도록.' },
-            { goal: 'Spotlight Follow의 원리(radial-gradient 이동)를 이해한다.', topics: ['e.clientX, e.clientY 좌표', 'radial-gradient 중심 이동', '다크 배경에서 효과적'], practice: null },
-            { goal: 'Spotlight Follow 효과를 구현한다.', topics: ['커서 위치에 빛 표시', '다크 히어로 섹션 적용', '빛 크기/색상 조정'], practice: '히어로 섹션에 마우스를 따라다니는 빛 효과를 추가해줘. 다크 배경에서 커서 위치 주변만 밝아지는 spotlight 효과.' },
-            { goal: '4회차 핵심 3가지를 정리하고 5회차를 예고한다.', topics: ['마그네틱: 커서가 당기는 효과', 'Flip Card: CSS만으로 3D 뒤집기', 'Spotlight: 좌표로 빛을 조종한다'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 5, title: '라이브러리 + 3D 확장', hours: '2시간',
-                        goal: 'CDN 라이브러리 활용법을 익히고 tsParticles·Typed.js·Three.js로 풍부한 시각 효과를 구현한다.',
-                        topics: ['CDN script 태그 한 줄 추가', 'tsParticles — 파티클 배경 효과', 'Typed.js — 타이핑 히어로 섹션', 'Three.js 3요소 (Scene/Camera/Renderer)', '3D 큐브 회전 인터랙션'],
-                        practice: 'tsParticles 파티클 배경, Typed.js 타이핑 효과, Three.js 회전 큐브를 각각 구현한다.',
-                        slides: ['01_오늘의_목표.svg','02_CDN_라이브러리_활용법.svg','03_실습1_tsParticles_파티클.svg','04_타이핑_애니메이션_원리.svg','05_실습2_Typedjs_타이핑.svg','06_3D_웹의_세계.svg','07_실습3_Threejs_회전큐브.svg','08_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '5회차 목표와 수업 흐름을 안내한다.', topics: ['tsParticles', 'Typed.js', 'Three.js'], practice: null },
-            { goal: 'CDN 라이브러리의 개념과 활용법을 이해한다.', topics: ['script 태그 1줄 = 수천 줄 기능', '이름만 알면 Claude가 CDN 링크 작성', '주요 라이브러리 3종 소개'], practice: null },
-            { goal: 'tsParticles 파티클 배경을 구현한다.', topics: ['파티클 수/색상/반응 거리 설정', '마우스 반응 옵션', '다크 배경에서 효과적'], practice: '히어로 섹션 배경에 tsParticles 파티클 효과를 추가해줘. 작은 흰 점들이 천천히 움직이고 마우스 근처로 반응하도록.' },
-            { goal: 'Typed.js의 동작 원리와 주요 설정을 이해한다.', topics: ['문자열 배열 → 타이핑 → 삭제 반복', 'typeSpeed / backSpeed / loop 설정', '포트폴리오 직함에 활용'], practice: null },
-            { goal: 'Typed.js 타이핑 효과를 구현한다.', topics: ['span#typed 위치 지정', 'CDN 추가 + 초기화 코드', '나만의 직함 배열 입력'], practice: '히어로 섹션의 직함 부분에 Typed.js를 적용해줘. "웹 개발자", "UI 디자이너", "Claude 전문가"가 순서대로 타이핑되도록.' },
-            { goal: 'Three.js의 3요소(Scene/Camera/Renderer)와 활용 사례를 이해한다.', topics: ['Scene: 3D 공간(무대)', 'Camera: 시점(눈)', 'Renderer: Canvas에 출력'], practice: null },
-            { goal: 'Three.js 회전 큐브를 구현한다.', topics: ['BoxGeometry + MeshBasicMaterial', 'requestAnimationFrame으로 회전', '형태·색·움직임을 Claude에게 지시'], practice: '히어로 섹션 오른쪽에 Three.js로 만든 3D 큐브를 추가해줘. 네온 파란색 와이어프레임 큐브가 천천히 회전하도록.' },
-            { goal: '5회차 핵심 3가지를 정리하고 6회차를 예고한다.', topics: ['CDN 라이브러리: 이름이 곧 열쇠', '파티클+타이핑: 숫자로 느낌 조절', 'Three.js 3D: 말로 설명하면 된다'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 6, title: '배경 효과와 순수 Canvas', hours: '2시간',
-                        goal: 'VANTA.js와 순수 Canvas 2D를 비교하며 각각의 인터랙티브 배경 효과를 구현한다.',
-                        topics: ['VANTA.js 6가지 효과 (WAVES/NET/BIRDS 등)', 'Canvas 2D API 기초 (beginPath/arc/fillRect)', '별자리 파티클 — 순수 JS 구현', '배경 효과 선택 가이드', '목적별 배경 추천'],
-                        practice: 'VANTA.js 배경과 Canvas 2D 별자리 파티클을 각각 구현하고 나만의 배경을 완성한다.',
-                        slides: ['01_오늘의_목표.svg','02_VANTAjs_배경_라이브러리.svg','03_실습1_VANTA_배경_적용.svg','04_Canvas_2D_기초.svg','05_실습2_별자리_파티클.svg','06_배경효과_선택_가이드.svg','07_실습3_나만의_배경_조합.svg','08_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '6회차 목표와 수업 흐름을 안내한다.', topics: ['VANTA.js', 'Canvas 2D', '별자리 파티클'], practice: null },
-            { goal: 'VANTA.js의 6가지 효과 종류와 사용법을 이해한다.', topics: ['WAVES/NET/BIRDS/FLAMES/FOG/DOTS', 'backgroundColor + color 설정', 'mouseControls로 인터랙션'], practice: null },
-            { goal: 'VANTA 배경을 히어로 섹션에 적용한다.', topics: ['VANTA.NET 효과 적용', '색상 설정 커스텀', '다른 효과로 교체 연습'], practice: '히어로 섹션 배경에 VANTA.NET 효과를 적용해줘. 어두운 배경에 하늘색 네트워크 선이 움직이도록.' },
-            { goal: 'Canvas 2D API 기초 개념과 일반 HTML과의 차이를 이해한다.', topics: ['픽셀 단위 드로잉', 'beginPath/arc/fillRect 메서드', 'requestAnimationFrame 루프'], practice: null },
-            { goal: 'Canvas 별자리 파티클 배경을 구현한다.', topics: ['파티클 생성 + 이동', '가까운 점끼리 선 연결', '마우스 반발 효과'], practice: 'Canvas로 별자리 파티클 배경을 만들어줘. 작은 점들이 천천히 움직이고, 가까운 점끼리 선으로 연결되며, 마우스에 반응하도록.' },
-            { goal: '사이트 목적별 배경 효과 선택 기준을 이해한다.', topics: ['포트폴리오: VANTA WAVES/NET', '스타트업: Canvas 파티클', '크리에이티브: VANTA FLAMES/BIRDS'], practice: null },
-            { goal: '나만의 배경 조합을 완성한다.', topics: ['효과 선택 + 색상 설정', '텍스트 가독성 확인', '1~6회차 통합 확인'], practice: '지금까지 만든 포트폴리오에 배경 효과를 적용해줘.' },
-            { goal: '6회차 핵심 3가지를 정리하고 7회차를 예고한다.', topics: ['VANTA.js: 3D 배경도 이름만', 'Canvas: 원+선 = 모든 효과', '배경 선택: 분위기를 만든다'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 7, title: '기획이 곧 프롬프트다', hours: '2시간',
-                        goal: '좋은 프롬프트와 나쁜 프롬프트의 차이를 직접 비교하고 4요소 구체적 작성법을 익힌다.',
-                        topics: ['나쁜 패턴: 모호한/추상적/범위없는 지시', '좋은 패턴: 구체적 수치/참고 키워드/범위 명시', '4요소: 대상 + 스타일 + 수치 + 범위', '프롬프트 수준별 결과 비교', '1~6회차 통합 랜딩페이지 실습'],
-                        practice: '나쁜/좋은 프롬프트를 각각 체험하고 4요소를 갖춘 통합 랜딩페이지를 완성한다.',
-                        slides: ['01_오늘의_목표.svg','02_나쁜_프롬프트_분석.svg','03_실습1_나쁜프롬프트_체험.svg','04_좋은_프롬프트_구조.svg','05_실습2_좋은프롬프트_실험.svg','06_퀄리티_차이_분석.svg','07_실습3_통합_랜딩페이지.svg','08_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '7회차 목표와 수업 흐름을 안내한다.', topics: ['나쁜 vs 좋은 프롬프트', '4요소 구조', '통합 실습'], practice: null },
-            { goal: '나쁜 프롬프트의 패턴과 좋은 프롬프트의 패턴을 비교한다.', topics: ['나쁜: 모호함/추상적/범위없음', '좋은: 구체적 수치/참고/범위 명시', '패턴 인식 훈련'], practice: null },
-            { goal: '나쁜 프롬프트로 직접 결과를 체험한다.', topics: ['"예쁘게 만들어줘" 지시', 'Claude의 임의 해석', '수정 반복의 비효율'], practice: '웹사이트를 예쁘고 고급스럽게 만들어줘.' },
-            { goal: '좋은 프롬프트의 4요소 구조를 이해한다.', topics: ['대상: 무엇을', '스타일: 어떤 느낌으로', '수치: 구체적 값', '범위: 어디까지'], practice: null },
-            { goal: '4요소를 갖춘 프롬프트로 결과를 비교한다.', topics: ['첫 시도 완성률 UP', '수정 횟수 DOWN', '4요소 직접 작성'], practice: '히어로 섹션의 배경(대상)을 다크 테크 스타일(스타일)로 바꿔줘. 배경 #0f172a, 텍스트 흰색, 포인트 #38bdf8(수치). CSS만 수정해줘(범위).' },
-            { goal: '프롬프트 구체성과 결과물 퀄리티의 관계를 분석한다.', topics: ['퀄리티 4요소: 레이아웃/타이포/색상 대비/인터랙션', '수준별 수정 횟수 비교', '5분 투자 = 30분 절약'], practice: null },
-            { goal: '1~6회차 기술을 통합한 랜딩페이지를 완성한다.', topics: ['VANTA 배경 + Typed.js', 'GSAP 스크롤 효과', '색상 팔레트 + 폰트'], practice: '포트폴리오 랜딩페이지를 완성해줘. 히어로: VANTA 배경 + Typed.js 직함, 스크롤: GSAP 페이드인, 색상: 다크 테크(#0f172a + #38bdf8) + Noto Sans KR.' },
-            { goal: '7회차 핵심 3가지를 정리하고 8회차를 예고한다.', topics: ['나쁜 프롬프트: 구체성 없으면 결과 없다', '4요소: 갖추면 원하는 결과', '통합 실습: 프롬프트가 곧 기획'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 8, title: 'v12 프롬프트 완전 이해 (파이널)', hours: '2시간',
-                        goal: 'v12 프롬프트 3개 레이어 구조를 이해하고 1회차 결과물과 v12 결과물을 나란히 비교한다.',
-                        topics: ['3-SPARK: Layout/Interaction/Visual 방향 설정', 'AESTHETIC_PINCH: 미감 핀치 레이어 (텍스처/공간감/디테일)', 'FONT JUDGMENT: 가독성/분위기/조합/한글 기준', 'v12로 1회차 랜딩페이지 재생성', '파이널 포트폴리오 완성'],
-                        practice: 'v12 프롬프트로 1회차 랜딩페이지를 재생성하고 처음 결과물과 나란히 비교한다.',
-                        slides: ['01_오늘의_목표.svg','02_3SPARK_구조.svg','03_AESTHETIC_PINCH_레이어.svg','04_실습1_SPARK_적용.svg','05_FONT_JUDGMENT.svg','06_실습2_폰트_JUDGMENT_적용.svg','07_v12_전체_구조.svg','08_실습3_1회차_v12_재생성.svg','09_Before_After_비교.svg','10_실습4_나만의_포트폴리오.svg','11_파이널_핵심_정리.svg'],
-                        slideDescs: [
-            { goal: '8회차 목표와 수업 흐름을 안내한다.', topics: ['3-SPARK 구조', 'AESTHETIC_PINCH', 'FONT JUDGMENT'], practice: null },
-            { goal: '3-SPARK의 개념과 3가지 SPARK 카테고리를 이해한다.', topics: ['SPARK = 시각적 핵심 아이디어', 'Layout/Interaction/Visual SPARK', 'SPARK 없으면 Claude가 임의 결정'], practice: null },
-            { goal: 'AESTHETIC_PINCH 레이어의 개념과 적용 방법을 이해한다.', topics: ['PINCH = 미적 감각의 언어화', '텍스처/공간감/디테일/분위기', '프롬프트에 PINCH 명시'], practice: null },
-            { goal: '3-SPARK를 정의하고 프롬프트에 적용한다.', topics: ['Layout/Interaction/Visual 각 1개 선택', 'SPARK 3개 프롬프트 작성', '방향성 있는 결과 확인'], practice: 'SPARK-1: [선택], SPARK-2: [선택], SPARK-3: [선택]. 이 3가지를 중심으로 포트폴리오 페이지를 제작해줘.' },
-            { goal: 'FONT JUDGMENT 4가지 기준(가독성/분위기/조합/한글)을 이해한다.', topics: ['bold_readability 등급', 'vibe_tag로 분위기 매칭', 'pairing 조합법'], practice: null },
-            { goal: 'FONT JUDGMENT 기준으로 최적 폰트 조합을 선택하고 적용한다.', topics: ['다크 테크: Inter + Noto Sans KR', '고급 감성: Playfair + Noto Serif', '적용 체크리스트 확인'], practice: 'FONT JUDGMENT 기준으로 폰트를 적용해줘. 사이트 분위기: 다크 테크 / 헤드라인: Inter / 본문: Noto Sans KR.' },
-            { goal: 'v12 프롬프트 전체 구조(3레이어)를 이해한다.', topics: ['Layer 1: 3-SPARK (방향성)', 'Layer 2: AESTHETIC_PINCH (분위기)', 'Layer 3: FONT JUDGMENT (타이포)'], practice: null },
-            { goal: 'v12 프롬프트로 1회차 랜딩페이지를 재생성한다.', topics: ['3레이어 통합 프롬프트 작성', 'SPARK + PINCH + FONT 한번에', '1회차 결과물과 비교 준비'], practice: '[SPARK-1] 전면 다크 배경 + 네온 포인트 / [SPARK-2] 마그네틱 CTA 버튼 / [SPARK-3] 스크롤 페이드인 / [AESTHETIC_PINCH] noisy-gradient + cinematic-spacing / [FONT] Inter(헤드) + Noto Sans KR(본문) — 위 설정으로 포트폴리오 랜딩페이지를 제작해줘.' },
-            { goal: '1회차 결과물과 v12 결과물을 나란히 비교한다.', topics: ['HTML 구조 동일', 'CSS/스타일 완전히 다름', 'v12 = 결과 재현 가능'], practice: null },
-            { goal: '최종 포트폴리오를 완성한다.', topics: ['8회차 체크리스트 확인', 'SPARK/PINCH/FONT 모두 적용', '나만의 콘텐츠 완성'], practice: null },
-            { goal: '8회차 전체 여정을 정리하고 파이널을 축하한다.', topics: ['1~8회차 여정 요약', 'v12 시스템 습득', 'AI Agent Web 개발자 완성'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 9, title: 'API 연동 — fetch + 외부 데이터', hours: '2시간',
-                        goal: 'fetch + JSON으로 외부 API에서 데이터를 가져와 페이지에 뿌린다. API 키 개념을 처음 만난다.',
-                        topics: ['API = 외부 데이터를 주는 서비스', 'fetch + JSON 기본 패턴', '키 없는 무료 API 호출', 'API 키 발급·공개 키 개념', '받은 데이터 검색·필터·정렬'],
-                        practice: '무료 API로 데이터를 받아 화면에 표시하고, 날씨 API 키로 도시별 날씨 카드를 만든 뒤 검색·필터를 추가한다.',
-                        slides: ['01_Part2_시작.svg','02_API란.svg','03_fetch_+_JSON.svg','04_실습1_무료_API.svg','05_API_키_첫_등장.svg','06_실습2_날씨_API.svg','07_실습3_검색_필터.svg','08_정리.svg'],
-                        slideDescs: [
-            { goal: 'Part 2 시작 — 정적 페이지에서 동적 페이지로 전환되는 첫 회차를 안내한다.', topics: ['Part 2 = 데이터·도메인·결제', '정적 → 동적 전환점', '9회차 흐름 안내'], practice: null },
-            { goal: 'API의 개념과 외부 데이터를 받는 원리를 이해한다.', topics: ['우리 서버 없이 외부 데이터 받는 법', '자판기 비유 (요청 → 응답)', 'API = 외부 데이터를 주는 서비스'], practice: null },
-            { goal: 'fetch 명령과 JSON 데이터 형식을 이해한다.', topics: ['fetch URL → response → json()', '키-값 구조', '비동기 처리 기본 패턴'], practice: null },
-            { goal: '키 없는 무료 API로 즉시 데이터를 받아본다.', topics: ['api.thecatapi.com (이미지)', 'api.quotable.io (명언)', '키 없이 즉시 호출 가능'], practice: '고양이 이미지 API에서 랜덤 이미지 받아서 페이지에 표시하고, 새로고침 버튼으로 다시 받아오게 해줘.' },
-            { goal: 'API 키의 개념과 공개 키·보호 키의 차이를 이해한다.', topics: ['키 발급 = 회원가입 + 키 페이지', '공개 API 키는 노출 OK', '진짜 키는 14주차에서 보호 학습'], practice: null },
-            { goal: '무료 키로 날씨 API를 호출해 화면에 표시한다.', topics: ['OpenWeatherMap 무료 키 발급', '도시 입력 → 날씨 표시', 'API 응답을 카드 UI로 매핑'], practice: 'OpenWeatherMap API로 서울 현재 날씨 받아서 페이지에 카드로 표시해줘. 내 API 키는 ___.' },
-            { goal: '받은 데이터 배열에 검색·필터 기능을 붙인다.', topics: ['배열 필터링 기본', '입력란과 데이터 연결', '실시간 검색 결과 표시'], practice: '받은 데이터에 검색창 추가해줘. 입력한 키워드 포함하는 항목만 보이도록.' },
-            { goal: '9회차 핵심을 정리하고 10회차(데이터 저장)를 예고한다.', topics: ['API 호출 = fetch + JSON', '키 개념 첫 만남', '다음 주: 데이터 저장'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 10, title: '데이터 저장 — 스키마 + LocalStorage', hours: '2시간',
-                        goal: 'DB 스키마(컬럼 설계) 개념을 이해하고 LocalStorage로 폼 데이터를 브라우저에 저장·재표시한다.',
-                        topics: ['데이터 구조화 — 행·열로 정리', '스키마 = 컬럼 이름·타입·옵션', 'LocalStorage 기본 개념', '폼 입력 → 저장 → 표시', 'LocalStorage 한계와 다음 단계'],
-                        practice: '본인 페이지의 데이터를 표로 설계하고 방명록 폼을 만들어 LocalStorage에 저장·삭제까지 구현한다.',
-                        slides: ['01_오늘의_목표.svg','02_데이터를_구조화.svg','03_스키마_=_설계도.svg','04_실습1_스키마_그리기.svg','05_LocalStorage란.svg','06_실습2_폼_저장.svg','07_실습3_목록_삭제.svg','08_정리_+_한계.svg'],
-                        slideDescs: [
-            { goal: '10회차 목표(데이터 저장 첫 경험)와 흐름을 안내한다.', topics: ['스키마 설계', 'LocalStorage 저장', '방명록 실습'], practice: null },
-            { goal: '흩어진 정보를 행·열 표로 정리하는 구조화 개념을 이해한다.', topics: ['메모장 vs 엑셀 표', '검색·필터·정렬 가능 차이', '데이터 = 행·열 구조'], practice: null },
-            { goal: '스키마가 컬럼 이름·타입·옵션의 설계도임을 이해한다.', topics: ['컬럼 이름 (name·email·message)', '타입 (텍스트·숫자·날짜)', '선택 옵션·필수 여부'], practice: null },
-            { goal: '본인 페이지에 필요한 데이터를 표로 설계해본다.', topics: ['"내 페이지 방명록은 어떤 컬럼?"', 'Claude와 스키마 대화', '컬럼·타입·옵션 표 완성'], practice: '내 페이지에 방명록 기능을 추가하고 싶어. 어떤 컬럼(이름·메시지·날짜 등)이 필요한지 표로 정리해줘.' },
-            { goal: 'LocalStorage의 동작 원리와 제약을 이해한다.', topics: ['브라우저 안에 저장되는 데이터', 'key-value + JSON.stringify/parse', '5MB 제한, 내 컴퓨터에만 저장'], practice: null },
-            { goal: '폼 입력을 LocalStorage에 저장하고 화면에 표시한다.', topics: ['HTML form + submit 이벤트', 'LocalStorage 배열에 push', '저장된 데이터를 카드로 렌더링'], practice: '방명록 폼(이름·메시지)을 만들고 입력하면 LocalStorage에 저장 후 화면에 카드로 표시해줘.' },
-            { goal: '저장된 항목을 삭제·수정하는 패턴을 익힌다.', topics: ['인덱스로 항목 찾기', '배열 splice·수정', '버튼 클릭 → 삭제 → 재렌더링'], practice: '각 방명록 카드에 삭제 버튼 추가해줘. 누르면 LocalStorage에서도 사라지도록.' },
-            { goal: 'LocalStorage 한계를 정리하고 11회차(클라우드 DB)를 예고한다.', topics: ['"내 컴퓨터에서만 보임" 한계', '다른 사용자와 공유 불가', '다음 주: Supabase 클라우드 DB'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 11, title: '클라우드 DB — Supabase CRUD', hours: '2시간',
-                        goal: 'Supabase 가입 → 테이블 만들기 → JS SDK로 CRUD 4종(Create·Read·Update·Delete)을 실행한다.',
-                        topics: ['Supabase = 가입만 하면 DB 주는 서비스', '테이블·컬럼 UI로 만들기', 'JS SDK로 Create·Read', 'CRUD 4종 패턴', 'LocalStorage 방명록을 클라우드로 전환'],
-                        practice: 'Supabase 프로젝트를 만들고 테이블을 설계한 뒤, 10회차 LocalStorage 방명록을 클라우드 DB로 전환한다.',
-                        slides: ['01_오늘의_목표.svg','02_Supabase란.svg','03_실습1_가입_프로젝트.svg','04_테이블_+_컬럼.svg','05_실습2_Read_+_Create.svg','06_Update_Delete.svg','07_실습3_방명록_클라우드_전환.svg','08_정리.svg'],
-                        slideDescs: [
-            { goal: '11회차 목표(Supabase로 클라우드 DB 연결)와 흐름을 안내한다.', topics: ['Supabase 가입·프로젝트', '테이블·CRUD', '방명록 클라우드 전환'], practice: null },
-            { goal: 'Supabase가 어떤 서비스인지 이해한다.', topics: ['PostgreSQL 기반 클라우드 DB', '무료 플랜으로 충분', 'Firebase 대안으로 자리잡음'], practice: null },
-            { goal: 'Supabase 가입과 새 프로젝트 생성을 진행한다.', topics: ['supabase.com 이메일 가입', 'New Project — 이름·비밀번호·리전', 'project URL·anon key 확인'], practice: 'supabase.com에서 새 프로젝트 만들고, project URL과 anon key를 확인해줘. (학생 직접 진행)' },
-            { goal: 'UI로 테이블·컬럼을 만들고 10주차 스키마를 적용한다.', topics: ['Table Editor', '컬럼 추가 (id·created_at·내용)', '타입 선택과 기본값'], practice: null },
-            { goal: 'Supabase JS SDK로 데이터 추가·조회를 실행한다.', topics: ['createClient(URL, anon key)', '.from(table).select() — Read', '.insert() — Create'], practice: '내 페이지에서 Supabase의 guestbook 테이블에 데이터 추가하고 전체 조회하는 코드 작성해줘. URL은 ___, key는 ___.' },
-            { goal: 'CRUD 4종(Create·Read·Update·Delete)의 패턴을 이해한다.', topics: ['.update() / .delete()', '필터 .eq() 사용법', '에러 처리 기본 패턴'], practice: null },
-            { goal: 'LocalStorage 방명록을 Supabase로 전환한다.', topics: ['LocalStorage 호출을 Supabase로 교체', '다른 사람도 볼 수 있는 방명록', '클라우드 DB의 장점 체감'], practice: '지난 주 LocalStorage로 만든 방명록을 Supabase로 옮겨줘. 모든 방문자가 글을 볼 수 있도록.' },
-            { goal: '11회차 핵심을 정리하고 12회차(회원 시스템)를 예고한다.', topics: ['모든 사용자가 공유하는 데이터', '"누구나 글 쓰는 상태"의 한계', '다음 주: 회원 시스템'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 12, title: '회원 시스템 — Supabase Auth', hours: '2시간',
-                        goal: 'Supabase Auth로 회원가입·로그인·로그아웃을 구현하고 "내 사용자만 보는 데이터" 개념을 익힌다.',
-                        topics: ['"내 데이터·다른 사람 데이터" 구분', 'Supabase Auth 개요', '회원가입·로그인·로그아웃 폼', 'user_id + RLS 개념', '11주 방명록을 "내 글만" 보기로 전환'],
-                        practice: '회원가입·로그인 폼을 만들고 11주 방명록을 "내 글만 보이는" 형태로 변환한다.',
-                        slides: ['01_오늘의_목표.svg','02_왜_회원이_필요한가.svg','03_Supabase_Auth_개요.svg','04_실습1_회원가입.svg','05_실습2_로그인_로그아웃.svg','06_내_데이터만_보기.svg','07_실습3_내_글만_보기.svg','08_정리.svg'],
-                        slideDescs: [
-            { goal: '12회차 목표(회원 시스템 구현)와 흐름을 안내한다.', topics: ['회원가입·로그인·로그아웃', '내 데이터만 보기', '11주 방명록 변환'], practice: null },
-            { goal: '왜 회원 시스템이 필요한지 이해한다.', topics: ['익명 방명록 vs 내 일기장', '책임·프라이버시 차이', '서비스다움의 출발'], practice: null },
-            { goal: 'Supabase Auth의 개요와 제공 기능을 이해한다.', topics: ['이메일·OAuth(Google·GitHub)', '가입 즉시 사용', '로그인 상태 자동 관리'], practice: null },
-            { goal: '회원가입 폼을 만들고 Supabase Auth signUp으로 연동한다.', topics: ['signUp({ email, password })', '이메일 인증 옵션', '가입 폼 UI 구성'], practice: '회원가입 폼(이메일·비번)을 만들고 Supabase Auth signUp으로 연동해줘.' },
-            { goal: '로그인·로그아웃을 구현하고 로그인 상태를 표시한다.', topics: ['signInWithPassword', 'onAuthStateChange로 세션 감지', 'signOut 버튼 + 상단 상태 표시'], practice: '로그인 폼·로그아웃 버튼 추가해줘. 로그인 상태가 화면 상단에 표시되도록.' },
-            { goal: 'user_id 컬럼과 RLS로 "내 데이터만" 보호하는 원리를 이해한다.', topics: ['테이블에 user_id 컬럼', 'RLS = 내 데이터 보호 규칙', 'Supabase UI에서 정책 설정'], practice: null },
-            { goal: '11주 방명록을 "내 글만 보이게" 변환한다.', topics: ['글 작성 시 user_id 자동 저장', '.eq(user_id, currentUser.id) 또는 RLS', '로그인 상태별 화면 분기'], practice: '11주 방명록을 변경해서 로그인한 사용자 본인 글만 보이고 쓸 수 있도록 해줘.' },
-            { goal: '12회차 핵심을 정리하고 13회차(도메인)를 예고한다.', topics: ['"이제 진짜 서비스 같다"', '회원 시스템 = 정체성의 시작', '다음 주: 내 도메인 가지기'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 13, title: '도메인 — 구매·DNS·GitHub Pages 연동', hours: '2시간',
-                        goal: '가비아에서 도메인을 구매하고 DNS를 설정해 GitHub Pages 사이트에 연결, SSL까지 적용한다.',
-                        topics: ['도메인 = 내 가게 간판', '도메인 시장(가비아·Namecheap·Cloudflare)', 'A 레코드·CNAME 레코드', 'GitHub Pages 커스텀 도메인 연결', 'SSL 자동 적용'],
-                        practice: '본인 이름·브랜드 도메인을 구매하고 GitHub Pages에 연결한 뒤 SSL까지 켠다.',
-                        slides: ['01_오늘의_목표.svg','02_도메인이란.svg','03_도메인_시장.svg','04_실습1_도메인_구매.svg','05_DNS_레코드란.svg','06_실습2_GitHub_Pages_연결.svg','07_실습3_SSL_적용.svg','08_내_도메인_공유.svg'],
-                        slideDescs: [
-            { goal: '13회차 목표(내 도메인 가지기)와 흐름을 안내한다.', topics: ['도메인 구매', 'DNS 설정', 'SSL 적용'], practice: null },
-            { goal: '도메인이 무엇이고 왜 필요한지 이해한다.', topics: ['example.com 같은 읽기 좋은 주소', 'IP 주소 대신 사용', '"내 가게 간판" 비유'], practice: null },
-            { goal: '도메인 등록 시장과 주요 업체를 비교한다.', topics: ['가비아 — 한국 친화', 'Namecheap — 국제', 'Cloudflare — 개발자 친화 / 가격대 비교'], practice: null },
-            { goal: '가비아에서 본인 도메인을 구매한다.', topics: ['가비아 가입 + 도메인 검색', '결제 진행', '도메인 등록 완료 확인'], practice: '(학생 직접 진행) — 가비아에서 본인 이름이나 브랜드 도메인 검색해서 구매' },
-            { goal: 'DNS 레코드(A·CNAME)의 개념을 이해한다.', topics: ['A 레코드 = IP로', 'CNAME = 다른 도메인으로', 'TTL 개념 가볍게'], practice: null },
-            { goal: '가비아 DNS에 GitHub Pages IP/CNAME을 입력해 연결한다.', topics: ['레포 Settings → Pages → Custom domain', '가비아 DNS에 A 레코드 4개 + CNAME', '연결 상태 확인'], practice: 'GitHub Pages 도메인 연결 방법 알려줘. 가비아에 A 레코드 4개 입력하고 레포 Settings에 도메인 입력하는 순서대로.' },
-            { goal: 'GitHub Pages 자동 SSL을 적용해 https://를 활성화한다.', topics: ['Let\'s Encrypt 자동 발급', '"https 강제" 체크박스', '전파 시간 (몇 분~몇 시간)'], practice: 'GitHub Pages에서 내 도메인에 SSL을 적용하고 싶어. Settings에서 어디를 체크해야 하는지 안내해줘.' },
-            { goal: '본인 도메인을 공유하고 14회차(Vercel)를 예고한다.', topics: ['학생끼리 도메인 자랑', '"진짜 내 사이트" 정체성', '다음 주: Vercel 환경'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 14, title: 'Vercel — DB·API 연동 환경 만들기', hours: '2시간',
-                        goal: 'GitHub Pages → Vercel로 옮기고 Vercel 함수·환경변수로 "API 키를 안전하게 숨기는 환경"을 만든다.',
-                        topics: ['GitHub Pages 한계 — 키 숨길 곳 없음', 'Vercel = 자동 배포 + 함수 + 환경변수', 'Vercel 함수 = 한 파일이 한 주소', '환경변수에 API 키 저장', '13주 도메인을 Vercel로 이전'],
-                        practice: 'Vercel에 GitHub 레포를 연결해 배포하고, 첫 Vercel 함수와 환경변수를 만든 뒤 도메인을 이전한다.',
-                        slides: ['01_오늘의_목표.svg','02_GitHub_Pages_한계.svg','03_Vercel이란.svg','04_실습1_Vercel_연결.svg','05_Vercel_함수란.svg','06_실습2_첫_함수.svg','07_실습3_환경변수_+_도메인.svg','08_정리.svg'],
-                        slideDescs: [
-            { goal: '14회차 목표(Vercel 환경 만들기)와 흐름을 안내한다.', topics: ['Vercel 연결·배포', 'Vercel 함수 첫 작성', '환경변수 + 도메인 이전'], practice: null },
-            { goal: 'GitHub Pages의 한계와 키 노출 문제를 이해한다.', topics: ['정적 파일만 호스팅', 'JS 코드는 다 노출', 'API 키 박으면 누구나 훔침'], practice: null },
-            { goal: 'Vercel이 무엇이고 무엇을 제공하는지 이해한다.', topics: ['GitHub 푸시 → 자동 배포', 'Vercel 함수 = "API 키 안전한 곳"', 'Hobby 플랜 무료'], practice: null },
-            { goal: 'Vercel에 GitHub 레포를 연결하고 첫 배포를 진행한다.', topics: ['vercel.com GitHub 로그인', '레포 import', '30초만에 첫 배포 URL'], practice: '(학생 직접 진행) — vercel.com 가입 → 내 GitHub 레포 import → Deploy' },
-            { goal: 'Vercel 함수의 개념(한 파일 = 한 주소)을 이해한다.', topics: ['api/ 폴더 구조', '한 파일이 한 주소', 'Vercel에서 도니까 키 노출 X'], practice: null },
-            { goal: '첫 Vercel 함수를 만들어 페이지에서 호출한다.', topics: ['api/hello.js 작성', "fetch('/api/hello')로 호출", '응답을 화면에 표시'], practice: 'api/hello.js 파일을 만들어서 "안녕하세요 [이름]" 응답하는 Vercel 함수 작성하고, 페이지에서 fetch로 호출해줘.' },
-            { goal: '환경변수에 API 키를 저장하고 13주 도메인을 Vercel로 이전한다.', topics: ['Vercel 대시보드 → Environment Variables', 'process.env.MY_KEY 사용', '도메인 레코드를 Vercel로 변경'], practice: 'Vercel 환경변수에 OPENWEATHER_KEY 추가했어. api/weather.js 함수를 만들어서 그 키로 날씨 조회해줘. 클라이언트엔 키 노출 X.' },
-            { goal: '14회차 핵심을 정리하고 15회차(AI 기능)를 예고한다.', topics: ['"이제 진짜 키 숨길 수 있다"', 'Vercel 함수 = 안전한 호출 통로', '다음 주: AI 기능 붙이기'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 15, title: 'API 활용 — AI 기능 붙이기', hours: '2시간',
-                        goal: 'Vercel 함수에서 OpenAI 등 유료 API를 호출해서 "AI 기능 내장 사이트"를 만든다. 클라이언트에 키 노출 X.',
-                        topics: ['왜 Vercel 함수에서 호출하나', 'AI API 3종 (OpenAI·Stability·DeepL)', '텍스트 요약 API 만들기', 'API 프롬프트 4요소', '이미지 생성 + 본인 사이트 활용'],
-                        practice: '텍스트 요약·이미지 생성 함수를 만들고 본인 사이트 주제에 맞는 AI 기능을 1개 추가한다.',
-                        slides: ['01_오늘의_목표.svg','02_왜_Vercel_함수에서.svg','03_AI_API_3종_소개.svg','04_실습1_텍스트_요약.svg','05_프롬프트_가이드.svg','06_실습2_이미지_생성.svg','07_실습3_본인_사이트_AI_기능.svg','08_정리.svg'],
-                        slideDescs: [
-            { goal: '15회차 목표(AI 기능 붙이기)와 흐름을 안내한다.', topics: ['텍스트 요약 함수', '이미지 생성', '본인 사이트 AI 기능 1개'], practice: null },
-            { goal: '왜 유료 API는 반드시 Vercel 함수에서 호출해야 하는지 이해한다.', topics: ['유료 키 = 노출 시 즉시 돈 빠짐', 'Vercel 함수 안에서만 process.env.KEY', '클라이언트는 함수 호출만'], practice: null },
-            { goal: 'AI API 3종(텍스트·이미지·번역)을 비교한다.', topics: ['OpenAI — 텍스트 작업', 'Stability AI — 이미지 생성', 'DeepL — 고품질 번역'], practice: null },
-            { goal: 'Vercel 함수로 텍스트 요약 API를 만든다.', topics: ['api/summarize.js에서 OpenAI 호출', '입력 텍스트 → AI 응답 → 페이지 표시', 'textarea + 버튼 UI'], practice: 'Vercel 환경변수 OPENAI_KEY 추가했어. api/summarize.js 만들어서 텍스트 입력 받아 OpenAI로 3줄 요약해줘. 페이지에서 textarea+버튼으로 호출.' },
-            { goal: 'AI에게 보내는 프롬프트의 4요소(대상·스타일·수치·범위)를 이해한다.', topics: ['7주에 배운 4요소 재적용', '구체 지시 = 좋은 결과', '시스템 프롬프트 vs 사용자 프롬프트'], practice: null },
-            { goal: 'Stability AI로 이미지를 생성해 페이지에 표시한다.', topics: ['Stability AI 무료 크레딧', '프롬프트 입력 → 이미지 받기', '생성 이미지를 화면에 표시'], practice: 'api/generate-image.js 만들어서 Stability AI로 이미지 생성해줘. 환경변수 STABILITY_KEY. 페이지에서 프롬프트 입력 → 이미지 표시.' },
-            { goal: '본인 사이트 주제에 어울리는 AI 기능 1개를 추가한다.', topics: ['카페 사이트 → 메뉴 추천', '포트폴리오 → 자기소개 자동 생성', '주제에 맞는 자유 발휘'], practice: '내 사이트 주제는 [___]. 이 주제에 어울리는 AI 기능 1개를 Vercel 함수로 추가해줘.' },
-            { goal: '15회차 핵심을 정리하고 16회차(결제 + 캡스톤)를 예고한다.', topics: ['AI 기능 내장 사이트', '키 보호 + AI 활용 패턴', '다음 주: 결제 + 발표'], practice: null }
-                        ]
-                    },
-                    {
-                        num: 16, title: '결제(토스 PG) + 캡스톤 발표', hours: '2시간',
-                        goal: '토스 PG 결제 위젯을 본인 사이트에 붙이고, 본인 작품을 5분씩 발표해 16주 코스를 완주한다.',
-                        topics: ['PG = 결제 중개 서비스', '토스페이먼츠 테스트 키', '결제 위젯 + Vercel 함수 검증', '캡스톤 5분 발표 가이드', '수료 + 다음 코스 안내'],
-                        practice: '토스 결제 위젯을 띄우고 Vercel 함수로 검증한 뒤, 본인 작품을 5분 발표한다.',
-                        slides: ['01_오늘의_목표.svg','02_PG란_무엇인가.svg','03_토스_PG_소개.svg','04_실습1_테스트_키_발급.svg','05_결제_위젯_원리.svg','06_실습2_위젯_띄우기.svg','07_실습3_검증_콜백.svg','08_결제_완료.svg','09_캡스톤_발표_가이드.svg','10_학생_발표.svg','11_다음_코스_안내.svg','12_수료.svg'],
-                        slideDescs: [
-            { goal: '16회차 목표(결제 + 캡스톤 발표)와 전체 흐름을 안내한다.', topics: ['전반 1h — 결제 붙이기', '후반 1h — 캡스톤 발표', '16주 마무리'], practice: null },
-            { goal: 'PG(Payment Gateway)의 개념과 역할을 이해한다.', topics: ['카드사·은행 직접 연동의 어려움', 'PG가 중개해주는 구조', '토스·이니시스·NHN KCP 등'], practice: null },
-            { goal: '토스페이먼츠의 특징과 테스트 키 방식을 이해한다.', topics: ['한국 친화 PG', '무료 테스트 키 즉시 발급', '위젯 SDK 한 줄로 호출'], practice: null },
-            { goal: '토스페이먼츠 가입 후 테스트 키를 발급받는다.', topics: ['tosspayments.com 가입', '개발자 센터 → 테스트 키', '클라이언트 키 · 시크릿 키 복사'], practice: '(학생 직접 진행) — tosspayments.com 가입 → 개발자 센터 → 테스트 클라이언트 키·시크릿 키 복사' },
-            { goal: '결제 위젯 흐름(위젯 → 결제 → 콜백 → 검증)을 이해한다.', topics: ['SDK 로드 → 위젯 생성', '결제 요청 → 성공 콜백', 'Vercel 함수에서 검증 → DB 저장'], practice: null },
-            { goal: '"결제하기" 버튼으로 토스 결제 위젯을 띄운다.', topics: ['HTML에 결제 영역', 'JS로 위젯 띄우기', '테스트 카드로 결제 시도 (실제 청구 X)'], practice: '토스 결제 위젯을 내 사이트에 추가해줘. 결제하기 버튼 누르면 위젯이 뜨고, 테스트 카드로 결제 시도 가능하도록.' },
-            { goal: 'Vercel 함수에서 결제를 검증하고 결과 페이지를 보여준다.', topics: ['api/payment-confirm.js 작성', '토스 API로 결제 검증', 'Supabase orders 테이블에 저장'], practice: 'api/payment-confirm.js를 만들어서 결제 성공 콜백을 토스 API로 검증하고, Supabase orders 테이블에 저장해줘.' },
-            { goal: '결제까지 가는 사이트 완성을 정리하고 발표 준비를 안내한다.', topics: ['"결제까지 가는 사이트" 완성', '발표 준비 시간 안내', '도메인·기능 시연 준비'], practice: null },
-            { goal: '캡스톤 5분 발표 가이드를 안내한다.', topics: ['주제 1분', '도메인·기능 시연 3분', '어려웠던 점·다음 단계 1분'], practice: null },
-            { goal: '학생 발표를 진행한다 (5분 × N명).', topics: ['본인 도메인 시연', '핵심 기능 보여주기', '서로 피드백·박수'], practice: null },
-            { goal: '다음 코스(웹이론·406·416)를 안내한다.', topics: ['웹이론 4개월 — 코드 본격', '406 — React 본격', '416 — 자동화 PM'], practice: null },
-            { goal: '16주 여정을 요약하고 수료를 축하한다.', topics: ['1~16주 여정 한눈에', '본인 도메인 + DB + AI + 결제 = 한 명의 메이커', '수료 + 다음 여정 응원'], practice: null }
-                        ]
-                    }
+{
+    num: 1, title: 'AI로 웹 만드는 세계 (청사진)', hours: '2시간',
+    goal: 'Claude Design을 직접 체험해 랜딩페이지는 누구나 만들 수 있음을 몸으로 알고 16주 청사진을 받는다.',
+    topics: ['Claude Design 직접 체험', '웹의 4갈래', '16주 청사진(Part1/Part2)', '메타 키워드(HTML/React/DESIGN.md)', 'AI를 부리는 사람 정체성', 'Claude Code Hello World'],
+    practice: 'Claude Design으로 본인 주제 페이지 1개를 만들고 Claude Code로 첫 Hello World 페이지를 띄운다.',
+    slides: ['01_환영과_오늘의_흐름.svg','02_오늘의_학습_목표.svg','03_실습1_Claude_Design_안내.svg','04_방금_만든_것은_랜딩페이지.svg','05_웹의_4갈래.svg','06_16주_청사진_Part1_Part2.svg','07_메타_키워드_HTML_React_DESIGNmd.svg','08_AI_시대_웹디자이너_정체성.svg','09_실습2_Claude_Code_Hello_World.svg','10_핵심_정리_다음주_예고.svg'],
+    slideDescs: [
+        { goal: '16주 코스 1회차 시작을 환영하고 오늘 2시간이 어디로 데려갈지 그림을 보여준다.', topics: ['회차 제목과 청사진','1회차 / 전체 16회차 / 2시간','오늘의 1개념'], practice: null },
+        { goal: '2시간 끝에 학생이 손에 쥘 3가지 결과물을 명확히 보여준다.', topics: ['내가 만든 Claude Design 페이지','16주 후 내 모습의 청사진','첫 안녕하세요 페이지'], practice: null },
+        { goal: 'claude.ai/design에 접속해 본인 주제로 1시간 동안 페이지를 자유롭게 만들어본다.', topics: ['claude.ai/design 접속','본인 주제 1개 정하기','자유 프롬프트 던지기','결과물 핸드오프 받기'], practice: 'claude.ai/design에 접속해 본인 주제 하나를 정하고 만들어줘, 바꿔줘 식으로 자유롭게 페이지를 만든 뒤 결과물을 다운로드한다.' },
+        { goal: '1시간 실습 결과물이 웹의 한 가지 형태인 랜딩페이지임을 인식한다.', topics: ['랜딩페이지 = 1페이지 스크롤형','보여주기 중심, 기능 적음','Wix/Webflow/Framer 계열','본인 결과물 다시 보기'], practice: null },
+        { goal: '웹사이트가 랜딩, SaaS, 쇼핑몰, 사내도구 4갈래로 나뉜다는 큰 지도를 본다.', topics: ['랜딩페이지','SaaS 서비스','쇼핑몰','사내도구'], practice: null },
+        { goal: '기초 8주 랜딩과 배포에서 심화 8주 데이터, 도메인, 결제로 이어지는 흐름을 머릿속에 그린다.', topics: ['Part 1: 뼈대에서 배포까지','Part 2: 데이터에서 결제까지','8주차와 16주차 마일스톤','매주 1개념 누적 구조'], practice: null },
+        { goal: '앞으로 자주 들을 3가지 핵심 키워드의 정체를 미리 한 번 인식한다.', topics: ['HTML/CSS/JS 뼈대','React와 컴포넌트','DESIGN.md 디자인 표준'], practice: null },
+        { goal: 'Claude Design이 잘 만들어주는데 왜 더 배우냐는 질문에 답을 가지고 간다.', topics: ['결과물을 내 것으로 통제','AI가 만든 코드 읽기','진짜 사이트로 운영','AI를 부리는 사람 정체성'], practice: null },
+        { goal: 'Claude Code 환경에서 안녕하세요 본인 이름 페이지를 띄워본다.', topics: ['Claude Code 환경 열기','HTML 페이지 만들기','브라우저로 열어보기','Claude Design과 차이 느끼기'], practice: '안녕하세요 본인 이름이 적힌 HTML 페이지를 만들어줘라고 프롬프트한 뒤 생성된 .html 파일을 브라우저로 연다.' },
+        { goal: '오늘 3가지 핵심을 다시 짚고 2주차로 가는 다리를 놓는다.', topics: ['누구나 랜딩페이지를 만든다','웹은 4갈래','AI를 부리는 사람 정체성','다음 주 HTML 뼈대 예고'], practice: null },
+    ],
+},
+{
+    num: 2, title: 'HTML, 웹의 뼈대', hours: '2시간',
+    goal: 'HTML 시맨틱 태그로 본인 랜딩페이지의 뼈대를 만들고 구조와 디자인 분리 지시법을 익힌다.',
+    topics: ['HTML은 웹페이지의 뼈대', '시맨틱 태그 5종 (header main section article footer)', '스타일 없이 구조만 지시법', '구조와 디자인 분리 원칙', '외부 링크와 임시 이미지 연결'],
+    practice: '내 랜딩페이지 HTML 뼈대를 만들고 섹션, 링크, 이미지를 단계적으로 추가한다.',
+    slides: ['01_표지_HTML_웹의_뼈대.svg','02_학습목표_오늘의_결과물.svg','03_HTML이란_무엇인가.svg','04_시맨틱_태그_5종.svg','05_실습1_첫_뼈대_생성.svg','06_구조와_디자인_분리.svg','07_실습2_섹션_추가.svg','08_실습3_링크와_이미지.svg','09_정리_핵심3가지.svg'],
+    slideDescs: [
+        { goal: '오늘을 한 문장으로 담는다 — 구조부터 잡는다.', topics: ['Session 02 / Basic Part 1', '1개념: 구조 = HTML', '오늘의 산출물: 내 랜딩페이지 HTML 뼈대'], practice: null },
+        { goal: '2시간 후 내 손에 무엇이 남는지 명확히 한다.', topics: ['내 소개와 연락 버튼이 있는 HTML 뼈대', '작품 갤러리와 연락처 섹션 확장', '외부 링크와 임시 이미지 완성 뼈대', '구조만 지시하는 프롬프트 감각'], practice: null },
+        { goal: 'HTML은 웹페이지의 뼈대라는 직관을 비유로 잡는다.', topics: ['HTML = HyperText Markup Language', '건물 철근 구조 비유', '브라우저가 가장 먼저 읽는 파일', '뼈대 → 옷(CSS) → 움직임(JS) 순서'], practice: null },
+        { goal: 'header main section article footer 5종의 의미를 한 번에 익힌다.', topics: ['header: 페이지 상단', 'main: 본문 컨테이너', 'section: 의미 단위 영역', 'footer: 페이지 하단'], practice: null },
+        { goal: '스타일 없이 구조만 지시법으로 첫 HTML 뼈대를 만든다.', topics: ['스타일 없이 구조만 명시가 핵심', '구체 항목 명시 → 시맨틱 태그 자동 배치', '결과는 검은 글씨 흰 배경', 'index.html 파일 위치 확인'], practice: '내 이름, 직업, 소개글, 연락 버튼이 있는 랜딩페이지 HTML 뼈대를 만들어줘. 스타일은 없이 구조만.' },
+        { goal: '왜 처음부터 디자인을 안 넣고 뼈대만 만들었는지 이해한다.', topics: ['같은 뼈대로 다양한 스타일 교체', '한쪽만 건드려 수정', '구조 수정과 스타일 수정을 분리해 지시', '다음 주 CSS 입힐 준비'], practice: null },
+        { goal: '본인 페이지 주제에 맞춰 섹션을 자유롭게 추가한다.', topics: ['Hero About Works Contact 4단 구성', '본인 주제로 변형 가능', '여전히 스타일 없이 반복 명시', 'section 태그 자동 생성 확인'], practice: '위 페이지에 작품 갤러리 섹션과 연락처 섹션을 추가해줘. 여전히 스타일 없이 구조만.' },
+        { goal: 'a 태그와 img 태그로 외부 자원을 페이지에 연결한다.', topics: ['loremflickr 임시 이미지 서비스', 'a 태그는 링크 img 태그는 이미지', '이미지별 다른 키워드 지정', '클릭하면 외부 사이트로 이동'], practice: '작품 갤러리에 임시 이미지(loremflickr) 4개 넣고 각각 외부 사이트로 가는 링크를 달아줘.' },
+        { goal: '오늘 핵심 3가지를 다시 짚고 다음 회차로 연결한다.', topics: ['HTML은 보이지 않는 뼈대', '시맨틱 태그 5종으로 의미 단위 구조', '스타일 없이 구조만 지시법', '다음 회차: CSS로 옷 입히기'], practice: null },
+    ],
+},
+{
+    num: 3, title: 'CSS 디자인 색 폰트 여백', hours: '2시간',
+    goal: 'HTML 뼈대는 그대로 두고 CSS만 얹어서 2주차 페이지를 분위기가 완전히 다른 페이지로 리디자인한다.',
+    topics: ['CSS의 4대 영역(색·폰트·여백·레이아웃)', '웜/쿨/뉴트럴/다크 색상과 분위기', 'Serif/Sans-Serif/Display 폰트 분류', 'Google Fonts로 한글+영문 폰트 적용', 'padding·margin으로 여백 트기', 'Before/After 리디자인 비교'],
+    practice: '다크 테크 색상 테마, Google Fonts 한글+영문 폰트, 넉넉한 여백을 모두 자연어 프롬프트로 지시해 2주차 페이지를 리디자인한다.',
+    slides: ['01_오늘은_꾸미기의_날.svg','02_오늘의_학습목표.svg','03_CSS_4대_영역.svg','04_색상_유형과_분위기.svg','05_폰트_3종_분류.svg','06_실습1_색상_테마.svg','07_실습2_Google_Fonts.svg','08_Before_After_정리.svg'],
+    slideDescs: [
+        { goal: '3회차의 주제인 CSS는 스타일이라는 것과 오늘 끝나면 손에 쥐는 Before/After 리디자인 페이지를 한 화면에 보여준다.', topics: ['회차 타이틀 Session 3 CSS 디자인', '1개념 한 줄 스타일은 CSS', '2주차 페이지를 분위기가 다른 페이지로 리디자인', '캐치프레이즈 같은 뼈대 전혀 다른 옷'], practice: null },
+        { goal: '회차 끝에 학생이 도달할 구체적 상태 3가지를 명시해 2시간 동안 무엇을 향해 달리는지 합의한다.', topics: ['색·폰트·여백은 CSS의 3대 무기', '자연어로 색상·폰트 지시해 적용', 'Google Fonts CDN 한 줄로 폰트 변경', 'padding·margin으로 숨통 트인 페이지'], practice: null },
+        { goal: 'CSS가 다루는 영역을 색·폰트·여백·레이아웃 4가지로 분류해 디자인이 4개 카테고리의 조합이라는 걸 이해시킨다.', topics: ['색·배경 color background-color', '폰트·타이포 font-family font-size', '간격·여백 padding margin', '레이아웃·배치 flex grid'], practice: null },
+        { goal: '웜/쿨/뉴트럴/다크 4가지 색 카테고리가 페이지 분위기를 어떻게 결정하는지 보여주고 자연어로 색 테마를 지시하는 어휘를 갖추게 한다.', topics: ['웜 빨강·주황은 따뜻함', '쿨 파랑·청록은 신뢰감 테크', '뉴트럴 흰·회·검은 미니멀', '다크 배경에 밝은 텍스트는 프리미엄'], practice: null },
+        { goal: 'Serif/Sans-Serif/Display 3분류로 폰트 인상을 정리하고 Google Fonts가 무료로 무한 폰트를 빌려주는 옷장이라는 걸 소개한다.', topics: ['Serif 삐침 있음 고급·신뢰', 'Sans-Serif 깔끔 현대·가독성', 'Display 강렬·장식적 헤드라인', 'Noto Sans KR 한글 + Inter 영문 조합'], practice: null },
+        { goal: '2주차 HTML 페이지에 다크 테크 색상 테마를 Claude Code 자연어 지시로 적용해 CSS 첫 변화를 즉시 눈으로 확인한다.', topics: ['Claude Code에 2주차 폴더 열기', '프롬프트 복붙으로 색상 테마 지시', 'style.css 파일 생성·연결 확인', '브라우저 새로고침으로 Before/After 비교'], practice: '프롬프트 복붙: 2주차에 만든 페이지에 다크 테크 색상 테마 적용해줘. 배경 #0f172a, 텍스트 흰색, 포인트 #38bdf8.' },
+        { goal: 'Google Fonts CDN link 한 줄과 font-family 한 줄로 한글과 영문 폰트가 동시에 바뀌는 경험을 시킨다.', topics: ['프롬프트 복붙으로 폰트 적용', 'head에 Google Fonts link 자동 추가', 'font-family에 Inter와 Noto Sans KR 적용', '한글·영문 두 곳 모두 새로고침 확인'], practice: '프롬프트 복붙: 위 페이지에 Google Fonts의 Noto Sans KR(한글) + Inter(영문) 폰트 적용해줘.' },
+        { goal: '여백·정렬 실습으로 페이지를 숨통 트인 상태로 마무리하고 2주차와 3주차를 비교하며 CSS 3대 무기를 정리한 뒤 다음 주 JavaScript를 예고한다.', topics: ['padding·margin으로 여백 주기', 'max-width와 margin 0 auto로 가운데 정렬', '오늘 배운 색·폰트·여백 3줄 정리', '다음 주 JavaScript 예고와 숙제'], practice: '프롬프트 복붙: 페이지가 답답해 보여. 섹션 사이 여백을 넉넉히 주고 가운데 정렬해줘.' },
+    ]
+},
+{
+    num: 4, title: 'JS 인터랙션 기초', hours: '2시간',
+    goal: 'click, scroll, mousemove 3대 트리거 개념을 이해하고 정적 페이지에 단순 인터랙션을 직접 붙여 반응하는 페이지로 진화시킨다.',
+    topics: ['HTML+CSS(모양)와 JS(행동)의 역할 차이', '3대 트리거 click, scroll, mousemove 구분', '클릭 토글 실습으로 버튼 반응 만들기', 'IntersectionObserver로 스크롤 등장 효과', '마우스 따라가는 커서 효과 완성'],
+    practice: '연락하기 버튼 클릭 메시지, 스크롤 페이드인 등장, 마우스 따라가는 커서 효과 3종을 내 페이지에 직접 추가한다.',
+    slides: ['01_오늘의_목표.svg','02_학습_목표.svg','03_JS의_역할.svg','04_3대_트리거.svg','05_실습1_클릭_토글.svg','06_스크롤_등장_원리.svg','07_실습2_3_스크롤_마우스.svg','08_핵심_정리.svg'],
+    slideDescs: [
+        { goal: '멈춰 있던 페이지가 반응하기 시작하는 순간을 만나는 4회차 미션을 소개한다.', topics: ['회차 타이틀: 페이지가 살아나는 순간', '1개념: 행동 = JS 3대 트리거', '클릭, 스크롤, 마우스에 반응하는 페이지 목표'], practice: null },
+        { goal: '2시간 후 도달할 3가지 능력을 명시한다.', topics: ['HTML+CSS와 JS 차이를 한 문장으로 설명', 'click, scroll, mousemove 쓰임 구분', '실습 3종을 내 페이지에 직접 완성', '정적에서 동적 페이지로 진화'], practice: null },
+        { goal: 'HTML, CSS, JS의 역할 분담을 건물 비유로 직관 이해한다.', topics: ['HTML = 건물 뼈대(벽, 문, 창문)', 'CSS = 인테리어(색, 폰트, 배치)', 'JS = 행동, 기계장치(엘리베이터, 자동문)', '사진 속 건물에서 작동하는 건물로'], practice: null },
+        { goal: '웹 인터랙션의 대부분을 차지하는 3대 사용자 행동을 사례와 함께 익힌다.', topics: ['click: 버튼, 메뉴, 이미지 누름', 'scroll: 섹션 등장, 패럴랙스, 진행률 바', 'mousemove: 자기 효과, 빛 추적, 커스텀 커서', '공통 패턴: 트리거 발생하면 행동한다'], practice: null },
+        { goal: '가장 기본 트리거인 click을 버튼에 붙여 메시지를 띄운다.', topics: ['연락하기 버튼 클릭하면 감사 메시지 등장', 'addEventListener click = 클릭하면 행동', 'class 토글, 메시지 표시, 색 변경', '한 번 더 누르면 숨기는 토글 확장'], practice: '연락하기 버튼을 클릭하면 감사합니다! 곧 연락드리겠습니다. 메시지가 나타나는 JS를 추가해줘.' },
+        { goal: '스크롤 등장 효과의 작동 원리를 화면 감지라는 한 단어로 이해한다.', topics: ['화면에 보일 때만 등장(페이드인)', 'IntersectionObserver = 화면 진입 자동 감지', '옛 scroll 좌표 계산보다 부드럽고 가벼움', '행동: opacity 0에서 1, translateY 이동'], practice: null },
+        { goal: '남은 두 트리거 scroll과 mousemove를 붙여 페이지를 완성한다.', topics: ['스크롤 등장: 섹션이 아래에서 위로 페이드인', '마우스 따라가기: 동그란 커서가 마우스 추적', 'e.clientX, e.clientY와 transform translate', '막히면 콘솔 에러를 그대로 붙여 고쳐달라 요청'], practice: '각 섹션이 스크롤로 화면에 보일 때 아래에서 위로 페이드인 되도록 IntersectionObserver로 구현해줘. 그리고 히어로 섹션 위에 마우스 따라다니는 동그란 커서 효과를 추가해줘.' },
+        { goal: '트리거에서 행동으로 이어지는 패턴을 한 장으로 압축하고 다음 회차를 예고한다.', topics: ['인터랙션 = 트리거에서 행동(스타일, 위치 변경)', 'click, scroll, mousemove 한 표 요약', '1주 구조에서 4주 인터랙션 완성까지 성장', '다음 주 예고: GSAP 애니메이션 라이브러리'], practice: null },
+    ],
+},
+{
+    num: 5, title: '스크롤 라이브러리 GSAP', hours: '2시간',
+    goal: 'GSAP ScrollTrigger로 페이드인 / 수평 스크롤 / 텍스트 컬러 reveal 3가지 패턴을 적용해 시네마틱 스크롤 페이지를 완성한다.',
+    topics: ['라이브러리와 CDN 개념 이해', '섹션 페이드인 효과', '수평 스크롤 (pin + translateX)', '텍스트 컬러 reveal (progress 0~1 매핑)', 'GSAP ScrollTrigger 3종 종합'],
+    practice: '4주차 페이지에 페이드인, 작품 갤러리 수평 스크롤, 헤드라인 컬러 reveal 효과를 프롬프트로 추가해 시네마틱 버전을 만든다.',
+    slides: ['01_오늘은_영화같은_스크롤.svg','02_오늘의_학습_목표.svg','03_라이브러리란.svg','04_수평_스크롤_원리.svg','05_텍스트_reveal_원리.svg','06_실습1_섹션_페이드인.svg','07_실습2_작품_갤러리_수평_스크롤.svg','08_실습3_헤드라인_컬러_reveal_정리.svg'],
+    slideDescs: [
+        { goal: '5회차에서 GSAP ScrollTrigger로 시네마틱 스크롤 페이지를 완성한다는 기대감을 심는다.', topics: ['회차 타이틀 스크롤 라이브러리 GSAP ScrollTrigger', '4주차 단순 JS 스크롤에서 라이브러리 풀 활용으로 점프', '오늘 결과물 미리보기 3가지 효과', '코드 한 줄 안 써도 진짜 사이트 같은 움직임'], practice: null },
+        { goal: '2시간 안에 GSAP ScrollTrigger 3종 패턴을 적용해 시네마틱 페이지를 완성한다.', topics: ['GSAP는 남이 만들어 놓은 기능 묶음', '페이드인 섹션이 자동으로 떠오름', '수평 스크롤 세로 휠을 가로 움직임으로', '텍스트 컬러 reveal 회색에서 검정으로'], practice: null },
+        { goal: 'CDN 라이브러리 개념을 이미 만들어진 기능 묶음 빌려오기로 직관 이해한다.', topics: ['라이브러리는 미리 만들어 둔 기능 세트', 'script 태그 한 줄로 수천 줄 코드 가져오기', 'CDN은 전 세계 공용 창고', '이름만 알면 Claude Code가 사용법 적용'], practice: null },
+        { goal: '세로 휠 입력이 어떻게 가로 움직임으로 변환되는지 그림으로 이해한다.', topics: ['pin으로 섹션을 화면에 잠시 고정', '휠 굴린 만큼 translateX로 좌측 이동', 'scrub으로 스크롤과 애니메이션 부드럽게 연결', '갤러리 스텝 소개 타임라인에 활용'], practice: null },
+        { goal: '스크롤 진행률 0~1을 색 크기 위치 등 어떤 수치에든 연결할 수 있다는 사고를 익힌다.', topics: ['ScrollTrigger가 progress 0에서 1 값을 알려줌', '이 숫자를 색 크기 위치 투명도에 매핑', '회색 #bbbbbb에서 검정 #111111 단계 변화', '한 번 익히면 응용 무한'], practice: null },
+        { goal: '4주차 페이지의 모든 섹션에 GSAP 페이드인 효과를 1번의 프롬프트로 추가한다.', topics: ['섹션이 화면 진입 시 아래에서 위로 떠오름', 'gsap.from과 ScrollTrigger 사용', '4주차 페이지를 베이스로 재활용', 'GSAP CDN 2줄 들어갔는지 확인'], practice: '페이지 각 섹션에 GSAP ScrollTrigger로 페이드인 효과 추가해줘. 아래에서 위로.' },
+        { goal: '갤러리 섹션을 가로로 흐르는 시네마틱 카드 4장 레이아웃으로 바꾼다.', topics: ['갤러리 도착 시 섹션 pin 후 카드 가로 흐름', 'pin true scrub 1 translateX 옵션', '4주차 작품 갤러리 섹션에 적용', '카드 가로 폭 합계가 화면보다 커야 함'], practice: '작품 갤러리에 카드 4개가 가로로 흐르는 수평 스크롤 효과를 GSAP로 만들어줘.' },
+        { goal: '히어로 헤드라인이 스크롤에 따라 회색에서 검정으로 밝아지는 효과를 완성하고 오늘 배운 3종을 종합한다.', topics: ['헤드라인이 progress에 따라 회색에서 검정 reveal', '4주차 히어로 섹션 메인 헤드라인에 적용', '오늘의 3종 세트 회고', 'Session 6 마우스 인터랙션 예고'], practice: '히어로 헤드라인이 스크롤 진행률에 따라 회색에서 검정으로 밝아지는 reveal 효과 만들어줘.' },
+    ],
+},
+{
+    num: 6, title: '마우스 인터랙션', hours: '2시간',
+    goal: '마그네틱 버튼, Flip Card, Spotlight Follow 3가지 마우스 인터랙션을 구현한다.',
+    topics: ['hover/click/mousemove 트리거 구분','CSS Transform과 JS 동적 제어의 분업','마우스 좌표 추적 원리(clientX/clientY)','마그네틱 버튼 만들기','3D Flip Card 만들기','커서 따라다니는 Spotlight 효과'],
+    practice: '포트폴리오에 마그네틱 버튼, Flip Card, Spotlight 빛 효과를 실제 적용한다.',
+    slides: ['01_표지_마우스_인터랙션.svg','02_오늘의_학습_목표.svg','03_마우스_트리거_3종.svg','04_CSS_vs_JS_제어.svg','05_좌표_추적_원리.svg','06_실습1_마그네틱_버튼.svg','07_실습2_Flip_Card.svg','08_실습3_Spotlight.svg','09_핵심_정리.svg'],
+    slideDescs: [
+        { goal: '6회차 주제인 마우스 인터랙션 3종을 한눈에 각인시킨다.', topics: ['회차 타이틀과 부제(마그네틱·Flip Card·Spotlight)','5주 스크롤 + 6주 마우스 = 인터랙션 양대 트리거','오늘의 한 줄: 커서가 가는 곳마다 페이지가 반응한다'], practice: null },
+        { goal: '2시간 후 학생이 만들 결과물 3가지를 명확히 약속한다.', topics: ['마우스가 다가오면 당겨지는 마그네틱 버튼','hover로 3D 뒤집히는 Flip Card','커서 따라다니는 Spotlight Follow','좌표 추적 = 다음 주 라이브러리 디딤돌'], practice: null },
+        { goal: 'hover/click/mousemove 세 트리거의 차이와 용도를 구분한다.', topics: ['hover: 요소 위로 올라갈 때(색 변화·확대)','click: 한 번 눌렀을 때(펼침·토글)','mousemove: 커서가 움직이는 매 순간(자석·빛 추적)','판단 기준: 상태 2개면 hover/click, 좌표 필요하면 mousemove'], practice: null },
+        { goal: '같은 움직임이라도 CSS와 JS의 역할이 다름을 이해한다.', topics: ['CSS 담당: hover 전환·rotateY·scale 등 정해진 결과','JS 담당: 실시간 좌표 계산·거리 계산','조합 패턴: JS가 값을 구하고 CSS transform이 그린다','Flip Card는 CSS 단독, 마그네틱·Spotlight은 JS+CSS 조합'], practice: null },
+        { goal: '마우스 좌표가 어떻게 숫자로 들어오는지 직관적으로 안다.', topics: ['e.clientX·e.clientY = 화면 왼쪽 위 기준 픽셀 좌표','getBoundingClientRect로 요소 기준 좌표 계산','거리 계산 = 피타고라스로 발동 범위 판단','수식은 외우지 않고 흐름만 이해'], practice: null },
+        { goal: '마우스가 가까이 오면 살짝 당겨지는 연락하기 버튼을 만든다.', topics: ['적용 위치: 포트폴리오 연락하기 CTA 버튼','일정 거리 이내에서 마우스 방향으로 살짝 이동','핵심 변수: 발동 반경과 끌림 강도','마우스가 멀어지면 원위치 복귀'], practice: '연락하기 버튼에 마그네틱 효과 추가해줘. 마우스가 근처 오면 버튼이 마우스 방향으로 살짝 당겨지도록.' },
+        { goal: '작품 카드를 hover하면 3D로 뒤집혀 설명이 나오게 만든다.', topics: ['적용 위치: 포트폴리오 작품 갤러리 카드','앞면 이미지+제목 / 뒷면 설명+링크','핵심 CSS: perspective·rotateY(180deg)·backface-visibility','트리거는 hover, CSS 단독 패턴 사례'], practice: '작품 카드를 Flip Card로 만들어줘. 앞면 이미지+제목, 뒷면 설명. hover로 뒤집기.' },
+        { goal: '다크 히어로 섹션에서 커서 주변만 환해지는 빛 효과를 만든다.', topics: ['적용 위치: 다크 배경 히어로 섹션','mousemove마다 radial-gradient 중심 좌표 갱신','핵심: radial-gradient(circle at X Y) 활용','X·Y 값을 JS가 매 프레임 업데이트'], practice: '히어로 섹션에 마우스 따라다니는 빛 효과 추가해줘. 다크 배경에서 커서 주변만 밝아지도록.' },
+        { goal: '좌표 추적 패턴을 정리하고 다음 주 라이브러리 학습으로 연결한다.', topics: ['오늘 배운 패턴: hover 전환·mousemove 좌표·CSS+JS 분업','마그네틱·Flip Card·Spotlight 포트폴리오 적용 완료','스크롤(5주)+마우스(6주) 트리거 양대 축 완성','다음 주 예고: 라이브러리로 더 화려한 인터랙션'], practice: null },
+    ],
+},
+{
+    num: 7, title: '시각 라이브러리 5종', hours: '2시간',
+    goal: 'tsParticles, Typed.js, Three.js, VANTA, Canvas 5종을 자연어 프롬프트로 조합해 풀 스펙 인터랙티브 랜딩을 완성한다.',
+    topics: ['시각 라이브러리 5종 카탈로그', 'CDN 한 줄로 라이브러리 붙이기', '좋은 프롬프트 4요소(대상 스타일 수치 범위)', '파티클 배경과 타이핑 효과', '3D 회전 큐브', '5종 조합 풀 스펙 랜딩'],
+    practice: '5종 중 페이지 분위기에 맞는 1~2개를 골라 파티클 배경, 타이핑 직함, 3D 큐브를 통합해 인터랙티브 랜딩을 완성한다.',
+    slides: ['01_오늘의_목표.svg','02_오늘_할_수_있게_되는_것.svg','03_시각_라이브러리_5종_카탈로그.svg','04_CDN_한_줄이면_끝.svg','05_좋은_프롬프트_4요소.svg','06_실습1_파티클_배경.svg','07_실습2_타이핑_효과.svg','08_실습3_3D_회전_큐브.svg','09_실습4_나만의_조합.svg','10_핵심_정리_+_배포_예고.svg'],
+    slideDescs: [
+        { goal: '7회차의 주제인 시각 라이브러리 5종 통합과 도달점인 풀 스펙 인터랙티브 랜딩을 한눈에 보여준다.', topics: ['라이브러리는 이름만 알면 끝', '5종 로고 카탈로그', '파티클 타이핑 3D가 살아있는 히어로 미리보기'], practice: null },
+        { goal: '2시간 후 학생이 손에 쥐고 갈 구체적 결과물과 역량을 명확히 한다.', topics: ['5종을 이름과 한 줄 설명으로 구분', '프롬프트만으로 파티클 타이핑 3D 적용', '분위기에 맞춰 1~2개 선택 조합', '프롬프트 4요소로 결과 통제'], practice: null },
+        { goal: 'tsParticles, Typed.js, Three.js, VANTA, Canvas 2D가 각각 무엇을 하는 도구인지 한눈에 구분한다.', topics: ['tsParticles 파티클 배경', 'Typed.js 텍스트 타이핑', 'Three.js 진짜 3D', 'VANTA WebGL 풀스크린 배경 / Canvas 2D 직접 그리기'], practice: null },
+        { goal: '라이브러리가 페이지에 붙는 원리인 CDN 한 줄과 호출 한 블록을 직관적으로 이해한다.', topics: ['라이브러리는 미리 짜둔 코드 묶음', 'CDN 링크로 설치 없이 불러오기', 'head에 script 한 줄이면 준비 완료', '호출 코드는 Claude가 생성'], practice: null },
+        { goal: '시각 효과를 의도대로 뽑아내는 프롬프트 공식인 4요소를 학습한다.', topics: ['대상: 어디에 적용할지', '스타일: 분위기', '수치: 양과 속도', '범위: 상호작용 경계'], practice: null },
+        { goal: 'tsParticles를 활용해 히어로 섹션 배경에 인터랙티브 파티클 효과를 추가한다.', topics: ['CDN 추가 후 자연어 지시', '점 수 색 속도 마우스 반응 조정', '다크 배경 + 흰 점 조합이 안정적'], practice: '히어로 섹션 배경에 tsParticles 파티클 효과 추가해줘. 흰 점이 천천히 떠다니고 마우스에 반응.' },
+        { goal: 'Typed.js로 히어로 직함 자리에 자동 타이핑과 삭제 반복 애니메이션을 적용한다.', topics: ['문자열 배열 타이핑 삭제 반복', '포트폴리오 직함 슬로건에 활용', '커서 속도 반복 여부를 자연어로 지시'], practice: '히어로 직함 자리에 Typed.js로 "웹 개발자", "UI 디자이너", "Claude 전문가" 순서로 타이핑.' },
+        { goal: 'Three.js의 Scene Camera Renderer 개념을 체감하며 페이지에 회전하는 3D 큐브를 배치한다.', topics: ['Scene Camera Renderer 3종 세트', 'BoxGeometry + 회전이 쉬운 출발점', '색 재질 회전 속도를 자연어로 조정'], practice: '히어로 오른쪽에 Three.js로 네온 파란 와이어프레임 큐브가 천천히 회전하도록.' },
+        { goal: '지금까지 만든 페이지에 5종 중 본인 분위기에 맞는 1~2개를 통합해 풀 스펙 랜딩으로 완성한다.', topics: ['페이지 분위기 진단', '분위기에 맞는 라이브러리 추천 매칭', '3개 이상 동시 적용은 산만함'], practice: '지금까지 만든 페이지를 풀 스펙 랜딩으로 정리해줘. 파티클 배경 + 타이핑 직함 + GSAP 스크롤.' },
+        { goal: '5종 라이브러리와 프롬프트 4요소를 복습하고 8회차 Vercel 배포로 자연스럽게 이어준다.', topics: ['5종 라이브러리 한 줄 요약 복습', '프롬프트 4요소는 공통 공식', '다음 주 Vercel 배포 예고'], practice: null },
+    ]
+},
+{
+    num: 8, title: 'v12 메타 정리와 사이트 배포', hours: '2시간',
+    goal: '1~7주에 쌓은 v12 시스템을 메타적으로 정리하고 GitHub Pages로 공개 URL을 받는다.',
+    topics: ['v12 = DESIGN.md = Claude Design 메타 인식', 'v12 3대 축 다시 정리', 'v12 프롬프트로 내 페이지 재생성', 'git과 GitHub Pages 5분 압축', '배포해줘 한 줄로 공개 URL 받기', '내 사이트 공유와 Part 2 예고'],
+    practice: 'v12 프롬프트로 본인 페이지를 재생성하고, 배포해줘 한 줄로 GitHub Pages 공개 URL을 받는다.',
+    slides: ['01_표지_내_사이트가_인터넷에.svg','02_오늘의_학습목표.svg','03_1주차_회상_Claude_Design.svg','04_메타_3종_비교.svg','05_v12_시스템_3대축.svg','06_실습1_v12_재생성.svg','07_git_5분_압축.svg','08_GitHub_CLI와_Pages.svg','09_실습2_배포해줘_한줄.svg','10_배포_후_체크리스트.svg','11_내_사이트_공유_타임.svg','12_핵심_정리_Part2_예고.svg'],
+    slideDescs: [
+        { goal: '8회차가 Part 1의 클라이맥스이며 끝나면 공개 URL을 갖게 된다는 기대감을 만든다.', topics: ['Session 8 Part 1 마무리', '1개념 인터넷에 내 사이트 띄우기', '결과물 본인 공개 URL'], practice: null },
+        { goal: '오늘 2시간 안에 도달할 3가지 결과를 명확히 못 박는다.', topics: ['v12 = DESIGN.md = Claude Design 메타 인식', 'v12 프롬프트로 페이지 재생성', '배포해줘 한 줄로 공개 URL', '링크 공유와 Part 2 예고'], practice: null },
+        { goal: '1주차 Claude Design 결과물과 지금 내 페이지를 비교해 7주간의 성장을 자각시킨다.', topics: ['1주차의 나는 구경꾼', '지금은 직접 만든 페이지', '차이는 프롬프트 + 의도 + 토큰'], practice: null },
+        { goal: '7주간 써 온 v12가 업계 표준과 같은 발상임을 보여주고 자존감을 끌어올린다.', topics: ['v12 3-SPARK + AESTHETIC_PINCH + FONT', 'DESIGN.md YAML 토큰 + 8섹션', 'Claude Design 제품화 버전', '공통 발상 토큰화와 표준화'], practice: null },
+        { goal: 'v12를 구성하는 3-SPARK, AESTHETIC_PINCH, FONT JUDGMENT가 각각 무엇을 결정하는지 못 박는다.', topics: ['3-SPARK 분위기 인터랙션 모션', 'AESTHETIC_PINCH 디테일 양념', 'FONT JUDGMENT 폰트 선택 근거'], practice: null },
+        { goal: '학생이 7주 결과물을 v12 프롬프트 한 번으로 재생성하고 Before/After를 비교한다.', topics: ['SPARK 3종 다크 네온 마그네틱 CTA 페이드인', 'AESTHETIC_PINCH noisy-gradient', 'FONT Inter + Noto Sans KR', '이전 결과물과 Before/After'], practice: '[SPARK-1] 전면 다크 + 네온 / [SPARK-2] 마그네틱 CTA / [SPARK-3] 스크롤 페이드인 / [AESTHETIC_PINCH] noisy-gradient + cinematic-spacing / [FONT] Inter(헤드) + Noto Sans KR(본문) 위 설정으로 내 페이지를 재생성해줘.' },
+        { goal: 'git을 깊이 가르치지 않고 변경 이력, 백업, 배포 통로 3가지 기능만 인지시킨다.', topics: ['git은 작업물의 타임머신', 'GitHub는 인터넷 백업', 'GitHub Pages는 무료 호스팅', '명령어는 Claude Code가 처리'], practice: null },
+        { goal: '배포해줘 한 줄이 내부에서 어떤 일을 하는지 큰 그림만 보여준다.', topics: ['gh repo create 빈 폴더 생성', 'git push 파일 복사', 'GitHub Pages 웹사이트 변환', '토큰은 내 출입증'], practice: null },
+        { goal: '학생 모두가 본인 페이지의 공개 URL을 손에 쥔다.', topics: ['사전 확인 GitHub 토큰', '배포해줘 한 줄 실습', '레포 생성 push Pages 활성화 자동', '회신 URL 휴대폰으로 열기'], practice: '이 페이지를 GitHub 레포 만들고 GitHub Pages로 배포해줘. 레포 이름은 my-portfolio.' },
+        { goal: 'URL이 안 보이거나 이미지가 깨지는 등 흔한 막힘을 5분 안에 해결시킨다.', topics: ['404는 Pages 활성화 대기', '이미지 깨짐 상대경로 확인', '폰트 안 뜸 CDN 점검', '모바일에서도 열어보기'], practice: '막히면 Claude한테 이미지 경로 고쳐줘처럼 한 줄로 요청해 체크리스트(URL 접속 / 이미지 / 폰트 / 모바일)를 통과시킨다.' },
+        { goal: '학생들끼리 본인 URL을 공유하며 클라이맥스의 감동을 집단으로 체화한다.', topics: ['단톡방에 본인 URL 올리기', '옆 사람 사이트에 좋은 점 댓글', '1주차의 나에서 8주차의 나 회고'], practice: '단톡방에 본인 URL을 올리고 옆 사람 사이트 1개에 좋은 점 1줄 댓글을 남긴다.' },
+        { goal: '오늘 메타 인식과 배포 경험을 못 박고 다음 8주 Part 2 기대감을 만든다.', topics: ['오늘 얻은 것 메타 인식과 공개 URL', 'Part 1 완주 정적 사이트 마스터', 'Part 2 예고 데이터 도메인 결제', '사이트가 아니라 서비스를 만든다'], practice: null },
+    ],
+},
+{
+    num: 9, title: 'API 연동 (외부 데이터)', hours: '2시간',
+    goal: 'fetch와 JSON으로 외부 데이터를 받아 페이지에 띄우고 API 키 개념을 처음 익혀 정적 페이지를 동적 페이지로 바꾼다.',
+    topics: ['Part 2 시작과 정적에서 동적으로의 전환', 'API를 자판기 비유로 이해하기', 'fetch와 JSON 데이터 흐름', 'API 키의 역할과 발급 감각', '키 없는 무료 데이터 받아오기', '날씨 카드와 검색 필터 실습'],
+    practice: '키 없는 고양이 이미지를 받아 띄우고, 무료 키로 날씨 카드를 만든 뒤 받은 데이터에 검색 필터를 붙인다.',
+    slides: ['01_Part2_시작.svg','02_오늘의_학습목표.svg','03_API란_자판기_비유.svg','04_fetch와_JSON.svg','05_API_키_첫등장.svg','06_실습1_고양이_이미지.svg','07_실습2_날씨_카드.svg','08_실습3_검색_필터.svg'],
+    slideDescs: [
+        { goal: 'Part 2의 큰 그림을 한눈에 보여주고 정적에서 동적으로의 전환이 주는 설렘을 만든다.', topics: ['Part 1 정리 후 Part 2 시작 선언', 'Part 2 키워드는 데이터 도메인 결제', '내 페이지가 바깥 데이터를 가져온다', '도구는 그대로 Claude Code와 브라우저'], practice: null },
+        { goal: '2시간 후 학생이 외부 데이터를 받아서 보여주는 페이지를 직접 만들 수 있다.', topics: ['데이터 받아오는 흐름 설명하기', 'fetch와 JSON을 비유로 이해', '키 없는 무료 데이터 띄우기', 'API 키 개념과 날씨 카드 검색까지'], practice: null },
+        { goal: 'API는 외부 데이터를 주는 서비스의 창구라는 직관을 자판기 비유로 잡는다.', topics: ['우리 페이지는 자판기 앞 손님', '외부 데이터 주는 서비스가 자판기', '요청과 응답이 한 번의 거래', '이미 만들어둔 서비스를 빌려 씀'], practice: null },
+        { goal: 'fetch는 주소 URL로 데이터를 요청하는 명령, JSON은 받아오는 데이터의 모양임을 안다.', topics: ['fetch는 브라우저 기본 탑재 명령', 'JSON은 키-값 쌍 데이터 형식', '주소에서 응답을 받아 풀어 표시', '코드는 Claude Code가 작성'], practice: null },
+        { goal: 'API 키가 신분증 역할이며 발급과 사용, 노출 범위에 대한 기본 감각을 잡는다.', topics: ['일부 서비스는 누가 쓰는지 키로 확인', '발급은 회원가입 후 키 복사', '무료 등급 공개 키는 코드에 적어도 무방', '진짜 보호할 키는 14주차에서 학습'], practice: null },
+        { goal: '키 없이도 동작하는 가장 쉬운 외부 데이터를 받아 페이지에 띄운다.', topics: ['thecatapi와 quotable로 키 없이 호출', '첫 성공 경험 만들기', '새로고침 버튼으로 다시 받아오기', '데이터를 받아 화면에 떴음을 확인'], practice: '고양이 이미지 API에서 랜덤 이미지를 받아서 페이지에 표시하고, 새로고침 버튼을 누르면 다시 받아오게 해줘.' },
+        { goal: '무료 키를 발급받아 첫 키 사용 호출을 성공시키고 카드 UI로 표시한다.', topics: ['OpenWeatherMap 가입 후 키 발급', '서울 현재 날씨 데이터 받기', '도시명 온도 아이콘 설명을 카드로 표시', '받은 JSON을 화면에 꽂는 흐름 짚기'], practice: 'OpenWeatherMap API로 서울 현재 날씨를 받아서 페이지에 카드로 표시해줘. 내 API 키는 ___.' },
+        { goal: '받아온 데이터 배열에 검색창을 연결해 동적 페이지의 진짜 맛을 본다.', topics: ['데이터가 여럿일 때 키워드 매칭', '검색창 입력으로 실시간 필터링', '정렬 옵션도 한 줄 프롬프트로 추가', '받아오기와 다루기는 다른 단계'], practice: '받은 데이터에 검색창을 추가해줘. 입력한 키워드가 포함된 항목만 보이도록.' },
+    ]
+},
+{
+    num: 10, title: '데이터 저장하기', hours: '2시간',
+    goal: '데이터를 표(스키마)로 설계하고 폼 입력을 LocalStorage에 저장해 새로고침해도 남는 방명록 페이지를 완성한다.',
+    topics: ['데이터 구조화와 행·열 표', '스키마 설계(이름·타입·옵션)', 'LocalStorage 저장 개념', '폼 입력 저장과 카드 표시', '항목 삭제·수정 동기화', 'LocalStorage 한계와 다음 주 예고'],
+    practice: 'Claude와 함께 방명록 스키마를 설계하고 폼 입력을 LocalStorage에 저장·표시·삭제하는 페이지를 완성한다.',
+    slides: ['01_표지_사라지지_않는_방명록.svg','02_학습목표.svg','03_개념_데이터_구조화.svg','04_개념_스키마_설계도.svg','05_개념_브라우저_서랍.svg','06_실습1_스키마_그려보기.svg','07_실습2_폼_저장하기.svg','08_실습3_삭제_수정.svg','09_핵심_정리.svg'],
+    slideDescs: [
+        { goal: '오늘 끝나면 새로고침해도 글이 남아있는 방명록 페이지를 갖게 된다는 기대감을 심는다.', topics: ['회차 제목 데이터를 저장하다', '키워드 표·저장·방명록', 'Before/After 한 줄 비교'], practice: null },
+        { goal: '2시간 후 도달할 3가지 능력을 학생 눈높이로 명확히 인지시킨다.', topics: ['데이터를 표로 설계', '폼 내용 브라우저 저장', '저장 항목 표시·삭제'], practice: null },
+        { goal: '흩어진 정보와 표 형태 정보의 차이를 시각으로 각인시킨다.', topics: ['줄글 후기 vs 엑셀 표', '검색·필터·정렬·개수', '행은 데이터 열은 종류'], practice: null },
+        { goal: '스키마 용어를 친숙하게 만들고 컬럼 설계의 3요소를 이해시킨다.', topics: ['표의 머리글을 미리 정함', '이름·타입·옵션 3요소', '방명록 예시 스키마'], practice: null },
+        { goal: 'LocalStorage가 무엇이고 어떤 한계가 있는지 직관적으로 이해시킨다.', topics: ['브라우저 안의 작은 서랍', '새로고침·종료해도 남음', 'key와 value 한 쌍 보관'], practice: null },
+        { goal: 'Claude와 대화하며 본인 페이지에 어울리는 데이터 구조를 표로 설계한다.', topics: ['주제 떠올리고 컬럼 추천', 'id·생성날짜 자동 포함', '컬럼 3~5개로 시작'], practice: '내 페이지에 방명록 기능을 추가하고 싶어. 어떤 컬럼(이름·메시지·날짜 등)이 필요한지 표로 정리해줘.' },
+        { goal: '방명록 폼을 만들고 입력·저장·카드 표시까지 한 흐름을 완성한다.', topics: ['폼 추가와 저장 버튼', 'LocalStorage 저장 후 렌더링', 'F5 새로고침 테스트'], practice: '방명록 폼(이름·메시지)을 만들고 입력하면 LocalStorage에 저장 후 화면에 카드로 표시해줘.' },
+        { goal: '저장된 카드에 삭제 버튼을 달고 저장소와 화면이 동기화되도록 만든다.', topics: ['카드마다 삭제 버튼', '서랍과 화면 같이 제거', 'index로 한 개만 삭제'], practice: '각 방명록 카드에 삭제 버튼 추가해줘. 누르면 LocalStorage에서도 사라지도록.' },
+        { goal: '오늘 배운 3가지를 복기하고 LocalStorage 한계로 다음 주 클라우드 DB의 필요성을 연결한다.', topics: ['3줄 요약 스키마·저장·동기화', '내 컴퓨터에서만 보임 한계', '다음 주 클라우드 DB 예고'], practice: null },
+    ]
+},
+{
+    num: 11, title: '클라우드 DB (Supabase)', hours: '2시간',
+    goal: 'Supabase에 가입해 클라우드 DB를 만들고 JS SDK로 CRUD 4종을 직접 실행한다.',
+    topics: ['Supabase 가입과 프로젝트 생성', 'Table Editor로 테이블 컬럼 만들기', 'CRUD 4종 패턴 이해', 'JS SDK로 Create Read 호출', 'LocalStorage 방명록 클라우드 전환'],
+    practice: '10주차 LocalStorage 방명록을 Supabase에 연결된 클라우드 방명록으로 전환한다.',
+    slides: ['01_오늘의_목표.svg','02_학습_목표.svg','03_Supabase란.svg','04_테이블_컬럼.svg','05_CRUD_4종.svg','06_실습1_가입_프로젝트.svg','07_실습2_테이블_Create_Read.svg','08_실습3_정리.svg'],
+    slideDescs: [
+        { goal: '내 컴퓨터에만 있던 데이터를 모두가 공유하는 클라우드 DB로 옮긴다.', topics: ['클라우드 DB 연결 1개념', '심화 트랙 Part 2 2시간', 'LocalStorage에서 Supabase로 도약'], practice: null },
+        { goal: 'Supabase 클라우드 DB를 만들고 JS SDK로 CRUD 4종을 직접 호출할 수 있다.', topics: ['가입과 프로젝트 생성으로 URL anon key 확보', 'Table Editor로 테이블 컬럼 만들기', 'JS SDK로 Create Read 성공', '방명록을 클라우드로 전환'], practice: null },
+        { goal: 'Supabase가 무엇이고 왜 우리 수업에 맞는지 한 문장으로 이해한다.', topics: ['PostgreSQL 기반 클라우드 DB 서비스', '가입만 하면 인터넷 주소로 DB 발급', '무료 플랜으로 수업 충분', 'Firebase의 대안이며 SQL 기반'], practice: null },
+        { goal: '테이블 컬럼 행 개념을 엑셀에 비유해 이해하고 설계한 스키마를 적용한다.', topics: ['테이블은 엑셀 시트 컬럼은 열 행은 데이터 한 줄', '필수 컬럼 id created_at 내용', '컬럼 타입 text int8 timestamp uuid'], practice: null },
+        { goal: 'Create Read Update Delete 4종 쿼리 패턴을 코드 한 줄 단위로 이해한다.', topics: ['Create는 insert Read는 select', 'Update와 Delete는 eq 필터로 지정', '공통 패턴 from 테이블 동작', '모든 쿼리는 비동기 await'], practice: null },
+        { goal: 'supabase.com에 가입하고 첫 프로젝트를 만들어 URL과 anon key를 얻는다.', topics: ['이메일로 가입 후 New Project', '이름 비밀번호 입력 리전은 서울 선택', 'Settings API에서 URL과 anon key 복사'], practice: 'supabase.com에서 새 프로젝트 만들고 project URL과 anon key를 확인해줘.' },
+        { goal: 'UI로 테이블을 만들고 SDK 코드로 첫 데이터를 클라우드 DB에 저장 조회한다.', topics: ['Table Editor로 guestbook 테이블 생성', 'nickname message 컬럼 추가', 'Supabase CDN 추가 후 데이터 1건 확인'], practice: '내 페이지에서 Supabase의 guestbook 테이블에 데이터 추가하고 전체 조회하는 코드 작성해줘. URL은 ___, key는 ___.' },
+        { goal: '10주차 LocalStorage 방명록을 Supabase로 전환해 모두가 볼 수 있게 완성한다.', topics: ['LocalStorage 호출을 Supabase 호출로 교체', '다른 기기 다른 사람도 글 확인', '다음 회차 회원 시스템 예고'], practice: '지난 주 LocalStorage로 만든 방명록을 Supabase로 옮겨줘. 모든 방문자가 글을 볼 수 있도록.' },
+    ],
+},
+{
+    num: 12, title: '회원 시스템 (Supabase Auth)', hours: '2시간',
+    goal: 'Supabase Auth로 회원가입과 로그인 로그아웃을 만들고 내 데이터만 보이게 분리한다.',
+    topics: ['회원 시스템이 필요한 이유', 'Supabase Auth 한눈에 이해', '회원가입 폼 만들기', '로그인 로그아웃과 상태 표시', 'user_id와 RLS로 내 데이터 보호', '11주 방명록을 내 글만 보이게 변신'],
+    practice: '11주 방명록에 회원가입 로그인 로그아웃을 붙이고 로그인한 본인 글만 보이고 쓸 수 있게 만든다.',
+    slides: ['01_12회차_시작.svg','02_오늘의_학습목표.svg','03_왜_회원이_필요한가.svg','04_Supabase_Auth_한눈에.svg','05_내_데이터만_보기.svg','06_실습1_회원가입.svg','07_실습2_로그인_로그아웃.svg','08_실습3_내_글만_보기.svg','09_핵심_정리.svg'],
+    slideDescs: [
+        { goal: '오늘 만들 것 회원만 들어올 수 있는 페이지를 한 줄로 소개한다.', topics: ['Session 12 심화 트랙 2시간', '1개념 회원 시스템 (Supabase Auth)', '모두 함께 보는 방명록에서 내 글만 보이는 방명록으로', '끝나면 로그인 폼과 내 글 목록 완성'], practice: null },
+        { goal: '회원가입 로그인 로그아웃과 내 데이터만 보기의 4가지를 직접 구현할 수 있게 된다.', topics: ['회원가입 폼 만들기 (이메일 비밀번호)', '로그인 로그아웃 동작시키기', '로그인 상태를 화면에 표시하기', '내가 쓴 글만 보이게 만들기 (user_id RLS)'], practice: null },
+        { goal: '모두 공유 데이터와 내 데이터의 차이를 직관적으로 이해한다.', topics: ['11주까지는 모두가 같은 방명록을 봄', '12주부터는 나만 보는 데이터', '카카오톡 인스타처럼 익숙한 앱 예시', '진짜 서비스는 누가 누군지 식별이 필요'], practice: null },
+        { goal: '복잡한 회원 시스템을 Supabase가 통째로 대신 만들어준다는 사실을 안다.', topics: ['Supabase Auth는 회원 시스템 통째로 제공', '이메일 구글 깃허브 로그인 기본 제공', '가입하면 회원 명단 자동 관리', '로그인 상태도 브라우저에 자동 저장'], practice: null },
+        { goal: '각 행에 주인 표시(user_id)를 달고 RLS로 남의 데이터 접근을 막는 원리를 이해한다.', topics: ['모든 데이터에 주인 표시 user_id 컬럼 추가', '저장 때 지금 로그인한 나로 자동 기록', '불러올 때 주인이 나인 것만 가져옴', 'RLS는 내 데이터 보호 규칙'], practice: null },
+        { goal: '이메일 비밀번호 입력 폼을 만들고 Supabase signUp으로 연동한다.', topics: ['이메일 비밀번호 입력 폼과 가입하기 버튼', 'signUp으로 연동', 'Authentication 탭에 이메일 추가 확인', '비밀번호 최소 6자 등 흔한 함정'], practice: '회원가입 폼(이메일 비번)을 만들고 Supabase Auth signUp으로 연동해줘.' },
+        { goal: '로그인 로그아웃 버튼을 만들고 화면 상단에 OOO님 표시까지 완성한다.', topics: ['로그인은 signInWithPassword 호출', '로그아웃은 signOut 한 줄', 'onAuthStateChange로 로그인 상태 감지', '새로고침해도 로그인 유지 확인'], practice: '로그인 폼 로그아웃 버튼 추가해줘. 로그인 상태가 화면 상단에 표시되도록.' },
+        { goal: '기존 방명록에 user_id를 붙이고 RLS를 켜서 본인 글만 보이고 쓸 수 있게 만든다.', topics: ['posts 테이블에 user_id 컬럼 추가', '저장 시 user_id 자동 첨부', '조회 시 본인 글만 또는 RLS에 맡기기', '두 계정으로 분리 테스트'], practice: '11주 방명록을 변경해서 로그인한 사용자 본인 글만 보이고 쓸 수 있도록 해줘.' },
+        { goal: '오늘 얻은 4가지 능력을 복기하고 다음 주 도메인 예고로 마무리한다.', topics: ['회원가입 로그인 로그아웃 구현', '로그인 상태를 화면에 반영', '데이터에 주인 표시 붙이기', 'RLS로 내 데이터 지키기'], practice: null },
+    ],
+},
+{
+    num: 13, title: '도메인 구매와 DNS 연결', hours: '2시간',
+    goal: '가비아에서 도메인을 구매하고 DNS를 설정해 GitHub Pages 사이트에 연결한 뒤 SSL까지 적용한다.',
+    topics: ['도메인 개념을 내 가게 간판 비유로 이해', '가비아에서 본인 이름이나 브랜드 도메인 직접 구매', 'A 레코드와 CNAME으로 GitHub Pages 연결', 'https 자물쇠 켜고 완성된 도메인 공유'],
+    practice: '가비아에서 도메인을 구매하고 DNS에 A 레코드 4개와 CNAME을 입력해 GitHub Pages에 연결한 뒤 SSL을 켠다.',
+    slides: ['01_표지_내_도메인을_가집니다.svg','02_오늘의_학습목표.svg','03_개념_도메인이란_무엇인가.svg','04_개념_도메인은_어디서_사나.svg','05_개념_DNS_레코드_A와_CNAME.svg','06_실습_가비아에서_도메인_구매.svg','07_실습_GitHub_Pages와_DNS_연결.svg','08_실습_SSL_켜고_공유하고_정리.svg'],
+    slideDescs: [
+        { goal: '오늘 끝나면 깃허브 기본 주소가 아닌 진짜 내 이름의 주소를 갖게 된다는 13회차의 약속을 전한다.', topics: ['Session 13 심화 트랙 Part 2', '1개념은 내 도메인 가지기', '깃허브 주소에서 내이름.com으로 격상', '2시간 안에 구매부터 SSL까지'], practice: null },
+        { goal: '2시간 안에 도달할 4단계를 학생이 미리 머릿속에 그리게 한다.', topics: ['도메인을 내 가게 간판 비유로 이해', '가비아에서 본인 도메인 직접 구매', 'DNS 레코드로 GitHub Pages 연결', 'https 자물쇠 켜고 공유'], practice: null },
+        { goal: '도메인이 사람이 읽기 좋은 인터넷 주소라는 사실을 비유로 각인시킨다.', topics: ['IP 주소 대 도메인 비교', '도메인은 간판 IP는 좌표 비유', '끝부분 .com .kr 등은 TLD', '도메인은 소유가 아닌 1년 단위 임대'], practice: null },
+        { goal: '등록업체 3곳을 비교해 왜 오늘 가비아인지 학생이 납득하게 한다.', topics: ['가비아는 한국어 UI와 .kr 강점으로 오늘 채택', 'Namecheap은 영문에 저렴한 가격', 'Cloudflare는 원가에 가깝고 개발자 친화', '어디서 사든 도메인 자체는 동일'], practice: null },
+        { goal: '다음 실습에서 입력할 A 레코드와 CNAME이 무엇을 의미하는지 그림으로 이해시킨다.', topics: ['DNS는 도메인을 IP로 바꾸는 전화번호부', 'A 레코드는 도메인을 IP로 직접 연결', 'CNAME은 도메인을 다른 도메인으로 연결', 'GitHub Pages는 A 레코드 4개와 CNAME 조합 요구'], practice: null },
+        { goal: '학생이 본인 이름이나 브랜드 도메인을 직접 검색하고 결제해 내 소유 상태를 만든다.', topics: ['가비아 가입과 이메일 인증', '원하는 이름 검색으로 사용 가능 여부 확인', '.com이 비싸면 .shop .site .kr 대안 시도', '1년 등록 결제 후 마이페이지 확인'], practice: '학생이 직접 진행한다. 가비아에서 본인 이름이나 브랜드 도메인을 검색해서 구매한다.' },
+        { goal: '가비아 DNS에 A 레코드 4개와 CNAME을 입력하고 GitHub 레포 Settings에 도메인을 적어 연결을 완료한다.', topics: ['가비아 My가비아 DNS 관리 진입', '호스트 @에 A 레코드 4개 입력', '호스트 www에 CNAME 입력', 'GitHub Settings Pages Custom domain에 도메인 입력'], practice: 'GitHub Pages 도메인 연결 방법 알려줘. 가비아에 A 레코드 4개 입력하고 레포 Settings에 도메인 입력하는 순서대로.' },
+        { goal: 'GitHub Pages 자동 SSL을 활성화해 https 자물쇠를 켜고 완성된 도메인을 동료에게 공유하며 회차를 마무리한다.', topics: ['Settings에서 Enforce HTTPS 체크 활성화', 'Let us Encrypt가 인증서 자동 발급', '체크박스가 회색이면 DNS 전파 중', 'https 접속 확인 후 링크 공유'], practice: 'GitHub Pages에서 내 도메인에 SSL을 적용하고 싶어. Settings에서 어디를 체크해야 하는지 안내해줘.' },
+    ],
+},
+{
+    num: 14, title: 'Vercel 환경으로 옮기기', hours: '2시간',
+    goal: 'GitHub Pages에서 Vercel로 옮겨 Vercel 함수와 환경변수로 API 키를 안전하게 숨기는 환경을 만든다.',
+    topics: ['GitHub Pages의 한계와 키 노출 위험', 'Vercel 자동 배포와 Vercel 함수, 환경변수', 'api 폴더 구조와 한 파일 한 주소 규칙', 'Vercel 가입과 GitHub 레포 연결 배포', '첫 Vercel 함수 만들어 호출하기', '환경변수에 키 저장하고 내 도메인 연결'],
+    practice: 'Vercel에 GitHub 레포를 연결해 배포하고, api/hello.js 함수와 환경변수 기반 날씨 함수를 만들어 도메인까지 연결한다.',
+    slides: ['01_표지_Vercel_환경으로_옮기기.svg','02_학습목표.svg','03_GitHub_Pages_한계.svg','04_Vercel이란.svg','05_Vercel_함수_구조.svg','06_실습1_Vercel_연결.svg','07_실습2_첫_함수.svg','08_실습3_환경변수_+_도메인.svg','09_핵심_정리.svg'],
+    slideDescs: [
+        { goal: 'GitHub Pages에서 Vercel로 옮겨 API 키를 안전하게 숨길 환경을 만든다는 한 줄 미션을 제시한다.', topics: ['회차 14, 트랙 심화 Part 2', 'API 키를 더 이상 코드에 박지 않는다', '2시간 구성 이론에서 실습 3개, 정리'], practice: null },
+        { goal: '회차 종료 시점에 학생이 손에 쥐는 결과물 3개를 명확히 못박는다.', topics: ['GitHub 레포 Vercel 연결로 푸시하면 자동 배포', 'api 폴더에 첫 Vercel 함수 만들어 호출 성공', 'API 키를 환경변수에 저장해 어디에도 노출 안 됨'], practice: null },
+        { goal: '왜 GitHub Pages를 떠나야 하는지 API 키 숨길 곳이 없다는 점을 이해한다.', topics: ['GitHub Pages는 정적 파일만 호스팅', 'JS에 키를 박으면 F12로 누구나 훔쳐봄', '서버에서 도는 코드가 없으면 키를 가릴 수 없음'], practice: null },
+        { goal: 'Vercel을 GitHub 자동 배포, Vercel 함수, 환경변수의 3종 세트로 인지시킨다.', topics: ['GitHub 레포 연결로 푸시마다 자동 배포', 'Vercel 함수는 서버에서 도는 자바스크립트', '환경변수에 비밀값 저장, Hobby 플랜 무료'], practice: null },
+        { goal: 'api 폴더 안 한 파일이 한 주소 규칙과 왜 키가 안 새는지 원리를 이해한다.', topics: ['루트에 api 폴더 생성, 파일 하나가 주소 하나', '함수 코드는 Vercel 서버에서만 돌고 결과만 전달', '페이지에서는 fetch로 호출'], practice: null },
+        { goal: 'vercel.com에 GitHub로 로그인하고 레포를 import해 30초 만에 첫 배포 URL을 얻는다.', topics: ['vercel.com GitHub 계정으로 로그인', '13주 레포 선택해 Import 후 Deploy', '발급된 vercel.app URL로 사이트 확인'], practice: '학생이 직접 진행 — vercel.com 가입 후 내 GitHub 레포를 import하고 Deploy를 눌러 첫 배포 URL을 확인한다.' },
+        { goal: 'Claude Code로 api/hello.js 함수를 만들고 페이지에서 fetch로 호출해 응답을 화면에 표시한다.', topics: ['Claude Code로 api/hello.js 생성', 'git push 후 자동 재배포 대기', 'fetch로 호출해 응답 화면 확인'], practice: 'api/hello.js 파일을 만들어서 안녕하세요 [이름] 응답하는 Vercel 함수 작성하고, 페이지에서 fetch로 호출해줘.' },
+        { goal: 'API 키를 환경변수에 저장해 코드에 박지 않고 사용하고, 13주에 산 도메인을 Vercel 사이트로 연결한다.', topics: ['Settings의 Environment Variables에 키 추가 후 Redeploy', 'F12 Network 탭에서 키 노출 안 됨 확인', 'Settings Domains에 도메인 입력하고 DNS 레코드 추가'], practice: 'Vercel 환경변수에 OPENWEATHER_KEY 추가했어. api/weather.js 함수를 만들어서 그 키로 날씨 조회해줘. 클라이언트엔 키 노출 X.' },
+        { goal: '이제 진짜 키를 숨길 수 있다는 점을 못박고 이 기반이 15주 AI와 16주 결제로 이어짐을 연결한다.', topics: ['자동 배포 파이프라인과 첫 Vercel 함수', '환경변수에 안전하게 들어간 API 키와 연결된 도메인', '15주 AI 기능과 16주 결제로 이어지는 베이스'], practice: null },
+    ],
+},
+{
+    num: 15, title: 'API 활용 AI 기능 붙이기', hours: '2시간',
+    goal: 'Vercel 함수에서 OpenAI 등 유료 API를 호출해 내 사이트에 진짜 AI 기능을 붙이고 키는 절대 노출하지 않는다.',
+    topics: ['Vercel 함수에서 AI API 안전 호출', 'API 키는 환경변수로 보관', 'OpenAI Stability DeepL 3종 용도', '프롬프트 4요소를 API에 적용', '본인 사이트에 AI 기능 직접 추가'],
+    practice: 'OpenAI 요약과 Stability 이미지 생성 기능을 만들고 본인 사이트 주제에 맞는 AI 기능 1개를 직접 붙인다.',
+    slides: ['01_표지_AI_기능_내장_사이트.svg','02_학습_목표_4가지.svg','03_왜_Vercel_함수에서_호출.svg','04_AI_API_3종_소개.svg','05_프롬프트_4요소를_API에.svg','06_실습1_텍스트_요약.svg','07_실습2_이미지_생성.svg','08_실습3_본인_사이트_AI_기능.svg','09_핵심_정리_다음_회차.svg'],
+    slideDescs: [
+        { goal: '15회차 한 줄 약속으로 내 사이트에 진짜 AI 기능을 붙인다는 목표를 제시한다.', topics: ['회차 타이틀 API 활용 AI 기능 붙이기', '14주 환경 15주 활용 16주 결제 흐름', '오늘 다룰 AI API 3종 예고'], practice: null },
+        { goal: '회차 종료 시점에 학생이 손수 할 수 있어야 하는 4가지를 명확히 한다.', topics: ['Vercel 함수에서 AI API 호출', 'API 키를 환경변수로 안전 보관', '프롬프트 4요소를 요청에 적용', '본인 사이트에 AI 기능 1개 추가'], practice: null },
+        { goal: '유료 API 키가 브라우저에 노출되면 안 되는 이유와 안전한 호출 경로를 이해한다.', topics: ['키 노출 시 즉시 돈이 빠진다', '브라우저 코드는 F12로 다 보인다', 'Vercel 함수 안에서만 키를 읽는다'], practice: null },
+        { goal: 'OpenAI Stability DeepL 각각이 무엇을 잘하는지와 어떤 걸 고르면 좋을지 안다.', topics: ['OpenAI 텍스트 요약 답변 생성', 'Stability AI 이미지 생성', 'DeepL 고품질 번역', '셋 다 호출 패턴은 동일'], practice: null },
+        { goal: '프롬프트 4요소 대상 스타일 수치 범위가 AI API 요청에서도 결과를 좌우함을 이해한다.', topics: ['대상 누구를 위한 답인가', '스타일 톤과 말투', '수치 길이와 개수', '범위 다룰 것과 뺄 것'], practice: null },
+        { goal: 'api/summarize.js를 만들어 페이지 입력 글을 OpenAI가 3줄로 요약해 돌려주게 한다.', topics: ['환경변수 OPENAI_KEY 등록', 'Claude Code 프롬프트로 생성', 'textarea 버튼 결과 영역 구성', '긴 본문 붙여 3줄 응답 확인'], practice: 'Vercel 환경변수 OPENAI_KEY 추가했어. api/summarize.js 만들어서 텍스트 입력 받아 OpenAI로 3줄 요약해줘. 페이지에서 textarea+버튼으로 호출.' },
+        { goal: 'Stability AI를 호출하는 api/generate-image.js로 프롬프트 입력에서 이미지 표시까지 완료한다.', topics: ['Stability 무료 크레딧 가입과 키 발급', '환경변수 STABILITY_KEY 등록', '함수와 페이지 동시 생성', '프롬프트 4요소 적용'], practice: 'api/generate-image.js 만들어서 Stability AI로 이미지 생성해줘. 환경변수 STABILITY_KEY. 페이지에서 프롬프트 입력 후 이미지 표시.' },
+        { goal: '자기 사이트 주제에 어울리는 AI 기능 한 가지를 스스로 정의하고 Vercel 함수로 붙인다.', topics: ['주제별 예시 카페 포트폴리오 여행', '정의 키 확인 프롬프트 배포 절차', '막히면 에러 그대로 붙여넣기'], practice: '내 사이트 주제는 [___]. 이 주제에 어울리는 AI 기능 1개를 Vercel 함수로 추가해줘.' },
+        { goal: '오늘 한 일을 한 화면에 압축하고 16주차 결제 흐름으로 자연스럽게 연결한다.', topics: ['페이지 입력 함수 AI API 응답 패턴', '키는 환경변수만 클라이언트엔 절대로', '프롬프트 4요소는 API에서도 동일', '16주차 결제 예고'], practice: null },
+    ],
+},
+{
+    num: 16, title: '결제 (토스 PG) + 캡스톤 발표', hours: '2시간',
+    goal: '토스 PG 결제 위젯을 본인 사이트에 붙이고, 본인 작품을 5분씩 발표해 16주 코스를 완주한다.',
+    topics: ['PG 개념과 결제 중개 서비스 이해', '토스페이먼츠 테스트 키 발급', '결제 위젯 띄우고 테스트 카드로 결제', 'Vercel 함수에서 결제 검증과 결과 페이지', '본인 작품 5분 캡스톤 발표', '16주 여정 정리와 수료 축하'],
+    practice: '토스 결제 위젯을 붙이고 검증까지 완성한 뒤 본인 작품을 5분 발표한다.',
+    slides: ['01_표지_결제와_캡스톤_발표.svg','02_오늘_가져갈_결과물.svg','03_PG란_무엇인가.svg','04_토스를_고른_이유.svg','05_실습1_테스트_키_발급.svg','06_결제_위젯_흐름.svg','07_실습2_위젯_띄우기.svg','08_실습3_검증_결과_페이지.svg','09_캡스톤_발표_가이드.svg','10_학생_발표.svg','11_16주_여정_한눈에.svg','12_다음_코스_안내.svg','13_수료_축하.svg'],
+    slideDescs: [
+        { goal: '16주 코스의 마지막 회차임을 인지하고 오늘 두 가지 미션인 결제와 발표를 받아 든다.', topics: ['Session 16 심화 Part 2 마지막 회차','결제 토스 PG와 캡스톤 발표','오늘 산출물은 결제까지 도는 사이트와 5분 발표'], practice: null },
+        { goal: '2시간 후 내 손과 머리에 무엇이 남는지 명확히 한다.', topics: ['토스페이먼츠 테스트 키 발급','내 사이트에 결제 위젯과 테스트 카드 결제','Vercel 함수 검증과 결과 페이지','본인 작품 5분 발표 후 수료'], practice: null },
+        { goal: 'PG라는 단어를 처음 들어도 카드 결제를 대신 처리해주는 회사라는 직관을 잡는다.', topics: ['PG는 결제 중개 서비스','카드사 은행 직접 계약은 사실상 불가능','PG가 가운데서 다 처리','한국 주요 PG는 토스페이먼츠 이니시스 NHN KCP'], practice: null },
+        { goal: '왜 다른 PG가 아니라 토스인지 학생 입장에서 장점을 이해한다.', topics: ['한글 문서와 한글 콘솔','무료 테스트 키 즉시 발급','위젯 SDK 한 줄로 결제창 호출','테스트 카드 번호 제공'], practice: null },
+        { goal: 'tosspayments.com 가입 후 개발자 센터에서 테스트 키 2개를 손에 넣는다.', topics: ['tosspayments.com 이메일 가입','테스트 클라이언트 키 복사','테스트 시크릿 키 복사','시크릿 키는 절대 노출 금지'], practice: 'tosspayments.com 가입 후 개발자 센터에서 테스트 클라이언트 키와 시크릿 키를 복사해 메모장에 임시 저장한다 (학생 직접 진행).' },
+        { goal: '결제 버튼 클릭부터 DB 저장까지 5단계 흐름을 머리에 그린다.', topics: ['SDK 로드와 위젯 생성','사용자가 카드 입력하고 결제 요청','성공 콜백을 Vercel 함수에서 검증','검증 후 주문 저장과 결과 페이지'], practice: null },
+        { goal: '결제하기 버튼을 누르면 토스 결제창이 뜨고 테스트 카드로 결제 시도까지 간다.', topics: ['결제하기 버튼으로 위젯 띄우기','클라이언트 키는 HTML에 직접 사용 가능','테스트 카드 번호로 결제 시도','실제 청구 없이 여러 번 시도'], practice: '토스 결제 위젯을 내 사이트에 추가해줘. 결제하기 버튼 누르면 위젯이 뜨고, 테스트 카드로 결제 시도 가능하도록.' },
+        { goal: 'Vercel 함수에서 결제를 검증하고 성공 실패 페이지가 떠서 결제까지 가는 사이트가 완성된다.', topics: ['Vercel 함수에서 토스 API로 검증','시크릿 키는 Vercel 환경변수로 등록','검증 성공 시 orders 테이블 저장','테스트 카드로 성공 페이지 확인'], practice: 'api/payment-confirm.js를 만들어서 결제 성공 콜백을 토스 API로 검증하고, Supabase orders 테이블에 저장해줘.' },
+        { goal: '5분 발표를 어떻게 구성할지 명확한 틀을 받는다.', topics: ['1인 5분 정확히 지키기','주제 소개 1분','본인 도메인 직접 시연 3분','어려웠던 점과 다음 기능 회고 1분'], practice: null },
+        { goal: '모든 학생이 본인 작품을 발표하고 동료 피드백을 받는다.', topics: ['자원자 우선 후 출석 순서 발표','강사는 타이머와 한 줄 코멘트','청중은 발표자 도메인 즉시 접속','발표 후 박수와 1질문'], practice: null },
+        { goal: '1회차 검은 글씨 페이지에서 16회차 결제 사이트까지 본인이 얼마나 왔는지 본다.', topics: ['1~4회차 HTML CSS JS 랜딩','5~8회차 도메인과 외부 연동','9~12회차 다중 페이지 DB 회원','13~16회차 AI 기능과 결제'], practice: null },
+        { goal: '본 코스 이후 어떤 길이 열려 있는지 보여주고 다음 등록 동기를 만든다.', topics: ['웹이론 4개월 코드 본격 이해','406 바이브코딩 React 본격','416 자동화 PM 도구 활용','관심사에 따라 1개 선택 권장'], practice: null },
+        { goal: '16주를 완주한 본인을 축하하고 사이트와 작품을 자산화하는 마지막 한 마디를 받는다.', topics: ['수료 축하와 작품 링크 게시','본인 도메인은 포트폴리오로 유지','작품 링크를 SNS 이력서에 자랑','막힐 때 본 코스 자료 다시 열기'], practice: null },
+    ],
+},
                 ]
             }
         };
@@ -1381,7 +1393,7 @@
 
         function getImagePath(course, stepNum, filename) {
             const stepFolder = 'step' + String(stepNum).padStart(2, '0');
-            return 'assets/' + course + '/' + stepFolder + '/' + filename;
+            return 'curriculum/_assets/' + course + '/' + stepFolder + '/' + filename;
         }
 
         /* ============================================
@@ -1860,7 +1872,7 @@
             for (const [courseName, course] of Object.entries(COURSES)) {
                 for (const session of course.sessions) {
                     const stepFolder = 'step' + String(session.num).padStart(2, '0');
-                    const url = 'assets/' + courseName + '/' + stepFolder + '/slides.json';
+                    const url = 'curriculum/_assets/' + courseName + '/' + stepFolder + '/slides.json';
                     promises.push(
                         fetch(url)
                             .then(r => r.ok ? r.json() : null)

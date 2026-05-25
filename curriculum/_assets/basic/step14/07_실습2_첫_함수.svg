@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 2</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ② — 첫 Vercel 함수 만들기</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">api/hello.js — 내 사이트에 서버 코드가 처음 돌기 시작하는 순간</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="240" width="1160" height="92" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="258" width="104" height="22" rx="11" fill="#2563eb"/>
+  <text x="136" y="273" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
+  <text x="84" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">"api/hello.js 파일을 만들어서 '안녕하세요 [이름]' 응답하는 Vercel 함수 작성하고,</text>
+  <text x="84" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">페이지에서 fetch로 호출해줘."</text>
+
+  <!-- 좌: 코드박스 미리보기 (다크) -->
+  <text x="60" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">Claude가 만든 api/hello.js (보여주기용)</text>
+  <rect x="60" y="396" width="600" height="120" rx="12" fill="#0f172a"/>
+  <text x="84" y="426" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">export default function (req, res) {</text>
+  <text x="108" y="454" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">res.json({ msg: "안녕하세요 홍길동" });</text>
+  <text x="84" y="482" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">}</text>
+  <text x="84" y="506" font-family="'Courier New',monospace" font-size="13" fill="#6b7280">// 외울 필요 없음 — Claude가 짜줍니다</text>
+
+  <!-- 우: 진행 순서 + 결과 mock -->
+  <text x="690" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">진행 순서</text>
+  <rect x="690" y="396" width="530" height="52" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="710" y="418" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">1) git push  2) Vercel 자동 재배포 (30초 대기)</text>
+  <text x="710" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">3) /api/hello 직접 열기  4) 페이지 버튼으로 호출</text>
+  <!-- 결과 화면 mock -->
+  <rect x="690" y="460" width="530" height="56" rx="12" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <circle cx="710" cy="478" r="4" fill="#ef4444"/>
+  <circle cx="724" cy="478" r="4" fill="#f59e0b"/>
+  <circle cx="738" cy="478" r="4" fill="#22c55e"/>
+  <line x1="690" y1="490" x2="1220" y2="490" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="710" y="508" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#171717">화면 표시:  안녕하세요 홍길동</text>
+
+  <!-- 확인해보세요 박스 -->
+  <rect x="60" y="532" width="1160" height="64" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <rect x="84" y="550" width="104" height="22" rx="11" fill="#16a34a"/>
+  <text x="136" y="565" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">확인해보세요</text>
+  <text x="84" y="590" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">· Vercel 화면에서 Building → Ready 로 바뀐다  · 버튼을 누르면 '안녕하세요' 응답이 화면에 뜬다</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">푸시하고 30초 기다리는 게 핵심 — 응답이 뜨면 내 서버 코드가 처음 돈 겁니다</text>
+</svg>

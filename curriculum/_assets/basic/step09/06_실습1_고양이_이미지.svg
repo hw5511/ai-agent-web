@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 09</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 1</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ① — 키 없는 무료 데이터</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">고양이 이미지를 받아 띄우기 — 첫 동적 페이지 성공 경험</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="240" width="1160" height="108" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="258" width="104" height="22" rx="11" fill="#2563eb"/>
+  <text x="136" y="273" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
+  <text x="84" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">"고양이 이미지 데이터에서 랜덤 이미지를 받아 페이지에 표시하고,</text>
+  <text x="84" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">새로고침 버튼을 누르면 다시 받아오게 해줘."</text>
+
+  <text x="60" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">사용 데이터 (키 없이 바로 호출)</text>
+
+  <!-- 두 서비스 카드 -->
+  <rect x="60" y="412" width="565" height="80" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">thecatapi.com</text>
+  <text x="84" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">랜덤 고양이 이미지 — 키 없이 즉시 호출 가능</text>
+
+  <rect x="655" y="412" width="565" height="80" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="679" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">quotable.io</text>
+  <text x="679" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">랜덤 명언 — 같은 방식으로 받아온다</text>
+
+  <!-- 연습해보세요 박스 -->
+  <rect x="60" y="512" width="1160" height="84" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <rect x="84" y="530" width="104" height="22" rx="11" fill="#16a34a"/>
+  <text x="136" y="545" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">확인해보세요</text>
+  <text x="84" y="578" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">• 페이지가 열린다  • 이미지가 뜬다  • 새로고침 버튼으로 다른 고양이가 나온다</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">새로고침마다 다른 고양이가 나오면 박수 — 이게 진짜 첫 동적 페이지입니다</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 10</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘 끝나면 이걸 할 수 있어요</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">2시간 후 도달할 3가지 — 이론은 짧게, 화면에 보이는 결과는 길게</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 목표 3가지</text>
+
+  <!-- 목표 1 (노랑 = 표/구조) -->
+  <rect x="60" y="278" width="360" height="200" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <rect x="84" y="302" width="30" height="30" rx="7" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <path d="M 91 317 L 97 324 L 108 309" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="126" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#d97706">01</text>
+  <text x="84" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#92400e">표로 설계하기</text>
+  <line x1="84" y1="396" x2="396" y2="396" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="84" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">데이터를 표(열·행) 형태로</text>
+  <text x="84" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">설계할 수 있다</text>
+  <text x="84" y="474" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e">— 스키마 개념</text>
+
+  <!-- 목표 2 (파랑 = 저장) -->
+  <rect x="460" y="278" width="360" height="200" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <rect x="484" y="302" width="30" height="30" rx="7" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <path d="M 491 317 L 497 324 L 508 309" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="526" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#2563eb">02</text>
+  <text x="484" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">브라우저에 저장</text>
+  <line x1="484" y1="396" x2="796" y2="396" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="484" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">폼에 입력한 내용을</text>
+  <text x="484" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">브라우저에 저장할 수 있다</text>
+  <text x="484" y="474" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">— LocalStorage</text>
+
+  <!-- 목표 3 (초록 = 표시/관리) -->
+  <rect x="860" y="278" width="360" height="200" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <rect x="884" y="302" width="30" height="30" rx="7" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <path d="M 891 317 L 897 324 L 908 309" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="926" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#16a34a">03</text>
+  <text x="884" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">표시하고 삭제</text>
+  <line x1="884" y1="396" x2="1196" y2="396" stroke="#86efac" stroke-width="1.5"/>
+  <text x="884" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">저장된 항목을 화면에</text>
+  <text x="884" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">표시하고 삭제할 수 있다</text>
+  <text x="884" y="474" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">— 표시·관리</text>
+
+  <!-- 진척도 게이지 -->
+  <text x="60" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">Part 2 진척도</text>
+  <rect x="60" y="544" width="780" height="44" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="92" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">09 가져오기</text>
+  <text x="222" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">→</text>
+  <rect x="250" y="552" width="150" height="28" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="325" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#1e40af">10 저장하기</text>
+  <text x="418" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">→</text>
+  <text x="448" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">11 클라우드 저장</text>
+  <text x="616" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">→</text>
+  <text x="646" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">12 …</text>
+
+  <rect x="860" y="544" width="360" height="44" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="884" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#1e40af">보너스 — 왜 다음 주가 필요한지 직접 느낀다</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘의 약속 — 코드는 한 줄도 안 씁니다. 부탁하는 법과 확인하는 법만 익히면 끝</text>
+</svg>

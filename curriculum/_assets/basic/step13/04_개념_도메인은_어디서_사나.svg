@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — 도메인은 어디서 사나</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">어느 가게에서 사든 도메인은 같습니다 — 오늘은 한국어가 편한 가비아로</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">도메인 판매처 3곳 비교</text>
+
+  <!-- 가비아 카드 (오늘 채택, 파랑 강조) -->
+  <rect x="60" y="278" width="360" height="300" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <!-- 별 SVG polygon -->
+  <polygon points="240,296 248,316 270,316 252,330 259,352 240,338 221,352 228,330 210,316 232,316" fill="#2563eb"/>
+  <text x="240" y="386" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#1e40af">가비아</text>
+  <rect x="170" y="404" width="140" height="26" rx="13" fill="#2563eb"/>
+  <text x="240" y="422" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">오늘 우리는 여기</text>
+  <line x1="90" y1="448" x2="390" y2="448" stroke="#93c5fd" stroke-width="1"/>
+  <text x="90" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">언어 · 한국어 UI</text>
+  <text x="90" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">결제 · 카드 / 계좌이체</text>
+  <text x="90" y="534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">강점 · 한국 .kr 강함</text>
+  <text x="90" y="562" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#1d4ed8">추천 · 한국어가 편한 모두</text>
+
+  <!-- Namecheap 카드 (회색) -->
+  <rect x="460" y="278" width="360" height="300" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="640" y="332" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#374151">Namecheap</text>
+  <text x="640" y="362" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">해외 판매처</text>
+  <line x1="490" y1="448" x2="790" y2="448" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="490" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">언어 · 영문</text>
+  <text x="490" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">결제 · 해외 결제카드</text>
+  <text x="490" y="534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">강점 · 가격 저렴</text>
+  <text x="490" y="562" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#6b7280">추천 · 영어 OK + 저렴 우선</text>
+
+  <!-- Cloudflare 카드 (회색) -->
+  <rect x="860" y="278" width="360" height="300" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1040" y="332" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#374151">Cloudflare</text>
+  <text x="1040" y="362" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">개발자 친화 판매처</text>
+  <line x1="890" y1="448" x2="1190" y2="448" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="890" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">언어 · 영문</text>
+  <text x="890" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">결제 · 해외 결제카드</text>
+  <text x="890" y="534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">강점 · 원가에 가까운 가격</text>
+  <text x="890" y="562" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#6b7280">추천 · 익숙한 개발자</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">어느 부동산에서 사든 같은 집 — 오늘은 한국어가 편한 가비아로 진행합니다</text>
+</svg>

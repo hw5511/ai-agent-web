@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 09</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 3</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ③ — 검색·필터 붙이기</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">받아온 데이터에 검색창을 연결해 동적 페이지의 진짜 맛을 봅니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 (좌측) -->
+  <rect x="60" y="240" width="640" height="108" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="258" width="104" height="22" rx="11" fill="#2563eb"/>
+  <text x="136" y="273" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
+  <text x="84" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#1e40af">"받은 데이터에 검색창을 추가해줘.</text>
+  <text x="84" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#1e40af">입력한 키워드가 포함된 항목만 보이도록."</text>
+
+  <!-- 우측 검색창 UI 모형 -->
+  <rect x="730" y="240" width="490" height="108" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="754" y="264" width="442" height="30" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="768" y="284" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">검색어 입력...</text>
+  <text x="754" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151">입력 전: 전체 표시  →  입력 후: 일치 항목만</text>
+
+  <text x="60" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">두 단계는 서로 다른 일</text>
+
+  <!-- 2분할 비교 -->
+  <rect x="60" y="412" width="565" height="100" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="84" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">데이터 받아오기</text>
+  <text x="84" y="480" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">자판기에서 상품을 받는 단계</text>
+  <text x="84" y="502" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">(실습 ①·②에서 한 일)</text>
+
+  <rect x="655" y="412" width="565" height="100" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="679" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">데이터 다루기</text>
+  <text x="679" y="480" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">받은 것을 검색·필터·정렬하는 단계</text>
+  <text x="679" y="502" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">정렬(가나다순)도 한 줄 프롬프트로 추가</text>
+
+  <!-- 10회차 예고 띠 -->
+  <rect x="60" y="532" width="1160" height="64" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="84" y="563" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#92400e" letter-spacing="0.06em">10회차 예고</text>
+  <text x="84" y="585" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#78350f">받아온 데이터를 "저장"하기 시작합니다 — 매번 처음부터 다시 받지 않도록</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘은 받아오기 마스터 — 다음 주엔 받은 걸 보관하기 시작합니다</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ① — Supabase</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">가입만 하면 데이터 보관함(DB)을 통째로 주는 서비스</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">내 페이지와 클라우드 DB가 주소로 연결됩니다</text>
+
+  <!-- 연결 다이어그램 -->
+  <rect x="60" y="280" width="430" height="96" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="275" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="700" fill="#374151">내 웹페이지</text>
+  <text x="275" y="352" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">Claude로 만든 HTML 화면</text>
+
+  <text x="640" y="334" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" fill="#9ca3af">←→</text>
+  <text x="640" y="362" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12.5" fill="#9ca3af">주소 URL + 키로 통신</text>
+
+  <rect x="790" y="280" width="430" height="96" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <ellipse cx="868" cy="328" rx="40" ry="20" fill="#bfdbfe"/>
+  <ellipse cx="848" cy="334" rx="22" ry="15" fill="#bfdbfe"/>
+  <ellipse cx="892" cy="334" rx="24" ry="16" fill="#bfdbfe"/>
+  <text x="990" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="700" fill="#1e40af">Supabase 클라우드 DB</text>
+  <text x="990" y="352" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#2563eb">데이터가 인터넷에 영구 저장</text>
+
+  <text x="60" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">지난 주와 비교</text>
+
+  <!-- 비교 2박스 -->
+  <rect x="60" y="446" width="555" height="146" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="482" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">LocalStorage (10주)</text>
+  <line x1="84" y1="498" x2="591" y2="498" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="84" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">• 내 컴퓨터(브라우저)에만 저장</text>
+  <text x="84" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">• 설정 0 · 무료 · 다른 기기엔 안 보임</text>
+
+  <rect x="665" y="446" width="555" height="146" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <text x="689" y="482" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">Supabase (오늘)</text>
+  <line x1="689" y1="498" x2="1196" y2="498" stroke="#93c5fd" stroke-width="1"/>
+  <text x="689" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• 전 세계 어디서나 공유 · 가입 1분</text>
+  <text x="689" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• 무료 플랜으로 수업 충분 (500MB · 5만 명)</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">Firebase를 들어봤다면 — Supabase는 그 대안 + 친숙한 SQL 기반</text>
+</svg>

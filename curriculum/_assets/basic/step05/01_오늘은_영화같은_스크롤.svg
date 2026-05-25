@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 05</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘은 "영화 같은 스크롤"을 만듭니다</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">스크롤 라이브러리 GSAP ScrollTrigger — 한 줄도 직접 안 써도 진짜 사이트 같은 움직임이</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 만들 효과 3가지</text>
+
+  <!-- 3 미니 카드: 노랑/파랑/초록 -->
+  <rect x="60" y="278" width="366" height="118" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="84" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#92400e">페이드인</text>
+  <text x="84" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">섹션이 화면에 들어오면</text>
+  <text x="84" y="376" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">아래에서 위로 스르륵 등장</text>
+
+  <rect x="457" y="278" width="366" height="118" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="481" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">수평 스크롤</text>
+  <text x="481" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">세로 휠을 굴리면 화면이</text>
+  <text x="481" y="376" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">옆으로 흐르는 갤러리</text>
+
+  <rect x="854" y="278" width="366" height="118" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="878" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">텍스트 컬러 reveal</text>
+  <text x="878" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">스크롤하면 글자가</text>
+  <text x="878" y="376" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">회색에서 검정으로 밝아짐</text>
+
+  <text x="60" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">수업 흐름</text>
+
+  <!-- 흐름 칩 -->
+  <rect x="60" y="468" width="150" height="40" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="135" y="493" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">라이브러리란?</text>
+  <text x="222" y="494" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
+  <rect x="234" y="468" width="130" height="40" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="299" y="493" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#92400e">페이드인</text>
+  <text x="376" y="494" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
+  <rect x="388" y="468" width="150" height="40" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="463" y="493" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">수평 스크롤</text>
+  <text x="550" y="494" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
+  <rect x="562" y="468" width="170" height="40" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="647" y="493" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">텍스트 reveal</text>
+  <text x="744" y="494" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
+  <rect x="756" y="468" width="100" height="40" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="806" y="493" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">정리</text>
+
+  <!-- 4주차 -> 5주차 점프 하이라이트 -->
+  <rect x="60" y="540" width="1160" height="56" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="90" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">4주차 직접 만든 단순 스크롤 → 5주차 라이브러리 풀 활용 시네마틱 페이지</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">친구에게 보여주면 "이거 진짜야?" 소리 듣는 페이지 — 오늘 완성합니다</text>
+</svg>

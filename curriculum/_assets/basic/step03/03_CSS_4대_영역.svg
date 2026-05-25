@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ① — CSS의 4대 영역</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">디자인은 감이 아니라 4개 카테고리의 조합입니다 — 오늘은 앞 3개에 집중</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">디자인 = 4개 슬롯 채우는 게임</text>
+
+  <!-- 영역 1 색·배경 (노랑) -->
+  <rect x="60" y="278" width="565" height="148" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="86" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#92400e">색 · 배경</text>
+  <text x="86" y="348" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">color · background-color</text>
+  <text x="86" y="376" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">첫인상의 70%를 결정한다</text>
+  <text x="86" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="600" fill="#d97706" letter-spacing="0.05em">오늘 비중</text>
+  <rect x="156" y="397" width="220" height="10" rx="5" fill="#fde68a"/>
+  <rect x="156" y="397" width="200" height="10" rx="5" fill="#d97706"/>
+
+  <!-- 영역 2 폰트·타이포 (파랑) -->
+  <rect x="655" y="278" width="565" height="148" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="681" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#1e40af">폰트 · 타이포</text>
+  <text x="681" y="348" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">font-family · font-size · weight</text>
+  <text x="681" y="376" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">신뢰도와 분위기를 만든다</text>
+  <text x="681" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="600" fill="#2563eb" letter-spacing="0.05em">오늘 비중</text>
+  <rect x="751" y="397" width="220" height="10" rx="5" fill="#bfdbfe"/>
+  <rect x="751" y="397" width="150" height="10" rx="5" fill="#2563eb"/>
+
+  <!-- 영역 3 간격·여백 (초록) -->
+  <rect x="60" y="444" width="565" height="148" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="86" y="484" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#15803d">간격 · 여백</text>
+  <text x="86" y="514" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">padding · margin</text>
+  <text x="86" y="542" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">답답함이냐, 숨통이냐를 가른다</text>
+  <text x="86" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="600" fill="#16a34a" letter-spacing="0.05em">오늘 비중</text>
+  <rect x="156" y="563" width="220" height="10" rx="5" fill="#bbf7d0"/>
+  <rect x="156" y="563" width="150" height="10" rx="5" fill="#16a34a"/>
+
+  <!-- 영역 4 레이아웃·배치 (회색, 맛보기) -->
+  <rect x="655" y="444" width="565" height="148" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="681" y="484" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#6b7280">레이아웃 · 배치</text>
+  <text x="681" y="514" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">flex · grid</text>
+  <text x="681" y="542" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">가로·세로 정렬, 정돈감 (오늘은 맛보기)</text>
+  <text x="681" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.05em">오늘 비중</text>
+  <rect x="751" y="563" width="220" height="10" rx="5" fill="#f3f4f6"/>
+  <rect x="751" y="563" width="50" height="10" rx="5" fill="#9ca3af"/>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">디자인은 감이 아니라 4개 슬롯 — 오늘은 앞 3개를 채워봅니다</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — 테이블 + 컬럼</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">데이터 보관함은 결국 한 장의 엑셀 시트와 똑같습니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">엑셀에 비유하면</text>
+
+  <!-- 3 비유 카드 -->
+  <rect x="60" y="278" width="370" height="92" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="84" y="314" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">테이블 = 시트 1장</text>
+  <text x="84" y="344" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">guestbook 같은 표 한 개</text>
+
+  <rect x="455" y="278" width="370" height="92" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="479" y="314" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">컬럼 = 열(제목줄)</text>
+  <text x="479" y="344" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">nickname · message 같은 칸 이름</text>
+
+  <rect x="850" y="278" width="370" height="92" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="874" y="314" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">행 = 데이터 한 줄</text>
+  <text x="874" y="344" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">방문자가 남긴 글 1개</text>
+
+  <text x="60" y="414" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">guestbook 테이블 예시 (id · created_at은 Supabase가 자동)</text>
+
+  <!-- 예시 테이블 -->
+  <rect x="60" y="434" width="1160" height="132" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <!-- header row -->
+  <rect x="60" y="434" width="1160" height="42" rx="12" fill="#f9fafb"/>
+  <rect x="60" y="460" width="1160" height="16" fill="#f9fafb"/>
+  <line x1="60" y1="476" x2="1220" y2="476" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="120" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#d97706">id</text>
+  <text x="300" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#d97706">created_at</text>
+  <text x="640" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#2563eb">nickname</text>
+  <text x="900" y="461" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#16a34a">message</text>
+  <!-- divider cols -->
+  <line x1="270" y1="434" x2="270" y2="566" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="600" y1="434" x2="600" y2="566" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="860" y1="434" x2="860" y2="566" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- data row 1 -->
+  <text x="120" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">1</text>
+  <text x="300" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">2026-05-25</text>
+  <text x="640" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">우희</text>
+  <text x="900" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">안녕하세요!</text>
+  <line x1="60" y1="528" x2="1220" y2="528" stroke="#f3f4f6" stroke-width="1"/>
+  <!-- data row 2 -->
+  <text x="120" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">2</text>
+  <text x="300" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">2026-05-25</text>
+  <text x="640" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">진아</text>
+  <text x="900" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">첫 글 남겨요</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">10주차에 종이에 그린 표 = 오늘 만들 테이블 — 한 번 만들면 영구 저장</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 2</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ② — "배포해줘" 한 줄로 끝</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘의 클라이맥스 — 모두가 본인 페이지의 공개 URL을 손에 쥡니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 사전 확인 라벨 -->
+  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">시작 전 확인</text>
+  <rect x="60" y="266" width="1160" height="40" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="84" y="291" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#991b1b">GitHub 토큰(출입증) 발급되어 있나요? — 1회차 사전과제로 받아 둔 것입니다</text>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="320" width="1160" height="108" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="338" width="104" height="22" rx="11" fill="#2563eb"/>
+  <text x="136" y="353" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
+  <text x="84" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">"이 페이지를 GitHub 레포 만들고 GitHub Pages로 배포해줘.</text>
+  <text x="84" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">레포 이름은 my-portfolio."</text>
+
+  <!-- 클로드 자동 처리 3칩 -->
+  <text x="60" y="466" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">클로드가 자동으로</text>
+  <rect x="60" y="482" width="360" height="44" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="240" y="510" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">레포 생성 → push → Pages on</text>
+  <text x="436" y="511" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">→</text>
+  <rect x="452" y="482" width="280" height="44" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="592" y="510" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">URL 회신</text>
+  <rect x="748" y="482" width="472" height="44" rx="10" fill="#0f172a"/>
+  <text x="772" y="510" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">https://hw5511.github.io/my-portfolio</text>
+
+  <!-- 연습해보세요 박스 -->
+  <rect x="60" y="540" width="1160" height="60" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <rect x="84" y="556" width="104" height="22" rx="11" fill="#16a34a"/>
+  <text x="136" y="571" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">감동 포인트</text>
+  <text x="204" y="578" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">회신된 URL을 휴대폰으로 열어보세요 — 진짜 인터넷에 떠 있습니다</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">5분 안에 URL 못 받으면 강사 호출 — 같이 1:1로 해결합니다</text>
+</svg>

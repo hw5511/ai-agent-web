@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 12</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ① — 왜 회원 시스템이 필요한가</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">"모두 함께 보는 데이터"와 "나만 보는 데이터"의 차이</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">공유 데이터 → 개인화 데이터</text>
+
+  <!-- 좌측: 공용 게시판 -->
+  <rect x="60" y="278" width="520" height="200" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">11주 — 공용 방명록</text>
+  <line x1="84" y1="330" x2="556" y2="330" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="84" y="364" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">모두가 같은 화면을 보고 씁니다</text>
+  <text x="84" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">누가 썼는지 구분 없음</text>
+  <text x="84" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">익명 게시판 같은 느낌</text>
+  <text x="84" y="456" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#92400e">누구나 모든 글을 본다</text>
+
+  <text x="618" y="386" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" fill="#9ca3af">→</text>
+
+  <!-- 우측: 개인 일기장 -->
+  <rect x="656" y="278" width="520" height="200" rx="16" fill="#faf5ff" stroke="#d8b4fe" stroke-width="2"/>
+  <text x="680" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#6d28d9">12주 — 개인 일기장</text>
+  <line x1="680" y1="330" x2="1152" y2="330" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="680" y="364" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#7c3aed">내 일기·내 메모·내 쇼핑 목록</text>
+  <text x="680" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#7c3aed">누가 썼는지 기록됩니다</text>
+  <text x="680" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#7c3aed">프라이버시 — 나만 볼 수 있음</text>
+  <text x="680" y="456" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#6d28d9">나만 내 글을 본다</text>
+
+  <text x="60" y="518" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">우리가 매일 쓰는 앱은 전부 회원 시스템</text>
+
+  <!-- 익숙한 앱 4개 -->
+  <rect x="60" y="538" width="270" height="56" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="195" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">카카오톡 — 내 채팅방만</text>
+  <rect x="350" y="538" width="270" height="56" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="485" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">인스타 — 내 게시물만 수정</text>
+  <rect x="640" y="538" width="270" height="56" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="775" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">노션 — 내 페이지만</text>
+  <rect x="930" y="538" width="246" height="56" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1053" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">메모앱 — 내 메모만</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">진짜 서비스가 되려면 "누가 누군지" 구분이 필요합니다</text>
+</svg>

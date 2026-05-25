@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 04</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">3대 트리거 — click · scroll · mousemove</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">이 3가지 사용자 행동만 알면 인터랙티브 웹의 90%를 설명할 수 있습니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">트리거 · 쓰임 · 사이트 사례</text>
+
+  <!-- click 카드 (초록) -->
+  <rect x="60" y="278" width="360" height="250" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <circle cx="100" cy="320" r="16" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+  <circle cx="100" cy="320" r="5" fill="#16a34a"/>
+  <text x="132" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#15803d">click</text>
+  <line x1="84" y1="350" x2="396" y2="350" stroke="#86efac" stroke-width="1.5"/>
+  <text x="84" y="384" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#166534">무언가를 누르는 순간</text>
+  <text x="84" y="412" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">버튼 · 메뉴 · 이미지 클릭</text>
+  <text x="84" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af">사이트 사례</text>
+  <text x="84" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">Linear — 클릭 토글 메뉴</text>
+
+  <!-- scroll 카드 (파랑) -->
+  <rect x="460" y="278" width="360" height="250" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <path d="M500 312 v16 M492 320 l8 8 l8 -8" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="532" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#1e40af">scroll</text>
+  <line x1="484" y1="350" x2="796" y2="350" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="484" y="384" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">화면을 위아래로 움직이는 순간</text>
+  <text x="484" y="412" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">섹션 등장 · 진행률 바</text>
+  <text x="484" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af">사이트 사례</text>
+  <text x="484" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">Apple — 스크롤 등장 효과</text>
+
+  <!-- mousemove 카드 (보라) -->
+  <rect x="860" y="278" width="360" height="250" rx="16" fill="#faf5ff" stroke="#d8b4fe" stroke-width="2"/>
+  <path d="M896 308 l0 24 l6 -7 l5 11 l5 -2 l-5 -11 l9 0 z" fill="#7c3aed"/>
+  <text x="930" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#6d28d9">mousemove</text>
+  <line x1="884" y1="350" x2="1196" y2="350" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="884" y="384" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#6d28d9">마우스를 움직이는 순간</text>
+  <text x="884" y="412" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6d28d9">빛 따라오기 · 커스텀 커서</text>
+  <text x="884" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af">사이트 사례</text>
+  <text x="884" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#6d28d9">Stripe — 마우스 그라데이션</text>
+
+  <!-- 공통 패턴 박스 -->
+  <rect x="60" y="548" width="1160" height="48" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="640" y="578" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">공통 패턴 — 트리거가 발생하면  →  무슨 행동을 한다  (이것만 알면 끝)</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘 본 사이트 중 어떤 트리거를 썼는지 30초만 떠올려 보세요</text>
+</svg>
