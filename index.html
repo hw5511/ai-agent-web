@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Agent Web 수업자료</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23171717'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='-apple-system,sans-serif' font-size='28' font-weight='700' fill='%23fff'%3EW%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
     <style>
@@ -1861,27 +1862,16 @@
         }
 
         /* ============================================
-           Slides JSON Loader
-           각 step 폴더의 slides.json을 fetch하여
-           COURSES 오브젝트의 slides 배열을 덮어씀.
-           slides.json이 없으면 기존 배열 유지 (fallback).
-           순서 변경 시 slides.json만 수정하면 됨.
+           Slides JSON Loader (현재 비활성 — COURSES 하드코딩 사용)
+           각 step 폴더에 slides.json을 두면 자동으로 slides 배열을
+           덮어쓰는 구조였으나, 현재는 JSON 파일을 두지 않고
+           COURSES 객체의 slides 배열을 SOT로 사용한다.
+           브라우저는 fetch().catch()로도 404 콘솔 로그를 막을 수 없어
+           fetch 호출 자체를 제거. JSON 운영 흐름이 필요해질 때
+           이 함수에 fetch 루프를 복원하면 됨.
            ============================================ */
         async function loadAllSlides() {
-            const promises = [];
-            for (const [courseName, course] of Object.entries(COURSES)) {
-                for (const session of course.sessions) {
-                    const stepFolder = 'step' + String(session.num).padStart(2, '0');
-                    const url = 'curriculum/_assets/' + courseName + '/' + stepFolder + '/slides.json';
-                    promises.push(
-                        fetch(url)
-                            .then(r => r.ok ? r.json() : null)
-                            .then(data => { if (data && data.slides) session.slides = data.slides; })
-                            .catch(() => {})
-                    );
-                }
-            }
-            await Promise.all(promises);
+            return;
         }
 
         /* ============================================
