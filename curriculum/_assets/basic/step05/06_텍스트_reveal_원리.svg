@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
 
@@ -8,13 +8,11 @@
 
   <!-- 제목 -->
   <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">텍스트 컬러 reveal의 원리</text>
-  <!-- 부제 -->
-  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">스크롤 진행률 0~1을 색·크기·위치 어디에든 연결한다</text>
-  <!-- 구분선 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">이번엔 같은 '스크롤 숫자'를 — 글자 색에 연결한다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 가로 슬라이더 (진행률 0~1) -->
-  <text x="60" y="276" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">진행률 progress</text>
+  <!-- 진행률 슬라이더 -->
+  <text x="60" y="276" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">스크롤 위치 = 숫자 (0 → 1)</text>
   <line x1="100" y1="320" x2="1180" y2="320" stroke="#e5e7eb" stroke-width="2"/>
   <circle cx="100" cy="320" r="6" fill="#374151"/>
   <circle cx="640" cy="320" r="6" fill="#374151"/>
@@ -23,24 +21,24 @@
   <text x="640" y="356" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">0.5</text>
   <text x="1180" y="356" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">1</text>
 
-  <!-- 3컷 비교 카드 -->
+  <!-- 3컷 비교 카드: 숫자가 커질수록 색이 진해짐 -->
   <rect x="80" y="402" width="340" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="100" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">PROGRESS 0</text>
+  <text x="100" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">숫자 0</text>
   <text x="100" y="498" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" font-weight="700" fill="#e5e7eb">Headline</text>
-  <text x="100" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">아직 회색, 보이지 않는 듯</text>
+  <text x="100" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">아직 연한 회색</text>
 
   <rect x="470" y="402" width="340" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="490" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">PROGRESS 0.5</text>
+  <text x="490" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">숫자 0.5</text>
   <text x="490" y="498" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" font-weight="700" fill="#9ca3af">Headline</text>
-  <text x="490" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">절반쯤, 중간 회색으로 떠오름</text>
+  <text x="490" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">절반쯤 떠오름</text>
 
   <rect x="860" y="402" width="340" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="880" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">PROGRESS 1</text>
+  <text x="880" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">숫자 1</text>
   <text x="880" y="498" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" font-weight="700" fill="#171717">Headline</text>
-  <text x="880" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">완전히 검정, 또렷이 등장</text>
+  <text x="880" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">완전히 검정, 또렷이</text>
 
-  <!-- 강조 한 줄 -->
-  <text x="60" y="638" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#16a34a">진행률 숫자 한 개에 효과 한 개 묶기 — 원리는 이게 전부</text>
+  <!-- 그린 핵심 한 줄 -->
+  <text x="60" y="638" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#16a34a">스크롤 숫자에 '색'을 연결 — 수평 스크롤과 똑같은 원리</text>
 
   <!-- 하단 메타 -->
   <text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">개념 · reveal 원리</text>

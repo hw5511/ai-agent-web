@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+<rect width="1280" height="720" fill="#ffffff"/>
+
+<rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+<text x="93" y="60" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700" letter-spacing="0.05em" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">WEB 05</text>
+
+<text x="60" y="130" font-size="40" font-weight="700" fill="#171717" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">GSAP란?</text>
+<text x="60" y="178" font-size="19" fill="#6b7280" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">전문가들이 쓰는, 가장 널리 쓰이는 웹 애니메이션 도구</text>
+<line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+<text x="60" y="287" font-size="21" fill="#9ca3af" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">─</text>
+<text x="100" y="287" font-size="21" font-weight="500" fill="#171717" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">GSAP = 움직임(애니메이션)을 만들어 주는 JS 도구</text>
+
+<text x="60" y="343" font-size="21" fill="#9ca3af" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">─</text>
+<text x="100" y="343" font-size="21" font-weight="500" fill="#171717" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">부드럽고 정교한 움직임을 짧은 코드로</text>
+
+<text x="60" y="399" font-size="21" fill="#9ca3af" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">─</text>
+<text x="100" y="399" font-size="21" font-weight="500" fill="#171717" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">브라우저마다 다른 문제를 알아서 처리해 줌</text>
+
+<text x="60" y="455" font-size="21" fill="#9ca3af" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">─</text>
+<text x="100" y="455" font-size="21" font-weight="500" fill="#171717" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">ScrollTrigger = 스크롤에 애니메이션을</text>
+<text x="100" y="483" font-size="21" font-weight="500" fill="#171717" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">'연결'하는 추가 기능</text>
+
+<text x="60" y="539" font-size="21" fill="#9ca3af" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">─</text>
+<text x="100" y="539" font-size="21" font-weight="500" fill="#171717" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">무료 · CDN 한두 줄로 가져와 바로 사용</text>
+
+<rect x="760" y="270" width="460" height="250" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5" rx="12"/>
+<text x="784" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">GSAP가 잘하는 것</text>
+<text x="784" y="346" font-size="18" fill="#374151" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">페이드인</text>
+<text x="784" y="386" font-size="18" fill="#374151" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">가로·세로 이동</text>
+<text x="784" y="426" font-size="18" fill="#374151" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">색·크기 변화</text>
+<text x="784" y="466" font-size="18" fill="#374151" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">스크롤 연동</text>
+
+<text x="60" y="612" font-size="26" font-weight="700" fill="#16a34a" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">복잡한 움직임을, 짧은 한 줄로 — 그게 GSAP</text>
+
+<text x="60" y="676" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">개념 · GSAP</text>
+</svg>

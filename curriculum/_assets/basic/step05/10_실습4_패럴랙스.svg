@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+<rect width="1280" height="720" fill="#ffffff"/>
+
+<rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+<text x="93" y="60" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="0.05em" fill="#ffffff" text-anchor="middle">WEB 05</text>
+
+<text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 4 · 패럴랙스 배경</text>
+<text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">배경이 본문보다 천천히 흘러 — 화면에 깊이감이 생깁니다</text>
+<line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+<text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="0.08em" fill="#9ca3af">단계</text>
+
+<text x="60" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af">─</text>
+<text x="100" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">히어로(또는 큰 섹션) 배경 위치를 Claude에 알려준다</text>
+
+<text x="60" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af">─</text>
+<text x="100" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">프롬프트 1줄로 패럴랙스 적용 요청</text>
+
+<text x="60" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af">─</text>
+<text x="100" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">새로고침 → 스크롤할 때 배경이 더 느리게 움직이는지 확인</text>
+
+<text x="60" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af">─</text>
+<text x="100" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">효과가 약하면 "차이를 더 크게" 한 줄 더</text>
+
+<rect x="700" y="252" width="520" height="210" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="724" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="0.08em" fill="#9ca3af">프롬프트 예시</text>
+<text x="724" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">히어로 배경 이미지가 스크롤할 때</text>
+<text x="724" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">본문보다 느리게 움직이는</text>
+<text x="724" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">패럴랙스 효과를 GSAP로 추가해줘.</text>
+<text x="724" y="440" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">그대로 복사해서 Claude Code에 붙여넣기</text>
+
+<text x="60" y="556" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#16a34a">배경과 본문의 속도 차이 = 깊이감</text>
+
+<text x="60" y="616" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="0.08em" fill="#9ca3af">실습 4 / 4 · 패럴랙스</text>
+<text x="60" y="648" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">스크롤 위치(숫자)를 배경 이동 속도에 연결한 것 — 오늘 배운 원리 그대로</text>
+</svg>

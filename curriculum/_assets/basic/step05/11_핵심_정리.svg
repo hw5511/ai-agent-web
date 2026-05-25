@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+<rect width="1280" height="720" fill="#ffffff"/>
+
+<rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+<text x="93" y="60" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="0.05em" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">WEB 05</text>
+
+<text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">핵심 정리</text>
+<text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 만든 GSAP 효과와, 그 뒤에 숨은 하나의 원리</text>
+<line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+<text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 완성한 효과 4종</text>
+
+<rect x="60" y="284" width="272" height="70" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="196" y="319" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#171717" text-anchor="middle" dominant-baseline="middle">페이드인</text>
+
+<rect x="348" y="284" width="272" height="70" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="484" y="319" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#171717" text-anchor="middle" dominant-baseline="middle">수평 스크롤</text>
+
+<rect x="636" y="284" width="272" height="70" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="772" y="319" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#171717" text-anchor="middle" dominant-baseline="middle">컬러 reveal</text>
+
+<rect x="924" y="284" width="272" height="70" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="1060" y="319" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#171717" text-anchor="middle" dominant-baseline="middle">패럴랙스</text>
+
+<text x="60" y="404" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">기억할 원리</text>
+
+<text x="60" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#9ca3af">─</text>
+<text x="100" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">스크롤 위치를 '숫자(진행률 0~1)'로 읽는다</text>
+
+<text x="60" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#9ca3af">─</text>
+<text x="100" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">그 숫자를 색·크기·위치 어디에든 연결한다</text>
+
+<text x="60" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#9ca3af">─</text>
+<text x="100" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">우리는 '이름'만 안다 — 코드는 Claude Code가</text>
+
+<text x="60" y="600" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#16a34a">진행률 숫자 한 개에 효과 한 개 — 원리만 알면 응용은 무한</text>
+
+<text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">다음 회차 (WEB 06) · 마우스 인터랙션 — 커서 따라가는 효과</text>
+</svg>
