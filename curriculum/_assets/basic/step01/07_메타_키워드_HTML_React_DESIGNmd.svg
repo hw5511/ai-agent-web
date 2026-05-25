@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">메타 키워드 — HTML · React · DESIGN.md</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">앞으로 자주 들을 3가지 — 오늘은 "이런 게 있구나"만</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">미리 귀에 담아둘 이름 3개</text>
+
+  <!-- HTML 카드 (노랑) -->
+  <rect x="60" y="278" width="360" height="290" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <text x="84" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#d97706">HTML</text>
+  <text x="84" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#92400e">웹의 3대 뼈대</text>
+  <line x1="84" y1="386" x2="396" y2="386" stroke="#fcd34d" stroke-width="1"/>
+  <text x="84" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">HTML — 구조(뼈대)</text>
+  <text x="84" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">CSS — 스타일(옷)</text>
+  <text x="84" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">JS — 움직임(행동)</text>
+  <text x="84" y="544" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#d97706">2주차에서 만남</text>
+
+  <!-- React 카드 (파랑) -->
+  <rect x="460" y="278" width="360" height="290" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <text x="484" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#2563eb">React</text>
+  <text x="484" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">조각을 모아 만드는 방식</text>
+  <line x1="484" y1="386" x2="796" y2="386" stroke="#93c5fd" stroke-width="1"/>
+  <text x="484" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">화면을 작은 조각(컴포넌트)으로</text>
+  <text x="484" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">나눠 만들고 다시 끼워 맞춤</text>
+  <text x="484" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">요즘 디자이너가 일하는 법</text>
+  <text x="484" y="544" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb">5주차쯤에서 만남</text>
+
+  <!-- DESIGN.md 카드 (초록) -->
+  <rect x="860" y="278" width="360" height="290" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="884" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#16a34a">DESIGN.md</text>
+  <text x="884" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">AI 시대 디자인 표준</text>
+  <line x1="884" y1="386" x2="1196" y2="386" stroke="#86efac" stroke-width="1"/>
+  <text x="884" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">Google이 만든 디자인 규칙</text>
+  <text x="884" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">문서. Claude에게 "이 규칙대로</text>
+  <text x="884" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">만들어" 라고 건네는 약속표</text>
+  <text x="884" y="544" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">6주차쯤에서 만남</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">지금 다 이해 안 돼도 됩니다 — 이름만 귀에 들어왔으면 성공이에요</text>
+</svg>

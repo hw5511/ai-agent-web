@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ③ — 결제 위젯 흐름 한눈에</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">버튼 클릭부터 저장까지 5단계 — 머릿속에 그림 하나만</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 영역 범례 -->
+  <rect x="60" y="240" width="14" height="14" rx="3" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="82" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">브라우저(내 화면)에서 일어나는 일</text>
+  <rect x="340" y="240" width="14" height="14" rx="3" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="362" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">Vercel 함수에서 일어나는 일</text>
+
+  <!-- 5단계 흐름 (2줄) -->
+  <rect x="60" y="278" width="200" height="92" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="160" y="312" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">① 도구 로드</text>
+  <text x="160" y="338" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">토스 스크립트</text>
+  <text x="160" y="356" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">한 줄</text>
+
+  <text x="288" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" fill="#9ca3af">→</text>
+
+  <rect x="316" y="278" width="200" height="92" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="416" y="312" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">② 위젯 생성</text>
+  <text x="416" y="338" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">결제 영역</text>
+  <text x="416" y="356" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">화면에 띄우기</text>
+
+  <text x="544" y="330" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" fill="#9ca3af">→</text>
+
+  <rect x="572" y="278" width="200" height="92" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="672" y="312" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">③ 결제 요청</text>
+  <text x="672" y="338" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">카드 입력 ·</text>
+  <text x="672" y="356" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e40af">확인</text>
+
+  <!-- 아래줄로 꺾이는 화살표 -->
+  <text x="672" y="396" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">↓</text>
+
+  <rect x="572" y="408" width="200" height="92" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="672" y="442" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">④ 결제 검증</text>
+  <text x="672" y="468" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">Vercel 함수에서</text>
+  <text x="672" y="486" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">토스에 다시 확인</text>
+
+  <text x="800" y="460" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" fill="#9ca3af">→</text>
+
+  <rect x="828" y="408" width="200" height="92" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="928" y="442" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#92400e">⑤ 저장 + 표시</text>
+  <text x="928" y="468" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e">주문 저장 후</text>
+  <text x="928" y="486" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#92400e">결과 페이지</text>
+
+  <!-- 왜 검증? 박스 -->
+  <rect x="60" y="538" width="1160" height="58" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="84" y="566" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">왜 ④ 검증이 필요할까?</text>
+  <text x="84" y="588" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">브라우저는 사용자가 마음대로 만질 수 있어요. "결제 성공"이라고 거짓말도 가능하니, Vercel 함수에서 토스에 한 번 더 확인합니다</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">검증을 안 하면 결제했다고 속일 수 있어서 — 반드시 Vercel 함수에서 한 번 더 확인</text>
+</svg>

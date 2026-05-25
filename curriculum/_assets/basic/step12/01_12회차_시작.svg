@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 12</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">12회차 시작 — 이제 진짜 서비스처럼</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">회원만 들어올 수 있는 페이지를 만듭니다 — 거의 다 클로드가 만들어줍니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 우측 상단 미니 진도바 -->
+  <text x="1220" y="60" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.04em">진도 12 / 14</text>
+  <rect x="1040" y="68" width="180" height="6" rx="3" fill="#e5e7eb"/>
+  <rect x="1040" y="68" width="154" height="6" rx="3" fill="#7c3aed"/>
+
+  <text x="60" y="262" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">11주 → 12주, 무엇이 달라지나</text>
+
+  <!-- 좌측: 11주 → 12주 변화 카드 -->
+  <rect x="60" y="284" width="320" height="120" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af">11주차</text>
+  <text x="84" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">모두 함께 보는</text>
+  <text x="84" y="384" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">방명록</text>
+
+  <text x="404" y="352" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" fill="#9ca3af">→</text>
+
+  <rect x="428" y="284" width="320" height="120" rx="14" fill="#faf5ff" stroke="#d8b4fe" stroke-width="2"/>
+  <text x="452" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#a78bfa">12주차</text>
+  <text x="452" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#6d28d9">내 글만 보이는</text>
+  <text x="452" y="384" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#6d28d9">방명록</text>
+
+  <!-- 우측: 자물쇠 + 사용자 아이콘 (벡터) -->
+  <rect x="792" y="284" width="428" height="120" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <!-- 사용자 아이콘 -->
+  <circle cx="858" cy="332" r="16" fill="none" stroke="#7c3aed" stroke-width="3"/>
+  <path d="M834 372 a24 22 0 0 1 48 0" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+  <!-- 자물쇠 아이콘 -->
+  <rect x="918" y="332" width="44" height="34" rx="6" fill="none" stroke="#6d28d9" stroke-width="3"/>
+  <path d="M926 332 v-8 a14 14 0 0 1 28 0 v8" fill="none" stroke="#6d28d9" stroke-width="3"/>
+  <circle cx="940" cy="348" r="4" fill="#6d28d9"/>
+  <line x1="940" y1="350" x2="940" y2="358" stroke="#6d28d9" stroke-width="3" stroke-linecap="round"/>
+  <text x="1010" y="343" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">회원만 들어오고</text>
+  <text x="1010" y="367" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">내 데이터는 나만</text>
+
+  <text x="60" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 끝나면 만들어질 화면</text>
+
+  <!-- 미리보기 썸네일 2장 -->
+  <rect x="60" y="468" width="565" height="124" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">로그인 화면</text>
+  <rect x="84" y="512" width="240" height="22" rx="6" fill="#f3f4f6"/>
+  <text x="94" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">이메일</text>
+  <rect x="84" y="540" width="240" height="22" rx="6" fill="#f3f4f6"/>
+  <text x="94" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">비밀번호</text>
+  <rect x="334" y="540" width="90" height="22" rx="6" fill="#7c3aed"/>
+  <text x="379" y="556" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">로그인</text>
+
+  <rect x="655" y="468" width="565" height="124" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="679" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#6d28d9">안녕하세요, OOO님</text>
+  <rect x="679" y="512" width="517" height="22" rx="6" fill="#f3f4f6"/>
+  <text x="691" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">내 글 — 오늘 날씨가 좋다</text>
+  <rect x="679" y="540" width="517" height="22" rx="6" fill="#f3f4f6"/>
+  <text x="691" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">내 글 — 12주차 재밌다</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">회원 시스템 — 어렵게 들리지만, 오늘 안에 다 완성됩니다</text>
+</svg>

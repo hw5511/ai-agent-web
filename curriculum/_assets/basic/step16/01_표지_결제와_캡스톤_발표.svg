@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">마지막 회차 — 결제 + 캡스톤 발표</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">Session 16 — 16주 마라톤의 골인선. 오늘 두 가지를 합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 두 미션</text>
+
+  <!-- 좌측: 결승선 히어로 다크 박스 -->
+  <rect x="60" y="270" width="560" height="248" rx="16" fill="#0f172a"/>
+  <text x="92" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#38bdf8" letter-spacing="0.08em">16 / 16 — FINISH</text>
+  <!-- 결승선 깃발 폴 -->
+  <rect x="92" y="350" width="6" height="120" rx="2" fill="#475569"/>
+  <!-- 체커 깃발 (벡터) -->
+  <rect x="98" y="350" width="120" height="60" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <rect x="98" y="350" width="30" height="20" fill="#e2e8f0"/>
+  <rect x="158" y="350" width="30" height="20" fill="#e2e8f0"/>
+  <rect x="128" y="370" width="30" height="20" fill="#e2e8f0"/>
+  <rect x="188" y="370" width="30" height="20" fill="#e2e8f0"/>
+  <rect x="98" y="390" width="30" height="20" fill="#e2e8f0"/>
+  <rect x="158" y="390" width="30" height="20" fill="#e2e8f0"/>
+  <text x="92" y="466" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#ffffff">드디어 골인선</text>
+  <text x="92" y="498" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#94a3b8">결제 붙이기 + 본인 작품 5분 발표 = 수료</text>
+
+  <!-- 우측: 회차 정보 4분할 -->
+  <rect x="652" y="270" width="276" height="118" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="676" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#92400e" letter-spacing="0.04em">회차</text>
+  <text x="676" y="346" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#d97706">Session 16</text>
+  <text x="676" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#92400e">심화 · Part 2 (마지막)</text>
+
+  <rect x="944" y="270" width="276" height="118" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="968" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#1e40af" letter-spacing="0.04em">한 개념</text>
+  <text x="968" y="346" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#1e3a8a">결제 + 마무리</text>
+  <text x="968" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af">카드 결제 붙이기 + 발표</text>
+
+  <rect x="652" y="400" width="276" height="118" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="676" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#15803d" letter-spacing="0.04em">시간</text>
+  <text x="676" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#16a34a">2시간</text>
+  <text x="676" y="502" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">전반 1h 결제 · 후반 1h 발표</text>
+
+  <rect x="944" y="400" width="276" height="118" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="968" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.04em">오늘의 산출물</text>
+  <text x="968" y="474" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">결제까지 도는 사이트</text>
+  <text x="968" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">+ 5분 발표 완료 → 수료</text>
+
+  <!-- 진행 바 16/16 -->
+  <text x="60" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.04em">진행도</text>
+  <rect x="60" y="568" width="1090" height="20" rx="10" fill="#dcfce7"/>
+  <rect x="60" y="568" width="1090" height="20" rx="10" fill="#16a34a"/>
+  <text x="1175" y="583" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="900" fill="#16a34a">16/16</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">끝나면 "결제까지 가는 사이트를 본인 도메인에 띄운 사람"이 됩니다</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">6회차 핵심 정리</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 포트폴리오에 적용한 마우스 인터랙션 3가지</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 카드 1 노랑 -->
+  <rect x="60" y="246" width="365" height="252" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <text x="84" y="292" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" font-weight="900" fill="#d97706">01</text>
+  <line x1="84" y1="308" x2="401" y2="308" stroke="#fcd34d" stroke-width="1"/>
+  <text x="84" y="346" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#92400e">마그네틱 버튼</text>
+  <text x="84" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">mousemove로 좌표를 읽고</text>
+  <text x="84" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">거리를 재서 버튼을 당긴다</text>
+  <text x="84" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">JS와 CSS가 함께 일한다</text>
+  <text x="84" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#d97706">좌표 → 거리 → 이동</text>
+
+  <!-- 카드 2 파랑 -->
+  <rect x="457" y="246" width="365" height="252" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <text x="481" y="292" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" font-weight="900" fill="#2563eb">02</text>
+  <line x1="481" y1="308" x2="798" y2="308" stroke="#93c5fd" stroke-width="1"/>
+  <text x="481" y="346" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">Flip Card</text>
+  <text x="481" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">hover로 3D 뒤집기</text>
+  <text x="481" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">앞면 작품 / 뒷면 설명</text>
+  <text x="481" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">CSS 단독으로 충분하다</text>
+  <text x="481" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb">hover 한 번이면 끝</text>
+
+  <!-- 카드 3 초록 -->
+  <rect x="854" y="246" width="366" height="252" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="878" y="292" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" font-weight="900" fill="#16a34a">03</text>
+  <line x1="878" y1="308" x2="1196" y2="308" stroke="#86efac" stroke-width="1"/>
+  <text x="878" y="346" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">Spotlight Follow</text>
+  <text x="878" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">커서 좌표로 빛의 중심을</text>
+  <text x="878" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">매 순간 갱신한다</text>
+  <text x="878" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">다크 배경에서 효과 만점</text>
+  <text x="878" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">좌표가 빛을 따라온다</text>
+
+  <!-- 누적 인터랙션 지도 -->
+  <text x="60" y="540" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">누적 인터랙션 지도</text>
+  <rect x="60" y="556" width="220" height="44" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="170" y="583" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">5주 — 스크롤</text>
+  <text x="300" y="584" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
+  <rect x="320" y="556" width="220" height="44" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="430" y="583" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">6주 — 마우스</text>
+  <text x="560" y="584" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
+  <rect x="580" y="556" width="220" height="44" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="690" y="583" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">7주 — 라이브러리</text>
+  <text x="828" y="586" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">트리거 양대 축 완성</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">다음 주 — 오늘 손으로 짠 좌표 추적이 라이브러리에선 한 줄로 끝납니다</text>
+</svg>

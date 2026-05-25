@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">3회차 핵심 정리 — Before / After</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">마지막 실습으로 여백을 트고, 오늘 배운 CSS 3대 무기를 정리합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 마지막 실습 프롬프트 (얇은 지시문 줄) -->
+  <rect x="60" y="236" width="1160" height="52" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="251" width="104" height="22" rx="11" fill="#2563eb"/>
+  <text x="136" y="266" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">실습 ③ 여백</text>
+  <text x="204" y="269" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">"페이지가 답답해 보여. 섹션 사이 여백을 넉넉히 주고 가운데 정렬해줘."</text>
+
+  <!-- 3줄 요약 카드 (노랑 → 파랑 → 초록) -->
+  <text x="60" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 배운 것 3가지</text>
+
+  <rect x="60" y="348" width="373" height="160" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="84" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" font-weight="900" fill="#d97706">01</text>
+  <text x="84" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#92400e">색</text>
+  <line x1="84" y1="438" x2="409" y2="438" stroke="#fcd34d" stroke-width="1"/>
+  <text x="84" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">자연어로 테마 지시</text>
+  <text x="84" y="492" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#92400e">다크 테크 · 웜 · 미니멀</text>
+
+  <rect x="453" y="348" width="373" height="160" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="477" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" font-weight="900" fill="#2563eb">02</text>
+  <text x="477" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">폰트</text>
+  <line x1="477" y1="438" x2="802" y2="438" stroke="#93c5fd" stroke-width="1"/>
+  <text x="477" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">Google Fonts 한 줄</text>
+  <text x="477" y="492" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#2563eb">Noto Sans KR + Inter</text>
+
+  <rect x="846" y="348" width="374" height="160" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="870" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" font-weight="900" fill="#16a34a">03</text>
+  <text x="870" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">여백</text>
+  <line x1="870" y1="438" x2="1196" y2="438" stroke="#86efac" stroke-width="1"/>
+  <text x="870" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">padding · margin</text>
+  <text x="870" y="492" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#16a34a">답답함을 숨통으로</text>
+
+  <!-- 다음 주 예고 + 숙제 -->
+  <rect x="60" y="524" width="700" height="72" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.05em">다음 주 (4회차) 예고</text>
+  <text x="84" y="580" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">JavaScript — 버튼 누르면 반응하는 페이지</text>
+
+  <rect x="780" y="524" width="440" height="72" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="804" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#16a34a" letter-spacing="0.05em">숙제</text>
+  <text x="804" y="580" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#166534">색 테마를 웜 또는 미니멀로 한 버전 더</text>
+
+  <!-- 진행 점 8개 모두 강조 -->
+  <circle cx="1092" cy="262" r="6" fill="#171717"/>
+  <circle cx="1108" cy="262" r="6" fill="#171717"/>
+  <circle cx="1124" cy="262" r="6" fill="#171717"/>
+  <circle cx="1140" cy="262" r="6" fill="#171717"/>
+  <circle cx="1156" cy="262" r="6" fill="#171717"/>
+  <circle cx="1172" cy="262" r="6" fill="#171717"/>
+  <circle cx="1188" cy="262" r="6" fill="#171717"/>
+  <circle cx="1204" cy="262" r="6" fill="#171717"/>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">같은 뼈대 위에 옷만 갈아입혔는데 — 완전히 다른 페이지가 됐습니다</text>
+</svg>

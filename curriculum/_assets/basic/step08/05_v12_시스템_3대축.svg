@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">v12 시스템의 3대 축, 다시 정리</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">"이 페이지는 왜 이렇게 생겼나"를 셋이 함께 설명합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">무엇을 결정하는가</text>
+
+  <!-- 3축 카드 -->
+  <!-- 3-SPARK (노랑) -->
+  <rect x="60" y="278" width="366" height="288" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <text x="84" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#92400e">3-SPARK</text>
+  <text x="84" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#d97706">페이지의 첫인상 3가지</text>
+  <line x1="84" y1="368" x2="402" y2="368" stroke="#fcd34d" stroke-width="1"/>
+  <text x="84" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#92400e">· 분위기 (전체 톤)</text>
+  <text x="84" y="442" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#92400e">· 인터랙션 (반응)</text>
+  <text x="84" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#92400e">· 모션 (움직임)</text>
+  <rect x="84" y="500" width="318" height="44" rx="8" fill="#fde68a"/>
+  <text x="100" y="528" font-family="'Courier New',monospace" font-size="14" fill="#78350f">[SPARK-1] 전면 다크 + 네온</text>
+
+  <!-- AESTHETIC_PINCH (파랑) -->
+  <rect x="457" y="278" width="366" height="288" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <text x="481" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#1e40af">AESTHETIC_PINCH</text>
+  <text x="481" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#2563eb">디테일 양념 한 꼬집</text>
+  <line x1="481" y1="368" x2="799" y2="368" stroke="#93c5fd" stroke-width="1"/>
+  <text x="481" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e40af">· 질감과 여백의 미세 조정</text>
+  <text x="481" y="442" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e40af">· 평범함 → 고급스러움</text>
+  <text x="481" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e40af">· 같은 구성, 다른 완성도</text>
+  <rect x="481" y="500" width="318" height="44" rx="8" fill="#bfdbfe"/>
+  <text x="497" y="528" font-family="'Courier New',monospace" font-size="13" fill="#1e3a8a">noisy-gradient · spacing</text>
+
+  <!-- FONT JUDGMENT (초록) -->
+  <rect x="854" y="278" width="366" height="288" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="878" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#15803d">FONT JUDGMENT</text>
+  <text x="878" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#16a34a">폰트 선택의 근거</text>
+  <line x1="878" y1="368" x2="1196" y2="368" stroke="#86efac" stroke-width="1"/>
+  <text x="878" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#15803d">· 헤드 폰트 (제목용)</text>
+  <text x="878" y="442" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#15803d">· 본문 폰트 (읽기용)</text>
+  <text x="878" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#15803d">· 왜 골랐는지 설명 가능</text>
+  <rect x="878" y="500" width="318" height="44" rx="8" fill="#bbf7d0"/>
+  <text x="894" y="528" font-family="'Courier New',monospace" font-size="13" fill="#166534">Inter + Noto Sans KR</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">다음 실습에서 이 3축을 그대로 프롬프트에 박아 넣습니다</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">학생 발표 — 5분 × N명</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">모두가 본인 작품을 발표하고 동료 피드백을 받습니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">발표 무대</text>
+
+  <!-- 좌측 무대 다크 박스 -->
+  <rect x="60" y="272" width="560" height="244" rx="16" fill="#0f172a"/>
+  <!-- 발표 화면 -->
+  <rect x="92" y="304" width="360" height="160" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <rect x="92" y="304" width="360" height="26" rx="10" fill="#334155"/>
+  <rect x="92" y="318" width="360" height="12" fill="#334155"/>
+  <circle cx="108" cy="317" r="4" fill="#64748b"/>
+  <circle cx="122" cy="317" r="4" fill="#64748b"/>
+  <text x="272" y="392" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#38bdf8">본인 도메인 화면</text>
+  <text x="272" y="418" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#94a3b8">로그인 · AI 기능 · 결제 시연</text>
+  <!-- 마이크 (벡터) -->
+  <rect x="514" y="356" width="24" height="40" rx="12" fill="#38bdf8"/>
+  <path d="M507 388 a19 19 0 0 0 38 0" stroke="#38bdf8" stroke-width="2.5" fill="none"/>
+  <rect x="524" y="407" width="4" height="12" fill="#38bdf8"/>
+  <rect x="513" y="418" width="26" height="4" rx="2" fill="#38bdf8"/>
+  <text x="526" y="446" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#94a3b8">발표자</text>
+  <text x="92" y="498" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#94a3b8">청중은 발표자 도메인에 같이 접속해서 시연을 봅니다</text>
+
+  <!-- 우측 발표 순서 보드 -->
+  <text x="652" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">발표 순서 (자원자 우선 → 출석 순)</text>
+  <rect x="652" y="272" width="568" height="40" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="676" y="297" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#9ca3af">① ___________</text>
+  <rect x="652" y="320" width="568" height="40" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="676" y="345" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#9ca3af">② ___________</text>
+  <rect x="652" y="368" width="568" height="40" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="676" y="393" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#9ca3af">③ ___________</text>
+
+  <!-- 진행 규칙 -->
+  <rect x="652" y="424" width="568" height="92" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="676" y="454" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#92400e">진행 규칙</text>
+  <text x="676" y="480" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">• 강사는 타이머 + 한 줄 코멘트  • 발표 후 박수 + 1명 1질문</text>
+  <text x="676" y="504" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">• 발표 영상 · 스크린샷은 학원 갤러리 게시용으로 캡처</text>
+
+  <!-- 타이머 -->
+  <rect x="60" y="538" width="1160" height="58" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="84" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#15803d">발표 타이머</text>
+  <text x="640" y="578" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="700" fill="#15803d">00:00 ~ 05:00</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">같이 고생한 동료들 작품 봐주세요 — 모르던 기능·아이디어는 다 메모</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">1회차 핵심 정리</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 배운 것 3가지 + 다음 주 예고</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 핵심 1 (노랑) -->
+  <rect x="60" y="240" width="360" height="270" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <text x="84" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" font-weight="900" fill="#d97706">01</text>
+  <text x="84" y="334" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#78350f">누구나 만든다</text>
+  <line x1="84" y1="352" x2="396" y2="352" stroke="#fcd34d" stroke-width="1"/>
+  <text x="84" y="388" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">랜딩페이지는 누구나</text>
+  <text x="84" y="414" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">만들 수 있다 —</text>
+  <text x="84" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">오늘 직접 증명함</text>
+  <text x="84" y="488" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#d97706">내 페이지가 손에 있음</text>
+
+  <!-- 핵심 2 (파랑) -->
+  <rect x="460" y="240" width="360" height="270" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <text x="484" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" font-weight="900" fill="#2563eb">02</text>
+  <text x="484" y="334" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e3a8a">웹은 4갈래</text>
+  <line x1="484" y1="352" x2="796" y2="352" stroke="#93c5fd" stroke-width="1"/>
+  <text x="484" y="388" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">랜딩 · 서비스 · 쇼핑몰 ·</text>
+  <text x="484" y="414" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">사내도구 4갈래를</text>
+  <text x="484" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">16주에 걸쳐 넓혀감</text>
+  <text x="484" y="488" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb">큰 지도를 받음</text>
+
+  <!-- 핵심 3 (초록) -->
+  <rect x="860" y="240" width="360" height="270" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="884" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" font-weight="900" fill="#16a34a">03</text>
+  <text x="884" y="334" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#166534">AI를 부리는 사람</text>
+  <line x1="884" y1="352" x2="1196" y2="352" stroke="#86efac" stroke-width="1"/>
+  <text x="884" y="388" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">코드를 읽고 통제하는</text>
+  <text x="884" y="414" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">사람이 우리의 정체성 —</text>
+  <text x="884" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">휘둘리지 않는다</text>
+  <text x="884" y="488" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">방향이 분명해짐</text>
+
+  <!-- 다음 주 티저 -->
+  <rect x="60" y="530" width="1160" height="66" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="548" width="96" height="30" rx="8" fill="#1e40af"/>
+  <text x="132" y="568" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#ffffff">다음 2주차</text>
+  <text x="204" y="568" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#1e40af">HTML 뼈대 — Claude가 만든 코드 안에 뭐가 들었는지 열어봅니다  (숙제 없음, 오늘 만든 페이지만 간직)</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘 만든 페이지가 첫 결과물 — 다음 주에 그 안을 열어봅시다</text>
+</svg>

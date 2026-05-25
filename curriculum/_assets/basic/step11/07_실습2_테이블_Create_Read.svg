@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 2</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ② — 테이블 + 첫 데이터</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">guestbook 테이블을 만들고 첫 글 1건을 클라우드 DB에 저장·조회합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">먼저 UI로 — Table Editor</text>
+
+  <!-- 좌: 테이블 만들기 단계 -->
+  <rect x="60" y="272" width="560" height="148" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">Table Editor → New table</text>
+  <text x="84" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14.5" fill="#6b7280">이름: guestbook</text>
+  <text x="84" y="366" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14.5" fill="#6b7280">컬럼 추가: nickname (text) · message (text)</text>
+  <text x="84" y="398" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14.5" fill="#16a34a">id · created_at은 자동으로 채워집니다</text>
+
+  <!-- 우: CDN 코드박스 -->
+  <rect x="660" y="272" width="560" height="148" rx="12" fill="#0f172a"/>
+  <text x="684" y="304" font-family="'Courier New',monospace" font-size="13" fill="#6b7280">// index.html에 Supabase 추가 (CDN)</text>
+  <text x="684" y="336" font-family="'Courier New',monospace" font-size="12.5" fill="#a3e635">&lt;script src="https://cdn.jsdelivr.net/</text>
+  <text x="684" y="358" font-family="'Courier New',monospace" font-size="12.5" fill="#a3e635">npm/@supabase/supabase-js@2/dist/umd/</text>
+  <text x="684" y="380" font-family="'Courier New',monospace" font-size="12.5" fill="#a3e635">supabase.min.js"&gt;&lt;/script&gt;</text>
+  <text x="684" y="408" font-family="'Courier New',monospace" font-size="13" fill="#6b7280">// 클로드가 자동으로 넣어 줍니다</text>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="436" width="1160" height="92" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="452" width="104" height="22" rx="11" fill="#2563eb"/>
+  <text x="136" y="467" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
+  <text x="84" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#1e40af">"내 페이지에서 Supabase의 guestbook 테이블에 데이터를 추가하고</text>
+  <text x="84" y="522" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#1e40af">전체 조회하는 코드 작성해줘. URL은 ___, key는 ___."</text>
+
+  <!-- 체크포인트 박스 -->
+  <rect x="60" y="544" width="1160" height="52" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <rect x="84" y="558" width="104" height="22" rx="11" fill="#16a34a"/>
+  <text x="136" y="573" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">체크포인트</text>
+  <text x="208" y="577" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">브라우저에서 글 1건 작성 → Table Editor 새로고침 → 데이터 1줄이 보이면 성공</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">첫 데이터가 대시보드에 뜨는 순간 박수 — URL·키는 그대로 복사·붙여넣기만</text>
+</svg>

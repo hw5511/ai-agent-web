@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘의 학습 목표</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">가입과 클릭만으로 — 클라우드 DB를 만들고 데이터 4종 동작을 직접 호출합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 배울 것 4단계</text>
+
+  <!-- 4 step checklist -->
+  <rect x="60" y="278" width="278" height="118" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="84" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="900" fill="#d97706">01</text>
+  <text x="84" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#92400e">가입 + 프로젝트</text>
+  <text x="84" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13.5" fill="#78350f">주소 URL · anon 키 확보</text>
+
+  <rect x="354" y="278" width="278" height="118" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="378" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="900" fill="#2563eb">02</text>
+  <text x="378" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">테이블 만들기</text>
+  <text x="378" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13.5" fill="#1e3a8a">10주 설계한 표를 그대로</text>
+
+  <rect x="648" y="278" width="278" height="118" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="672" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="900" fill="#16a34a">03</text>
+  <text x="672" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#15803d">데이터 추가·조회</text>
+  <text x="672" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13.5" fill="#166534">코드로 저장·불러오기 성공</text>
+
+  <rect x="942" y="278" width="278" height="118" rx="14" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="966" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="900" fill="#7c3aed">04</text>
+  <text x="966" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#6d28d9">방명록 전환</text>
+  <text x="966" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13.5" fill="#6d28d9">지난 주 방명록을 클라우드로</text>
+
+  <text x="60" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">무엇이 달라지나</text>
+
+  <!-- Before / After -->
+  <rect x="60" y="470" width="555" height="120" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#9ca3af" letter-spacing="0.04em">BEFORE</text>
+  <text x="84" y="538" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">내 컴퓨터에만 저장</text>
+  <text x="84" y="566" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">브라우저를 닫거나 다른 기기에서는 안 보임</text>
+
+  <rect x="665" y="470" width="555" height="120" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="689" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#16a34a" letter-spacing="0.04em">AFTER</text>
+  <text x="689" y="538" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">모두가 공유하는 클라우드 DB</text>
+  <text x="689" y="566" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">다른 사람 · 다른 기기에서도 그대로 보임</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">코드 한 줄도 직접 안 칩니다 — 가입과 클릭만, 코드는 클로드가 씁니다</text>
+</svg>

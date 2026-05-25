@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ③ — DNS 레코드 (A와 CNAME)</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">DNS = 도메인을 IP로 바꿔주는 "인터넷 전화번호부"입니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">전화번호부 비유 · 이름(도메인) → 번호(IP)</text>
+
+  <!-- A 레코드 (초록 = 동작/연결) -->
+  <rect x="60" y="278" width="560" height="148" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="84" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">A 레코드</text>
+  <text x="84" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">도메인을 IP 주소로 직접 연결</text>
+  <rect x="84" y="356" width="120" height="48" rx="10" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="144" y="385" text-anchor="middle" font-family="'Courier New',monospace" font-size="18" font-weight="700" fill="#15803d">@</text>
+  <text x="234" y="386" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#16a34a">→</text>
+  <rect x="264" y="356" width="332" height="48" rx="10" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="430" y="385" text-anchor="middle" font-family="'Courier New',monospace" font-size="17" font-weight="700" fill="#15803d">185.199.108.153 (IP)</text>
+
+  <!-- CNAME 레코드 (파랑 = 도메인) -->
+  <rect x="60" y="438" width="560" height="148" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="84" y="472" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">CNAME 레코드</text>
+  <text x="84" y="498" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1d4ed8">도메인을 다른 도메인으로 연결</text>
+  <rect x="84" y="516" width="120" height="48" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="144" y="545" text-anchor="middle" font-family="'Courier New',monospace" font-size="18" font-weight="700" fill="#1e40af">www</text>
+  <text x="234" y="546" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#2563eb">→</text>
+  <rect x="264" y="516" width="332" height="48" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="430" y="545" text-anchor="middle" font-family="'Courier New',monospace" font-size="17" font-weight="700" fill="#1e40af">hw5511.github.io</text>
+
+  <!-- 우측: GitHub Pages 공식 IP 코드박스 -->
+  <text x="660" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">GitHub Pages가 요구하는 조합 (다음 실습에서 입력)</text>
+  <rect x="660" y="278" width="560" height="226" rx="12" fill="#0f172a"/>
+  <text x="684" y="312" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// A 레코드 4개 — 호스트 @</text>
+  <text x="684" y="342" font-family="'Courier New',monospace" font-size="16" fill="#a3e635">185.199.108.153</text>
+  <text x="684" y="368" font-family="'Courier New',monospace" font-size="16" fill="#a3e635">185.199.109.153</text>
+  <text x="684" y="394" font-family="'Courier New',monospace" font-size="16" fill="#a3e635">185.199.110.153</text>
+  <text x="684" y="420" font-family="'Courier New',monospace" font-size="16" fill="#a3e635">185.199.111.153</text>
+  <text x="684" y="456" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// CNAME 1개 — 호스트 www</text>
+  <text x="684" y="486" font-family="'Courier New',monospace" font-size="16" fill="#a3e635">www  →  hw5511.github.io</text>
+
+  <!-- 전파 시간 안내 -->
+  <rect x="660" y="518" width="560" height="68" rx="14" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="684" y="548" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#6d28d9">입력해도 바로 안 보일 수 있어요</text>
+  <text x="684" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#7c3aed">주소 정보가 전 세계로 퍼지는 시간 — 몇 분에서 몇 시간</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">A는 번호로, CNAME은 다른 이름으로 — 두 글자만 기억하면 됩니다</text>
+</svg>

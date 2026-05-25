@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">Session 6 — 마우스 인터랙션</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">마그네틱 · Flip Card · Spotlight — 커서가 가는 곳마다 페이지가 반응합니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="262" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 만들 인터랙션 3종</text>
+
+  <!-- 마그네틱 카드 (노랑) -->
+  <rect x="60" y="284" width="365" height="190" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
+  <rect x="84" y="312" width="120" height="56" rx="10" fill="#92400e"/>
+  <text x="144" y="346" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#fef3c7">연락하기</text>
+  <text x="222" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#d97706">↖</text>
+  <text x="84" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#92400e">마그네틱 버튼</text>
+  <text x="84" y="446" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">마우스가 다가오면 자석처럼 당겨진다</text>
+
+  <!-- Flip Card (파랑) -->
+  <rect x="457" y="284" width="365" height="190" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+  <rect x="503" y="312" width="120" height="56" rx="10" fill="#1e40af"/>
+  <rect x="656" y="312" width="120" height="56" rx="10" fill="#bfdbfe"/>
+  <text x="640" y="346" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#2563eb">↻</text>
+  <text x="481" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">Flip Card</text>
+  <text x="481" y="446" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">올리면 3D로 뒤집혀 설명이 나온다</text>
+
+  <!-- Spotlight (초록) -->
+  <rect x="854" y="284" width="366" height="190" rx="16" fill="#0f172a"/>
+  <circle cx="1037" cy="348" r="34" fill="#dcfce7" opacity="0.85"/>
+  <circle cx="1037" cy="348" r="20" fill="#a3e635"/>
+  <text x="878" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#a3e635">Spotlight Follow</text>
+  <text x="878" y="446" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#94a3b8">커서 주변만 환해지는 빛 효과</text>
+
+  <text x="60" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">지금까지의 인터랙션 트리거</text>
+
+  <rect x="60" y="544" width="280" height="52" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="200" y="576" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">5주 — 스크롤 반응</text>
+  <text x="362" y="577" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">+</text>
+  <rect x="384" y="544" width="280" height="52" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="524" y="576" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">6주 — 마우스 반응</text>
+  <text x="690" y="577" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">=  인터랙션 양대 트리거 완성</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">커서가 가는 곳마다 페이지가 반응한다 — 오늘은 wow 모먼트 가득한 회차입니다</text>
+</svg>

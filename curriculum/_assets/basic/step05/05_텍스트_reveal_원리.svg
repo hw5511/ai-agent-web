@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 05</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">텍스트 컬러 reveal의 원리 — 0에서 1까지</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">스크롤 진행률 숫자 한 개에, 색 변화 한 개를 묶어주면 끝</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">진행률은 0에서 1로 흐릅니다</text>
+
+  <!-- progress slider -->
+  <line x1="120" y1="300" x2="1160" y2="300" stroke="#e5e7eb" stroke-width="6" stroke-linecap="round"/>
+  <line x1="120" y1="300" x2="640" y2="300" stroke="#9ca3af" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="120" cy="300" r="9" fill="#bbbbbb"/>
+  <circle cx="640" cy="300" r="11" fill="#6b7280"/>
+  <circle cx="1160" cy="300" r="9" fill="#111111"/>
+  <text x="120" y="334" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">0 (시작)</text>
+  <text x="640" y="334" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">0.5 (중간)</text>
+  <text x="1160" y="334" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">1 (끝)</text>
+
+  <text x="60" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">진행률에 따라 헤드라인 색이 변합니다</text>
+
+  <!-- 3 color 비교 카드 -->
+  <rect x="60" y="406" width="366" height="110" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="243" y="462" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#bbbbbb">우리 작업실</text>
+  <text x="243" y="496" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">진행률 0 — 흐릿한 회색 (#bbbbbb)</text>
+
+  <rect x="457" y="406" width="366" height="110" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="640" y="462" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#6b7280">우리 작업실</text>
+  <text x="640" y="496" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">진행률 0.5 — 절반쯤 진해짐</text>
+
+  <rect x="854" y="406" width="366" height="110" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1037" y="462" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#111111">우리 작업실</text>
+  <text x="1037" y="496" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">진행률 1 — 또렷한 검정 (#111111)</text>
+
+  <!-- 응용 박스 -->
+  <rect x="60" y="540" width="1160" height="56" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="90" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">한 번 익히면 응용 무한 — 색 대신 글자 크기, 배경색, 카드 회전에도 똑같이 묶을 수 있어요</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">진행률 숫자 한 개에 효과 한 개 — 그 단순한 원리가 reveal의 정체입니다</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
+  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 2</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ② — 이미지 생성 기능 붙이기</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">프롬프트를 입력하면 Stability AI가 그림을 그려 보여줍니다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Claude 지시문 박스 -->
+  <rect x="60" y="240" width="1160" height="92" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <rect x="84" y="256" width="104" height="22" rx="11" fill="#2563eb"/>
+  <text x="136" y="271" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
+  <text x="84" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">"api/generate-image.js 만들어서 Stability AI로 이미지 생성해줘. 환경변수</text>
+  <text x="84" y="330" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">STABILITY_KEY. 페이지에서 프롬프트 입력 → 이미지 표시. 로딩 표시도 넣어줘."</text>
+
+  <!-- 흐름 다이어그램 -->
+  <text x="60" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">동작 흐름</text>
+  <rect x="60" y="388" width="210" height="52" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="165" y="420" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">프롬프트 입력</text>
+  <text x="290" y="421" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
+  <rect x="310" y="388" width="210" height="52" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="415" y="420" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">Vercel 함수</text>
+  <text x="540" y="421" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
+  <rect x="560" y="388" width="210" height="52" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="665" y="420" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">Stability AI</text>
+
+  <!-- 프롬프트 4요소 예시 박스 -->
+  <rect x="60" y="460" width="600" height="112" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="84" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#92400e">4요소를 그대로 적용</text>
+  <text x="84" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">"수채화 스타일(스타일), 정사각형(수치),</text>
+  <text x="84" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">강아지 1마리(범위)" — 구체적일수록 결과가 좋다</text>
+
+  <!-- 우측: 결과 미리보기 모형 -->
+  <text x="690" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">결과 미리보기</text>
+  <rect x="690" y="388" width="530" height="184" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="714" y="412" width="220" height="136" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <!-- 이미지 자리표시자 아이콘 (벡터) -->
+  <rect x="744" y="448" width="160" height="64" rx="6" fill="#e5e7eb"/>
+  <circle cx="776" cy="472" r="9" fill="#9ca3af"/>
+  <path d="M752 512 L792 480 L824 504 L856 476 L896 512 Z" fill="#9ca3af"/>
+  <text x="824" y="540" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">생성된 이미지 자리</text>
+  <text x="958" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">· 생성에 5~15초 걸립니다</text>
+  <text x="958" y="482" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">· "그리는 중..." 로딩 표시</text>
+  <text x="958" y="514" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">· 다 되면 그림이 표시</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">내가 적은 문장이 그림이 되어 화면에 뜹니다 — 무료 크레딧 안에서 충분히 체험</text>
+</svg>

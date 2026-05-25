@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 10</text>
+  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">Session 10 — 데이터를 저장하다</text>
+  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">내 페이지에 진짜 '기록'을 남기는 첫 경험 — 2시간 / 심화 Part 2</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="262" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">지금까지 → 오늘부터</text>
+
+  <!-- Before: 사라지는 방명록 (회색) -->
+  <rect x="60" y="284" width="500" height="150" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="310" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">새로고침하면 사라졌다</text>
+  <rect x="100" y="344" width="420" height="30" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="116" y="364" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">방명록을 적어도...</text>
+  <text x="310" y="404" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">F5 한 번에 텅 빈 페이지로 돌아간다</text>
+
+  <text x="610" y="366" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="34" fill="#9ca3af">→</text>
+
+  <!-- After: 남는 방명록 (초록 = 동작) -->
+  <rect x="660" y="284" width="500" height="150" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+  <text x="910" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">오늘부터는 남는다</text>
+  <rect x="700" y="342" width="420" height="22" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+  <text x="714" y="357" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#166534">우희 — 잘 봤어요</text>
+  <rect x="700" y="368" width="420" height="22" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1"/>
+  <text x="714" y="383" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#166534">철수 — 또 올게요</text>
+  <text x="910" y="416" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#16a34a">글이 차곡차곡 쌓여 새로고침해도 그대로</text>
+
+  <text x="60" y="482" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 키워드</text>
+
+  <rect x="60" y="502" width="360" height="56" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="240" y="536" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#92400e">표 (스키마)</text>
+  <rect x="460" y="502" width="360" height="56" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="640" y="536" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">저장 (브라우저 서랍)</text>
+  <rect x="860" y="502" width="300" height="56" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1010" y="536" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#15803d">방명록</text>
+
+  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
+  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">이번 주의 한 줄 → 저장, 가능합니다 (한 줄도 직접 안 써도 됩니다)</text>
+</svg>
