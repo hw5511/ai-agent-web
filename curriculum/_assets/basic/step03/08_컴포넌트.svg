@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 03 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">컴포넌트</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">재사용하는 UI의 최소 단위</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 좌측 글머리 -->
+  <text x="80" y="284" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="284" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">버튼·카드·입력창처럼 반복되는 UI 조각</text>
+
+  <text x="80" y="342" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="342" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">한 번 잘 만들어 여러 곳에 재사용</text>
+
+  <text x="80" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">작은 부품을 조합해 화면 전체를 구성</text>
+
+  <text x="80" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">한 부품만 고치면 쓰인 곳이 전부 바뀐다</text>
+
+  <!-- 그린 핵심 한 줄 -->
+  <text x="80" y="566" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#16a34a">작은 부품을 모아 화면을 조립한다</text>
+
+  <!-- 우측 시각: 부품 → 화면 -->
+  <rect x="700" y="276" width="520" height="312" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="724" y="314" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">부품을 모아 화면으로</text>
+
+  <!-- 부품들 -->
+  <rect x="724" y="336" width="130" height="44" rx="8" fill="#171717"/>
+  <text x="789" y="363" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#ffffff">버튼</text>
+  <rect x="724" y="392" width="130" height="44" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="789" y="419" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="500" fill="#374151">입력창</text>
+  <rect x="724" y="448" width="130" height="64" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="789" y="485" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="500" fill="#374151">카드</text>
+
+  <!-- 화살표 -->
+  <text x="888" y="436" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="400" fill="#9ca3af">→</text>
+
+  <!-- 조립된 화면 -->
+  <rect x="924" y="336" width="272" height="176" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="940" y="352" width="240" height="18" rx="3" fill="#171717"/>
+  <rect x="940" y="384" width="112" height="58" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="1068" y="384" width="112" height="58" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="940" y="456" width="84" height="26" rx="6" fill="#171717"/>
+  <text x="1060" y="500" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="500" fill="#9ca3af">여러 부품 = 한 화면</text>
+
+  <text x="724" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">한 부품을 고치면 그 부품 쓴 곳이 전부 바뀐다</text>
+
+  <!-- 출처 -->
+  <text x="1220" y="694" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#9ca3af">참고 · 토스 기술 블로그</text>
+</svg>

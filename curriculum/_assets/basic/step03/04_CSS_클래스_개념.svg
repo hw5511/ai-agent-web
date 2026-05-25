@@ -27,31 +27,27 @@
   <!-- 그린 핵심 한 줄 -->
   <text x="60" y="612" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#16a34a">스타일에 '이름표'를 붙여 재사용하는 것</text>
 
-  <!-- 우: 시각 예시 카드 (한 클래스를 여러 요소에 재사용) -->
+  <!-- 우: 시각 예시 카드 (클래스 없이 vs 클래스로) -->
   <rect x="700" y="296" width="520" height="320" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
 
-  <text x="724" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">클래스 한 번 정의</text>
-  <text x="724" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="700" fill="#171717">.btn</text>
-  <text x="784" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">= 짙은 배경·둥근 모서리·밝은 글자</text>
+  <!-- 클래스 없이: 제각각 -->
+  <text x="724" y="336" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">클래스 없이 — 매번 따로, 제각각</text>
+  <rect x="724" y="350" width="92" height="34" rx="4" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+  <rect x="838" y="346" width="124" height="42" rx="21" fill="#171717"/>
+  <rect x="984" y="352" width="160" height="30" rx="2" fill="#e5e7eb"/>
 
-  <!-- 같은 클래스를 적용한 버튼 3개 (재사용) -->
-  <rect x="724" y="410" width="130" height="44" rx="8" fill="#171717"/>
-  <rect x="748" y="429" width="82" height="6" rx="3" fill="#ffffff"/>
+  <line x1="724" y1="424" x2="1196" y2="424" stroke="#e5e7eb" stroke-width="1"/>
 
-  <rect x="874" y="410" width="130" height="44" rx="8" fill="#171717"/>
-  <rect x="898" y="429" width="82" height="6" rx="3" fill="#ffffff"/>
-
-  <rect x="1024" y="410" width="130" height="44" rx="8" fill="#171717"/>
-  <rect x="1048" y="429" width="82" height="6" rx="3" fill="#ffffff"/>
-
-  <!-- 라벨: 각 버튼 .btn -->
-  <text x="789" y="480" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">.btn</text>
-  <text x="939" y="480" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">.btn</text>
-  <text x="1089" y="480" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">.btn</text>
-
-  <line x1="724" y1="518" x2="1196" y2="518" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- 클래스로 .btn: 통일 -->
+  <text x="724" y="462" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#16a34a" letter-spacing="0.08em">클래스로 (.btn) — 전부 똑같이 통일</text>
+  <rect x="724" y="476" width="130" height="42" rx="8" fill="#171717"/>
+  <rect x="748" y="494" width="82" height="6" rx="3" fill="#ffffff"/>
+  <rect x="895" y="476" width="130" height="42" rx="8" fill="#171717"/>
+  <rect x="919" y="494" width="82" height="6" rx="3" fill="#ffffff"/>
+  <rect x="1066" y="476" width="130" height="42" rx="8" fill="#171717"/>
+  <rect x="1090" y="494" width="82" height="6" rx="3" fill="#ffffff"/>
 
   <!-- 캡션 -->
-  <text x="724" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#171717">같은 클래스 → 어디서나 똑같이</text>
-  <text x="724" y="590" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">한 번 정의하면 버튼 수십 개도 일관된 모양</text>
+  <text x="724" y="566" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#171717">같은 .btn → 들쭉날쭉이 사라진다</text>
+  <text x="724" y="594" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">'똑같음'이 곧 일관성 — 그게 클래스의 힘</text>
 </svg>
