@@ -1,46 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 15 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ① — 왜 Vercel 함수에서 부르나</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">API 키 = 카드와 같습니다 — 브라우저에 적으면 누구나 봅니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">왜 Vercel 함수에서 호출하나</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">유료 키는 절대 브라우저에 나오면 안 된다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">안전한 호출 경로</text>
+  <!-- 좌측: 위험 케이스 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">위험한 방식</text>
 
-  <!-- 안전 흐름도 -->
-  <rect x="60" y="278" width="250" height="58" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="185" y="306" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">브라우저(내 페이지)</text>
-  <text x="185" y="326" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">키 모름</text>
-  <text x="330" y="313" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">→</text>
-  <rect x="350" y="278" width="250" height="58" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="475" y="306" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">Vercel 함수</text>
-  <text x="475" y="326" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#16a34a">여기서만 키 사용</text>
-  <text x="620" y="313" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">→</text>
-  <rect x="640" y="278" width="250" height="58" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="765" y="306" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">OpenAI 등 서비스</text>
-  <text x="765" y="326" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">키 확인 후 응답</text>
+  <rect x="60" y="284" width="560" height="280" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">X · 브라우저에 키 적기</text>
 
-  <!-- 위험 케이스 (빨강) -->
-  <rect x="60" y="372" width="565" height="190" rx="16" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <circle cx="100" cy="412" r="16" fill="#fca5a5"/>
-  <path d="M93 405 L107 419 M107 405 L93 419" stroke="#991b1b" stroke-width="3" stroke-linecap="round"/>
-  <text x="130" y="419" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#991b1b">위험 — 브라우저에 키를 적으면</text>
-  <text x="84" y="462" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#b91c1c">· 누구나 F12(개발자도구)로 키를 그대로 본다</text>
-  <text x="84" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#b91c1c">· 유출되면 남이 내 카드로 결제를 일으킨다</text>
-  <text x="84" y="526" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#b91c1c">· 실제로 하룻밤 새 큰 비용이 빠진 사고가 있다</text>
+  <text x="90" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">─  페이지 코드 안에 키가 그대로</text>
+  <text x="90" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">─  누구나 F12로 열어 볼 수 있음</text>
+  <text x="90" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">─  유출되면 즉시 요금 발생</text>
 
-  <!-- 안전 케이스 (초록) -->
-  <rect x="655" y="372" width="565" height="190" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <circle cx="695" cy="412" r="16" fill="#86efac"/>
-  <path d="M688 412 L693 418 L703 405" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="725" y="419" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">안전 — Vercel 함수 안에서만</text>
-  <text x="679" y="462" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#166534">· 키는 환경변수에 보관, 화면엔 절대 안 보낸다</text>
-  <text x="679" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#166534">· 브라우저는 Vercel 함수만 부른다 (키 모름)</text>
-  <!-- 코드박스 (안전 카드 안) -->
-  <rect x="679" y="510" width="517" height="38" rx="8" fill="#0f172a"/>
-  <text x="695" y="535" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">const key = process.env.OPENAI_KEY;</text>
+  <text x="90" y="524" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">OpenAI 키 = 카드와 같은 것</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">키는 Vercel 함수 안에서만 읽는다 — 브라우저는 끝까지 키를 모릅니다</text>
+  <!-- 우측: 안전 케이스 -->
+  <text x="660" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">안전한 방식</text>
+
+  <rect x="660" y="284" width="560" height="280" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="690" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">O · Vercel 함수 안에서만</text>
+
+  <text x="690" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">─  키는 Vercel 환경변수에 저장</text>
+  <text x="690" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">─  Vercel 함수에서만 키를 읽음</text>
+  <text x="690" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">─  브라우저는 함수만 호출, 키는 모름</text>
+
+  <text x="690" y="524" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">키는 서랍 안, 손은 서랍 밖</text>
+
+  <!-- 핵심 한 줄 (그린) -->
+  <text x="640" y="630" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="600" fill="#16a34a">"키는 Vercel 함수 안에서만 살아 있다"</text>
 </svg>

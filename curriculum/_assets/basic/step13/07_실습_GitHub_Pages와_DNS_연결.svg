@@ -1,43 +1,72 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 13 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 2</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ② — 내 사이트에 도메인 연결</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">가비아에 주소 정보(A·CNAME) 입력 + GitHub에 도메인 적기</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 2 · GitHub Pages와 DNS 연결</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">가비아에 5줄 입력 → GitHub Settings에 도메인 등록</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- Claude 지시문 박스 -->
-  <rect x="60" y="234" width="1160" height="86" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="84" y="250" width="104" height="22" rx="11" fill="#2563eb"/>
-  <text x="136" y="265" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
-  <text x="84" y="302" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#1e40af">"GitHub Pages 도메인 연결 방법 알려줘. 가비아에 A 레코드 4개 입력하고, 레포 Settings에 도메인 입력하는 순서대로."</text>
-
   <!-- 좌측: 가비아 DNS 입력표 -->
-  <text x="60" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#15803d" letter-spacing="0.08em">① 가비아 → My가비아 → DNS 관리</text>
-  <rect x="60" y="364" width="560" height="222" rx="12" fill="#0f172a"/>
-  <text x="84" y="396" font-family="'Courier New',monospace" font-size="13" fill="#6b7280">// 그대로 복사 — 호스트 / 값</text>
-  <text x="84" y="424" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">A   @   185.199.108.153</text>
-  <text x="84" y="448" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">A   @   185.199.109.153</text>
-  <text x="84" y="472" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">A   @   185.199.110.153</text>
-  <text x="84" y="496" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">A   @   185.199.111.153</text>
-  <text x="84" y="524" font-family="'Courier New',monospace" font-size="15" fill="#38bdf8">CNAME  www  hw5511.github.io</text>
-  <text x="84" y="560" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#94a3b8">@ = 내도메인.com (루트)  ·  www = www.내도메인.com</text>
+  <rect x="60" y="250" width="565" height="380" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="286" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">1 · 가비아 DNS 관리</text>
+  <text x="80" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">My가비아 → DNS 관리 → 5줄 추가</text>
 
-  <!-- 우측: GitHub Settings 화면 -->
-  <text x="660" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#1e40af" letter-spacing="0.08em">② GitHub 레포 → Settings → Pages</text>
-  <rect x="660" y="364" width="560" height="222" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="684" y="398" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">Custom domain</text>
-  <rect x="684" y="412" width="400" height="40" rx="8" fill="#f9fafb" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="700" y="438" font-family="'Courier New',monospace" font-size="16" font-weight="700" fill="#1e40af">내도메인.com</text>
-  <rect x="1096" y="412" width="100" height="40" rx="8" fill="#dbeafe"/>
-  <text x="1146" y="438" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">Save</text>
-  <line x1="684" y1="474" x2="1196" y2="474" stroke="#f3f4f6" stroke-width="1"/>
-  <text x="684" y="504" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">• 레포에 CNAME 파일이 자동 생성됨 (확인만)</text>
-  <rect x="684" y="520" width="512" height="48" rx="10" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
-  <text x="704" y="549" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6d28d9">"DNS check in progress" 메시지는 정상 — 기다리면 됩니다</text>
+  <!-- 표 헤더 -->
+  <text x="80" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">타입</text>
+  <text x="170" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">호스트</text>
+  <text x="280" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">값</text>
+  <line x1="80" y1="372" x2="605" y2="372" stroke="#e5e7eb" stroke-width="1"/>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">입력값은 복사만 하면 됩니다 — 헷갈리는 건 클로드에게 다시 물어보세요</text>
+  <text x="80" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">A</text>
+  <text x="170" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">@</text>
+  <text x="280" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">185.199.108.153</text>
+
+  <text x="80" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">A</text>
+  <text x="170" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">@</text>
+  <text x="280" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">185.199.109.153</text>
+
+  <text x="80" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">A</text>
+  <text x="170" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">@</text>
+  <text x="280" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">185.199.110.153</text>
+
+  <text x="80" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">A</text>
+  <text x="170" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">@</text>
+  <text x="280" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">185.199.111.153</text>
+
+  <line x1="80" y1="504" x2="605" y2="504" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="2 3"/>
+
+  <text x="80" y="534" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">CNAME</text>
+  <text x="170" y="534" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">www</text>
+  <text x="280" y="534" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">hw5511.github.io</text>
+
+  <text x="80" y="588" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">@ = 내도메인.com 자체 · www = www.내도메인.com</text>
+  <text x="80" y="610" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">CNAME 값은 본인 사용자명.github.io 로 바꿔 입력</text>
+
+  <!-- 우측: GitHub Settings -->
+  <rect x="655" y="250" width="565" height="380" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="675" y="286" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">2 · GitHub 레포</text>
+  <text x="675" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">Settings → Pages → Custom domain</text>
+
+  <text x="675" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="715" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">레포의 Settings 탭 열기</text>
+
+  <text x="675" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="715" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">좌측 메뉴 Pages 클릭</text>
+
+  <text x="675" y="468" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="715" y="468" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">Custom domain에 내도메인.com 입력 · Save</text>
+
+  <text x="675" y="512" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="715" y="512" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">레포에 CNAME 파일 자동 생성 확인</text>
+
+  <text x="675" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">"DNS check in progress" 메시지는 정상입니다</text>
+  <text x="675" y="582" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">즉시 안 보여도 다음 단계로 진행하세요</text>
+
+  <!-- 안내 -->
+  <text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#9ca3af">Claude Code 프롬프트는 슬라이드 외부 액션박스에서 복사하세요</text>
 </svg>

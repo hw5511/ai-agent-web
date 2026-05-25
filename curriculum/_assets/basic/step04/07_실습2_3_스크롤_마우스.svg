@@ -1,46 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 04 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 04</text>
-  <rect x="144" y="44" width="60" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="174" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 2·3</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ②③ — 스크롤 등장 + 마우스 따라가기</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">남은 두 트리거(scroll · mousemove)를 한 번에 붙여 페이지를 완성합니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 04</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 2 · 3 — 스크롤 등장 + 마우스 따라가기</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">남은 두 트리거를 한 번에 붙여 페이지를 완성합니다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌: 실습 2 스크롤 등장 -->
-  <rect x="60" y="240" width="565" height="278" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <rect x="84" y="258" width="120" height="22" rx="11" fill="#2563eb"/>
-  <text x="144" y="273" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">실습 2 · 스크롤 등장</text>
-  <text x="84" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">결과 — 섹션이 보일 때 아래에서 위로 페이드인</text>
-  <!-- Claude 지시문 박스 -->
-  <rect x="84" y="328" width="517" height="100" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="104" y="354" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#2563eb">Claude 지시문</text>
-  <text x="104" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#1e40af">"각 섹션이 스크롤로 화면에 보일 때</text>
-  <text x="104" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#1e40af">아래에서 위로 페이드인 되도록</text>
-  <text x="104" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#1e40af">IntersectionObserver로 구현해줘."</text>
-  <text x="84" y="462" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">트리거 scroll · 행동 opacity 0→1 + 위로 이동</text>
-  <text x="84" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#1e40af">필수 미션</text>
+  <!-- 좌: 실습 2 -->
+  <rect x="60" y="252" width="566" height="334" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">실습 2 · SCROLL</text>
+  <text x="84" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">스크롤 등장</text>
+  <text x="84" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">각 섹션이 화면에 보일 때 페이드인</text>
+  <line x1="84" y1="386" x2="602" y2="386" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 우: 실습 3 마우스 따라가기 -->
-  <rect x="655" y="240" width="565" height="278" rx="14" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
-  <rect x="679" y="258" width="140" height="22" rx="11" fill="#7c3aed"/>
-  <text x="749" y="273" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">실습 3 · 마우스 따라가기</text>
-  <text x="679" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#6d28d9">결과 — 동그란 커서가 마우스를 부드럽게 따라옴</text>
-  <!-- Claude 지시문 박스 -->
-  <rect x="679" y="328" width="517" height="100" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="699" y="354" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#2563eb">Claude 지시문</text>
-  <text x="699" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#1e40af">"히어로 섹션 위에 마우스 따라다니는</text>
-  <text x="699" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#1e40af">동그란 커서 효과를 추가해줘."</text>
-  <text x="679" y="462" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6d28d9">마우스 좌표(clientX/Y) → 위치 이동</text>
-  <text x="679" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#7c3aed">도전 미션 (시간 남으면)</text>
+  <text x="84" y="418" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">단계</text>
 
-  <!-- 하단 체크포인트 -->
-  <rect x="60" y="534" width="1160" height="62" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <rect x="84" y="552" width="104" height="22" rx="11" fill="#16a34a"/>
-  <text x="136" y="567" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">체크포인트</text>
-  <text x="208" y="568" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">스크롤 등장 작동  ·  마우스 커서 작동  ·  안 되면 "콘솔 에러를 그대로 붙여넣고 고쳐줘"  ·  사이트에 다시 올리기</text>
+  <text x="100" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="132" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">섹션마다 페이드인 효과 요청</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">셋 다 작동하면 내 사이트 주소를 친구에게 보내 자랑하세요</text>
+  <text x="100" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="132" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">아래에서 위로 살짝 떠오르게 (20px)</text>
+
+  <text x="100" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="132" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">스크롤하면서 한 섹션씩 등장 확인</text>
+
+  <text x="100" y="554" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="132" y="554" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">너무 빠르면 "조금 천천히" 한 줄 더</text>
+
+  <!-- 우: 실습 3 -->
+  <rect x="654" y="252" width="566" height="334" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="678" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">실습 3 · MOUSEMOVE</text>
+  <text x="678" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">마우스 따라가기</text>
+  <text x="678" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">히어로 섹션에 동그란 커서가 따라옴</text>
+  <line x1="678" y1="386" x2="1196" y2="386" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="678" y="418" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">단계</text>
+
+  <text x="694" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="726" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">히어로 위에 동그란 커서 추가 요청</text>
+
+  <text x="694" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="726" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">마우스 좌표를 따라 부드럽게 이동</text>
+
+  <text x="694" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="726" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">움직임이 끊기면 "부드럽게" 한 줄 더</text>
+
+  <text x="694" y="554" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">─</text>
+  <text x="726" y="554" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#171717">잘 되면 색이나 크기로 변주 도전</text>
+
+  <!-- 체크포인트 -->
+  <text x="60" y="630" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">체크포인트</text>
+  <text x="60" y="664" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">스크롤 등장 작동 ·  마우스 커서 작동 ·  Vercel에 재배포</text>
+
+  <!-- 핵심 한 줄 (그린) -->
+  <text x="1220" y="664" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#16a34a">막히면 "콘솔 에러 고쳐줘" 한 마디</text>
 </svg>

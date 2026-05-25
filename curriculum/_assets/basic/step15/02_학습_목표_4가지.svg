@@ -1,47 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 15 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">학습 목표 — 끝나면 할 수 있는 것</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘이 끝나면 직접 할 수 있어야 하는 4가지</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">학습 목표</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 끝나면 할 수 있는 것</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="258" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">목표 4가지</text>
+  <!-- 목표 1 -->
+  <text x="80" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Vercel 함수에서 OpenAI · Stability · DeepL API를 호출할 수 있다</text>
 
-  <!-- 목표 카드 1 -->
-  <rect x="60" y="282" width="730" height="68" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="84" y="300" width="32" height="32" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M91 316 L98 323 L110 308" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="134" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#374151">Vercel 함수 안에서 OpenAI · Stability · DeepL을 호출한다</text>
+  <!-- 목표 2 -->
+  <text x="80" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">API 키를 Vercel 환경변수로 안전하게 보관할 수 있다</text>
 
-  <!-- 목표 카드 2 -->
-  <rect x="60" y="362" width="730" height="68" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="84" y="380" width="32" height="32" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M91 396 L98 403 L110 388" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="134" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#374151">API 키를 Vercel 환경변수에 안전하게 보관한다</text>
+  <!-- 목표 3 -->
+  <text x="80" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">프롬프트 4요소를 API 요청에도 그대로 적용할 수 있다</text>
 
-  <!-- 목표 카드 3 -->
-  <rect x="60" y="442" width="730" height="68" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="84" y="460" width="32" height="32" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M91 476 L98 483 L110 468" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="134" y="484" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#374151">좋은 프롬프트(대상·스타일·수치·범위)를 요청에 담는다</text>
+  <!-- 목표 4 — 그린 강조 -->
+  <text x="80" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#16a34a">─</text>
+  <text x="120" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">내 사이트 주제에 어울리는 AI 기능 1개를 직접 추가할 수 있다</text>
 
-  <!-- 목표 카드 4 -->
-  <rect x="60" y="522" width="730" height="68" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="84" y="540" width="32" height="32" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M91 556 L98 563 L110 548" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="134" y="564" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#374151">내 사이트 주제에 맞는 AI 기능 1개를 직접 추가한다</text>
-
-  <!-- 우측: 오늘의 결과물 박스 -->
-  <rect x="814" y="282" width="406" height="308" rx="16" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
-  <text x="838" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb" letter-spacing="0.05em">오늘의 결과물</text>
-  <text x="838" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#1e40af">내 사이트</text>
-  <text x="838" y="408" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#93c5fd">+</text>
-  <text x="838" y="452" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#1e40af">AI 응답 1개</text>
-  <line x1="838" y1="478" x2="1196" y2="478" stroke="#bfdbfe" stroke-width="1"/>
-  <text x="838" y="514" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">거창해 보여도 전부 "버튼 → 응답"이</text>
-  <text x="838" y="540" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">한 번 일어나는 게 전부입니다</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">목표는 단 하나 — "AI 응답 1개를 내 사이트에서 직접 받아본다"</text>
+  <!-- 메타 -->
+  <text x="60" y="640" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 결과물 · 내 사이트 + AI 응답 1개</text>
 </svg>

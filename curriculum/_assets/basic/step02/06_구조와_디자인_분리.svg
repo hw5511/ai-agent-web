@@ -1,54 +1,57 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 02</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">구조와 디자인 분리</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">왜 처음부터 디자인을 안 넣고 뼈대만 만들었을까요</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 02</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">구조와 디자인 분리</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">왜 처음부터 디자인을 안 넣고 뼈대만 만들었나</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">하나의 뼈대 → 옷만 갈아입힌다</text>
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">하나의 뼈대 · 세 가지 옷</text>
 
-  <!-- 1 뼈대 -->
-  <rect x="60" y="278" width="220" height="240" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
-  <rect x="100" y="312" width="140" height="20" rx="4" fill="#fcd34d"/>
-  <rect x="100" y="344" width="100" height="12" rx="3" fill="#fde68a"/>
-  <rect x="100" y="366" width="120" height="12" rx="3" fill="#fde68a"/>
-  <rect x="100" y="396" width="72" height="22" rx="4" fill="#fcd34d"/>
-  <text x="170" y="478" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#92400e">뼈대 1개</text>
-  <text x="170" y="502" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#78350f">HTML 그대로</text>
+  <!-- 뼈대 (좌) -->
+  <rect x="60" y="300" width="220" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="170" y="338" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">뼈대 (HTML)</text>
+  <rect x="92" y="362" width="156" height="18" rx="2" fill="#e5e7eb"/>
+  <rect x="92" y="392" width="156" height="50" rx="2" fill="#e5e7eb"/>
+  <rect x="92" y="454" width="100" height="14" rx="2" fill="#e5e7eb"/>
+  <rect x="92" y="478" width="156" height="14" rx="2" fill="#e5e7eb"/>
+  <rect x="92" y="502" width="120" height="14" rx="2" fill="#e5e7eb"/>
+  <text x="170" y="546" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">한 번 잘 잡으면 끝</text>
 
-  <text x="310" y="404" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" fill="#9ca3af">→</text>
+  <!-- 화살표 -->
+  <text x="312" y="438" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" fill="#9ca3af">→</text>
 
-  <!-- 3가지 스타일 변형 -->
-  <rect x="340" y="278" width="280" height="240" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <rect x="378" y="312" width="204" height="24" rx="6" fill="#2563eb"/>
-  <rect x="378" y="348" width="150" height="14" rx="4" fill="#93c5fd"/>
-  <rect x="378" y="372" width="180" height="14" rx="4" fill="#93c5fd"/>
-  <rect x="378" y="400" width="96" height="28" rx="14" fill="#2563eb"/>
-  <text x="480" y="478" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">스타일 A</text>
-  <text x="480" y="502" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e3a8a">차분한 파랑</text>
+  <!-- 스타일 A -->
+  <rect x="360" y="300" width="270" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="495" y="338" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">스타일 A · 미니멀</text>
+  <line x1="384" y1="362" x2="606" y2="362" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="392" y="382" width="180" height="14" rx="2" fill="#374151"/>
+  <rect x="392" y="408" width="120" height="10" rx="2" fill="#9ca3af"/>
+  <rect x="392" y="438" width="206" height="56" rx="4" fill="#f9fafb"/>
+  <rect x="392" y="510" width="80" height="22" rx="2" fill="#171717"/>
 
-  <rect x="640" y="278" width="280" height="240" rx="14" fill="#0f172a"/>
-  <rect x="678" y="312" width="204" height="24" rx="6" fill="#38bdf8"/>
-  <rect x="678" y="348" width="150" height="14" rx="4" fill="#334155"/>
-  <rect x="678" y="372" width="180" height="14" rx="4" fill="#334155"/>
-  <rect x="678" y="400" width="96" height="28" rx="14" fill="#a3e635"/>
-  <text x="780" y="478" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#ffffff">스타일 B</text>
-  <text x="780" y="502" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#94a3b8">다크 모드</text>
+  <!-- 스타일 B -->
+  <rect x="660" y="300" width="270" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="795" y="338" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">스타일 B · 둥근</text>
+  <line x1="684" y1="362" x2="906" y2="362" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="692" y="382" width="160" height="14" rx="7" fill="#171717"/>
+  <rect x="692" y="408" width="140" height="10" rx="5" fill="#9ca3af"/>
+  <rect x="692" y="438" width="206" height="56" rx="16" fill="#f9fafb"/>
+  <rect x="692" y="510" width="100" height="22" rx="11" fill="#374151"/>
 
-  <rect x="940" y="278" width="280" height="240" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <rect x="978" y="312" width="204" height="24" rx="6" fill="#16a34a"/>
-  <rect x="978" y="348" width="150" height="14" rx="4" fill="#86efac"/>
-  <rect x="978" y="372" width="180" height="14" rx="4" fill="#86efac"/>
-  <rect x="978" y="400" width="96" height="28" rx="14" fill="#16a34a"/>
-  <text x="1080" y="478" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">스타일 C</text>
-  <text x="1080" y="502" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#166534">싱그러운 초록</text>
+  <!-- 스타일 C -->
+  <rect x="960" y="300" width="260" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1090" y="338" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">스타일 C · 또렷한</text>
+  <line x1="984" y1="362" x2="1196" y2="362" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="992" y="382" width="200" height="18" fill="#171717"/>
+  <rect x="992" y="412" width="100" height="10" fill="#6b7280"/>
+  <rect x="992" y="438" width="200" height="56" fill="#f9fafb"/>
+  <rect x="992" y="510" width="120" height="26" fill="#171717"/>
 
-  <!-- 하단 원칙 박스 -->
-  <rect x="60" y="532" width="1160" height="64" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="84" y="562" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">수정할 때 한쪽만 건드리면 됩니다 — 구조 따로, 디자인 따로</text>
-  <text x="84" y="585" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">Claude에게도 "구조 수정"과 "스타일 수정"을 나눠서 말하면 깔끔합니다</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘 뼈대를 잘 잡아두면 다음 주 CSS가 훨씬 편해집니다</text>
+  <!-- 하단 그린 강조 -->
+  <text x="60" y="630" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">실무 원칙</text>
+  <text x="60" y="670" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#16a34a">구조 수정과 스타일 수정을 분리해서 말하기</text>
 </svg>

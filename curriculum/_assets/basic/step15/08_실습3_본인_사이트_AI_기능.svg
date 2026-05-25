@@ -1,49 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 15 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 3</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ③ — 내 사이트에 AI 기능 1개</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">주제에 맞는 AI 기능을 스스로 정하고 직접 붙여봅니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 3 · 본인 사이트 AI 기능 1개</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">자기 사이트 주제에 어울리는 기능을 직접 정의해 붙인다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
   <!-- 영감 카드 3개 -->
-  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">주제별 영감</text>
-  <rect x="60" y="266" width="370" height="104" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="84" y="302" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">카페 사이트</text>
-  <text x="84" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">오늘의 추천 메뉴를</text>
-  <text x="84" y="358" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">자동으로 만들어 준다</text>
-  <rect x="455" y="266" width="370" height="104" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="479" y="302" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">포트폴리오</text>
-  <text x="479" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">자기소개 문구를</text>
-  <text x="479" y="358" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">자동으로 작성한다</text>
-  <rect x="850" y="266" width="370" height="104" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="874" y="302" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">여행 블로그</text>
-  <text x="874" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">긴 일정을</text>
-  <text x="874" y="358" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">3줄로 요약해 준다</text>
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">영감 · 주제별 예시</text>
 
-  <!-- 빈칸 채우기 프롬프트 템플릿 -->
-  <text x="60" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">빈칸 채우기 프롬프트</text>
-  <rect x="60" y="422" width="730" height="100" rx="14" fill="#0f172a"/>
-  <text x="84" y="462" font-family="'Courier New',monospace" font-size="16" fill="#a3e635">"내 사이트 주제는 [          ].</text>
-  <text x="84" y="492" font-family="'Courier New',monospace" font-size="16" fill="#a3e635"> 이 주제에 어울리는 AI 기능 1개를</text>
-  <text x="84" y="510" font-family="'Courier New',monospace" font-size="16" fill="#a3e635"> Vercel 함수로 추가해줘."</text>
+  <rect x="60" y="284" width="370" height="170" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">카페 사이트</text>
+  <text x="90" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">오늘의 추천 메뉴 자동 생성</text>
+  <text x="90" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">"날씨 보고 음료 1개 추천"</text>
 
-  <!-- 체크리스트 (5단계, 벡터 체크) -->
-  <text x="820" y="408" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">진행 체크리스트</text>
-  <rect x="820" y="422" width="400" height="100" rx="14" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <path d="M844 452 L851 459 L863 444" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="876" y="457" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">기능 한 줄 정의 · 환경변수 확인</text>
-  <path d="M844 480 L851 487 L863 472" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="876" y="485" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">Claude Code 프롬프트 작성</text>
-  <path d="M844 508 L851 515 L863 500" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="876" y="513" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">함수 · 페이지 생성 → 배포 확인</text>
+  <rect x="455" y="284" width="370" height="170" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="485" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">포트폴리오</text>
+  <text x="485" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">자기소개 문구 자동 작성</text>
+  <text x="485" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">"키워드 3개로 한 단락 생성"</text>
 
-  <!-- 막혔을 때 박스 -->
-  <rect x="60" y="540" width="1160" height="56" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <text x="90" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#991b1b">막혔을 때 — 에러 메시지를 통째로 복사해 Claude Code에 그대로 붙여넣으면 됩니다</text>
+  <rect x="850" y="284" width="370" height="170" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="880" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">여행 블로그</text>
+  <text x="880" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">일정 3줄 요약</text>
+  <text x="880" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">"긴 후기 → 3줄 한눈에"</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">결과가 투박해도 괜찮습니다 — "내가 정해서 붙였다"는 경험이 목표입니다</text>
+  <!-- 절차 -->
+  <text x="60" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">절차</text>
+
+  <text x="80" y="544" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="544" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">기능 한 줄 정의</text>
+
+  <text x="80" y="580" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="580" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">환경변수 확인</text>
+
+  <text x="80" y="616" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="616" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">Claude Code 프롬프트 작성</text>
+
+  <text x="80" y="652" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="652" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">배포 후 동작 확인</text>
+
+  <!-- 우측: 빈칸 템플릿 박스 -->
+  <rect x="740" y="510" width="480" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="770" y="548" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">빈칸 채우기 템플릿</text>
+  <text x="770" y="586" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">"내 사이트 주제는 ____ ."</text>
+  <text x="770" y="614" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">"이 주제에 어울리는 AI 기능 1개를</text>
+  <text x="770" y="640" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">Vercel 함수로 추가해줘."</text>
 </svg>

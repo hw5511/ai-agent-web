@@ -1,46 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 03 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ③ — 폰트 3종 + Google Fonts</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">Google Fonts = 무료 폰트 1,500개 옷장 — link 한 줄로 빌려옵니다</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">폰트 3종 분류</text>
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.015em">폰트 3종 분류</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">인상은 폰트가 절반을 결정한다</text>
+  <rect x="60" y="212" width="1160" height="1" fill="#e5e7eb"/>
 
-  <!-- Serif (노랑 = 고급) -->
-  <rect x="60" y="278" width="373" height="180" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="84" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="38" font-weight="400" font-style="italic" fill="#92400e">Hello 안녕</text>
-  <text x="84" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#78350f">Serif — 삐침 있음</text>
-  <text x="84" y="412" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">고급 · 신뢰 · 매거진</text>
-  <text x="84" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#92400e">예: Noto Serif</text>
+  <!-- Serif -->
+  <rect x="60" y="260" width="380" height="300" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">SERIF</text>
+  <text x="80" y="376" font-family="Georgia,'Times New Roman',serif" font-size="52" font-weight="400" fill="#171717">안녕 Hello</text>
+  <text x="80" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">삐침 있는 글씨</text>
+  <text x="80" y="476" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#374151">고급 · 신뢰 · 매거진</text>
+  <text x="80" y="532" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">Noto Serif KR</text>
 
-  <!-- Sans-Serif (파랑 = 현대) -->
-  <rect x="453" y="278" width="373" height="180" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="477" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#1e40af">Hello 안녕</text>
-  <text x="477" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e3a8a">Sans-Serif — 깔끔 직선</text>
-  <text x="477" y="412" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">현대적 · 테크 · 가독성</text>
-  <text x="477" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af">예: Inter, Noto Sans</text>
+  <!-- Sans-Serif -->
+  <rect x="450" y="260" width="380" height="300" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="470" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">SANS-SERIF</text>
+  <text x="470" y="376" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="52" font-weight="500" fill="#171717">안녕 Hello</text>
+  <text x="470" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">깔끔한 직선</text>
+  <text x="470" y="476" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#374151">현대 · 테크 · 가독성</text>
+  <text x="470" y="532" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">Inter · Noto Sans KR</text>
 
-  <!-- Display (초록 = 임팩트) -->
-  <rect x="846" y="278" width="374" height="180" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="870" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="42" font-weight="900" letter-spacing="0.02em" fill="#15803d">Hello 안녕</text>
-  <text x="870" y="380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#166534">Display — 강렬·장식적</text>
-  <text x="870" y="412" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">임팩트 · 로고 · 헤드라인</text>
-  <text x="870" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">제목 전용으로만</text>
+  <!-- Display -->
+  <rect x="840" y="260" width="380" height="300" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="860" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">DISPLAY</text>
+  <text x="860" y="376" font-family="Impact,'Arial Black',sans-serif" font-size="52" font-weight="900" fill="#171717" letter-spacing="-0.02em">안녕 HELLO</text>
+  <text x="860" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">강렬한 헤드라인</text>
+  <text x="860" y="476" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#374151">임팩트 · 로고 전용</text>
+  <text x="860" y="532" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">본문엔 쓰지 말 것</text>
 
-  <!-- 코드박스: link 한 줄 -->
-  <rect x="60" y="478" width="700" height="98" rx="12" fill="#0f172a"/>
-  <text x="84" y="510" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// Google Fonts 옷장에서 빌리는 한 줄 — 외우지 않아도 됩니다</text>
-  <text x="84" y="542" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">&lt;link rel="stylesheet"</text>
-  <text x="84" y="566" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">      href="fonts.googleapis.com/..."&gt;</text>
-
-  <!-- 오늘 쓸 폰트 박스 -->
-  <rect x="780" y="478" width="440" height="98" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="804" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#1e40af" letter-spacing="0.05em">오늘 쓸 폰트 — 안전한 첫 조합</text>
-  <text x="804" y="544" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e3a8a">Noto Sans KR (한글)</text>
-  <text x="804" y="570" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e3a8a">+ Inter (영문)</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">폰트 이름만 알면 끝 — "Noto Sans KR 적용해줘" 한 줄이면 됩니다</text>
+  <!-- 오늘의 조합 -->
+  <text x="60" y="624" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 쓸 조합</text>
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Noto Sans KR <tspan fill="#9ca3af">(한글)</tspan>   +   Inter <tspan fill="#9ca3af">(영문)</tspan></text>
+  <text x="60" y="694" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#16a34a">Google Fonts에서 한 줄이면 가져온다</text>
 </svg>

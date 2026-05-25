@@ -1,44 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 08 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 1</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ① — v12 프롬프트로 내 페이지 재생성</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">아래 5줄을 그대로 복붙 — 한 줄 차이가 만드는 결과를 눈으로 봅니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">실습 1 · v12로 재생성</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">프롬프트 한 줄로 내 페이지를 다시 만들고 비교한다</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌측 프롬프트 코드박스 -->
-  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">실습 프롬프트 (그대로 복붙)</text>
-  <rect x="60" y="268" width="640" height="262" rx="12" fill="#0f172a"/>
-  <text x="84" y="304" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// 아래 설정으로 내 페이지를 재생성해줘</text>
-  <text x="84" y="338" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">[SPARK-1] 전면 다크 + 네온</text>
-  <text x="84" y="370" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">[SPARK-2] 마그네틱 CTA</text>
-  <text x="84" y="402" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">[SPARK-3] 스크롤 페이드인</text>
-  <text x="84" y="434" font-family="'Courier New',monospace" font-size="15" fill="#38bdf8">[AESTHETIC_PINCH] noisy-gradient</text>
-  <text x="84" y="462" font-family="'Courier New',monospace" font-size="15" fill="#38bdf8">                  + cinematic-spacing</text>
-  <text x="84" y="494" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">[FONT] Inter(헤드) + Noto Sans KR(본문)</text>
+  <!-- 메타 라벨 -->
+  <text x="80" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">STEPS</text>
 
-  <!-- 우측 Before/After 미니 갤러리 -->
-  <text x="730" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">Before / After 비교</text>
-  <rect x="730" y="268" width="235" height="262" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="847" y="306" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#9ca3af" letter-spacing="0.06em">이전 회차 결과</text>
-  <rect x="754" y="324" width="187" height="120" rx="8" fill="#e5e7eb"/>
-  <text x="847" y="390" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">Before</text>
-  <text x="847" y="480" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">예전에 만든 내 페이지</text>
+  <!-- 단계 1 -->
+  <text x="80" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">내 페이지 폴더 열기 · Claude Code 켜기</text>
 
-  <rect x="985" y="268" width="235" height="262" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="1102" y="306" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#16a34a" letter-spacing="0.06em">v12 재생성 결과</text>
-  <rect x="1009" y="324" width="187" height="120" rx="8" fill="#0f172a"/>
-  <text x="1102" y="390" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#38bdf8">After</text>
-  <text x="1102" y="480" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#15803d">다크 + 네온 + 모션</text>
+  <!-- 단계 2 -->
+  <text x="80" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">v12 프롬프트 붙여넣기 — 3-SPARK · PINCH · FONT</text>
 
-  <!-- 메모란 (연습 박스) -->
-  <rect x="60" y="544" width="1160" height="56" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <rect x="84" y="558" width="104" height="22" rx="11" fill="#16a34a"/>
-  <text x="136" y="573" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">한 줄 메모</text>
-  <text x="204" y="577" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">내 페이지에서 어디가 더 좋아졌나요? 한 줄로 적어보세요</text>
+  <!-- 단계 3 -->
+  <text x="80" y="420" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="420" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">결과 확인 · 이전 회차 결과물과 Before / After</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">막히면 손 드세요 — 강사가 화면 공유로 바로 시연합니다</text>
+  <!-- 단계 4 -->
+  <text x="80" y="472" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="472" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">"어디가 더 좋아졌나" 한 줄 메모</text>
+
+  <!-- 우측 v12 키워드 카드 (프롬프트는 외부에서 복사) -->
+  <rect x="780" y="290" width="420" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="808" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">v12 키워드</text>
+
+  <text x="808" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">SPARK-1 — 전면 다크 + 네온</text>
+  <text x="808" y="388" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">SPARK-2 — 마그네틱 CTA</text>
+  <text x="808" y="414" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">SPARK-3 — 스크롤 페이드인</text>
+  <text x="808" y="440" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">PINCH — noisy-gradient · cinematic-spacing</text>
+  <text x="808" y="466" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">FONT — Inter(헤드) · Noto Sans KR(본문)</text>
+
+  <!-- 그린 강조 한 줄 -->
+  <text x="80" y="616" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="600" fill="#16a34a">프롬프트 한 줄 차이가 만드는 결과 — 눈으로 본다</text>
 </svg>

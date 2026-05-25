@@ -1,55 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 15 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — 오늘 다룰 AI API 3종</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">셋 다 무료 크레딧이 있고, 부르는 방식은 똑같습니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘 다룰 AI API 3종</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">셋 다 호출 패턴은 같다 · 하나 익히면 나머지도 쉽다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- OpenAI 카드 (노랑) -->
-  <rect x="60" y="240" width="370" height="270" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
-  <text x="84" y="284" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#92400e">OpenAI (GPT)</text>
-  <line x1="84" y1="300" x2="406" y2="300" stroke="#fcd34d" stroke-width="1"/>
-  <text x="84" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#d97706">잘하는 것</text>
-  <text x="84" y="362" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#78350f">텍스트 작업 — 요약·답변·작성</text>
-  <text x="84" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#d97706">입력 → 출력</text>
-  <text x="84" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#78350f">긴 글 → 3줄 요약</text>
-  <text x="84" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">예: 자기소개 문구 자동 작성</text>
+  <!-- 카드 3개 -->
+  <rect x="60" y="260" width="370" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="302" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">텍스트</text>
+  <text x="90" y="340" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">OpenAI</text>
+  <text x="90" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">GPT 모델로 텍스트 작업</text>
 
-  <!-- Stability 카드 (파랑) -->
-  <rect x="455" y="240" width="370" height="270" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="479" y="284" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#1e40af">Stability AI</text>
-  <line x1="479" y1="300" x2="801" y2="300" stroke="#93c5fd" stroke-width="1"/>
-  <text x="479" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb">잘하는 것</text>
-  <text x="479" y="362" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e3a8a">이미지 생성 — 그림 그리기</text>
-  <text x="479" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb">입력 → 출력</text>
-  <text x="479" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e3a8a">설명 문장 → 그림 한 장</text>
-  <text x="479" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">예: "수채화 강아지" → 이미지</text>
+  <text x="90" y="432" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  요약 · 답변 · 문구 생성</text>
+  <text x="90" y="464" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  입력: 긴 글</text>
+  <text x="90" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  출력: 3줄 요약</text>
 
-  <!-- DeepL 카드 (초록) -->
-  <rect x="850" y="240" width="370" height="270" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="874" y="284" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#15803d">DeepL</text>
-  <line x1="874" y1="300" x2="1196" y2="300" stroke="#86efac" stroke-width="1"/>
-  <text x="874" y="336" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">잘하는 것</text>
-  <text x="874" y="362" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#166534">고품질 번역 — 한국어·영어</text>
-  <text x="874" y="406" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">입력 → 출력</text>
-  <text x="874" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#166534">한국어 문장 → 자연스러운 영어</text>
-  <text x="874" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">예: 소개 글 영어 버전 만들기</text>
+  <rect x="455" y="260" width="370" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="485" y="302" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">이미지</text>
+  <text x="485" y="340" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">Stability AI</text>
+  <text x="485" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">프롬프트로 이미지 생성</text>
+
+  <text x="485" y="432" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  일러스트 · 사진풍 그림</text>
+  <text x="485" y="464" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  입력: 묘사 문장</text>
+  <text x="485" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  출력: 이미지 한 장</text>
+
+  <rect x="850" y="260" width="370" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="880" y="302" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">번역</text>
+  <text x="880" y="340" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">DeepL</text>
+  <text x="880" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">고품질 자연 번역</text>
+
+  <text x="880" y="432" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  한 ↔ 영 · 일 · 중</text>
+  <text x="880" y="464" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  입력: 원문</text>
+  <text x="880" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">─  출력: 자연스러운 번역문</text>
 
   <!-- 공통 패턴 다이어그램 -->
-  <text x="60" y="548" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">셋 다 부르는 방식은 동일</text>
-  <rect x="60" y="562" width="200" height="40" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="160" y="587" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">페이지 입력</text>
-  <text x="280" y="588" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
-  <rect x="300" y="562" width="200" height="40" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="400" y="587" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">Vercel 함수</text>
-  <text x="520" y="588" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
-  <rect x="540" y="562" width="200" height="40" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="640" y="587" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">AI API</text>
-  <text x="760" y="588" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
-  <rect x="780" y="562" width="200" height="40" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="880" y="587" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">응답 표시</text>
+  <text x="60" y="572" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">공통 호출 패턴</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">하나만 익히면 나머지 둘은 Claude Code가 같은 패턴으로 만들어 줍니다</text>
+  <rect x="60" y="592" width="220" height="60" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="170" y="628" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#171717">페이지 입력</text>
+
+  <text x="298" y="630" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+
+  <rect x="316" y="592" width="220" height="60" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="426" y="628" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#171717">Vercel 함수</text>
+
+  <text x="554" y="630" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+
+  <rect x="572" y="592" width="220" height="60" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="682" y="628" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#171717">AI API</text>
+
+  <text x="810" y="630" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">→</text>
+
+  <rect x="828" y="592" width="220" height="60" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="938" y="628" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#171717">응답 표시</text>
 </svg>

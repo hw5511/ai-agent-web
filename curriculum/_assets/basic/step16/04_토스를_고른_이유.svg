@@ -1,51 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — 토스페이먼츠를 고른 이유</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">학생 입장에서 가장 시작하기 쉬운 PG입니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">왜 토스페이먼츠인가</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">학생 입장에서 가장 친절한 PG</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">콘솔 미리보기</text>
+  <g font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">
+    <rect x="80" y="270" width="265" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="104" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">01</text>
+    <text x="104" y="346" font-size="22" font-weight="700" fill="#171717">한글 문서</text>
+    <text x="104" y="380" font-size="15" font-weight="400" fill="#6b7280">한국 친화 · 한글 콘솔</text>
+    <text x="104" y="402" font-size="15" font-weight="400" fill="#6b7280">막힐 때 검색이 잘 됨</text>
 
-  <!-- 좌측 콘솔 목업 -->
-  <rect x="60" y="272" width="470" height="290" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="60" y="272" width="470" height="48" rx="14" fill="#dbeafe"/>
-  <rect x="60" y="300" width="470" height="20" fill="#dbeafe"/>
-  <circle cx="92" cy="296" r="9" fill="#2563eb"/>
-  <text x="92" y="301" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="900" fill="#ffffff">T</text>
-  <text x="114" y="301" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">토스페이먼츠 개발자 센터</text>
-  <text x="84" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.04em">테스트 키</text>
-  <rect x="84" y="368" width="422" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="100" y="393" font-family="'Courier New',monospace" font-size="14" fill="#374151">test_ck_••••••••  (클라이언트)</text>
-  <rect x="84" y="416" width="422" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="100" y="441" font-family="'Courier New',monospace" font-size="14" fill="#374151">test_sk_••••••••  (시크릿)</text>
-  <rect x="84" y="476" width="200" height="34" rx="8" fill="#2563eb"/>
-  <text x="184" y="498" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#ffffff">키 복사하기</text>
-  <text x="84" y="538" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">한글 콘솔 · 한글 문서 — 헤매지 않습니다</text>
+    <rect x="365" y="270" width="265" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="389" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">02</text>
+    <text x="389" y="346" font-size="22" font-weight="700" fill="#171717">테스트 키 즉시</text>
+    <text x="389" y="380" font-size="15" font-weight="400" fill="#6b7280">사업자 등록 X</text>
+    <text x="389" y="402" font-size="15" font-weight="400" fill="#6b7280">이메일 가입만으로 발급</text>
 
-  <!-- 우측 비교 표 -->
-  <text x="560" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">학생에게 좋은 점</text>
-  <rect x="560" y="272" width="660" height="58" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M584 301 l6 6 l12 -13" stroke="#16a34a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="616" y="298" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">무료 테스트 키 즉시 발급</text>
-  <text x="616" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">사업자 등록 X · 카드 등록 X — 이메일만으로</text>
+    <rect x="650" y="270" width="265" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="674" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">03</text>
+    <text x="674" y="346" font-size="22" font-weight="700" fill="#171717">위젯 SDK 한 줄</text>
+    <text x="674" y="380" font-size="15" font-weight="400" fill="#6b7280">스크립트 한 줄로</text>
+    <text x="674" y="402" font-size="15" font-weight="400" fill="#6b7280">결제창 호출 가능</text>
 
-  <rect x="560" y="342" width="660" height="58" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <path d="M584 371 l6 6 l12 -13" stroke="#2563eb" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="616" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">위젯 도구 한 줄로 결제창 호출</text>
-  <text x="616" y="390" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af">복잡한 화면을 직접 안 만들어도 됩니다</text>
+    <rect x="935" y="270" width="265" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="959" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">04</text>
+    <text x="959" y="346" font-size="22" font-weight="700" fill="#171717">테스트 카드</text>
+    <text x="959" y="380" font-size="15" font-weight="400" fill="#6b7280">실제 청구 일어나지 않음</text>
+    <text x="959" y="402" font-size="15" font-weight="400" fill="#6b7280">마음 편히 여러 번 시도</text>
+  </g>
 
-  <rect x="560" y="412" width="660" height="58" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <path d="M584 441 l6 6 l12 -13" stroke="#d97706" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="616" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#92400e">테스트 카드 번호 제공</text>
-  <text x="616" y="460" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">실제 청구 없이 여러 번 결제 연습 가능</text>
+  <text x="60" y="555" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#374151">사업을 진짜 시작할 때만 사업자 등록 후 실 키로 교체하면 끝</text>
 
-  <rect x="560" y="482" width="660" height="58" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <path d="M584 511 l6 6 l12 -13" stroke="#6b7280" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="616" y="508" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">나중에 실제 서비스로 전환도 가능</text>
-  <text x="616" y="530" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">사업자 등록 후 실 키로 바꾸면 끝</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">사업자 없어도 테스트 키만으로 오늘 실습은 전부 됩니다</text>
+  <text x="60" y="635" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">오늘은 테스트 키만으로 끝까지 갑니다</text>
 </svg>

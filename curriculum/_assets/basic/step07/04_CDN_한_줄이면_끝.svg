@@ -1,47 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 07 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 07</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">왜 링크 한 줄이면 다 끝나는가</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">라이브러리 = 남이 미리 짜둔 코드 묶음 — 설치 없이 주소만 적으면 됩니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 07</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">CDN 한 줄이면 끝</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">설치 없음 · 인터넷에서 바로 불러오기</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="258" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">붙는 원리 — 3단계</text>
+  <!-- 3단 다이어그램 -->
+  <rect x="100" y="310" width="280" height="150" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="240" y="358" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">1단계</text>
+  <text x="240" y="396" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">CDN 링크 추가</text>
+  <text x="240" y="430" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">head 안 script 한 줄</text>
 
-  <!-- 3단 흐름 -->
-  <rect x="60" y="280" width="350" height="120" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="235" y="322" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">1. 링크 추가</text>
-  <text x="235" y="354" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">코드 묶음을 인터넷에서</text>
-  <text x="235" y="376" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">바로 불러옵니다 (설치 없음)</text>
+  <text x="420" y="395" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" font-weight="400" fill="#9ca3af">→</text>
 
-  <text x="430" y="346" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" fill="#9ca3af">→</text>
+  <rect x="460" y="310" width="280" height="150" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="600" y="358" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">2단계</text>
+  <text x="600" y="396" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">Claude가 호출</text>
+  <text x="600" y="430" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">초기화 코드 자동 생성</text>
 
-  <rect x="465" y="280" width="350" height="120" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="640" y="322" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">2. 클로드가 작성</text>
-  <text x="640" y="354" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">효과를 켜는 초기화 코드를</text>
-  <text x="640" y="376" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">자연어 지시대로 생성</text>
+  <text x="780" y="395" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" font-weight="400" fill="#9ca3af">→</text>
 
-  <text x="835" y="346" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" fill="#9ca3af">→</text>
+  <rect x="820" y="310" width="280" height="150" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="960" y="358" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">3단계</text>
+  <text x="960" y="396" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">효과 등장</text>
+  <text x="960" y="430" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">새로고침 한 번이면 끝</text>
 
-  <rect x="870" y="280" width="350" height="120" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="1045" y="322" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">3. 효과 등장</text>
-  <text x="1045" y="354" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">페이지를 열면 파티클·3D가</text>
-  <text x="1045" y="376" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">바로 살아 움직입니다</text>
-
-  <text x="60" y="452" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">실제로 적는 것은 이 한 줄 (보여주기용)</text>
-
-  <!-- 코드박스 -->
-  <rect x="60" y="472" width="780" height="106" rx="12" fill="#0f172a"/>
-  <text x="84" y="504" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">&lt;!-- HTML head 안에 한 줄 --&gt;</text>
-  <text x="84" y="534" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">&lt;script src="https://cdn.jsdelivr.net/npm/</text>
-  <text x="84" y="558" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">tsparticles@2/tsparticles.bundle.min.js"&gt;&lt;/script&gt;</text>
-
-  <!-- 우측 캡션 카드 -->
-  <rect x="860" y="472" width="360" height="106" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <text x="1040" y="514" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#15803d">이게 전부입니다</text>
-  <text x="1040" y="546" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">설치도 세팅도 없이</text>
-  <text x="1040" y="566" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">주소 한 줄로 사용 준비 완료</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">설치 공포는 끝 — 우리는 "어디에 어떤 효과"만 지시합니다</text>
+  <!-- 핵심 한 줄 -->
+  <text x="640" y="560" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#16a34a">설치 공포 끝, 이게 전부입니다</text>
+  <text x="640" y="600" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="400" fill="#6b7280">우리는 어디에 어떤 효과인지만 지시</text>
 </svg>

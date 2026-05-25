@@ -1,41 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 11 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ③ — CRUD 4종</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">데이터와 대화하는 4가지 방법 — 추가 · 조회 · 수정 · 삭제</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">CRUD 4종</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">DB와 대화하는 네 가지 방법</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">4종 동작 (각 코드 한 줄)</text>
+  <!-- 4분할 카드 -->
+  <!-- Card 1 — Create -->
+  <rect x="60" y="260" width="280" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">C · CREATE</text>
+  <text x="80" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">새로 추가</text>
+  <text x="80" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">테이블에 데이터 한 줄을</text>
+  <text x="80" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">처음으로 써넣는 동작</text>
+  <text x="80" y="425" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#374151" letter-spacing="0.04em">.insert(...)</text>
 
-  <!-- 2x2 그리드 -->
-  <rect x="60" y="272" width="566" height="96" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="84" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">C — Create (추가)</text>
-  <text x="84" y="338" font-family="'Courier New',monospace" font-size="14" fill="#166534">.insert(&#123; message: '안녕' &#125;)</text>
-  <text x="84" y="360" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#16a34a">새 데이터 한 줄 넣기</text>
+  <!-- Card 2 — Read -->
+  <rect x="360" y="260" width="280" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="380" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">R · READ</text>
+  <text x="380" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">불러오기</text>
+  <text x="380" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">저장된 데이터를</text>
+  <text x="380" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">조회해서 가져오는 동작</text>
+  <text x="380" y="425" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#374151" letter-spacing="0.04em">.select(...)</text>
 
-  <rect x="654" y="272" width="566" height="96" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="678" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">R — Read (조회)</text>
-  <text x="678" y="338" font-family="'Courier New',monospace" font-size="14" fill="#78350f">.select('*')</text>
-  <text x="678" y="360" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d97706">전체 불러오기 (필터 .eq('id', 1))</text>
+  <!-- Card 3 — Update -->
+  <rect x="660" y="260" width="280" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="680" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">U · UPDATE</text>
+  <text x="680" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">수정</text>
+  <text x="680" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">이미 있는 데이터의</text>
+  <text x="680" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">내용을 바꾸는 동작</text>
+  <text x="680" y="425" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#374151" letter-spacing="0.04em">.update(...).eq(...)</text>
 
-  <rect x="60" y="382" width="566" height="96" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="84" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">U — Update (수정)</text>
-  <text x="84" y="448" font-family="'Courier New',monospace" font-size="14" fill="#1e3a8a">.update(&#123; message: '수정' &#125;).eq('id', 1)</text>
-  <text x="84" y="470" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#2563eb">특정 줄만 골라 고치기</text>
+  <!-- Card 4 — Delete -->
+  <rect x="960" y="260" width="260" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="980" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">D · DELETE</text>
+  <text x="980" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">삭제</text>
+  <text x="980" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">한 줄을 영구적으로</text>
+  <text x="980" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">지우는 동작</text>
+  <text x="980" y="425" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#374151" letter-spacing="0.04em">.delete().eq(...)</text>
 
-  <rect x="654" y="382" width="566" height="96" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <text x="678" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#b91c1c">D — Delete (삭제)</text>
-  <text x="678" y="448" font-family="'Courier New',monospace" font-size="14" fill="#991b1b">.delete().eq('id', 1)</text>
-  <text x="678" y="470" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#dc2626">특정 줄 지우기</text>
+  <!-- 공통 패턴 -->
+  <text x="60" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">공통 패턴</text>
+  <text x="60" y="545" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#374151">supabase · 어느 테이블에 · 무엇을 할지</text>
 
-  <text x="60" y="514" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">공통 패턴 — 어느 테이블에, 무엇을 할지 두 가지만 정합니다</text>
+  <!-- 핵심 한 줄 (그린) -->
+  <text x="60" y="610" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#16a34a" letter-spacing="-0.01em">패턴만 익히면 끝 — 코드는 Claude가 작성</text>
 
-  <!-- 코드박스 -->
-  <rect x="60" y="534" width="1160" height="62" rx="12" fill="#0f172a"/>
-  <text x="84" y="560" font-family="'Courier New',monospace" font-size="14.5" fill="#a3e635">const &#123; data &#125; = await supabase.from('guestbook').select('*')</text>
-  <text x="84" y="584" font-family="'Courier New',monospace" font-size="13" fill="#6b7280">// 모든 동작은 supabase.from('테이블이름').동작() — 그리고 await로 기다립니다</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">코드는 외울 필요 없습니다 — 클로드에게 "CRUD 4종 작성해줘"면 끝</text>
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">CONCEPT · CRUD</text>
 </svg>

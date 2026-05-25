@@ -1,40 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 15 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 1</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ① — 텍스트 요약 기능 만들기</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">글을 붙여넣으면 OpenAI가 3줄로 요약해 돌려줍니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 1 · 텍스트 요약 기능</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">긴 글을 붙여 넣으면 OpenAI가 3줄로 줄여 돌려준다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- Claude 지시문 박스 -->
-  <rect x="60" y="240" width="1160" height="92" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="84" y="256" width="104" height="22" rx="11" fill="#2563eb"/>
-  <text x="136" y="271" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
-  <text x="84" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">"환경변수 OPENAI_KEY 추가했어. api/summarize.js 만들어서 텍스트 입력 받아</text>
-  <text x="84" y="330" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">OpenAI로 3줄 요약해줘. 페이지에서 textarea + 버튼으로 호출."</text>
+  <!-- 좌측: 단계 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단계</text>
 
-  <!-- 좌측: 화면 와이어프레임 -->
-  <text x="60" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">화면 모양</text>
-  <rect x="60" y="388" width="560" height="184" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="84" y="408" width="512" height="56" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-  <text x="100" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">여기에 긴 글을 붙여넣기 (textarea)</text>
-  <rect x="84" y="476" width="130" height="40" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="149" y="501" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">요약하기</text>
-  <rect x="84" y="528" width="512" height="32" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-  <text x="100" y="549" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">결과: 3줄 요약이 여기에 표시</text>
+  <text x="80" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">Vercel 환경변수 OPENAI_KEY 등록</text>
 
-  <!-- 우측: 코드박스 골격 -->
-  <text x="660" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">api/summarize.js — 골격 (보여주기용)</text>
-  <rect x="660" y="388" width="560" height="184" rx="12" fill="#0f172a"/>
-  <text x="684" y="420" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// Vercel 함수 — 외우지 않아도 됩니다</text>
-  <text x="684" y="448" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">const key = process.env.OPENAI_KEY;</text>
-  <text x="684" y="476" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">const r = await fetch("OpenAI 주소", {</text>
-  <text x="684" y="504" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">  headers: { Authorization: key },</text>
-  <text x="684" y="532" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">  body: "글 + 3줄로 요약 지시" });</text>
-  <text x="684" y="560" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// 응답을 페이지로 돌려준다</text>
+  <text x="80" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">Claude Code에 프롬프트 한 번에 입력</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">긴 뉴스 본문을 붙이고 3줄 요약이 뜨면 성공 — 코드는 Claude가 씁니다</text>
+  <text x="80" y="420" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="420" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">api/summarize.js + 페이지 자동 생성</text>
+
+  <text x="80" y="472" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="472" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">긴 글 붙여넣고 "요약하기" 버튼 확인</text>
+
+  <!-- 우측: 화면 와이어 -->
+  <text x="740" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">완성 화면</text>
+
+  <rect x="740" y="284" width="480" height="320" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+
+  <rect x="772" y="316" width="416" height="100" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="790" y="344" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">긴 글을 여기에 붙여넣기</text>
+
+  <rect x="772" y="436" width="120" height="40" rx="8" fill="#171717"/>
+  <text x="832" y="461" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#ffffff">요약하기</text>
+
+  <rect x="772" y="496" width="416" height="80" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="790" y="524" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151">─ 핵심 한 줄</text>
+  <text x="790" y="546" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151">─ 두 번째 줄</text>
+  <text x="790" y="568" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151">─ 세 번째 줄</text>
+
+  <!-- 강조 한 줄 (그린) -->
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="600" fill="#16a34a">"코드는 Claude가, 의도는 내가"</text>
 </svg>

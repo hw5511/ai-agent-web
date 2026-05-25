@@ -1,56 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 14 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 1</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ① — Vercel 연결 + 첫 배포</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">GitHub로 로그인 → 레포 import → 30초 만에 첫 배포 URL</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 1 · Vercel 가입 + 첫 배포</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">손으로 클릭하는 작업 — Claude Code를 부르지 않는 회차</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">손으로 클릭하는 4단계</text>
+  <!-- 단계 메타 -->
+  <text x="60" y="260" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">STEPS</text>
 
-  <!-- 4스텝 카드 가로 (파랑 = 배포) -->
-  <rect x="60" y="278" width="276" height="150" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="84" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#2563eb">1</text>
-  <text x="84" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">가입</text>
-  <text x="84" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1d4ed8">vercel.com → Sign Up</text>
-  <text x="84" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1d4ed8">→ GitHub 계정으로 로그인</text>
+  <!-- 4스텝 카드 가로 배치 -->
+  <!-- 카드 1 -->
+  <rect x="60" y="290" width="275" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">STEP 01</text>
+  <text x="84" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">가입</text>
+  <text x="84" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">vercel.com 접속</text>
+  <text x="84" y="426" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">Sign Up</text>
+  <text x="84" y="450" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">GitHub 계정으로 로그인</text>
 
-  <rect x="354" y="278" width="276" height="150" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="378" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#2563eb">2</text>
-  <text x="378" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">Import</text>
-  <text x="378" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1d4ed8">Add New → Project</text>
-  <text x="378" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1d4ed8">→ 13주에 쓰던 레포 선택</text>
+  <!-- 카드 2 -->
+  <rect x="355" y="290" width="275" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="379" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">STEP 02</text>
+  <text x="379" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">레포 Import</text>
+  <text x="379" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">Add New → Project</text>
+  <text x="379" y="426" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">13주 GitHub 레포 선택</text>
+  <text x="379" y="450" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">Import 클릭</text>
 
-  <rect x="648" y="278" width="276" height="150" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="672" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#16a34a">3</text>
-  <text x="672" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#15803d">Deploy</text>
-  <text x="672" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">설정 손대지 말고 그대로</text>
-  <text x="672" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">Deploy 클릭 → 30초 대기</text>
+  <!-- 카드 3 -->
+  <rect x="650" y="290" width="275" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="674" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">STEP 03</text>
+  <text x="674" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">Deploy</text>
+  <text x="674" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">설정은 손대지 말기</text>
+  <text x="674" y="426" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">Deploy 버튼 클릭</text>
+  <text x="674" y="450" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">30초 대기</text>
 
-  <rect x="942" y="278" width="278" height="150" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="966" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#16a34a">4</text>
-  <text x="966" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#15803d">확인</text>
-  <text x="966" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">xxx.vercel.app URL 클릭</text>
-  <text x="966" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">→ 내 사이트가 뜨는지</text>
+  <!-- 카드 4 -->
+  <rect x="945" y="290" width="275" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="969" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">STEP 04</text>
+  <text x="969" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">URL 확인</text>
+  <text x="969" y="402" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">xxx.vercel.app 발급</text>
+  <text x="969" y="426" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">사이트 뜨는지 확인</text>
+  <text x="969" y="450" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">커밋 한 번 더 → 자동 배포</text>
 
-  <!-- 좌: 안내 박스 (노랑) -->
-  <rect x="60" y="448" width="760" height="80" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="84" y="482" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#92400e">체크포인트 — 자동 배포 확인</text>
-  <text x="84" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">커밋 하나 더 push → Vercel이 알아서 새 배포를 만드는지 본다</text>
+  <!-- 핵심 한 줄 (그린) -->
+  <text x="60" y="586" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#16a34a">“이번엔 키보드 말고 마우스”</text>
 
-  <!-- 우: Claude Code 안내 박스 -->
-  <rect x="840" y="448" width="380" height="80" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="864" y="482" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">이 실습만 Claude Code 안 씀</text>
-  <text x="864" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">전부 마우스로 클릭하는 작업</text>
-
-  <!-- 확인해보세요 박스 -->
-  <rect x="60" y="540" width="1160" height="56" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <rect x="84" y="556" width="104" height="22" rx="11" fill="#16a34a"/>
-  <text x="136" y="571" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">확인해보세요</text>
-  <text x="204" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">· 배포 URL이 발급된다  · URL을 누르면 내 사이트가 뜬다  · 다 끝난 분은 옆 사람 도와주기</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">막히면 손 들어주세요 — 클릭 몇 번이면 첫 배포 URL이 나옵니다</text>
+  <!-- 하단 메타 -->
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">PRACTICE 01 · GUI ONLY · 막히면 손 들기</text>
 </svg>

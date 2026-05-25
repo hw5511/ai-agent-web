@@ -1,47 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 02 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 02</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">HTML, 웹의 뼈대</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘은 한 문장으로 — 구조부터 잡는다</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 02</text>
 
-  <text x="60" y="262" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">건물의 뼈대 = 페이지의 뼈대</text>
+  <!-- 부제 -->
+  <text x="60" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">2회차 · 2시간 · 구조부터 잡는다</text>
 
-  <!-- 좌측: 건물 철근 구조 일러스트 -->
-  <rect x="60" y="284" width="540" height="290" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <!-- 기둥 -->
-  <rect x="130" y="324" width="14" height="210" rx="3" fill="#92400e"/>
-  <rect x="318" y="324" width="14" height="210" rx="3" fill="#92400e"/>
-  <rect x="506" y="324" width="14" height="210" rx="3" fill="#92400e"/>
-  <!-- 가로 보 -->
-  <rect x="130" y="324" width="390" height="12" rx="3" fill="#d97706"/>
-  <rect x="130" y="394" width="390" height="12" rx="3" fill="#d97706"/>
-  <rect x="130" y="464" width="390" height="12" rx="3" fill="#d97706"/>
-  <rect x="130" y="522" width="390" height="12" rx="3" fill="#d97706"/>
-  <text x="330" y="566" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">보이지 않지만 모든 것을 떠받친다</text>
+  <!-- 큰 제목 -->
+  <text x="60" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="60" font-weight="700" fill="#171717" letter-spacing="-0.02em">HTML, 웹의 뼈대</text>
 
-  <!-- 우측: 회차 정보 4분할 -->
-  <rect x="640" y="284" width="276" height="138" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="664" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#92400e" letter-spacing="0.05em">회차</text>
-  <text x="664" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#d97706">Session 02</text>
-  <text x="664" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">Basic · Part 1</text>
+  <!-- 그린 짧은 언더라인 -->
+  <rect x="60" y="456" width="120" height="4" rx="2" fill="#16a34a"/>
 
-  <rect x="944" y="284" width="276" height="138" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="968" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#15803d" letter-spacing="0.05em">오늘의 한 개념</text>
-  <text x="968" y="376" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#16a34a">구조 = HTML</text>
-  <text x="968" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">딱 하나만 기억하세요</text>
-
-  <rect x="640" y="436" width="276" height="138" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="664" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#1e40af" letter-spacing="0.05em">소요 시간</text>
-  <text x="664" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#2563eb">2시간</text>
-  <text x="664" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">천천히 따라오면 됩니다</text>
-
-  <rect x="944" y="436" width="276" height="138" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="968" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.05em">오늘의 산출물</text>
-  <text x="968" y="514" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="700" fill="#374151">내 랜딩페이지</text>
-  <text x="968" y="540" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="700" fill="#374151">HTML 뼈대</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">코드 한 줄 못 써도 됩니다 — 오늘은 뼈대 단위로 들여다봅니다  ·  진행 2 / 16</text>
+  <!-- 하단 우측 시그니처 -->
+  <text x="1220" y="676" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af" letter-spacing="0.08em">AI AGENT WEB · 16주 코스</text>
 </svg>

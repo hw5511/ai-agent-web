@@ -1,48 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 14 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘 끝나면 가능한 것</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">눈에 보이는 기능보다 — 다음 주 AI · 결제를 위한 '기반 깔기'</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">학습 목표</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">오늘 끝나면 손에 쥐는 것</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">손에 쥐는 결과물</text>
+  <!-- 목표 1 -->
+  <text x="80" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">GitHub 푸시 → Vercel 자동 배포 파이프라인이 돈다</text>
 
-  <!-- 목표 1 (파랑 = 배포) -->
-  <rect x="60" y="278" width="565" height="96" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="86" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="900" fill="#2563eb">01</text>
-  <text x="126" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">GitHub → Vercel 자동 배포 연결</text>
-  <text x="86" y="348" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1d4ed8">푸시만 하면 자동으로 진짜 사이트로 배포됨</text>
+  <!-- 목표 2 -->
+  <text x="80" y="366" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="366" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">api/ 폴더에 첫 Vercel 함수를 만들고 페이지에서 호출 성공</text>
 
-  <!-- 목표 2 (초록 = 함수/동작) -->
-  <rect x="655" y="278" width="565" height="96" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="681" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="900" fill="#16a34a">02</text>
-  <text x="721" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">api/ 폴더에 첫 Vercel 함수</text>
-  <text x="681" y="348" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">페이지에서 호출해서 응답 받기 성공</text>
+  <!-- 목표 3 -->
+  <text x="80" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">API 키를 Vercel 환경변수에 저장 — 코드 어디에도 노출 X</text>
 
-  <!-- 목표 3 (빨강 = 인증/보안) -->
-  <rect x="60" y="388" width="565" height="96" rx="14" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <text x="86" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="900" fill="#dc2626">03</text>
-  <text x="126" y="422" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#991b1b">API 키를 환경변수에 안전 보관</text>
-  <text x="86" y="458" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#b91c1c">코드 · 브라우저 어디에도 노출되지 않음</text>
+  <!-- 보너스 (그린 강조) -->
+  <text x="80" y="506" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#16a34a">─</text>
+  <text x="120" y="506" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">보너스 · 13주에 산 내 도메인이 Vercel 사이트로 연결</text>
 
-  <!-- 보너스 (중립) -->
-  <rect x="655" y="388" width="565" height="96" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="681" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#9ca3af" letter-spacing="0.06em">보너스</text>
-  <text x="681" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">13주에 산 도메인을 연결</text>
-  <text x="681" y="474" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">내 도메인이 Vercel 사이트를 가리킴</text>
-
-  <!-- 진행률 타임라인 -->
-  <text x="60" y="528" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">이 기반이 이어지는 길</text>
-  <rect x="60" y="544" width="200" height="44" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="160" y="571" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">14 환경 베이스</text>
-  <text x="284" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
-  <rect x="308" y="544" width="180" height="44" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="398" y="571" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">15 AI 기능</text>
-  <text x="512" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">→</text>
-  <rect x="536" y="544" width="180" height="44" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="626" y="571" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">16 결제</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">지루해 보여도 여기가 제일 중요합니다 — 다음 주 AI · 결제의 토대</text>
+  <!-- 하단 메타 라벨 -->
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">TODAY · 14 / 16</text>
 </svg>

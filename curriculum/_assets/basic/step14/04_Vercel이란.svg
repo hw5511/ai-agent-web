@@ -1,54 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 14 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — Vercel이란 무엇인가</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">자동 배포 + Vercel 함수 + 환경변수, 3종 세트로 기억하세요</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">Vercel이란 무엇인가</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">세 가지가 한 묶음 — 자동 배포 · 함수 · 환경변수</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">Vercel 3종 세트</text>
+  <!-- 카드 3장 -->
+  <!-- 카드 1: 자동 배포 -->
+  <rect x="60" y="270" width="360" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="306" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">01</text>
+  <text x="84" y="346" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">자동 배포</text>
+  <text x="84" y="384" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">GitHub 레포와 연결</text>
+  <text x="84" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">push 한 번이면 진짜 사이트로</text>
+  <text x="84" y="432" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">자동 업데이트</text>
 
-  <!-- 카드 1: GitHub 자동 배포 (파랑) -->
-  <rect x="60" y="278" width="360" height="180" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="84" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">GitHub 자동 배포</text>
-  <line x1="84" y1="334" x2="396" y2="334" stroke="#93c5fd" stroke-width="1"/>
-  <text x="84" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1d4ed8">레포와 연결만 해두면</text>
-  <text x="84" y="394" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1d4ed8">푸시할 때마다 자동으로</text>
-  <text x="84" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1d4ed8">진짜 사이트로 배포</text>
+  <!-- 카드 2: Vercel 함수 -->
+  <rect x="460" y="270" width="360" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="484" y="306" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">02</text>
+  <text x="484" y="346" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">Vercel 함수</text>
+  <text x="484" y="384" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">Vercel이 알아서 도는</text>
+  <text x="484" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">자바스크립트 한 토막</text>
+  <text x="484" y="432" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">키를 안전하게 숨길 곳</text>
 
-  <!-- 카드 2: Vercel 함수 (초록) -->
-  <rect x="460" y="278" width="360" height="180" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="484" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">Vercel 함수</text>
-  <line x1="484" y1="334" x2="796" y2="334" stroke="#86efac" stroke-width="1"/>
-  <text x="484" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">Vercel이 알아서 도는</text>
-  <text x="484" y="394" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">작은 자바스크립트 한 토막</text>
-  <text x="484" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">= API 키 숨길 곳</text>
+  <!-- 카드 3: 환경변수 -->
+  <rect x="860" y="270" width="360" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="884" y="306" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">03</text>
+  <text x="884" y="346" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">환경변수</text>
+  <text x="884" y="384" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">비밀값을 대시보드에 저장</text>
+  <text x="884" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">코드엔 절대 X</text>
+  <text x="884" y="432" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">함수 안에서만 꺼내 씀</text>
 
-  <!-- 카드 3: 환경변수 금고 (빨강 = 보안) -->
-  <rect x="860" y="278" width="360" height="180" rx="16" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
-  <text x="884" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#991b1b">환경변수 금고</text>
-  <line x1="884" y1="334" x2="1196" y2="334" stroke="#fca5a5" stroke-width="1"/>
-  <text x="884" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#b91c1c">키 같은 비밀값을</text>
-  <text x="884" y="394" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#b91c1c">Vercel 화면에 따로 저장</text>
-  <text x="884" y="420" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#991b1b">코드엔 절대 안 적음</text>
+  <!-- 흐름도 한 줄 -->
+  <text x="60" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">FLOW</text>
+  <text x="60" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#374151">내 PC</text>
+  <text x="170" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">→</text>
+  <text x="208" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#374151">git push</text>
+  <text x="338" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">→</text>
+  <text x="376" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#374151">GitHub</text>
+  <text x="488" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">→</text>
+  <text x="526" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#374151">Vercel</text>
+  <text x="630" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">→</text>
+  <text x="668" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">진짜 사이트</text>
 
-  <!-- 흐름도 -->
-  <text x="60" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">자동 배포 흐름</text>
-  <rect x="60" y="516" width="150" height="44" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="135" y="543" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">내 PC</text>
-  <text x="226" y="544" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">git push →</text>
-  <rect x="280" y="516" width="150" height="44" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="355" y="543" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">GitHub</text>
-  <text x="455" y="544" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">자동 →</text>
-  <rect x="500" y="516" width="150" height="44" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="575" y="543" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">Vercel</text>
-  <text x="671" y="544" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
-  <rect x="692" y="516" width="190" height="44" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="787" y="543" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">진짜 사이트</text>
-  <!-- Hobby 무료 안내 -->
-  <rect x="922" y="516" width="298" height="44" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="1071" y="543" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">Hobby 플랜 = 무료 (학습용 충분)</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">'Vercel이 알아서 도는 작은 함수 하나' — Claude Code가 다 짜줍니다</text>
+  <!-- 하단 메타 -->
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">CONCEPT 02 · HOBBY 플랜 무료</text>
 </svg>

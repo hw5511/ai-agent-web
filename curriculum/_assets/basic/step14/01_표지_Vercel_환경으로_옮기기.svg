@@ -1,39 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 14 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">Vercel 환경으로 옮기기</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">API 키, 더 이상 코드에 박지 않는다 — 심화 / Part 2</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
 
-  <text x="60" y="262" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘은 '환경 갈아엎는 날'</text>
+  <!-- 부제 -->
+  <text x="60" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">심화 Part 2 · 14회차 · 2시간</text>
 
-  <!-- 좌: GitHub Pages 정적 사이트 (파일 봉투) -->
-  <rect x="60" y="290" width="430" height="220" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="275" y="338" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">GitHub Pages</text>
-  <!-- 파일 봉투 아이콘 (vector) -->
-  <rect x="225" y="362" width="100" height="68" rx="6" fill="#ffffff" stroke="#9ca3af" stroke-width="2"/>
-  <polygon points="225,362 275,398 325,362" fill="none" stroke="#9ca3af" stroke-width="2"/>
-  <text x="275" y="470" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">글과 사진만 보이는 정적 사이트</text>
-  <text x="275" y="494" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">키 숨길 곳이 없다</text>
+  <!-- 큰 제목 -->
+  <text x="60" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="60" font-weight="700" fill="#171717" letter-spacing="-0.02em">Vercel 환경으로 옮기기</text>
 
-  <!-- 가운데 굵은 화살표 + 이사 -->
-  <text x="640" y="395" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="48" fill="#171717">→</text>
-  <text x="640" y="430" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#6b7280">이사</text>
+  <!-- 그린 짧은 언더라인 -->
+  <rect x="60" y="440" width="120" height="4" rx="2" fill="#16a34a"/>
 
-  <!-- 우: Vercel (검은 삼각형 + 함수 박스) (파랑 = 도메인/배포) -->
-  <rect x="790" y="290" width="430" height="220" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <!-- Vercel 검은 삼각형 로고 (vector) -->
-  <polygon points="1005,360 1043,422 967,422" fill="#171717"/>
-  <text x="1005" y="338" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">Vercel</text>
-  <rect x="930" y="438" width="150" height="36" rx="9" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="1005" y="462" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">Vercel 함수</text>
-  <text x="1005" y="498" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1d4ed8">키를 안전하게 가려주는 환경</text>
+  <!-- 한 줄 설명 -->
+  <text x="60" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#374151">API 키, 더 이상 코드에 박지 않는다</text>
 
-  <!-- 2시간 구성 안내 -->
-  <rect x="60" y="540" width="1160" height="56" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="90" y="575" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">2시간 구성 — 이론(한계 · Vercel · 함수) → 실습 3개(연결 · 첫 함수 · 환경변수+도메인) → 정리</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">코드는 클로드가 다 짜줍니다 — 우리는 Vercel로 옮겨 타기만 하면 됩니다</text>
+  <!-- 하단 우측 시그니처 -->
+  <text x="1220" y="676" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af" letter-spacing="0.08em">AI AGENT WEB · 16주 코스</text>
 </svg>

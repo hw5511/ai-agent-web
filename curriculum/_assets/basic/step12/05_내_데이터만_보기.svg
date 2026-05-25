@@ -1,64 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 12 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 12</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ③ — "내 데이터만 보기"의 비밀</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">각 글에 "주인 표시(user_id)"를 달고, RLS로 남의 데이터를 막습니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 12</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">내 데이터만 보기의 비밀</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">각 글에 "주인 표시"를 달고, RLS로 남의 접근을 막는다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">posts 테이블 — "주인 표시" 한 칸 추가</text>
+  <!-- 좌측: posts 표 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">POSTS 표</text>
 
-  <!-- 테이블 일러스트 -->
-  <rect x="60" y="278" width="640" height="200" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <!-- 헤더 행 -->
-  <rect x="60" y="278" width="640" height="40" rx="14" fill="#f9fafb"/>
-  <rect x="60" y="298" width="640" height="20" fill="#f9fafb"/>
-  <line x1="60" y1="318" x2="700" y2="318" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="100" y="304" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#374151">내용</text>
-  <rect x="460" y="278" width="240" height="40" rx="0" fill="#fef3c7"/>
-  <text x="580" y="304" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#92400e">user_id (주인 표시)</text>
-  <line x1="460" y1="278" x2="460" y2="478" stroke="#e5e7eb" stroke-width="1"/>
-  <!-- 데이터 행 1 (내 글) -->
-  <text x="100" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151">오늘 날씨가 좋다</text>
-  <text x="480" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#92400e">나 (me)</text>
-  <!-- 자물쇠 열림 (내 글) -->
-  <rect x="648" y="338" width="20" height="16" rx="3" fill="none" stroke="#16a34a" stroke-width="2"/>
-  <path d="M651 338 v-4 a7 7 0 0 1 14 0" fill="none" stroke="#16a34a" stroke-width="2"/>
-  <line x1="60" y1="368" x2="700" y2="368" stroke="#f3f4f6" stroke-width="1"/>
-  <!-- 데이터 행 2 (남의 글) -->
-  <text x="100" y="400" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">남이 쓴 글</text>
-  <text x="480" y="400" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#9ca3af">다른 사람</text>
-  <!-- 자물쇠 잠김 + X (남의 글) -->
-  <rect x="648" y="390" width="20" height="16" rx="3" fill="none" stroke="#dc2626" stroke-width="2"/>
-  <path d="M651 390 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#dc2626" stroke-width="2"/>
-  <line x1="676" y1="390" x2="688" y2="402" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="688" y1="390" x2="676" y2="402" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="60" y1="418" x2="700" y2="418" stroke="#f3f4f6" stroke-width="1"/>
-  <!-- 데이터 행 3 (내 글) -->
-  <text x="100" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#374151">12주차 재밌다</text>
-  <text x="480" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#92400e">나 (me)</text>
-  <rect x="648" y="438" width="20" height="16" rx="3" fill="none" stroke="#16a34a" stroke-width="2"/>
-  <path d="M651 438 v-4 a7 7 0 0 1 14 0" fill="none" stroke="#16a34a" stroke-width="2"/>
+  <!-- 표 컨테이너 -->
+  <rect x="60" y="280" width="560" height="280" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
 
-  <!-- 우측: 2가지 동작 + RLS 박스 -->
-  <rect x="724" y="278" width="452" height="90" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="748" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">글을 저장할 때</text>
-  <text x="748" y="340" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">"이 글의 주인 = 지금 로그인한 나"로</text>
-  <text x="748" y="360" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">자동으로 기록</text>
+  <!-- 헤더 -->
+  <line x1="60" y1="320" x2="620" y2="320" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="90" y="307" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">id</text>
+  <text x="170" y="307" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">content</text>
+  <text x="420" y="307" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#16a34a">user_id  ←  주인 표시</text>
 
-  <rect x="724" y="382" width="452" height="96" rx="14" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
-  <rect x="748" y="398" width="48" height="22" rx="11" fill="#7c3aed"/>
-  <text x="772" y="413" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">RLS</text>
-  <text x="808" y="414" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#6d28d9">내 데이터 보호 규칙</text>
-  <text x="748" y="444" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#7c3aed">불러올 때 "주인이 나인 것만" 가져옴</text>
-  <text x="748" y="466" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#7c3aed">Supabase 화면에서 클릭 몇 번으로 켜기</text>
+  <!-- row 1 -->
+  <text x="90" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">1</text>
+  <text x="170" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">오늘 점심 맛있었다</text>
+  <text x="420" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">U-001</text>
+  <line x1="60" y1="375" x2="620" y2="375" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- RLS 정책 예시 코드박스 -->
-  <rect x="60" y="500" width="1116" height="96" rx="12" fill="#0f172a"/>
-  <text x="84" y="532" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// RLS 정책 예시 — 보여주기용, 직접 쓰지 않습니다</text>
-  <text x="84" y="566" font-family="'Courier New',monospace" font-size="16" fill="#a3e635">auth.uid() = user_id  인 행만 보임</text>
-  <text x="84" y="588" font-family="'Courier New',monospace" font-size="13" fill="#94a3b8">= "지금 로그인한 나" 가 주인인 글만 통과시킨다</text>
+  <!-- row 2 -->
+  <text x="90" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">2</text>
+  <text x="170" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">회의 메모 정리</text>
+  <text x="420" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">U-002</text>
+  <line x1="60" y1="425" x2="620" y2="425" stroke="#e5e7eb" stroke-width="1"/>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">SQL 직접 안 씁니다 — Supabase 화면에서 토글 켜는 정도면 됩니다</text>
+  <!-- row 3 -->
+  <text x="90" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">3</text>
+  <text x="170" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">주말 할 일</text>
+  <text x="420" y="458" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">U-001</text>
+  <line x1="60" y1="475" x2="620" y2="475" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- row 4 -->
+  <text x="90" y="508" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">4</text>
+  <text x="170" y="508" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">장보기 리스트</text>
+  <text x="420" y="508" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">U-003</text>
+  <line x1="60" y1="525" x2="620" y2="525" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- row 5 -->
+  <text x="90" y="555" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">5</text>
+  <text x="170" y="555" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#171717">선물 아이디어</text>
+  <text x="420" y="555" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">U-001</text>
+
+  <!-- 우측: 규칙 -->
+  <text x="680" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">규칙 (RLS)</text>
+
+  <rect x="680" y="280" width="540" height="100" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="700" y="315" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#171717">Row Level Security</text>
+  <text x="700" y="346" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">"내 데이터 보호 규칙"</text>
+
+  <rect x="680" y="400" width="540" height="160" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="700" y="435" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">규칙 한 줄</text>
+  <text x="700" y="475" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="500" fill="#171717">"주인이 나인 행만 보이게"</text>
+  <text x="700" y="510" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">─  글을 저장할 때 — 주인 = 나</text>
+  <text x="700" y="535" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">─  글을 불러올 때 — 내 것만 골라옴</text>
+
+  <!-- 핵심 한 줄 -->
+  <text x="640" y="635" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#171717">Supabase UI에서 토글 한 번이면 적용</text>
 </svg>

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Agent Web 수업자료</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23171717'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='-apple-system,sans-serif' font-size='28' font-weight='700' fill='%23fff'%3EW%3C/text%3E%3C/svg%3E">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
     <style>
         /*
          * Lecture App Style
@@ -38,10 +38,12 @@
             --muted-fg:     #737373;
             --border:       #e5e5e5;
 
-            --accent:        #2563eb;
-            --accent-muted:  #eff6ff;
-            --accent-border: #bfdbfe;
+            /* Single accent: green #16a34a (PPT 모노톤 + 그린 액센트 1색) */
+            --accent:        #16a34a;
+            --accent-muted:  #f0fdf4;
+            --accent-border: #bbf7d0;
 
+            /* success는 accent와 동일 (BC 유지용 alias) */
             --success:        #16a34a;
             --success-muted:  #f0fdf4;
             --success-border: #bbf7d0;
@@ -73,30 +75,13 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
             background: var(--bg);
             color: var(--fg);
             line-height: 1.5;
             display: flex;
             flex-direction: column;
         }
-
-        .sidebar-toggle {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius);
-            border: none;
-            background: transparent;
-            color: var(--muted-fg);
-            cursor: pointer;
-            transition: background 0.14s, color 0.14s;
-            flex-shrink: 0;
-        }
-
-        .sidebar-toggle:hover { background: var(--secondary); color: var(--fg); }
 
         /* ============================================
            5. App Layout
@@ -119,14 +104,6 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition:
-                width var(--sidebar-transition),
-                border-color var(--sidebar-transition);
-        }
-
-        .sidebar.collapsed {
-            width: 0;
-            border-right-color: transparent;
         }
 
         .sidebar-inner {
@@ -138,62 +115,18 @@
         }
 
         .sidebar-header {
-            padding: 0.75rem 0.75rem 0.625rem;
+            padding: 1rem 0.875rem 0.875rem;
             flex-shrink: 0;
             border-bottom: 1px solid var(--border);
         }
 
-        /* 사이드바 상단: 과정 탭 + 접기 버튼 */
-        .sidebar-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        /* 사이드바 닫힌 상태에서 좌상단에 표시되는 재열기 버튼 */
-        .sidebar-reopen {
-            position: absolute;
-            top: 0.75rem;
-            left: 0.75rem;
-            z-index: 50;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            background: var(--bg);
-            color: var(--muted-fg);
-            cursor: pointer;
-            transition: background 0.14s, color 0.14s, opacity 0.2s;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .sidebar-reopen.visible { opacity: 1; pointer-events: auto; }
-        .sidebar-reopen:hover { background: var(--secondary); color: var(--fg); }
-
-        .sidebar-course-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.2rem 0.625rem;
-            border-radius: var(--radius-full);
-            font-size: var(--font-xs);
+        .sidebar-brand {
+            font-size: 0.875rem;
             font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-course-badge.basic    { background: var(--accent-muted);   color: var(--accent); }
-
-        .sidebar-course-title {
-            font-size: 0.9375rem;
-            font-weight: 700;
+            letter-spacing: -0.01em;
             color: var(--fg);
-            line-height: 1.4;
+            margin-bottom: 0.75rem;
+            padding: 0 0.125rem;
         }
 
         .sidebar-nav {
@@ -323,26 +256,16 @@
             border-color: var(--fg);
             background: var(--secondary);
         }
-        .nav-part-tab.active.part-1 {
-            background: #2563eb;
-            border-color: #1d4ed8;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.28);
+        /* Active 탭은 BASIC/ADVANCED 동일 톤 — 흑색 배경 + 흰 글자 (모노톤 통일) */
+        .nav-part-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
         }
-        .nav-part-tab.active.part-1 .tab-label,
-        .nav-part-tab.active.part-1 .tab-sub {
-            color: #ffffff;
+        .nav-part-tab.active .tab-label,
+        .nav-part-tab.active .tab-sub {
+            color: var(--primary-fg);
         }
-        .nav-part-tab.active.part-1 .tab-sub { opacity: 0.85; }
-        .nav-part-tab.active.part-2 {
-            background: #f59e0b;
-            border-color: #d97706;
-            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.28);
-        }
-        .nav-part-tab.active.part-2 .tab-label,
-        .nav-part-tab.active.part-2 .tab-sub {
-            color: #ffffff;
-        }
-        .nav-part-tab.active.part-2 .tab-sub { opacity: 0.85; }
+        .nav-part-tab.active .tab-sub { opacity: 0.7; }
 
 
         /* ============================================
@@ -517,7 +440,7 @@
             cursor: pointer;
         }
 
-        .action-copy-row:hover { background: #f0f4ff; }
+        .action-copy-row:hover { background: var(--accent-muted); }
 
         .action-item-desc {
             font-size: 11px;
@@ -553,7 +476,7 @@
             align-items: center;
             gap: 0.4rem;
             font-size: 13px;
-            color: #1d4ed8;
+            color: var(--accent);
             text-decoration: none;
             padding: 0.3rem 0;
             white-space: nowrap;
@@ -840,9 +763,10 @@
         /* ============================================
            10. Badge Variants
            ============================================ */
+        /* 모노톤: BASIC/ADVANCED 헤더 배지는 흑색. 그린은 슬라이드 안에서만. */
         .badge-basic {
-            background: var(--accent-muted);
-            color: var(--accent);
+            background: var(--primary);
+            color: var(--primary-fg);
             padding: 0.2rem 0.625rem;
             border-radius: var(--radius-full);
             font-size: var(--font-xs);
@@ -886,12 +810,6 @@
                 width: var(--sidebar-width) !important;
                 transition: transform var(--sidebar-transition);
                 transform: translateX(0);
-            }
-
-            .sidebar.collapsed {
-                transform: translateX(-100%);
-                width: var(--sidebar-width) !important;
-                border-right-color: var(--border);
             }
 
             /* 메인 콘텐츠: 전체 너비 */
@@ -966,12 +884,6 @@
             .image-slide.is-active { opacity: 1; }
             .image-slide.is-prev   { opacity: 0; }
 
-            /* 사이드바 reopen 버튼: 항상 표시 */
-            .sidebar-reopen {
-                opacity: 1 !important;
-                pointer-events: auto !important;
-            }
-
             /* 슬라이드 네비 */
             .slide-nav {
                 padding: 0.5rem 1rem;
@@ -994,15 +906,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-inner">
                 <div class="sidebar-header">
-                    <div class="sidebar-top">
-                        <button class="sidebar-toggle" id="sidebar-toggle" title="사이드바 접기">
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <path d="M9 2L3 7l6 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="sidebar-course-badge basic" id="sidebar-badge">BASIC</div>
-                    <div class="sidebar-course-title" id="sidebar-title">AI 에이전트 기초 과정</div>
+                    <div class="sidebar-brand">AI 에이전트 — 웹</div>
                 </div>
                 <nav class="sidebar-nav" id="sidebar-nav"></nav>
             </div>
@@ -1010,13 +914,6 @@
 
         <!-- 7. Slide Area -->
         <div class="slide-area">
-            <button class="sidebar-reopen" id="sidebar-reopen" title="사이드바 열기">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <rect x="0.5" y="2" width="13" height="1.5" rx="0.75" fill="currentColor"/>
-                    <rect x="0.5" y="6.25" width="13" height="1.5" rx="0.75" fill="currentColor"/>
-                    <rect x="0.5" y="10.5" width="13" height="1.5" rx="0.75" fill="currentColor"/>
-                </svg>
-            </button>
             <div class="slides-container" id="slides-container"></div>
 
             <!-- 8. Slide Navigation -->
@@ -1357,7 +1254,6 @@
         let currentCourse  = 'basic';
         let currentSession = 0;   // 현재 스텝 인덱스
         let currentSlide   = 0;   // 현재 스텝 내 이미지 슬라이드 인덱스
-        let sidebarOpen    = true;
 
         /* ============================================
            URL Hash State  (#course/sessionIdx/slideIdx)
@@ -1585,21 +1481,17 @@
            ============================================ */
         function renderSidebar(course) {
             const data = COURSES[course];
-            document.getElementById('sidebar-badge').className = `sidebar-course-badge ${data.badgeClass}`;
-            document.getElementById('sidebar-badge').textContent = data.badgeText;
-            document.getElementById('sidebar-title').textContent = data.title;
-
             const nav = document.getElementById('sidebar-nav');
             const activePart = currentSession >= 8 ? 2 : 1;
             const parts = [];
 
             parts.push(`<div class="nav-part-tabs">
                 <button class="nav-part-tab part-1${activePart === 1 ? ' active' : ''}" data-part="1">
-                    <span class="tab-label">PART 1</span>
+                    <span class="tab-label">BASIC</span>
                     <span class="tab-sub">기초 8주</span>
                 </button>
                 <button class="nav-part-tab part-2${activePart === 2 ? ' active' : ''}" data-part="2">
-                    <span class="tab-label">PART 2</span>
+                    <span class="tab-label">ADVANCED</span>
                     <span class="tab-sub">심화 8주</span>
                 </button>
             </div>`);
@@ -1804,18 +1696,6 @@
         /* ============================================
            Event Listeners
            ============================================ */
-        document.getElementById('sidebar-toggle').addEventListener('click', () => {
-            sidebarOpen = false;
-            document.getElementById('sidebar').classList.add('collapsed');
-            document.getElementById('sidebar-reopen').classList.add('visible');
-        });
-
-        document.getElementById('sidebar-reopen').addEventListener('click', () => {
-            sidebarOpen = true;
-            document.getElementById('sidebar').classList.remove('collapsed');
-            document.getElementById('sidebar-reopen').classList.remove('visible');
-        });
-
         document.getElementById('btn-prev').addEventListener('click', () => goToSlide(-1));
         document.getElementById('btn-next').addEventListener('click', () => goToSlide(1));
 

@@ -1,51 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 14 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">14회차 핵심 정리</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">내 사이트에 '키 숨길 곳'이 생겼다 — 오늘 손에 쥔 것 4가지</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 14</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">핵심 정리</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">이제 내 사이트에 ‘키 숨길 곳’이 생겼다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌: 14주 완료 체크리스트 (4항목, 색 노랑→파랑→초록→빨강 흐름) -->
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 완료</text>
-  <!-- 체크 1 (파랑) -->
-  <rect x="60" y="278" width="600" height="56" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <path d="M 86 306 l 8 9 16 -19" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="124" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">GitHub 푸시 → Vercel 자동 배포 파이프라인</text>
-  <!-- 체크 2 (초록) -->
-  <rect x="60" y="344" width="600" height="56" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M 86 372 l 8 9 16 -19" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="124" y="378" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">api/ 폴더 안의 첫 Vercel 함수</text>
-  <!-- 체크 3 (빨강) -->
-  <rect x="60" y="410" width="600" height="56" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <path d="M 86 438 l 8 9 16 -19" fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="124" y="444" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#991b1b">환경변수에 안전하게 들어간 API 키</text>
-  <!-- 체크 4 (중립) -->
-  <rect x="60" y="476" width="600" height="56" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <path d="M 86 504 l 8 9 16 -19" fill="none" stroke="#6b7280" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="124" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#374151">내 도메인이 가리키는 Vercel 사이트 (전파 대기 OK)</text>
+  <!-- 좌측: 오늘 가져갈 것 -->
+  <text x="60" y="260" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 가져갈 것</text>
 
-  <!-- 우: 타임라인 + 한 문장 핵심 -->
-  <text x="690" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">다음 주로 이어지는 길</text>
-  <!-- 14 (파랑) -->
-  <rect x="690" y="278" width="530" height="50" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="714" y="309" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#1e40af">14 환경 — 키 숨길 곳 완성 (오늘)</text>
-  <text x="955" y="346" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">↓</text>
-  <!-- 15 (초록) -->
-  <rect x="690" y="356" width="530" height="50" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="714" y="387" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#15803d">15 AI 기능 — 이 환경 위에 챗봇 얹기</text>
-  <text x="955" y="424" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#9ca3af">↓</text>
-  <!-- 16 (보라) -->
-  <rect x="690" y="434" width="530" height="50" rx="10" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
-  <text x="714" y="465" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#6d28d9">16 결제 — 결제 키도 같은 환경변수로</text>
-  <!-- 한 문장 핵심 -->
-  <rect x="690" y="494" width="530" height="38" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="955" y="519" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">키는 오늘 만든 환경변수에 그대로 꽂으면 끝</text>
+  <text x="80" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">GitHub 푸시 → Vercel 자동 배포 파이프라인</text>
 
-  <!-- 하단: 막힌 곳 메모 박스 -->
-  <rect x="60" y="542" width="1160" height="56" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="84" y="576" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">오늘 막힌 곳 적어가기 — 강사 1:1 피드백용 (다음 시간 시작 전 함께 잡고 갑니다)</text>
+  <text x="80" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">api/ 폴더 안의 첫 Vercel 함수</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">다음 주 — AI 키만 꽂으면 바로 챗봇 만듭니다</text>
+  <text x="80" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">환경변수에 안전하게 들어간 API 키</text>
+
+  <text x="80" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">내 도메인이 가리키는 Vercel 사이트</text>
+
+  <!-- 그린 짧은 구분선 -->
+  <rect x="60" y="488" width="80" height="3" rx="1.5" fill="#16a34a"/>
+
+  <!-- 핵심 한 줄 -->
+  <text x="60" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" font-weight="700" fill="#171717">“내 사이트에 키 숨길 곳이 생겼다”</text>
+
+  <!-- 다음 회차 -->
+  <text x="60" y="610" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">NEXT</text>
+  <text x="60" y="642" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">WEB 15 · AI 기능 얹기 — 오늘 만든 환경변수에 AI 키를 꽂는다</text>
+  <text x="60" y="670" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">WEB 16 · 결제 — 같은 방식으로 결제 키도 환경변수에</text>
 </svg>

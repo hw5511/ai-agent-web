@@ -1,55 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 05 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 05</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘의 학습 목표</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">코드는 외울 필요 없어요 — 효과 "이름" 3개만 기억하면 됩니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 05</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">학습 목표</text>
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">오늘 2시간 끝나면 할 수 있는 것</text>
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">2시간 뒤 할 수 있는 것</text>
+  <!-- 목표 1 -->
+  <text x="80" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">라이브러리가 "남이 만들어 둔 기능 묶음"임을 이해한다</text>
 
-  <!-- 체크리스트 4줄 (좌측 660 폭) -->
-  <rect x="60" y="278" width="660" height="58" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <path d="M88 307 l8 8 l16 -18" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="128" y="313" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#374151">GSAP가 "남이 만들어 둔 기능 묶음"임을 이해한다</text>
+  <!-- 목표 2 -->
+  <text x="80" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">페이드인 — 섹션이 들어오면 자동으로 떠오른다</text>
 
-  <rect x="60" y="346" width="660" height="58" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <path d="M88 375 l8 8 l16 -18" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="128" y="381" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#92400e">페이드인 — 섹션이 들어오면 자동으로 떠오르게 한다</text>
+  <!-- 목표 3 -->
+  <text x="80" y="426" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="426" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">수평 스크롤 — 세로 휠을 가로 움직임으로 바꾼다</text>
 
-  <rect x="60" y="414" width="660" height="58" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <path d="M88 443 l8 8 l16 -18" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="128" y="449" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">수평 스크롤 — 세로 휠을 가로 움직임으로 바꾼다</text>
+  <!-- 목표 4 -->
+  <text x="80" y="494" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="494" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">텍스트 컬러 reveal — 스크롤에 따라 글자가 회색→검정</text>
 
-  <rect x="60" y="482" width="660" height="58" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M88 511 l8 8 l16 -18" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="128" y="517" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#15803d">텍스트 컬러 reveal — 글자가 회색에서 검정으로 밝아진다</text>
+  <!-- 목표 5 (도착점, 그린 강조) -->
+  <text x="80" y="562" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#16a34a">─</text>
+  <text x="120" y="562" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">4회차 페이지에 3종 효과가 모두 얹어진 시네마틱 버전</text>
 
-  <!-- 우측 Before/After -->
-  <text x="752" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">도착점</text>
-  <rect x="752" y="278" width="468" height="120" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="986" y="322" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">4주차 페이지</text>
-  <text x="986" y="354" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">움직임 없는 정적 페이지</text>
-  <text x="986" y="380" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">지금까지 만든 것</text>
-
-  <text x="986" y="430" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#9ca3af">↓</text>
-
-  <rect x="752" y="446" width="468" height="120" rx="14" fill="#0f172a"/>
-  <text x="986" y="490" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#ffffff">5주차 시네마틱 페이지</text>
-  <text x="986" y="522" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#38bdf8">3가지 효과가 모두 얹어진 버전</text>
-  <text x="986" y="548" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#94a3b8">오늘 끝나면 완성</text>
-
-  <!-- 진척 바 5/8 -->
-  <text x="60" y="588" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af">진행 5 / 8 회차</text>
-  <circle cx="300" cy="583" r="8" fill="#171717"/>
-  <circle cx="328" cy="583" r="8" fill="#171717"/>
-  <circle cx="356" cy="583" r="8" fill="#171717"/>
-  <circle cx="384" cy="583" r="8" fill="#171717"/>
-  <circle cx="412" cy="583" r="8" fill="#171717"/>
-  <circle cx="440" cy="583" r="8" fill="#e5e7eb"/>
-  <circle cx="468" cy="583" r="8" fill="#e5e7eb"/>
-  <circle cx="496" cy="583" r="8" fill="#e5e7eb"/>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">효과 이름 3개만 기억하세요 — 페이드인 · 수평 스크롤 · 텍스트 reveal</text>
+  <!-- 하단 메타 -->
+  <text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">5 / 16 회차</text>
 </svg>

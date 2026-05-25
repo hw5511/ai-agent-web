@@ -1,46 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 15 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ③ — 프롬프트 4요소를 API에도</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">7주차에 배운 대상·스타일·수치·범위가 AI 응답도 좌우합니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 15</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">프롬프트 4요소를 API 요청에도</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">7주차에 배운 그 4요소가 그대로 결과를 좌우한다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 4요소 색상 라벨 -->
-  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">4요소</text>
-  <rect x="60" y="266" width="278" height="46" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="80" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">대상</text>
-  <text x="128" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">누구를 위한 답인가</text>
-  <rect x="348" y="266" width="278" height="46" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="368" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">스타일</text>
-  <text x="428" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">톤·말투</text>
-  <rect x="636" y="266" width="278" height="46" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="656" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#92400e">수치</text>
-  <text x="704" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">길이·개수 (3줄·5개)</text>
-  <rect x="924" y="266" width="296" height="46" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <text x="944" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#991b1b">범위</text>
-  <text x="992" y="294" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#b91c1c">다룰 것 / 뺄 것</text>
+  <!-- 4요소 카드 -->
+  <rect x="60" y="252" width="280" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">1 · 대상</text>
+  <text x="80" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">누구를 위한 답인가</text>
+  <text x="80" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">"초등학생도 알게"</text>
 
-  <!-- Before (모호) -->
-  <text x="60" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">모호한 프롬프트</text>
-  <rect x="60" y="364" width="560" height="100" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="84" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">"이 글 요약해줘"</text>
-  <text x="84" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">결과: 길이도 톤도 제멋대로 — 매번 다르게 나옴</text>
+  <rect x="360" y="252" width="280" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="380" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">2 · 스타일</text>
+  <text x="380" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">톤과 말투</text>
+  <text x="380" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">"친근한 반말"</text>
 
-  <!-- After (4요소 적용, 다크 카드) -->
-  <text x="660" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">4요소 적용 프롬프트</text>
-  <rect x="660" y="364" width="560" height="100" rx="14" fill="#0f172a"/>
-  <text x="684" y="400" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#a3e635">"초등학생도 알게(대상), 친근한 말투로(스타일),</text>
-  <text x="684" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#a3e635">3줄로(수치), 기술 용어는 빼고(범위) 요약해줘"</text>
-  <text x="684" y="452" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#38bdf8">결과: 원하는 모양으로 안정적으로 나옴</text>
+  <rect x="660" y="252" width="280" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="680" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">3 · 수치</text>
+  <text x="680" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">길이와 개수</text>
+  <text x="680" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">"3줄로" · "5개"</text>
 
-  <!-- 토큰 설명 박스 -->
-  <rect x="60" y="488" width="1160" height="100" rx="14" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="84" y="506" width="120" height="22" rx="11" fill="#2563eb"/>
-  <text x="144" y="521" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">"토큰"이란?</text>
-  <text x="84" y="554" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e40af">API에서 쓰는 "글자 수 비슷한 단위"입니다. 입력·응답이 길수록 토큰이 늘어납니다.</text>
-  <text x="84" y="578" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e40af">길게 쓸수록 응답이 느려지고 무료 크레딧이 빨리 닳으니, 필요한 만큼만 짧고 구체적으로.</text>
+  <rect x="940" y="252" width="280" height="160" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="960" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">4 · 범위</text>
+  <text x="960" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">다룰 것 · 뺄 것</text>
+  <text x="960" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">"기술 용어 빼고"</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">구체적인 4요소가 좋은 AI 응답을 만듭니다 — 사람에게 시키듯 똑같이</text>
+  <!-- Before / After -->
+  <text x="60" y="462" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">막연한 요청</text>
+  <rect x="60" y="482" width="560" height="100" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="90" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">"이 글 요약해줘"</text>
+  <text x="90" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">길이도 톤도 들쭉날쭉</text>
+
+  <text x="660" y="462" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">4요소 적용</text>
+  <rect x="660" y="482" width="560" height="100" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="690" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#374151">"초등학생도 알게, 친근한 톤, 3줄, 숫자는 빼고"</text>
+  <text x="690" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">매번 비슷한 결과 · 안정적</text>
+
+  <!-- 토큰 안내 한 줄 -->
+  <text x="60" y="640" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">참고 · "토큰"은 API에서 글자 수 비슷한 단위 — 길수록 응답이 느려지고 무료 크레딧이 빨리 줄어든다</text>
 </svg>

@@ -1,71 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 13 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 1</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ① — 가비아에서 내 도메인 구매</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">검색 → 선택 → 결제 → 확인, 약 10~15분 · 본인이 직접 클릭합니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 1 · 가비아에서 내 도메인 사기</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">검색 → 선택 → 결제 → 등록 확인 · 약 10~15분</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">4단계로 끝나는 구매 흐름</text>
+  <!-- 좌측 단계 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단계</text>
 
-  <!-- 4단계 카드 -->
-  <rect x="60" y="278" width="266" height="218" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <circle cx="100" cy="318" r="17" fill="#fef3c7"/>
-  <text x="100" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="900" fill="#92400e">1</text>
-  <text x="130" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">검색</text>
-  <rect x="84" y="346" width="218" height="96" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="100" y="364" width="186" height="30" rx="6" fill="#f3f4f6"/>
-  <text x="112" y="384" font-family="'Courier New',monospace" font-size="14" fill="#9ca3af">내이름 입력...</text>
-  <text x="100" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">가비아 메인 검색창</text>
-  <text x="84" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">원하는 이름 입력 →</text>
-  <text x="84" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">사용 가능 여부 확인</text>
+  <text x="80" y="310" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="310" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">가비아 가입 · 이메일 인증</text>
 
-  <rect x="343" y="278" width="266" height="218" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <circle cx="383" cy="318" r="17" fill="#fef3c7"/>
-  <text x="383" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="900" fill="#92400e">2</text>
-  <text x="413" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">선택</text>
-  <rect x="367" y="346" width="218" height="96" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="383" y="362" width="186" height="22" rx="5" fill="#dcfce7"/>
-  <text x="393" y="378" font-family="'Courier New',monospace" font-size="12" fill="#15803d">내이름.com  사용가능</text>
-  <rect x="383" y="390" width="186" height="22" rx="5" fill="#f3f4f6"/>
-  <text x="393" y="406" font-family="'Courier New',monospace" font-size="12" fill="#9ca3af">내이름.shop  더 저렴</text>
-  <text x="367" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">.com 비싸거나 선점이면</text>
-  <text x="367" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">.shop / .site / .kr 즉시 시도</text>
+  <text x="80" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">메인 검색창에 원하는 이름 입력</text>
 
-  <rect x="626" y="278" width="266" height="218" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <circle cx="666" cy="318" r="17" fill="#fef3c7"/>
-  <text x="666" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="900" fill="#92400e">3</text>
-  <text x="696" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">결제</text>
-  <rect x="650" y="346" width="218" height="96" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="666" y="362" width="186" height="20" rx="5" fill="#f3f4f6"/>
-  <text x="676" y="377" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#6b7280">기간 · 1년</text>
-  <rect x="666" y="388" width="186" height="20" rx="5" fill="#f3f4f6"/>
-  <text x="676" y="403" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#6b7280">자동갱신 · 일단 OFF</text>
-  <rect x="666" y="414" width="186" height="22" rx="5" fill="#dbeafe"/>
-  <text x="759" y="430" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#1e40af">결제하기</text>
-  <text x="650" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">카드 · 본인 인증 미리</text>
-  <text x="650" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">준비해두기</text>
+  <text x="80" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">사용 가능한 TLD 선택 (.com 외에 .kr · .shop · .site)</text>
 
-  <rect x="909" y="278" width="266" height="218" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <circle cx="949" cy="318" r="17" fill="#86efac"/>
-  <text x="949" y="324" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="900" fill="#15803d">4</text>
-  <text x="979" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">확인</text>
-  <rect x="933" y="346" width="218" height="96" rx="10" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
-  <g transform="translate(1020,372)">
-    <circle cx="22" cy="22" r="22" fill="#dcfce7"/>
-    <path d="M12 23 l7 7 l13 -15" fill="none" stroke="#15803d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-  <text x="933" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">마이페이지에서</text>
-  <text x="933" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">"도메인 등록 완료" 확인</text>
+  <text x="80" y="490" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="490" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">1년 등록 · 자동 갱신은 일단 OFF · 결제</text>
 
-  <!-- 팁 박스 -->
-  <rect x="60" y="512" width="1160" height="84" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <rect x="84" y="530" width="120" height="22" rx="11" fill="#16a34a"/>
-  <text x="144" y="545" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">이름이 이미 있다면?</text>
-  <text x="84" y="578" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">• 끝에 -dev · -studio 붙이기   • 본인 영문 이름 + 직업/취미 조합   • 더 싼 끝부분(.shop · .kr)으로 바꿔보기</text>
+  <text x="80" y="550" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="550" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">My가비아에서 "도메인 등록 완료" 확인</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">결제 완료 = 이제 이 이름은 내 것 — 1년간 나만의 도메인입니다</text>
+  <!-- 우측 팁 카드 -->
+  <rect x="830" y="262" width="390" height="220" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="850" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">이름이 이미 있다면</text>
+  <text x="850" y="338" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#171717">myname-dev</text>
+  <text x="850" y="372" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#171717">myname-studio</text>
+  <text x="850" y="406" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#171717">myname.shop</text>
+  <text x="850" y="450" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">본인 이름 + 직업/취미 조합 추천</text>
+
+  <!-- 우측 결제 준비 카드 -->
+  <rect x="830" y="500" width="390" height="120" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="850" y="534" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">결제 전에 준비</text>
+  <text x="850" y="568" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="500" fill="#171717">카드 정보 · 휴대폰 본인 인증</text>
+  <text x="850" y="594" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">결제 단계에서 가장 많이 멈춤</text>
+
+  <!-- 안내 -->
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#374151">Claude Code 없이 직접 진행 · 결제 화면 멈추면 강사에게 손드세요</text>
 </svg>

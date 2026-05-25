@@ -1,50 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">다음 코스 안내 — 세 갈래 길</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">이 코스 이후 본인 관심사에 따라 1개를 골라 이어갑니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">다음 코스 안내</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">본인 관심사에 따라 한 갈래 선택</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">진로 선택지</text>
+  <g font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">
+    <rect x="60" y="270" width="375" height="290" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="84" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">TRACK 01</text>
+    <text x="84" y="350" font-size="26" font-weight="700" fill="#171717">웹이론</text>
+    <text x="84" y="384" font-size="15" font-weight="500" fill="#6b7280">4개월</text>
+    <line x1="84" y1="408" x2="411" y2="408" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="84" y="446" font-size="17" font-weight="500" fill="#374151">HTML · CSS · JS 본격</text>
+    <text x="84" y="476" font-size="17" font-weight="500" fill="#374151">코드 직접 읽고 쓰기</text>
+    <text x="84" y="528" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.05em">Claude 없이도 코드 이해</text>
 
-  <!-- 카드 1: 웹이론 노랑 -->
-  <rect x="60" y="272" width="366" height="270" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
-  <text x="84" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#d97706">웹이론</text>
-  <text x="84" y="342" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#92400e">4개월</text>
-  <line x1="84" y1="358" x2="402" y2="358" stroke="#fcd34d" stroke-width="1"/>
-  <text x="84" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">HTML · CSS · JS · React</text>
-  <text x="84" y="418" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">코드를 본격적으로 이해</text>
-  <text x="84" y="462" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af">추천 대상</text>
-  <text x="84" y="486" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">"Claude 없이도 코드를</text>
-  <text x="84" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">읽고 싶다"는 분</text>
+    <rect x="452.5" y="270" width="375" height="290" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="476.5" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">TRACK 02</text>
+    <text x="476.5" y="350" font-size="26" font-weight="700" fill="#171717">406 바이브코딩</text>
+    <text x="476.5" y="384" font-size="15" font-weight="500" fill="#6b7280">컴포넌트 · 상태관리</text>
+    <line x1="476.5" y1="408" x2="803.5" y2="408" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="476.5" y="446" font-size="17" font-weight="500" fill="#374151">복잡한 앱 본격 제작</text>
+    <text x="476.5" y="476" font-size="17" font-weight="500" fill="#374151">화면 단위 사고</text>
+    <text x="476.5" y="528" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.05em">큰 서비스 만들고 싶다면</text>
 
-  <!-- 카드 2: 406 바이브코딩 파랑 -->
-  <rect x="457" y="272" width="366" height="270" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="481" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#2563eb">406 바이브코딩</text>
-  <text x="481" y="342" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#1e40af">React 본격</text>
-  <line x1="481" y1="358" x2="799" y2="358" stroke="#93c5fd" stroke-width="1"/>
-  <text x="481" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">컴포넌트 · 상태 관리</text>
-  <text x="481" y="418" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">복잡한 앱 만들기</text>
-  <text x="481" y="462" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af">추천 대상</text>
-  <text x="481" y="486" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af">"더 큰 서비스를 직접</text>
-  <text x="481" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af">만들고 싶다"는 분</text>
+    <rect x="845" y="270" width="375" height="290" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="869" y="306" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">TRACK 03</text>
+    <text x="869" y="350" font-size="26" font-weight="700" fill="#171717">416 자동화 PM</text>
+    <text x="869" y="384" font-size="15" font-weight="500" fill="#6b7280">n8n · 도구 활용</text>
+    <line x1="869" y1="408" x2="1196" y2="408" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="869" y="446" font-size="17" font-weight="500" fill="#374151">코드 안 쓰고 자동화</text>
+    <text x="869" y="476" font-size="17" font-weight="500" fill="#374151">사업 운영 시각</text>
+    <text x="869" y="528" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.05em">기획 · 운영 강한 사람용</text>
+  </g>
 
-  <!-- 카드 3: 416 자동화 PM 초록 -->
-  <rect x="854" y="272" width="366" height="270" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="878" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#16a34a">416 자동화 PM</text>
-  <text x="878" y="342" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#15803d">n8n · 자동화</text>
-  <line x1="878" y1="358" x2="1196" y2="358" stroke="#86efac" stroke-width="1"/>
-  <text x="878" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">PM 시각의 도구 활용</text>
-  <text x="878" y="418" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">사업 자동화 설계</text>
-  <text x="878" y="462" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af">추천 대상</text>
-  <text x="878" y="486" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">"코드 안 쓰고 사업을</text>
-  <text x="878" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">자동화하고 싶다"는 분</text>
+  <rect x="60" y="600" width="80" height="3" rx="1.5" fill="#16a34a"/>
 
-  <!-- 할인 박스 -->
-  <rect x="60" y="556" width="1160" height="44" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="84" y="583" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">본 코스 수료자 할인 — 등록 상담은 오늘 발표 다 끝나고 따로 안내</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">16주 동기끼리 다음 코스에서 또 만나는 경우 많습니다</text>
+  <text x="60" y="654" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#374151">본 코스 수료자 할인 안내  ·  등록 상담은 발표 종료 후 따로</text>
 </svg>

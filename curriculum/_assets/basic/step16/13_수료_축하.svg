@@ -1,49 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 16 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">수료를 축하합니다</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">16주를 완주한 본인에게, 마지막 한 마디를 드립니다</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
 
-  <!-- 중앙 졸업/트로피 히어로 다크 박스 -->
-  <rect x="60" y="240" width="740" height="288" rx="16" fill="#0f172a"/>
-  <text x="92" y="284" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#38bdf8" letter-spacing="0.08em">16 / 16 — 완주</text>
-  <!-- 트로피 (벡터) -->
-  <path d="M388 312 h64 v22 a32 32 0 0 1 -64 0 z" fill="#a3e635"/>
-  <path d="M388 314 h-18 a14 14 0 0 0 14 18" fill="none" stroke="#a3e635" stroke-width="4"/>
-  <path d="M452 314 h18 a14 14 0 0 1 -14 18" fill="none" stroke="#a3e635" stroke-width="4"/>
-  <rect x="414" y="368" width="12" height="20" fill="#a3e635"/>
-  <rect x="398" y="388" width="44" height="10" rx="3" fill="#a3e635"/>
-  <text x="420" y="446" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#ffffff">본인이 만들었습니다</text>
-  <text x="420" y="482" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#94a3b8">도메인 + DB + 회원 + AI + 결제까지 도는 사이트</text>
-  <rect x="300" y="498" width="240" height="10" rx="5" fill="#16a34a"/>
-  <text x="555" y="507" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#a3e635">수료 · 이름 호명</text>
+  <!-- 메타 -->
+  <text x="60" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">CONGRATULATIONS · 16 / 16</text>
 
-  <!-- 우측 다음 단계 카드 -->
-  <text x="830" y="268" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">이제 할 것</text>
-  <rect x="830" y="282" width="390" height="56" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="854" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">본인 도메인 계속 살려두기</text>
-  <text x="854" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">포트폴리오로 그대로 활용</text>
+  <!-- 큰 제목 -->
+  <text x="60" y="372" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="56" font-weight="700" fill="#171717" letter-spacing="-0.02em">수료를 축하합니다</text>
 
-  <rect x="830" y="348" width="390" height="56" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="854" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">작품 링크 자랑하기</text>
-  <text x="854" y="394" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e40af">SNS · 이력서 · 블로그에</text>
+  <!-- 그린 짧은 구분선 -->
+  <rect x="60" y="404" width="120" height="4" rx="2" fill="#16a34a"/>
 
-  <rect x="830" y="414" width="390" height="56" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="854" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#92400e">막힐 때 다시 열기</text>
-  <text x="854" y="460" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">본 코스 자료 · Claude Code</text>
+  <!-- 부연 -->
+  <text x="60" y="478" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="500" fill="#374151">본인 도메인은 살려두기  ·  포트폴리오로 활용</text>
+  <text x="60" y="516" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="500" fill="#374151">막힐 때마다 본 코스 자료와 Claude Code를 다시 열기</text>
 
-  <!-- QR 자리 (벡터 박스) -->
-  <rect x="830" y="478" width="186" height="50" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="842" y="488" width="30" height="30" rx="4" fill="#e5e7eb"/>
-  <text x="884" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#374151">학원 갤러리</text>
-  <text x="884" y="518" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">작품 게시</text>
-  <rect x="1034" y="478" width="186" height="50" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="1046" y="488" width="30" height="30" rx="4" fill="#e5e7eb"/>
-  <text x="1088" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#374151">다음 코스</text>
-  <text x="1088" y="518" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">등록 안내</text>
+  <!-- 마지막 한 줄 -->
+  <text x="60" y="624" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="32" font-weight="700" fill="#171717" letter-spacing="-0.01em">본인이 만들었습니다 — 잊지 마세요</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">16주 끝까지 와줘서 감사합니다 — 오늘 만든 사이트는 본인 자산입니다</text>
+  <!-- 하단 시그니처 -->
+  <text x="1220" y="676" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af" letter-spacing="0.08em">AI AGENT WEB · COURSE COMPLETE</text>
 </svg>

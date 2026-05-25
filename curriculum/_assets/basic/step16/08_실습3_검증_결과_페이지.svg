@@ -1,50 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 3</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ③ — 결제 검증 + 결과 페이지</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">여기까지 뜨면 "결제까지 가는 사이트"가 완성됩니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">실습 3 · 검증과 결과 페이지</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">Vercel 함수에서 검증 → 주문 저장 → 결과 페이지</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- Claude 지시문 박스 -->
-  <rect x="60" y="234" width="1160" height="96" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="84" y="250" width="104" height="22" rx="11" fill="#2563eb"/>
-  <text x="136" y="265" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
-  <text x="84" y="300" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">"api/payment-confirm.js를 만들어서 결제 성공 콜백을 토스 API로 검증하고,</text>
-  <text x="84" y="324" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">Supabase orders 테이블에 저장해줘."</text>
+  <text x="80" y="258" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">STEPS</text>
 
-  <text x="60" y="368" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">검증 흐름</text>
+  <text x="80" y="310" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="310" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Vercel 환경변수에 시크릿 키를 등록한다  ·  TOSS_SECRET_KEY</text>
 
-  <!-- 흐름도 (좌측) -->
-  <rect x="60" y="386" width="700" height="60" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="84" y="421" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">위젯 결제 성공</text>
-  <text x="280" y="421" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#1e40af">→</text>
-  <text x="310" y="421" font-family="'Courier New',monospace" font-size="14" font-weight="700" fill="#1e40af">payment-confirm.js</text>
+  <text x="80" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Claude Code에 검증 함수 추가 프롬프트를 붙여넣는다</text>
 
-  <rect x="60" y="456" width="700" height="60" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="84" y="491" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">토스 API로 검증</text>
-  <text x="280" y="491" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#15803d">→</text>
-  <text x="310" y="491" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">orders 테이블 저장</text>
-  <text x="560" y="491" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" fill="#15803d">→</text>
-  <text x="590" y="491" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">성공 페이지</text>
+  <text x="80" y="410" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="410" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">결제 성공 콜백 → 토스 API로 진위 확인 → orders 테이블에 기록</text>
 
-  <!-- 우측 성공 페이지 목업 -->
-  <rect x="780" y="386" width="440" height="130" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <circle cx="1000" cy="424" r="18" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-  <path d="M992 424 l5 6 l11 -13" stroke="#16a34a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="1000" y="464" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">결제가 완료되었습니다</text>
-  <text x="1000" y="492" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">주문번호 : ORD-20260525-001</text>
+  <text x="80" y="460" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="460" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">성공 페이지에 주문번호가 뜬다  ·  실패 시 실패 페이지</text>
 
-  <!-- 경고 박스 -->
-  <rect x="60" y="528" width="1160" height="70" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <polygon points="92,544 104,568 80,568" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-linejoin="round"/>
-  <rect x="91" y="552" width="2" height="8" fill="#dc2626"/>
-  <rect x="91" y="563" width="2" height="2" fill="#dc2626"/>
-  <text x="120" y="558" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#991b1b">시크릿 키는 코드에 직접 쓰지 말고 Vercel 환경변수로!</text>
-  <text x="120" y="582" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#991b1b">TOSS_SECRET_KEY 이름으로 Vercel에 등록 → 함수에서 불러와 씁니다</text>
+  <text x="80" y="510" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="510" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">테스트 카드로 결제 → 성공 페이지가 뜨면 완성</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">여기까지 뜨면 진짜 끝 — 도메인 + DB + 회원 + AI + 결제 사이트 완성, 다 같이 박수!</text>
+  <rect x="60" y="568" width="1160" height="76" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="598" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">SECURITY</text>
+  <text x="84" y="628" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">시크릿 키는 코드에 직접 쓰지 않습니다  ·  반드시 Vercel 환경변수만 사용.</text>
+
+  <text x="60" y="690" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">여기까지 뜨면 결제까지 가는 사이트가 완성됩니다</text>
 </svg>

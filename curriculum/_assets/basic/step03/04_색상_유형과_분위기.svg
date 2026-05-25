@@ -1,60 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
-  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — 색상 유형과 분위기</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">색 코드를 외울 필요 없어요 — "다크 테크 느낌"이라고만 말해도 됩니다</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">4가지 색 분위기</text>
+  <!-- WEB 03 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.015em">색상 유형과 분위기</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">네 가지 분위기 · 외울 필요는 없다</text>
+  <rect x="60" y="212" width="1160" height="1" fill="#e5e7eb"/>
 
   <!-- 웜 -->
-  <rect x="60" y="278" width="275" height="298" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="84" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">웜</text>
-  <rect x="84" y="334" width="68" height="46" rx="8" fill="#ef4444"/>
-  <rect x="160" y="334" width="68" height="46" rx="8" fill="#f97316"/>
-  <rect x="236" y="334" width="68" height="46" rx="8" fill="#fbbf24"/>
-  <text x="84" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">빨강 · 주황 · 노랑</text>
-  <text x="84" y="444" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#374151">따뜻함, 활기</text>
-  <line x1="84" y1="470" x2="311" y2="470" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="84" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">이런 곳에 어울림</text>
-  <text x="84" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">음식 · 라이프스타일</text>
+  <rect x="60" y="260" width="280" height="340" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">WARM</text>
+  <text x="80" y="336" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">웜</text>
+  <text x="80" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">빨강 · 주황 · 노랑</text>
+  <text x="80" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">따뜻함, 친근함</text>
+  <rect x="80" y="540" width="220" height="1" fill="#e5e7eb"/>
+  <text x="80" y="568" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">어울리는 사이트</text>
+  <text x="80" y="588" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">음식 · 라이프스타일</text>
 
   <!-- 쿨 -->
-  <rect x="349" y="278" width="275" height="298" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="373" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">쿨</text>
-  <rect x="373" y="334" width="100" height="46" rx="8" fill="#2563eb"/>
-  <rect x="481" y="334" width="119" height="46" rx="8" fill="#06b6d4"/>
-  <text x="373" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">파랑 · 청록</text>
-  <text x="373" y="444" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#374151">신뢰감, 차분함</text>
-  <line x1="373" y1="470" x2="600" y2="470" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="373" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">이런 곳에 어울림</text>
-  <text x="373" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">테크 · 금융</text>
+  <rect x="350" y="260" width="280" height="340" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="370" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">COOL</text>
+  <text x="370" y="336" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">쿨</text>
+  <text x="370" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">파랑 · 청록</text>
+  <text x="370" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">신뢰감, 차분함</text>
+  <rect x="370" y="540" width="220" height="1" fill="#e5e7eb"/>
+  <text x="370" y="568" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">어울리는 사이트</text>
+  <text x="370" y="588" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">테크 · 금융</text>
 
   <!-- 뉴트럴 -->
-  <rect x="638" y="278" width="275" height="298" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="662" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#374151">뉴트럴</text>
-  <rect x="662" y="334" width="68" height="46" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-  <rect x="738" y="334" width="68" height="46" rx="8" fill="#9ca3af"/>
-  <rect x="814" y="334" width="68" height="46" rx="8" fill="#1f2937"/>
-  <text x="662" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">흰 · 회 · 검</text>
-  <text x="662" y="444" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#374151">미니멀, 정제됨</text>
-  <line x1="662" y1="470" x2="889" y2="470" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="662" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">이런 곳에 어울림</text>
-  <text x="662" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">포트폴리오 · 매거진</text>
+  <rect x="640" y="260" width="280" height="340" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="660" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">NEUTRAL</text>
+  <text x="660" y="336" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">뉴트럴</text>
+  <text x="660" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">흰 · 회 · 검</text>
+  <text x="660" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">미니멀, 차분</text>
+  <rect x="660" y="540" width="220" height="1" fill="#e5e7eb"/>
+  <text x="660" y="568" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">어울리는 사이트</text>
+  <text x="660" y="588" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">포트폴리오 · 매거진</text>
 
-  <!-- 다크 (오늘 선택, 다크 카드) -->
-  <rect x="927" y="278" width="293" height="298" rx="14" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
-  <text x="951" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#38bdf8">다크</text>
-  <rect x="951" y="334" width="100" height="46" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-  <rect x="1059" y="334" width="137" height="46" rx="8" fill="#38bdf8"/>
-  <text x="951" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#94a3b8">어두운 배경 + 밝은 텍스트</text>
-  <text x="951" y="444" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#ffffff">프리미엄, 몰입감</text>
-  <line x1="951" y1="470" x2="1196" y2="470" stroke="#334155" stroke-width="1"/>
-  <text x="951" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#64748b">이런 곳에 어울림</text>
-  <text x="951" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#94a3b8">개발자 · 게이밍</text>
-  <text x="951" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#38bdf8">← 오늘 이걸로 진행</text>
+  <!-- 다크 -->
+  <rect x="930" y="260" width="290" height="340" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="950" y="298" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">DARK</text>
+  <text x="950" y="336" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">다크</text>
+  <text x="950" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">어두운 배경 · 밝은 글자</text>
+  <text x="950" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">프리미엄, 집중</text>
+  <rect x="950" y="540" width="230" height="1" fill="#e5e7eb"/>
+  <text x="950" y="568" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">어울리는 사이트</text>
+  <text x="950" y="588" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#374151">개발자 · 게이밍</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">색 코드는 안 외워도 됩니다 — "다크 테크로 해줘" 한 마디면 클로드가 골라줍니다</text>
+  <!-- 그린 한 줄 강조 -->
+  <text x="60" y="678" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">오늘은 ‘다크’ 분위기로 진행</text>
 </svg>

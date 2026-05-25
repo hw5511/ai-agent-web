@@ -1,55 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 01 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">환영합니다 — AI로 웹 만드는 세계</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">16주의 시작 · 오늘 2시간이 전체의 방향을 정합니다</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 회차</text>
+  <!-- 부제 (작게, 회색) -->
+  <text x="60" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">16주의 시작 · 첫 2시간</text>
 
-  <!-- 회차 정보 3카드 -->
-  <rect x="60" y="278" width="360" height="96" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="240" y="320" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#d97706">1회차</text>
-  <text x="240" y="350" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">전체 16회차의 출발점</text>
+  <!-- 큰 제목 -->
+  <text x="60" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="60" font-weight="700" fill="#171717" letter-spacing="-0.02em">AI로 웹 만드는 세계</text>
 
-  <rect x="460" y="278" width="360" height="96" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="640" y="320" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="900" fill="#2563eb">2시간</text>
-  <text x="640" y="350" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">만들고 · 보고 · 깨닫고 · 다시</text>
+  <!-- 그린 짧은 언더라인 -->
+  <rect x="60" y="456" width="120" height="4" rx="2" fill="#16a34a"/>
 
-  <rect x="860" y="278" width="360" height="96" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="1040" y="316" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">오늘의 1개념</text>
-  <text x="1040" y="350" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">AI 시대 웹 만들기란 무엇인가</text>
-
-  <text x="60" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">16주 로드맵 — 오늘은 1주차</text>
-
-  <!-- 16칸 진행 바 -->
-  <rect x="60" y="448" width="1160" height="44" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
-  <rect x="68" y="456" width="64" height="28" rx="7" fill="#171717"/>
-  <text x="100" y="475" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">1주</text>
-  <text x="156" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">2</text>
-  <text x="220" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">3</text>
-  <text x="284" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">4</text>
-  <text x="348" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">5</text>
-  <text x="412" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">6</text>
-  <text x="476" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">7</text>
-  <text x="540" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">8</text>
-  <line x1="588" y1="458" x2="588" y2="482" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="636" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">9</text>
-  <text x="700" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">10</text>
-  <text x="764" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">11</text>
-  <text x="828" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">12</text>
-  <text x="892" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">13</text>
-  <text x="956" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">14</text>
-  <text x="1020" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">15</text>
-  <text x="1084" y="475" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#d1d5db">16</text>
-  <text x="1160" y="475" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af">→ 끝</text>
-
-  <!-- 오늘의 흐름 -->
-  <text x="60" y="540" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 2시간의 흐름</text>
-  <rect x="60" y="556" width="1160" height="44" rx="10" fill="#f3f4f6"/>
-  <text x="640" y="584" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#374151">직접 만들기 1시간  →  청사진 강의 40분  →  첫 페이지 띄우기 20분</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘은 만들고, 보고, 깨닫고, 다시 시작합니다 — 코딩 경험 없어도 됩니다</text>
+  <!-- 하단 우측 시그니처 (아주 작게, 메타) -->
+  <text x="1220" y="676" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af" letter-spacing="0.08em">AI AGENT WEB · 16주 코스</text>
 </svg>

@@ -1,43 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 02</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">HTML이란 무엇인가</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">웹페이지의 뼈대 — 보이지 않지만 모든 화면의 기초</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 02</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">HTML이란 무엇인가</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">웹 페이지의 뼈대를 짜는 언어 · 외울 필요 없음</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">건물 철근 ↔ HTML</text>
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">한 줄로</text>
 
-  <!-- 좌: 건물 철근 -->
-  <rect x="60" y="278" width="540" height="200" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <rect x="160" y="312" width="12" height="130" rx="3" fill="#92400e"/>
-  <rect x="324" y="312" width="12" height="130" rx="3" fill="#92400e"/>
-  <rect x="488" y="312" width="12" height="130" rx="3" fill="#92400e"/>
-  <rect x="160" y="312" width="340" height="10" rx="3" fill="#d97706"/>
-  <rect x="160" y="372" width="340" height="10" rx="3" fill="#d97706"/>
-  <rect x="160" y="432" width="340" height="10" rx="3" fill="#d97706"/>
-  <text x="330" y="466" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#92400e">건물의 철근 구조</text>
+  <text x="80" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">눈에 보이는 모든 화면의 골격 — 건물로 치면 철근 구조</text>
 
-  <text x="620" y="384" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#9ca3af">↔</text>
+  <text x="80" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">브라우저가 페이지를 열 때 가장 먼저 읽는 파일</text>
 
-  <!-- 우: HTML 코드 박스 -->
-  <rect x="640" y="278" width="580" height="200" rx="12" fill="#0f172a"/>
-  <text x="664" y="312" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">&lt;!-- 보여주기용 — 외우지 않아도 됩니다 --&gt;</text>
-  <text x="664" y="346" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">&lt;header&gt; ... &lt;/header&gt;</text>
-  <text x="664" y="376" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">&lt;main&gt; ... &lt;/main&gt;</text>
-  <text x="664" y="406" font-family="'Courier New',monospace" font-size="15" fill="#a3e635">&lt;footer&gt; ... &lt;/footer&gt;</text>
-  <text x="664" y="448" font-family="'Courier New',monospace" font-size="14" fill="#94a3b8">HyperText Markup Language</text>
-
-  <text x="60" y="520" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">쌓이는 순서 — 오늘은 맨 아래 칸만</text>
+  <text x="80" y="420" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="420" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">뼈대만 있으면 검은 글씨 페이지 — 그게 정상</text>
 
   <!-- 3단 스택 -->
-  <rect x="60" y="540" width="373" height="52" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
-  <text x="246" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#92400e">HTML — 뼈대  (오늘)</text>
-  <rect x="453" y="540" width="313" height="52" rx="10" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="609" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#9ca3af">CSS — 옷  (다음 주)</text>
-  <rect x="786" y="540" width="434" height="52" rx="10" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="1003" y="572" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#9ca3af">JS — 움직임  (그 다음)</text>
+  <text x="60" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">웹 페이지는 3층으로 쌓인다</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">지금 보는 모든 사이트도 다 이 검은 글씨에서 시작했습니다</text>
+  <rect x="60" y="520" width="380" height="48" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="550" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#9ca3af">JS · 움직임</text>
+  <text x="416" y="550" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">나중에</text>
+
+  <rect x="60" y="578" width="380" height="48" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#9ca3af">CSS · 옷</text>
+  <text x="416" y="608" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">다음 주</text>
+
+  <!-- 오늘 칸 - 그린 왼쪽 강조 바 -->
+  <rect x="60" y="636" width="380" height="48" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="60" y="636" width="4" height="48" fill="#16a34a"/>
+  <text x="84" y="666" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#171717">HTML · 뼈대</text>
+  <text x="416" y="666" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#16a34a">오늘</text>
+
+  <!-- 우측 큰 한 줄 메시지 -->
+  <text x="500" y="582" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">기억할 한 줄</text>
+  <text x="500" y="640" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#171717">구조가 먼저, 디자인은 나중</text>
 </svg>

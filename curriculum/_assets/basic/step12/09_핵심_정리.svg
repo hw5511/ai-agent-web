@@ -1,53 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 12 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 12</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">12회차 핵심 정리 — 이제 진짜 서비스 같다</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 새로 생긴 능력 3가지</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 12</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">핵심 정리</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">이제 진짜 서비스 같다</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 얻은 것</text>
+  <!-- 오늘 가져갈 것 라벨 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 새로 생긴 능력</text>
 
-  <!-- 정리 3카드 (노랑→파랑→초록) -->
-  <rect x="60" y="276" width="373" height="200" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="84" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#d97706">01</text>
-  <text x="84" y="348" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">회원 시스템 구현</text>
-  <line x1="84" y1="362" x2="409" y2="362" stroke="#fcd34d" stroke-width="1"/>
-  <text x="84" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">회원가입 폼 만들기</text>
-  <text x="84" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">로그인 · 로그아웃 동작</text>
-  <text x="84" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">Supabase Auth 한 줄 호출</text>
-  <text x="84" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#d97706">가입부터 로그아웃까지</text>
+  <!-- 항목 1 -->
+  <text x="80" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">회원가입 · 로그인 · 로그아웃을 직접 만든다</text>
 
-  <rect x="453" y="276" width="373" height="200" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="477" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#2563eb">02</text>
-  <text x="477" y="348" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">로그인 상태 표시</text>
-  <line x1="477" y1="362" x2="802" y2="362" stroke="#93c5fd" stroke-width="1"/>
-  <text x="477" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">화면 상단에 "OOO님"</text>
-  <text x="477" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">로그인하면 화면 즉시 갱신</text>
-  <text x="477" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">새로고침해도 로그인 유지</text>
-  <text x="477" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb">상태가 화면에 반영된다</text>
+  <!-- 항목 2 -->
+  <text x="80" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">로그인 상태를 화면에 반영한다</text>
 
-  <rect x="846" y="276" width="374" height="200" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="870" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="900" fill="#16a34a">03</text>
-  <text x="870" y="348" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">내 데이터만 보기</text>
-  <line x1="870" y1="362" x2="1196" y2="362" stroke="#86efac" stroke-width="1"/>
-  <text x="870" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">글에 "주인 표시(user_id)"</text>
-  <text x="870" y="416" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">RLS로 내 데이터 지키기</text>
-  <text x="870" y="440" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">본인 글만 보이고 쓰기</text>
-  <text x="870" y="468" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">나만 보는 방명록 완성</text>
+  <!-- 항목 3 -->
+  <text x="80" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">데이터에 주인 표시(user_id)를 붙인다</text>
 
-  <!-- 응용 아이디어 + 다음 주 예고 -->
-  <rect x="60" y="492" width="700" height="104" rx="14" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <rect x="84" y="508" width="92" height="22" rx="11" fill="#16a34a"/>
-  <text x="130" y="523" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">응용 아이디어</text>
-  <text x="84" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">• 개인 일기장  • 비밀 메모장  • 내 쇼핑 위시리스트</text>
-  <text x="84" y="582" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#15803d">과제(선택): 오늘 방명록을 "비밀 일기장"으로 한 줄 리뉴얼</text>
+  <!-- 항목 4 -->
+  <text x="80" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#171717">RLS로 내 데이터를 지킨다</text>
 
-  <rect x="780" y="492" width="440" height="104" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="804" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb" letter-spacing="0.04em">다음 주 예고 — Session 13</text>
-  <text x="804" y="556" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="700" fill="#1e40af">도메인 연결</text>
-  <text x="804" y="582" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">내 사이트에 "내 사이트 주소.com" 붙이기</text>
+  <!-- 그린 짧은 구분선 -->
+  <rect x="60" y="500" width="80" height="3" rx="1.5" fill="#16a34a"/>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">어려운 단어 한 번도 안 썼는데, 회원 시스템을 완성했습니다</text>
+  <!-- 한 줄 회고 -->
+  <text x="60" y="555" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#171717">이제 누가 봐도 진짜 서비스다</text>
+
+  <!-- 응용 아이디어 (작게) -->
+  <text x="60" y="600" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#6b7280">응용 — 개인 일기장 · 비밀 메모장 · 내 쇼핑 위시리스트</text>
+
+  <!-- 다음 회차 예고 -->
+  <text x="1220" y="650" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">NEXT</text>
+  <text x="1220" y="678" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">WEB 13 · 내 사이트 주소.com 연결</text>
 </svg>

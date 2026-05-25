@@ -1,39 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 01 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">우리의 정체성 — AI를 부리는 사람</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">"Claude Design이 다 만들어주는데 16주를 왜?" 에 대한 답</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">AI를 부리는 사람</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">"Claude가 다 만들어주는데 왜 더 배워?"에 대한 답</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">16주가 만드는 차이</text>
+  <!-- 좌: AI만 쓰는 사람 -->
+  <rect x="80" y="260" width="500" height="240" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="104" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">BEFORE</text>
+  <text x="104" y="344" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">AI만 쓰는 사람</text>
+  <text x="104" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#6b7280">결과는 나오지만 왜 그런지 모름</text>
+  <text x="104" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#6b7280">고치고 싶어도 어디를 만질지 모름</text>
+  <text x="104" y="454" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#6b7280">진짜 내 사이트로 옮기지 못함</text>
 
-  <!-- 좌: AI만 쓰는 사람 (회색) -->
-  <rect x="60" y="278" width="500" height="200" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="84" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#6b7280">AI에 휘둘리는 사람</text>
-  <line x1="84" y1="336" x2="536" y2="336" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="84" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">결과물만 받고 왜 그런지 모름</text>
-  <text x="84" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">고치고 싶어도 손댈 줄 모름</text>
-  <text x="84" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">진짜 사이트로 띄우지 못함</text>
+  <!-- 화살표 -->
+  <text x="620" y="394" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" font-weight="400" fill="#9ca3af">→</text>
+  <text x="620" y="424" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">16주</text>
 
-  <!-- 가운데 화살표 -->
-  <text x="610" y="386" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" fill="#9ca3af">→</text>
-  <text x="610" y="416" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af">16주</text>
+  <!-- 우: AI 부리는 사람 -->
+  <rect x="660" y="260" width="540" height="240" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="684" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">AFTER</text>
+  <text x="684" y="344" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">AI를 부리는 사람</text>
+  <text x="684" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">코드 구조를 읽고 통제할 수 있음</text>
+  <text x="684" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">"왜 이렇게 했지"를 짚어낼 수 있음</text>
+  <text x="684" y="454" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">진짜 사이트로 배포·운영할 수 있음</text>
 
-  <!-- 우: AI 부리는 사람 (다크 강조) -->
-  <rect x="660" y="278" width="500" height="200" rx="16" fill="#0f172a"/>
-  <text x="684" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#38bdf8">AI를 부리는 사람</text>
-  <line x1="684" y1="336" x2="1136" y2="336" stroke="#334155" stroke-width="1"/>
-  <text x="684" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#e5e7eb">코드 구조를 알아 진짜 내 것으로 통제</text>
-  <text x="684" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#e5e7eb">"이거 왜 이렇게 했지" 를 읽어냄</text>
-  <text x="684" y="432" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#e5e7eb">진짜 사이트로 배포 · 운영까지</text>
-
-  <!-- 안심 박스 -->
-  <rect x="60" y="512" width="1100" height="84" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <rect x="84" y="530" width="104" height="22" rx="11" fill="#16a34a"/>
-  <text x="136" y="545" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">안심하세요</text>
-  <text x="84" y="578" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">지금 이거 못해도 당연합니다 — 16주가 바로 그 통제력을 만들어주는 시간이에요</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">AI에 휘둘리지 않고 부리는 사람 — 이게 16주의 차이입니다</text>
+  <!-- 그린 강조 한 줄 -->
+  <text x="640" y="600" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#16a34a">우리의 정체성 — AI를 부리는 사람</text>
 </svg>

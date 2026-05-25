@@ -1,44 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 06 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — CSS와 JS의 역할 나누기</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">같은 "움직임"이라도 CSS와 JS가 맡는 일이 다릅니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">CSS와 JS의 분업</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">정해진 결과는 CSS · 변하는 입력은 JS</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">누가 무엇을 맡나</text>
+  <!-- 좌측 CSS 카드 -->
+  <rect x="60" y="252" width="560" height="232" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">CSS</text>
+  <text x="84" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">정해진 결과를 그린다</text>
 
-  <!-- CSS 카드 파랑 -->
-  <rect x="60" y="278" width="560" height="180" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="84" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#1e40af">CSS 담당 — 정해진 결과</text>
-  <line x1="84" y1="334" x2="596" y2="334" stroke="#93c5fd" stroke-width="1"/>
-  <text x="84" y="370" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• hover 상태 전환 (올렸다 / 뗐다)</text>
-  <text x="84" y="400" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• rotateY 로 카드 뒤집기</text>
-  <text x="84" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">• scale 로 크기 키우기</text>
+  <text x="84" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="116" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">hover 상태 전환</text>
 
-  <!-- JS 카드 초록 -->
-  <rect x="660" y="278" width="560" height="180" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="684" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#15803d">JS 담당 — 변하는 입력값</text>
-  <line x1="684" y1="334" x2="1196" y2="334" stroke="#86efac" stroke-width="1"/>
-  <text x="684" y="370" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">• 실시간 마우스 좌표 읽기</text>
-  <text x="684" y="400" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">• 버튼까지의 거리 계산</text>
-  <text x="684" y="430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">• 그 값을 CSS에 넘겨주기</text>
+  <text x="84" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="116" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">rotateY · scale · translate</text>
 
-  <text x="60" y="500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">조합 패턴 — JS가 값을 구하고, CSS transform이 그린다</text>
+  <text x="84" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="116" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">사전에 정한 끝값으로 부드럽게</text>
 
-  <!-- 조합 흐름 칩 -->
-  <rect x="60" y="522" width="280" height="56" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="200" y="556" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">mousemove 좌표 계산</text>
-  <text x="362" y="557" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">→</text>
-  <rect x="384" y="522" width="220" height="56" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="494" y="556" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">CSS transform 적용</text>
-  <text x="626" y="557" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">→</text>
-  <rect x="648" y="522" width="220" height="56" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="758" y="556" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">화면에 움직임</text>
-  <rect x="908" y="522" width="312" height="56" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="1064" y="548" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#92400e">Flip = CSS 단독</text>
-  <text x="1064" y="568" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">마그네틱 · Spotlight = JS + CSS</text>
+  <!-- 우측 JS 카드 -->
+  <rect x="660" y="252" width="560" height="232" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="684" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">JS</text>
+  <text x="684" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">변하는 값을 구한다</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">Claude Code가 알아서 나눠 짭니다 — 우리는 "왜 그렇게 나누는지" 감만 잡으면 됩니다</text>
+  <text x="684" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="716" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">실시간 마우스 좌표</text>
+
+  <text x="684" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="716" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">요소와의 거리 · 방향 계산</text>
+
+  <text x="684" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="716" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">매 프레임 새 값을 CSS에 전달</text>
+
+  <!-- 하단 다이어그램 -->
+  <text x="60" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">조합 패턴</text>
+
+  <rect x="60" y="560" width="240" height="80" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="180" y="595" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#171717">mousemove</text>
+  <text x="180" y="618" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">커서 이동 감지</text>
+
+  <text x="324" y="608" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#9ca3af">→</text>
+
+  <rect x="350" y="560" width="240" height="80" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="470" y="595" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#171717">JS 좌표 계산</text>
+  <text x="470" y="618" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">거리 · 방향 도출</text>
+
+  <text x="614" y="608" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#9ca3af">→</text>
+
+  <rect x="640" y="560" width="240" height="80" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="760" y="595" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#171717">CSS transform</text>
+  <text x="760" y="618" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">그 값으로 그려준다</text>
+
+  <text x="940" y="595" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">오늘의 매칭</text>
+  <text x="940" y="620" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">Flip = CSS 단독</text>
+  <text x="940" y="642" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">마그네틱·Spotlight = JS+CSS</text>
 </svg>

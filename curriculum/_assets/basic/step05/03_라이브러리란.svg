@@ -1,42 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 05 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 05</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">라이브러리란? — 한 줄로 수천 줄 빌려쓰기</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">다운로드 안 해요 — 주소 한 줄만 붙이면 기능이 통째로 들어옵니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 05</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">라이브러리란 무엇인가</text>
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">한 줄 빌려쓰면, 수천 줄의 기능이 따라옵니다</text>
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌측 자판기 메타포 -->
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">자판기로 이해하기</text>
+  <!-- 글머리 -->
+  <text x="80" y="280" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="280" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">라이브러리 = 누군가 미리 만들어 둔 기능 세트</text>
 
-  <rect x="60" y="278" width="560" height="120" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="84" y="316" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">동전 한 개 = 주소 한 줄</text>
-  <text x="84" y="346" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">자판기에 동전을 넣듯 주소 한 줄을 넣으면</text>
-  <text x="84" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">완성된 기능 묶음이 뚝 떨어진다</text>
+  <text x="80" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">script 한 줄로 전체 기능을 통째로 가져옴</text>
 
-  <rect x="60" y="412" width="560" height="120" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="84" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#15803d">음료수 = 만들어진 기능</text>
-  <text x="84" y="480" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">우리는 음료수를 직접 만들지 않는다</text>
-  <text x="84" y="506" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">누군가 미리 채워둔 걸 꺼내 쓸 뿐</text>
+  <text x="80" y="384" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="384" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">CDN = 전 세계 어디서나 빠르게 받는 공용 창고</text>
 
-  <!-- 우측 코드박스 + 설명 -->
-  <text x="660" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 빌릴 도구 (주소 두 줄)</text>
+  <text x="80" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">우리는 "이름"만 알면 된다 — 사용법은 Claude가 적용</text>
 
-  <rect x="660" y="278" width="560" height="148" rx="12" fill="#0f172a"/>
-  <text x="684" y="312" font-family="'Courier New',monospace" font-size="13" fill="#6b7280">&lt;!-- 보여주기용 — 외우지 않아도 됩니다 --&gt;</text>
-  <text x="684" y="344" font-family="'Courier New',monospace" font-size="13" fill="#a3e635">&lt;script src=".../gsap/3.x/gsap.min.js"&gt;</text>
-  <text x="684" y="366" font-family="'Courier New',monospace" font-size="13" fill="#a3e635">&lt;/script&gt;</text>
-  <text x="684" y="394" font-family="'Courier New',monospace" font-size="13" fill="#a3e635">&lt;script src=".../ScrollTrigger.min.js"&gt;</text>
-  <text x="684" y="416" font-family="'Courier New',monospace" font-size="13" fill="#a3e635">&lt;/script&gt;</text>
+  <text x="80" y="488" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="488" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">오늘 빌릴 도구: GSAP · GSAP ScrollTrigger</text>
 
-  <rect x="660" y="442" width="560" height="90" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="684" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">GSAP + ScrollTrigger</text>
-  <text x="684" y="508" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">이 두 줄이 = 애니메이션 엔진 통째로</text>
+  <!-- 강조 한 줄 (그린) -->
+  <text x="60" y="600" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#16a34a">"이 한 줄이 = 애니메이션 엔진 통째로"</text>
 
-  <!-- 하단 설명 -->
-  <rect x="60" y="552" width="1160" height="44" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="90" y="580" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#1e40af">우리는 이름만 알면 됩니다 — 사용법은 Claude Code가 알아서 적용해요</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">다운로드 없이 주소 두 줄 — 그게 라이브러리를 빌려쓰는 전부입니다</text>
+  <!-- 하단 메타 -->
+  <text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">개념 · 라이브러리</text>
 </svg>

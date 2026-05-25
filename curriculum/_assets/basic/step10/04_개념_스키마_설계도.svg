@@ -1,58 +1,68 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 10 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 10</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ② — 스키마 = 데이터의 설계도</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">표의 머리글을 미리 정해두는 것 — 짓기 전에 그리는 건축 도면</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 10</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">스키마 — 데이터의 설계도</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">표의 머리글을 미리 정해두는 것</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌측: 방명록 스키마 표 (노랑) -->
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">방명록 스키마 — 미리 그린 표</text>
-  <rect x="60" y="274" width="730" height="240" rx="14" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
-  <!-- 헤더 -->
-  <text x="100" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#d97706">컬럼명</text>
-  <text x="320" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#d97706">타입</text>
-  <text x="490" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#d97706">필수</text>
-  <text x="610" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#d97706">예시</text>
-  <line x1="84" y1="324" x2="766" y2="324" stroke="#fcd34d" stroke-width="1.5"/>
-  <!-- 행 1 -->
-  <text x="100" y="356" font-family="'Courier New',monospace" font-size="15" fill="#78350f">id</text>
-  <text x="320" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">숫자</text>
-  <text x="490" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#16a34a">자동</text>
-  <text x="610" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">1, 2, 3</text>
-  <line x1="84" y1="370" x2="766" y2="370" stroke="#fde68a" stroke-width="1"/>
-  <!-- 행 2 -->
-  <text x="100" y="402" font-family="'Courier New',monospace" font-size="15" fill="#78350f">name</text>
-  <text x="320" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">텍스트</text>
-  <text x="490" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#d97706">O</text>
-  <text x="610" y="402" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">"우희"</text>
-  <line x1="84" y1="416" x2="766" y2="416" stroke="#fde68a" stroke-width="1"/>
-  <!-- 행 3 -->
-  <text x="100" y="448" font-family="'Courier New',monospace" font-size="15" fill="#78350f">message</text>
-  <text x="320" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">텍스트</text>
-  <text x="490" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#d97706">O</text>
-  <text x="610" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">"잘봤어요"</text>
-  <line x1="84" y1="462" x2="766" y2="462" stroke="#fde68a" stroke-width="1"/>
-  <!-- 행 4 -->
-  <text x="100" y="494" font-family="'Courier New',monospace" font-size="15" fill="#78350f">created_at</text>
-  <text x="320" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">날짜</text>
-  <text x="490" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#16a34a">자동</text>
-  <text x="610" y="494" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">2026-05-25</text>
+  <!-- 컬럼 3요소 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">컬럼 3요소</text>
 
-  <!-- 우측 상단: 컬럼 3요소 (파랑) -->
-  <text x="820" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">컬럼 설계 3요소</text>
-  <rect x="820" y="274" width="400" height="150" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="844" y="308" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">이름 (name)</text>
-  <text x="844" y="330" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e3a8a">무슨 데이터인지</text>
-  <text x="844" y="360" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">타입 (텍스트·숫자·날짜)</text>
-  <text x="844" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e3a8a">어떤 모양의 값인지</text>
-  <text x="844" y="412" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">옵션 (필수 여부·기본값)</text>
+  <rect x="60" y="280" width="200" height="100" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">이름</text>
+  <text x="80" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">name · message</text>
 
-  <!-- 우측 하단: 도면 비유 (회색) -->
-  <rect x="820" y="438" width="400" height="76" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="844" y="470" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">건축 도면 비유</text>
-  <text x="844" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">날짜 빠뜨리면 → 나중에 정렬 불가 (후회)</text>
+  <rect x="280" y="280" width="200" height="100" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="300" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">타입</text>
+  <text x="300" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">텍스트 · 숫자 · 날짜</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘 그린 이 표 = 다음 주의 클라우드 저장소로 그대로 옮겨갑니다</text>
+  <rect x="500" y="280" width="200" height="100" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="520" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#171717">옵션</text>
+  <text x="520" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">필수 여부 · 기본값</text>
+
+  <!-- 예시 표 -->
+  <text x="60" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">방명록 스키마 예시</text>
+
+  <rect x="60" y="448" width="1160" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+
+  <!-- 헤더 행 -->
+  <text x="100" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">컬럼명</text>
+  <text x="380" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">타입</text>
+  <text x="620" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">필수</text>
+  <text x="860" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">예시</text>
+  <line x1="80" y1="496" x2="1200" y2="496" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="100" y="524" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">id</text>
+  <text x="380" y="524" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">숫자</text>
+  <text x="620" y="524" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">자동</text>
+  <text x="860" y="524" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">1, 2, 3</text>
+  <line x1="80" y1="538" x2="1200" y2="538" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="100" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">name</text>
+  <text x="380" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">텍스트</text>
+  <text x="620" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">O</text>
+  <text x="860" y="560" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">우희</text>
+  <line x1="80" y1="572" x2="1200" y2="572" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="100" y="594" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">message</text>
+  <text x="380" y="594" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">텍스트</text>
+  <text x="620" y="594" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">O</text>
+  <text x="860" y="594" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">잘 봤어요</text>
+  <line x1="80" y1="606" x2="1200" y2="606" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="100" y="624" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">created_at</text>
+  <text x="380" y="624" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">날짜</text>
+  <text x="620" y="624" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">자동</text>
+  <text x="860" y="624" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">2026-05-25</text>
+
+  <!-- 핵심 한 줄 -->
+  <text x="60" y="688" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">집을 짓기 전에 도면부터 그린다</text>
 </svg>

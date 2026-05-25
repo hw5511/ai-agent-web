@@ -1,41 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 01 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">웹의 4갈래</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">웹사이트는 크게 네 가지로 나뉩니다 — 우리는 1번에서 출발</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">웹의 4갈래</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">큰 지도 한 번 보기 — 우리는 1번에서 시작</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌상: 랜딩 (노랑, 강조) -->
-  <rect x="60" y="240" width="565" height="170" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
-  <text x="84" y="280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#92400e">1 · 랜딩페이지</text>
-  <rect x="466" y="262" width="135" height="26" rx="8" fill="#d97706"/>
-  <text x="533" y="280" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">이번 수업 메인</text>
-  <text x="84" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#78350f">보여주기 위한 페이지</text>
-  <text x="84" y="358" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">한 화면 스크롤형 · 소개와 홍보 중심</text>
-  <text x="84" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#92400e">예: 제품 소개 · 회사 홈 · 행사 안내</text>
+  <!-- 카드 1: 랜딩페이지 -->
+  <rect x="80" y="260" width="270" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="100" y="292" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">01</text>
+  <text x="100" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">랜딩페이지</text>
+  <text x="100" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">보여주는 사이트</text>
+  <text x="100" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">이번 수업의 출발점</text>
+  <text x="100" y="420" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#16a34a" letter-spacing="0.06em">START HERE</text>
 
-  <!-- 우상: SaaS (파랑) -->
-  <rect x="655" y="240" width="565" height="170" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="679" y="280" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#1e40af">2 · 기능이 도는 서비스</text>
-  <text x="679" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#1e3a8a">눌러서 일이 되는 사이트</text>
-  <text x="679" y="358" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">로그인하고 데이터를 다루며 작업</text>
-  <text x="679" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">예: Notion · Slack · Figma</text>
+  <!-- 카드 2: SaaS -->
+  <rect x="370" y="260" width="270" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="390" y="292" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">02</text>
+  <text x="390" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">SaaS</text>
+  <text x="390" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">기능이 도는 서비스</text>
+  <text x="390" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">Notion · Slack · Figma</text>
 
-  <!-- 좌하: 쇼핑몰 (초록) -->
-  <rect x="60" y="426" width="565" height="170" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="84" y="466" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#15803d">3 · 쇼핑몰</text>
-  <text x="84" y="504" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#166534">상품을 팔고 결제를 받는 사이트</text>
-  <text x="84" y="544" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">상품 진열 · 주문 · 결제 흐름이 핵심</text>
-  <text x="84" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#15803d">예: 자사몰 · 온라인 스토어</text>
+  <!-- 카드 3: 쇼핑몰 -->
+  <rect x="660" y="260" width="270" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="680" y="292" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">03</text>
+  <text x="680" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">쇼핑몰</text>
+  <text x="680" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">자사몰 · 스토어</text>
+  <text x="680" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">상품 · 결제 · 주문</text>
 
-  <!-- 우하: 사내도구 (회색) -->
-  <rect x="655" y="426" width="565" height="170" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="679" y="466" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#374151">4 · 사내도구</text>
-  <text x="679" y="504" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#4b5563">회사 안에서만 쓰는 내부 시스템</text>
-  <text x="679" y="544" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">직원만 보는 관리 화면 · 업무 도구</text>
-  <text x="679" y="572" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">예: 사내 대시보드 · 관리자 화면</text>
+  <!-- 카드 4: 사내도구 -->
+  <rect x="950" y="260" width="250" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="970" y="292" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">04</text>
+  <text x="970" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">사내도구</text>
+  <text x="970" y="370" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">회사 내부 시스템</text>
+  <text x="970" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">관리자 · 대시보드</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">1번에서 시작해 16주 동안 점점 다른 갈래도 만질 수 있게 됩니다</text>
+  <!-- 하단 안내 -->
+  <text x="80" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">16주 동안</text>
+  <text x="80" y="580" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">1번에서 시작해 2 · 3 · 4번 영역도 차츰 만집니다</text>
 </svg>

@@ -1,49 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 03 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘 끝나면 할 수 있는 것</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">코드 한 줄도 직접 안 쳐도 됩니다 — 클로드한테 말로 시키는 법만 익히면 끝</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 03</text>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">목표 체크리스트</text>
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.015em">학습 목표</text>
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">오늘 끝나면 할 수 있는 것</text>
+  <!-- 구분선 -->
+  <rect x="60" y="212" width="1160" height="1" fill="#e5e7eb"/>
 
-  <!-- 목표 카드 4장 (좌측 760폭에 2x2) -->
-  <rect x="60" y="278" width="365" height="120" rx="14" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <path d="M 86 320 l 8 8 l 16 -18" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="124" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">CSS의 3대 무기</text>
-  <text x="86" y="362" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">색 · 폰트 · 여백이 무엇인지</text>
-  <text x="86" y="384" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">말로 설명할 수 있다</text>
+  <!-- 항목 1 -->
+  <text x="80" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">색·폰트·여백이 CSS의 3대 무기라는 것을 말할 수 있다</text>
 
-  <rect x="445" y="278" width="365" height="120" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <path d="M 471 320 l 8 8 l 16 -18" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="509" y="328" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">말로 색·폰트 지시</text>
-  <text x="471" y="362" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">자연어로 클로드에게 시켜서</text>
-  <text x="471" y="384" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">페이지에 적용할 수 있다</text>
+  <!-- 항목 2 -->
+  <text x="80" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Claude Code에 자연어로 지시해 페이지에 색을 입힐 수 있다</text>
 
-  <rect x="60" y="414" width="365" height="120" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M 86 456 l 8 8 l 16 -18" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="124" y="464" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">Google Fonts 한 줄</text>
-  <text x="86" y="498" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">한글+영문 폰트를</text>
-  <text x="86" y="520" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">한 줄로 바꿀 수 있다</text>
+  <!-- 항목 3 -->
+  <text x="80" y="440" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="440" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Google Fonts 한 줄로 한글+영문 폰트를 바꿀 수 있다</text>
 
-  <rect x="445" y="414" width="365" height="120" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <path d="M 471 456 l 8 8 l 16 -18" fill="none" stroke="#6b7280" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="509" y="464" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#374151">숨통 트인 여백</text>
-  <text x="471" y="498" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">답답한 페이지를 여백으로</text>
-  <text x="471" y="520" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">시원하게 만들 수 있다</text>
+  <!-- 항목 4 (그린 강조) -->
+  <text x="80" y="512" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#16a34a">─</text>
+  <text x="120" y="512" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">답답한 페이지를 여백으로 숨통 트인 상태로 만들 수 있다</text>
 
-  <!-- 우측 결과물 박스 -->
-  <text x="850" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 끝에 손에 쥐는 것</text>
-  <rect x="850" y="278" width="370" height="256" rx="14" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
-  <rect x="874" y="304" width="140" height="16" rx="4" fill="#38bdf8"/>
-  <rect x="874" y="332" width="322" height="9" rx="4" fill="#334155"/>
-  <rect x="874" y="350" width="322" height="9" rx="4" fill="#334155"/>
-  <rect x="874" y="368" width="240" height="9" rx="4" fill="#334155"/>
-  <rect x="874" y="402" width="100" height="28" rx="6" fill="#38bdf8"/>
-  <text x="1035" y="490" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#38bdf8">Before / After 비교</text>
-  <text x="1035" y="514" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#94a3b8">리디자인된 내 페이지</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">위협감 제거가 핵심 — 직접 칠 코드는 0줄, 말로 시키는 법만 배웁니다</text>
+  <!-- 메타: 산출물 -->
+  <text x="60" y="630" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 산출물</text>
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">Before · 2주차 페이지   /   After · 3주차 리디자인 페이지</text>
 </svg>

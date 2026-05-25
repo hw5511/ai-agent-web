@@ -1,49 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 07 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 07</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">라이브러리 5종으로 풀 스펙 랜딩 만들기</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">라이브러리 = 이름만 알면 끝 — 코드 한 줄도 직접 안 쳐도 됩니다</text>
-  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 07</text>
 
-  <text x="60" y="258" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 배울 것</text>
+  <!-- 부제 -->
+  <text x="60" y="320" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">7주차 · 시각 라이브러리 5종</text>
 
-  <!-- 미니 카드 3개 -->
-  <rect x="60" y="280" width="360" height="110" rx="12" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="84" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#92400e">5종 카탈로그</text>
-  <text x="84" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">어떤 효과 = 어떤 라이브러리</text>
-  <text x="84" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">이름과 쓰임만 구분합니다</text>
+  <!-- 큰 제목 -->
+  <text x="60" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="60" font-weight="700" fill="#171717" letter-spacing="-0.02em">라이브러리 = 이름만 알면 끝</text>
 
-  <rect x="460" y="280" width="360" height="110" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="484" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#1e40af">자연어로 붙이기</text>
-  <text x="484" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">프롬프트만으로 파티클·타이핑</text>
-  <text x="484" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">3D 효과를 페이지에 추가</text>
+  <!-- 그린 짧은 언더라인 -->
+  <rect x="60" y="426" width="120" height="4" rx="2" fill="#16a34a"/>
 
-  <rect x="860" y="280" width="360" height="110" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="884" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">풀 스펙 랜딩</text>
-  <text x="884" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">5종 중 1~2개를 골라 조합해</text>
-  <text x="884" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">내 페이지를 완성합니다</text>
+  <!-- 보조 한 줄 -->
+  <text x="60" y="486" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#6b7280">파티클 · 타이핑 · 3D · 배경 · 직접 그리기</text>
 
-  <text x="60" y="438" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">수업 흐름</text>
-
-  <!-- 흐름 칩 -->
-  <rect x="60" y="458" width="150" height="40" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="135" y="483" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">5종 소개</text>
-  <text x="224" y="484" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
-  <rect x="238" y="458" width="150" height="40" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="313" y="483" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#92400e">실습 4종</text>
-  <text x="402" y="484" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
-  <rect x="416" y="458" width="150" height="40" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="491" y="483" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">프롬프트 공식</text>
-  <text x="580" y="484" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#9ca3af">→</text>
-  <rect x="594" y="458" width="150" height="40" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="669" y="483" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">정리</text>
-
-  <!-- 도달점 박스 -->
-  <rect x="60" y="528" width="1160" height="68" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="90" y="558" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb" letter-spacing="0.04em">오늘의 도달점</text>
-  <text x="90" y="583" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">파티클 배경 + 타이핑 직함 + 3D 큐브가 동시에 살아있는 풀 스펙 랜딩 — 1회차 디자인 결과물 동급</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">외울 건 5개 이름뿐 — 오늘은 코드 학습이 아니라 카탈로그 학습입니다</text>
+  <!-- 하단 우측 시그니처 -->
+  <text x="1220" y="676" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af" letter-spacing="0.08em">AI AGENT WEB · 07 / 16</text>
 </svg>

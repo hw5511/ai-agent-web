@@ -1,47 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 06 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ① — 마우스 트리거 3종</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">hover · click · mousemove — 언제 반응을 켤지 세 가지를 구분합니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">마우스 트리거 3종</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">언제 발동되는가 — hover · click · mousemove</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">언제 발동되나</text>
+  <!-- 메타 라벨 -->
+  <text x="60" y="258" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">트리거 비교</text>
 
-  <!-- hover 노랑 -->
-  <rect x="60" y="278" width="365" height="250" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
-  <text x="84" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#92400e">hover</text>
-  <line x1="84" y1="336" x2="401" y2="336" stroke="#fcd34d" stroke-width="1"/>
-  <text x="84" y="370" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#78350f">올라갔을 때 한 번</text>
-  <text x="84" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">마우스가 요소 위로 올라가는</text>
-  <text x="84" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">순간 켜진다</text>
-  <text x="84" y="470" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#d97706">대표 예시</text>
-  <text x="84" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#78350f">색 변화 · 확대 · Flip Card</text>
+  <!-- 카드 1: hover -->
+  <rect x="60" y="280" width="373" height="288" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">01</text>
+  <text x="84" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">hover</text>
+  <text x="84" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">마우스가 요소 위로 올라온 동안</text>
+  <line x1="84" y1="420" x2="409" y2="420" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="84" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">대표 예시</text>
+  <text x="84" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">색 변화 · 확대 · Flip Card</text>
+  <text x="84" y="528" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">상태</text>
+  <text x="84" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">위 / 안 — 2개</text>
 
-  <!-- click 파랑 -->
-  <rect x="457" y="278" width="365" height="250" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="481" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#1e40af">click</text>
-  <line x1="481" y1="336" x2="798" y2="336" stroke="#93c5fd" stroke-width="1"/>
-  <text x="481" y="370" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#1e3a8a">한 번 눌렀을 때</text>
-  <text x="481" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">마우스를 한 번 누르는</text>
-  <text x="481" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">동작으로 켜진다</text>
-  <text x="481" y="470" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#2563eb">대표 예시</text>
-  <text x="481" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#1e3a8a">메뉴 펼침 · 토글 · 모달 열기</text>
+  <!-- 카드 2: click -->
+  <rect x="453" y="280" width="373" height="288" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="477" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">02</text>
+  <text x="477" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">click</text>
+  <text x="477" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">한 번 눌렀을 때</text>
+  <line x1="477" y1="420" x2="802" y2="420" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="477" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">대표 예시</text>
+  <text x="477" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">메뉴 펼침 · 토글 · 모달</text>
+  <text x="477" y="528" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">상태</text>
+  <text x="477" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">열림 / 닫힘 — 2개</text>
 
-  <!-- mousemove 초록 -->
-  <rect x="854" y="278" width="366" height="250" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="878" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#15803d">mousemove</text>
-  <line x1="878" y1="336" x2="1196" y2="336" stroke="#86efac" stroke-width="1"/>
-  <text x="878" y="370" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#166534">움직이는 매 순간</text>
-  <text x="878" y="404" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">커서가 이동하는 동안</text>
-  <text x="878" y="426" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">계속 좌표를 읽는다</text>
-  <text x="878" y="470" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">대표 예시</text>
-  <text x="878" y="496" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#166534">마그네틱 · Spotlight 빛 추적</text>
+  <!-- 카드 3: mousemove -->
+  <rect x="846" y="280" width="374" height="288" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="870" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">03</text>
+  <text x="870" y="358" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#171717">mousemove</text>
+  <text x="870" y="394" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">커서가 움직이는 매 순간</text>
+  <line x1="870" y1="420" x2="1196" y2="420" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="870" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">대표 예시</text>
+  <text x="870" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">마그네틱 · Spotlight · 패럴랙스</text>
+  <text x="870" y="528" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">상태</text>
+  <text x="870" y="552" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">연속 좌표 — 수많은 값</text>
 
-  <!-- 판단 기준 배너 -->
-  <rect x="60" y="548" width="1160" height="50" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="90" y="579" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="600" fill="#374151">판단 기준 — 상태가 2개면 hover · click,  좌표가 필요하면 mousemove</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘 만들 셋 — Flip은 hover,  마그네틱과 Spotlight는 mousemove입니다</text>
+  <!-- 강조 한 줄 (그린) -->
+  <text x="60" y="640" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="600" fill="#16a34a">상태가 2개면 hover · click, 좌표가 필요하면 mousemove</text>
 </svg>

@@ -1,45 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 01 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">방금 만든 그것은 "랜딩페이지"</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">한 화면을 스크롤하며 보여주는 페이지 — 웹의 가장 흔한 형태</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">방금 만든 그것은 랜딩페이지</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">웹의 1가지 형태 — "보여주기 위한 한 장"</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">랜딩페이지의 특징</text>
+  <!-- 글머리 -->
+  <text x="80" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">1페이지 스크롤형 — 위에서 아래로 한 번에</text>
 
-  <!-- 특징 3카드 -->
-  <rect x="60" y="278" width="360" height="150" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="240" y="328" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#92400e">보여주기가 목적</text>
-  <line x1="100" y1="350" x2="380" y2="350" stroke="#fcd34d" stroke-width="1"/>
-  <text x="240" y="384" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">정보를 잘 전달하는 게</text>
-  <text x="240" y="406" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">가장 중요한 일</text>
+  <text x="80" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">정보 전달이 목적, 누르는 기능은 거의 없음</text>
 
-  <rect x="460" y="278" width="360" height="150" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="640" y="328" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#1e40af">예쁘게가 핵심</text>
-  <line x1="500" y1="350" x2="780" y2="350" stroke="#93c5fd" stroke-width="1"/>
-  <text x="640" y="384" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">첫인상이 곧 성패</text>
-  <text x="640" y="406" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">디자인이 절반 이상</text>
+  <text x="80" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Wix · Webflow · Framer — 이제 Claude Design도 합류</text>
 
-  <rect x="860" y="278" width="360" height="150" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="1040" y="328" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#15803d">누르는 기능 적음</text>
-  <line x1="900" y1="350" x2="1180" y2="350" stroke="#86efac" stroke-width="1"/>
-  <text x="1040" y="384" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">복잡한 동작이 거의 없어</text>
-  <text x="1040" y="406" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">가장 만들기 쉬운 형태</text>
-
-  <!-- 같은 카테고리 다이어그램 -->
-  <text x="60" y="476" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">랜딩페이지를 만드는 도구들 — 이제 Claude Design도 합류</text>
-
-  <rect x="60" y="496" width="208" height="60" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="164" y="532" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">Wix</text>
-  <rect x="288" y="496" width="208" height="60" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="392" y="532" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">Webflow</text>
-  <rect x="516" y="496" width="208" height="60" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="620" y="532" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#374151">Framer</text>
-  <text x="754" y="532" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">+</text>
-  <rect x="788" y="496" width="432" height="60" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="1004" y="532" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">Claude Design — 방금 여러분이 쓴 것</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">방금 만든 게 웹의 한 종류 — 다른 종류도 많습니다</text>
+  <!-- 강조 한 줄 -->
+  <text x="80" y="566" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#16a34a">"방금 만든 그것, 사실 웹의 한 종류입니다"</text>
 </svg>

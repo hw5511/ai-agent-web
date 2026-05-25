@@ -1,43 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 01 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">16주 청사진 — Part 1 + Part 2</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">기초 8주(랜딩 + 배포) → 심화 8주(데이터 + 도메인 + 결제)</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 01</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">16주 청사진</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">Part 1 (1~8주) → Part 2 (9~16주)</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- Part 1 박스 (노랑) -->
-  <rect x="60" y="240" width="565" height="200" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="84" y="278" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#92400e">Part 1 · 1~8주 — 기초</text>
-  <line x1="84" y1="296" x2="601" y2="296" stroke="#fcd34d" stroke-width="1"/>
-  <text x="84" y="330" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">• HTML · CSS · JS 뼈대 익히기</text>
-  <text x="84" y="358" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">• React 컴포넌트로 화면 조립</text>
-  <text x="84" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">• DESIGN.md 로 디자인 룰 전달</text>
-  <text x="84" y="414" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">• 진짜 사이트로 인터넷에 배포</text>
+  <!-- 16주 타임라인 -->
+  <g>
+    <text x="80" y="270" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">PART 1 · 1~8주</text>
+    <text x="660" y="270" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">PART 2 · 9~16주</text>
 
-  <!-- Part 2 박스 (파랑) -->
-  <rect x="655" y="240" width="565" height="200" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="679" y="278" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#1e40af">Part 2 · 9~16주 — 심화</text>
-  <line x1="679" y1="296" x2="1196" y2="296" stroke="#93c5fd" stroke-width="1"/>
-  <text x="679" y="330" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">• Vercel을 활용한 DB · API 연동</text>
-  <text x="679" y="358" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">• 회원 시스템(가입 · 로그인)</text>
-  <text x="679" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">• 본인 도메인 주소 연결</text>
-  <text x="679" y="414" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">• 결제 흐름까지 붙이기</text>
+    <!-- Part 1 박스 8개 -->
+    <rect x="80"  y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="150" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="220" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="290" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="360" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="430" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="500" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="570" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <!-- Part 2 박스 8개 -->
+    <rect x="650"  y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="720"  y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="790"  y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="860"  y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="930"  y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="1000" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="1070" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="1140" y="290" width="65" height="36" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
 
-  <!-- 16칸 타임라인 -->
-  <text x="60" y="478" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">매주 1개념씩 — 누적식</text>
-  <rect x="60" y="496" width="556" height="36" rx="8" fill="#fde68a"/>
-  <rect x="624" y="496" width="556" height="36" rx="8" fill="#bfdbfe"/>
-  <text x="338" y="519" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#92400e">1 · 2 · 3 · 4 · 5 · 6 · 7 · 8</text>
-  <text x="902" y="519" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#1e40af">9 · 10 · 11 · 12 · 13 · 14 · 15 · 16</text>
+    <!-- 1주차 현재 위치 (그린 채움) -->
+    <rect x="80" y="290" width="65" height="36" rx="4" fill="#16a34a"/>
+    <text x="112" y="314" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff">1</text>
 
-  <!-- 마일스톤 깃발 (벡터) -->
-  <path d="M610 540 v40 M610 544 h22 v14 h-22 z" fill="#d97706" stroke="#d97706" stroke-width="2" stroke-linejoin="round"/>
-  <text x="600" y="596" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#92400e">8주 — 내 랜딩이 인터넷에 떠 있음</text>
+    <!-- 8 / 16 라벨 -->
+    <text x="602" y="314" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#171717">8</text>
+    <text x="1172" y="314" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#171717">16</text>
+  </g>
 
-  <path d="M1170 540 v40 M1170 544 h22 v14 h-22 z" fill="#2563eb" stroke="#2563eb" stroke-width="2" stroke-linejoin="round"/>
-  <text x="1160" y="596" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#1e40af">16주 — 내 도메인에 결제 도는 사이트</text>
+  <!-- Part 1 설명 -->
+  <text x="80" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">Part 1 · 랜딩을 통제하고 배포</text>
+  <text x="80" y="448" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="400" fill="#374151">HTML/CSS/JS 뼈대 · 컴포넌트 · DESIGN.md · 진짜 사이트로 배포</text>
+  <text x="80" y="478" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#6b7280">마일스톤(8주) — 내가 통제하는 랜딩이 인터넷에 떠 있음</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">매주 하나씩만 쌓으면 16주 후엔 진짜 본인 사이트가 떠 있습니다</text>
+  <!-- Part 2 설명 -->
+  <text x="80" y="548" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#171717">Part 2 · 데이터 · 도메인 · 회원 · 결제</text>
+  <text x="80" y="584" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="400" fill="#374151">Vercel을 활용한 DB·API 연동 · 회원 시스템 · 본인 도메인 · 결제 흐름</text>
+  <text x="80" y="614" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#6b7280">마일스톤(16주) — 본인 도메인에 결제 도는 사이트 보유</text>
 </svg>

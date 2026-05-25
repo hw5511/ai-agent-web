@@ -1,62 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">오늘 가져갈 결과물</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">2시간 후 내 손과 머리에 무엇이 남는지 먼저 정합니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 16</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">학습 목표</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">2시간 후 내 손에 남는 네 가지</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="252" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 체크리스트</text>
+  <text x="80" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="290" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">토스페이먼츠 테스트 키를 손에 넣는다</text>
 
-  <!-- 좌측 4단계 체크리스트 -->
-  <rect x="60" y="270" width="700" height="64" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <circle cx="92" cy="302" r="13" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <path d="M86 302 l4 4 l8 -9" stroke="#d97706" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="120" y="298" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#92400e">① 토스 테스트 키 발급</text>
-  <text x="120" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">tosspayments.com 가입 → 키 2개 손에 넣기</text>
+  <text x="80" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">내 사이트에 결제 위젯이 뜬다</text>
 
-  <rect x="60" y="346" width="700" height="64" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <circle cx="92" cy="378" r="13" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
-  <path d="M86 378 l4 4 l8 -9" stroke="#2563eb" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="120" y="374" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">② 결제 위젯 띄우기</text>
-  <text x="120" y="396" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">내 사이트에 결제창이 뜨고 테스트 카드로 결제</text>
+  <text x="80" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">Vercel 함수에서 결제를 검증하고 결과 페이지가 뜬다</text>
 
-  <rect x="60" y="422" width="700" height="64" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <circle cx="92" cy="454" r="13" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <path d="M86 454 l4 4 l8 -9" stroke="#16a34a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="120" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#15803d">③ 결제 검증 + 결과 페이지</text>
-  <text x="120" y="472" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#6b7280">Vercel 함수에서 검증 → 성공 페이지 동작</text>
+  <text x="80" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#16a34a">─</text>
+  <text x="120" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">본인 작품을 5분간 발표하고 수료한다</text>
 
-  <rect x="60" y="498" width="700" height="64" rx="12" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
-  <circle cx="92" cy="530" r="13" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1.5"/>
-  <path d="M86 530 l4 4 l8 -9" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="120" y="526" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#6d28d9">④ 본인 작품 5분 발표 → 수료</text>
-  <text x="120" y="548" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#7c3aed">내가 만든 사이트를 직접 보여주기</text>
-
-  <!-- 우측 미리보기: 결제 위젯 모달 -->
-  <rect x="790" y="270" width="430" height="180" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="790" y="270" width="430" height="40" rx="14" fill="#0f172a"/>
-  <rect x="790" y="296" width="430" height="14" fill="#0f172a"/>
-  <text x="810" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#ffffff">결제하기</text>
-  <text x="1175" y="296" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#94a3b8">×</text>
-  <rect x="814" y="332" width="382" height="30" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="828" y="352" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">카드 번호  •••• •••• •••• ••••</text>
-  <rect x="814" y="372" width="186" height="30" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="828" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">유효기간 MM/YY</text>
-  <rect x="1010" y="372" width="186" height="30" rx="6" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="1024" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">CVC · 할부</text>
-  <rect x="814" y="410" width="382" height="28" rx="8" fill="#dbeafe"/>
-  <text x="1005" y="429" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#1e40af">테스트 카드로 결제 — 실제 청구 X</text>
-
-  <!-- 발표 마이크 (벡터) -->
-  <rect x="790" y="466" width="430" height="96" rx="14" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
-  <rect x="826" y="490" width="22" height="36" rx="11" fill="#7c3aed"/>
-  <path d="M820 518 a17 17 0 0 0 34 0" stroke="#7c3aed" stroke-width="2.5" fill="none"/>
-  <rect x="835" y="535" width="4" height="10" fill="#7c3aed"/>
-  <rect x="826" y="544" width="22" height="4" rx="2" fill="#7c3aed"/>
-  <text x="876" y="510" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#6d28d9">그리고 5분 발표</text>
-  <text x="876" y="534" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#7c3aed">내가 만든 작품을 동료 앞에서 자랑하는 시간</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘 결제는 테스트 모드 — 실제 돈이 빠지지 않으니 마음 편히 누르세요</text>
+  <!-- 하단 안내 (회색) -->
+  <text x="60" y="650" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">TEST MODE</text>
+  <text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">오늘 결제는 모두 테스트 카드  ·  실제 청구는 일어나지 않습니다</text>
 </svg>

@@ -1,52 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 13 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ① — 도메인이란 무엇인가</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">도메인 = 사람이 읽기 좋은 인터넷 주소, 내 가게의 "간판"입니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">도메인이란 무엇인가</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">사람이 읽기 좋은 인터넷 주소 · "내 가게 간판"</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">사람은 간판을 보고, 기계는 좌표를 본다</text>
+  <!-- 간판 vs 좌표 다이어그램 -->
+  <rect x="80" y="270" width="500" height="140" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="100" y="304" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">간판 · 사람이 읽음</text>
+  <text x="100" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#171717">example.com</text>
+  <text x="100" y="386" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">도메인 — 외우고 입력할 수 있는 이름</text>
 
-  <!-- 도메인 = 간판 (파랑) -->
-  <rect x="60" y="278" width="500" height="130" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="84" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#2563eb">사람이 보는 것 — 도메인</text>
-  <text x="84" y="356" font-family="'Courier New',monospace" font-size="26" font-weight="700" fill="#1e40af">example.com</text>
-  <text x="84" y="388" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1d4ed8">가게 간판 — 외우기 쉽고 기억에 남는다</text>
+  <text x="600" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="400" fill="#9ca3af">↔</text>
 
-  <text x="610" y="350" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" fill="#9ca3af">↔</text>
+  <rect x="640" y="270" width="500" height="140" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="660" y="304" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">GPS 좌표 · 기계가 읽음</text>
+  <text x="660" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#171717">185.199.108.153</text>
+  <text x="660" y="386" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">IP — 진짜 건물 위치, 외우기 어려움</text>
 
-  <!-- IP = 좌표 (회색) -->
-  <rect x="660" y="278" width="500" height="130" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="684" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#9ca3af">기계가 보는 것 — IP 주소</text>
-  <text x="684" y="356" font-family="'Courier New',monospace" font-size="26" font-weight="700" fill="#6b7280">185.199.108.153</text>
-  <text x="684" y="388" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">건물의 GPS 좌표 — 정확하지만 못 외운다</text>
+  <!-- 분해 다이어그램 -->
+  <text x="80" y="470" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">도메인의 구조</text>
+  <text x="80" y="514" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="500" fill="#171717">myname</text>
+  <text x="218" y="514" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="500" fill="#9ca3af">+</text>
+  <text x="252" y="514" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#171717">.com</text>
+  <text x="80" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">내가 정하는 이름</text>
+  <text x="252" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#6b7280">끝자리 = TLD (.kr · .shop · .dev …)</text>
 
-  <!-- 분해 다이어그램 (좌측 하단) -->
-  <text x="60" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">도메인 쪼개보기</text>
-  <rect x="60" y="468" width="500" height="118" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="92" y="500" width="200" height="54" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="192" y="525" text-anchor="middle" font-family="'Courier New',monospace" font-size="20" font-weight="700" fill="#15803d">내이름</text>
-  <text x="192" y="546" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#16a34a">내가 정하는 부분</text>
-  <text x="308" y="535" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">+</text>
-  <rect x="328" y="500" width="200" height="54" rx="10" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="428" y="525" text-anchor="middle" font-family="'Courier New',monospace" font-size="20" font-weight="700" fill="#92400e">.com</text>
-  <text x="428" y="546" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#d97706">끝부분 (TLD)</text>
-
-  <!-- TLD 가격 표 (우측 하단) -->
-  <text x="660" y="448" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">끝부분별 평균 가격 (1년)</text>
-  <rect x="660" y="468" width="500" height="118" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <line x1="660" y1="500" x2="1160" y2="500" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="660" y1="529" x2="1160" y2="529" stroke="#f3f4f6" stroke-width="1"/>
-  <line x1="660" y1="558" x2="1160" y2="558" stroke="#f3f4f6" stroke-width="1"/>
-  <text x="690" y="490" font-family="'Courier New',monospace" font-size="15" font-weight="700" fill="#374151">.com</text>
-  <text x="1130" y="490" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">약 1.2~1.8만원</text>
-  <text x="690" y="520" font-family="'Courier New',monospace" font-size="15" font-weight="700" fill="#374151">.shop · .site</text>
-  <text x="1130" y="520" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">더 저렴 (할인 多)</text>
-  <text x="690" y="549" font-family="'Courier New',monospace" font-size="15" font-weight="700" fill="#374151">.kr (한국)</text>
-  <text x="1130" y="549" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">별도 가격대</text>
-  <text x="690" y="578" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">도메인은 "소유"가 아니라 1년 단위 "임대" — 갱신 필요</text>
-
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">IP는 못 외워도, 간판은 외운다 — 그래서 도메인이 필요합니다</text>
+  <!-- 핵심 한 줄 (그린 강조) -->
+  <text x="80" y="630" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#16a34a">"소유가 아니라 1년 단위 임대"</text>
+  <text x="80" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#6b7280">갱신을 안 하면 다른 사람이 가져갈 수 있다</text>
 </svg>

@@ -1,44 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 04 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 04</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">4회차 핵심 정리</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">인터랙션 = 트리거(무슨 일이 일어나면)  →  행동(무엇을 한다)</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 04</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">핵심 정리</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 가져갈 1줄 + 다음 회차 예고</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 익힌 3대 트리거</text>
+  <!-- 오늘의 1줄 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘의 1줄</text>
+  <text x="60" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="30" font-weight="700" fill="#171717">인터랙션 = 트리거 → 행동</text>
 
-  <!-- 카드 01 click (노랑) -->
-  <rect x="60" y="278" width="360" height="270" rx="16" fill="#fef3c7" stroke="#fcd34d" stroke-width="2"/>
-  <text x="84" y="334" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#d97706">01</text>
-  <text x="84" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#92400e">click</text>
-  <line x1="84" y1="388" x2="396" y2="388" stroke="#fcd34d" stroke-width="1.5"/>
-  <text x="84" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">버튼 · 메뉴를 누르는 순간</text>
-  <text x="84" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#78350f">→ 메시지 표시 · 색 변경 · 토글</text>
-  <text x="84" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#d97706">실습 1 — 연락하기 버튼 완성</text>
+  <!-- 3대 트리거 한 표 -->
+  <text x="60" y="372" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">3대 트리거 한 표 요약</text>
 
-  <!-- 카드 02 scroll (파랑) -->
-  <rect x="460" y="278" width="360" height="270" rx="16" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="484" y="334" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#2563eb">02</text>
-  <text x="484" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#1e40af">scroll</text>
-  <line x1="484" y1="388" x2="796" y2="388" stroke="#93c5fd" stroke-width="1.5"/>
-  <text x="484" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">화면을 위아래로 움직이는 순간</text>
-  <text x="484" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e3a8a">→ 섹션이 페이드인으로 등장</text>
-  <text x="484" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#2563eb">실습 2 — 스크롤 등장 완성</text>
+  <text x="80" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#171717">click</text>
+  <text x="240" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#6b7280">버튼 · 메뉴 누를 때 행동을 단다</text>
 
-  <!-- 카드 03 mousemove (초록) -->
-  <rect x="860" y="278" width="360" height="270" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="884" y="334" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#16a34a">03</text>
-  <text x="884" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#15803d">mousemove</text>
-  <line x1="884" y1="388" x2="1196" y2="388" stroke="#86efac" stroke-width="1.5"/>
-  <text x="884" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">마우스를 움직이는 순간</text>
-  <text x="884" y="450" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">→ 커서가 위치를 따라 이동</text>
-  <text x="884" y="524" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#16a34a">실습 3 — 마우스 따라가기 완성</text>
+  <text x="80" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#171717">scroll</text>
+  <text x="240" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#6b7280">화면에 들어왔는지 감지해서 등장</text>
 
-  <!-- 누적 성장 + 다음 주 예고 -->
-  <rect x="60" y="566" width="1160" height="34" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="640" y="588" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#374151">1주 구조  →  2주 스타일  →  3주 레이아웃  →  4주 인터랙션 완성</text>
+  <text x="80" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+  <text x="120" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#171717">mousemove</text>
+  <text x="288" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#6b7280">마우스 좌표를 따라 요소를 움직인다</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">다음 5회차 — GSAP: 오늘의 인터랙션을 영화 장면처럼 부드럽게</text>
+  <!-- 그린 짧은 구분선 -->
+  <rect x="60" y="544" width="80" height="3" rx="1.5" fill="#16a34a"/>
+
+  <!-- 다음 회차 예고 -->
+  <text x="60" y="588" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">다음 회차 · WEB 05</text>
+  <text x="60" y="626" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#171717">GSAP — 오늘의 인터랙션이 영화 장면처럼 부드러워집니다</text>
+
+  <!-- 누적 위치 -->
+  <text x="1220" y="666" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">1주 구조 · 2주 스타일 · 3주 레이아웃 · 4주 인터랙션</text>
 </svg>

@@ -1,46 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 06 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
-  <rect x="144" y="44" width="52" height="24" rx="12" fill="#fef3c7" stroke="#d1d5db" stroke-width="1"/>
-  <text x="170" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#d97706" letter-spacing="0.05em">실습 2</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ② — Flip Card</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">작품 카드를 올리면 3D로 뒤집혀 설명이 나옵니다 — CSS 단독 패턴</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 06</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 ② · Flip Card</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">hover로 작품 카드가 3D로 뒤집힌다 — CSS 단독</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- Claude 지시문 박스 -->
-  <rect x="60" y="240" width="1160" height="108" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <rect x="84" y="258" width="104" height="22" rx="11" fill="#2563eb"/>
-  <text x="136" y="273" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">Claude 지시문</text>
-  <text x="84" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">"작품 카드를 Flip Card로 만들어줘.</text>
-  <text x="84" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#1e40af">앞면 이미지+제목, 뒷면 설명. hover로 뒤집기."</text>
+  <!-- 좌측: 단계 -->
+  <text x="60" y="258" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단계</text>
 
-  <text x="60" y="392" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">3D 뒤집기 단계 — hover 한 번이면 끝</text>
+  <text x="80" y="308" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="308" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">대상 정하기 — 작품 갤러리 카드</text>
 
-  <!-- 뒤집기 시퀀스 -->
-  <rect x="60" y="412" width="180" height="80" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <text x="150" y="448" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">앞면 (0°)</text>
-  <text x="150" y="474" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e3a8a">이미지 + 제목</text>
-  <text x="262" y="458" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">→</text>
-  <rect x="284" y="412" width="180" height="80" rx="12" fill="#f9fafb" stroke="#d1d5db" stroke-width="2"/>
-  <text x="374" y="448" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">회전 (90°)</text>
-  <text x="374" y="474" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">돌아가는 중</text>
-  <text x="486" y="458" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">→</text>
-  <rect x="508" y="412" width="180" height="80" rx="12" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="598" y="448" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#15803d">뒷면 (180°)</text>
-  <text x="598" y="474" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#166534">설명 + 링크</text>
+  <text x="80" y="354" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="354" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">앞면 / 뒷면 콘텐츠 나누기</text>
 
-  <!-- 핵심 CSS 메모 박스 -->
-  <rect x="724" y="412" width="496" height="80" rx="12" fill="#0f172a"/>
-  <text x="748" y="442" font-family="'Courier New',monospace" font-size="14" fill="#6b7280">// 핵심 CSS — Claude가 짜줍니다</text>
-  <text x="748" y="470" font-family="'Courier New',monospace" font-size="14" fill="#a3e635">perspective · rotateY(180deg) · backface</text>
+  <text x="80" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="400" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">perspective로 입체감 세팅</text>
 
-  <!-- 확인해보세요 박스 -->
-  <rect x="60" y="510" width="1160" height="86" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
-  <rect x="84" y="528" width="104" height="22" rx="11" fill="#16a34a"/>
-  <text x="136" y="543" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" fill="#ffffff">확인해보세요</text>
-  <text x="84" y="576" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">• 카드 위에 마우스를 올리면 뒤집힌다  • 뒷면에 설명이 보인다  • 마우스를 빼면 앞면으로 돌아온다</text>
+  <text x="80" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">hover에 rotateY 180° 적용</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">perspective 값을 0으로 줘보세요 — 입체감이 사라지는 걸로 역할을 체험합니다</text>
+  <text x="80" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
+  <text x="120" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">뒷면 가리기 — backface-visibility</text>
+
+  <!-- 우측: 뒤집기 시퀀스 -->
+  <text x="720" y="258" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">뒤집기 단계</text>
+
+  <!-- 0° -->
+  <rect x="720" y="290" width="140" height="180" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <rect x="740" y="310" width="100" height="80" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="790" y="356" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">image</text>
+  <text x="790" y="414" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="600" fill="#171717">작품 제목</text>
+  <text x="790" y="436" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#6b7280">앞면</text>
+  <text x="790" y="492" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#374151">0°</text>
+
+  <text x="890" y="386" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#9ca3af">→</text>
+
+  <!-- 90° (얇은 라인) -->
+  <rect x="920" y="290" width="140" height="180" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <line x1="990" y1="310" x2="990" y2="450" stroke="#9ca3af" stroke-width="2"/>
+  <text x="990" y="492" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#374151">90°</text>
+  <text x="990" y="514" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">옆에서 본 모습</text>
+
+  <text x="1090" y="386" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#9ca3af">→</text>
+
+  <!-- 180° (뒷면) -->
+  <rect x="1120" y="290" width="100" height="180" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1170" y="334" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#374151">한 줄 설명</text>
+  <text x="1170" y="358" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#6b7280">+ 링크</text>
+  <line x1="1140" y1="380" x2="1200" y2="380" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="1170" y="408" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#9ca3af">뒷면</text>
+  <text x="1170" y="492" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#374151">180°</text>
+
+  <!-- 핵심 속성 -->
+  <text x="720" y="556" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">핵심 속성</text>
+  <text x="720" y="582" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">perspective · rotateY · backface-visibility</text>
+
+  <!-- 강조 한 줄 (그린) -->
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">JS 없이 CSS만으로 — 상태 2개짜리 인터랙션의 정석</text>
 </svg>

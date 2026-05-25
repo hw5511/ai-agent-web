@@ -1,51 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 10 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 10</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">개념 ③ — 브라우저의 작은 서랍</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">LocalStorage — 내 브라우저 안에 데이터를 저장해두는 서랍</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 10</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">LocalStorage — 브라우저의 작은 서랍</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">내 브라우저 안에 데이터를 저장해두는 공간</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌측: 브라우저 + 서랍 일러스트 (파랑) -->
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">내 브라우저 안의 서랍</text>
-  <rect x="60" y="274" width="500" height="240" rx="14" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
-  <!-- 브라우저 창 -->
-  <rect x="90" y="298" width="440" height="190" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
-  <rect x="90" y="298" width="440" height="28" rx="10" fill="#eff6ff"/>
-  <circle cx="108" cy="312" r="4" fill="#93c5fd"/>
-  <circle cx="122" cy="312" r="4" fill="#bfdbfe"/>
-  <circle cx="136" cy="312" r="4" fill="#dbeafe"/>
-  <!-- 서랍 -->
-  <rect x="180" y="346" width="260" height="120" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-  <rect x="270" y="338" width="80" height="18" rx="9" fill="#2563eb"/>
-  <text x="310" y="351" text-anchor="middle" font-family="'Courier New',monospace" font-size="12" fill="#ffffff">guestbook</text>
-  <!-- 서랍 속 카드 -->
-  <rect x="200" y="372" width="220" height="22" rx="5" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
-  <text x="212" y="387" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#1e40af">우희 — 잘 봤어요</text>
-  <rect x="200" y="400" width="220" height="22" rx="5" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
-  <text x="212" y="415" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#1e40af">철수 — 또 올게요</text>
-  <rect x="200" y="428" width="220" height="22" rx="5" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
-  <text x="212" y="443" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" fill="#1e40af">영희 — 최고!</text>
+  <!-- 좌측: 특징 글머리 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">특징</text>
 
-  <!-- 우측 상단: 특징 (초록) -->
-  <text x="600" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">서랍의 특징</text>
-  <rect x="600" y="274" width="620" height="120" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <path d="M 628 308 L 636 316 L 650 300" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="668" y="314" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">새로고침해도 남음  ·  브라우저 닫아도 남음</text>
-  <path d="M 628 344 L 636 352 L 650 336" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="668" y="350" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">5MB까지 저장 가능</text>
-  <path d="M 628 380 L 636 388 L 650 372" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="668" y="386" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">이름표(key) + 내용(value) 한 쌍으로 보관</text>
+  <text x="80" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">새로고침해도 남는다</text>
 
-  <!-- 우측 하단: 비교 미니표 -->
-  <text x="600" y="436" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 vs 다음 주 (미리보기)</text>
-  <rect x="600" y="452" width="305" height="62" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="624" y="480" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#374151">브라우저 서랍 (오늘)</text>
-  <text x="624" y="502" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">내 컴퓨터에서만 보임</text>
-  <rect x="915" y="452" width="305" height="62" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="939" y="480" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#1e40af">클라우드 서랍 (다음 주)</text>
-  <text x="939" y="502" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#1e3a8a">친구도 볼 수 있음</text>
+  <text x="80" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">브라우저를 닫아도 남는다</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">접었다 폈다(JSON)는 클로드가 다 처리 — 우리는 "서랍에 넣는구나"만 알면 됩니다</text>
+  <text x="80" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">5MB까지 저장 가능</text>
+
+  <text x="80" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">key(이름표) + value(내용) 한 쌍</text>
+
+  <text x="80" y="504" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="504" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">표를 글자로 접었다 폈다 (Claude가 처리)</text>
+
+  <!-- 우측: 비교 미니표 -->
+  <text x="700" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 vs 다음 주</text>
+
+  <rect x="700" y="280" width="520" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+
+  <text x="900" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">LocalStorage</text>
+  <text x="1080" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#6b7280">클라우드 DB</text>
+  <line x1="720" y1="332" x2="1200" y2="332" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="720" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">저장 위치</text>
+  <text x="900" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">내 브라우저</text>
+  <text x="1080" y="362" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">인터넷 너머</text>
+  <line x1="720" y1="378" x2="1200" y2="378" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="720" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">친구도 보임</text>
+  <text x="900" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">X</text>
+  <text x="1080" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">O</text>
+  <line x1="720" y1="424" x2="1200" y2="424" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="720" y="454" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">크기</text>
+  <text x="900" y="454" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">5MB</text>
+  <text x="1080" y="454" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">사실상 무제한</text>
+  <line x1="720" y1="468" x2="1200" y2="468" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="720" y="498" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">난이도</text>
+  <text x="900" y="498" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">오늘 30분</text>
+  <text x="1080" y="498" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">다음 주</text>
+
+  <text x="720" y="528" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="400" fill="#9ca3af">다음 주는 같은 표를 클라우드 서랍으로 옮긴다</text>
+
+  <!-- 핵심 한 줄 -->
+  <text x="60" y="650" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="600" fill="#16a34a">오늘은 내 컴퓨터의 서랍 한 칸</text>
 </svg>

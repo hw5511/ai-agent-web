@@ -1,44 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- WEB 08 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">내 사이트 공유 타임</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">오늘 받은 URL을 자랑하고, 7주의 성장을 한 문장으로 남깁니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">공유 타임</text>
+
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">서로의 URL을 띄우고 · 한 줄 회고로 8주를 마무리</text>
+
+  <!-- 구분선 -->
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <!-- 좌측 채팅 mockup -->
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단톡방에 URL 올리기</text>
-  <rect x="60" y="276" width="560" height="320" rx="16" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <!-- 좌측: 단톡방 카드 -->
+  <rect x="80" y="252" width="540" height="380" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="108" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단톡방 · 지금 일어나는 일</text>
 
-  <rect x="84" y="300" width="380" height="44" rx="10" fill="#dbeafe"/>
-  <text x="104" y="328" font-family="'Courier New',monospace" font-size="13" fill="#1e40af">hw5511.github.io/jihye</text>
+  <line x1="108" y1="312" x2="592" y2="312" stroke="#e5e7eb" stroke-width="1"/>
 
-  <rect x="216" y="356" width="380" height="44" rx="10" fill="#dcfce7"/>
-  <text x="236" y="384" font-family="'Courier New',monospace" font-size="13" fill="#15803d">hw5511.github.io/minjun</text>
+  <text x="108" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af">민지</text>
+  <text x="108" y="376" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">hw5511.github.io / minji-portfolio</text>
 
-  <rect x="84" y="412" width="380" height="44" rx="10" fill="#fef3c7"/>
-  <text x="104" y="440" font-family="'Courier New',monospace" font-size="13" fill="#92400e">hw5511.github.io/seoyeon</text>
+  <text x="108" y="416" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af">현우</text>
+  <text x="108" y="442" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">hw5511.github.io / hyunwoo-site</text>
 
-  <rect x="216" y="468" width="380" height="44" rx="10" fill="#dbeafe"/>
-  <text x="236" y="496" font-family="'Courier New',monospace" font-size="13" fill="#1e40af">hw5511.github.io/doyun</text>
+  <text x="108" y="482" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af">수아</text>
+  <text x="108" y="508" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">hw5511.github.io / sua-landing</text>
 
-  <text x="84" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">옆 사람 사이트 1개 들어가서</text>
-  <text x="84" y="576" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">좋은 점 1줄 댓글 달기</text>
+  <text x="108" y="548" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af">나</text>
+  <text x="108" y="574" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#171717">hw5511.github.io / 내이름</text>
 
-  <!-- 우측 회고 + 안내 -->
-  <text x="660" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">한 문장 회고</text>
-  <rect x="660" y="276" width="560" height="150" rx="16" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
-  <text x="684" y="318" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#15803d">"1주차의 나 → 8주차의 나"</text>
-  <text x="684" y="354" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">한 문장으로 적어보세요.</text>
-  <rect x="684" y="372" width="512" height="38" rx="8" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5"/>
-  <text x="700" y="396" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">예: 구경꾼이었던 내가 이제 직접 만든다</text>
+  <text x="108" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af">…</text>
 
-  <rect x="660" y="446" width="560" height="150" rx="16" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
-  <text x="684" y="488" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="700" fill="#1e40af">잊지 말 것</text>
-  <text x="684" y="522" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">· 오늘 받은 URL을 즐겨찾기 하세요</text>
-  <text x="684" y="552" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">· 가족·친구에게 링크 보내기 (선택)</text>
-  <text x="684" y="582" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#1e40af">· 자기소개할 때 이 주소를 쓰세요</text>
+  <!-- 우측: 할 일 글머리 -->
+  <text x="660" y="288" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 할 것</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">오늘 받은 URL은 평생 여러분 겁니다 — 마음껏 자랑하세요</text>
+  <text x="660" y="346" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="700" y="346" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">단톡방에 내 URL 올리기</text>
+
+  <text x="660" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="700" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">옆 사람 사이트 1곳 들어가기</text>
+
+  <text x="660" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="700" y="446" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">좋은 점 한 줄 댓글</text>
+
+  <text x="660" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="700" y="496" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">1주차의 나 → 8주차의 나 회고</text>
+
+  <text x="660" y="546" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="700" y="546" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">가족 · 친구에게 링크 보내기 (선택)</text>
+
+  <text x="660" y="608" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af">오늘 받은 URL을 즐겨찾기 해두세요</text>
+
+  <!-- 그린 강조 한 줄 -->
+  <text x="80" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">사이트가 살아 있다 — 평생 내 주소</text>
 </svg>

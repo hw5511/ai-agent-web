@@ -1,42 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 04 배지 -->
   <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
-  <text x="93" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 04</text>
-  <text x="60" y="130" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">스크롤 등장의 원리 — '화면 감지'</text>
-  <text x="60" y="178" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">요소가 화면에 들어왔는지 자동으로 감지해주는 '망원경'이 핵심입니다</text>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 04</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">스크롤 등장의 원리</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">"이 요소가 화면에 들어왔는지" 감지 — 그게 전부</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="60" y="256" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">화면에 들어오는 순간을 감지한다</text>
+  <!-- 다이어그램 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">개념도</text>
 
-  <!-- 좌측 뷰포트 다이어그램 -->
-  <rect x="60" y="278" width="500" height="300" rx="14" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="84" y="306" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af">브라우저 화면 (뷰포트)</text>
-  <!-- 뷰포트 틀 -->
-  <rect x="180" y="320" width="260" height="180" rx="10" fill="#ffffff" stroke="#374151" stroke-width="2"/>
-  <line x1="180" y1="350" x2="440" y2="350" stroke="#d1d5db" stroke-width="1"/>
-  <circle cx="196" cy="335" r="4" fill="#e5e7eb"/>
-  <circle cx="210" cy="335" r="4" fill="#e5e7eb"/>
-  <!-- 화면 안 박스 (감지됨, 초록) -->
-  <rect x="200" y="366" width="220" height="50" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="310" y="396" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#15803d">화면 안 — 페이드인 등장</text>
-  <!-- 화면 밖으로 들어오는 박스 (회색) -->
-  <rect x="200" y="520" width="220" height="44" rx="8" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1.5"/>
-  <text x="310" y="547" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">아직 화면 밖 — 숨김</text>
-  <path d="M310 514 v-12 M302 508 l8 -8 l8 8" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="338" y="492" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="700" fill="#16a34a">감지!</text>
+  <!-- 뷰포트 (화면) -->
+  <rect x="60" y="282" width="700" height="300" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">VIEWPORT (브라우저 화면)</text>
 
-  <!-- 우측 옛 방식 vs 지금 방식 -->
-  <rect x="600" y="278" width="620" height="140" rx="14" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
-  <text x="624" y="312" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#b91c1c">옛날 방식</text>
-  <text x="624" y="344" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#991b1b">스크롤할 때마다 좌표를 일일이 계산</text>
-  <text x="624" y="372" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#991b1b">→ 무겁고 끊김이 생긴다</text>
+  <!-- 아직 화면 밖 박스 (점선) -->
+  <rect x="120" y="430" width="280" height="100" rx="8" fill="#ffffff" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="260" y="468" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">아직 화면 밖</text>
+  <text x="260" y="490" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">opacity 0</text>
 
-  <rect x="600" y="438" width="620" height="140" rx="14" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
-  <text x="624" y="472" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#15803d">지금 방식 — IntersectionObserver</text>
-  <text x="624" y="504" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">화면에 들어오면 자동으로 알려준다</text>
-  <text x="624" y="532" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#166534">→ 훨씬 부드럽고 가볍다</text>
-  <text x="624" y="560" font-family="'Courier New',monospace" font-size="14" fill="#15803d">트리거 scroll · 행동 opacity 0→1, 아래→위</text>
+  <!-- 화살표 위쪽 -->
+  <text x="445" y="488" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" fill="#9ca3af">↑</text>
 
-  <rect x="60" y="618" width="1160" height="52" rx="10" fill="#171717"/>
-  <text x="640" y="649" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="600" fill="#ffffff">단어는 외우지 마세요 — '스크롤 등장 = 화면 감지' 키워드만 기억하면 됩니다</text>
+  <!-- 화면에 들어옴 박스 -->
+  <rect x="480" y="350" width="240" height="80" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="600" y="384" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#16a34a">감지!</text>
+  <text x="600" y="408" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#374151">opacity 0 → 1</text>
+
+  <!-- 옛날 vs 지금 -->
+  <text x="800" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">비교</text>
+
+  <rect x="800" y="282" width="420" height="140" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="824" y="314" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">옛날 방식</text>
+  <text x="824" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#374151">scroll 이벤트 + 좌표 계산</text>
+  <text x="824" y="382" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">매 움직임마다 계산 — 무겁고</text>
+  <text x="824" y="404" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">버벅임</text>
+
+  <rect x="800" y="442" width="420" height="140" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="824" y="474" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.06em">지금 방식</text>
+  <text x="824" y="510" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="600" fill="#171717">IntersectionObserver</text>
+  <text x="824" y="542" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">"들어왔어!" 자동 알림 —</text>
+  <text x="824" y="564" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">가볍고 부드러움</text>
+
+  <!-- 핵심 한 줄 (그린) -->
+  <text x="640" y="650" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="600" fill="#16a34a">단어는 외울 필요 없음 — Claude에 "페이드인" 한 마디면 끝</text>
 </svg>
