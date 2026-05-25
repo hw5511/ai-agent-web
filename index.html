@@ -93,6 +93,34 @@
             overflow: hidden;
         }
 
+        /* 모바일 햄버거 토글 + 백드롭 (데스크톱: 숨김) */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 0.625rem;
+            left: 0.625rem;
+            z-index: 120;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            color: var(--fg);
+            cursor: pointer;
+        }
+
+        .sidebar-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            background: rgba(0,0,0,0.35);
+        }
+
         /* ============================================
            6. Sidebar
            ============================================ */
@@ -799,7 +827,7 @@
                 overflow: auto;
             }
 
-            /* 사이드바: overlay 방식으로 전환 */
+            /* 사이드바: 기본 숨김 → 햄버거로 슬라이드 인 */
             .sidebar {
                 position: fixed;
                 top: 0;
@@ -809,8 +837,15 @@
                 box-shadow: 2px 0 12px rgba(0,0,0,0.15);
                 width: var(--sidebar-width) !important;
                 transition: transform var(--sidebar-transition);
-                transform: translateX(0);
+                transform: translateX(-100%);
             }
+            .sidebar.is-open { transform: translateX(0); }
+
+            /* 햄버거 버튼 + 백드롭 표시 */
+            .menu-toggle { display: flex; }
+            .sidebar-backdrop.is-open { display: block; }
+            /* 열린 드로어 헤더: 닫기(X) 버튼과 브랜드 텍스트 겹침 방지 */
+            .sidebar-header { padding-left: 3.25rem; }
 
             /* 메인 콘텐츠: 전체 너비 */
             .slide-area {
@@ -839,7 +874,7 @@
             .session-inner {
                 overflow: visible;
                 height: auto;
-                padding: 1rem;
+                padding: 3.5rem 1rem 1rem;
             }
 
             .session-header {
@@ -900,6 +935,12 @@
 <body>
 
     <!-- 5. App Layout -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <svg id="menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+    </button>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
     <div class="app-body">
 
         <!-- 6. Sidebar -->
@@ -1634,6 +1675,14 @@
             updateSidebarActive();
             updateDescPanel();
             pushHash();
+            closeSidebarMobile();   // 모바일: 세션 선택 시 사이드바 접기
+        }
+
+        /* 모바일에서만 사이드바 닫기 */
+        function closeSidebarMobile() {
+            if (window.matchMedia('(max-width: 768px)').matches && window.setSidebarOpen) {
+                window.setSidebarOpen(false);
+            }
         }
 
         /* ============================================
@@ -1777,6 +1826,27 @@
             renderSidebar(currentCourse);
             updateIndicator();
             pushHash();   // 초기 상태를 URL에 반영
+
+            // 모바일 햄버거 메뉴 토글
+            const sidebarEl  = document.getElementById('sidebar');
+            const backdropEl = document.getElementById('sidebar-backdrop');
+            const toggleEl   = document.getElementById('menu-toggle');
+            const menuIcon   = document.getElementById('menu-icon');
+            const ICON_BARS  = '<path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>';
+            const ICON_X     = '<path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>';
+            window.setSidebarOpen = (open) => {
+                sidebarEl.classList.toggle('is-open', open);
+                backdropEl.classList.toggle('is-open', open);
+                toggleEl.setAttribute('aria-expanded', open ? 'true' : 'false');
+                toggleEl.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+                if (menuIcon) menuIcon.innerHTML = open ? ICON_X : ICON_BARS;
+            };
+            toggleEl.addEventListener('click', () => setSidebarOpen(!sidebarEl.classList.contains('is-open')));
+            backdropEl.addEventListener('click', () => setSidebarOpen(false));
+            // 데스크톱 폭으로 복귀 시 열림 상태 초기화
+            window.matchMedia('(max-width: 768px)').addEventListener('change', e => {
+                if (!e.matches) setSidebarOpen(false);
+            });
 
             // 전체화면 진입 버튼 이벤트 (renderSlides 후 등록)
             document.getElementById('slides-container').addEventListener('click', e => {
