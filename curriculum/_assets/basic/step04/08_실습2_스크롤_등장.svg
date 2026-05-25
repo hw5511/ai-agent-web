@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+<rect width="1280" height="720" fill="#ffffff"/>
+
+<rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+<text x="93" y="60" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="0.05em" fill="#ffffff" text-anchor="middle">WEB 04</text>
+
+<text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 2 · 스크롤 등장</text>
+<text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" fill="#6b7280">각 섹션이 화면에 보일 때 아래에서 위로 페이드인 — IntersectionObserver</text>
+
+<line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+<text x="60" y="260" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="0.08em" fill="#9ca3af">단계</text>
+
+<text x="60" y="308" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+<text x="100" y="308" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#171717">섹션마다 페이드인 효과를 Claude에 요청</text>
+
+<text x="60" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+<text x="100" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#171717">아래에서 위로 살짝 떠오르게 (translateY 20px)</text>
+
+<text x="60" y="404" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+<text x="100" y="404" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#171717">스크롤하면서 한 섹션씩 등장하는지 확인</text>
+
+<text x="60" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#9ca3af">─</text>
+<text x="100" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" fill="#171717">너무 빠르면 "조금 천천히" 한 줄 더</text>
+
+<rect x="700" y="260" width="520" height="210" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+<text x="724" y="296" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="0.08em" fill="#9ca3af">프롬프트 예시</text>
+<text x="724" y="340" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">각 섹션이 스크롤로 화면에 보일 때</text>
+<text x="724" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">아래에서 위로 페이드인 되도록</text>
+<text x="724" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" fill="#374151">IntersectionObserver로 구현해줘.</text>
+
+<text x="60" y="648" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">화면에 들어올 때 — 그때 등장시킨다</text>
+<text x="60" y="684" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#6b7280">막히면 "콘솔 에러 그대로 붙여서 고쳐줘"</text>
+</svg>
