@@ -54,6 +54,12 @@
   <text x="720" y="566" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">핵심 속성</text>
   <text x="720" y="592" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#374151">radial-gradient(circle at X Y, 밝은색, 어두운색)</text>
 
+  <!-- 프롬프트 예시 박스 -->
+  <rect x="60" y="528" width="600" height="100" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="558" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">프롬프트 예시</text>
+  <text x="84" y="588" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="500" fill="#374151">히어로 섹션에 마우스 따라다니는 빛 효과 추가해줘.</text>
+  <text x="84" y="614" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="500" fill="#374151">다크 배경에서 커서 주변만 밝아지도록.</text>
+
   <!-- 강조 한 줄 (그린) -->
-  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">이거 하나로 사이트가 영화처럼 보인다</text>
+  <text x="60" y="672" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#16a34a">이거 하나로 사이트가 영화처럼 보인다</text>
 </svg>
