@@ -80,20 +80,20 @@
 
 ### 슬라이드 8 — 스타일 가이드 도서관: DESIGN.md
 - **유형**: 개념 + 액션(링크)
-- **goal**: SPARK=작업기준 / DESIGN.md=시각참조 / Claude Design=생성기능 역할을 구분하고 getdesign.md를 소개한다.
+- **goal**: SPARK=작업기준 / DESIGN.md=시각참조 / Claude Design=생성기능 역할을 구분하고 무료 DESIGN.md 도서관(designmd.ai·freedesignmd.com)을 소개한다.
 - **핵심 토픽(역할 구분 3행)**: SPARK.md 작업 기준표 / DESIGN.md 브랜드 시각 참조 / Claude Design 디자인 생성 기능
-- **액션박스**: getdesign.md 링크 (구경/영감용 — "스타일 가이드 도서관" 프레이밍)
+- **액션박스(링크 2개)**: designmd.ai/explore · freedesignmd.com/#directory (구경/영감용 — "스타일 가이드 도서관" 프레이밍)
 - **강사 노트**: MAGI 합의 — 옛 3종 비교"표"는 폐기, 역할 한 줄씩만. 클라이맥스 희석 방지.
 
 ---
 
 ### 슬라이드 9 — 실습 C: 유명 스타일 입히기
-- **유형**: 실습 + 액션(링크)
-- **goal**: getdesign.md에서 브랜드 DESIGN.md를 골라 CLAUDE.md로 교체해 같은 프롬프트로 분위기를 통째로 바꾼다.
-- **핵심 토픽**: getdesign.md 도서관에서 고르기 / DESIGN.md 복사 → CLAUDE.md로 저장 / 같은 프롬프트 다시 → 다른 분위기
-- **액션박스**: `getdesign.md에서 스타일 받기` (링크 https://getdesign.md/design-md)
-- **변경(CEO 2026-05-26)**: 강사 제작 스타일 팩(zip) 다운로드 폐기 → 실습은 **getdesign.md에서 직접 받아** 진행. (style_pack 파일/zip 레포에서 제거)
-- **강사 노트**: "도서관에서 마음에 드는 브랜드 DESIGN.md를 복사해서 CLAUDE.md로 저장하면, 같은 프롬프트인데 분위기가 확 바뀌어요."
+- **유형**: 실습 + 액션(링크 2개)
+- **goal**: 무료 DESIGN.md 도서관에서 스타일을 골라 CLAUDE.md로 교체해 같은 프롬프트로 분위기를 통째로 바꾼다.
+- **핵심 토픽**: 무료 도서관 2곳에서 고르기 / DESIGN.md 복사 → CLAUDE.md로 저장 / 같은 프롬프트 다시 → 다른 분위기
+- **액션박스(링크 2개)**: `designmd.ai/explore` (291개 무료) · `freedesignmd.com/#directory` (121개+ 무료, 로그인 불필요)
+- **변경 이력(CEO 2026-05-26)**: ① 강사 제작 스타일 팩(zip) 폐기. ② getdesign.md 채택했다가 **유료 확인되어 폐기**. ③ 무료·로그인 불필요 두 사이트(designmd.ai, freedesignmd.com)로 교체 — 외부 조사 + Playwright 탐방으로 무료/신뢰도 확인 완료.
+- **강사 노트**: "두 사이트 다 무료예요. 마음에 드는 DESIGN.md를 복사해서 CLAUDE.md로 저장하면, 같은 프롬프트인데 분위기가 확 바뀌어요."
 
 ---
 
@@ -136,6 +136,6 @@
 - **총 14장**. CEO 2026-05-26 전면 재구성 + MAGI 3-way(Yuki·Gemini·Codex) 검증. (6번 비교 슬라이드 뒤에 실제 A/B 화면 이미지 슬라이드 6b 추가)
 - **서사**: 맨손(A) → SPARK(B) → 비교(6) → 왜?(7, 원리) → DESIGN.md 도서관(8) → 스타일 입히기(C, 9) → 보관함(10)·전시장(11)·공개(12·13).
 - **MAGI 핵심 결정**: 메타 비교표 폐기→역할 구분 1장 / npx 기본 동선 제외(강사 사전배포 팩) / gh device-flow + 계정 확인 / A·B 공통 프롬프트 고정 / Plan B 웹 업로드.
-- **실습 C 자료(CEO 2026-05-26)**: 강사 제작 스타일 팩(zip) 폐기 → getdesign.md에서 직접 받아 진행. style_pack 파일은 레포에서 제거.
+- **실습 C 자료(CEO 2026-05-26)**: 강사 제작 스타일 팩(zip) 폐기 → 무료 DESIGN.md 도서관(designmd.ai·freedesignmd.com)에서 직접 받아 진행. style_pack 파일은 레포에서 제거. (getdesign.md는 유료라 미사용)
 - **다운로드 단일 폴더**: `curriculum/_assets/files/` (SPARK.md).
 - 표현 가이드 준수: "백엔드/풀스택/서버사이드/API서버/프로덕션" 미사용. 대체어 "웹 공개 / 보관함·전시장 / 기준표".
