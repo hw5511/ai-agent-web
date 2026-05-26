@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>김우희 — 웹 디자이너</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+/>
+<style>
+  :root {
+    --bg: oklch(96% 0.004 90);
+    --ink: oklch(18% 0.01 90);
+    --muted: oklch(52% 0.01 90);
+    --line: oklch(82% 0.006 90);
+    --accent: oklch(58% 0.19 28);
+    --paper: oklch(99% 0.002 90);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* 스크롤 진행 바 */
+  .progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    z-index: 100;
+    will-change: transform;
+  }
+
+  .wrap {
+    width: min(92vw, 1180px);
+    margin-inline: auto;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 14vh 8vh;
+    overflow: hidden;
+  }
+
+  .hero__mesh {
+    position: absolute;
+    width: 70vmax;
+    height: 70vmax;
+    top: -20vmax;
+    right: -18vmax;
+    background: radial-gradient(
+      circle at center,
+      oklch(58% 0.19 28 / 0.14),
+      transparent 62%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+    z-index: 0;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  .hero h1 {
+    font-size: clamp(3.4rem, 13vw, 11rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin-top: 0.35em;
+  }
+
+  .hero h1 .accent {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .hero__lead {
+    margin-top: 1.4rem;
+    max-width: 30ch;
+    font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .hero__role {
+    position: absolute;
+    right: 0;
+    bottom: 8vh;
+    text-align: right;
+    z-index: 1;
+  }
+
+  .hero__role span {
+    display: block;
+    font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero__role strong {
+    font-size: clamp(1.1rem, 2.6vw, 1.7rem);
+    font-weight: 700;
+  }
+
+  /* ---------- WORK ---------- */
+  .work {
+    padding-block: 12vh;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 5vh;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .section-head span {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cards {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border-block: 1px solid var(--line);
+  }
+
+  .card {
+    position: relative;
+    background: var(--paper);
+    padding: clamp(1.6rem, 4vw, 3rem);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: clamp(1rem, 4vw, 3rem);
+    align-items: start;
+    cursor: pointer;
+    transition: background 0.5s var(--ease), transform 0.6s var(--ease),
+      opacity 0.6s var(--ease);
+    will-change: transform, opacity;
+  }
+
+  .card:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .card__no {
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-weight: 600;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.4em;
+  }
+
+  .card__body h3 {
+    font-size: clamp(1.4rem, 3.6vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .card__body p {
+    margin-top: 0.7rem;
+    max-width: 46ch;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.5s var(--ease);
+  }
+
+  .card:hover .card__body p {
+    color: oklch(80% 0.01 90);
+  }
+
+  .card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+  }
+
+  .card__tags i {
+    font-style: normal;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 0.28em 0.8em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    transition: border-color 0.5s var(--ease), color 0.5s var(--ease);
+  }
+
+  .card:hover .card__tags i {
+    border-color: oklch(40% 0.01 90);
+    color: oklch(82% 0.01 90);
+  }
+
+  .card__arrow {
+    align-self: center;
+    font-size: 1.8rem;
+    line-height: 1;
+    transform: translateX(-6px);
+    opacity: 0;
+    transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
+  }
+
+  .card:hover .card__arrow {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact {
+    padding-block: 16vh 12vh;
+    text-align: center;
+  }
+
+  .contact h2 {
+    font-size: clamp(2.4rem, 9vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  .contact p {
+    margin-top: 1.2rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-weight: 500;
+  }
+
+  .cta {
+    --pad: clamp(1rem, 2.4vw, 1.3rem);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 2.6rem;
+    padding: var(--pad) calc(var(--pad) * 2);
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    font-weight: 600;
+    border-radius: 999px;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.5s var(--ease);
+    will-change: transform;
+  }
+
+  .cta:hover {
+    transform: translateY(-3px);
+  }
+
+  .cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateY(101%);
+    transition: transform 0.5s var(--ease);
+    z-index: -1;
+  }
+
+  .cta:hover::before {
+    transform: translateY(0);
+  }
+
+  .cta__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    transition: background 0.5s var(--ease);
+  }
+
+  .cta:hover .cta__dot {
+    background: var(--paper);
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-block: 2.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* 스크롤 리빌 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 760px) {
+    .hero__role {
+      position: static;
+      text-align: left;
+      margin-top: 3rem;
+    }
+    .card {
+      grid-template-columns: auto 1fr;
+    }
+    .card__arrow {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__mesh" id="mesh" aria-hidden="true"></div>
+    <div class="wrap hero__inner">
+      <span class="eyebrow reveal">Portfolio — 2026</span>
+      <h1 class="reveal">
+        김<span class="accent">우</span>희
+      </h1>
+      <p class="hero__lead reveal">
+        보기 좋은 화면이 아니라, 끝까지 읽히는 화면을 설계합니다.
+        구조와 여백으로 메시지를 정돈하는 웹 디자이너입니다.
+      </p>
+    </div>
+    <div class="wrap hero__role reveal">
+      <span>Role</span>
+      <strong>Web Designer</strong>
+    </div>
+  </header>
+
+  <!-- WORK -->
+  <section class="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>내가 한 일</h2>
+        <span>Selected Work</span>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card__no">01</div>
+          <div class="card__body">
+            <h3>브랜드 리뉴얼 사이트</h3>
+            <p>
+              노후화된 코퍼레이트 사이트를 톤·타이포·그리드부터 다시 잡아
+              브랜드 인상을 재정의했습니다. 핵심 전환 동선을 한눈에 정리했습니다.
+            </p>
+            <div class="card__tags">
+              <i>UX 설계</i><i>아트 디렉션</i><i>디자인 시스템</i>
+            </div>
+          </div>
+          <div class="card__arrow" aria-hidden="true">&rarr;</div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__no">02</div>
+          <div class="card__body">
+            <h3>커머스 랜딩페이지</h3>
+            <p>
+              신제품 출시 캠페인을 위한 원페이지 랜딩을 기획·디자인했습니다.
+              스크롤 흐름에 맞춰 정보를 단계적으로 노출해 이탈을 줄였습니다.
+            </p>
+            <div class="card__tags">
+              <i>랜딩 기획</i><i>모션 가이드</i><i>반응형</i>
+            </div>
+          </div>
+          <div class="card__arrow" aria-hidden="true">&rarr;</div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__no">03</div>
+          <div class="card__body">
+            <h3>웹 디자인 시스템</h3>
+            <p>
+              컴포넌트·컬러·타이포 토큰을 문서화해 팀 전체가 일관된 화면을
+              빠르게 만들 수 있도록 기준을 세웠습니다.
+            </p>
+            <div class="card__tags">
+              <i>컴포넌트</i><i>토큰화</i><i>가이드 문서</i>
+            </div>
+          </div>
+          <div class="card__arrow" aria-hidden="true">&rarr;</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="wrap">
+      <h2 class="reveal">함께<br />만들어요</h2>
+      <p class="reveal">새 프로젝트, 협업, 무엇이든 편하게 보내주세요.</p>
+      <a class="cta reveal" href="mailto:hello@kimwoohee.design">
+        <span class="cta__dot" aria-hidden="true"></span>
+        연락하기
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:1rem;">
+      <span>&copy; 2026 김우희</span>
+      <span>Web Designer · Seoul</span>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // 스크롤 진행 바
+      const ui_progress = document.getElementById("progress");
+      let ui_ticking = false;
+      const ui_updateProgress = () => {
+        const scrollable =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+        ui_progress.style.transform = `scaleX(${ratio})`;
+        ui_ticking = false;
+      };
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ui_ticking) {
+            window.requestAnimationFrame(ui_updateProgress);
+            ui_ticking = true;
+          }
+        },
+        { passive: true }
+      );
+
+      // 스크롤 리빌
+      const ui_revealEls = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const ui_io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, idx) => {
+              if (entry.isIntersecting) {
+                const delay = (idx % 3) * 70;
+                window.setTimeout(
+                  () => entry.target.classList.add("in"),
+                  delay
+                );
+                ui_io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.16 }
+        );
+        ui_revealEls.forEach((el) => ui_io.observe(el));
+      } else {
+        ui_revealEls.forEach((el) => el.classList.add("in"));
+      }
+
+      // 마우스 패럴랙스 (SURPRISE — 미세 관성)
+      const ui_mesh = document.getElementById("mesh");
+      let app_mx = 0;
+      let app_my = 0;
+      let app_cx = 0;
+      let app_cy = 0;
+      const ui_finePointer = window.matchMedia("(pointer: fine)").matches;
+
+      if (ui_finePointer) {
+        window.addEventListener(
+          "pointermove",
+          (e) => {
+            app_mx = (e.clientX / window.innerWidth - 0.5) * 2;
+            app_my = (e.clientY / window.innerHeight - 0.5) * 2;
+          },
+          { passive: true }
+        );
+
+        const ui_loop = () => {
+          app_cx += (app_mx - app_cx) * 0.06;
+          app_cy += (app_my - app_cy) * 0.06;
+          ui_mesh.style.transform = `translate3d(${app_cx * 36}px, ${
+            app_cy * 36
+          }px, 0)`;
+          window.requestAnimationFrame(ui_loop);
+        };
+        window.requestAnimationFrame(ui_loop);
+      }
+    })();
+  </script>
+</body>
+</html>
