@@ -30,9 +30,9 @@
   <text x="724" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#16a34a">"RLS로 보안 유지하면서 만들어줘"</text>
   <text x="724" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">이 한 줄만 더 붙이면</text>
   <text x="724" y="406" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">Claude가 안전하게 처리해줘요</text>
-  <text x="724" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">깊은 권한·로그인은 다음 주(회원 시스템)</text>
+  <text x="724" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">로그인·작성자 표시는 다음 주(커뮤니티 사이트)</text>
 
   <!-- 다음 회차 -->
-  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#9ca3af">다음 회차 · WEB 12 · 회원 시스템 — "이 글을 누가 썼는지" 기록하기</text>
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#9ca3af">다음 회차 · WEB 12 · 커뮤니티 사이트 — 글·댓글이 쌓이는 게시판 만들기</text>
   <text x="1220" y="660" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">WRAP UP</text>
 </svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 12 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 12</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">오늘의 학습 목표</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">2시간 뒤, 내가 기획한 게시판이 실제로 동작한다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 목표 1 -->
+  <text x="60" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#e5e7eb">01</text>
+  <text x="120" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">어떤 화면이 필요한지 먼저 기획하기</text>
+
+  <!-- 목표 2 -->
+  <text x="60" y="372" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#e5e7eb">02</text>
+  <text x="120" y="372" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">프롬프트 한 번으로 게시판 화면 만들기</text>
+
+  <!-- 목표 3 -->
+  <text x="60" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#e5e7eb">03</text>
+  <text x="120" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">만들어진 화면 보고 마음에 들게 다듬기</text>
+
+  <!-- 목표 4 -->
+  <text x="60" y="516" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#e5e7eb">04</text>
+  <text x="120" y="516" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">저장 공간을 연결해서 글이 진짜로 저장되게 하기</text>
+</svg>
