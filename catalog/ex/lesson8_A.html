@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>봄날 플라워 — Blossom Day Flower</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: oklch(97% 0.015 12);
+  --bg2: oklch(94% 0.02 15);
+  --rose: oklch(62% 0.19 12);
+  --rose-dark: oklch(42% 0.16 12);
+  --green: oklch(55% 0.14 148);
+  --text: oklch(18% 0.04 20);
+  --muted: oklch(52% 0.05 20);
+  --border: oklch(85% 0.04 15);
+  --font-display: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  --font-body: 'Noto Serif KR', serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; line-height: 1.8; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 1px; width: 0%; background: var(--rose); z-index: 1000; }
+
+/* 꽃잎 파티클 Canvas — SURPRISE ELEMENT */
+#petal-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 52px;
+  background: rgba(255,248,245,0.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; letter-spacing: 0.12em; color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-link { font-size: 0.72rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.3s; }
+.nav-link:hover { color: var(--rose); }
+.nav-order { background: var(--rose); color: #fff; font-size: 0.72rem; letter-spacing: 0.1em; text-decoration: none; padding: 10px 22px; will-change: transform; transition: opacity 0.3s; }
+.nav-order:hover { opacity: 0.85; }
+
+/* 히어로 */
+#hero {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 64px; position: relative; z-index: 1;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 52px; border-right: 1px solid var(--border);
+}
+.hero-tag { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--rose); margin-bottom: 20px; opacity: 0; }
+.hero-title { font-family: var(--font-display); font-size: clamp(40px, 6.5vw, 92px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 28px; opacity: 0; transform: translateY(36px); }
+.hero-title em { font-style: italic; color: var(--rose); }
+.hero-desc { font-size: 0.9rem; color: var(--muted); line-height: 2; max-width: 400px; margin-bottom: 40px; opacity: 0; }
+.hero-actions { display: flex; gap: 16px; opacity: 0; }
+.btn-rose { background: var(--rose); color: #fff; font-family: var(--font-display); font-size: 0.92rem; letter-spacing: 0.08em; text-decoration: none; padding: 14px 32px; will-change: transform; transition: opacity 0.3s; }
+.btn-rose:hover { opacity: 0.85; }
+.btn-outline { border: 1px solid var(--border); color: var(--muted); font-size: 0.75rem; letter-spacing: 0.12em; text-decoration: none; padding: 14px 24px; transition: all 0.3s; }
+.btn-outline:hover { border-color: var(--rose); color: var(--rose); }
+.hero-right { background: var(--bg2); position: relative; overflow: hidden; }
+.hero-img { width: 100%; height: 100%; background: linear-gradient(160deg, oklch(88% 0.08 15) 0%, oklch(82% 0.1 12) 50%, oklch(75% 0.12 10) 100%); }
+.hero-badge { position: absolute; top: 40px; right: 40px; background: rgba(255,255,255,0.9); padding: 16px 20px; text-align: center; }
+.badge-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; color: var(--rose); line-height: 1; }
+.badge-text { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+/* 브랜드 철학 */
+#philosophy {
+  position: relative; z-index: 1; padding: 100px 52px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+.phil-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+.phil-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--rose); margin-bottom: 28px; }
+.phil-quote { font-family: var(--font-display); font-size: clamp(24px, 4vw, 50px); font-weight: 300; line-height: 1.4; letter-spacing: -0.01em; font-style: italic; }
+.phil-divider { width: 40px; height: 1px; background: var(--rose); margin: 32px auto; }
+.phil-text { font-size: 0.88rem; color: var(--muted); line-height: 2; }
+
+/* 시즌 플라워 컬렉션 */
+#collection {
+  position: relative; z-index: 1; padding: 100px 52px;
+  background: var(--bg2); border-top: 1px solid var(--border);
+}
+.coll-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 52px; }
+.coll-title { font-family: var(--font-display); font-size: clamp(24px, 3.8vw, 48px); font-weight: 300; line-height: 1.2; }
+.coll-title em { font-style: italic; color: var(--rose); }
+.coll-season { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); }
+.flowers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.flower-card { position: relative; overflow: hidden; cursor: pointer; }
+.flower-img { aspect-ratio: 3/4; overflow: hidden; transition: transform 0.5s cubic-bezier(0.23,1,0.32,1); }
+.flower-img:hover { transform: scale(0.98); }
+.flower-img-inner { width: 100%; height: 100%; transition: transform 0.7s ease; }
+.flower-card:hover .flower-img-inner { transform: scale(1.06); }
+.flower-info { padding: 16px 0; }
+.flower-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 400; margin-bottom: 4px; }
+.flower-eng { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.12em; margin-bottom: 8px; font-style: italic; font-family: var(--font-display); }
+.flower-price { font-size: 0.82rem; color: var(--rose); }
+
+/* 맞춤 제작 서비스 */
+#bespoke {
+  position: relative; z-index: 1; padding: 100px 52px;
+  border-top: 1px solid var(--border); background: var(--bg);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.bespoke-image { aspect-ratio: 4/5; overflow: hidden; }
+.bespoke-img-inner { width: 100%; height: 100%; background: linear-gradient(145deg, oklch(85% 0.08 15), oklch(75% 0.12 5)); }
+.bespoke-content {}
+.bespoke-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--rose); margin-bottom: 20px; }
+.bespoke-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 52px); font-weight: 300; line-height: 1.3; margin-bottom: 24px; }
+.bespoke-title em { font-style: italic; color: var(--rose); }
+.bespoke-desc { font-size: 0.88rem; color: var(--muted); line-height: 2.1; margin-bottom: 32px; }
+.bespoke-options { display: flex; flex-direction: column; gap: 0; margin-bottom: 36px; }
+.option-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+.option-icon { color: var(--rose); font-size: 0.9rem; }
+
+/* 위치 */
+#location {
+  position: relative; z-index: 1; padding: 80px 52px;
+  background: var(--bg2); border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+}
+.loc-item { padding: 28px 0; border-top: 2px solid var(--rose); }
+.loc-label { font-size: 0.62px; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); margin-bottom: 12px; }
+.loc-value { font-family: var(--font-display); font-size: 0.95rem; font-weight: 400; line-height: 1.8; }
+
+footer {
+  position: relative; z-index: 1; padding: 40px 52px;
+  background: var(--text); color: var(--bg);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.15em; }
+.footer-copy { font-size: 0.65rem; color: rgba(250,246,244,0.5); }
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { height: 60vw; }
+  .hero-left { padding: 60px 20px; }
+  #philosophy, #collection, #bespoke, #location, footer { padding-left: 20px; padding-right: 20px; }
+  .flowers-grid { grid-template-columns: 1fr 1fr; }
+  #bespoke { grid-template-columns: 1fr; }
+  #location { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<canvas id="petal-canvas"></canvas>
+
+<nav>
+  <div class="nav-logo">봄날 플라워</div>
+  <div class="nav-links">
+    <a href="#collection" class="nav-link">컬렉션</a>
+    <a href="#bespoke" class="nav-link">맞춤 제작</a>
+    <a href="#location" class="nav-link">방문</a>
+    <a href="#bespoke" class="nav-order" id="nav-btn">주문하기</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Blossom Day Flower Studio · 서울</p>
+    <h1 class="hero-title">꽃이 전하는<br><em>마음</em>을<br>담습니다</h1>
+    <p class="hero-desc">특별한 날을 위한 꽃. 생일, 결혼기념일, 감사의 마음, 또는 그냥 오늘 — 어떤 이유든 꽃은 마음을 전합니다.</p>
+    <div class="hero-actions">
+      <a href="#collection" class="btn-rose" id="hero-btn">시즌 컬렉션 보기</a>
+      <a href="#bespoke" class="btn-outline">맞춤 제작 문의</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img"></div>
+    <div class="hero-badge">
+      <div class="badge-num">1,200+</div>
+      <div class="badge-text">행복한 배달</div>
+    </div>
+  </div>
+</section>
+
+<section id="philosophy">
+  <div class="phil-wrap">
+    <p class="phil-label">Our Philosophy</p>
+    <p class="phil-quote">"꽃 한 송이가 가져다주는 미소는, 세상에서 가장 짧지만 가장 진실한 감동입니다."</p>
+    <div class="phil-divider"></div>
+    <p class="phil-text">봄날 플라워는 꽃의 생동감과 그 뒤에 담긴 마음을 함께 전달합니다. 모든 부케는 당일 아침 가장 신선한 꽃을 직접 선별해 만듭니다. 조화는 취급하지 않습니다.</p>
+  </div>
+</section>
+
+<section id="collection">
+  <div class="coll-header">
+    <h2 class="coll-title">시즌 <em>플라워</em><br>컬렉션</h2>
+    <div class="coll-season">Spring 2024</div>
+  </div>
+  <div class="flowers-grid">
+    <div class="flower-card">
+      <div class="flower-img"><div class="flower-img-inner" style="background: linear-gradient(145deg, #f0c8c0, #e0a8a0);"></div></div>
+      <div class="flower-info">
+        <h3 class="flower-name">봄날 부케</h3>
+        <p class="flower-eng">Blossom Day Bouquet</p>
+        <p class="flower-price">58,000원~</p>
+      </div>
+    </div>
+    <div class="flower-card">
+      <div class="flower-img"><div class="flower-img-inner" style="background: linear-gradient(135deg, #e8d0c8, #d8b8b0);"></div></div>
+      <div class="flower-info">
+        <h3 class="flower-name">튤립 어레인지먼트</h3>
+        <p class="flower-eng">Tulip Arrangement</p>
+        <p class="flower-price">72,000원~</p>
+      </div>
+    </div>
+    <div class="flower-card">
+      <div class="flower-img"><div class="flower-img-inner" style="background: linear-gradient(155deg, #d8e8d0, #b8d0a8);"></div></div>
+      <div class="flower-info">
+        <h3 class="flower-name">그린 클러치</h3>
+        <p class="flower-eng">Green Clutch Bouquet</p>
+        <p class="flower-price">45,000원~</p>
+      </div>
+    </div>
+    <div class="flower-card">
+      <div class="flower-img"><div class="flower-img-inner" style="background: linear-gradient(140deg, #f8e8e0, #f0d0c0);"></div></div>
+      <div class="flower-info">
+        <h3 class="flower-name">피오니 박스</h3>
+        <p class="flower-eng">Peony Box Flower</p>
+        <p class="flower-price">98,000원~</p>
+      </div>
+    </div>
+    <div class="flower-card">
+      <div class="flower-img"><div class="flower-img-inner" style="background: linear-gradient(150deg, #e8d8e8, #d0b8d0);"></div></div>
+      <div class="flower-info">
+        <h3 class="flower-name">라벤더 부케</h3>
+        <p class="flower-eng">Lavender & Herb Bouquet</p>
+        <p class="flower-price">48,000원~</p>
+      </div>
+    </div>
+    <div class="flower-card">
+      <div class="flower-img"><div class="flower-img-inner" style="background: linear-gradient(160deg, #f0e8d0, #e0d0b8);"></div></div>
+      <div class="flower-info">
+        <h3 class="flower-name">아이보리 웨딩</h3>
+        <p class="flower-eng">Ivory Wedding Bouquet</p>
+        <p class="flower-price">180,000원~</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bespoke">
+  <div class="bespoke-image">
+    <div class="bespoke-img-inner"></div>
+  </div>
+  <div class="bespoke-content">
+    <p class="bespoke-label">Bespoke Service</p>
+    <h2 class="bespoke-title">마음을 담은<br><em>맞춤 제작</em></h2>
+    <p class="bespoke-desc">받을 사람의 취향, 전달하고 싶은 감정, 행사의 성격 — 이야기해 주시면 세상에 하나뿐인 꽃을 만들어 드립니다. 결혼식, 기념일, 감사 선물 모두 가능합니다.</p>
+    <div class="bespoke-options">
+      <div class="option-row"><span class="option-icon">✦</span><span>선호 꽃, 색상, 분위기 상담</span></div>
+      <div class="option-row"><span class="option-icon">✦</span><span>당일 배달 (오전 주문 오후 배달)</span></div>
+      <div class="option-row"><span class="option-icon">✦</span><span>손글씨 메시지 카드 포함</span></div>
+      <div class="option-row"><span class="option-icon">✦</span><span>정기 구독 (주 1회 / 격주)</span></div>
+    </div>
+    <a href="#" class="btn-rose" id="bespoke-btn">맞춤 제작 상담 신청</a>
+  </div>
+</section>
+
+<section id="location">
+  <div class="loc-item">
+    <p class="loc-label">Location</p>
+    <div class="loc-value">서울시 마포구<br>연남동 228-15<br>(연남로 12길 8)</div>
+  </div>
+  <div class="loc-item">
+    <p class="loc-label">Hours</p>
+    <div class="loc-value">화–일 10:00–20:00<br>월요일 휴무<br>공휴일 12:00–18:00</div>
+  </div>
+  <div class="loc-item">
+    <p class="loc-label">Order & Delivery</p>
+    <div class="loc-value">카카오채널 @봄날플라워<br>02-789-0123<br>서울 전지역 당일 배달</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">봄날 플라워</div>
+  <div class="footer-copy">© 2024 Blossom Day Flower Studio</div>
+</footer>
+
+<script>
+(function() {
+  // Lenis
+  const v12_lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  v12_lenis.on('scroll', ({ progress }) => { document.getElementById('progress-bar').style.width = (progress * 100) + '%'; });
+
+  // 꽃잎 파티클 (SURPRISE ELEMENT)
+  const v12_cv = document.getElementById('petal-canvas');
+  const v12_ctx = v12_cv.getContext('2d');
+  v12_cv.width = window.innerWidth;
+  v12_cv.height = window.innerHeight;
+  window.addEventListener('resize', () => { v12_cv.width = window.innerWidth; v12_cv.height = window.innerHeight; });
+
+  const v12_petals = Array.from({ length: 24 }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * -window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: Math.random() * 0.8 + 0.3,
+    r: Math.random() * 8 + 4,
+    rot: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.04,
+    color: `oklch(${75 + Math.random() * 15}% ${0.08 + Math.random() * 0.08} ${5 + Math.random() * 20})`
+  }));
+
+  let v12_mouseX = -200, v12_mouseY = -200;
+  document.addEventListener('mousemove', (e) => { v12_mouseX = e.clientX; v12_mouseY = e.clientY; });
+
+  function v12_drawPetals() {
+    const w = v12_cv.width, h = v12_cv.height;
+    v12_ctx.clearRect(0, 0, w, h);
+    v12_petals.forEach(p => {
+      p.y += p.vy;
+      p.x += p.vx + Math.sin(p.y * 0.01) * 0.3;
+      p.rot += p.rotSpeed;
+
+      // 마우스 근처 반발
+      const v12_dx = p.x - v12_mouseX;
+      const v12_dy = p.y - v12_mouseY;
+      const v12_d = Math.sqrt(v12_dx * v12_dx + v12_dy * v12_dy);
+      if (v12_d < 80) {
+        p.vx += v12_dx / v12_d * 0.4;
+        p.vy -= 0.2;
+      }
+      // 속도 제한
+      if (p.vy < 0.1) p.vy += 0.05;
+      if (Math.abs(p.vx) > 1) p.vx *= 0.95;
+
+      if (p.y > h + 20) { p.y = -20; p.x = Math.random() * w; }
+
+      v12_ctx.save();
+      v12_ctx.translate(p.x, p.y);
+      v12_ctx.rotate(p.rot);
+      v12_ctx.fillStyle = p.color;
+      v12_ctx.globalAlpha = 0.55;
+      v12_ctx.beginPath();
+      v12_ctx.ellipse(0, 0, p.r, p.r * 0.5, 0, 0, Math.PI * 2);
+      v12_ctx.fill();
+      v12_ctx.restore();
+    });
+    requestAnimationFrame(v12_drawPetals);
+  }
+  v12_drawPetals();
+
+  // 히어로 애니메이션
+  gsap.timeline({ delay: 0.3 })
+    .to('.hero-tag', { opacity: 1, duration: 0.7, ease: 'power2.out' })
+    .to('.hero-title', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.3')
+    .to('.hero-desc', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .to('.hero-actions', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+  // 철학 섹션
+  gsap.from('.phil-quote', { opacity: 0, y: 32, scrollTrigger: { trigger: '#philosophy', start: 'top 72%', end: 'top 42%', scrub: 1 } });
+  gsap.from('.phil-text', { opacity: 0, y: 20, scrollTrigger: { trigger: '#philosophy', start: 'top 60%', end: 'top 30%', scrub: 1 } });
+
+  // 꽃 카드
+  document.querySelectorAll('.flower-card').forEach((el, i) => {
+    gsap.from(el, { opacity: 0, y: 28, scale: 0.97, scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 55%', scrub: 1 } });
+  });
+
+  // 맞춤 제작 섹션
+  gsap.from('.bespoke-image', { opacity: 0, x: -48, scrollTrigger: { trigger: '#bespoke', start: 'top 70%', end: 'top 35%', scrub: 1 } });
+  gsap.from('.bespoke-title', { opacity: 0, y: 32, scrollTrigger: { trigger: '#bespoke', start: 'top 68%', end: 'top 38%', scrub: 1 } });
+  gsap.from('.bespoke-desc', { opacity: 0, y: 20, scrollTrigger: { trigger: '#bespoke', start: 'top 60%', end: 'top 30%', scrub: 1 } });
+  document.querySelectorAll('.option-row').forEach((el, i) => {
+    gsap.from(el, { opacity: 0, x: -16, scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 60%', scrub: 1 } });
+  });
+
+  // 마그네틱
+  [document.getElementById('hero-btn'), document.getElementById('bespoke-btn'), document.getElementById('nav-btn')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.2}px, ${(e.clientY - r.top - r.height/2) * 0.2}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    });
+  });
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>

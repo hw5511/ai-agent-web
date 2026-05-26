@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고요 — 마음챙김 명상 앱</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #07080f;
+  --text: #c8d0e0;
+  --muted: #5060788;
+  --muted2: #506078;
+  --accent: #a090d8;
+  --accent2: #6080c8;
+  --soft: rgba(160,144,216,0.15);
+  --font-serif: 'Noto Serif KR', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 300; overflow-x: hidden; line-height: 1.7; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 1px; width: 0%; background: var(--accent); z-index: 1000; }
+
+/* Canvas 배경 */
+#cosmos-canvas { position: fixed; inset: 0; z-index: 0; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 52px;
+}
+.nav-logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.2em; color: var(--text); }
+.nav-download {
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); text-decoration: none;
+  border: 1px solid rgba(160,144,216,0.3); padding: 9px 22px;
+  transition: all 0.3s;
+}
+.nav-download:hover { background: rgba(160,144,216,0.1); border-color: var(--accent); }
+
+/* 히어로 */
+#hero {
+  height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  position: relative; z-index: 1; padding: 0 24px;
+}
+.hero-circle-wrap {
+  position: relative; margin-bottom: 52px;
+  width: min(220px, 50vw); aspect-ratio: 1;
+}
+#breath-canvas { width: 100%; height: 100%; border-radius: 50%; }
+.breath-text {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.breath-instruction { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.breath-count { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; color: var(--text); }
+.hero-title { font-family: var(--font-serif); font-size: clamp(40px, 7vw, 88px); font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 20px; }
+.hero-sub { font-size: 0.9rem; color: var(--muted2); max-width: 440px; line-height: 2; margin-bottom: 40px; }
+.hero-cta {
+  display: inline-block; background: var(--accent); color: var(--bg);
+  font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none; padding: 15px 40px;
+  transition: opacity 0.3s; will-change: transform;
+}
+.hero-cta:hover { opacity: 0.85; }
+
+/* 특징 섹션 */
+#features {
+  position: relative; z-index: 1;
+  padding: 120px 52px;
+  background: rgba(7,8,15,0.7); backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(160,144,216,0.1);
+}
+.section-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 60px; text-align: center; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.feature { text-align: center; padding: 40px 24px; }
+.feature-icon { font-size: 2.4rem; margin-bottom: 20px; }
+.feature-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; margin-bottom: 12px; }
+.feature-desc { font-size: 0.82rem; color: var(--muted2); line-height: 1.9; }
+
+/* 통계 */
+#stats {
+  position: relative; z-index: 1;
+  padding: 80px 52px;
+  background: rgba(7,8,15,0.85); backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(160,144,216,0.1);
+  display: grid; grid-template-columns: repeat(3, 1fr); text-align: center;
+}
+.stat { padding: 32px 0; }
+.stat-num { font-family: var(--font-serif); font-size: clamp(36px, 5vw, 60px); font-weight: 300; color: var(--accent); line-height: 1; }
+.stat-label { font-size: 0.72rem; color: var(--muted2); letter-spacing: 0.12em; margin-top: 8px; }
+
+/* 다운로드 */
+#download {
+  position: relative; z-index: 1;
+  padding: 140px 52px; text-align: center;
+  background: rgba(7,8,15,0.75); backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(160,144,216,0.1);
+}
+.dl-title { font-family: var(--font-serif); font-size: clamp(32px, 5.5vw, 72px); font-weight: 300; line-height: 1.2; margin-bottom: 40px; }
+.dl-buttons { display: flex; gap: 16px; justify-content: center; }
+.dl-btn {
+  font-size: 0.78rem; letter-spacing: 0.12em; text-decoration: none;
+  padding: 14px 32px; transition: all 0.3s; will-change: transform;
+}
+.dl-btn-primary { background: var(--accent); color: var(--bg); }
+.dl-btn-primary:hover { opacity: 0.85; }
+.dl-btn-secondary { border: 1px solid rgba(160,144,216,0.3); color: var(--accent); }
+.dl-btn-secondary:hover { background: rgba(160,144,216,0.08); border-color: var(--accent); }
+
+footer {
+  position: relative; z-index: 1;
+  padding: 40px 52px; border-top: 1px solid rgba(160,144,216,0.1);
+  background: rgba(7,8,15,0.95);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; letter-spacing: 0.15em; }
+.footer-copy { font-size: 0.65rem; color: var(--muted2); letter-spacing: 0.1em; }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  #features, #download, footer { padding-left: 24px; padding-right: 24px; }
+  .features-grid { grid-template-columns: 1fr; }
+  #stats { grid-template-columns: 1fr; }
+  .dl-buttons { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<canvas id="cosmos-canvas"></canvas>
+
+<nav>
+  <div class="nav-logo">고요</div>
+  <a href="#" class="nav-download">앱 다운로드</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-circle-wrap">
+    <canvas id="breath-canvas" width="220" height="220"></canvas>
+    <div class="breath-text">
+      <div class="breath-instruction" id="breath-label">숨을 들이쉬세요</div>
+      <div class="breath-count" id="breath-count">4</div>
+    </div>
+  </div>
+  <h1 class="hero-title">고요함이<br>깊어질수록</h1>
+  <p class="hero-sub">호흡과 함께하는 명상 여정. 매일 10분, 내면의 고요한 공간으로 돌아가세요.</p>
+  <a href="#" class="hero-cta" id="hero-cta">무료로 시작하기</a>
+</section>
+
+<section id="features">
+  <p class="section-label">Why GOYO</p>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">🌙</div>
+      <h3 class="feature-title">수면 명상</h3>
+      <p class="feature-desc">잠들기 전 마음을 정리하는 수면 유도 프로그램. 자연의 소리와 함께 깊은 휴식으로.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">☁️</div>
+      <h3 class="feature-title">스트레스 해소</h3>
+      <p class="feature-desc">일상의 긴장을 빠르게 풀어주는 5분 긴급 명상. 언제 어디서든 고요로 돌아갑니다.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">✦</div>
+      <h3 class="feature-title">집중력 강화</h3>
+      <p class="feature-desc">작업 전 마음을 모으는 집중 명상. 흩어진 주의력을 하나의 점으로 모읍니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="stat"><div class="stat-num">92만</div><div class="stat-label">활성 사용자</div></div>
+  <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">앱스토어 평점</div></div>
+  <div class="stat"><div class="stat-num">230만</div><div class="stat-label">명상 세션 완료</div></div>
+</section>
+
+<section id="download">
+  <h2 class="dl-title">오늘부터<br>고요를 시작하세요</h2>
+  <div class="dl-buttons">
+    <a href="#" class="dl-btn dl-btn-primary" id="ios-btn">App Store 다운로드</a>
+    <a href="#" class="dl-btn dl-btn-secondary" id="android-btn">Google Play</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">고요</div>
+  <div class="footer-copy">© 2024 GOYO Inc. 마음챙김 명상 앱</div>
+</footer>
+
+<script>
+(function() {
+  // 별자리 파티클 배경
+  const v12_bg = document.getElementById('cosmos-canvas');
+  const v12_bgCtx = v12_bg.getContext('2d');
+
+  function v12_resizeBg() {
+    v12_bg.width = window.innerWidth;
+    v12_bg.height = window.innerHeight;
+  }
+  v12_resizeBg();
+  window.addEventListener('resize', v12_resizeBg);
+
+  // 파티클 정의
+  const v12_particles = Array.from({ length: 120 }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.18,
+    vy: (Math.random() - 0.5) * 0.18,
+    r: Math.random() * 1.8 + 0.4,
+    a: Math.random() * 0.4 + 0.1
+  }));
+
+  let v12_mouseX = window.innerWidth / 2;
+  let v12_mouseY = window.innerHeight / 2;
+  document.addEventListener('mousemove', (e) => { v12_mouseX = e.clientX; v12_mouseY = e.clientY; });
+
+  function v12_drawBg() {
+    const w = v12_bg.width, h = v12_bg.height;
+    v12_bgCtx.clearRect(0, 0, w, h);
+
+    // 원형 모션 배경 (SURPRISE: 마우스 위치에 반응하는 광원)
+    const v12_grd = v12_bgCtx.createRadialGradient(v12_mouseX, v12_mouseY, 0, v12_mouseX, v12_mouseY, Math.min(w, h) * 0.5);
+    v12_grd.addColorStop(0, 'rgba(100,80,180,0.08)');
+    v12_grd.addColorStop(0.5, 'rgba(60,80,160,0.04)');
+    v12_grd.addColorStop(1, 'rgba(0,0,0,0)');
+    v12_bgCtx.fillStyle = v12_grd;
+    v12_bgCtx.fillRect(0, 0, w, h);
+
+    // 파티클 + 연결선
+    v12_particles.forEach((p, i) => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+
+      // 마우스 반발
+      const v12_dx = p.x - v12_mouseX;
+      const v12_dy = p.y - v12_mouseY;
+      const v12_dist = Math.sqrt(v12_dx * v12_dx + v12_dy * v12_dy);
+      if (v12_dist < 120) {
+        const v12_force = (120 - v12_dist) / 120 * 0.008;
+        p.vx += v12_dx / v12_dist * v12_force;
+        p.vy += v12_dy / v12_dist * v12_force;
+      }
+      // 속도 제한
+      const v12_speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+      if (v12_speed > 0.5) { p.vx *= 0.5 / v12_speed; p.vy *= 0.5 / v12_speed; }
+
+      // 별 그리기
+      v12_bgCtx.beginPath();
+      v12_bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      v12_bgCtx.fillStyle = `rgba(180,160,240,${p.a})`;
+      v12_bgCtx.fill();
+
+      // 연결선
+      for (let j = i + 1; j < v12_particles.length; j++) {
+        const v12_q = v12_particles[j];
+        const v12_ddx = p.x - v12_q.x;
+        const v12_ddy = p.y - v12_q.y;
+        const v12_d = Math.sqrt(v12_ddx * v12_ddx + v12_ddy * v12_ddy);
+        if (v12_d < 120) {
+          v12_bgCtx.beginPath();
+          v12_bgCtx.moveTo(p.x, p.y);
+          v12_bgCtx.lineTo(v12_q.x, v12_q.y);
+          v12_bgCtx.strokeStyle = `rgba(160,144,216,${(1 - v12_d / 120) * 0.15})`;
+          v12_bgCtx.lineWidth = 0.5;
+          v12_bgCtx.stroke();
+        }
+      }
+    });
+    requestAnimationFrame(v12_drawBg);
+  }
+  v12_drawBg();
+
+  // 호흡 원형 애니메이션
+  const v12_breathCanvas = document.getElementById('breath-canvas');
+  const v12_breathCtx = v12_breathCanvas.getContext('2d');
+  const v12_breathLabel = document.getElementById('breath-label');
+  const v12_breathCount = document.getElementById('breath-count');
+
+  const v12_breathCycle = [
+    { phase: 'in', duration: 4000, label: '숨을 들이쉬세요', color: 'rgba(160,144,216,' },
+    { phase: 'hold', duration: 4000, label: '잠깐 멈추세요', color: 'rgba(96,128,200,' },
+    { phase: 'out', duration: 6000, label: '천천히 내쉬세요', color: 'rgba(140,100,200,' }
+  ];
+  let v12_phaseIdx = 0;
+  let v12_phaseStart = performance.now();
+  let v12_prevScale = 0.4;
+
+  function v12_drawBreath(ts) {
+    const w = v12_breathCanvas.width;
+    const h = v12_breathCanvas.height;
+    const cx = w / 2, cy = h / 2, maxR = Math.min(w, h) / 2 - 6;
+
+    const v12_phase = v12_breathCycle[v12_phaseIdx];
+    const v12_elapsed = ts - v12_phaseStart;
+    let v12_t = Math.min(1, v12_elapsed / v12_phase.duration);
+
+    if (v12_elapsed >= v12_phase.duration) {
+      v12_phaseIdx = (v12_phaseIdx + 1) % v12_breathCycle.length;
+      v12_phaseStart = ts;
+      v12_t = 0;
+    }
+
+    // 스케일 계산
+    let v12_scale;
+    if (v12_phase.phase === 'in') {
+      v12_scale = 0.4 + 0.6 * v12_t;
+    } else if (v12_phase.phase === 'hold') {
+      v12_scale = 1.0;
+    } else {
+      v12_scale = 1.0 - 0.6 * v12_t;
+    }
+
+    // 카운트
+    const v12_remaining = Math.ceil((v12_phase.duration - v12_elapsed) / 1000);
+    v12_breathCount.textContent = Math.max(1, v12_remaining);
+    v12_breathLabel.textContent = v12_phase.label;
+
+    // 그리기
+    v12_breathCtx.clearRect(0, 0, w, h);
+    const v12_r = maxR * v12_scale;
+
+    // 외곽 링
+    v12_breathCtx.beginPath();
+    v12_breathCtx.arc(cx, cy, maxR, 0, Math.PI * 2);
+    v12_breathCtx.strokeStyle = 'rgba(160,144,216,0.15)';
+    v12_breathCtx.lineWidth = 1;
+    v12_breathCtx.stroke();
+
+    // 메인 원
+    const v12_grd = v12_breathCtx.createRadialGradient(cx, cy, 0, cx, cy, v12_r);
+    v12_grd.addColorStop(0, v12_phase.color + '0.35)');
+    v12_grd.addColorStop(1, v12_phase.color + '0.05)');
+    v12_breathCtx.beginPath();
+    v12_breathCtx.arc(cx, cy, v12_r, 0, Math.PI * 2);
+    v12_breathCtx.fillStyle = v12_grd;
+    v12_breathCtx.fill();
+    v12_breathCtx.strokeStyle = v12_phase.color + '0.5)';
+    v12_breathCtx.lineWidth = 1.5;
+    v12_breathCtx.stroke();
+
+    // 진행 호
+    v12_breathCtx.beginPath();
+    v12_breathCtx.arc(cx, cy, maxR - 3, -Math.PI / 2, -Math.PI / 2 + v12_t * Math.PI * 2);
+    v12_breathCtx.strokeStyle = 'rgba(160,144,216,0.6)';
+    v12_breathCtx.lineWidth = 2;
+    v12_breathCtx.stroke();
+
+    requestAnimationFrame(v12_drawBreath);
+  }
+  requestAnimationFrame(v12_drawBreath);
+
+  // 진행 바
+  window.addEventListener('scroll', () => {
+    const v12_p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    document.getElementById('progress-bar').style.width = (v12_p * 100) + '%';
+  });
+
+  // 마그네틱 버튼
+  [document.getElementById('hero-cta'), document.getElementById('ios-btn')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.22}px, ${(e.clientY - r.top - r.height/2) * 0.22}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform 0.6s cubic-bezier(0.34,1.56,0.64,1)';
+    });
+  });
+})();
+</script>
+</body>
+</html>

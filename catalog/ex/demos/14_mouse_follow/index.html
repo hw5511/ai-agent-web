@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Parallax</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #080808;
+      cursor: none;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+    }
+
+    /* Layer 0: background image */
+    .layer-bg {
+      background-image: url('https://picsum.photos/seed/forest/1920/1080');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+    }
+
+    /* Layer 1: radial gradient overlay */
+    .layer-gradient {
+      background: radial-gradient(ellipse at center, #1a1a2e 0%, transparent 70%);
+      opacity: 0.6;
+    }
+
+    /* Layer 2: subtitle */
+    .layer-subtitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      pointer-events: none;
+    }
+
+    .subtitle-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      color: #666;
+      text-transform: uppercase;
+    }
+
+    /* Layer 3: main title */
+    .layer-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      pointer-events: none;
+    }
+
+    .title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 90px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 0.9;
+      text-align: center;
+    }
+
+    .title-line {
+      width: 60px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-top: 96px;
+    }
+
+    .desc-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #444;
+      margin-top: 20px;
+    }
+
+    /* Spacer for subtitle above title */
+    .layer-subtitle-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* offset upward to appear above the main title */
+      transform: translateY(-80px);
+    }
+
+    /* Layer 4: decorative circle */
+    .layer-circle {
+      pointer-events: none;
+    }
+
+    .deco-circle {
+      position: absolute;
+      bottom: -150px;
+      right: -150px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: transparent;
+    }
+
+    /* Layer 5: cursor dot */
+    .layer-cursor {
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .cursor-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: white;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <!-- Layer 0: background -->
+    <div class="layer layer-bg" data-factor="0.01"></div>
+
+    <!-- Layer 1: gradient overlay -->
+    <div class="layer layer-gradient" data-factor="0.03"></div>
+
+    <!-- Layer 2: subtitle -->
+    <div class="layer layer-subtitle" data-factor="0.06">
+      <div class="layer-subtitle-inner">
+        <span class="subtitle-text">Interactive Experience</span>
+      </div>
+    </div>
+
+    <!-- Layer 3: main title -->
+    <div class="layer layer-title" data-factor="0.04">
+      <div class="title-group">
+        <h1 class="main-title">BEYOND<br>THE SURFACE</h1>
+        <div class="title-line"></div>
+        <p class="desc-text">Move your mouse to explore</p>
+      </div>
+    </div>
+
+    <!-- Layer 4: decorative circle -->
+    <div class="layer layer-circle" data-factor="0.10">
+      <div class="deco-circle"></div>
+    </div>
+
+    <!-- Layer 5: cursor dot -->
+    <div class="layer layer-cursor" data-factor="1.0">
+      <div class="cursor-dot" id="cursorDot"></div>
+    </div>
+  </div>
+
+  <script>
+    const layers = document.querySelectorAll('.layer[data-factor]');
+    const cursorDot = document.getElementById('cursorDot');
+
+    const mouse = { x: 0, y: 0 };
+    const targets = [];
+    const current = [];
+
+    layers.forEach((layer, i) => {
+      targets.push({ x: 0, y: 0 });
+      current.push({ x: 0, y: 0 });
+    });
+
+    let cursorTargetX = window.innerWidth / 2;
+    let cursorTargetY = window.innerHeight / 2;
+    let cursorCurrentX = window.innerWidth / 2;
+    let cursorCurrentY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+
+      layers.forEach((layer, i) => {
+        const factor = parseFloat(layer.dataset.factor);
+        if (factor === 1.0) {
+          cursorTargetX = e.clientX;
+          cursorTargetY = e.clientY;
+        } else {
+          targets[i].x = dx * factor;
+          targets[i].y = dy * factor;
+        }
+      });
+    });
+
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function tick() {
+      layers.forEach((layer, i) => {
+        const factor = parseFloat(layer.dataset.factor);
+        if (factor === 1.0) {
+          cursorCurrentX = lerp(cursorCurrentX, cursorTargetX, 0.15);
+          cursorCurrentY = lerp(cursorCurrentY, cursorTargetY, 0.15);
+          cursorDot.style.left = cursorCurrentX + 'px';
+          cursorDot.style.top = cursorCurrentY + 'px';
+        } else {
+          current[i].x = lerp(current[i].x, targets[i].x, 0.08);
+          current[i].y = lerp(current[i].y, targets[i].y, 0.08);
+          layer.style.transform = `translate(${current[i].x}px, ${current[i].y}px)`;
+        }
+      });
+
+      requestAnimationFrame(tick);
+    }
+
+    tick();
+  </script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Shuffle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0d0d0d;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-family: 'Space Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 200;
+    }
+
+    .hint {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      opacity: 0.4;
+      z-index: 200;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .deck-wrapper {
+      position: relative;
+      width: 260px;
+      height: 380px;
+      cursor: pointer;
+      perspective: 900px;
+    }
+
+    .deck {
+      position: relative;
+      width: 260px;
+      height: 380px;
+      transform-style: preserve-3d;
+    }
+
+    .card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 380px;
+      border-radius: 16px;
+      overflow: hidden;
+      color: white;
+      will-change: transform, opacity;
+      user-select: none;
+    }
+
+    .card-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .card-color {
+      position: absolute;
+      inset: 0;
+    }
+
+    .card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+      opacity: 0.55;
+      pointer-events: none;
+      display: block;
+    }
+
+    .card-content {
+      position: absolute;
+      inset: 0;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-collection {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      line-height: 1.6;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-genre {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      text-align: right;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-middle {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .aka-badge {
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      background: transparent;
+      color: white;
+    }
+
+    .card-bottom {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-artist {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .card-tracks {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-track {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      opacity: 0.5;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .card-number {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span>SPOTIFY DATAS</span>
+    <span>YOUR MOST STREAM ARTIST IN 2024</span>
+    <span>6 ARTISTS</span>
+  </header>
+
+  <div class="deck-wrapper" id="deckWrapper">
+    <div class="deck" id="deck"></div>
+  </div>
+
+  <div class="hint">CLICK TO SHUFFLE</div>
+
+  <script>
+    var artistData = [
+      {
+        name: 'KEVIN',
+        genre: 'INDIE POP',
+        collection: 'NEON WAVES',
+        color: '#E8453C',
+        seed: 10,
+        tracks: ['Neon Lights', 'Pastel Sky', 'Midnight Code', 'Echo Drive']
+      },
+      {
+        name: 'DEVONTE',
+        genre: 'AMBIENT',
+        collection: 'VELVET DRIFT',
+        color: '#F47B20',
+        seed: 30,
+        tracks: ['Velvet Dreams', 'Drift Away', 'Soft Horizon']
+      },
+      {
+        name: 'JULIAN',
+        genre: 'ELECTRONIC',
+        collection: 'ECHO FLAME',
+        color: '#F4C430',
+        seed: 50,
+        tracks: ['Echo Chamber', 'Flame Theory', 'Circuit Glow', 'Night Signal']
+      },
+      {
+        name: 'CASABLANCAS',
+        genre: 'SYNTHWAVE',
+        collection: 'PHANTOM BEAT',
+        color: '#4CAF84',
+        seed: 70,
+        tracks: ['Phantom Pulse', 'Beat Legacy', 'Synth Wave Rider']
+      },
+      {
+        name: 'STEPHEN LEE',
+        genre: 'SOUL R&B',
+        collection: 'BRUNER',
+        color: '#5B8DEF',
+        seed: 90,
+        tracks: ['Soul Sunday', "Bruner's Theme", 'R&B Nights', 'Golden Hour']
+      },
+      {
+        name: 'THUNDER CAT',
+        genre: 'SOUL R&B',
+        collection: 'THE GOLDEN AGE',
+        color: '#9B59B6',
+        seed: 110,
+        tracks: ['Golden Age', 'Soul Storm', 'Purple Rain Dance']
+      }
+    ];
+
+    // index 0 = back, index 5 = front
+    var fanConfig = [
+      { rotate: -20, tx: -160, ty: 8  },
+      { rotate: -12, tx: -96,  ty: 4  },
+      { rotate:  -5, tx: -32,  ty: 0  },
+      { rotate:   3, tx:  32,  ty: 4  },
+      { rotate:  11, tx:  96,  ty: 8  },
+      { rotate:  19, tx:  160, ty: 12 }
+    ];
+
+    var deck = document.getElementById('deck');
+    var deckWrapper = document.getElementById('deckWrapper');
+    var cards = [];
+    var isAnimating = false;
+
+    artistData.forEach(function(artist, i) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.style.zIndex = i + 1;
+      card.innerHTML =
+        '<div class="card-bg">' +
+          '<div class="card-color" style="background:' + artist.color + ';"></div>' +
+          '<img class="card-img" src="https://picsum.photos/seed/' + artist.seed + '/260/380" alt="" draggable="false">' +
+        '</div>' +
+        '<div class="card-content">' +
+          '<div class="card-top">' +
+            '<div class="card-collection">COLLECTION<br>' + artist.collection + '</div>' +
+            '<div class="card-genre">' + artist.genre + '</div>' +
+          '</div>' +
+          '<div class="card-middle"><div class="aka-badge">AKA</div></div>' +
+          '<div class="card-bottom">' +
+            '<div class="card-artist">' + artist.name + '</div>' +
+            '<div class="card-tracks">' +
+              artist.tracks.map(function(t) { return '<div class="card-track">' + t + '</div>'; }).join('') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="card-number">' + String(i + 1).padStart(2, '0') + '/06</div>';
+      deck.appendChild(card);
+      cards.push(card);
+    });
+
+    function getFanTransform(idx, overrideY) {
+      var cfg = fanConfig[idx];
+      var ty = overrideY !== undefined ? overrideY : cfg.ty;
+      return 'translateX(' + cfg.tx + 'px) translateY(' + ty + 'px) rotate(' + cfg.rotate + 'deg)';
+    }
+
+    // Initial state: all cards off-screen below
+    cards.forEach(function(card, i) {
+      card.style.transition = 'none';
+      card.style.transform = getFanTransform(i, 600);
+      card.style.opacity = '0';
+    });
+
+    // Staggered entrance animation
+    setTimeout(function() {
+      cards.forEach(function(card, i) {
+        setTimeout(function() {
+          card.style.transition = 'transform 0.7s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease';
+          card.style.transform = getFanTransform(i);
+          card.style.opacity = '1';
+        }, i * 120);
+      });
+    }, 150);
+
+    // Shuffle on click
+    deckWrapper.addEventListener('click', function() {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      // Scale bounce feedback
+      targetScale = 0.96;
+      setTimeout(function() { targetScale = 1.0; }, 150);
+
+      var frontCard = cards[cards.length - 1];
+      var frontIdx = cards.length - 1;
+      var cfg = fanConfig[frontIdx];
+
+      // Animate front card off screen downward
+      frontCard.style.transition = 'transform 0.45s cubic-bezier(0.55,0,1,0.45), opacity 0.3s ease';
+      frontCard.style.transform = 'translateX(' + cfg.tx + 'px) translateY(640px) rotate(' + cfg.rotate + 'deg)';
+      frontCard.style.opacity = '0';
+
+      setTimeout(function() {
+        // Rotate array: front card becomes back card
+        cards.pop();
+        cards.unshift(frontCard);
+
+        // Update z-indices
+        cards.forEach(function(c, i) { c.style.zIndex = i + 1; });
+
+        // Reposition ex-front card instantly to back off-screen
+        frontCard.style.transition = 'none';
+        var backCfg = fanConfig[0];
+        frontCard.style.transform = 'translateX(' + backCfg.tx + 'px) translateY(640px) rotate(' + backCfg.rotate + 'deg)';
+        frontCard.style.opacity = '0';
+
+        // Animate all cards to their new fan positions
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            cards.forEach(function(card, i) {
+              card.style.transition = 'transform 0.7s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease';
+              card.style.transform = getFanTransform(i);
+              card.style.opacity = '1';
+            });
+            setTimeout(function() { isAnimating = false; }, 700);
+          });
+        });
+      }, 380);
+    });
+
+    // Parallax lerp
+    var targetRotX = 0, targetRotY = 0;
+    var currentRotX = 0, currentRotY = 0;
+    var targetScale = 1, currentScale = 1;
+
+    document.addEventListener('mousemove', function(e) {
+      targetRotX = -(e.clientY / window.innerHeight - 0.5) * 12;
+      targetRotY =  (e.clientX / window.innerWidth  - 0.5) * 12;
+    });
+
+    document.addEventListener('mouseleave', function() {
+      targetRotX = 0;
+      targetRotY = 0;
+    });
+
+    (function raf() {
+      currentRotX += (targetRotX - currentRotX) * 0.05;
+      currentRotY += (targetRotY - currentRotY) * 0.05;
+      currentScale += (targetScale - currentScale) * 0.12;
+      deck.style.transform =
+        'rotateX(' + currentRotX.toFixed(4) + 'deg) ' +
+        'rotateY(' + currentRotY.toFixed(4) + 'deg) ' +
+        'scale(' + currentScale.toFixed(4) + ')';
+      requestAnimationFrame(raf);
+    })();
+  </script>
+
+</body>
+</html>

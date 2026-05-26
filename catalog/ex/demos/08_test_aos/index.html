@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAND - Digital Futures</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    header span {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Section 1 - Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px 0;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 100px;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+
+    .hero-title .accent {
+      color: #00ff9d;
+      display: block;
+    }
+
+    .hero-subtitle {
+      margin-top: 32px;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+    }
+
+    .hero-arrow {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: #00ff9d;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 0.4; transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* Section 2 - Stats */
+    .stats {
+      background: #111;
+      padding: 120px 24px;
+    }
+
+    .stats-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 48px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      color: #00ff9d;
+      line-height: 1;
+    }
+
+    .stat-label {
+      margin-top: 12px;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+    }
+
+    /* Section 3 - Services */
+    .services {
+      background: #0d0d0d;
+      padding: 120px 24px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      text-align: center;
+      letter-spacing: 0.04em;
+      margin-bottom: 64px;
+    }
+
+    .section-title span {
+      color: #00ff9d;
+    }
+
+    .cards-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 40px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: border-color 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(0, 255, 157, 0.3);
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #00ff9d;
+    }
+
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 11px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Section 4 - Features */
+    .features {
+      background: #111;
+      padding: 120px 24px;
+    }
+
+    .feature-row {
+      max-width: 1000px;
+      margin: 0 auto 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .feature-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      filter: brightness(0.85);
+    }
+
+    .feature-text {
+      padding: 16px 0;
+    }
+
+    .feature-tag {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: #00ff9d;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .feature-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: 0.03em;
+      margin-bottom: 20px;
+    }
+
+    .feature-body {
+      font-size: 11px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Section 5 - CTA */
+    .cta {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px;
+      background: #0d0d0d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 255, 157, 0.07) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 88px;
+      letter-spacing: 0.03em;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .cta-btn {
+      position: relative;
+      display: inline-block;
+      padding: 16px 48px;
+      background: #00ff9d;
+      color: #0d0d0d;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: #00d97e;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 60px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-row {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .feature-row.reverse {
+        direction: ltr;
+      }
+
+      .cta-title {
+        font-size: 52px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <span>BRAND</span>
+    <span>2024</span>
+  </header>
+
+  <!-- Section 1: Hero -->
+  <section class="hero">
+    <div data-aos="fade-up" data-aos-delay="0">
+      <h1 class="hero-title">
+        WE BUILD
+        <span class="accent">DIGITAL FUTURES</span>
+      </h1>
+    </div>
+    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+      Crafting experiences that shape tomorrow
+    </p>
+    <div class="hero-arrow">&#8595;</div>
+  </section>
+
+  <!-- Section 2: Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item" data-aos="fade-right" data-aos-delay="0">
+        <div class="stat-number">128+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-item" data-aos="fade-up" data-aos-delay="150">
+        <div class="stat-number">40K</div>
+        <div class="stat-label">Users</div>
+      </div>
+      <div class="stat-item" data-aos="fade-left" data-aos-delay="300">
+        <div class="stat-number">99%</div>
+        <div class="stat-label">Satisfaction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Services -->
+  <section class="services">
+    <h2 class="section-title" data-aos="fade-up">OUR <span>SERVICES</span></h2>
+    <div class="cards-grid">
+      <div class="card" data-aos="flip-left" data-aos-delay="0">
+        <div class="card-icon">[&gt;_]</div>
+        <div class="card-name">Web Development</div>
+        <p class="card-desc">High-performance web apps built with modern frameworks and clean code.</p>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="150">
+        <div class="card-icon">[#]</div>
+        <div class="card-name">UI / UX Design</div>
+        <p class="card-desc">Pixel-perfect interfaces designed for usability and visual impact.</p>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="300">
+        <div class="card-icon">[~]</div>
+        <div class="card-name">Brand Strategy</div>
+        <p class="card-desc">Cohesive brand identities that communicate your vision with clarity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Features -->
+  <section class="features">
+    <div class="feature-row">
+      <img
+        src="https://loremflickr.com/600/400/technology"
+        alt="Technology"
+        class="feature-img"
+        data-aos="fade-right"
+      >
+      <div class="feature-text" data-aos="fade-left">
+        <p class="feature-tag">/ 01 &mdash; Innovation</p>
+        <h3 class="feature-heading">TECHNOLOGY THAT MOVES FAST</h3>
+        <p class="feature-body">We stay ahead of the curve by adopting emerging tools and practices that give our clients a genuine competitive edge in the digital landscape.</p>
+      </div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-text" data-aos="fade-right">
+        <p class="feature-tag">/ 02 &mdash; Process</p>
+        <h3 class="feature-heading">BUILT WITH INTENTION</h3>
+        <p class="feature-body">Every decision we make is grounded in strategy. From architecture to pixel, our process ensures quality at every layer of the stack.</p>
+      </div>
+      <img
+        src="https://loremflickr.com/600/400/software"
+        alt="Software"
+        class="feature-img"
+        data-aos="fade-left"
+      >
+    </div>
+  </section>
+
+  <!-- Section 5: CTA -->
+  <section class="cta">
+    <h2 class="cta-title" data-aos="zoom-in">Ready to Start?</h2>
+    <a href="#" class="cta-btn" data-aos="zoom-in" data-aos-delay="200">Get in Touch</a>
+  </section>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+  </script>
+</body>
+</html>

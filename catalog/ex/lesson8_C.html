@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>냥이네 — 고양이 카페</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Gmarket+Sans:wght@300;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: oklch(97% 0.02 55);
+  --bg2: oklch(94% 0.025 50);
+  --bg3: oklch(91% 0.03 45);
+  --clay: oklch(72% 0.1 50);
+  --clay-dark: oklch(50% 0.12 42);
+  --sage: oklch(65% 0.1 150);
+  --text: oklch(22% 0.04 50);
+  --muted: oklch(52% 0.06 50);
+  --border: oklch(86% 0.04 50);
+  --font-display: 'Noto Serif KR', serif;
+  --font-body: 'Gmarket Sans', 'Noto Sans KR', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; line-height: 1.75; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--clay); z-index: 1000; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: rgba(252,248,242,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 48px;
+}
+.nav-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.06em; }
+.nav-logo span { color: var(--clay); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-link { font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.nav-link:hover { color: var(--clay-dark); }
+.nav-reserve { background: var(--clay); color: #fff; font-size: 0.72rem; letter-spacing: 0.06em; text-decoration: none; padding: 9px 20px; border-radius: 32px; will-change: transform; transition: opacity 0.3s; }
+.nav-reserve:hover { opacity: 0.85; }
+
+/* 히어로 */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 100px 48px 80px; position: relative;
+}
+.hero-wave { position: absolute; top: 0; left: 0; right: 0; height: 300px; background: linear-gradient(180deg, var(--bg2) 0%, transparent 100%); pointer-events: none; }
+.hero-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); background: oklch(97% 0.03 50); border: 1px solid oklch(88% 0.05 50); padding: 6px 16px; border-radius: 32px; display: inline-block; margin-bottom: 28px; opacity: 0; }
+.hero-title { font-family: var(--font-display); font-size: clamp(44px, 8vw, 104px); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 28px; opacity: 0; transform: translateY(36px); }
+.hero-title .cat-emoji { display: inline-block; animation: catWave 3s ease-in-out infinite; }
+@keyframes catWave { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(10deg); } 75% { transform: rotate(-6deg); } }
+.hero-desc { font-size: 0.92rem; color: var(--muted); max-width: 480px; line-height: 2; margin-bottom: 40px; opacity: 0; }
+.hero-actions { display: flex; gap: 16px; justify-content: center; opacity: 0; }
+.btn-clay { background: var(--clay); color: #fff; font-size: 0.82rem; letter-spacing: 0.06em; text-decoration: none; padding: 14px 32px; border-radius: 32px; will-change: transform; transition: opacity 0.3s; }
+.btn-clay:hover { opacity: 0.85; }
+.btn-soft { background: var(--bg2); color: var(--muted); font-size: 0.78rem; letter-spacing: 0.06em; text-decoration: none; padding: 14px 28px; border-radius: 32px; border: 1px solid var(--border); transition: all 0.3s; }
+.btn-soft:hover { border-color: var(--clay); color: var(--clay-dark); }
+
+/* 고양이 소개 */
+#cats {
+  padding: 80px 48px; border-top: 1px solid var(--border);
+}
+.cats-label { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); margin-bottom: 48px; text-align: center; }
+.cats-title { font-family: var(--font-display); font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; text-align: center; margin-bottom: 56px; }
+.cats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.cat-card {
+  background: var(--bg2); border-radius: 16px; overflow: hidden;
+  text-align: center; transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+  cursor: pointer;
+}
+.cat-card:hover { transform: translateY(-8px); }
+.cat-img { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: var(--bg3); }
+.cat-info { padding: 16px; }
+.cat-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.cat-breed { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 6px; }
+.cat-personality { font-size: 0.72rem; color: var(--clay-dark); }
+
+/* 갤러리 스크롤 reveal */
+#gallery {
+  padding: 80px 48px; background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.gallery-title { font-family: var(--font-display); font-size: clamp(22px, 3vw, 36px); font-weight: 700; margin-bottom: 40px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.gallery-item { overflow: hidden; border-radius: 8px; aspect-ratio: 1; }
+.gallery-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; transition: transform 0.5s ease; }
+.gallery-item:hover .gallery-img { transform: scale(1.06); }
+
+/* 메뉴 */
+#menu {
+  padding: 80px 48px; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+}
+.menu-title { font-family: var(--font-display); font-size: clamp(22px, 3vw, 38px); font-weight: 700; margin-bottom: 36px; }
+.menu-list { display: flex; flex-direction: column; gap: 0; }
+.menu-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.menu-name { font-size: 0.9rem; }
+.menu-desc { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+.menu-price { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--clay-dark); flex-shrink: 0; }
+.notice-box { background: var(--bg2); border-radius: 12px; padding: 28px; }
+.notice-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+.notice-item { font-size: 0.78rem; color: var(--muted); line-height: 2; display: flex; gap: 8px; }
+.notice-item::before { content: '•'; color: var(--clay); flex-shrink: 0; }
+
+/* 이용 안내 */
+#info {
+  padding: 80px 48px; border-top: 1px solid var(--border);
+  background: var(--clay);
+  color: #fff;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+}
+.info-block { }
+.info-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+.info-value { font-family: var(--font-display); font-size: 0.95rem; font-weight: 400; line-height: 1.8; }
+
+footer {
+  padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.15);
+  background: var(--clay-dark); color: #fff;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: 0.08em; }
+.footer-copy { font-size: 0.65rem; opacity: 0.5; letter-spacing: 0.08em; }
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  #hero, #cats, #gallery, #menu, footer { padding-left: 20px; padding-right: 20px; }
+  .cats-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  #menu, #info { grid-template-columns: 1fr; }
+  #info { padding: 60px 20px; }
+  footer { flex-direction: column; gap: 12px; padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-logo">냥이<span>네</span></div>
+  <div class="nav-links">
+    <a href="#cats" class="nav-link">우리 고양이들</a>
+    <a href="#menu" class="nav-link">메뉴</a>
+    <a href="#info" class="nav-link">이용 안내</a>
+    <a href="#" class="nav-reserve" id="nav-btn">방문 예약</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-wave"></div>
+  <p class="hero-tag">고양이 카페 · 서울 망원동</p>
+  <h1 class="hero-title">오늘 힐링이<br>필요하세요? <span class="cat-emoji">🐱</span></h1>
+  <p class="hero-desc">7마리의 개성 넘치는 고양이들이 기다리는 공간. 커피 한 잔과 고양이의 온기가 오늘의 피로를 녹여드립니다. 세련되지만 과하지 않게, 고양이처럼.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn-clay" id="hero-btn">방문 예약하기</a>
+    <a href="#cats" class="btn-soft">고양이 만나보기</a>
+  </div>
+</section>
+
+<section id="cats">
+  <p class="cats-label">Meet Our Cats</p>
+  <h2 class="cats-title">냥이네 가족을 소개합니다</h2>
+  <div class="cats-grid">
+    <div class="cat-card">
+      <div class="cat-img">🐈</div>
+      <div class="cat-info">
+        <h3 class="cat-name">루나</h3>
+        <p class="cat-breed">러시안 블루 · 5살</p>
+        <p class="cat-personality">새침하지만 가끔 애교</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-img">🐈‍⬛</div>
+      <div class="cat-info">
+        <h3 class="cat-name">콩이</h3>
+        <p class="cat-breed">봄베이 · 3살</p>
+        <p class="cat-personality">사람을 엄청 좋아해요</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-img">🐱</div>
+      <div class="cat-info">
+        <h3 class="cat-name">모카</h3>
+        <p class="cat-breed">스코티시폴드 · 4살</p>
+        <p class="cat-personality">항상 졸린 표정 zzz</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-img">😺</div>
+      <div class="cat-info">
+        <h3 class="cat-name">하루</h3>
+        <p class="cat-breed">노르웨이숲 · 6살</p>
+        <p class="cat-personality">모두의 아빠 고양이</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-img">😸</div>
+      <div class="cat-info">
+        <h3 class="cat-name">보리</h3>
+        <p class="cat-breed">먼치킨 · 2살</p>
+        <p class="cat-personality">짧은 다리로 뛰어다녀요</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-img">🙀</div>
+      <div class="cat-info">
+        <h3 class="cat-name">솜이</h3>
+        <p class="cat-breed">페르시안 · 5살</p>
+        <p class="cat-personality">털이 눈처럼 하얗고 많아요</p>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-img">😻</div>
+      <div class="cat-info">
+        <h3 class="cat-name">별이</h3>
+        <p class="cat-breed">샴 · 3살</p>
+        <p class="cat-personality">수다스럽고 호기심 많아요</p>
+      </div>
+    </div>
+    <div class="cat-card" style="background: var(--bg); border: 2px dashed var(--border);">
+      <div class="cat-img" style="font-size: 2.5rem;">+</div>
+      <div class="cat-info">
+        <h3 class="cat-name">다음 가족</h3>
+        <p class="cat-breed">입양 예정 · 조만간</p>
+        <p class="cat-personality">기대해 주세요!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <h2 class="gallery-title">냥이네 일상 갤러리</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item" style="background: oklch(88% 0.08 50);"><div class="gallery-img">😴</div></div>
+    <div class="gallery-item" style="background: oklch(85% 0.06 55);"><div class="gallery-img">🐾</div></div>
+    <div class="gallery-item" style="background: oklch(90% 0.07 45);"><div class="gallery-img">🧶</div></div>
+    <div class="gallery-item" style="background: oklch(87% 0.08 150);"><div class="gallery-img">🌿</div></div>
+    <div class="gallery-item" style="background: oklch(89% 0.06 50);"><div class="gallery-img">☕</div></div>
+    <div class="gallery-item" style="background: oklch(86% 0.07 48);"><div class="gallery-img">🐈</div></div>
+  </div>
+</section>
+
+<section id="menu">
+  <div>
+    <h2 class="menu-title">음료 메뉴</h2>
+    <div class="menu-list">
+      <div class="menu-item">
+        <div><p class="menu-name">아메리카노</p><p class="menu-desc">스페셜티 원두 매일 직접 로스팅</p></div>
+        <p class="menu-price">5,500</p>
+      </div>
+      <div class="menu-item">
+        <div><p class="menu-name">냥이 라테</p><p class="menu-desc">고양이 발바닥 모양 폼아트</p></div>
+        <p class="menu-price">6,500</p>
+      </div>
+      <div class="menu-item">
+        <div><p class="menu-name">얼그레이 티</p><p class="menu-desc">베르가못 향 가득, 따뜻하게</p></div>
+        <p class="menu-price">5,500</p>
+      </div>
+      <div class="menu-item">
+        <div><p class="menu-name">딸기 쥬스</p><p class="menu-desc">생딸기 착즙, 논알코올</p></div>
+        <p class="menu-price">6,000</p>
+      </div>
+      <div class="menu-item">
+        <div><p class="menu-name">고양이 케이크 세트</p><p class="menu-desc">음료 + 미니 케이크</p></div>
+        <p class="menu-price">9,500</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="notice-box">
+      <p class="notice-title">이용 안내</p>
+      <div class="notice-item">입장료 없음, 음료 1잔 필수 주문 (성인 1인 기준)</div>
+      <div class="notice-item">최대 체류 시간 90분 (주말 혼잡 시)</div>
+      <div class="notice-item">어린이 동반 가능 (7세 이상, 보호자 동행)</div>
+      <div class="notice-item">고양이를 무섭게 다루면 퇴장 요청드릴 수 있습니다</div>
+      <div class="notice-item">플래시 촬영 금지 · 고양이 먹이 지참 금지</div>
+      <div class="notice-item">예약 우선, 현장 방문도 가능 (자리 있을 시)</div>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <div class="info-block">
+    <p class="info-label">Location</p>
+    <div class="info-value">서울시 마포구<br>망원동 402-18<br>망원역 1번 출구 5분</div>
+  </div>
+  <div class="info-block">
+    <p class="info-label">Hours</p>
+    <div class="info-value">월–금 12:00–21:00<br>토–일 11:00–22:00<br>연중무휴</div>
+  </div>
+  <div class="info-block">
+    <p class="info-label">Contact</p>
+    <div class="info-value">카카오채널<br>@냥이네카페<br>02-678-9012</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">냥이네 🐾</div>
+  <div class="footer-copy">© 2024 냥이네 고양이 카페 · 서울 마포구 망원동</div>
+</footer>
+
+<script>
+(function() {
+  const v12_lenis = new Lenis({ duration: 1.1, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  v12_lenis.on('scroll', ({ progress }) => { document.getElementById('progress-bar').style.width = (progress * 100) + '%'; });
+
+  // 히어로
+  gsap.timeline({ delay: 0.3 })
+    .to('.hero-tag', { opacity: 1, duration: 0.6, ease: 'power2.out' })
+    .to('.hero-title', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.3')
+    .to('.hero-desc', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .to('.hero-actions', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+  // 고양이 카드 진입
+  document.querySelectorAll('.cat-card').forEach((el, i) => {
+    gsap.from(el, {
+      opacity: 0, y: 28, scale: 0.95,
+      scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 60%', scrub: 1 }
+    });
+  });
+
+  // 갤러리 reveal
+  document.querySelectorAll('.gallery-item').forEach((el, i) => {
+    gsap.from(el, {
+      opacity: 0, scale: 0.92,
+      scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 55%', scrub: 1 }
+    });
+  });
+
+  // 메뉴 섹션
+  document.querySelectorAll('.menu-item').forEach((el) => {
+    gsap.from(el, {
+      opacity: 0, x: -16,
+      scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 62%', scrub: 1 }
+    });
+  });
+
+  // 마그네틱
+  [document.getElementById('hero-btn'), document.getElementById('nav-btn')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.2}px, ${(e.clientY - r.top - r.height/2) * 0.2}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    });
+  });
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>

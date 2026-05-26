@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stardust — An Indie Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.161.0/build/three.module.js"}}</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #01020a;
+  --text: #c8d8f0;
+  --muted: #4a5870;
+  --gold: #f0c848;
+  --purple: #9060f0;
+  --cyan: #40d8f0;
+  --border: rgba(144,96,240,0.15);
+  --font-mono: 'Space Mono', monospace;
+  --font-body: 'Noto Sans KR', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; line-height: 1.65; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 1px; width: 0%; background: linear-gradient(90deg, var(--purple), var(--cyan)); z-index: 1000; }
+
+/* Three.js 풀스크린 배경 */
+#star-bg { position: fixed; inset: 0; z-index: 0; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 52px;
+}
+.nav-logo { font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold); letter-spacing: 0.06em; }
+.nav-right { display: flex; gap: 28px; align-items: center; }
+.nav-link { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.nav-link:hover { color: var(--cyan); }
+
+/* 히어로 풀스크린 */
+#hero {
+  height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  position: relative; z-index: 1; padding: 0 24px;
+}
+.hero-badge {
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--purple);
+  border: 1px solid var(--border); padding: 6px 16px;
+  border-radius: 2px; margin-bottom: 28px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.hero-title {
+  font-family: var(--font-mono); font-size: clamp(48px, 9vw, 120px);
+  font-weight: 700; letter-spacing: -0.02em; line-height: 0.95;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-subtitle { font-family: var(--font-mono); font-size: clamp(12px, 1.5vw, 18px); color: var(--cyan); margin-bottom: 24px; min-height: 1.6em; }
+.hero-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.9; max-width: 520px; margin-bottom: 40px; }
+
+/* 카운트다운 */
+.countdown-wrap { margin-bottom: 48px; }
+.countdown-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.countdown { display: flex; gap: 24px; justify-content: center; align-items: flex-start; }
+.cd-unit { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.cd-num { font-family: var(--font-mono); font-size: clamp(28px, 5vw, 56px); font-weight: 700; color: var(--gold); line-height: 1; min-width: 2.5ch; text-align: center; }
+.cd-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--muted); }
+.cd-sep { font-family: var(--font-mono); font-size: clamp(28px, 5vw, 56px); color: var(--purple); line-height: 1; opacity: 0.5; }
+
+.hero-actions { display: flex; gap: 16px; justify-content: center; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  color: #fff; font-family: var(--font-mono); font-size: 0.75rem;
+  letter-spacing: 0.1em; text-decoration: none; padding: 14px 36px;
+  transition: opacity 0.3s; will-change: transform;
+}
+.btn-primary:hover { opacity: 0.8; }
+.btn-outline {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em;
+  color: var(--purple); text-decoration: none;
+  border: 1px solid rgba(144,96,240,0.4); padding: 14px 36px;
+  transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--purple); background: rgba(144,96,240,0.06); }
+
+/* 게임 특징 */
+#about {
+  position: relative; z-index: 1;
+  padding: 120px 52px;
+  border-top: 1px solid var(--border);
+  background: rgba(1,2,10,0.6); backdrop-filter: blur(8px);
+}
+.about-header { text-align: center; margin-bottom: 80px; }
+.about-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--purple); margin-bottom: 16px; }
+.about-title { font-family: var(--font-mono); font-size: clamp(28px, 4vw, 52px); font-weight: 700; line-height: 1.2; }
+.about-title span { color: var(--gold); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.feature { border: 1px solid var(--border); padding: 36px 28px; background: rgba(1,2,10,0.4); transition: border-color 0.3s, transform 0.3s; }
+.feature:hover { border-color: var(--purple); transform: translateY(-4px); }
+.feature-num { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700; color: var(--purple); opacity: 0.4; line-height: 1; margin-bottom: 16px; }
+.feature-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 12px; color: var(--text); }
+.feature-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.9; }
+
+/* 시스템 요구 사양 */
+#specs {
+  position: relative; z-index: 1;
+  padding: 80px 52px;
+  border-top: 1px solid var(--border);
+  background: rgba(1,2,10,0.8); backdrop-filter: blur(8px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.specs-title { font-family: var(--font-mono); font-size: clamp(18px, 2.5vw, 28px); margin-bottom: 32px; color: var(--gold); }
+.spec-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.72rem; }
+.spec-key { color: var(--muted); }
+.spec-val { color: var(--text); }
+
+footer {
+  position: relative; z-index: 1;
+  padding: 36px 52px; border-top: 1px solid var(--border);
+  background: rgba(1,2,10,0.95);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-mono); color: var(--gold); font-size: 0.9rem; }
+.footer-copy { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  #about, #specs, footer { padding-left: 24px; padding-right: 24px; }
+  .features-grid { grid-template-columns: 1fr; }
+  #specs { grid-template-columns: 1fr; gap: 40px; }
+  .countdown { gap: 12px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<canvas id="star-bg"></canvas>
+
+<nav>
+  <div class="nav-logo">★ STARDUST</div>
+  <div class="nav-right">
+    <a href="#" class="nav-link">Story</a>
+    <a href="#" class="nav-link">Gallery</a>
+    <a href="#" class="nav-link">Wishlist</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-badge">Indie Game · 2024 Release</div>
+  <h1 class="hero-title">STARDUST</h1>
+  <div class="hero-subtitle"><span id="typed-el"></span></div>
+  <p class="hero-desc">별빛이 닿지 않는 우주의 끝에서 시작되는 이야기. 혼자이지만 외롭지 않은, 소란하지만 고요한 우주 탐험 어드벤처.</p>
+
+  <div class="countdown-wrap">
+    <p class="countdown-label">출시까지</p>
+    <div class="countdown">
+      <div class="cd-unit"><div class="cd-num" id="cd-days">00</div><div class="cd-label">DAYS</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">HRS</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">MIN</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">SEC</div></div>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#" class="btn-primary" id="wishlist-btn">위시리스트 추가</a>
+    <a href="#" class="btn-outline">트레일러 보기</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-header">
+    <p class="about-label">Game Features</p>
+    <h2 class="about-title">혼자서도 <span>아름다운</span> 여정</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-num">01</div>
+      <h3 class="feature-title">절차적 생성 우주</h3>
+      <p class="feature-desc">매 게임마다 달라지는 10억 개의 별계. 같은 경험은 두 번 없습니다. 알고리즘이 만드는 무한한 탐험지.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-num">02</div>
+      <h3 class="feature-title">음악 반응형 환경</h3>
+      <p class="feature-desc">배경 음악의 비트와 멜로디에 반응하여 우주 환경이 실시간으로 변화합니다. 귀와 눈이 하나가 됩니다.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-num">03</div>
+      <h3 class="feature-title">비선형 스토리텔링</h3>
+      <p class="feature-desc">정해진 순서가 없습니다. 탐험하는 순서에 따라 다른 이야기가 펼쳐집니다. 우주만큼 넓은 내러티브.</p>
+    </div>
+  </div>
+</section>
+
+<section id="specs">
+  <div>
+    <p class="specs-title">// 최소 사양</p>
+    <div class="spec-item"><span class="spec-key">OS</span><span class="spec-val">Windows 10 / macOS 12</span></div>
+    <div class="spec-item"><span class="spec-key">CPU</span><span class="spec-val">Intel i5-8400</span></div>
+    <div class="spec-item"><span class="spec-key">GPU</span><span class="spec-val">GTX 1060 6GB</span></div>
+    <div class="spec-item"><span class="spec-key">RAM</span><span class="spec-val">8GB</span></div>
+    <div class="spec-item"><span class="spec-key">Storage</span><span class="spec-val">12GB</span></div>
+  </div>
+  <div>
+    <p class="specs-title">// 권장 사양</p>
+    <div class="spec-item"><span class="spec-key">OS</span><span class="spec-val">Windows 11 / macOS 14</span></div>
+    <div class="spec-item"><span class="spec-key">CPU</span><span class="spec-val">Intel i7-10700</span></div>
+    <div class="spec-item"><span class="spec-key">GPU</span><span class="spec-val">RTX 3060 Ti</span></div>
+    <div class="spec-item"><span class="spec-key">RAM</span><span class="spec-val">16GB</span></div>
+    <div class="spec-item"><span class="spec-key">Storage</span><span class="spec-val">12GB SSD</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">★ STARDUST</div>
+  <div class="footer-copy">© 2024 NOVA Indie Studio</div>
+</footer>
+
+<script type="module">
+import * as THREE from 'three';
+
+(function() {
+  // Three.js 별 파티클 배경
+  const v12_canvas = document.getElementById('star-bg');
+  const v12_scene = new THREE.Scene();
+  const v12_cam = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+  v12_cam.position.z = 1;
+
+  const v12_renderer = new THREE.WebGLRenderer({ canvas: v12_canvas, antialias: false });
+  v12_renderer.setSize(window.innerWidth, window.innerHeight);
+  v12_renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  v12_renderer.setClearColor(0x01020a);
+
+  // 별 파티클
+  const v12_starCount = 3000;
+  const v12_starPos = new Float32Array(v12_starCount * 3);
+  const v12_starColors = new Float32Array(v12_starCount * 3);
+  for (let i = 0; i < v12_starCount; i++) {
+    const v12_i3 = i * 3;
+    v12_starPos[v12_i3] = (Math.random() - 0.5) * 2000;
+    v12_starPos[v12_i3+1] = (Math.random() - 0.5) * 2000;
+    v12_starPos[v12_i3+2] = -Math.random() * 2000;
+    const v12_r = Math.random();
+    if (v12_r < 0.3) { v12_starColors[v12_i3]=0.56; v12_starColors[v12_i3+1]=0.37; v12_starColors[v12_i3+2]=0.94; }
+    else if (v12_r < 0.6) { v12_starColors[v12_i3]=0.25; v12_starColors[v12_i3+1]=0.85; v12_starColors[v12_i3+2]=0.94; }
+    else { v12_starColors[v12_i3]=1; v12_starColors[v12_i3+1]=1; v12_starColors[v12_i3+2]=1; }
+  }
+  const v12_starGeo = new THREE.BufferGeometry();
+  v12_starGeo.setAttribute('position', new THREE.BufferAttribute(v12_starPos, 3));
+  v12_starGeo.setAttribute('color', new THREE.BufferAttribute(v12_starColors, 3));
+  const v12_starMat = new THREE.PointsMaterial({ size: 1.5, vertexColors: true, transparent: true, opacity: 0.85 });
+  const v12_stars = new THREE.Points(v12_starGeo, v12_starMat);
+  v12_scene.add(v12_stars);
+
+  // 큰 별 몇 개
+  const v12_bigStarGeo = new THREE.BufferGeometry();
+  const v12_bigPos = new Float32Array(100 * 3);
+  for (let i = 0; i < 100; i++) {
+    v12_bigPos[i*3] = (Math.random()-0.5)*1600;
+    v12_bigPos[i*3+1] = (Math.random()-0.5)*1600;
+    v12_bigPos[i*3+2] = -Math.random()*1500;
+  }
+  v12_bigStarGeo.setAttribute('position', new THREE.BufferAttribute(v12_bigPos, 3));
+  const v12_bigStarMat = new THREE.PointsMaterial({ size: 3.5, color: 0xf0c848, transparent: true, opacity: 0.7 });
+  v12_scene.add(new THREE.Points(v12_bigStarGeo, v12_bigStarMat));
+
+  let v12_scrollY = 0;
+  window.addEventListener('scroll', () => {
+    v12_scrollY = window.scrollY;
+    const v12_p = v12_scrollY / (document.body.scrollHeight - window.innerHeight);
+    document.getElementById('progress-bar').style.width = (v12_p * 100) + '%';
+  });
+
+  let v12_mouseX = 0, v12_mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    v12_mouseX = (e.clientX / window.innerWidth - 0.5);
+    v12_mouseY = (e.clientY / window.innerHeight - 0.5);
+  });
+
+  window.addEventListener('resize', () => {
+    v12_renderer.setSize(window.innerWidth, window.innerHeight);
+    v12_cam.aspect = window.innerWidth / window.innerHeight;
+    v12_cam.updateProjectionMatrix();
+  });
+
+  let v12_t = 0;
+  function v12_animate() {
+    requestAnimationFrame(v12_animate);
+    v12_t += 0.005;
+    v12_stars.rotation.y = v12_mouseX * 0.05 + v12_t * 0.04;
+    v12_stars.rotation.x = v12_mouseY * 0.03;
+    v12_cam.position.z = 1 + v12_scrollY * 0.3;
+    v12_renderer.render(v12_scene, v12_cam);
+  }
+  v12_animate();
+
+  // Typed.js
+  new Typed('#typed-el', {
+    strings: ['우주를 탐험하라', 'Explore the Cosmos', '별의 이야기를 수집하라', 'Collect Star Stories', '혼자이지만, 외롭지 않다'],
+    typeSpeed: 70, backSpeed: 45, backDelay: 1500, loop: true, showCursor: true
+  });
+
+  // 카운트다운 (출시일: 2024-12-25)
+  const v12_target = new Date('2024-12-25T00:00:00');
+  function v12_updateCountdown() {
+    const v12_now = new Date();
+    const v12_diff = Math.max(0, v12_target - v12_now);
+    const v12_days = Math.floor(v12_diff / 86400000);
+    const v12_hours = Math.floor((v12_diff % 86400000) / 3600000);
+    const v12_mins = Math.floor((v12_diff % 3600000) / 60000);
+    const v12_secs = Math.floor((v12_diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(v12_days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(v12_hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(v12_mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(v12_secs).padStart(2,'0');
+  }
+  v12_updateCountdown();
+  setInterval(v12_updateCountdown, 1000);
+
+  // 마그네틱 버튼
+  const v12_btn = document.getElementById('wishlist-btn');
+  v12_btn.addEventListener('mousemove', (e) => {
+    const r = v12_btn.getBoundingClientRect();
+    v12_btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.25}px, ${(e.clientY - r.top - r.height/2) * 0.25}px)`;
+  });
+  v12_btn.addEventListener('mouseleave', () => {
+    v12_btn.style.transform = 'translate(0,0)';
+    v12_btn.style.transition = 'transform 0.6s cubic-bezier(0.34,1.56,0.64,1)';
+  });
+})();
+</script>
+</body>
+</html>

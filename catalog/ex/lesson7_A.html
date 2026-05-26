@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마음쉼 — 정신건강 상담 클리닉</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #faf8f5;
+  --bg2: #f2ede6;
+  --text: #2c2420;
+  --muted: #8a7a6c;
+  --accent: #9b7b8c;
+  --accent2: #b8956c;
+  --warm: #e8dfd4;
+  --border: rgba(44,36,32,0.08);
+  --font-serif: 'Noto Serif KR', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 300; overflow-x: hidden; line-height: 1.75; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--accent); z-index: 1000; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 52px;
+}
+.nav-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; letter-spacing: 0.08em; color: var(--text); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-link { font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.nav-link:hover { color: var(--text); }
+.nav-reserve {
+  font-size: 0.72rem; background: var(--accent); color: #fff;
+  text-decoration: none; padding: 10px 24px; letter-spacing: 0.05em;
+  transition: opacity 0.3s; will-change: transform;
+}
+.nav-reserve:hover { opacity: 0.85; }
+
+/* 히어로 */
+#hero {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 100px 52px 80px; gap: 80px;
+}
+.hero-left {}
+.hero-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(155,123,140,0.3); padding: 6px 14px; margin-bottom: 28px; }
+.hero-title { font-family: var(--font-serif); font-size: clamp(36px, 5.5vw, 68px); font-weight: 400; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 24px; }
+.hero-sub { font-size: 0.92rem; color: var(--muted); line-height: 2; max-width: 440px; margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 16px; align-items: center; }
+.btn-primary {
+  background: var(--accent); color: #fff;
+  font-size: 0.8rem; letter-spacing: 0.08em; text-decoration: none;
+  padding: 14px 32px; transition: opacity 0.3s; will-change: transform;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-text { font-size: 0.78rem; color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(138,122,108,0.3); padding-bottom: 2px; }
+.hero-image {
+  aspect-ratio: 4/5; background: var(--warm);
+  position: relative; overflow: hidden;
+}
+.hero-image-inner {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, #e8dfd4 0%, #d4c4b4 50%, #c8b8a0 100%);
+}
+.hero-image-quote {
+  position: absolute; bottom: 32px; left: 32px; right: 32px;
+  background: rgba(250,248,245,0.9); padding: 24px;
+}
+.quote-text { font-family: var(--font-serif); font-size: 0.95rem; line-height: 1.8; margin-bottom: 12px; color: var(--text); }
+.quote-author { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.12em; }
+
+/* 철학 섹션 */
+#philosophy {
+  padding: 100px 52px; background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.phil-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 52px); font-weight: 400; line-height: 1.4; max-width: 640px; margin: 0 auto 60px; text-align: center; }
+.phil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.phil-item { text-align: center; padding: 36px 24px; }
+.phil-icon { font-size: 2rem; margin-bottom: 16px; }
+.phil-heading { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 12px; }
+.phil-desc { font-size: 0.82rem; color: var(--muted); line-height: 2; }
+
+/* 서비스 */
+#services {
+  padding: 100px 52px;
+  border-top: 1px solid var(--border);
+}
+.services-title { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 42px); font-weight: 400; margin-bottom: 52px; }
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); }
+.service-card {
+  background: var(--bg); padding: 40px 36px;
+  transition: background 0.3s;
+}
+.service-card:hover { background: var(--bg2); }
+.svc-num { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+.svc-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
+.svc-desc { font-size: 0.82rem; color: var(--muted); line-height: 2; margin-bottom: 20px; }
+.svc-duration { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; }
+
+/* 상담사 */
+#therapists {
+  padding: 100px 52px; background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.therapists-label { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; }
+.therapists-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.therapist-card { text-align: center; }
+.therapist-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--warm); margin: 0 auto 16px; overflow: hidden; }
+.avatar-inner { width: 100%; height: 100%; background: linear-gradient(135deg, #d4b8a8, #c0a090); }
+.therapist-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; margin-bottom: 4px; }
+.therapist-role { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 12px; }
+.therapist-spec { font-size: 0.75rem; color: var(--muted); line-height: 1.8; }
+
+/* 예약 */
+#booking {
+  padding: 100px 52px; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.booking-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 52px); font-weight: 400; line-height: 1.35; margin-bottom: 20px; }
+.booking-desc { font-size: 0.88rem; color: var(--muted); line-height: 2; margin-bottom: 36px; }
+.booking-form { display: flex; flex-direction: column; gap: 16px; }
+.form-input {
+  width: 100%; padding: 14px 18px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.85rem; outline: none; transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+.form-input:focus { border-color: var(--accent); }
+.form-submit {
+  background: var(--accent); color: #fff; border: none; cursor: pointer;
+  font-family: var(--font-sans); font-size: 0.82rem; letter-spacing: 0.1em;
+  padding: 16px 32px; text-align: center; transition: opacity 0.3s; will-change: transform;
+}
+.form-submit:hover { opacity: 0.85; }
+
+footer {
+  padding: 48px 52px; border-top: 1px solid var(--border);
+  background: var(--text); color: var(--bg);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; letter-spacing: 0.1em; color: var(--bg); }
+.footer-right { text-align: right; }
+.footer-copy { font-size: 0.65rem; color: rgba(250,248,245,0.5); letter-spacing: 0.1em; }
+.footer-contact { font-size: 0.75rem; color: rgba(250,248,245,0.7); letter-spacing: 0.06em; margin-bottom: 4px; }
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  #hero { grid-template-columns: 1fr; padding: 100px 20px 60px; gap: 40px; }
+  #philosophy, #services, #therapists, #booking, footer { padding: 60px 20px; }
+  .phil-grid, .services-grid { grid-template-columns: 1fr; }
+  .therapists-grid { grid-template-columns: 1fr 1fr; }
+  #booking { grid-template-columns: 1fr; gap: 40px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-logo">마음쉼</div>
+  <div class="nav-links">
+    <a href="#" class="nav-link">상담 서비스</a>
+    <a href="#" class="nav-link">상담사 소개</a>
+    <a href="#" class="nav-link">오시는 길</a>
+    <a href="#" class="nav-reserve" id="nav-btn">첫 상담 예약</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">정신건강 상담 클리닉</div>
+    <h1 class="hero-title">판단 없이<br>당신의 이야기를<br>듣겠습니다</h1>
+    <p class="hero-sub">어떤 감정도, 어떤 어려움도 괜찮습니다. 마음쉼에서는 당신이 느끼는 모든 것이 유효합니다. 함께 조금씩 나아가겠습니다.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary" id="hero-btn">첫 상담 신청하기</a>
+      <a href="#services" class="btn-text">서비스 알아보기</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner"></div>
+    <div class="hero-image-quote">
+      <p class="quote-text">"용기는 두려움이 없는 것이 아닙니다. 두려움에도 불구하고 한 걸음 내딛는 것입니다."</p>
+      <p class="quote-author">마음쉼 클리닉</p>
+    </div>
+  </div>
+</section>
+
+<section id="philosophy">
+  <h2 class="phil-title">우리가 상담에 임하는 방식</h2>
+  <div class="phil-grid">
+    <div class="phil-item">
+      <div class="phil-icon">◯</div>
+      <h3 class="phil-heading">비판단적 경청</h3>
+      <p class="phil-desc">당신이 겪는 어려움을 평가하지 않습니다. 먼저 듣고, 먼저 이해하겠습니다. 모든 감정은 그 자체로 의미가 있습니다.</p>
+    </div>
+    <div class="phil-item">
+      <div class="phil-icon">◌</div>
+      <h3 class="phil-heading">개인화된 치료</h3>
+      <p class="phil-desc">모든 사람의 이야기는 다릅니다. 한 가지 방법이 모든 사람에게 맞지 않습니다. 당신만을 위한 상담 방향을 함께 만들어갑니다.</p>
+    </div>
+    <div class="phil-item">
+      <div class="phil-icon">◎</div>
+      <h3 class="phil-heading">장기적 동반</h3>
+      <p class="phil-desc">빠른 해결책을 약속하지 않습니다. 대신, 당신이 스스로 성장할 수 있는 힘을 찾도록 옆에서 함께하겠습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="services-title">상담 서비스</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <p class="svc-num">01</p>
+      <h3 class="svc-title">개인 심리상담</h3>
+      <p class="svc-desc">우울, 불안, 스트레스, 대인관계 어려움, 자존감 문제 등 삶의 다양한 심리적 어려움을 1:1로 상담합니다. 인지행동치료(CBT), 정신역동, 수용전념치료(ACT) 접근을 활용합니다.</p>
+      <p class="svc-duration">50분 / 1회기 · 주 1회 권장</p>
+    </div>
+    <div class="service-card">
+      <p class="svc-num">02</p>
+      <h3 class="svc-title">커플 상담</h3>
+      <p class="svc-desc">소통의 어려움, 갈등 반복, 친밀감 문제로 고민하는 커플을 위한 상담입니다. 서로를 더 깊이 이해하고 관계를 회복하는 데 초점을 맞춥니다.</p>
+      <p class="svc-duration">80분 / 1회기 · 주 1회 권장</p>
+    </div>
+    <div class="service-card">
+      <p class="svc-num">03</p>
+      <h3 class="svc-title">청소년 상담</h3>
+      <p class="svc-desc">학업 스트레스, 또래 관계, 진로 불안, 자해 충동 등 청소년이 마주하는 다양한 어려움을 따뜻하게 다룹니다. 부모 상담을 병행할 수 있습니다.</p>
+      <p class="svc-duration">50분 / 1회기 · 월 2~4회</p>
+    </div>
+    <div class="service-card">
+      <p class="svc-num">04</p>
+      <h3 class="svc-title">심리검사 패키지</h3>
+      <p class="svc-desc">MMPI-2, SCL-90, 성격유형검사(MBTI/Enneagram), 주의력 검사 등 심리검사와 해석 상담을 결합한 패키지입니다. 자신을 더 깊이 이해하는 계기가 됩니다.</p>
+      <p class="svc-duration">검사 90분 + 해석 50분</p>
+    </div>
+  </div>
+</section>
+
+<section id="therapists">
+  <p class="therapists-label">Our Therapists</p>
+  <div class="therapists-grid">
+    <div class="therapist-card">
+      <div class="therapist-avatar"><div class="avatar-inner"></div></div>
+      <h3 class="therapist-name">이수진 상담사</h3>
+      <p class="therapist-role">임상심리사 1급 · 상담심리사 1급</p>
+      <p class="therapist-spec">우울증 / 불안장애 / 트라우마<br>인지행동치료 전문</p>
+    </div>
+    <div class="therapist-card">
+      <div class="therapist-avatar"><div class="avatar-inner" style="background: linear-gradient(135deg, #b8d0c4, #90b8a8);"></div></div>
+      <h3 class="therapist-name">박민준 상담사</h3>
+      <p class="therapist-role">정신건강 전문요원 1급</p>
+      <p class="therapist-spec">대인관계 / 자존감 / 청소년<br>수용전념치료(ACT) 전문</p>
+    </div>
+    <div class="therapist-card">
+      <div class="therapist-avatar"><div class="avatar-inner" style="background: linear-gradient(135deg, #d4c0b0, #b8a090);"></div></div>
+      <h3 class="therapist-name">김하은 상담사</h3>
+      <p class="therapist-role">결혼 및 가족치료사</p>
+      <p class="therapist-spec">커플 / 가족관계 / 소통<br>가트맨 커플상담 전문</p>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div>
+    <h2 class="booking-title">첫 상담,<br>용기를 내어<br>주셔서 감사합니다</h2>
+    <p class="booking-desc">첫 상담은 30분 무료입니다. 어떤 이야기를 하고 싶으신지, 어떤 도움이 필요하신지 부담 없이 말씀해 주세요.</p>
+  </div>
+  <div>
+    <form class="booking-form" onsubmit="return false;">
+      <input class="form-input" type="text" placeholder="성함">
+      <input class="form-input" type="tel" placeholder="연락처">
+      <select class="form-input">
+        <option value="">상담 유형 선택</option>
+        <option>개인 심리상담</option>
+        <option>커플 상담</option>
+        <option>청소년 상담</option>
+        <option>심리검사 패키지</option>
+      </select>
+      <input class="form-input" type="text" placeholder="희망 날짜/시간 (예: 5월 15일 오후 3시)">
+      <textarea class="form-input" rows="3" placeholder="간단한 상담 내용 (선택사항)"></textarea>
+      <button class="form-submit" id="submit-btn">예약 신청하기</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">마음쉼</div>
+  <div class="footer-right">
+    <p class="footer-contact">02-345-6789 · mindrest@clinic.kr</p>
+    <p class="footer-contact">서울시 강남구 역삼동 · 월–금 10:00–19:00</p>
+    <p class="footer-copy">© 2024 마음쉼 정신건강 상담 클리닉</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const v12_lenis = new Lenis({
+    duration: 1.1,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  v12_lenis.on('scroll', ({ progress }) => {
+    document.getElementById('progress-bar').style.width = (progress * 100) + '%';
+  });
+
+  // 히어로 진입
+  gsap.from('.hero-tag', { opacity: 0, y: 16, duration: 0.8, delay: 0.2, ease: 'power3.out' });
+  gsap.from('.hero-title', { opacity: 0, y: 32, duration: 1.0, delay: 0.4, ease: 'power3.out' });
+  gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power2.out' });
+  gsap.from('.hero-actions', { opacity: 0, y: 16, duration: 0.7, delay: 0.8, ease: 'power2.out' });
+  gsap.from('.hero-image', { opacity: 0, x: 40, duration: 1.0, delay: 0.3, ease: 'power3.out' });
+
+  // 섹션 애니메이션
+  document.querySelectorAll('.phil-item, .service-card, .therapist-card').forEach((el, i) => {
+    gsap.from(el, {
+      opacity: 0, y: 32,
+      scrollTrigger: { trigger: el, start: 'top 82%', end: 'top 55%', scrub: 1 }
+    });
+  });
+  gsap.from('.phil-title', { opacity: 0, y: 24, scrollTrigger: { trigger: '#philosophy', start: 'top 72%', end: 'top 45%', scrub: 1 } });
+  gsap.from('.booking-title', { opacity: 0, y: 28, scrollTrigger: { trigger: '#booking', start: 'top 72%', end: 'top 45%', scrub: 1 } });
+
+  // 마그네틱 버튼
+  [document.getElementById('hero-btn'), document.getElementById('submit-btn'), document.getElementById('nav-btn')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.18}px, ${(e.clientY - r.top - r.height/2) * 0.18}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    });
+  });
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>

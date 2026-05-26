@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atelier Blanc — Luxury Interior Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,opsz,wght@0,14..69,100..900;1,14..69,100..900&family=Noto+Serif+KR:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      oklch(96% 0.012 76);
+      --cream-2:    oklch(91% 0.018 73);
+      --brown:      oklch(20% 0.034 42);
+      --brown-mid:  oklch(38% 0.044 44);
+      --brown-lt:   oklch(60% 0.038 52);
+      --gold:       oklch(67% 0.062 78);
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      background: var(--cream);
+      color: var(--brown);
+      font-family: 'Cormorant', 'Noto Serif KR', serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Progress Bar ── */
+    #v12-progress {
+      position: fixed; top: 0; left: 0;
+      height: 1px; width: 0%;
+      background: var(--brown-mid);
+      z-index: 1000;
+      will-change: width;
+    }
+
+    /* ── Nav ── */
+    #v12-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 2.2rem 4.5rem;
+      transition: padding 0.6s ease, background 0.6s ease, border-color 0.6s ease;
+      border-bottom: 1px solid transparent;
+    }
+    #v12-nav.scrolled {
+      padding: 1.2rem 4.5rem;
+      background: rgba(245, 237, 225, 0.86);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom-color: rgba(160, 130, 100, 0.18);
+    }
+    .nav-logo {
+      font-family: 'Cormorant', serif;
+      font-weight: 600; font-size: 1.35rem;
+      letter-spacing: 0.15em; color: var(--cream);
+      text-transform: uppercase; transition: color 0.6s ease;
+    }
+    #v12-nav.scrolled .nav-logo { color: var(--brown); }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.78rem; font-weight: 300;
+      letter-spacing: 0.1em; color: rgba(245,237,225,0.75);
+      text-decoration: none; position: relative;
+      transition: color 0.3s ease;
+    }
+    #v12-nav.scrolled .nav-links a { color: var(--brown-lt); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: currentColor;
+      transition: width 0.4s ease;
+    }
+    .nav-links a:hover { color: var(--brown); }
+    #v12-nav.scrolled .nav-links a:hover { color: var(--brown); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative; height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://loremflickr.com/1920/1080/interior,luxury,dark') center/cover no-repeat;
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 60%,
+        rgba(28, 18, 10, 0.45) 0%,
+        rgba(28, 18, 10, 0.68) 55%,
+        rgba(22, 14, 8, 0.88) 100%
+      );
+    }
+    /* 선명한 망각 — edge fade */
+    .hero-fade {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(to bottom, var(--cream) 0%, transparent 14%, transparent 82%, var(--cream) 100%),
+        linear-gradient(to right,  var(--cream) 0%, transparent 12%, transparent 88%, var(--cream) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+    }
+    .hero-eyebrow {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.72rem; font-weight: 300;
+      letter-spacing: 0.45em; color: rgba(245,237,215,0.6);
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(5.5rem, 15vw, 15rem);
+      font-weight: 300; line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: oklch(95% 0.01 76);
+      will-change: transform, opacity;
+    }
+    .hero-title em { font-style: italic; font-weight: 200; }
+    .hero-subtitle {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      font-weight: 300; letter-spacing: 0.25em;
+      color: rgba(245,237,215,0.65); margin-top: 0.4rem;
+    }
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: inline-flex; align-items: center; gap: 1rem;
+      font-family: 'Cormorant', serif;
+      font-size: 0.88rem; font-weight: 500;
+      letter-spacing: 0.28em; color: rgba(245,237,215,0.75);
+      text-transform: uppercase; cursor: pointer;
+      transition: color 0.4s ease;
+    }
+    .hero-cta::before {
+      content: '';
+      width: 38px; height: 1px;
+      background: rgba(245,237,215,0.55);
+      transition: width 0.4s ease;
+    }
+    .hero-cta:hover { color: rgba(245,237,215,1); }
+    .hero-cta:hover::before { width: 65px; }
+    .scroll-hint {
+      position: absolute; bottom: 2.8rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      color: rgba(245,237,215,0.45);
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.65rem; font-weight: 300; letter-spacing: 0.35em;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(245,237,215,0.5), transparent);
+      animation: scrollPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.35; transform: scaleY(1); }
+      50%       { opacity: 0.9;  transform: scaleY(0.65); }
+    }
+
+    /* ── Manifesto ── */
+    #manifesto {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 10rem 9rem; position: relative; overflow: hidden;
+    }
+    .manifesto-inner { max-width: 860px; position: relative; z-index: 2; }
+    .manifesto-label {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.68rem; font-weight: 300;
+      letter-spacing: 0.45em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 3.5rem;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .manifesto-label::before {
+      content: ''; width: 28px; height: 1px; background: var(--gold);
+    }
+    /* SURPRISE_ELEMENT: font-variation-settings "wght" animated by scroll */
+    #v12-quote {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(2.8rem, 5.5vw, 6rem);
+      line-height: 1.18;
+      font-variation-settings: "wght" 100;
+      color: var(--brown);
+      will-change: font-variation-settings;
+    }
+    #v12-quote em { font-style: italic; color: var(--brown-mid); }
+    .manifesto-byline {
+      margin-top: 4rem;
+      display: flex; align-items: center; gap: 2rem;
+    }
+    .manifesto-rule { width: 54px; height: 1px; background: var(--brown-lt); }
+    .manifesto-byline span {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.78rem; font-weight: 300;
+      letter-spacing: 0.15em; color: var(--brown-lt);
+    }
+    /* 선명한 망각 — ghost bg number */
+    .manifesto-ghost {
+      position: absolute; right: 4rem; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Cormorant', serif;
+      font-size: 22rem; font-weight: 200;
+      color: rgba(140, 110, 80, 0.055);
+      line-height: 1; pointer-events: none; user-select: none;
+    }
+
+    /* ── Gallery ── */
+    #gallery-header {
+      padding: 7rem 4.5rem 3.5rem;
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    .gallery-title {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(3rem, 6.5vw, 7.5rem);
+      font-weight: 300; line-height: 0.95; color: var(--brown);
+    }
+    .gallery-title em { font-style: italic; }
+    .gallery-count {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.72rem; font-weight: 300;
+      letter-spacing: 0.25em; color: var(--brown-lt);
+      padding-bottom: 0.8rem;
+    }
+    #gallery-viewport {
+      height: 100vh; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    #gallery-track {
+      display: flex; align-items: flex-end;
+      gap: 2.2rem; padding: 0 4.5rem 4rem;
+      will-change: transform;
+    }
+    .g-item {
+      flex: 0 0 auto; position: relative;
+      overflow: hidden; cursor: pointer;
+    }
+    .g-item:nth-child(odd)  { width: 400px; height: 72vh; }
+    .g-item:nth-child(even) { width: 310px; height: 52vh; margin-bottom: 5rem; }
+    .g-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+      /* 선명한 망각 — top/bottom fade */
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 88%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 88%, transparent 100%);
+    }
+    .g-item:hover .g-img { transform: scale(1.05); }
+    /* glassmorphism caption — VISUAL_SPARK */
+    .g-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.8rem;
+      transform: translateY(100%);
+      transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .g-item:hover .g-caption { transform: translateY(0); }
+    .g-glass {
+      background: rgba(245, 237, 222, 0.13);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(210, 185, 155, 0.22);
+      border-radius: 2px; padding: 1.4rem 1.6rem;
+      box-shadow: 0 8px 32px rgba(28, 18, 10, 0.25);
+    }
+    .g-title {
+      font-family: 'Cormorant', serif;
+      font-size: 1.45rem; font-weight: 400;
+      color: oklch(95% 0.01 76); margin-bottom: 0.3rem;
+    }
+    .g-sub {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.68rem; font-weight: 300;
+      letter-spacing: 0.15em; color: rgba(245,237,222,0.62);
+    }
+
+    /* ── About ── */
+    #about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+    }
+    .about-img-wrap {
+      position: relative; overflow: hidden;
+    }
+    .about-img {
+      width: 100%; height: 100%;
+      object-fit: cover; will-change: transform;
+    }
+    .about-img-wrap::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(to right,  transparent 65%, var(--cream) 100%),
+        linear-gradient(to bottom, var(--cream) 0%, transparent 18%, transparent 82%, var(--cream) 100%);
+    }
+    .about-content {
+      padding: 6.5rem 5rem 6.5rem 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .sec-label {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.68rem; font-weight: 300;
+      letter-spacing: 0.45em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 1.4rem;
+    }
+    .sec-label::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+    .about-heading {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(2.4rem, 3.8vw, 4.2rem);
+      font-weight: 400; line-height: 1.22; color: var(--brown);
+      margin-bottom: 2.5rem;
+    }
+    .about-heading em { font-style: italic; color: var(--brown-mid); }
+    .about-p {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.92rem; font-weight: 300;
+      line-height: 2.05; color: var(--brown-mid);
+      margin-bottom: 1.4rem;
+    }
+    .about-rule {
+      width: 100%; height: 1px; margin: 3rem 0;
+      background: linear-gradient(to right, var(--brown-lt), transparent);
+    }
+    .about-pullquote {
+      font-family: 'Cormorant', serif;
+      font-size: 1.6rem; font-weight: 300; font-style: italic;
+      line-height: 1.4; color: var(--brown-mid);
+    }
+    .about-meta {
+      margin-top: 2.5rem;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.72rem; font-weight: 300;
+      letter-spacing: 0.12em; color: var(--brown-lt);
+    }
+
+    /* ── Approach ── */
+    #approach {
+      padding: 10rem 9rem;
+      background: var(--cream-2); position: relative;
+    }
+    #approach::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--brown-lt), transparent);
+    }
+    .approach-head {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 7rem;
+    }
+    .approach-h {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(3rem, 5.5vw, 6.5rem);
+      font-weight: 300; line-height: 1.02; color: var(--brown);
+    }
+    .approach-h em { font-style: italic; }
+    .approach-intro {
+      max-width: 300px; padding-top: 0.5rem;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.86rem; font-weight: 300;
+      line-height: 1.95; color: var(--brown-mid);
+    }
+    .approach-row {
+      display: grid; grid-template-columns: 72px 1fr 1fr;
+      align-items: start; padding: 3.8rem 0;
+      border-top: 1px solid rgba(140, 115, 90, 0.2);
+      transition: transform 0.45s ease;
+      will-change: transform; cursor: default;
+    }
+    .approach-row:last-child { border-bottom: 1px solid rgba(140, 115, 90, 0.2); }
+    .approach-row:hover { transform: translateX(10px); }
+    .approach-num {
+      font-family: 'Cormorant', serif;
+      font-size: 0.9rem; font-weight: 300;
+      color: var(--brown-lt); padding-top: 0.35rem;
+    }
+    .approach-name {
+      font-family: 'Cormorant', serif;
+      font-size: 2.6rem; font-weight: 400; color: var(--brown);
+      line-height: 1.1; transition: font-style 0.3s ease;
+    }
+    .approach-row:hover .approach-name { font-style: italic; }
+    .approach-desc {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.84rem; font-weight: 300;
+      line-height: 1.92; color: var(--brown-mid); max-width: 380px;
+    }
+
+    /* ── Contact ── */
+    #contact {
+      min-height: 85vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 9rem 4rem; text-align: center; position: relative; overflow: hidden;
+    }
+    /* 선명한 망각 — ghost bg text */
+    .contact-ghost {
+      position: absolute; bottom: -2.5rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant', serif;
+      font-size: 23vw; font-weight: 200;
+      color: rgba(140, 110, 80, 0.055);
+      white-space: nowrap; pointer-events: none; user-select: none;
+    }
+    .contact-label {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.68rem; font-weight: 300;
+      letter-spacing: 0.45em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 2.8rem;
+    }
+    .contact-h {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(3rem, 7.5vw, 9rem);
+      font-weight: 300; line-height: 1.04;
+      color: var(--brown); margin-bottom: 1.8rem;
+    }
+    .contact-h em { font-style: italic; }
+    .contact-sub {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.88rem; font-weight: 300;
+      letter-spacing: 0.1em; color: var(--brown-lt);
+      margin-bottom: 4.5rem;
+    }
+    .contact-btn {
+      position: relative; overflow: hidden;
+      display: inline-flex; align-items: center; gap: 1.6rem;
+      padding: 1.4rem 3.8rem;
+      border: 1px solid var(--brown);
+      font-family: 'Cormorant', serif;
+      font-size: 1rem; font-weight: 500;
+      letter-spacing: 0.22em; color: var(--brown);
+      text-transform: uppercase; cursor: pointer;
+      transition: color 0.55s ease;
+      text-decoration: none;
+    }
+    .contact-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--brown);
+      transform: translateX(-101%);
+      transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .contact-btn:hover { color: var(--cream); }
+    .contact-btn:hover::before { transform: translateX(0); }
+    .contact-btn span { position: relative; z-index: 1; }
+    .contact-info {
+      display: flex; gap: 5rem; margin-top: 5rem;
+      padding-top: 3.5rem;
+      border-top: 1px solid rgba(140, 115, 90, 0.2);
+      position: relative; z-index: 1;
+    }
+    .ci-label {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.62rem; font-weight: 300;
+      letter-spacing: 0.4em; color: var(--brown-lt);
+      text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .ci-value {
+      font-family: 'Cormorant', serif;
+      font-size: 1.1rem; font-weight: 400; color: var(--brown);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2rem 4.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(140, 115, 90, 0.15);
+    }
+    .f-logo {
+      font-family: 'Cormorant', serif;
+      font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.15em; color: var(--brown);
+    }
+    .f-copy {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 0.68rem; font-weight: 300; color: var(--brown-lt);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      #v12-nav { padding: 1.5rem 2rem; }
+      #v12-nav.scrolled { padding: 1rem 2rem; }
+      .nav-links { display: none; }
+      #manifesto { padding: 6rem 2rem; }
+      .manifesto-ghost { display: none; }
+      #gallery-header { padding: 4rem 2rem 2rem; }
+      #gallery-track { padding: 0 2rem 3rem; gap: 1.4rem; }
+      .g-item:nth-child(odd)  { width: 280px; height: 65vw; }
+      .g-item:nth-child(even) { width: 220px; height: 50vw; margin-bottom: 3rem; }
+      #about { grid-template-columns: 1fr; }
+      .about-img-wrap { min-height: 55vw; }
+      .about-content { padding: 4rem 2rem; }
+      #approach { padding: 6rem 2rem; }
+      .approach-head { flex-direction: column; gap: 2rem; }
+      .approach-row { grid-template-columns: 48px 1fr; }
+      .approach-desc { display: none; }
+      #contact { padding: 6rem 2rem; }
+      .contact-info { flex-direction: column; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="v12-progress"></div>
+
+  <nav id="v12-nav">
+    <div class="nav-logo">Atelier Blanc</div>
+    <ul class="nav-links">
+      <li><a href="#manifesto">철학</a></li>
+      <li><a href="#gallery-header">작품</a></li>
+      <li><a href="#about">스튜디오</a></li>
+      <li><a href="#approach">프로세스</a></li>
+      <li><a href="#contact">상담</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="hero-bg" id="v12-hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-fade"></div>
+    <div class="hero-content" id="v12-hero-content">
+      <p class="hero-eyebrow">Luxury Interior Studio &nbsp;·&nbsp; Seoul, 2012</p>
+      <h1 class="hero-title"><em>Atelier</em><br>Blanc</h1>
+      <p class="hero-subtitle">공간이 당신의 언어가 되는 곳</p>
+      <div class="hero-cta" id="v12-hero-cta">Portfolio 보기</div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ── Manifesto ── -->
+  <section id="manifesto">
+    <div class="manifesto-inner">
+      <p class="manifesto-label">철학 — Philosophy</p>
+      <h2 id="v12-quote">
+        공간은 단순한 배경이 아니다.<br>
+        <em>그것은 당신이 세상에</em><br>
+        전하는 가장 고요한 언어이다.
+      </h2>
+      <div class="manifesto-byline">
+        <div class="manifesto-rule"></div>
+        <span>Atelier Blanc &nbsp;·&nbsp; Creative Direction</span>
+      </div>
+    </div>
+    <div class="manifesto-ghost" aria-hidden="true">01</div>
+  </section>
+
+  <!-- ── Gallery ── -->
+  <div id="gallery-header">
+    <h2 class="gallery-title"><em>Selected</em><br>Works</h2>
+    <div class="gallery-count">06 Projects</div>
+  </div>
+  <div id="gallery-viewport">
+    <div id="gallery-track">
+      <div class="g-item">
+        <img class="g-img" src="https://loremflickr.com/800/1000/interior,luxury" alt="Residence Maison">
+        <div class="g-caption"><div class="g-glass">
+          <p class="g-title">Residence Maison</p>
+          <p class="g-sub">서울 · 주거 공간 · 2024</p>
+        </div></div>
+      </div>
+      <div class="g-item">
+        <img class="g-img" src="https://loremflickr.com/700/900/bedroom,minimal" alt="The Calm Suite">
+        <div class="g-caption"><div class="g-glass">
+          <p class="g-title">The Calm Suite</p>
+          <p class="g-sub">부산 · 호텔 스위트 · 2024</p>
+        </div></div>
+      </div>
+      <div class="g-item">
+        <img class="g-img" src="https://loremflickr.com/800/1000/livingroom,modern" alt="Espace Lumière">
+        <div class="g-caption"><div class="g-glass">
+          <p class="g-title">Espace Lumière</p>
+          <p class="g-sub">제주 · 빌라 · 2023</p>
+        </div></div>
+      </div>
+      <div class="g-item">
+        <img class="g-img" src="https://loremflickr.com/700/900/kitchen,marble" alt="Studio Noir">
+        <div class="g-caption"><div class="g-glass">
+          <p class="g-title">Studio Noir</p>
+          <p class="g-sub">서울 · 상업 공간 · 2023</p>
+        </div></div>
+      </div>
+      <div class="g-item">
+        <img class="g-img" src="https://loremflickr.com/800/1000/bathroom,luxury" alt="Penthouse Aria">
+        <div class="g-caption"><div class="g-glass">
+          <p class="g-title">Penthouse Aria</p>
+          <p class="g-sub">서울 · 주거 공간 · 2022</p>
+        </div></div>
+      </div>
+      <div class="g-item">
+        <img class="g-img" src="https://loremflickr.com/700/900/office,premium" alt="Bureau Classique">
+        <div class="g-caption"><div class="g-glass">
+          <p class="g-title">Bureau Classique</p>
+          <p class="g-sub">판교 · 오피스 · 2022</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="about-img-wrap">
+      <img class="about-img" id="v12-about-img"
+        src="https://loremflickr.com/900/1200/interior,studio" alt="Atelier Blanc Studio">
+    </div>
+    <div class="about-content" id="v12-about-content">
+      <div class="sec-label">스튜디오 — About</div>
+      <h2 class="about-heading">
+        <em>섬세함</em>이 만드는<br>
+        공간의 품격
+      </h2>
+      <p class="about-p">
+        아틀리에 블랑은 2012년 서울에서 설립된 이후 공간 디자인의 본질적 가치를 추구해왔습니다.
+        트렌드를 좇는 대신, 클라이언트의 삶의 방식과 가치관에서 디자인의 언어를 찾습니다.
+      </p>
+      <p class="about-p">
+        각 프로젝트는 깊은 대화에서 시작됩니다. 당신이 원하는 것 너머, 당신이 진정 필요로 하는 것을 발견하는 것이 우리의 일입니다.
+      </p>
+      <div class="about-rule"></div>
+      <p class="about-pullquote">"진정한 럭셔리는<br>보이지 않는 곳에 있습니다."</p>
+      <p class="about-meta">Seoul · Est. 2012 &nbsp;·&nbsp; 청담동 아틀리에</p>
+    </div>
+  </section>
+
+  <!-- ── Approach ── -->
+  <section id="approach">
+    <div class="approach-head">
+      <h2 class="approach-h">Design<br><em>Process</em></h2>
+      <p class="approach-intro">
+        모든 훌륭한 공간은 치밀한 과정의 산물입니다. 아틀리에 블랑의 디자인 프로세스는 클라이언트와의 깊은 신뢰에서 시작됩니다.
+      </p>
+    </div>
+    <div id="v12-approach-rows">
+      <div class="approach-row">
+        <span class="approach-num">01</span>
+        <h3 class="approach-name">Discovery</h3>
+        <p class="approach-desc">공간 사용자의 라이프스타일, 심미적 취향, 기능적 요구사항을 심층 인터뷰를 통해 발굴합니다. 진단 없이는 처방도 없습니다.</p>
+      </div>
+      <div class="approach-row">
+        <span class="approach-num">02</span>
+        <h3 class="approach-name">Concept</h3>
+        <p class="approach-desc">수집된 인사이트를 바탕으로 공간의 핵심 서사(Narrative)를 구축합니다. 모든 디자인 결정은 이 서사에서 출발합니다.</p>
+      </div>
+      <div class="approach-row">
+        <span class="approach-num">03</span>
+        <h3 class="approach-name">Craft</h3>
+        <p class="approach-desc">선별된 장인과 재료만이 기준을 통과합니다. 공간의 완성도는 보이지 않는 디테일에서 결정됩니다.</p>
+      </div>
+      <div class="approach-row">
+        <span class="approach-num">04</span>
+        <h3 class="approach-name">Refinement</h3>
+        <p class="approach-desc">완공 후에도 관계는 이어집니다. 공간이 삶에 완전히 녹아들 때까지 세밀한 조율을 멈추지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="contact-ghost" aria-hidden="true">BLANC</div>
+    <p class="contact-label">상담 예약 — Contact</p>
+    <h2 class="contact-h">
+      당신의 공간,<br><em>함께 설계합니다</em>
+    </h2>
+    <p class="contact-sub">프로젝트 문의 및 상담 예약을 받고 있습니다</p>
+    <a class="contact-btn" href="mailto:hello@atelierblancstudio.com">
+      <span>상담 신청하기</span>
+    </a>
+    <div class="contact-info">
+      <div>
+        <p class="ci-label">Location</p>
+        <p class="ci-value">서울시 강남구 청담동</p>
+      </div>
+      <div>
+        <p class="ci-label">Email</p>
+        <p class="ci-value">hello@atelierblancstudio.com</p>
+      </div>
+      <div>
+        <p class="ci-label">Hours</p>
+        <p class="ci-value">Mon – Fri &nbsp; 10:00 – 18:00</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="f-logo">Atelier Blanc</div>
+    <p class="f-copy">© 2024 Atelier Blanc Interior Studio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ── Lenis smooth scroll ──
+    const v12_lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    v12_lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // ── Progress bar ──
+    ScrollTrigger.create({
+      start: 0, end: 'max',
+      onUpdate(self) {
+        document.getElementById('v12-progress').style.width = (self.progress * 100) + '%';
+      }
+    });
+
+    // ── Nav glass on scroll ──
+    ScrollTrigger.create({
+      start: '80px top',
+      onEnter:     () => document.getElementById('v12-nav').classList.add('scrolled'),
+      onLeaveBack: () => document.getElementById('v12-nav').classList.remove('scrolled')
+    });
+
+    // ── Hero parallax ──
+    gsap.to('#v12-hero-bg', {
+      yPercent: 28,
+      ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+    gsap.to('#v12-hero-content', {
+      yPercent: 18, opacity: 0,
+      ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: '45% top', end: 'bottom top', scrub: 1 }
+    });
+
+    // ── SURPRISE: variable font weight scrub (INTERACTION_SPARK) ──
+    const v12_quoteEl = document.getElementById('v12-quote');
+    ScrollTrigger.create({
+      trigger: v12_quoteEl,
+      start: 'top 82%',
+      end: 'center 38%',
+      scrub: 2,
+      onUpdate(self) {
+        const v12_w = Math.round(100 + self.progress * 620);
+        v12_quoteEl.style.fontVariationSettings = `"wght" ${v12_w}`;
+      }
+    });
+
+    // Manifesto entrance
+    gsap.from('.manifesto-inner', {
+      xPercent: -4, opacity: 0, duration: 1.4, ease: 'power3.out',
+      scrollTrigger: { trigger: '#manifesto', start: 'top 75%' }
+    });
+
+    // ── Gallery horizontal pin ──
+    const v12_track = document.getElementById('gallery-track');
+    const v12_getSlide = () => -(v12_track.scrollWidth - window.innerWidth);
+
+    gsap.to('#gallery-track', {
+      x: v12_getSlide,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#gallery-viewport',
+        start: 'top top',
+        end: () => '+=' + Math.abs(v12_getSlide()),
+        pin: true,
+        anticipatePin: 1,
+        scrub: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    // Gallery items stagger entrance
+    gsap.from('.g-item', {
+      yPercent: 12, opacity: 0, duration: 1, stagger: 0.12, ease: 'power3.out',
+      scrollTrigger: { trigger: '#gallery-viewport', start: 'top 85%' }
+    });
+
+    // ── About parallax ──
+    gsap.to('#v12-about-img', {
+      yPercent: -8, ease: 'none',
+      scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+    gsap.from('#v12-about-content > *', {
+      yPercent: 6, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#about', start: 'top 65%' }
+    });
+
+    // ── Approach rows entrance ──
+    gsap.from('.approach-row', {
+      xPercent: -2, opacity: 0, duration: 0.85, stagger: 0.14, ease: 'power3.out',
+      scrollTrigger: { trigger: '#v12-approach-rows', start: 'top 80%' }
+    });
+
+    // ── Contact entrance ──
+    gsap.from('#contact .contact-h', {
+      yPercent: 8, opacity: 0, duration: 1.3, ease: 'power3.out',
+      scrollTrigger: { trigger: '#contact', start: 'top 75%' }
+    });
+
+    // ── Nav smooth scroll ──
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const v12_dest = document.querySelector(link.getAttribute('href'));
+        if (v12_dest) v12_lenis.scrollTo(v12_dest);
+      });
+    });
+
+    document.getElementById('v12-hero-cta').addEventListener('click', () => {
+      v12_lenis.scrollTo(document.getElementById('gallery-header'));
+    });
+  </script>
+</body>
+</html>

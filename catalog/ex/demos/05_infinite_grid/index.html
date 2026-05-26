@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Grid</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #111;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Space Mono', monospace;
+      cursor: grab;
+    }
+
+    body.dragging {
+      cursor: grabbing;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 32px;
+      pointer-events: none;
+    }
+
+    #header span {
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      opacity: 0.6;
+    }
+
+    #scene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .grid-copy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 280px);
+      gap: 6px;
+      will-change: transform;
+    }
+
+    .tile {
+      width: 280px;
+      height: 280px;
+      border-radius: 6px;
+      overflow: hidden;
+      opacity: 0;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    body:not(.dragging) .tile:hover {
+      transform: scale(1.04);
+      filter: brightness(1.2);
+    }
+
+    #hint {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      opacity: 0.5;
+      pointer-events: none;
+      transition: opacity 0.6s;
+      white-space: nowrap;
+      z-index: 100;
+    }
+
+    #hint.hidden {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <span>INFINITE GRID</span>
+    <span>026</span>
+  </div>
+
+  <div id="scene"></div>
+
+  <div id="hint">DRAG TO EXPLORE</div>
+
+  <script>
+    const COLS = 3;
+    const ROWS = 9;
+    const TILE_W = 280;
+    const TILE_H = 280;
+    const GAP = 6;
+    const TOTAL = COLS * ROWS;
+    const GRID_W = TILE_W * COLS + GAP * (COLS - 1);
+    const GRID_H = TILE_H * ROWS + GAP * (ROWS - 1);
+
+    const scene = document.getElementById('scene');
+    const hint = document.getElementById('hint');
+
+    let offsetX = 0;
+    let offsetY = 0;
+    let velX = 0;
+    let velY = 0;
+    let isDragging = false;
+    let isDragged = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    // Determine how many grid copies are needed to cover the viewport
+    function getCopyCounts() {
+      const cxCount = Math.ceil(window.innerWidth / GRID_W) + 2;
+      const cyCount = Math.ceil(window.innerHeight / GRID_H) + 2;
+      return { cxCount, cyCount };
+    }
+
+    let copies = [];
+
+    function buildGrid() {
+      copies.forEach(c => c.el.remove());
+      copies = [];
+
+      const { cxCount, cyCount } = getCopyCounts();
+
+      for (let cy = 0; cy < cyCount; cy++) {
+        for (let cx = 0; cx < cxCount; cx++) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'grid-copy';
+
+          const tileDivs = [];
+          for (let i = 0; i < TOTAL; i++) {
+            const tile = document.createElement('div');
+            tile.className = 'tile';
+
+            const img = document.createElement('img');
+            img.src = `https://picsum.photos/seed/${i + 1}/280/280`;
+            img.alt = '';
+            img.draggable = false;
+
+            tile.appendChild(img);
+            wrapper.appendChild(tile);
+            tileDivs.push(tile);
+          }
+
+          scene.appendChild(wrapper);
+          copies.push({ el: wrapper, cx, cy, tiles: tileDivs });
+        }
+      }
+
+      // Fade-in stagger: all tiles across all copies, keyed by tile index within grid
+      const lastDelay = (TOTAL - 1) * 40 + 500;
+      copies.forEach(({ tiles: tileDivs }) => {
+        tileDivs.forEach((tile, i) => {
+          setTimeout(() => {
+            tile.style.transition = 'opacity 0.5s ease, transform 0.3s ease, filter 0.3s ease';
+            tile.style.opacity = '1';
+          }, i * 40);
+        });
+      });
+      // After all fade-ins complete, remove opacity from transition so hover works cleanly
+      setTimeout(() => {
+        copies.forEach(({ tiles: tileDivs }) => {
+          tileDivs.forEach(tile => {
+            tile.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+          });
+        });
+      }, lastDelay + 50);
+    }
+
+    function mod(n, m) {
+      return ((n % m) + m) % m;
+    }
+
+    function render() {
+      const vpW = window.innerWidth;
+      const vpH = window.innerHeight;
+      const centerX = (vpW - GRID_W) / 2;
+      const centerY = (vpH - GRID_H) / 2;
+
+      const ox = mod(offsetX, GRID_W);
+      const oy = mod(offsetY, GRID_H);
+
+      const baseX = centerX + ox - GRID_W;
+      const baseY = centerY + oy - GRID_H;
+
+      copies.forEach(({ el, cx, cy }) => {
+        const x = baseX + cx * GRID_W;
+        const y = baseY + cy * GRID_H;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    }
+
+    function loop() {
+      if (!isDragging) {
+        velX *= 0.92;
+        velY *= 0.92;
+        if (Math.abs(velX) < 0.01) velX = 0;
+        if (Math.abs(velY) < 0.01) velY = 0;
+        offsetX += velX;
+        offsetY += velY;
+      }
+      render();
+      requestAnimationFrame(loop);
+    }
+
+    function onDragStart(x, y) {
+      isDragging = true;
+      lastX = x;
+      lastY = y;
+      velX = 0;
+      velY = 0;
+      document.body.classList.add('dragging');
+
+      if (!isDragged) {
+        isDragged = true;
+        hint.classList.add('hidden');
+        setTimeout(() => { hint.style.display = 'none'; }, 600);
+      }
+    }
+
+    function onDragMove(x, y) {
+      if (!isDragging) return;
+      const dx = x - lastX;
+      const dy = y - lastY;
+      lastX = x;
+      lastY = y;
+      velX = dx * 1.2;
+      velY = dy * 1.2;
+      offsetX += velX;
+      offsetY += velY;
+    }
+
+    function onDragEnd() {
+      isDragging = false;
+      document.body.classList.remove('dragging');
+    }
+
+    document.addEventListener('mousedown', (e) => onDragStart(e.clientX, e.clientY));
+    document.addEventListener('mousemove', (e) => onDragMove(e.clientX, e.clientY));
+    document.addEventListener('mouseup', onDragEnd);
+    document.addEventListener('mouseleave', onDragEnd);
+
+    document.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      onDragStart(t.clientX, t.clientY);
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      onDragMove(t.clientX, t.clientY);
+    }, { passive: true });
+
+    document.addEventListener('touchend', onDragEnd);
+
+    window.addEventListener('resize', () => {
+      buildGrid();
+    });
+
+    buildGrid();
+    render();
+    loop();
+  </script>
+</body>
+</html>

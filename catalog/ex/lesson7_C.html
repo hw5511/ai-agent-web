@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STITCH — 수제 가죽공방</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f0e8;
+  --bg2: #ece4d4;
+  --leather: #7a5830;
+  --leather-dark: #4e3418;
+  --cream: #f0e8d8;
+  --text: #1e1408;
+  --muted: #7a6a50;
+  --border: rgba(30,20,8,0.1);
+  --font-display: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  --font-body: 'Noto Serif KR', serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; line-height: 1.8; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 1px; width: 0%; background: var(--leather); z-index: 1000; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 52px;
+}
+.nav-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; }
+.nav-right { display: flex; gap: 28px; align-items: center; }
+.nav-link { font-size: 0.72rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; }
+.nav-order {
+  font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+  background: var(--leather-dark); color: var(--cream);
+  text-decoration: none; padding: 10px 22px; transition: opacity 0.3s; will-change: transform;
+}
+.nav-order:hover { opacity: 0.85; }
+
+/* 히어로 */
+#hero {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 64px;
+}
+.hero-left {
+  padding: 80px 52px; display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--border);
+}
+.hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--leather); margin-bottom: 24px; opacity: 0; }
+.hero-title { font-family: var(--font-display); font-size: clamp(42px, 6.5vw, 88px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 28px; opacity: 0; transform: translateY(40px); }
+.hero-title em { font-style: italic; color: var(--leather); }
+.hero-quote { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: var(--muted); line-height: 1.8; max-width: 380px; margin-bottom: 40px; opacity: 0; }
+.hero-cta { display: inline-block; border: 1px solid var(--leather); color: var(--leather); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding: 13px 28px; will-change: transform; transition: all 0.3s; opacity: 0; }
+.hero-cta:hover { background: var(--leather); color: var(--cream); }
+
+.hero-right { background: var(--bg2); position: relative; overflow: hidden; }
+.hero-image { width: 100%; height: 100%; background: linear-gradient(160deg, #c8a870 0%, #9a7040 50%, #6a4820 100%); }
+.hero-material-text {
+  position: absolute; bottom: 40px; left: 40px; right: 40px;
+  font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(240,232,216,0.7);
+}
+
+/* 공방 이야기 */
+#story {
+  padding: 120px 52px; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.story-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--leather); margin-bottom: 24px; }
+.story-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 52px); font-weight: 300; line-height: 1.3; margin-bottom: 24px; }
+.story-title em { font-style: italic; color: var(--leather); }
+.story-text { font-size: 0.88rem; color: var(--muted); line-height: 2.1; }
+.story-stat { margin-top: 40px; display: flex; gap: 48px; }
+.stat { }
+.stat-num { font-family: var(--font-display); font-size: 2.8rem; font-weight: 300; color: var(--leather-dark); line-height: 1; }
+.stat-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+.story-image { aspect-ratio: 4/5; background: linear-gradient(145deg, #c0a070, #8a6040); }
+
+/* 제품 갤러리 */
+#gallery {
+  padding: 100px 52px; background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+.gallery-title { font-family: var(--font-display); font-size: clamp(24px, 3.5vw, 44px); font-weight: 300; }
+.gallery-all { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(122,106,80,0.3); padding-bottom: 2px; }
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+.product-card { background: var(--bg); overflow: hidden; transition: transform 0.4s cubic-bezier(0.23,1,0.32,1); }
+.product-card:hover { transform: scale(0.98); }
+.product-img { aspect-ratio: 3/4; overflow: hidden; }
+.product-img-inner { width: 100%; height: 100%; transition: transform 0.6s ease; }
+.product-card:hover .product-img-inner { transform: scale(1.04); }
+.product-info { padding: 20px 24px 28px; }
+.product-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 400; margin-bottom: 4px; }
+.product-material { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 10px; }
+.product-price { font-family: var(--font-display); font-size: 0.95rem; color: var(--leather-dark); }
+
+/* 주문 제작 */
+#custom {
+  padding: 100px 52px; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+}
+.custom-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 52px); font-weight: 300; line-height: 1.2; margin-bottom: 24px; }
+.custom-title em { font-style: italic; color: var(--leather); }
+.custom-desc { font-size: 0.88rem; color: var(--muted); line-height: 2; margin-bottom: 36px; }
+.process-steps { display: flex; flex-direction: column; gap: 0; }
+.step { display: flex; gap: 24px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid var(--border); }
+.step-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; color: var(--leather); line-height: 1; flex-shrink: 0; width: 40px; }
+.step-content {}
+.step-title { font-size: 0.9rem; font-weight: 400; margin-bottom: 4px; }
+.step-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.8; }
+.custom-cta { display: inline-block; background: var(--leather-dark); color: var(--cream); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding: 14px 32px; margin-top: 32px; will-change: transform; transition: opacity 0.3s; }
+.custom-cta:hover { opacity: 0.85; }
+
+footer {
+  padding: 48px 52px; border-top: 1px solid var(--border);
+  background: var(--leather-dark); color: var(--cream);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.24em; text-transform: uppercase; }
+.footer-right { text-align: right; }
+.footer-info { font-size: 0.72rem; color: rgba(240,232,216,0.6); line-height: 2; }
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  #hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { height: 50vw; }
+  #story, #custom { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
+  #gallery { padding: 60px 20px; }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  footer { flex-direction: column; gap: 20px; padding: 36px 20px; text-align: center; }
+  .footer-right { text-align: center; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-logo">Stitch</div>
+  <div class="nav-right">
+    <a href="#gallery" class="nav-link">제품</a>
+    <a href="#story" class="nav-link">공방</a>
+    <a href="#custom" class="nav-link">주문 제작</a>
+    <a href="#custom" class="nav-order" id="order-btn">주문 제작 문의</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">수제 가죽공방 · 서울 성수동</p>
+    <h1 class="hero-title">시간이 깃드는<br><em>가죽</em>을<br>만듭니다</h1>
+    <p class="hero-quote">"좋은 가죽은 세월과 함께 아름다워집니다. 사용할수록 당신의 손에 길들여지는 물건."</p>
+    <a href="#gallery" class="hero-cta" id="hero-cta">제품 보기</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image"></div>
+    <div class="hero-material-text">Full-grain vegetable-tanned leather · Hand-stitched · Seoul, Korea</div>
+  </div>
+</section>
+
+<section id="story">
+  <div>
+    <p class="story-label">About the Workshop</p>
+    <h2 class="story-title">장인의 손이<br><em>기억하는</em> 방식</h2>
+    <p class="story-text">
+      2012년 성수동 작은 공방에서 시작했습니다. 가죽 한 장을 마르고 자르고 꿰매는 12시간을 12년째 반복하고 있습니다.
+      기계가 훨씬 빠르다는 걸 알지만, 손바느질이 만드는 실의 장력은 기계가 흉내낼 수 없습니다.
+      빠르게 만들고 싶지 않습니다. 오래 쓸 수 있는 것을 만들고 싶습니다.
+    </p>
+    <div class="story-stat">
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">년의 시간</div></div>
+      <div class="stat"><div class="stat-num">2,400+</div><div class="stat-label">제작 완료 작품</div></div>
+    </div>
+  </div>
+  <div class="story-image"></div>
+</section>
+
+<section id="gallery">
+  <div class="gallery-header">
+    <h2 class="gallery-title">제품 갤러리</h2>
+    <a href="#" class="gallery-all">전체 보기 →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img"><div class="product-img-inner" style="background: linear-gradient(145deg, #8a6030, #604020);"></div></div>
+      <div class="product-info">
+        <h3 class="product-name">숄더백 No.3</h3>
+        <p class="product-material">Italy Vegetable Tanned · Hand-stitched</p>
+        <p class="product-price">\480,000</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img"><div class="product-img-inner" style="background: linear-gradient(135deg, #6a5030, #483820);"></div></div>
+      <div class="product-info">
+        <h3 class="product-name">장지갑 Standard</h3>
+        <p class="product-material">France Vache · Saddle Stitch</p>
+        <p class="product-price">\195,000</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img"><div class="product-img-inner" style="background: linear-gradient(155deg, #7a6040, #504030);"></div></div>
+      <div class="product-info">
+        <h3 class="product-name">키홀더 Small</h3>
+        <p class="product-material">Japan Tochigi · Hand Dyed</p>
+        <p class="product-price">\58,000</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="custom">
+  <div>
+    <h2 class="custom-title">나만의 것을<br><em>주문 제작</em>합니다</h2>
+    <p class="custom-desc">
+      세상에 하나뿐인 가죽 제품을 만들어 드립니다. 크기, 색상, 재봉 실, 개인 각인까지 — 처음부터 끝까지 당신을 위한 과정입니다.
+      제작 기간은 4–8주, 가죽 선택부터 함께합니다.
+    </p>
+    <a href="#" class="custom-cta" id="custom-cta">주문 제작 문의하기</a>
+  </div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <p class="step-title">상담 및 디자인 확정</p>
+        <p class="step-desc">원하는 제품의 형태, 용도, 사이즈를 논의합니다. 스케치와 샘플로 최종 디자인을 확인합니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <p class="step-title">가죽 선택</p>
+        <p class="step-desc">이탈리아, 프랑스, 일본산 가죽 중 용도와 취향에 맞는 가죽을 직접 보고 고르실 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <p class="step-title">수작업 제작 (4–8주)</p>
+        <p class="step-desc">재단, 염색, 바느질까지 모든 과정을 손으로 진행합니다. 제작 과정 사진을 공유합니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <p class="step-title">각인 및 완성</p>
+        <p class="step-desc">이니셜 각인, 날짜 각인 가능합니다. 완성품은 직접 방문 수령 또는 배송합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Stitch</div>
+  <div class="footer-right">
+    <p class="footer-info">서울시 성동구 성수동 2가 · 수–일 12:00–19:00<br>02-567-8901 · stitch@workshop.kr</p>
+    <p class="footer-info" style="margin-top: 8px;">© 2024 Stitch Leather Workshop</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const v12_lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  v12_lenis.on('scroll', ({ progress }) => { document.getElementById('progress-bar').style.width = (progress * 100) + '%'; });
+
+  // 히어로
+  const v12_tl = gsap.timeline({ delay: 0.3 });
+  v12_tl
+    .to('.hero-eyebrow', { opacity: 1, duration: 0.7, ease: 'power2.out' })
+    .to('.hero-title', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.3')
+    .to('.hero-quote', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .to('.hero-cta', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+  // 스크롤 애니메이션
+  gsap.from('.story-title', { opacity: 0, y: 32, scrollTrigger: { trigger: '#story', start: 'top 72%', end: 'top 45%', scrub: 1 } });
+  gsap.from('.story-text', { opacity: 0, y: 24, scrollTrigger: { trigger: '#story', start: 'top 65%', end: 'top 38%', scrub: 1 } });
+  gsap.from('.story-stat', { opacity: 0, y: 20, scrollTrigger: { trigger: '.story-stat', start: 'top 80%', end: 'top 55%', scrub: 1 } });
+  gsap.from('.story-image', { opacity: 0, x: 48, scrollTrigger: { trigger: '#story', start: 'top 72%', end: 'top 35%', scrub: 1 } });
+
+  document.querySelectorAll('.product-card').forEach((el) => {
+    gsap.from(el, { opacity: 0, y: 28, scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 55%', scrub: 1 } });
+  });
+  document.querySelectorAll('.step').forEach((el, i) => {
+    gsap.from(el, { opacity: 0, x: -20, scrollTrigger: { trigger: el, start: 'top 85%', end: 'top 60%', scrub: 1 } });
+  });
+
+  // 마그네틱
+  [document.getElementById('hero-cta'), document.getElementById('order-btn'), document.getElementById('custom-cta')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.2}px, ${(e.clientY - r.top - r.height/2) * 0.2}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    });
+  });
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>

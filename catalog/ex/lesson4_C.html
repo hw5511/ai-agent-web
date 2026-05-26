@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXIOM — Creative Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300&family=Pretendard:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a090a;
+  --surface: #121112;
+  --border: rgba(255,255,255,0.06);
+  --text: #e4e0e8;
+  --muted: #6a6270;
+  --accent: #9e6cff;
+  --accent-dim: rgba(158,108,255,0.12);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', -apple-system, sans-serif;
+}
+* { cursor: none; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.65;
+}
+
+/* 커스텀 커서 */
+#cursor-dot {
+  position: fixed; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%); will-change: transform;
+  mix-blend-mode: screen;
+}
+#cursor-circle {
+  position: fixed; width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(158,108,255,0.5); pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%); will-change: transform;
+  transition: width 0.25s, height 0.25s, background 0.25s;
+}
+.service-card:hover ~ #cursor-circle, body:has(.service-card:hover) #cursor-circle {
+  width: 80px; height: 80px; background: rgba(158,108,255,0.06);
+}
+#cursor-label {
+  position: fixed; pointer-events: none; z-index: 9997;
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); white-space: nowrap;
+  transform: translate(-50%, -50%);
+  opacity: 0; transition: opacity 0.2s;
+}
+
+#progress-bar { position: fixed; top: 0; left: 0; height: 1px; width: 0%; background: var(--accent); z-index: 1000; }
+
+/* 네비게이션 */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 56px;
+}
+.nav-logo { font-family: var(--font-body); font-size: 0.88rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; }
+.nav-cta {
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); text-decoration: none; border: 1px solid rgba(158,108,255,0.3);
+  padding: 10px 24px; transition: all 0.3s; will-change: transform;
+}
+.nav-cta:hover { background: var(--accent-dim); border-color: var(--accent); }
+
+/* 히어로 */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; padding: 120px 56px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-noise {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 200px 200px; opacity: 0.4;
+}
+.hero-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 24px;
+  opacity: 0; transform: translateY(14px); position: relative; z-index: 1;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8.5vw, 120px); font-weight: 300;
+  line-height: 0.95; letter-spacing: -0.025em;
+  max-width: 800px; position: relative; z-index: 1;
+  opacity: 0; transform: translateY(40px);
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-desc {
+  margin-top: 40px; font-size: 0.9rem; color: var(--muted);
+  max-width: 440px; line-height: 1.9;
+  opacity: 0; transform: translateY(20px); position: relative; z-index: 1;
+}
+.hero-stats {
+  margin-top: 80px; display: flex; gap: 60px; position: relative; z-index: 1;
+  opacity: 0;
+}
+.stat-num { font-family: var(--font-display); font-size: clamp(32px, 5vw, 58px); font-weight: 300; line-height: 1; }
+.stat-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+/* 서비스 확장 카드 */
+#services { padding: 120px 56px; border-top: 1px solid var(--border); }
+.services-header { margin-bottom: 64px; }
+.services-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+.services-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 52px); font-weight: 300; line-height: 1.2; }
+
+.service-card {
+  border-top: 1px solid var(--border);
+  padding: 0; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.service-card:hover { border-color: rgba(158,108,255,0.3); }
+.service-card:last-child { border-bottom: 1px solid var(--border); }
+.service-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 0; cursor: pointer;
+}
+.service-name-row { display: flex; align-items: center; gap: 24px; }
+.service-num { font-size: 0.62rem; letter-spacing: 0.25em; color: var(--muted); width: 32px; }
+.service-name { font-family: var(--font-display); font-size: clamp(20px, 2.8vw, 36px); font-weight: 300; transition: color 0.3s; }
+.service-card:hover .service-name { color: var(--accent); }
+.service-toggle {
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 1.2rem; transition: all 0.3s; flex-shrink: 0;
+}
+.service-card:hover .service-toggle { border-color: var(--accent); color: var(--accent); }
+.service-body {
+  display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease;
+}
+.service-card.open .service-body { grid-template-rows: 1fr; }
+.service-body-inner {
+  overflow: hidden; padding: 0 0 0 56px;
+}
+.service-body-content {
+  padding-bottom: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+}
+.service-desc { font-size: 0.86rem; color: var(--muted); line-height: 2; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.service-tag {
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  border: 1px solid var(--border); padding: 6px 14px; color: var(--muted);
+  transition: all 0.2s;
+}
+.service-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* 작업 목록 */
+#works {
+  padding: 120px 56px; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+}
+.work-item {
+  aspect-ratio: 16/9; position: relative; overflow: hidden;
+  background: var(--surface);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.work-item:hover { transform: scale(0.98); }
+.work-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,9,10,0.85) 0%, transparent 55%);
+}
+.work-info { position: absolute; bottom: 0; left: 0; padding: 28px; }
+.work-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 300; margin-bottom: 4px; }
+.work-type { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.work-bg { width: 100%; height: 100%; }
+
+footer {
+  padding: 80px 56px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-cta { font-family: var(--font-display); font-size: clamp(28px, 5vw, 66px); font-weight: 300; letter-spacing: -0.01em; color: var(--text); text-decoration: none; will-change: transform; }
+.footer-copy { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.12em; text-align: right; }
+
+@media (max-width: 768px) {
+  nav { padding: 18px 24px; }
+  #hero, #services, footer { padding-left: 24px; padding-right: 24px; }
+  #works { grid-template-columns: 1fr; padding: 80px 24px; }
+  .service-body-content { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 32px; }
+  footer { flex-direction: column; gap: 24px; padding: 48px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-circle"></div>
+<div id="cursor-label">Explore</div>
+
+<nav>
+  <div class="nav-logo">Axiom</div>
+  <a href="#" class="nav-cta" id="nav-cta-btn">Contact Us</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-noise"></div>
+  <p class="hero-eyebrow">Creative Agency — Seoul / New York</p>
+  <h1 class="hero-title">We make<br>brands <em>unforgettable</em></h1>
+  <p class="hero-desc">전략과 감각으로 브랜드를 재정의합니다. 아이디어에서 시장까지 — 완전한 크리에이티브 파트너십.</p>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">140+</div>
+      <div class="stat-label">Brands Launched</div>
+    </div>
+    <div>
+      <div class="stat-num">12</div>
+      <div class="stat-label">Awards Won</div>
+    </div>
+    <div>
+      <div class="stat-num">8yr</div>
+      <div class="stat-label">Experience</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="services-header">
+    <p class="services-label">What we do</p>
+    <h2 class="services-title">Our Services</h2>
+  </div>
+
+  <div class="service-card open">
+    <div class="service-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="service-name-row">
+        <span class="service-num">01</span>
+        <span class="service-name">Brand Strategy</span>
+      </div>
+      <div class="service-toggle">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-body-inner">
+        <div class="service-body-content">
+          <p class="service-desc">브랜드의 본질을 발굴하고 시장에서의 위치를 전략적으로 설계합니다. 경쟁 분석부터 포지셔닝, 브랜드 보이스까지 완전한 전략 수립을 제공합니다.</p>
+          <div class="service-tags">
+            <span class="service-tag">Positioning</span>
+            <span class="service-tag">Audience Research</span>
+            <span class="service-tag">Brand Architecture</span>
+            <span class="service-tag">Naming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <div class="service-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="service-name-row">
+        <span class="service-num">02</span>
+        <span class="service-name">Visual Identity</span>
+      </div>
+      <div class="service-toggle">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-body-inner">
+        <div class="service-body-content">
+          <p class="service-desc">로고, 색채 시스템, 타이포그래피, 그리드 — 브랜드의 모든 시각적 언어를 일관성 있게 구축하고 모든 터치포인트에 적용합니다.</p>
+          <div class="service-tags">
+            <span class="service-tag">Logo Design</span>
+            <span class="service-tag">Color System</span>
+            <span class="service-tag">Typography</span>
+            <span class="service-tag">Brand Guidelines</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <div class="service-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="service-name-row">
+        <span class="service-num">03</span>
+        <span class="service-name">Digital Experience</span>
+      </div>
+      <div class="service-toggle">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-body-inner">
+        <div class="service-body-content">
+          <p class="service-desc">웹사이트부터 앱까지, 브랜드 경험을 디지털 공간으로 확장합니다. UX 설계에서 모션 인터랙션까지 완전한 디지털 제작을 담당합니다.</p>
+          <div class="service-tags">
+            <span class="service-tag">Web Design</span>
+            <span class="service-tag">Motion Design</span>
+            <span class="service-tag">Interaction</span>
+            <span class="service-tag">App UI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <div class="service-header" onclick="this.parentElement.classList.toggle('open')">
+      <div class="service-name-row">
+        <span class="service-num">04</span>
+        <span class="service-name">Content & Campaign</span>
+      </div>
+      <div class="service-toggle">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-body-inner">
+        <div class="service-body-content">
+          <p class="service-desc">브랜드 스토리를 콘텐츠로 실현합니다. 광고 캠페인, 소셜 미디어 전략, 영상 제작, 에디토리얼 디자인을 통해 지속적인 브랜드 경험을 창출합니다.</p>
+          <div class="service-tags">
+            <span class="service-tag">Campaign</span>
+            <span class="service-tag">Social Media</span>
+            <span class="service-tag">Video</span>
+            <span class="service-tag">Editorial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="work-item">
+    <div class="work-bg" style="background: linear-gradient(135deg, #1a0f2e, #0d0a1e);"></div>
+    <div class="work-overlay"></div>
+    <div class="work-info">
+      <h3 class="work-title">Luminary Fintech</h3>
+      <p class="work-type">Brand Strategy · Identity</p>
+    </div>
+  </div>
+  <div class="work-item">
+    <div class="work-bg" style="background: linear-gradient(145deg, #0f2010, #0a160a);"></div>
+    <div class="work-overlay"></div>
+    <div class="work-info">
+      <h3 class="work-title">Arboreum Wellness</h3>
+      <p class="work-type">Visual Identity · Digital</p>
+    </div>
+  </div>
+  <div class="work-item">
+    <div class="work-bg" style="background: linear-gradient(140deg, #20100f, #180c0c);"></div>
+    <div class="work-overlay"></div>
+    <div class="work-info">
+      <h3 class="work-title">MURA Restaurant Group</h3>
+      <p class="work-type">Identity · Campaign</p>
+    </div>
+  </div>
+  <div class="work-item">
+    <div class="work-bg" style="background: linear-gradient(150deg, #101820, #0a1018);"></div>
+    <div class="work-overlay"></div>
+    <div class="work-info">
+      <h3 class="work-title">Vertex AI Platform</h3>
+      <p class="work-type">Digital Experience · Brand</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-cta" id="footer-cta">Start a project →</a>
+  <div class="footer-copy">© 2024 Axiom<br>Creative Agency</div>
+</footer>
+
+<script>
+(function() {
+  const v12_lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  v12_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  v12_lenis.on('scroll', ({ progress }) => {
+    document.getElementById('progress-bar').style.width = (progress * 100) + '%';
+  });
+
+  // 커스텀 커서
+  const v12_dot = document.getElementById('cursor-dot');
+  const v12_circle = document.getElementById('cursor-circle');
+  const v12_label = document.getElementById('cursor-label');
+  let v12_mx = 0, v12_my = 0;
+  let v12_cx = 0, v12_cy = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    v12_mx = e.clientX; v12_my = e.clientY;
+    gsap.set(v12_dot, { x: v12_mx, y: v12_my });
+  });
+  gsap.ticker.add(() => {
+    v12_cx += (v12_mx - v12_cx) * 0.1;
+    v12_cy += (v12_my - v12_cy) * 0.1;
+    gsap.set(v12_circle, { x: v12_cx, y: v12_cy });
+    gsap.set(v12_label, { x: v12_cx + 28, y: v12_cy - 8 });
+  });
+
+  // 서비스 카드 호버
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      gsap.set(v12_label, { opacity: 1 });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.set(v12_label, { opacity: 0 });
+    });
+  });
+
+  // 히어로 진입
+  gsap.timeline({ delay: 0.3 })
+    .to('.hero-eyebrow', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+    .to('.hero-title', { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, '-=0.4')
+    .to('.hero-desc', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
+    .to('.hero-stats', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.3');
+
+  // 서비스 섹션
+  gsap.from('.services-title', {
+    opacity: 0, y: 36,
+    scrollTrigger: { trigger: '#services', start: 'top 72%', end: 'top 45%', scrub: 1 }
+  });
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    gsap.from(card, {
+      opacity: 0, x: -20,
+      scrollTrigger: { trigger: card, start: 'top 85%', end: 'top 60%', scrub: 1 }
+    });
+  });
+
+  // 작업 섹션
+  document.querySelectorAll('.work-item').forEach((item, i) => {
+    gsap.from(item, {
+      opacity: 0, scale: 0.95,
+      scrollTrigger: { trigger: item, start: 'top 85%', end: 'top 55%', scrub: 1 }
+    });
+  });
+
+  // 마그네틱 버튼들
+  [document.getElementById('nav-cta-btn'), document.getElementById('footer-cta')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const v12_dx = e.clientX - (r.left + r.width / 2);
+      const v12_dy = e.clientY - (r.top + r.height / 2);
+      gsap.to(btn, { x: v12_dx * 0.25, y: v12_dy * 0.25, duration: 0.4, ease: 'power2.out' });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+    });
+  });
+
+  ScrollTrigger.refresh();
+})();
+</script>
+</body>
+</html>

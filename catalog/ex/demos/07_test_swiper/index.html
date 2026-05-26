@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Archive</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 32px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    header span {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* SECTION 1 - MAIN SLIDER */
+    .section-main {
+      padding-top: 90px;
+      padding-bottom: 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .swiper-main {
+      width: 100%;
+      padding-bottom: 48px !important;
+    }
+
+    .swiper-main .swiper-slide {
+      width: 340px;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      opacity: 0.6;
+      transform: scale(0.85);
+    }
+
+    .swiper-main .swiper-slide-active {
+      opacity: 1;
+      transform: scale(1.0);
+    }
+
+    .album-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .album-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .album-info {
+      padding: 16px 4px 0;
+    }
+
+    .album-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .album-artist {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .swiper-main .swiper-pagination {
+      bottom: 0;
+    }
+
+    .swiper-main .swiper-pagination-bullet {
+      background: rgba(255, 255, 255, 0.3);
+      opacity: 1;
+      width: 6px;
+      height: 6px;
+    }
+
+    .swiper-main .swiper-pagination-bullet-active {
+      background: #fff;
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* SECTION 2 - TRACK LIST */
+    .section-tracks {
+      background: #111;
+      padding: 60px 0;
+    }
+
+    .tracks-header {
+      padding: 0 32px 32px;
+    }
+
+    .tracks-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+
+    .swiper-tracks {
+      padding: 0 32px !important;
+      padding-bottom: 32px !important;
+    }
+
+    .track-card {
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .track-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .track-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    .track-duration {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.35);
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    .track-bar {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 1px;
+    }
+
+    .swiper-tracks .swiper-scrollbar {
+      bottom: 0;
+      left: 32px;
+      right: 32px;
+      width: auto;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      height: 2px;
+    }
+
+    .swiper-tracks .swiper-scrollbar-drag {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <span>Music Archive</span>
+    <span>2024 Collection</span>
+  </header>
+
+  <!-- SECTION 1: MAIN COVERFLOW SLIDER -->
+  <section class="section-main">
+    <div class="swiper swiper-main">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="album-card">
+            <img src="https://loremflickr.com/500/500/music?lock=1" alt="album" />
+          </div>
+          <div class="album-info">
+            <div class="album-name">Neon Pulse</div>
+            <div class="album-artist">SYNTH COLLECTIVE</div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="album-card">
+            <img src="https://loremflickr.com/500/500/music?lock=2" alt="album" />
+          </div>
+          <div class="album-info">
+            <div class="album-name">Echo Wave</div>
+            <div class="album-artist">DEEP RESONANCE</div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="album-card">
+            <img src="https://loremflickr.com/500/500/music?lock=3" alt="album" />
+          </div>
+          <div class="album-info">
+            <div class="album-name">Void Space</div>
+            <div class="album-artist">AMBIENT DUO</div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="album-card">
+            <img src="https://loremflickr.com/500/500/music?lock=4" alt="album" />
+          </div>
+          <div class="album-info">
+            <div class="album-name">Solar Wind</div>
+            <div class="album-artist">ORBITAL SHIFT</div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="album-card">
+            <img src="https://loremflickr.com/500/500/music?lock=5" alt="album" />
+          </div>
+          <div class="album-info">
+            <div class="album-name">Dark Matter</div>
+            <div class="album-artist">COSMIC NOISE</div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="album-card">
+            <img src="https://loremflickr.com/500/500/music?lock=6" alt="album" />
+          </div>
+          <div class="album-info">
+            <div class="album-name">Night Shift</div>
+            <div class="album-artist">LATE HOUR CLUB</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: TRACK LIST SLIDER -->
+  <section class="section-tracks">
+    <div class="tracks-header">
+      <h2 class="tracks-title">Recent Tracks</h2>
+    </div>
+    <div class="swiper swiper-tracks">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Neon Pulse — Intro</div>
+              <div class="track-duration">3:42</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 68%"></div></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Echo Chamber</div>
+              <div class="track-duration">5:17</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 40%"></div></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Void Drift</div>
+              <div class="track-duration">4:08</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 55%"></div></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Solar Flare</div>
+              <div class="track-duration">6:31</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 22%"></div></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Dark Orbit</div>
+              <div class="track-duration">3:59</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 80%"></div></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Night Drive</div>
+              <div class="track-duration">4:44</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 33%"></div></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Frequency Low</div>
+              <div class="track-duration">2:58</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 60%"></div></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="track-card">
+            <div class="track-meta">
+              <div class="track-name">Signal Loss</div>
+              <div class="track-duration">5:03</div>
+            </div>
+            <div class="track-bar"><div class="track-bar-fill" style="width: 15%"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-scrollbar"></div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper('.swiper-main', {
+      effect: 'coverflow',
+      centeredSlides: true,
+      slidesPerView: 2.5,
+      loop: true,
+      grabCursor: true,
+      coverflowEffect: {
+        depth: 200,
+        rotate: 20,
+        stretch: 0,
+        modifier: 1,
+        slideShadows: false
+      },
+      pagination: {
+        el: '.swiper-main .swiper-pagination',
+        clickable: true
+      }
+    });
+
+    new Swiper('.swiper-tracks', {
+      slidesPerView: 1.2,
+      spaceBetween: 16,
+      freeMode: true,
+      grabCursor: true,
+      scrollbar: {
+        el: '.swiper-tracks .swiper-scrollbar',
+        draggable: true
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 3
+        }
+      }
+    });
+  </script>
+</body>
+</html>
