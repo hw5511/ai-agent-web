@@ -49,6 +49,11 @@
   <rect x="850" y="590" width="370" height="70" rx="10" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
   <text x="1035" y="630" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="500" fill="#171717">버튼으로 갱신</text>
 
+  <!-- 예시 프롬프트 -->
+  <rect x="500" y="486" width="720" height="72" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="524" y="514" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">예시 프롬프트</text>
+  <text x="524" y="544" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">버튼을 누르면 고양이 사진이 나오는 페이지 만들어줘. 버튼을 다시 누르면 다른 고양이로 바뀌게.</text>
+
   <!-- 강조 한 줄 (그린) -->
-  <text x="1220" y="520" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#16a34a">진짜 첫 동적 페이지</text>
+  <text x="60" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="700" fill="#16a34a">진짜 첫 동적 페이지</text>
 </svg>

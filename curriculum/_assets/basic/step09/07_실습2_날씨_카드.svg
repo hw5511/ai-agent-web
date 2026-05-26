@@ -45,6 +45,12 @@
 
   <text x="790" y="586" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" fill="#9ca3af">데이터 출처 · 기상청(KMA)</text>
 
+  <!-- 예시 프롬프트 -->
+  <rect x="60" y="536" width="660" height="100" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="564" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">예시 프롬프트</text>
+  <text x="84" y="596" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">기상청 API허브 인증키로 서울 현재 날씨를 받아서</text>
+  <text x="84" y="622" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">페이지에 카드로 표시해줘. 내 인증키는 ___.</text>
+
   <!-- 강조 한 줄 (그린) -->
-  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#16a34a">키 한 줄만 내 손으로 · 나머지는 Claude가</text>
+  <text x="760" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="600" fill="#16a34a">키 한 줄만 내 손으로 · 나머지는 Claude가</text>
 </svg>
