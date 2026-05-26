@@ -32,7 +32,7 @@
 
   <!-- 다음 예고 라벨 -->
   <text x="60" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">다음 회차 예고</text>
-  <text x="60" y="572" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">13주차 — 내 도메인(주소)을 사서 내 사이트에 연결하기</text>
+  <text x="60" y="572" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">13주차 — 리액트로 업그레이드하고 내 도메인 연결하기</text>
 
   <!-- 핵심 한 줄 -->
   <text x="1220" y="660" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">화면을 쪼개 적는 습관이 핵심</text>
