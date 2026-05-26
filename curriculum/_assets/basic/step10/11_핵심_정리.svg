@@ -20,16 +20,16 @@
   <text x="120" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">데이터는 표(스키마)로 설계한다</text>
 
   <text x="80" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
-  <text x="120" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">브라우저 서랍(LocalStorage)에 저장한다</text>
+  <text x="120" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">내 컴퓨터에 서버를 켜고 localhost로 연다</text>
 
   <text x="80" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
-  <text x="120" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">화면과 저장소는 항상 같이 움직인다</text>
+  <text x="120" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">폼 입력이 CSV 파일에 줄로 쌓인다</text>
 
   <!-- 그린 짧은 구분선 -->
   <rect x="60" y="456" width="80" height="3" rx="1.5" fill="#16a34a"/>
 
   <!-- 우측: 한계 표 -->
-  <text x="700" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">LocalStorage의 한계</text>
+  <text x="700" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">CSV(로컬)의 한계</text>
 
   <rect x="700" y="280" width="520" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
 
@@ -38,7 +38,7 @@
   <line x1="720" y1="330" x2="1200" y2="330" stroke="#e5e7eb" stroke-width="1"/>
 
   <text x="720" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">어디 저장</text>
-  <text x="900" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">내 브라우저</text>
+  <text x="900" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">내 컴퓨터 파일</text>
   <text x="1080" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">인터넷 너머</text>
   <line x1="720" y1="376" x2="1200" y2="376" stroke="#e5e7eb" stroke-width="1"/>
 
@@ -47,15 +47,15 @@
   <text x="1080" y="406" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">O</text>
   <line x1="720" y1="422" x2="1200" y2="422" stroke="#e5e7eb" stroke-width="1"/>
 
-  <text x="720" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">진짜 사이트</text>
-  <text x="900" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">연습용</text>
-  <text x="1080" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">O</text>
+  <text x="720" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#171717">서버 꺼지면</text>
+  <text x="900" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">접속 불가</text>
+  <text x="1080" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">항상 열림</text>
 
   <!-- 숙제 안내 -->
   <text x="60" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">숙제</text>
-  <text x="60" y="576" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">오늘 만든 방명록 링크를 친구에게 보내고</text>
-  <text x="60" y="604" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">"내 글이 너한테 안 보이네?" 직접 체험해오기</text>
+  <text x="60" y="576" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">서버를 껐다 켜도 글이 남아있는지 확인하고</text>
+  <text x="60" y="604" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">친구는 왜 내 글을 못 보는지 생각해오기</text>
 
   <!-- 다음 회차 예고 -->
-  <text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">다음 회차 (WEB 11) · Vercel을 활용한 DB 연동 — 친구 글도 내 화면에</text>
+  <text x="60" y="676" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">다음 회차 (WEB 11) · Supabase 클라우드 DB — 친구 글도 내 화면에</text>
 </svg>

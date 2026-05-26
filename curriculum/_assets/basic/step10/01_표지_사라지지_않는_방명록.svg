@@ -16,7 +16,7 @@
   <rect x="60" y="448" width="120" height="4" rx="2" fill="#16a34a"/>
 
   <!-- 한 줄 메시지 -->
-  <text x="60" y="510" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#374151">새로고침해도 사라지지 않는 방명록을 만든다</text>
+  <text x="60" y="510" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#374151">내 컴퓨터에 작은 서버를 켜고, CSV 파일에 글을 남긴다</text>
 
   <!-- 하단 우측 시그니처 -->
   <text x="1220" y="676" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af" letter-spacing="0.08em">AI AGENT WEB · 16주 코스</text>

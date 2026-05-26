@@ -64,5 +64,5 @@
   <text x="860" y="624" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#374151">2026-05-25</text>
 
   <!-- 핵심 한 줄 -->
-  <text x="60" y="688" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">집을 짓기 전에 도면부터 그린다</text>
+  <text x="60" y="688" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">이 표가 그대로 CSV 파일의 머리글이 된다</text>
 </svg>

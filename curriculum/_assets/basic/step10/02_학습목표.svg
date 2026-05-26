@@ -20,13 +20,13 @@
 
   <!-- 목표 2 -->
   <text x="80" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
-  <text x="120" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">폼에 입력한 내용을 브라우저에 저장할 수 있다</text>
-  <text x="120" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#6b7280">LocalStorage — 브라우저 안의 작은 서랍</text>
+  <text x="120" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">내 컴퓨터에 서버를 켜고 localhost로 열 수 있다</text>
+  <text x="120" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#6b7280">Flask — app.py를 실행하면 내 PC가 작은 서버가 된다</text>
 
   <!-- 목표 3 -->
   <text x="80" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="400" fill="#9ca3af">─</text>
-  <text x="120" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">저장된 항목을 화면에 표시하고 삭제할 수 있다</text>
-  <text x="120" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#6b7280">화면과 저장소를 함께 관리한다</text>
+  <text x="120" y="492" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="500" fill="#171717">폼 입력을 CSV 파일에 저장하고 직접 열어 확인한다</text>
+  <text x="120" y="520" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#6b7280">CSV — 표 한 줄이 그대로 파일에 쌓인다</text>
 
   <!-- 핵심 한 줄 -->
   <text x="60" y="630" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="600" fill="#16a34a">이론은 짧게, 화면에 보이는 결과는 길게</text>
