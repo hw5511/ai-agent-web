@@ -329,17 +329,27 @@ body {
 }
 
 /* ============================================
-   Sticky 트랙 토글 바
+   Sticky 트랙 토글 바 — 다크 글래스 + scroll dim
 ============================================ */
 .track-tabbar {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(23,23,23,0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
   padding: 0.6rem var(--section-padding);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.track-tabbar.is-dimmed {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+.track-tabbar.is-dimmed:hover {
+  opacity: 1;
+  transform: translateY(0);
 }
 .track-tabbar-inner {
   max-width: var(--content-max-width);
@@ -350,14 +360,16 @@ body {
   justify-content: space-between;
 }
 .track-tabbar-title {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: var(--fg);
-  letter-spacing: -0.01em;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .track-tabs {
   display: inline-flex;
-  background: var(--secondary);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 9999px;
   padding: 4px;
 }
@@ -371,24 +383,25 @@ body {
   font-weight: 700;
   letter-spacing: 0.04em;
   cursor: pointer;
-  color: var(--muted-fg);
+  color: rgba(255,255,255,0.6);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   transition: background 0.2s, color 0.2s;
   font-family: inherit;
 }
-.track-tab:hover { color: var(--fg); }
+.track-tab:hover { color: #ffffff; }
 .track-tab .track-tab-sub {
   font-size: 0.7rem;
   font-weight: 600;
   opacity: 0.7;
 }
 .track-tab.is-active {
-  background: var(--primary);
-  color: var(--primary-fg);
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(22,163,74,0.45);
 }
-.track-tab.is-active .track-tab-sub { opacity: 0.7; }
+.track-tab.is-active .track-tab-sub { opacity: 0.85; }
 
 /* ============================================
    Track sections (toggled)
@@ -1803,6 +1816,36 @@ body.track-advanced [data-track="basic"] {
   heroEls.forEach(function(el, i) {
     setTimeout(function() { el.classList.add('visible'); }, delays[i] || i * 120);
   });
+
+  // ===== Sticky tabbar — scroll direction dim =====
+  var tabbar = document.getElementById('trackTabbar');
+  if (tabbar) {
+    var lastY = window.pageYOffset;
+    var ticking = false;
+    var DELTA = 8;       // jitter 방지 임계값
+    var TOP_GUARD = 80;  // 상단 근처에서는 항상 활성
+
+    function evalDim() {
+      var y = window.pageYOffset;
+      if (Math.abs(y - lastY) < DELTA) { ticking = false; return; }
+      if (y < TOP_GUARD) {
+        tabbar.classList.remove('is-dimmed');
+      } else if (y > lastY) {
+        tabbar.classList.add('is-dimmed');     // scrolling down
+      } else {
+        tabbar.classList.remove('is-dimmed');  // scrolling up
+      }
+      lastY = y;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(evalDim);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 })();
 </script>
 </body>
