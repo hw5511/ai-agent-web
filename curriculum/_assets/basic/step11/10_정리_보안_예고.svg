@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">핵심 정리</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">오늘 가져갈 것 · 보안 한 줄 · 다음 주</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 좌측: 오늘 가져갈 것 -->
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">오늘 가져갈 것</text>
+
+  <text x="80" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="316" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">프롬프트로 클라우드 DB(프로젝트·테이블) 생성</text>
+
+  <text x="80" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="364" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">방명록·쇼핑몰을 클라우드에 연결</text>
+
+  <text x="80" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="412" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">배포 + 자동 핑으로 24시간 유지</text>
+
+  <rect x="60" y="452" width="80" height="3" rx="1.5" fill="#e5e7eb"/>
+
+  <!-- 우측: 보안 = 프롬프트 한 줄 -->
+  <text x="700" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">보안은 프롬프트 한 줄</text>
+
+  <rect x="700" y="284" width="520" height="184" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="724" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="700" fill="#16a34a">"RLS로 보안 유지하면서 만들어줘"</text>
+  <text x="724" y="378" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">이 한 줄만 더 붙이면</text>
+  <text x="724" y="406" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#374151">Claude가 안전하게 처리해줘요</text>
+  <text x="724" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">깊은 권한·로그인은 다음 주(회원 시스템)</text>
+
+  <!-- 다음 회차 -->
+  <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="500" fill="#9ca3af">다음 회차 · WEB 12 · 회원 시스템 — "이 글을 누가 썼는지" 기록하기</text>
+  <text x="1220" y="660" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">WRAP UP</text>
+</svg>

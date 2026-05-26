@@ -58,7 +58,7 @@
   <text x="720" y="463" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="400" fill="#9ca3af">id · created_at 은 Supabase가 자동으로 채워 줍니다</text>
 
   <!-- 핵심 한 줄 -->
-  <text x="60" y="600" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="600" fill="#171717">"10주차에 종이에 그린 표 = 오늘 만들 테이블"</text>
+  <text x="60" y="600" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="600" fill="#171717">"10주차 CSV 표(머리글) = 오늘 만들 클라우드 테이블"</text>
 
   <text x="60" y="660" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">CONCEPT · 스키마</text>
 </svg>

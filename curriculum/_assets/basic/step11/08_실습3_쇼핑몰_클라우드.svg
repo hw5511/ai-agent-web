@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">실습 3 · 로컬 쇼핑몰을 클라우드로</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">지난주 products.csv 쇼핑몰을 Supabase로 — 어디서나 같은 상품</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단계</text>
+
+  <text x="80" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">지난주 만든 로컬 CSV 쇼핑몰 떠올리기</text>
+
+  <text x="80" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">"products 테이블 만들고 이 CSV 데이터 넣어줘"</text>
+
+  <text x="80" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">"쇼핑몰이 CSV 대신 클라우드를 읽게 바꿔줘"</text>
+
+  <text x="80" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">친구 폰으로 접속 → 같은 상품 보이면 성공</text>
+
+  <!-- 우측: 전환 before/after -->
+  <text x="720" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">전환</text>
+
+  <rect x="720" y="284" width="180" height="104" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="810" y="326" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#171717">로컬 CSV</text>
+  <text x="810" y="356" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">내 컴퓨터에만</text>
+
+  <text x="924" y="346" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="400" fill="#9ca3af">→</text>
+
+  <rect x="948" y="284" width="180" height="104" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="1038" y="326" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#171717">클라우드</text>
+  <text x="1038" y="356" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#6b7280">누구나 같은 상품</text>
+
+  <text x="720" y="430" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">상품 추가·수정도 클라우드에 바로 반영</text>
+
+  <!-- 예시 프롬프트 -->
+  <rect x="60" y="512" width="1160" height="86" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">예시 프롬프트</text>
+  <text x="84" y="574" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">지난주 로컬 products.csv 쇼핑몰을 Supabase products 테이블로 옮기고, 페이지가 클라우드에서 상품을 읽게 바꿔줘.</text>
+
+  <text x="60" y="664" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">내 컴퓨터가 꺼져도 쇼핑몰은 살아있다</text>
+</svg>

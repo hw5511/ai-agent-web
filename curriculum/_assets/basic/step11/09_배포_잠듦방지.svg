@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 11</text>
+
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">배포하고, 안 잠들게</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">GitHub Pages로 공개 + 무료 DB가 잠들지 않게 자동 핑</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단계</text>
+
+  <text x="80" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">"내 사이트를 GitHub Pages에 배포해줘"</text>
+
+  <text x="80" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">이제 진짜 주소로 친구도 접속 가능</text>
+
+  <text x="80" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">무료 Supabase는 7일 미사용 시 잠듦 (주의)</text>
+
+  <text x="80" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
+  <text x="120" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">"안 잠들게 3일마다 핑 보내는 Action 만들어줘"</text>
+
+  <!-- 우측: 왜 핑? -->
+  <text x="760" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">왜 핑?</text>
+  <rect x="760" y="284" width="460" height="180" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="784" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">7일간 DB 활동 없으면 → 잠듦</text>
+  <text x="784" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">GitHub Action이 3일마다 가벼운 쿼리</text>
+  <text x="784" y="396" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">→ 타이머 리셋, 계속 깨어있음</text>
+  <line x1="784" y1="420" x2="1196" y2="420" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="784" y="448" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="400" fill="#9ca3af">레포에 60일간 커밋 없으면 Action은 멈춤</text>
+
+  <!-- 예시 프롬프트 -->
+  <rect x="60" y="512" width="1160" height="86" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="84" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">예시 프롬프트</text>
+  <text x="84" y="574" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">내 사이트를 GitHub Pages에 배포하고, 무료 Supabase가 안 잠들게 3일마다 핑 보내는 GitHub Action도 만들어줘.</text>
+
+  <text x="60" y="664" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#16a34a">배포 + 자동 핑 = 24시간 살아있는 사이트</text>
+</svg>
