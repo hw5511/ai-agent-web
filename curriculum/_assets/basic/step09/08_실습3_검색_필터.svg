@@ -7,47 +7,35 @@
   <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 09</text>
 
   <!-- 제목 -->
-  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 3 · 검색·필터 붙이기</text>
-  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">받아온 데이터에 검색창을 연결해 실시간 필터링</text>
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717">실습 3 · 원하는 API로 자유 제작</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">한국 공개 API 목록에서 골라 나만의 미니 사이트 만들기</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
   <!-- 좌측: 단계 -->
   <text x="60" y="266" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단계</text>
 
   <text x="80" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
-  <text x="120" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">받아온 데이터가 여러 개(배열)임을 확인</text>
+  <text x="120" y="318" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">아래 한국 공개 API 목록(GitHub) 열기</text>
 
   <text x="80" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
-  <text x="120" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">검색창 추가 프롬프트를 Claude Code에 전달</text>
+  <text x="120" y="368" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">관심 분야 API 하나 고르기 (날씨·지도·교통…)</text>
 
   <text x="80" y="418" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
-  <text x="120" y="418" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">키워드 입력 → 일치하는 항목만 남는지 확인</text>
+  <text x="120" y="418" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">문서 링크 + 키 발급 방법 확인</text>
 
   <text x="80" y="468" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="22" fill="#9ca3af">─</text>
-  <text x="120" y="468" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">시간 여유 → 가나다순 정렬도 한 줄로 추가</text>
+  <text x="120" y="468" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">"이 API로 ○○ 보여주는 페이지 만들어줘" 한 줄</text>
 
-  <!-- 우측: 화면 모형 (전→후) -->
-  <text x="700" y="266" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">검색 전</text>
+  <!-- 우측: 목록 박스 -->
+  <text x="700" y="266" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">한국 공개 API 목록 (GitHub)</text>
 
-  <rect x="700" y="290" width="240" height="240" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="720" y="312" width="200" height="32" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="732" y="334" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#9ca3af">검색어 입력</text>
-
-  <text x="720" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">사과</text>
-  <text x="720" y="410" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">바나나</text>
-  <text x="720" y="440" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">사이다</text>
-  <text x="720" y="470" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">우유</text>
-  <text x="720" y="500" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#374151">사탕</text>
-
-  <text x="980" y="266" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">"사" 입력 후</text>
-
-  <rect x="980" y="290" width="240" height="240" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <rect x="1000" y="312" width="200" height="32" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="1012" y="334" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" fill="#171717">사</text>
-
-  <text x="1000" y="380" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#171717">사과</text>
-  <text x="1000" y="410" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#171717">사이다</text>
-  <text x="1000" y="440" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#171717">사탕</text>
+  <rect x="700" y="290" width="520" height="250" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="724" y="332" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="500" fill="#374151">github.com/yybmion/public-apis-4Kr</text>
+  <text x="724" y="372" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">260+ API · 30+ 분야</text>
+  <text x="724" y="404" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">정부 · 지도 · 교통 · 금융 · 날씨 · 환경 …</text>
+  <text x="724" y="436" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" fill="#6b7280">대부분 무료 · 로그인 없이 목록 열람</text>
+  <line x1="724" y1="466" x2="1196" y2="466" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="724" y="502" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" fill="#9ca3af">고른 API 문서 링크를 Claude에 같이 주면 끝</text>
 
   <!-- 다음 회차 예고 (그린 짧은 구분선 + 회색 글씨) -->
   <rect x="60" y="600" width="80" height="3" rx="1.5" fill="#16a34a"/>
