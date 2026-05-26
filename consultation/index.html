@@ -4,28 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI 에이전트 웹 수업 — 상담자료</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;600;700;800&display=swap');
-
 /* ============================================
-   CSS Variables
+   CSS Variables — 흑백 + 그린 #16a34a 단일 톤
 ============================================ */
 :root {
-  --bg: #fff;
-  --fg: #0a0a0a;
-  --card: #fff;
+  --bg: #ffffff;
+  --fg: #171717;
+  --card: #ffffff;
   --primary: #171717;
   --primary-fg: #fafafa;
   --secondary: #f5f5f5;
-  --secondary-fg: #171717;
   --muted: #f5f5f5;
-  --muted-fg: #737373;
-  --border: #e5e5e5;
-  --accent: #2563eb;
-  --accent-fg: #fff;
-  --success: #16a34a;
-  --warning: #ca8a04;
-  --danger: #dc2626;
+  --muted-fg: #6b7280;
+  --border: #e5e7eb;
+  --accent: #16a34a;
+  --accent-strong: #15803d;
+  --accent-muted: #f0fdf4;
+  --accent-fg: #ffffff;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -34,45 +32,34 @@
   --space-xl: 3rem;
   --space-2xl: 4rem;
 
-  --font-xs: 0.75rem;
-  --font-sm: 0.875rem;
-  --font-base: 1rem;
-  --font-lg: 1.125rem;
-  --font-xl: 1.25rem;
-  --font-2xl: 1.5rem;
-  --font-3xl: 2rem;
-  --font-4xl: clamp(2rem, 4vw, 3rem);
-  --font-5xl: clamp(3rem, 8vw, 7rem);
-
   --radius: 0.5rem;
   --radius-lg: 1rem;
 
   --section-padding: clamp(1rem, 2vw, 2rem);
   --hero-padding: clamp(2rem, 5vw, 5rem);
   --content-max-width: 1400px;
+  --tabbar-h: 56px;
 }
 
 /* ============================================
    Reset & Base
 ============================================ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { font-size: 16px; scroll-behavior: smooth; overflow-y: auto; }
-
+html { font-size: 16px; scroll-behavior: smooth; }
 body {
-  font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   line-height: 1.6;
   color: var(--fg);
   background: var(--bg);
 }
 
 /* ============================================
-   Hero Section
+   Hero
 ============================================ */
 .hero-section {
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,20 +67,9 @@ body {
   background: var(--primary);
   color: var(--primary-fg);
   padding: var(--hero-padding);
-  margin: 0;
   position: relative;
   overflow: hidden;
 }
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 60% 30%, rgba(37, 99, 235, 0.12) 0%, transparent 60%),
-              radial-gradient(ellipse at 20% 80%, rgba(37, 99, 235, 0.06) 0%, transparent 50%);
-  pointer-events: none;
-}
-
 .hero-content {
   max-width: var(--content-max-width);
   width: 100%;
@@ -105,7 +81,6 @@ body {
   position: relative;
   z-index: 1;
 }
-
 .hero-eyebrow {
   display: inline-block;
   padding: 0.3rem 1rem;
@@ -117,40 +92,26 @@ body {
   text-transform: uppercase;
   opacity: 0.7;
 }
-
-.hero-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
 .hero-title-main {
-  font-size: clamp(3rem, 9vw, 8rem);
+  font-size: clamp(2.6rem, 8vw, 7rem);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #e8e8e8 0%, #fff 15%, #b0b0b0 30%, #fff 45%, #d0d0d0 55%, #fff 70%, #a8a8a8 85%, #e0e0e0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
   word-break: keep-all;
 }
-
 .hero-tagline {
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-size: clamp(0.9rem, 1.4vw, 1.15rem);
   font-weight: 400;
-  opacity: 0.5;
+  opacity: 0.55;
   margin-top: var(--space-sm);
   word-break: keep-all;
 }
-
 .hero-divider {
   width: 60px;
   height: 2px;
-  background: rgba(255,255,255,0.2);
+  background: var(--accent);
 }
-
 .hero-stats {
   display: flex;
   justify-content: center;
@@ -160,517 +121,408 @@ body {
   padding-top: var(--space-lg);
   border-top: 1px solid rgba(255,255,255,0.1);
   width: 100%;
+  max-width: 720px;
 }
-
 .stat-item { text-align: center; }
-
 .stat-value {
   display: block;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 900;
   line-height: 1;
   margin-bottom: var(--space-xs);
   color: #fff;
 }
-
 .stat-label {
   display: block;
-  font-size: clamp(0.7rem, 0.9vw, 0.9rem);
+  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
   opacity: 0.5;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-.hero-nav {
-  display: flex;
+/* Track choose CTA (hero) */
+.track-choose {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-md);
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: var(--space-sm);
+  width: 100%;
+  max-width: 760px;
+  margin-top: var(--space-md);
 }
-
-.hero-nav a {
-  font-size: clamp(0.75rem, 0.9vw, 0.85rem);
-  font-weight: 600;
-  color: rgba(255,255,255,0.45);
+.track-choose-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  text-align: left;
+  color: #fff;
   text-decoration: none;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: color 0.2s;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
-
-.hero-nav a:hover { color: rgba(255,255,255,0.9); }
+.track-choose-card:hover {
+  background: rgba(22,163,74,0.12);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.track-choose-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.track-choose-title {
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
 
 /* ============================================
    Section
 ============================================ */
 .section {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
   padding: var(--space-2xl) var(--section-padding);
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
   position: relative;
 }
-
-.section:nth-child(even) { background: var(--secondary); }
-
-.section--dark {
-  background: var(--primary) !important;
-  color: var(--primary-fg);
-}
-
+.section--alt { background: var(--secondary); }
+.section--dark { background: var(--primary); color: var(--primary-fg); }
 .section-container {
   max-width: var(--content-max-width);
   width: 100%;
   margin: 0 auto;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
 }
-
-/* ============================================
-   Section Header
-============================================ */
 .section-header {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
   text-align: left;
-  flex-shrink: 0;
 }
-
 .section-badge {
   display: inline-block;
   padding: 0.25rem var(--space-sm);
   background: var(--primary);
   color: var(--primary-fg);
   border-radius: 9999px;
-  font-size: clamp(0.6rem, 0.75vw, 0.75rem);
-  font-weight: 600;
+  font-size: clamp(0.6rem, 0.75vw, 0.72rem);
+  font-weight: 700;
   margin-bottom: var(--space-sm);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-
-.section--dark .section-badge {
-  background: var(--accent);
-  color: var(--accent-fg);
-}
-
+.section--dark .section-badge { background: var(--accent); color: var(--accent-fg); }
 .section-title {
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   font-weight: 800;
   margin-bottom: var(--space-xs);
   letter-spacing: -0.02em;
   word-break: keep-all;
 }
-
-.section--dark .section-title { color: var(--primary-fg); }
-
+.section--dark .section-title { color: #fff; }
 .section-description {
-  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-size: clamp(0.88rem, 1vw, 1rem);
   color: var(--muted-fg);
-  line-height: 1.5;
+  line-height: 1.65;
   word-break: keep-all;
+  max-width: 760px;
 }
-
-.section--dark .section-description { color: rgba(255,255,255,0.5); }
+.section--dark .section-description { color: rgba(255,255,255,0.55); }
 
 /* ============================================
-   Compare Grid
+   Feature cards (수업 소개)
 ============================================ */
-.compare-grid {
-  flex: 1;
+.feature-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
 }
-
-.compare-card {
+.feature-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  gap: var(--space-sm);
 }
-
-.compare-card--highlight {
+.feature-card--accent {
   background: var(--primary);
   color: var(--primary-fg);
   border-color: transparent;
 }
-
-.compare-header { margin-bottom: var(--space-sm); }
-
-.compare-label {
-  display: inline-block;
-  padding: 0.2rem 0.6rem;
-  border-radius: 9999px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  margin-bottom: var(--space-sm);
-  text-transform: uppercase;
-}
-
-.compare-label--old { background: var(--muted); color: var(--muted-fg); }
-.compare-label--new { background: var(--accent); color: var(--accent-fg); }
-
-.compare-title {
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
+.feature-card--accent .feature-card-desc { color: rgba(255,255,255,0.65); }
+.feature-card-title {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
   font-weight: 800;
   word-break: keep-all;
 }
-
-.compare-steps {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.compare-step {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-
-.compare-card--old .compare-step { border-bottom-color: var(--border); }
-.compare-step:last-child { border-bottom: none; }
-
-.step-number {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--muted);
+.feature-card-desc {
+  font-size: clamp(0.85rem, 0.95vw, 0.95rem);
   color: var(--muted-fg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.compare-card--highlight .step-number {
-  background: rgba(255,255,255,0.12);
-  color: var(--primary-fg);
-}
-
-.step-content strong {
-  display: block;
-  font-size: clamp(0.85rem, 1vw, 0.95rem);
-  margin-bottom: 2px;
-}
-
-.step-content p {
-  font-size: clamp(0.78rem, 0.9vw, 0.85rem);
-  color: var(--muted-fg);
-  line-height: 1.4;
+  line-height: 1.65;
   word-break: keep-all;
 }
 
-.compare-card--highlight .step-content p { color: rgba(255,255,255,0.55); }
-
-.compare-footer {
-  margin-top: auto;
-  padding-top: var(--space-sm);
-  font-size: clamp(0.8rem, 0.9vw, 0.9rem);
-  text-align: center;
+/* ============================================
+   16주 전체 로드맵
+============================================ */
+.roadmap-16w {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
 }
-
-.compare-footer--old {
-  border-top: 1px solid var(--border);
-  color: var(--muted-fg);
-}
-
-.compare-footer--new {
-  border-top: 1px solid rgba(255,255,255,0.15);
-  opacity: 0.7;
-}
-
-/* Prompt box */
-.prompt-box {
-  margin-top: var(--space-lg);
-  background: var(--muted);
+.roadmap-track {
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  border-left: 4px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.roadmap-track--accent {
+  background: var(--accent-muted);
+  border-color: var(--accent);
+}
+.roadmap-track-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.roadmap-track-title {
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+}
+.roadmap-track-sub {
+  font-size: clamp(0.82rem, 0.92vw, 0.9rem);
+  color: var(--muted-fg);
+  margin-bottom: var(--space-sm);
+  word-break: keep-all;
+}
+.roadmap-track-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 0.9rem;
+}
+.roadmap-track-list li {
+  font-size: clamp(0.8rem, 0.9vw, 0.88rem);
+  color: var(--fg);
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.roadmap-track-list li::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
 }
 
-.prompt-box-label {
+/* ============================================
+   Sticky 트랙 토글 바
+============================================ */
+.track-tabbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem var(--section-padding);
+}
+.track-tabbar-inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  justify-content: space-between;
+}
+.track-tabbar-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+.track-tabs {
+  display: inline-flex;
+  background: var(--secondary);
+  border-radius: 9999px;
+  padding: 4px;
+}
+.track-tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  color: var(--muted-fg);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.2s, color 0.2s;
+  font-family: inherit;
+}
+.track-tab:hover { color: var(--fg); }
+.track-tab .track-tab-sub {
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+.track-tab.is-active {
+  background: var(--primary);
+  color: var(--primary-fg);
+}
+.track-tab.is-active .track-tab-sub { opacity: 0.7; }
+
+/* ============================================
+   Track sections (toggled)
+============================================ */
+body.track-basic [data-track="advanced"],
+body.track-advanced [data-track="basic"] {
+  display: none !important;
+}
+
+/* ============================================
+   8회차 카드 그리드
+============================================ */
+.roadmap-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+.roadmap-card {
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.roadmap-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  border-color: var(--accent);
+}
+.roadmap-card--accent {
+  background: var(--primary);
+  color: var(--primary-fg);
+  border-color: transparent;
+}
+.roadmap-card--accent:hover { border-color: var(--accent); }
+.roadmap-card--accent .roadmap-list li { color: rgba(255,255,255,0.78); }
+.roadmap-card--accent .roadmap-list li::before { color: var(--accent); }
+
+.roadmap-step {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+}
+.roadmap-card--accent .roadmap-step { color: var(--accent); }
+.roadmap-num {
+  font-size: clamp(2.2rem, 3.6vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+  opacity: 0.12;
+}
+.roadmap-card--accent .roadmap-num { opacity: 0.35; }
+.roadmap-title {
+  font-size: clamp(0.95rem, 1.25vw, 1.1rem);
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+  word-break: keep-all;
+  line-height: 1.3;
+}
+.roadmap-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.roadmap-list li {
+  font-size: clamp(0.78rem, 0.88vw, 0.86rem);
+  color: var(--muted-fg);
+  padding-left: 0.85rem;
+  position: relative;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.roadmap-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ============================================
+   Lesson section
+============================================ */
+.lesson-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+.lesson-info-label {
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: var(--space-xs);
-}
-
-.prompt-box-text {
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
-  font-weight: 600;
-  color: var(--fg);
-  line-height: 1.6;
-  word-break: keep-all;
-}
-
-.prompt-box-result {
-  margin-top: var(--space-sm);
-  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
-  color: var(--muted-fg);
-}
-
-/* ============================================
-   Roadmap
-============================================ */
-.roadmap-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-sm);
-}
-
-.roadmap-card {
-  flex: 1;
-  padding: var(--space-lg);
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-}
-
-.roadmap-card--white {
-  background: var(--card);
-  border: 1px solid var(--border);
-}
-
-.roadmap-card--blue {
-  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.12) 90%, rgba(255,255,255,0.06) 100%), var(--accent);
-  color: var(--accent-fg);
-  border: 1px solid rgba(255,255,255,0.25);
-}
-
-.roadmap-card--dark {
-  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0) 65%, rgba(255,255,255,0.08) 85%, rgba(255,255,255,0.03) 100%), var(--primary);
-  color: var(--primary-fg);
-  border: 1px solid rgba(255,255,255,0.18);
-}
-
-.roadmap-step {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
-  margin-bottom: var(--space-xs);
-  text-transform: uppercase;
-}
-
-.roadmap-num {
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: var(--space-xs);
-  opacity: 0.15;
-}
-
-.roadmap-title {
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  font-weight: 800;
-  margin-bottom: var(--space-md);
-  word-break: keep-all;
-}
-
-.roadmap-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.roadmap-list li {
-  font-size: clamp(0.78rem, 0.9vw, 0.9rem);
-  opacity: 0.8;
-  padding-left: 1rem;
-  position: relative;
-  line-height: 1.5;
-  word-break: keep-all;
-}
-
-.roadmap-list li::before {
-  content: "-";
-  position: absolute;
-  left: 0;
-  opacity: 0.5;
-}
-
-/* ============================================
-   Lesson Section Layout
-============================================ */
-.lesson-layout {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.lesson-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-md);
-  flex: 1;
-  align-items: start;
-}
-
-.lesson-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.lesson-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
-}
-
-.lesson-card-thumb {
-  aspect-ratio: 16/9;
-  background: var(--muted);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.lesson-card-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s;
-}
-
-.lesson-card:hover .lesson-card-thumb img {
-  transform: scale(1.04);
-}
-
-.lesson-card-body {
-  padding: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  flex: 1;
-}
-
-.lesson-card-title {
-  font-size: clamp(0.85rem, 1vw, 1rem);
-  font-weight: 700;
-  word-break: keep-all;
-}
-
-.lesson-card-link {
-  margin-top: auto;
-  padding-top: var(--space-xs);
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: opacity 0.2s;
-}
-
-.lesson-card-link:hover { opacity: 0.7; }
-
-.lesson-footer {
-  padding: var(--space-md);
-  background: var(--muted);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-}
-
-.lesson-footer-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted-fg);
-  flex-shrink: 0;
-}
-
-.lesson-footer a {
-  font-size: clamp(0.78rem, 0.9vw, 0.85rem);
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
-  word-break: break-all;
-  transition: opacity 0.2s;
-}
-
-.lesson-footer a:hover { opacity: 0.7; }
-
-/* Lesson Info Block */
-.lesson-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-xl);
-  padding: var(--space-lg);
-  background: var(--muted);
-  border-radius: var(--radius-lg);
-}
-
-.lesson-info-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
   margin-bottom: var(--space-sm);
 }
-
 .lesson-info-goal p {
-  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  font-size: clamp(0.88rem, 1vw, 0.95rem);
   line-height: 1.75;
   color: var(--fg);
   word-break: keep-all;
 }
-
 .lesson-info-topics ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
-
 .lesson-info-topics li {
   font-size: clamp(0.82rem, 0.9vw, 0.9rem);
-  color: var(--muted-fg);
-  padding-left: 1rem;
+  color: var(--fg);
+  padding-left: 1.1rem;
   position: relative;
   line-height: 1.5;
   word-break: keep-all;
 }
-
 .lesson-info-topics li::before {
-  content: "-";
+  content: "•";
   position: absolute;
-  left: 0;
+  left: 0.2rem;
+  color: var(--accent);
+  font-weight: 700;
 }
 
-/* Examples label above thumbnail grid */
 .examples-label {
   font-size: 0.7rem;
   font-weight: 700;
@@ -681,221 +533,127 @@ body {
   padding-bottom: var(--space-xs);
   border-bottom: 1px solid var(--border);
 }
-
-/* lesson-card / awww-card as anchor */
-a.lesson-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-a.awww-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Feature cards (section 2) */
-.feature-grid {
-  flex: 1;
+.lesson-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-  align-items: start;
-}
-
-.feature-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-}
-
-.feature-card--accent {
-  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.12) 90%, rgba(255,255,255,0.06) 100%), var(--accent);
-  color: var(--accent-fg);
-  border: 1px solid rgba(255,255,255,0.25);
-}
-
-.feature-card--accent .feature-card-desc { color: rgba(255,255,255,0.75); }
-
-.feature-card-icon {
-  font-size: 1.8rem;
-  line-height: 1;
-}
-
-.feature-card-title {
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
-  font-weight: 800;
-  word-break: keep-all;
-}
-
-.feature-card-desc {
-  font-size: clamp(0.82rem, 0.95vw, 0.95rem);
-  color: var(--muted-fg);
-  line-height: 1.65;
-  word-break: keep-all;
-}
-
-/* ============================================
-   Awwwards Cards (Section 8)
-============================================ */
-.awww-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--space-md);
 }
-
-.awww-card {
+.lesson-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.2s, box-shadow 0.2s;
 }
-
-.awww-card-thumb {
+.lesson-card-thumb {
   aspect-ratio: 16/9;
   background: var(--muted);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.awww-card-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s;
-}
-
-.awww-card:hover .awww-card-thumb img {
-  transform: scale(1.04);
-}
-
-.awww-card-body {
-  padding: var(--space-md);
   display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  flex: 1;
-}
-
-.awww-card-link {
-  margin-top: auto;
-  padding-top: var(--space-xs);
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-fg);
   font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.awww-card-link:hover { opacity: 0.7; }
-
-.awww-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
-}
-
-.awww-num {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--accent);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.awww-title {
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  font-weight: 800;
-  letter-spacing: -0.01em;
+.lesson-block {
+  margin-bottom: var(--space-2xl);
 }
-
-.awww-desc {
-  font-size: clamp(0.78rem, 0.88vw, 0.88rem);
+.lesson-block:last-child { margin-bottom: 0; }
+.lesson-block-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+.lesson-block-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--primary);
+  color: var(--primary-fg);
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.lesson-block-title {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  flex: 1;
+}
+.lesson-block-tagline {
+  font-size: clamp(0.85rem, 0.95vw, 0.92rem);
   color: var(--muted-fg);
-  line-height: 1.5;
+  margin-bottom: var(--space-md);
   word-break: keep-all;
 }
 
 /* ============================================
-   CTA Section
+   CTA
 ============================================ */
 .cta-center {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--space-xl);
   text-align: center;
+  padding: var(--space-xl) 0;
 }
-
 .cta-title {
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 900;
-  color: var(--primary-fg);
+  color: #fff;
   letter-spacing: -0.03em;
   line-height: 1.15;
   word-break: keep-all;
 }
-
 .cta-sub {
-  font-size: clamp(0.9rem, 1.3vw, 1.15rem);
-  opacity: 0.5;
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  opacity: 0.55;
   max-width: 540px;
   line-height: 1.7;
   word-break: keep-all;
 }
-
 .cta-buttons {
   display: flex;
   gap: var(--space-md);
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.85rem 2rem;
+  padding: 0.9rem 2rem;
   border-radius: 9999px;
-  font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+  font-size: clamp(0.85rem, 0.95vw, 0.95rem);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s, background 0.2s;
   cursor: pointer;
   border: none;
+  font-family: inherit;
 }
-
 .btn--primary {
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(37,99,235,0.35);
 }
-
 .btn--primary:hover {
+  background: var(--accent-strong);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(37,99,235,0.5);
 }
-
 .btn--outline {
   background: transparent;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.75);
   border: 1px solid rgba(255,255,255,0.25);
 }
-
 .btn--outline:hover {
   color: #fff;
   border-color: rgba(255,255,255,0.6);
@@ -906,185 +664,93 @@ a.awww-card {
 ============================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
 .reveal-children > * {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(18px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 .reveal-children.visible > *:nth-child(1) { transition-delay: 0s; }
-.reveal-children.visible > *:nth-child(2) { transition-delay: 0.07s; }
-.reveal-children.visible > *:nth-child(3) { transition-delay: 0.14s; }
-.reveal-children.visible > *:nth-child(4) { transition-delay: 0.21s; }
-.reveal-children.visible > *:nth-child(5) { transition-delay: 0.28s; }
-.reveal-children.visible > *:nth-child(6) { transition-delay: 0.35s; }
-
+.reveal-children.visible > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-children.visible > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-children.visible > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-children.visible > *:nth-child(5) { transition-delay: 0.24s; }
+.reveal-children.visible > *:nth-child(6) { transition-delay: 0.3s; }
+.reveal-children.visible > *:nth-child(7) { transition-delay: 0.36s; }
+.reveal-children.visible > *:nth-child(8) { transition-delay: 0.42s; }
 .reveal-children.visible > * { opacity: 1; transform: translateY(0); }
 
 /* ============================================
    Responsive
 ============================================ */
 @media (max-width: 1024px) {
-  .feature-grid { grid-template-columns: repeat(2, 1fr); }
-  .awww-grid { grid-template-columns: repeat(2, 1fr); }
   .roadmap-row { grid-template-columns: repeat(2, 1fr); }
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .roadmap-16w { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 768px) {
-  .compare-grid { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: 1fr; }
-  .awww-grid { grid-template-columns: 1fr; }
-  .lesson-cards { grid-template-columns: 1fr; }
-  .hero-stats { gap: var(--space-lg); }
-  .flow-roadmap { gap: var(--space-xs); justify-content: flex-start; }
-  .flow-step { min-width: 72px; }
-  .flow-step--current { transform: none; }
+  .roadmap-row { grid-template-columns: 1fr; }
+  .track-choose { grid-template-columns: 1fr; }
   .lesson-info { grid-template-columns: 1fr; }
-}
-
-/* ============================================
-   Full Curriculum Roadmap (Section 3.5)
-============================================ */
-#full-roadmap .section-container {
-  max-width: 100%;
-  overflow: visible;
-  padding-left: var(--space-xl);
-  padding-right: var(--space-xl);
-}
-
-.flow-roadmap {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: var(--space-xs);
-  justify-content: center;
-  padding: var(--space-xl) 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.flow-roadmap::-webkit-scrollbar { display: none; }
-
-.flow-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  padding: var(--space-md) var(--space-lg);
-  background: var(--muted);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  min-width: 120px;
-  flex-shrink: 0;
-  text-align: center;
-  position: relative;
-}
-
-.flow-step--current {
-  background: var(--accent);
-  color: var(--accent-fg);
-  border-color: var(--accent);
-  transform: scale(1.06);
-  box-shadow: 0 8px 28px rgba(37,99,235,0.22);
-}
-
-.flow-step--next {
-  background: #f0f7ff;
-  border-color: #bfdbfe;
-  color: #1e40af;
-}
-
-.flow-step-num {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
-.flow-step--current .flow-step-num { color: rgba(255,255,255,0.75); opacity: 1; }
-.flow-step--next .flow-step-num { opacity: 0.7; }
-
-.flow-step-title {
-  font-size: clamp(0.8rem, 0.9vw, 0.9rem);
-  font-weight: 700;
-}
-
-.flow-step-badge {
-  position: absolute;
-  top: -11px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  color: var(--accent);
-  font-size: 0.6rem;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 9999px;
-  border: 1px solid var(--accent);
-  white-space: nowrap;
-}
-
-.flow-arrow-large {
-  font-size: 1.1rem;
-  color: var(--muted-fg);
-  flex-shrink: 0;
-  font-weight: 600;
+  .roadmap-track-list { grid-template-columns: 1fr; }
+  .track-tabbar-title { display: none; }
+  .track-tabbar-inner { justify-content: center; }
 }
   </style>
 </head>
-<body>
+<body class="track-basic">
 
 <!-- ============================
-     SECTION 1: HERO
+     HERO
 ============================ -->
 <section class="hero-section" id="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow reveal">2026 AI Agent Web</div>
+    <div class="hero-eyebrow reveal">2026 AI Agent Web · 16주 코스</div>
 
-    <div class="hero-title reveal">
-      <div class="hero-title-main">AI에이전트 웹</div>
-      <p class="hero-tagline">코딩을 몰라도, AI 에이전트에게 지시하면 완성된다</p>
+    <div class="reveal">
+      <div class="hero-title-main">AI 에이전트 — 웹</div>
+      <p class="hero-tagline">코딩을 몰라도, AI 에이전트에게 지시하면 진짜 사이트가 완성된다</p>
     </div>
 
     <div class="hero-divider reveal"></div>
 
     <div class="hero-stats reveal-children">
       <div class="stat-item">
-        <span class="stat-value">16H</span>
-        <span class="stat-label">총수업시간</span>
+        <span class="stat-value">16주</span>
+        <span class="stat-label">전체 코스</span>
       </div>
       <div class="stat-item">
-        <span class="stat-value">100%</span>
-        <span class="stat-label">실습 중심</span>
+        <span class="stat-value">기초 8 · 심화 8</span>
+        <span class="stat-label">2개 트랙</span>
       </div>
       <div class="stat-item">
-        <span class="stat-value">AI</span>
-        <span class="stat-label">에이전트 직접 생성</span>
+        <span class="stat-value">0 코딩</span>
+        <span class="stat-label">코딩 경험 불필요</span>
       </div>
     </div>
 
-    <nav class="hero-nav reveal">
-      <a href="#intro">수업 소개</a>
-      <a href="#full-roadmap">로드맵</a>
-      <a href="#curriculum">커리큘럼</a>
-      <a href="#results">결과물</a>
-      <a href="#cta">수강 안내</a>
-    </nav>
+    <div class="track-choose reveal-children">
+      <a class="track-choose-card" href="#basic" data-track-choose="basic">
+        <span class="track-choose-tag">Basic · 1~8주차</span>
+        <span class="track-choose-title">기초 커리큘럼 보기</span>
+      </a>
+      <a class="track-choose-card" href="#advanced" data-track-choose="advanced">
+        <span class="track-choose-tag">Advanced · 9~16주차</span>
+        <span class="track-choose-title">심화 커리큘럼 보기</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ============================
-     SECTION 2: 수업 소개
+     수업 소개 (공통)
 ============================ -->
 <section class="section" id="intro">
   <div class="section-container">
@@ -1092,8 +758,9 @@ a.awww-card {
       <span class="section-badge">수업 소개</span>
       <h2 class="section-title">AI 에이전트 웹 수업이란?</h2>
       <p class="section-description">
-        코딩 없이 AI 에이전트에게 지시만 해서 실제 브라우저에서 동작하는 웹 페이지를 만드는 수업입니다.<br>
-        원하는 것을 말하면 AI 에이전트가 코드를 생성하고, 눈앞에서 완성된 결과물이 나옵니다.
+        코딩 없이 AI 에이전트에게 지시만 해서 실제 브라우저에서 동작하는 웹 페이지를 만들고,
+        나아가 데이터·회원·결제까지 갖춘 진짜 사이트로 배포하는 16주 코스입니다.
+        원하는 것을 말하면 AI 에이전트가 코드를 생성하고, 눈앞에서 결과물이 나옵니다.
       </p>
     </div>
 
@@ -1101,16 +768,23 @@ a.awww-card {
       <div class="feature-card feature-card--accent">
         <div class="feature-card-title">코딩 지식 불필요</div>
         <p class="feature-card-desc">
-          HTML, CSS, JavaScript를 몰라도 됩니다.<br>
-          원하는 웹 페이지를 말로 설명하면 AI 에이전트가 코드를 생성합니다.
-          지시어(프롬프트)만으로 웹을 완성합니다.
+          HTML·CSS·JavaScript를 직접 쓸 줄 몰라도 됩니다.
+          원하는 페이지를 말로 설명하면 AI 에이전트가 코드를 생성합니다.
+          지시어(프롬프트)만으로 결과물을 만듭니다.
         </p>
       </div>
       <div class="feature-card">
-        <div class="feature-card-title">고퀄리티 인터랙션</div>
+        <div class="feature-card-title">회차당 1개념</div>
         <p class="feature-card-desc">
-          마우스 인터랙션, 스크롤 애니메이션, 3D 오브젝트, 파티클 효과까지.
-          고급 웹 기술도 AI 에이전트에게 지시하면 구현됩니다.
+          매 회차마다 한 가지 개념과 결과물에 집중합니다.
+          한 번에 몰아치지 않고, 학습 흐름이 끊기지 않게 단계별로 쌓아 올라갑니다.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">기초 + 심화 16주</div>
+        <p class="feature-card-desc">
+          기초 8주는 보이는 웹을, 심화 8주는 데이터·회원·AI 기능·결제가 동작하는 진짜 사이트를 만듭니다.
+          학습 단계가 명확히 분리되어 있습니다.
         </p>
       </div>
     </div>
@@ -1118,554 +792,879 @@ a.awww-card {
 </section>
 
 <!-- ============================
-     SECTION 3.5: 전체 커리큘럼 로드맵
+     16주 전체 로드맵 (공통)
 ============================ -->
-<section class="section" id="full-roadmap">
+<section class="section section--alt" id="roadmap">
   <div class="section-container">
     <div class="section-header reveal">
-      <span class="section-badge">전체 커리큘럼</span>
-      <h2 class="section-title">웹 개발 학습 로드맵</h2>
+      <span class="section-badge">16주 로드맵</span>
+      <h2 class="section-title">기초 8주 + 심화 8주, 한눈에</h2>
       <p class="section-description">
-        AI Agent 웹 수업은 전체 웹 커리큘럼의 첫 번째 관문입니다.<br>
-        AI로 먼저 결과물을 만들어보고, 그 다음 단계를 자연스럽게 밟아나가는 구조로 설계되어 있습니다.
+        기초 트랙에서 "보이는 결과물"을 만드는 감각을 익히고,
+        심화 트랙에서 "동작하는 서비스"로 확장합니다. 두 트랙이 하나의 흐름으로 연결됩니다.
       </p>
     </div>
 
-    <div class="flow-roadmap reveal-children">
-      <div class="flow-step">
-        <div class="flow-step-num">01</div>
-        <div class="flow-step-title">프롬프트<br>엔지니어링</div>
+    <div class="roadmap-16w reveal-children">
+      <div class="roadmap-track roadmap-track--accent">
+        <div class="roadmap-track-tag">Basic · 1~8주차</div>
+        <div class="roadmap-track-title">보이는 웹 · 인터랙션 · 배포</div>
+        <p class="roadmap-track-sub">AI 에이전트로 랜딩페이지를 만들고, 인터랙션·라이브러리·디자인 시스템을 거쳐 GitHub Pages로 공개까지.</p>
+        <ul class="roadmap-track-list">
+          <li data-num="01">로드맵 · Hello World</li>
+          <li data-num="02">HTML 뼈대</li>
+          <li data-num="03">CSS 디자인</li>
+          <li data-num="04">JS 인터랙션</li>
+          <li data-num="05">GSAP 스크롤</li>
+          <li data-num="06">마우스 인터랙션</li>
+          <li data-num="07">시각 라이브러리 5종</li>
+          <li data-num="08">SPARK.md + 배포</li>
+        </ul>
       </div>
-      <div class="flow-arrow-large">&rarr;</div>
-      <div class="flow-step">
-        <div class="flow-step-num">02</div>
-        <div class="flow-step-title">AI Agent<br>기초</div>
-      </div>
-      <div class="flow-arrow-large">&rarr;</div>
-      <div class="flow-step flow-step--current">
-        <div class="flow-step-badge">현재 수업</div>
-        <div class="flow-step-num">03</div>
-        <div class="flow-step-title">AI Agent<br>웹</div>
-      </div>
-      <div class="flow-arrow-large">&rarr;</div>
-      <div class="flow-step flow-step--next">
-        <div class="flow-step-num">04</div>
-        <div class="flow-step-title">웹 이론</div>
-      </div>
-      <div class="flow-arrow-large">&rarr;</div>
-      <div class="flow-step flow-step--next">
-        <div class="flow-step-num">05</div>
-        <div class="flow-step-title">웹<br>1, 2, 3</div>
-      </div>
-      <div class="flow-arrow-large">&rarr;</div>
-      <div class="flow-step flow-step--next">
-        <div class="flow-step-num">06</div>
-        <div class="flow-step-title">AI Agent<br>웹 심화</div>
-      </div>
-      <div class="flow-arrow-large">&rarr;</div>
-      <div class="flow-step flow-step--next">
-        <div class="flow-step-num">07</div>
-        <div class="flow-step-title">포트폴리오</div>
+      <div class="roadmap-track">
+        <div class="roadmap-track-tag">Advanced · 9~16주차</div>
+        <div class="roadmap-track-title">데이터 · 회원 · AI · 결제</div>
+        <p class="roadmap-track-sub">API와 DB를 연결하고, 회원 시스템·도메인·AI 기능·결제까지 붙여 "진짜 서비스"로 완성합니다.</p>
+        <ul class="roadmap-track-list">
+          <li data-num="09">API 연동</li>
+          <li data-num="10">데이터 저장</li>
+          <li data-num="11">클라우드 DB</li>
+          <li data-num="12">회원 시스템</li>
+          <li data-num="13">도메인</li>
+          <li data-num="14">Vercel 환경</li>
+          <li data-num="15">AI 기능</li>
+          <li data-num="16">결제 + 캡스톤</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================
-     SECTION 4: 커리큘럼 로드맵
+     STICKY 트랙 토글 바
 ============================ -->
-<section class="section" id="curriculum">
+<div class="track-tabbar" id="trackTabbar">
+  <div class="track-tabbar-inner">
+    <div class="track-tabbar-title">트랙 선택</div>
+    <div class="track-tabs" role="tablist" aria-label="커리큘럼 트랙">
+      <button class="track-tab is-active" data-track-tab="basic" role="tab" aria-selected="true">
+        BASIC <span class="track-tab-sub">기초 8주</span>
+      </button>
+      <button class="track-tab" data-track-tab="advanced" role="tab" aria-selected="false">
+        ADVANCED <span class="track-tab-sub">심화 8주</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     BASIC TRACK — 8회차 카드 그리드
+============================================ -->
+<section class="section" data-track="basic" id="curriculum-basic">
   <div class="section-container">
     <div class="section-header reveal">
-      <span class="section-badge">Curriculum</span>
-      <h2 class="section-title">8회차 커리큘럼 로드맵</h2>
-      <p class="section-description">웹의 기초부터 v12 AI 프롬프트 시스템까지, 8회차에 걸쳐 단계별로 실력을 쌓아갑니다.</p>
+      <span class="section-badge">Basic · Curriculum</span>
+      <h2 class="section-title">기초 8주차 커리큘럼</h2>
+      <p class="section-description">웹의 첫 만남부터 SPARK.md 프롬프트 시스템과 배포까지, 보이는 결과물을 매 회차 한 가지씩 완성합니다.</p>
     </div>
 
     <div class="roadmap-row reveal-children">
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 01</div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 01</div>
         <div class="roadmap-num">01</div>
-        <div class="roadmap-title">웹의 언어를 만나다</div>
+        <div class="roadmap-title">AI로 웹 만드는 세계</div>
         <ul class="roadmap-list">
-          <li>HTML · CSS · JS 역할 분담</li>
-          <li>AI 에이전트로 랜딩페이지 제작</li>
-          <li>구조와 스타일 분리 지시법</li>
-          <li>지시 → 생성 → 수정 사이클</li>
+          <li>Claude Code 첫 체험</li>
+          <li>16주 전체 로드맵</li>
+          <li>HTML·React·DESIGN.md 메타</li>
+          <li>Hello World 실습</li>
         </ul>
       </div>
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 02</div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 02</div>
         <div class="roadmap-num">02</div>
-        <div class="roadmap-title">색상과 폰트 디자인</div>
+        <div class="roadmap-title">HTML — 웹의 뼈대</div>
         <ul class="roadmap-list">
-          <li>색상 팔레트 선정 원리</li>
-          <li>Google Fonts 조합 적용</li>
-          <li>Before/After 비교 체험</li>
-          <li>나만의 디자인 조합 완성</li>
+          <li>HTML이 무엇인가</li>
+          <li>시맨틱 태그 5종</li>
+          <li>구조와 디자인 분리</li>
+          <li>뼈대 · 섹션 · 링크 실습</li>
         </ul>
       </div>
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 03</div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 03</div>
         <div class="roadmap-num">03</div>
-        <div class="roadmap-title">스크롤 트리거</div>
+        <div class="roadmap-title">CSS — 색·폰트·여백</div>
         <ul class="roadmap-list">
-          <li>GSAP ScrollTrigger 기초</li>
-          <li>수평 스크롤 패널 구현</li>
-          <li>텍스트 컬러 reveal 효과</li>
-          <li>스크롤 진행도 연동 애니메이션</li>
+          <li>CSS 4대 영역</li>
+          <li>CSS 클래스 개념</li>
+          <li>디자인 시스템 · 컴포넌트</li>
+          <li>색상 테마 · Google Fonts</li>
         </ul>
       </div>
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 04</div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 04</div>
         <div class="roadmap-num">04</div>
+        <div class="roadmap-title">JS 인터랙션 기초</div>
+        <ul class="roadmap-list">
+          <li>JS가 무엇인가</li>
+          <li>3대 트리거 (click·scroll·mousemove)</li>
+          <li>IntersectionObserver 등장</li>
+          <li>클릭 토글 · 스크롤 등장 · 마우스 따라가기</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 05</div>
+        <div class="roadmap-num">05</div>
+        <div class="roadmap-title">GSAP 스크롤</div>
+        <ul class="roadmap-list">
+          <li>라이브러리·GSAP란</li>
+          <li>수평 스크롤 원리</li>
+          <li>텍스트 컬러 reveal</li>
+          <li>섹션 페이드인 · 패럴랙스</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 06</div>
+        <div class="roadmap-num">06</div>
         <div class="roadmap-title">마우스 인터랙션</div>
         <ul class="roadmap-list">
-          <li>마그네틱 버튼 (자기장 효과)</li>
-          <li>CSS 3D Flip Card</li>
-          <li>마우스 Spotlight Follow</li>
-          <li>호버 · 클릭 · 드래그 트리거</li>
+          <li>마우스 트리거 3종</li>
+          <li>좌표 추적의 원리</li>
+          <li>마그네틱 · Flip Card</li>
+          <li>Spotlight Follow</li>
         </ul>
       </div>
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 05</div>
-        <div class="roadmap-num">05</div>
-        <div class="roadmap-title">라이브러리 + 3D</div>
-        <ul class="roadmap-list">
-          <li>tsParticles 파티클 인터랙션</li>
-          <li>Typed.js 타이핑 애니메이션</li>
-          <li>Three.js 3D 오브젝트</li>
-          <li>CDN 라이브러리 활용법</li>
-        </ul>
-      </div>
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 06</div>
-        <div class="roadmap-num">06</div>
-        <div class="roadmap-title">배경 효과 + Canvas</div>
-        <ul class="roadmap-list">
-          <li>VANTA.js WebGL 배경</li>
-          <li>Canvas 2D 별자리 파티클</li>
-          <li>배경 효과 선택 가이드</li>
-          <li>나만의 배경 조합</li>
-        </ul>
-      </div>
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 07</div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 07</div>
         <div class="roadmap-num">07</div>
-        <div class="roadmap-title">기획 = 프롬프트</div>
+        <div class="roadmap-title">시각 라이브러리 5종</div>
         <ul class="roadmap-list">
-          <li>나쁜 프롬프트 vs 좋은 프롬프트</li>
-          <li>퀄리티 차이 직접 체험</li>
-          <li>좋은 프롬프트 구조 학습</li>
-          <li>통합 랜딩페이지 실습</li>
+          <li>tsParticles · Typed.js</li>
+          <li>Three.js + Sketchfab</li>
+          <li>VANTA.js 움직이는 배경</li>
+          <li>Canvas 2D 직접 그리기</li>
         </ul>
       </div>
-      <div class="roadmap-card roadmap-card--white">
-        <div class="roadmap-step">Step 08</div>
+      <div class="roadmap-card roadmap-card--accent">
+        <div class="roadmap-step">Week 08</div>
         <div class="roadmap-num">08</div>
-        <div class="roadmap-title">v12 프롬프트 파이널</div>
+        <div class="roadmap-title">내 사이트를 세상에</div>
         <ul class="roadmap-list">
-          <li>3-SPARK 구조 완전 이해</li>
-          <li>AESTHETIC_PINCH 미감 레이어</li>
-          <li>FONT JUDGMENT 시스템</li>
-          <li>1회차 재생성 — Before/After</li>
+          <li>맨손 vs SPARK.md 비교</li>
+          <li>designmd.ai 스타일 입히기</li>
+          <li>GitHub 보관 + Pages 공개</li>
+          <li>도메인 직전 · 1부 마무리</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================
-     SECTION 5: 1회차 상세
-============================ -->
-<section class="section" id="lesson1">
+<!-- ============================================
+     BASIC TRACK — 회차 상세 8개
+============================================ -->
+<section class="section section--alt" data-track="basic" id="lessons-basic">
   <div class="section-container">
     <div class="section-header reveal">
-      <span class="section-badge">LESSON 01</span>
-      <h2 class="section-title">1회차 — 웹의 언어를 만나다</h2>
-      <p class="section-description">HTML · CSS · JS가 무엇인지 이해하고, AI 에이전트 지시만으로 실제 랜딩페이지를 처음부터 완성합니다.</p>
+      <span class="section-badge">Basic · Lessons</span>
+      <h2 class="section-title">기초 8주차 — 회차별 상세</h2>
+      <p class="section-description">각 회차의 학습 목표와 다루는 내용입니다. 결과물 예시는 순차적으로 업데이트됩니다.</p>
     </div>
 
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          코드를 몰라도 "AI 에이전트가 대신 써준다"는 경험을 처음으로 합니다.
-          HTML(뼈대)·CSS(스타일)·JS(행동)의 역할을 이해하고,
-          구조와 스타일을 분리해서 지시하는 방법을 익히며 랜딩페이지 한 장을 완성합니다.
-        </p>
+    <!-- Lesson 1 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 01</span>
+        <h3 class="lesson-block-title">AI로 웹 만드는 세계 — 로드맵과 첫 체험</h3>
       </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>HTML · CSS · JavaScript 세 언어의 역할 분담</li>
-          <li>AI 에이전트로 랜딩페이지 뼈대 먼저 → CSS 입히기</li>
-          <li>구조와 스타일을 분리해서 지시하는 방법</li>
-          <li>JS 버튼 클릭 인터랙션 추가</li>
-          <li>지시 → 생성 → 확인 → 수정 사이클 체험</li>
-        </ul>
+      <p class="lesson-block-tagline reveal">Claude Code로 첫 결과물을 만들어보고, 16주 동안 어디까지 가는지 전체 지도를 그립니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            "AI 에이전트에게 지시만 하면 코드가 생긴다"는 첫 경험을 합니다.
+            웹의 3갈래(HTML·CSS·JS)와 16주 코스의 전체 지도를 그리고,
+            Claude Design으로 가벼운 첫 결과물 한 장을 즉시 만들어봅니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>Claude Code 첫 체험 (Claude Design 안내)</li>
+            <li>웹의 3갈래 — HTML·CSS·JS의 역할 분담</li>
+            <li>16주 로드맵 (Basic 8주 + Advanced 8주)</li>
+            <li>HTML · React · DESIGN.md 메타 키워드</li>
+            <li>"AI를 부리는 사람"이라는 관점 — 외주 비유</li>
+            <li>Claude Code로 Hello World 실습</li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <div class="lesson-layout">
       <div class="examples-label">수업 결과물 예시</div>
       <div class="lesson-cards reveal-children">
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 2 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 02</span>
+        <h3 class="lesson-block-title">HTML — 웹의 뼈대</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">HTML이 무엇인지 이해하고, 시맨틱 태그로 페이지의 뼈대를 만드는 방법을 익힙니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            웹 페이지를 "뼈대 → 살 → 행동" 순서로 쌓아 올린다는 감각을 잡습니다.
+            HTML이 왜 'Markup' 언어인지, 시맨틱 태그가 왜 중요한지 이해하고
+            AI 에이전트에게 뼈대를 단계별로 지시해서 페이지의 골격을 완성합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>HTML의 역사 — 왜 'Markup'인가</li>
+            <li>시맨틱 태그 5종 (header·nav·main·section·footer)</li>
+            <li>구조와 디자인을 분리해서 지시하는 방법</li>
+            <li>실습 — 첫 뼈대 생성 / 섹션 추가 / 링크와 이미지</li>
+            <li>와이어프레임으로 페이지 구조 그리기</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 3 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 03</span>
+        <h3 class="lesson-block-title">CSS — 색·폰트·여백으로 디자인 입히기</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">CSS의 4대 영역과 클래스 개념을 익히고, 디자인 시스템·컴포넌트로 페이지 톤을 갈아끼웁니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            CSS가 색·폰트·여백·레이아웃의 4영역으로 나뉜다는 구조를 잡고,
+            "클래스 하나로 페이지 전체의 톤이 바뀐다"는 경험을 합니다.
+            디자인 시스템과 컴포넌트 개념을 분리해서 이해하고, 색상 테마와 Google Fonts를 일괄 적용해봅니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>CSS의 4대 영역 (색·폰트·여백·레이아웃)</li>
+            <li>CSS 클래스란 — 스타일을 묶어 재사용</li>
+            <li>디자인 시스템 개념 (토큰·일관성)</li>
+            <li>컴포넌트 개념 — 묶음으로 다시 쓰기</li>
+            <li>실습 — 색상 테마 적용 / Google Fonts / 컴포넌트 재사용</li>
+            <li>Before/After 비교로 여백·톤의 차이 확인</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 4 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 04</span>
+        <h3 class="lesson-block-title">JS 인터랙션 기초 — 3대 트리거</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">정적인 사진 같던 페이지에 click·scroll·mousemove 3대 트리거를 붙여 반응하는 페이지로 진화시킵니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            JS가 페이지에 "행동"을 부여한다는 것을 이해하고, click·scroll·mousemove 3대 트리거의 차이를 파악합니다.
+            클릭 토글, 스크롤 등장(IntersectionObserver), 마우스 따라가기를 각각 실습으로 완성합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>JS의 역할 — 사진에서 엘리베이터로</li>
+            <li>JavaScript란 — 한 줄로 시작하는 행동 언어</li>
+            <li>3대 트리거 (click · scroll · mousemove) 비교</li>
+            <li>IntersectionObserver — 스크롤 등장의 원리</li>
+            <li>실습 — 클릭 토글(연락하기 버튼) / 스크롤 등장 / 마우스 따라가기</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 5 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 05</span>
+        <h3 class="lesson-block-title">GSAP — 영화 같은 스크롤</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">script 한 줄로 수천 줄을 빌려쓰는 "라이브러리"의 개념을 익히고, GSAP ScrollTrigger로 영화 같은 스크롤을 만듭니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            라이브러리가 무엇인지, CDN으로 어떻게 불러오는지 이해합니다.
+            GSAP ScrollTrigger로 수평 스크롤·텍스트 컬러 reveal·패럴랙스 같은 "영화 같은 스크롤" 효과를
+            지시 한 줄로 완성하는 경험을 합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>라이브러리란 — script 한 줄로 수천 줄 빌려쓰기</li>
+            <li>GSAP란 — 가장 보편적인 애니메이션 라이브러리</li>
+            <li>수평 스크롤의 원리 (쉬운 모델로)</li>
+            <li>텍스트 컬러 reveal의 원리</li>
+            <li>실습 — 섹션 페이드인 / 작품 갤러리 수평 스크롤 / 헤드라인 컬러 reveal / 패럴랙스 배경</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 6 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 06</span>
+        <h3 class="lesson-block-title">마우스 인터랙션 — 살아 움직이는 페이지</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">마우스 좌표를 추적하는 원리를 익히고, 마그네틱 · Flip Card · Spotlight 3종 인터랙션을 완성합니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            마우스가 페이지의 트리거가 되는 세 가지 인터랙션 패턴을 직접 만듭니다.
+            자기장처럼 끌리는 마그네틱 버튼, CSS 3D로 뒤집히는 Flip Card,
+            마우스를 따라 빛이 퍼지는 Spotlight 효과를 지시만으로 완성합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>마우스 트리거 3종 비교 (hover · mousemove · click)</li>
+            <li>좌표 추적의 원리 (쉬운 모델로)</li>
+            <li>실습 — 마그네틱 버튼 (mousemove + transform)</li>
+            <li>실습 — Flip Card (CSS rotateY + perspective)</li>
+            <li>실습 — Spotlight Follow (radial-gradient 좌표)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 7 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 07</span>
+        <h3 class="lesson-block-title">시각 라이브러리 5종 — 풀 스펙 랜딩</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">tsParticles · Typed.js · Three.js · VANTA.js · Canvas 2D — 다섯 라이브러리로 풀 스펙 랜딩페이지를 한 회차에 완성합니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            전문 개발자도 시간이 걸리는 파티클·타이핑·3D·동적 배경·Canvas 그리기까지
+            AI 에이전트로 즉시 구현합니다. CDN 한 줄로 라이브러리를 불러오는 패턴과
+            라이브러리 옵션을 프롬프트로 조정하는 방법을 익힙니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>시각 라이브러리 5종 카탈로그</li>
+            <li>CDN 한 줄이면 다 끝나는 이유</li>
+            <li>좋은 프롬프트 4요소 (대상·스타일·수치·범위)</li>
+            <li>실습 — tsParticles 히어로 배경 / Typed.js 직함 타이핑</li>
+            <li>실습 — Three.js 3D 회전 큐브 + Sketchfab</li>
+            <li>실습 — VANTA 움직이는 배경 / Canvas 직접 그리기</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 8 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 08</span>
+        <h3 class="lesson-block-title">내 사이트를 세상에 — SPARK.md + 배포</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">맨손 프롬프트 vs SPARK.md A/B 비교, designmd.ai로 스타일 입히기, GitHub Pages로 공개까지. 기초 트랙의 결승전.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            같은 페이지를 맨손으로 한 번, SPARK.md 프롬프트로 한 번 만들어
+            결과 차이를 직접 비교합니다. 무료 스타일 라이브러리 designmd.ai로 톤을 입히고,
+            GitHub Pages로 실제 인터넷에 공개해서 "내 작품 URL"을 가집니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>실습 A — 맨손으로 랜딩페이지 만들기</li>
+            <li>SPARK.md — 비밀 재료 다운로드</li>
+            <li>실습 B — 같은 페이지, SPARK.md로 다시</li>
+            <li>A vs B 결과 비교 (텍스트 + 실 화면 이미지)</li>
+            <li>실습 C — designmd.ai로 유명 스타일 입히기</li>
+            <li>GitHub 작품 보관 + GitHub Pages 공개</li>
+            <li>gh CLI 설치·로그인 · 1부 회고 + 2부 예고</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================
-     SECTION 6: 2회차 상세
-============================ -->
-<section class="section" id="lesson2">
+<!-- ============================================
+     ADVANCED TRACK — 8회차 카드 그리드
+============================================ -->
+<section class="section" data-track="advanced" id="curriculum-advanced">
   <div class="section-container">
     <div class="section-header reveal">
-      <span class="section-badge">LESSON 02</span>
-      <h2 class="section-title">2회차 — 색상과 폰트로 퀄리티를 높인다</h2>
-      <p class="section-description">1회차 결과물에 색상 팔레트와 폰트를 입혀 Before/After 차이를 직접 체험합니다.</p>
+      <span class="section-badge">Advanced · Curriculum</span>
+      <h2 class="section-title">심화 8주차 커리큘럼</h2>
+      <p class="section-description">API·DB·회원 시스템·도메인·AI 기능·결제까지. 보이는 페이지를 "동작하는 서비스"로 진화시킵니다.</p>
     </div>
 
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          같은 구조라도 색상과 폰트 하나가 퀄리티를 완전히 바꾼다는 것을 체험합니다.
-          색상이 분위기를 만드는 원리를 이해하고, Google Fonts 조합을 AI 에이전트로 적용하며
-          1회차 결과물을 "성형수술"하는 Before/After 비교를 직접 만들어봅니다.
-        </p>
-      </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>색상 팔레트 선정 원리 (주색·배경·강조색)</li>
-          <li>AI 에이전트로 색상 테마 일괄 변경</li>
-          <li>Google Fonts 조합 선택 및 적용</li>
-          <li>Before/After 비교로 디자인 차이 확인</li>
-          <li>나만의 색상·폰트 조합 완성</li>
+    <div class="roadmap-row reveal-children">
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 09</div>
+        <div class="roadmap-num">09</div>
+        <div class="roadmap-title">API 연동</div>
+        <ul class="roadmap-list">
+          <li>API란 — 자판기 비유</li>
+          <li>fetch · JSON</li>
+          <li>API 키 첫 등장</li>
+          <li>고양이 이미지 · 날씨 · 검색</li>
         </ul>
       </div>
-    </div>
-
-    <div class="lesson-layout">
-      <div class="examples-label">수업 결과물 예시</div>
-      <div class="lesson-cards reveal-children">
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 10</div>
+        <div class="roadmap-num">10</div>
+        <div class="roadmap-title">데이터 저장</div>
+        <ul class="roadmap-list">
+          <li>데이터 구조화 · 스키마</li>
+          <li>LocalStorage 브라우저 서랍</li>
+          <li>폼 → 저장 → 표시</li>
+          <li>사라지지 않는 방명록</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 11</div>
+        <div class="roadmap-num">11</div>
+        <div class="roadmap-title">클라우드 DB · Supabase</div>
+        <ul class="roadmap-list">
+          <li>Supabase 가입형 DB</li>
+          <li>테이블 · 컬럼 = 엑셀 시트</li>
+          <li>CRUD 4종</li>
+          <li>방명록을 클라우드로</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 12</div>
+        <div class="roadmap-num">12</div>
+        <div class="roadmap-title">회원 시스템 · Auth</div>
+        <ul class="roadmap-list">
+          <li>왜 회원 시스템인가</li>
+          <li>Supabase Auth 한눈에</li>
+          <li>user_id + RLS</li>
+          <li>"내 글만 보이게" 변신</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 13</div>
+        <div class="roadmap-num">13</div>
+        <div class="roadmap-title">내 도메인</div>
+        <ul class="roadmap-list">
+          <li>도메인이란</li>
+          <li>가비아 vs 해외</li>
+          <li>A 레코드 · CNAME</li>
+          <li>GitHub Pages + SSL 연결</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 14</div>
+        <div class="roadmap-num">14</div>
+        <div class="roadmap-title">Vercel 환경</div>
+        <ul class="roadmap-list">
+          <li>GitHub Pages의 한계</li>
+          <li>Vercel이란</li>
+          <li>Vercel 함수 구조</li>
+          <li>환경변수 · 내 도메인 연결</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-step">Week 15</div>
+        <div class="roadmap-num">15</div>
+        <div class="roadmap-title">AI 기능 내장</div>
+        <ul class="roadmap-list">
+          <li>왜 Vercel 함수에서 호출</li>
+          <li>AI API 3종</li>
+          <li>프롬프트 4요소 그대로</li>
+          <li>요약 · 이미지 생성 · 내 사이트 적용</li>
+        </ul>
+      </div>
+      <div class="roadmap-card roadmap-card--accent">
+        <div class="roadmap-step">Week 16</div>
+        <div class="roadmap-num">16</div>
+        <div class="roadmap-title">결제 + 캡스톤 발표</div>
+        <ul class="roadmap-list">
+          <li>PG가 뭐고 왜 필요한가</li>
+          <li>토스페이먼츠 결제 위젯</li>
+          <li>결제 검증 · 결과 페이지</li>
+          <li>학생 캡스톤 발표 · 수료</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================
-     SECTION 7: 3회차 상세
-============================ -->
-<section class="section" id="lesson3">
+<!-- ============================================
+     ADVANCED TRACK — 회차 상세 8개
+============================================ -->
+<section class="section section--alt" data-track="advanced" id="lessons-advanced">
   <div class="section-container">
     <div class="section-header reveal">
-      <span class="section-badge">LESSON 03</span>
-      <h2 class="section-title">3회차 — 스크롤 트리거</h2>
-      <p class="section-description">GSAP ScrollTrigger로 스크롤에 연동되는 수평 패널 전환과 텍스트 컬러 reveal을 구현합니다.</p>
+      <span class="section-badge">Advanced · Lessons</span>
+      <h2 class="section-title">심화 8주차 — 회차별 상세</h2>
+      <p class="section-description">각 회차의 학습 목표와 다루는 내용입니다. 결과물 예시는 순차적으로 업데이트됩니다.</p>
     </div>
 
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          스크롤이 단순한 위아래 이동이 아닌 애니메이션의 트리거가 될 수 있다는 것을 체험합니다.
-          GSAP ScrollTrigger로 수평 스크롤 패널을 구성하고,
-          텍스트가 스크롤 진행도에 따라 색이 바뀌는 컬러 reveal 효과를 AI 에이전트로 만들어봅니다.
-        </p>
+    <!-- Lesson 9 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 09</span>
+        <h3 class="lesson-block-title">API 연동 — 데이터가 살아 움직이는 페이지</h3>
       </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>ScrollTrigger 개념 — 스크롤이 애니메이션을 트리거하는 원리</li>
-          <li>GSAP ScrollTrigger 기본 사용법 (scrub, pin)</li>
-          <li>수평 스크롤 패널 구현 (translateX 연동)</li>
-          <li>스크롤 진행도에 따라 텍스트 색이 바뀌는 컬러 reveal</li>
-          <li>CDN으로 GSAP 라이브러리 불러오기</li>
-        </ul>
+      <p class="lesson-block-tagline reveal">외부에서 데이터를 가져오는 fetch와 JSON, 그리고 API 키 개념을 익히고 실시간 데이터를 페이지에 띄웁니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            "내가 쓴 데이터"가 아니라 "외부 데이터"를 받아와 페이지에 띄우는 첫 경험을 합니다.
+            API와 fetch의 개념을 자판기 비유로 잡고, API 키가 왜 필요한지 이해하며
+            키 없는 무료 API부터 OpenWeather 같은 실제 API까지 단계별로 연결합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>API란 — 자판기 비유</li>
+            <li>fetch와 JSON — 한 줄 명령 + 데이터 형식</li>
+            <li>API 키 첫 등장 — 왜 필요한가</li>
+            <li>실습 — 키 없는 무료 데이터 (고양이 이미지)</li>
+            <li>실습 — OpenWeather로 날씨 카드</li>
+            <li>실습 — 받은 데이터로 검색·필터 붙이기</li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <div class="lesson-layout">
       <div class="examples-label">수업 결과물 예시</div>
       <div class="lesson-cards reveal-children">
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex1/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson2_ex1/thumbnail.png" alt="GSAP 수평 스크롤">
-          </div>
-        </a>
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex2/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson2_ex2/thumbnail.png" alt="스크롤 텍스트 컬러 리빌">
-          </div>
-        </a>
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex3/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson2_ex3/thumbnail.png" alt="AOS 포트폴리오">
-          </div>
-        </a>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 10 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 10</span>
+        <h3 class="lesson-block-title">데이터 저장 — 사라지지 않는 방명록</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">스키마라는 "데이터 설계도" 개념을 잡고, LocalStorage로 페이지를 새로고침해도 남아있는 데이터를 만듭니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            데이터를 그냥 늘어놓는 게 아니라 "구조화"한다는 개념을 잡습니다.
+            스키마가 곧 데이터의 설계도이며, LocalStorage는 브라우저의 작은 서랍이라는 모델로 이해합니다.
+            폼에 입력한 내용이 새로고침해도 사라지지 않는 방명록을 직접 완성합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>데이터를 '구조화'한다는 것</li>
+            <li>스키마 — 데이터의 설계도</li>
+            <li>LocalStorage — 브라우저의 작은 서랍</li>
+            <li>실습 — 내 페이지의 스키마 그려보기</li>
+            <li>실습 — 폼 만들고 LocalStorage에 저장</li>
+            <li>실습 — 항목 삭제·수정 기능 추가</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 11 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 11</span>
+        <h3 class="lesson-block-title">클라우드 DB — Supabase로 도약</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">내 컴퓨터를 넘어 클라우드 DB로. Supabase 가입만으로 DB를 갖고, CRUD 4종으로 방명록을 옮깁니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            10주 방명록은 내 브라우저에만 남아있었습니다. 이번 주는 "다른 사람도 볼 수 있는" 클라우드 DB로 도약합니다.
+            Supabase가 어떻게 "가입만 하면 DB를 주는 서비스"인지, 테이블·컬럼이 왜 엑셀 시트와 같은 구조인지,
+            CRUD 4종이 데이터와 대화하는 4가지 방법이라는 것을 직접 체험합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>Supabase — 가입만 하면 DB 주는 서비스</li>
+            <li>테이블 + 컬럼 = 데이터의 엑셀 시트</li>
+            <li>CRUD 4종 (Create · Read · Update · Delete)</li>
+            <li>실습 — Supabase 가입 + 첫 프로젝트</li>
+            <li>실습 — Table Editor로 guestbook 테이블</li>
+            <li>실습 — 방명록을 클라우드로 전환</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 12 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 12</span>
+        <h3 class="lesson-block-title">회원 시스템 — 이제 진짜 서비스처럼</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">회원가입·로그인이 붙으면 사이트는 비로소 "서비스"가 됩니다. Supabase Auth와 RLS로 "내 글만 보이게" 변신.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            왜 회원 시스템이 필요한지부터 짚고, Supabase Auth로 회원가입·로그인·로그아웃을 단계별로 붙입니다.
+            user_id와 RLS(행 단위 보안)의 개념을 이해하고, 11주 방명록을 "내 글만 보이게" 변신시켜 진짜 서비스의 감각을 잡습니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>왜 회원 시스템이 필요한가</li>
+            <li>Supabase Auth 한눈에</li>
+            <li>"내 데이터만 보기"의 비밀 — user_id + RLS</li>
+            <li>실습 — 회원가입 폼</li>
+            <li>실습 — 로그인 · 로그아웃 + 로그인 상태 표시</li>
+            <li>실습 — 11주 방명록을 "내 글만"으로 변신</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 13 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 13</span>
+        <h3 class="lesson-block-title">내 도메인 — DNS와 SSL까지</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">오늘은 내 도메인을 갖는 날. 가비아에서 구매하고 GitHub Pages와 DNS로 연결, SSL 자물쇠까지 켭니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            "내 사이트의 진짜 주소"를 갖는 경험을 합니다.
+            도메인이 무엇인지, 어디서 어떻게 사는지, DNS 레코드(A · CNAME)가 왜 필요한지 이해하고,
+            가비아에서 구매한 도메인을 GitHub Pages와 연결해 SSL까지 켭니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>도메인이란 무엇인가</li>
+            <li>도메인은 어디서 사나 (가비아 vs 해외)</li>
+            <li>DNS 레코드 — A 레코드와 CNAME</li>
+            <li>실습 — 가비아에서 내 도메인 구매</li>
+            <li>실습 — GitHub Pages와 DNS로 연결</li>
+            <li>실습 — SSL(자물쇠) 켜고 서로 공유</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 14 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 14</span>
+        <h3 class="lesson-block-title">Vercel 환경으로 옮기기</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">GitHub Pages의 한계를 넘어 Vercel 환경으로. Vercel 함수와 환경변수로 "서버 쪽 로직"을 처음으로 갖습니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            정적 파일만 가능한 GitHub Pages의 한계를 짚고, Vercel로 옮겨가는 이유를 이해합니다.
+            Vercel 함수가 어떻게 작은 서버 로직을 대신해주는지 구조를 잡고,
+            첫 함수를 만들고 환경변수와 내 도메인을 연결합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>GitHub Pages의 한계</li>
+            <li>Vercel이란 무엇인가</li>
+            <li>Vercel 함수의 구조</li>
+            <li>실습 — Vercel 가입 + GitHub 연결 + 첫 배포</li>
+            <li>실습 — 첫 Vercel 함수 (api/hello.js)</li>
+            <li>실습 — 환경변수 + 내 도메인 연결</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 15 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 15</span>
+        <h3 class="lesson-block-title">AI 기능 내장 — 사이트에 AI를 붙이다</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">왜 AI API 호출을 Vercel 함수에서 해야 하는지 이해하고, 텍스트 요약·이미지 생성을 내 사이트에 직접 붙입니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            "AI 기능이 내장된 사이트"를 직접 운영해보는 날입니다.
+            왜 AI API 키는 브라우저가 아니라 Vercel 함수에서 호출해야 하는지 보안 관점을 잡고,
+            오늘 다룰 AI API 3종을 골라 텍스트 요약·이미지 생성을 내 사이트에 1개 이상 붙입니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>왜 Vercel 함수에서 호출해야 하나 (보안·키 노출)</li>
+            <li>오늘 다룰 AI API 3종</li>
+            <li>프롬프트 4요소를 API에도 그대로</li>
+            <li>실습 — 텍스트 요약 기능</li>
+            <li>실습 — 이미지 생성 기능</li>
+            <li>실습 — 본인 사이트에 AI 기능 1개 추가</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+      </div>
+    </div>
+
+    <!-- Lesson 16 -->
+    <div class="lesson-block">
+      <div class="lesson-block-header reveal">
+        <span class="lesson-block-badge">WEEK 16</span>
+        <h3 class="lesson-block-title">결제 + 캡스톤 발표 — 16주 마무리</h3>
+      </div>
+      <p class="lesson-block-tagline reveal">토스페이먼츠로 결제 위젯을 띄우고 검증까지. 마지막으로 학생 캡스톤 발표로 16주 여정을 수료합니다.</p>
+      <div class="lesson-info reveal">
+        <div class="lesson-info-goal">
+          <div class="lesson-info-label">수업 목표</div>
+          <p>
+            "결제까지 동작하는 진짜 사이트"의 마지막 퍼즐을 끼웁니다.
+            PG가 무엇이고 왜 필요한지 이해하고, 토스페이먼츠 결제 위젯을 띄워 검증·결과 페이지까지 완성합니다.
+            마지막으로 16주 동안 만든 본인의 캡스톤을 발표하며 코스를 수료합니다.
+          </p>
+        </div>
+        <div class="lesson-info-topics">
+          <div class="lesson-info-label">배우는 내용</div>
+          <ul>
+            <li>PG가 뭐고 왜 필요한가</li>
+            <li>토스페이먼츠를 고른 이유</li>
+            <li>결제 위젯 흐름 한눈에</li>
+            <li>실습 — 토스 테스트 키 발급</li>
+            <li>실습 — 결제 위젯 띄우기</li>
+            <li>실습 — 결제 검증 + 결과 페이지</li>
+            <li>캡스톤 발표 가이드 · 학생 발표 · 수료</li>
+          </ul>
+        </div>
+      </div>
+      <div class="examples-label">수업 결과물 예시</div>
+      <div class="lesson-cards reveal-children">
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
+        <div class="lesson-card"><div class="lesson-card-thumb">준비 중</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================
-     SECTION 8: 4회차 상세
-============================ -->
-<section class="section" id="results">
-  <div class="section-container">
-    <div class="section-header reveal">
-      <span class="section-badge">LESSON 04</span>
-      <h2 class="section-title">4회차 — 마우스 인터랙션</h2>
-      <p class="section-description">
-        마그네틱 버튼, CSS 3D Flip Card, Spotlight Follow — 마우스 이벤트 기반 인터랙션 3종을 AI 에이전트로 구현합니다.
-      </p>
-    </div>
-
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          마우스가 트리거가 되는 세 가지 인터랙션 패턴을 체험합니다.
-          자기장처럼 끌리는 마그네틱 버튼, 클릭하면 뒤집히는 Flip Card,
-          마우스를 따라 빛이 퍼지는 Spotlight 효과를 각각 지시만으로 완성합니다.
-        </p>
-      </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>mousemove 이벤트로 마그네틱(자기장) 버튼 구현</li>
-          <li>CSS 3D 변환을 이용한 Flip Card 호버 인터랙션</li>
-          <li>마우스 위치 기반 Spotlight Follow 효과</li>
-          <li>호버 · 클릭 · 드래그 트리거 구분과 활용</li>
-          <li>AI 에이전트로 인터랙션 옵션 조정하기</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="lesson-layout">
-      <div class="examples-label">수업 결과물 예시</div>
-      <div class="lesson-cards reveal-children">
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex1/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson1_ex1/thumbnail.png" alt="마우스 커서 + 자기장 버튼">
-          </div>
-        </a>
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex2/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson1_ex2/thumbnail.png" alt="3D 플립 카드">
-          </div>
-        </a>
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson1_ex3/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson1_ex3/thumbnail.png" alt="마우스 스포트라이트 효과">
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     SECTION: 5회차 상세
-============================ -->
-<section class="section" id="lesson5">
-  <div class="section-container">
-    <div class="section-header reveal">
-      <span class="section-badge">LESSON 05</span>
-      <h2 class="section-title">5회차 — 라이브러리 + 3D</h2>
-      <p class="section-description">tsParticles, Typed.js, Three.js — 혼자서는 못 만들었을 효과를 AI 에이전트 지시 한 줄로 완성합니다.</p>
-    </div>
-
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          전문 개발자도 시간이 걸리는 파티클·타이핑·3D 효과를 AI 에이전트로 즉시 구현합니다.
-          라이브러리가 무엇인지, CDN으로 어떻게 불러오는지 이해하고
-          "혼자 못 만들었을 것 같은" 결과물을 직접 완성하는 경험을 합니다.
-        </p>
-      </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>CDN 라이브러리 활용법 — script 태그 한 줄로 기능 추가</li>
-          <li>tsParticles로 마우스에 반응하는 인터랙티브 파티클 구현</li>
-          <li>Typed.js 타이핑 애니메이션 — 문구가 자동으로 타이핑되는 효과</li>
-          <li>Three.js 3D 오브젝트 — 회전하는 큐브/구 구현</li>
-          <li>라이브러리 옵션을 프롬프트로 조정하는 방법</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="lesson-layout">
-      <div class="examples-label">수업 결과물 예시</div>
-      <div class="lesson-cards reveal-children">
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex1/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson3_ex1/thumbnail.png" alt="tsParticles 파티클">
-          </div>
-        </a>
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex2/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson3_ex2/thumbnail.png" alt="Three.js 3D">
-          </div>
-        </a>
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson2_ex3/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson2_ex3/thumbnail.png" alt="Typed.js 타이핑">
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     SECTION: 6회차 상세
-============================ -->
-<section class="section" id="lesson6">
-  <div class="section-container">
-    <div class="section-header reveal">
-      <span class="section-badge">LESSON 06</span>
-      <h2 class="section-title">6회차 — 배경 효과 + Canvas</h2>
-      <p class="section-description">VANTA.js WebGL 배경과 Canvas 2D 별자리 파티클 — 페이지 전체를 살아있는 배경으로 채웁니다.</p>
-    </div>
-
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          웹 페이지의 배경 자체가 인터랙티브한 시각 경험이 될 수 있다는 것을 체험합니다.
-          VANTA.js로 WebGL 기반 동적 배경을 적용하고,
-          순수 Canvas 2D API로 별자리 연결 파티클을 직접 구현합니다.
-        </p>
-      </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>VANTA.js WebGL 인터랙티브 배경 효과 적용</li>
-          <li>Canvas 2D API로 별자리 연결 파티클 구현</li>
-          <li>배경 효과 선택 가이드 — 어떤 상황에 어떤 효과가 맞는가</li>
-          <li>나만의 배경 조합 완성</li>
-          <li>배경과 콘텐츠 레이어 분리 구조 이해</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="lesson-layout">
-      <div class="examples-label">수업 결과물 예시</div>
-      <div class="lesson-cards reveal-children">
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex3/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson3_ex3/thumbnail.png" alt="VANTA.js WebGL 배경">
-          </div>
-        </a>
-        <a class="lesson-card" href="https://hw5511.github.io/ai-agent-web/13_class_agent_v5/lesson3_ex4/" target="_blank">
-          <div class="lesson-card-thumb">
-            <img src="../13_class_agent_v5/lesson3_ex4/thumbnail.png" alt="Canvas 2D 별자리 파티클">
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     SECTION: 7회차 상세
-============================ -->
-<section class="section" id="lesson7">
-  <div class="section-container">
-    <div class="section-header reveal">
-      <span class="section-badge">LESSON 07</span>
-      <h2 class="section-title">7회차 — 기획 = 프롬프트</h2>
-      <p class="section-description">나쁜 프롬프트와 좋은 프롬프트의 결과물 차이를 직접 체험하며 퀄리티를 높이는 지시법을 익힙니다.</p>
-    </div>
-
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          같은 AI 에이전트에게 지시해도 프롬프트 품질에 따라 결과물이 완전히 달라진다는 것을 체험합니다.
-          나쁜 프롬프트와 좋은 프롬프트를 직접 입력해보고 차이를 비교하며,
-          웹 기획이 곧 프롬프트 작성이라는 것을 이해합니다.
-        </p>
-      </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>나쁜 프롬프트 분석 — 왜 결과가 나쁜가</li>
-          <li>좋은 프롬프트 구조 — 목적 + 대상 + 스타일 + 기술스펙</li>
-          <li>나쁜/좋은 프롬프트 직접 체험 비교</li>
-          <li>퀄리티 차이 분석 — 무엇이 결과를 바꾸는가</li>
-          <li>통합 랜딩페이지 실습</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="lesson-layout">
-      <div class="examples-label">수업 결과물 예시</div>
-      <div class="lesson-cards reveal-children">
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     SECTION: 8회차 상세
-============================ -->
-<section class="section" id="lesson8">
-  <div class="section-container">
-    <div class="section-header reveal">
-      <span class="section-badge">LESSON 08</span>
-      <h2 class="section-title">8회차 — v12 프롬프트 파이널</h2>
-      <p class="section-description">3-SPARK + AESTHETIC_PINCH + FONT JUDGMENT — 우희 인더스트리 v12 프롬프트 시스템을 완전히 이해하고 적용합니다.</p>
-    </div>
-
-    <div class="lesson-info reveal">
-      <div class="lesson-info-goal">
-        <div class="lesson-info-label">수업 목표</div>
-        <p>
-          수업 전체를 관통하는 v12 프롬프트 시스템을 완전히 이해하고 직접 적용합니다.
-          1회차에 만든 랜딩페이지를 v12 시스템으로 재생성해 Before/After를 비교하며,
-          AI 에이전트를 최고 수준으로 활용하는 방법을 체득합니다.
-        </p>
-      </div>
-      <div class="lesson-info-topics">
-        <div class="lesson-info-label">배우는 내용</div>
-        <ul>
-          <li>3-SPARK 구조 — LAYOUT / INTERACTION / VISUAL 영감 분리</li>
-          <li>AESTHETIC_PINCH — 미감의 온도를 더하는 4번째 레이어</li>
-          <li>FONT JUDGMENT — mood_tags 기반 폰트 선택 시스템</li>
-          <li>1회차 랜딩페이지 v12로 재생성 — Before/After 비교</li>
-          <li>나만의 포트폴리오 페이지 최종 완성</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="lesson-layout">
-      <div class="examples-label">수업 결과물 예시</div>
-      <div class="lesson-cards reveal-children">
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-        <div class="lesson-card"><div class="lesson-card-thumb" style="background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#a3a3a3;font-size:0.8rem;">준비 중</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     SECTION 9: CTA
+     CTA (공통)
 ============================ -->
 <section class="section section--dark" id="cta">
   <div class="section-container">
@@ -1675,34 +1674,35 @@ a.awww-card {
       </div>
 
       <h2 class="cta-title reveal">
-        AI 에이전트로<br>웹을 직접 만들어보세요
+        AI 에이전트로<br>
+        진짜 사이트를 만들어보세요
       </h2>
 
       <p class="cta-sub reveal">
         코딩 경험이 없어도 괜찮습니다.<br>
-        원하는 것을 지시하는 방법만 배우면 됩니다.
+        16주 동안 "보이는 결과물"에서 "동작하는 서비스"까지 단계별로 완성합니다.
       </p>
 
       <div class="cta-buttons reveal">
         <a href="#" class="btn btn--primary">수강 상담 신청</a>
-        <a href="https://hw5511.github.io/ai-agent-web/" target="_blank" class="btn btn--outline">결과물 더 보기 &rarr;</a>
+        <a href="https://hw5511.github.io/ai-agent-web/" target="_blank" rel="noopener" class="btn btn--outline">수업자료 보기 →</a>
       </div>
 
       <div class="hero-stats reveal" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--space-lg); margin-top: var(--space-sm);">
         <div class="stat-item">
-          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">16H</span>
-          <span class="stat-label">총수업시간</span>
+          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">16주</span>
+          <span class="stat-label">전체 코스</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">웹 입문</span>
-          <span class="stat-label">가장 빠른 시작</span>
+          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">기초 + 심화</span>
+          <span class="stat-label">2개 트랙</span>
         </div>
         <div class="stat-item">
           <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">0 코딩</span>
           <span class="stat-label">코딩 경험 불필요</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">v12</span>
+          <span class="stat-value" style="font-size: clamp(1.4rem, 2.5vw, 2.2rem);">SPARK.md</span>
           <span class="stat-label">프롬프트 시스템</span>
         </div>
       </div>
@@ -1714,27 +1714,94 @@ a.awww-card {
 (function() {
   'use strict';
 
-  // IntersectionObserver - reveal
-  var revealEls = document.querySelectorAll('.reveal, .reveal-children');
+  // ===== Track toggle =====
+  var body = document.body;
+  var tabs = document.querySelectorAll('[data-track-tab]');
+  var chooseCards = document.querySelectorAll('[data-track-choose]');
 
-  var observer = new IntersectionObserver(function(entries) {
+  function setTrack(track, opts) {
+    opts = opts || {};
+    if (track !== 'basic' && track !== 'advanced') track = 'basic';
+    body.classList.remove('track-basic', 'track-advanced');
+    body.classList.add('track-' + track);
+
+    tabs.forEach(function(btn) {
+      var on = btn.getAttribute('data-track-tab') === track;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+
+    if (opts.updateHash !== false) {
+      try { history.replaceState(null, '', '#' + track); } catch(e) { location.hash = track; }
+    }
+    if (opts.scrollTo) {
+      var target = document.getElementById(opts.scrollTo);
+      if (target) {
+        var tabbar = document.getElementById('trackTabbar');
+        var off = tabbar ? tabbar.offsetHeight : 0;
+        var y = target.getBoundingClientRect().top + window.pageYOffset - off - 8;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+    // 트랙 전환 시 새로 보이는 reveal 다시 트리거 가능하도록
+    setTimeout(triggerInViewport, 50);
+  }
+
+  tabs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTrack(btn.getAttribute('data-track-tab'), { scrollTo: 'curriculum-' + btn.getAttribute('data-track-tab') });
+    });
+  });
+
+  chooseCards.forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      setTrack(card.getAttribute('data-track-choose'), { scrollTo: 'intro' });
+    });
+  });
+
+  // 초기 트랙: URL hash 우선
+  var initial = (location.hash || '').replace('#', '');
+  setTrack(initial === 'advanced' ? 'advanced' : 'basic', { updateHash: false });
+
+  window.addEventListener('hashchange', function() {
+    var h = (location.hash || '').replace('#', '');
+    if (h === 'basic' || h === 'advanced') setTrack(h, { updateHash: false });
+  });
+
+  // ===== Reveal animations =====
+  var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  revealEls.forEach(function(el) { observer.observe(el); });
+  function observeReveals() {
+    document.querySelectorAll('.reveal:not(.visible), .reveal-children:not(.visible)').forEach(function(el) {
+      // 숨겨진 트랙 안의 요소는 일단 observe 등록하고, 보일 때 IntersectionObserver가 처리
+      revealObserver.observe(el);
+    });
+  }
+
+  function triggerInViewport() {
+    document.querySelectorAll('.reveal:not(.visible), .reveal-children:not(.visible)').forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0 && el.offsetParent !== null) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
+  observeReveals();
 
   // Hero reveal on load
   var heroEls = document.querySelectorAll('.hero-section .reveal, .hero-section .reveal-children');
-  var delays = [0, 200, 400, 600, 800];
+  var delays = [0, 150, 300, 450, 600];
   heroEls.forEach(function(el, i) {
-    setTimeout(function() {
-      el.classList.add('visible');
-    }, delays[i] || i * 150);
+    setTimeout(function() { el.classList.add('visible'); }, delays[i] || i * 120);
   });
 })();
 </script>
