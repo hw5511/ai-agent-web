@@ -8,36 +8,36 @@
 
   <!-- 제목 -->
   <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">실습 C · 유명 스타일 입히기</text>
-  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">기준표(CLAUDE.md)만 바꿔서 분위기를 통째로 갈아끼운다</text>
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">getdesign.md 도서관에서 브랜드 스타일을 골라 CLAUDE.md로 교체</text>
   <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
 
   <!-- 좌: 단계 -->
   <text x="60" y="262" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">단계</text>
 
   <text x="60" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
-  <text x="100" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">아래 버튼으로 스타일 팩(3종) 다운로드</text>
+  <text x="100" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">아래 버튼으로 getdesign.md 도서관 열기</text>
 
   <text x="60" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
-  <text x="100" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">마음에 드는 1개를 CLAUDE.md로 이름 바꿔 교체</text>
+  <text x="100" y="360" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">마음에 드는 브랜드의 DESIGN.md 복사</text>
 
   <text x="60" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
-  <text x="100" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">실습 A·B와 같은 프롬프트 한 번 더</text>
+  <text x="100" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">프로젝트 폴더에 CLAUDE.md로 저장(교체)</text>
 
   <text x="60" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">─</text>
-  <text x="100" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">완전히 다른 분위기로 바뀌는 걸 확인</text>
+  <text x="100" y="456" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#171717">실습 A·B와 같은 프롬프트 다시 → 분위기 확 바뀜</text>
 
-  <!-- 우: 스타일 팩 박스 -->
+  <!-- 우: getdesign.md 박스 -->
   <rect x="700" y="252" width="520" height="216" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="724" y="286" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">스타일 팩 3종</text>
-  <text x="724" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">Minimal Dark — 한밤의 테크 제품</text>
-  <text x="724" y="354" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">Pastel Soft — 따뜻한 라이프스타일</text>
-  <text x="724" y="384" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">Editorial Serif — 고급 잡지 느낌</text>
+  <text x="724" y="286" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">getdesign.md 도서관</text>
+  <text x="724" y="324" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">330+ 브랜드의 DESIGN.md 모음</text>
+  <text x="724" y="354" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">무료로 구경 · 로그인 불필요</text>
+  <text x="724" y="384" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">예) Stripe · Apple · Linear …</text>
   <line x1="724" y1="408" x2="1196" y2="408" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="724" y="442" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">고른 1개를 CLAUDE.md로 — 강사 제작 교육용 프리셋</text>
+  <text x="724" y="442" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">DESIGN.md 복사 → 내 폴더에 CLAUDE.md로 저장</text>
 
   <!-- 그린 핵심 한 줄 -->
   <text x="60" y="572" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#16a34a">기준표만 바꿔도 — 페이지의 인격이 바뀐다</text>
 
   <!-- 하단 메타 -->
-  <text x="60" y="668" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">실습 C · 더 많은 스타일은 getdesign.md 도서관에서</text>
+  <text x="60" y="668" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">실습 C · getdesign.md (출처 VoltAgent · 브랜드 비공인)</text>
 </svg>

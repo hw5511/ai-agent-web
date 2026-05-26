@@ -79,12 +79,12 @@
 ---
 
 ### 슬라이드 9 — 실습 C: 유명 스타일 입히기
-- **유형**: 실습 + 액션(다운로드)
-- **goal**: 강사 제작 스타일 팩 1개를 CLAUDE.md로 교체해 같은 프롬프트로 분위기를 통째로 바꾼다.
-- **핵심 토픽**: 스타일 팩 3종 다운로드 / 고른 1개를 CLAUDE.md로 교체 / 같은 프롬프트 다시 → 다른 분위기
-- **액션박스**: `스타일 팩 3종 다운로드 (zip)` (`curriculum/_assets/files/style_pack.zip`) + getdesign.md 링크
-- **스타일 팩**: Minimal Dark / Pastel Soft / Editorial Serif — **강사 제작 원본 교육용 프리셋**(공개 레포 저작권 리스크 회피). getdesign.md의 실제 브랜드 파일은 "더 궁금하면" 구경용 링크로만. npx는 기본 동선에서 제외(MAGI 합의).
-- **강사 노트**: "파일 하나 바꿨을 뿐인데 페이지 인격이 바뀌죠?"
+- **유형**: 실습 + 액션(링크)
+- **goal**: getdesign.md에서 브랜드 DESIGN.md를 골라 CLAUDE.md로 교체해 같은 프롬프트로 분위기를 통째로 바꾼다.
+- **핵심 토픽**: getdesign.md 도서관에서 고르기 / DESIGN.md 복사 → CLAUDE.md로 저장 / 같은 프롬프트 다시 → 다른 분위기
+- **액션박스**: `getdesign.md에서 스타일 받기` (링크 https://getdesign.md/design-md)
+- **변경(CEO 2026-05-26)**: 강사 제작 스타일 팩(zip) 다운로드 폐기 → 실습은 **getdesign.md에서 직접 받아** 진행. (style_pack 파일/zip 레포에서 제거)
+- **강사 노트**: "도서관에서 마음에 드는 브랜드 DESIGN.md를 복사해서 CLAUDE.md로 저장하면, 같은 프롬프트인데 분위기가 확 바뀌어요."
 
 ---
 
@@ -127,6 +127,6 @@
 - **총 13장**. CEO 2026-05-26 전면 재구성 + MAGI 3-way(Yuki·Gemini·Codex) 검증.
 - **서사**: 맨손(A) → SPARK(B) → 비교(6) → 왜?(7, 원리) → DESIGN.md 도서관(8) → 스타일 입히기(C, 9) → 보관함(10)·전시장(11)·공개(12·13).
 - **MAGI 핵심 결정**: 메타 비교표 폐기→역할 구분 1장 / npx 기본 동선 제외(강사 사전배포 팩) / gh device-flow + 계정 확인 / A·B 공통 프롬프트 고정 / Plan B 웹 업로드.
-- **유키 편차(보고됨)**: 실습 C 스타일 팩은 브랜드 파일 대신 **강사 제작 원본 프리셋 3종**(public 레포 저작권 회피). getdesign.md는 구경용 링크.
-- **다운로드 단일 폴더**: `curriculum/_assets/files/` (SPARK.md, style_pack.zip + style_pack/ 원본).
+- **실습 C 자료(CEO 2026-05-26)**: 강사 제작 스타일 팩(zip) 폐기 → getdesign.md에서 직접 받아 진행. style_pack 파일은 레포에서 제거.
+- **다운로드 단일 폴더**: `curriculum/_assets/files/` (SPARK.md).
 - 표현 가이드 준수: "백엔드/풀스택/서버사이드/API서버/프로덕션" 미사용. 대체어 "웹 공개 / 보관함·전시장 / 기준표".
