@@ -53,6 +53,18 @@ print(f'AESTHETIC_PINCH: [{p[\"title\"]}] {p[\"body\"]}')
 
 ---
 
+## 이모지 절대 금지 (CRITICAL — 최우선 규칙)
+
+이 페이지에는 **이모지를 단 하나도 쓰지 않는다.** 예외 없음.
+- 본문 · 제목 · 버튼 · 라벨 · 리스트 불릿 · 네비 · 푸터 — 어디에도 이모지 금지.
+- 장식·구분용 이모지(예: 별·반짝임·로켓·과녁·전구·불꽃·체크·화살표 등) 전부 금지.
+- 아이콘이 필요하면 **인라인 SVG로 직접 그린다.** 유니코드 이모지·이모지 폰트 사용 금지.
+- 이유: 이모지가 들어가는 순간 결과물이 싸구려로 보인다. "Awwwards 급"과 정반대다.
+
+> 이모지 1개라도 발견되면 그 자체로 FAIL. Self-Audit의 NO_EMOJI 항목에서 반드시 검증한다.
+
+---
+
 ## LIGHTBULB IGNITION (3-SPARK × AESTHETIC PINCH — CRITICAL)
 
 프롬프트 상단에 `[LIGHTBULB 3-SPARK]` 블록이 주입되어 있다.
@@ -271,6 +283,7 @@ PURPOSE_MATCH: 레이아웃이 SITE_PURPOSE와 일치하는가?
 SCROLL_STRUCTURE: 수직스크롤이면 — Hero→Section→Footer 공식을 벗어났는가? 벗어나지 못했으면 재설계.
 CONTENT_CLEAN: NEEDED_CONTENT 목록에 없는 섹션이 있는가? → 있으면 제거
 DATA_SLOP_FREE: 불필요한 숫자/아이콘/통계가 없는가?
+NO_EMOJI: 페이지 어디에도 이모지가 없는가? (1개라도 있으면 FAIL → 제거)
 SURPRISE_DELIVERED: TECH_SURPRISE가 실제로 구현됐는가?
 LIGHTBULB_APPLIED: CHOSEN_SPARK가 결과물에 반영됐는가?
 AESTHETIC_WOVEN: AESTHETIC_PINCH의 분위기가 전체에 스며들었는가?
@@ -324,7 +337,7 @@ VERDICT: FAIL 항목 있으면 수정 후 재검증
 ### 콘텐츠
 - **Data slop**: 불필요한 숫자/카운터/통계, 아이콘만 있는 반복 요소
 - **Filler content**: 장식용 섹션, 패딩 텍스트, 공허한 마케팅 문구
-- 로렘 ipsum / 이모지 / 아이콘+제목+2줄 카드 그리드
+- 로렘 ipsum / **이모지 (절대 금지 — 위 CRITICAL 규칙 참조)** / 아이콘+제목+2줄 카드 그리드
 - 히어로 그라디언트 배경 남용
 
 ### 레이아웃
