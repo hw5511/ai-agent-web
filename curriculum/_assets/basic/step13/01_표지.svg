@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <!-- 상단 WEB 13 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 13</text>
+
+  <!-- 부제 -->
+  <text x="60" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="500" fill="#9ca3af" letter-spacing="0.04em">13회차 · 심화 트랙 · 2시간</text>
+
+  <!-- 큰 제목 -->
+  <text x="60" y="424" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="58" font-weight="700" fill="#171717" letter-spacing="-0.02em">리액트로 멋지게, 내 도메인</text>
+
+  <!-- 그린 짧은 언더라인 -->
+  <rect x="60" y="456" width="120" height="4" rx="2" fill="#16a34a"/>
+
+  <!-- 한 줄 설명 -->
+  <text x="60" y="510" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#6b7280">프리미엄 컴포넌트로 사이트를 멋지게 만들고, 내 이름의 주소까지 단다</text>
+
+  <!-- 우측 메타 -->
+  <text x="1220" y="676" text-anchor="end" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="500" fill="#9ca3af" letter-spacing="0.08em">리액트 · 컴포넌트 · 도메인</text>
+</svg>
