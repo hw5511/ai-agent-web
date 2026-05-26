@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Text Color Reveal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #000b36;
+      --color-secondary: #ed1162;
+      --color-primary: #eda624;
+      --color-accent: #239da0;
+      --color-text: #ffffff;
+      --color-muted: rgba(255, 255, 255, 0.12);
+      --font-title: 'Bebas Neue', sans-serif;
+      --font-body: 'Space Mono', 'Noto Sans KR', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* 스크롤 진행 바 */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+      z-index: 1000;
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      opacity: 0.35;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(4rem, 12vw, 10rem);
+      letter-spacing: 0.08em;
+      line-height: 0.95;
+      color: var(--color-text);
+    }
+
+    .hero h1 span {
+      display: block;
+    }
+
+    .hero h1 span.accent-line {
+      background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      opacity: 0.4;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      opacity: 0.3;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+      animation: scroll-anim 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scroll-anim {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* Reveal 섹션 공통 */
+    .reveal-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem clamp(1rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-index {
+      position: absolute;
+      top: 2.5rem;
+      left: 2.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      opacity: 0.2;
+    }
+
+    .reveal-text {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 6.5vw, 7.5rem);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      text-align: center;
+      max-width: 1100px;
+      word-break: keep-all;
+    }
+
+    .char {
+      display: inline-block;
+      color: var(--color-muted);
+      will-change: color;
+    }
+
+    .section-sub {
+      margin-top: 2.5rem;
+      font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+      letter-spacing: 0.12em;
+      opacity: 0;
+      transform: translateY(16px);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400;
+    }
+
+    .section-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* 색상별 glow */
+    .section-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    #section1 .section-glow { background: #ed1162; }
+    #section2 .section-glow { background: #eda624; }
+    #section3 .section-glow { background: #239da0; }
+    #section4 .section-glow { background: #f0f0f0; }
+
+    /* Footer */
+    .footer {
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.5rem, 4vw, 3.5rem);
+      letter-spacing: 0.1em;
+      opacity: 0.15;
+    }
+
+    .footer-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      opacity: 0.2;
+    }
+
+    /* 모바일 */
+    @media (max-width: 768px) {
+      .reveal-text {
+        font-size: clamp(2rem, 9vw, 4rem);
+        line-height: 1.2;
+      }
+
+      .section-sub {
+        font-size: 0.75rem;
+      }
+
+      .scroll-indicator {
+        bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-dots"></div>
+    <p class="hero-label">Scroll Text Color Reveal</p>
+    <h1>
+      <span>WORDS</span>
+      <span class="accent-line">COME</span>
+      <span>ALIVE</span>
+    </h1>
+    <p class="hero-sub">스크롤하면 문장에 색이 깃든다</p>
+    <div class="scroll-indicator">
+      <span>SCROLL DOWN</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Reveal Section 1 -->
+  <section class="reveal-section" id="section1">
+    <div class="section-glow"></div>
+    <div class="section-index">01 / 04</div>
+    <div class="reveal-text" data-color="#ed1162">
+      DESIGN IS NOT JUST WHAT IT LOOKS LIKE
+    </div>
+    <p class="section-sub">디자인이란 단순히 어떻게 보이는가의 문제가 아니다</p>
+    <div class="section-line"></div>
+  </section>
+
+  <!-- Reveal Section 2 -->
+  <section class="reveal-section" id="section2">
+    <div class="section-glow"></div>
+    <div class="section-index">02 / 04</div>
+    <div class="reveal-text" data-color="#eda624">
+      MAKE IT SIMPLE BUT SIGNIFICANT
+    </div>
+    <p class="section-sub">단순하게, 그러나 언제나 의미있게 만들어라</p>
+    <div class="section-line"></div>
+  </section>
+
+  <!-- Reveal Section 3 -->
+  <section class="reveal-section" id="section3">
+    <div class="section-glow"></div>
+    <div class="section-index">03 / 04</div>
+    <div class="reveal-text" data-color="#239da0">
+      GREAT DESIGN SOLVES PROBLEMS
+    </div>
+    <p class="section-sub">위대한 디자인은 반드시 문제를 해결한다</p>
+    <div class="section-line"></div>
+  </section>
+
+  <!-- Reveal Section 4 -->
+  <section class="reveal-section" id="section4">
+    <div class="section-glow"></div>
+    <div class="section-index">04 / 04</div>
+    <div class="reveal-text" data-color="#f0efff">
+      THE DETAILS ARE NOT THE DETAILS
+    </div>
+    <p class="section-sub">디테일은 단지 디테일이 아니다, 그것이 곧 디자인이다</p>
+    <div class="section-line"></div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p class="footer-title">SCROLL TEXT REVEAL</p>
+    <p class="footer-meta">GSAP &nbsp;·&nbsp; SCROLLTRIGGER &nbsp;·&nbsp; 2026</p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 스크롤 진행 바
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('progress-bar').style.width = progress + '%';
+    });
+
+    // 각 글자를 span.char 으로 분해
+    document.querySelectorAll('.reveal-text').forEach(el => {
+      const color = el.dataset.color;
+      const raw = el.textContent.trim();
+
+      el.innerHTML = raw.split('').map(ch => {
+        if (ch === ' ') {
+          return '<span class="char" style="display:inline-block;width:0.35em">&nbsp;</span>';
+        }
+        return `<span class="char">${ch}</span>`;
+      }).join('');
+
+      const chars = el.querySelectorAll('.char');
+      const section = el.closest('.reveal-section');
+      const sub = section.querySelector('.section-sub');
+      const glow = section.querySelector('.section-glow');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: '+=140%',
+          pin: true,
+          scrub: 1.2,
+          anticipatePin: 1,
+        }
+      });
+
+      // 글자 색 앞에서부터 채우기
+      tl.to(chars, {
+        color: color,
+        stagger: {
+          each: 0.025,
+          ease: 'none',
+        },
+        ease: 'none',
+        duration: 1,
+      });
+
+      // 서브 텍스트 등장
+      tl.to(sub, {
+        opacity: 1,
+        y: 0,
+        duration: 0.25,
+        ease: 'power2.out',
+      }, '-=0.15');
+
+      // glow 효과
+      tl.to(glow, {
+        opacity: 0.06,
+        duration: 0.5,
+        ease: 'power1.in',
+      }, 0);
+    });
+
+    // Hero 초기 애니메이션
+    gsap.from('.hero h1 span', {
+      y: 60,
+      opacity: 0,
+      stagger: 0.12,
+      duration: 0.9,
+      ease: 'power3.out',
+      delay: 0.2,
+    });
+
+    gsap.from('.hero-label, .hero-sub', {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: 'power2.out',
+      delay: 0.6,
+    });
+
+    gsap.from('.scroll-indicator', {
+      opacity: 0,
+      y: 10,
+      duration: 0.8,
+      delay: 1.2,
+      ease: 'power2.out',
+    });
+  </script>
+</body>
+</html>

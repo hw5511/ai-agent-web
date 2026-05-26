@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Music — 음악 취미 소개</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #00b6fc;
+      --color-accent: #fed300;
+      --color-text: #f0f0f0;
+      --color-muted: #555;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 3px; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+    }
+    nav .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.12em;
+      color: var(--color-primary);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav ul a:hover { color: var(--color-accent); }
+
+    /* ── HERO ── */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,182,252,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      letter-spacing: 0.06em;
+      line-height: 0.9;
+      color: var(--color-text);
+    }
+    .hero-title span { color: var(--color-primary); }
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      max-width: 460px;
+      line-height: 1.8;
+    }
+    .hero-cta {
+      margin-top: 3rem;
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .hero-cta:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    /* ── EQUALIZER BARS (decoration) ── */
+    .eq-bars {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      align-items: flex-end;
+    }
+    .eq-bar {
+      width: 4px;
+      background: var(--color-primary);
+      border-radius: 2px;
+      opacity: 0.7;
+      animation: eqAnim var(--dur) ease-in-out infinite alternate;
+    }
+    @keyframes eqAnim {
+      from { height: 8px; }
+      to   { height: var(--h); }
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 7rem 4rem; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      color: #999;
+      line-height: 1.9;
+      max-width: 520px;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-image {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .about-image img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .about-image:hover img { transform: scale(1.04); }
+    .about-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--color-primary);
+      border-radius: 12px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,182,252,0.2);
+      border-radius: 10px;
+      padding: 1.4rem;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .stat-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--color-accent);
+      letter-spacing: 0.06em;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: #888;
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+    }
+
+    /* ── ALBUMS ── */
+    #albums {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.8rem;
+    }
+    .album-card {
+      cursor: pointer;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s;
+    }
+    .album-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(0,182,252,0.2);
+      border-color: var(--color-primary);
+    }
+    .album-thumb {
+      position: relative;
+      overflow: hidden;
+    }
+    .album-thumb img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .album-card:hover .album-thumb img { transform: scale(1.08); }
+    .album-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.85) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .album-card:hover .album-overlay { opacity: 1; }
+    .album-play {
+      width: 40px; height: 40px;
+      border: 2px solid var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-accent);
+      font-size: 1rem;
+    }
+    .album-info {
+      padding: 1rem 1.1rem;
+    }
+    .album-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.07em;
+      color: var(--color-text);
+    }
+    .album-artist {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      margin-top: 0.25rem;
+    }
+    .album-genre {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+    }
+
+    /* ── GENRES ── */
+    #genres {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .genres-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .genre-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.4rem 2rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      transition: background 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+    .genre-row:hover {
+      background: rgba(0,182,252,0.07);
+      border-color: var(--color-primary);
+    }
+    .genre-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--color-accent);
+      min-width: 3rem;
+      letter-spacing: 0.05em;
+    }
+    .genre-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      flex: 1;
+    }
+    .genre-bar-wrap {
+      width: 200px;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .genre-bar {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .genre-pct {
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      min-width: 3rem;
+      text-align: right;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── QUOTE ── */
+    #quote {
+      text-align: center;
+      padding: 8rem 4rem;
+      background: linear-gradient(135deg, rgba(0,182,252,0.06) 0%, rgba(254,211,0,0.04) 100%);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .quote-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--color-text);
+    }
+    .quote-text em { color: var(--color-primary); font-style: normal; }
+    .quote-author {
+      margin-top: 2rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 4rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--color-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      section { padding: 5rem 1.5rem; }
+      #about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .genre-bar-wrap { display: none; }
+      .genre-row { padding: 1rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <nav>
+    <div class="logo">MY MUSIC</div>
+    <ul>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#albums">ALBUMS</a></li>
+      <li><a href="#genres">GENRES</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div id="hero-bg"></div>
+    <p class="hero-tag">Music is my life</p>
+    <h1 class="hero-title">
+      SOUND<br /><span>IS MY</span><br />WORLD
+    </h1>
+    <p class="hero-sub">
+      음악이 없는 하루는 상상할 수 없어요. 장르를 가리지 않고 좋은 소리라면 무엇이든 빠져드는 음악 덕후의 페이지입니다.
+    </p>
+    <a href="#albums" class="hero-cta">EXPLORE ALBUMS</a>
+    <div class="eq-bars" id="eq-bars"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section>
+    <div id="about">
+      <div class="about-image" data-aos="fade-right" data-aos-duration="900">
+        <img src="https://loremflickr.com/600/750/music,concert" alt="music" />
+      </div>
+      <div data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">MUSIC<br />OBSESSED</h2>
+        <p class="section-desc">
+          음악은 단순한 취미를 넘어 제 삶의 언어입니다. 귀로 듣고, 가슴으로 느끼고, 온몸으로 반응하는 것이 제가 음악을 즐기는 방식입니다. 장르 구분 없이 좋은 음악이면 모두 환영해요.
+        </p>
+        <div class="about-stats">
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="stat-num">1,200+</div>
+            <div class="stat-label">Saved Songs</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="stat-num">48</div>
+            <div class="stat-label">Favorite Albums</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+            <div class="stat-num">12</div>
+            <div class="stat-label">Concerts Attended</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="500">
+            <div class="stat-num">7+</div>
+            <div class="stat-label">Years of Passion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALBUMS -->
+  <section>
+    <div id="albums">
+      <p class="section-label" data-aos="fade-up">My Favorites</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">FAVORITE<br />ALBUMS</h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="160">
+        수백 번 들어도 질리지 않는 앨범들. 각각의 앨범은 제 인생의 어느 챕터와 함께합니다.
+      </p>
+      <div class="albums-grid">
+        <div class="album-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb1/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">MIDNIGHT RAIN</div>
+            <div class="album-artist">The Night Owls</div>
+            <div class="album-genre">Indie Rock</div>
+          </div>
+        </div>
+        <div class="album-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb2/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">NEON VOID</div>
+            <div class="album-artist">Synth Division</div>
+            <div class="album-genre">Synthwave</div>
+          </div>
+        </div>
+        <div class="album-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb3/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">SOUL DEEP</div>
+            <div class="album-artist">Ella & The Band</div>
+            <div class="album-genre">Soul / R&B</div>
+          </div>
+        </div>
+        <div class="album-card" data-aos="fade-up" data-aos-delay="240">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb4/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">DIGITAL ECHO</div>
+            <div class="album-artist">Circuit Breakers</div>
+            <div class="album-genre">Electronic</div>
+          </div>
+        </div>
+        <div class="album-card" data-aos="fade-up" data-aos-delay="320">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb5/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">RAW PULSE</div>
+            <div class="album-artist">Steel Horizon</div>
+            <div class="album-genre">Post-Rock</div>
+          </div>
+        </div>
+        <div class="album-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb6/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">COSMIC DRIFT</div>
+            <div class="album-artist">Orion Project</div>
+            <div class="album-genre">Ambient</div>
+          </div>
+        </div>
+        <div class="album-card" data-aos="fade-up" data-aos-delay="480">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb7/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">FIRE SERMON</div>
+            <div class="album-artist">Red Voltage</div>
+            <div class="album-genre">Alt Metal</div>
+          </div>
+        </div>
+        <div class="album-card" data-aos="fade-up" data-aos-delay="560">
+          <div class="album-thumb">
+            <img src="https://picsum.photos/seed/alb8/400/400" alt="album" />
+            <div class="album-overlay">
+              <div class="album-play">&#9654;</div>
+            </div>
+          </div>
+          <div class="album-info">
+            <div class="album-title">BLUE NOTE 77</div>
+            <div class="album-artist">Marcus & Trio</div>
+            <div class="album-genre">Jazz / Fusion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GENRES -->
+  <section>
+    <div id="genres">
+      <p class="section-label" data-aos="fade-up">What I Listen</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">MY GENRE<br />CHART</h2>
+      <p class="section-desc" data-aos="fade-up" data-aos-delay="160">
+        제 플레이리스트를 분석하면 이런 분포가 나옵니다. 다양한 장르를 오가며 그날의 기분에 맞는 음악을 찾아요.
+      </p>
+      <div class="genres-list" id="genres-list">
+        <div class="genre-row" data-aos="fade-up" data-aos-delay="0" data-pct="88">
+          <div class="genre-num">01</div>
+          <div class="genre-name">INDIE ROCK</div>
+          <div class="genre-bar-wrap"><div class="genre-bar"></div></div>
+          <div class="genre-pct">88%</div>
+        </div>
+        <div class="genre-row" data-aos="fade-up" data-aos-delay="80" data-pct="75">
+          <div class="genre-num">02</div>
+          <div class="genre-name">ELECTRONIC</div>
+          <div class="genre-bar-wrap"><div class="genre-bar"></div></div>
+          <div class="genre-pct">75%</div>
+        </div>
+        <div class="genre-row" data-aos="fade-up" data-aos-delay="160" data-pct="62">
+          <div class="genre-num">03</div>
+          <div class="genre-name">JAZZ / FUSION</div>
+          <div class="genre-bar-wrap"><div class="genre-bar"></div></div>
+          <div class="genre-pct">62%</div>
+        </div>
+        <div class="genre-row" data-aos="fade-up" data-aos-delay="240" data-pct="55">
+          <div class="genre-num">04</div>
+          <div class="genre-name">R&B / SOUL</div>
+          <div class="genre-bar-wrap"><div class="genre-bar"></div></div>
+          <div class="genre-pct">55%</div>
+        </div>
+        <div class="genre-row" data-aos="fade-up" data-aos-delay="320" data-pct="40">
+          <div class="genre-num">05</div>
+          <div class="genre-name">AMBIENT</div>
+          <div class="genre-bar-wrap"><div class="genre-bar"></div></div>
+          <div class="genre-pct">40%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section id="quote" data-aos="fade-up" data-aos-duration="1000">
+    <blockquote class="quote-text">
+      "Without music, <em>life would be</em> a mistake."
+    </blockquote>
+    <p class="quote-author">— Friedrich Nietzsche</p>
+  </section>
+
+  <footer>
+    <p>MUSIC IS NOT A HOBBY. IT'S A LIFESTYLE. &copy; 2026</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // AOS init
+    AOS.init({ once: true, easing: 'ease-out-quart' });
+
+    // Progress bar
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      bar.style.width = (scrolled / total * 100) + '%';
+    }, { passive: true });
+
+    // Equalizer bars
+    const eq = document.getElementById('eq-bars');
+    const heights = [14, 22, 34, 48, 38, 26, 44, 30, 18, 42, 28, 36];
+    const durations = [0.5, 0.7, 0.4, 0.9, 0.6, 0.8, 0.5, 0.7, 0.4, 0.6, 0.8, 0.5];
+    heights.forEach((h, i) => {
+      const b = document.createElement('div');
+      b.className = 'eq-bar';
+      b.style.setProperty('--h', h + 'px');
+      b.style.setProperty('--dur', durations[i] + 's');
+      b.style.animationDelay = (i * 0.07) + 's';
+      eq.appendChild(b);
+    });
+
+    // Genre bars (IntersectionObserver)
+    const genreSection = document.getElementById('genres-list');
+    let animated = false;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !animated) {
+        animated = true;
+        document.querySelectorAll('.genre-row').forEach((row, i) => {
+          const pct = row.dataset.pct;
+          const barEl = row.querySelector('.genre-bar');
+          setTimeout(() => {
+            barEl.style.width = pct + '%';
+          }, i * 120);
+        });
+      }
+    }, { threshold: 0.3 });
+    observer.observe(genreSection);
+  </script>
+</body>
+</html>

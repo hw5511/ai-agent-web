@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MY MUSIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #111;
+      --accent: #00ff9d;
+      --text: #ffffff;
+      --muted: #888;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', 'Noto Sans KR', monospace;
+      letter-spacing: 0.05em;
+      overflow-x: hidden;
+    }
+
+    /* 스크롤 진행 바 */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--accent);
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s linear;
+      will-change: transform;
+    }
+
+    /* 네비 */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 900;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* 히어로 */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,255,157,0.06), transparent 70%),
+        radial-gradient(ellipse 30% 50% at 20% 80%, rgba(0,255,157,0.04), transparent 50%);
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 13rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+    }
+
+    .hero-title span { color: var(--accent); }
+
+    .hero-desc {
+      max-width: 480px;
+      font-size: 0.82rem;
+      line-height: 2;
+      color: var(--muted);
+      font-family: 'Noto Sans KR', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      animation: fadeUpDown 2s ease-in-out infinite;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    @keyframes fadeUpDown {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* 섹션 공통 */
+    section {
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.06em;
+      margin-bottom: 48px;
+    }
+
+    /* 소개 섹션 */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .intro-text p {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.9rem;
+      line-height: 2.2;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+    }
+
+    .intro-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    .intro-img {
+      position: relative;
+    }
+
+    .intro-img img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: grayscale(20%);
+      transition: filter 0.6s ease;
+    }
+
+    .intro-img:hover img { filter: grayscale(0%); }
+
+    .intro-img::before {
+      content: '';
+      position: absolute;
+      inset: -12px -12px 12px 12px;
+      border: 1px solid rgba(0,255,157,0.25);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    /* 장르 태그 */
+    .genres {
+      background: var(--bg2);
+      padding: 80px 48px;
+    }
+
+    .genre-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .genre-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .genre-tag {
+      padding: 10px 22px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.35s ease;
+    }
+
+    .genre-tag:hover,
+    .genre-tag.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,255,157,0.06);
+    }
+
+    /* 앨범 그리드 */
+    .albums-wrap {
+      background: var(--bg);
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .album-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #1a1a1a;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      will-change: transform;
+    }
+
+    .album-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,255,157,0.12);
+    }
+
+    .album-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .album-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .album-info {
+      padding: 18px 18px 20px;
+    }
+
+    .album-artist {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .album-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .album-year {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .album-play {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: all 0.35s ease;
+    }
+
+    .album-card:hover .album-play {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .album-play svg {
+      width: 14px;
+      height: 14px;
+      fill: #fff;
+      margin-left: 2px;
+    }
+
+    /* 추천 트랙 */
+    .tracks-section {
+      background: var(--bg2);
+      padding: 120px 0;
+    }
+
+    .tracks-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .track-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .track-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .track-item:hover { padding-left: 16px; }
+
+    .track-item:hover .track-num { color: var(--accent); }
+
+    .track-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--muted);
+      width: 36px;
+      text-align: center;
+      transition: color 0.3s ease;
+    }
+
+    .track-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .track-meta { flex: 1; }
+
+    .track-name {
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .track-artist {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .track-duration {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .track-bar {
+      width: 80px;
+      height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .track-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    /* 푸터 */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      .intro-grid { grid-template-columns: 1fr; gap: 40px; }
+      .intro-img { order: -1; }
+      .genres { padding: 60px 24px; }
+      .tracks-inner { padding: 0 24px; }
+      footer { padding: 40px 24px; }
+      .album-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <nav>
+    <div class="nav-logo">MY MUSIC</div>
+    <ul class="nav-links">
+      <li><a href="#intro">ABOUT</a></li>
+      <li><a href="#albums">ALBUMS</a></li>
+      <li><a href="#tracks">TRACKS</a></li>
+    </ul>
+  </nav>
+
+  <!-- 히어로 -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <p class="hero-label">MUSIC IS MY LIFE</p>
+    <h1 class="hero-title">I <span>LOVE</span><br>MUSIC</h1>
+    <p class="hero-desc">음악은 내가 숨 쉬는 방식이에요. 장르를 가리지 않고, 좋은 멜로디가 있다면 그게 내 음악입니다.</p>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </div>
+
+  <!-- 소개 -->
+  <section id="intro">
+    <div class="intro-grid">
+      <div class="intro-text" data-aos="fade-right" data-aos-duration="900">
+        <p class="section-label">ABOUT MY TASTE</p>
+        <h2 class="section-title">나의 음악 이야기</h2>
+        <p>어릴 때부터 음악이 제 곁에 있었어요. 통학길 이어폰 속 음악이 하루를 버티게 해줬고, 공부할 때도 밥 먹을 때도 항상 뭔가 틀어놔야 직성이 풀립니다.</p>
+        <p>록, 인디, 재즈, 힙합, 시티팝까지 — 기분에 따라 장르를 바꿔 들어요. 앨범 커버 아트도 같이 수집하는 게 취미입니다.</p>
+        <div class="intro-stats">
+          <div class="stat">
+            <span class="stat-num">340+</span>
+            <span class="stat-label">앨범 보유</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">12</span>
+            <span class="stat-label">플레이리스트</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">5yr</span>
+            <span class="stat-label">음악 수집 경력</span>
+          </div>
+        </div>
+      </div>
+      <div class="intro-img" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+        <img src="https://loremflickr.com/600/600/vinyl,record" alt="vinyl record" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 장르 -->
+  <div class="genres">
+    <div class="genre-inner">
+      <p class="section-label" data-aos="fade-up">MY GENRES</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">즐겨 듣는 장르</h2>
+      <div class="genre-tags">
+        <span class="genre-tag active" data-aos="fade-up" data-aos-delay="100">INDIE ROCK</span>
+        <span class="genre-tag" data-aos="fade-up" data-aos-delay="140">CITY POP</span>
+        <span class="genre-tag" data-aos="fade-up" data-aos-delay="180">JAZZ</span>
+        <span class="genre-tag" data-aos="fade-up" data-aos-delay="220">HIP HOP</span>
+        <span class="genre-tag" data-aos="fade-up" data-aos-delay="260">ALTERNATIVE</span>
+        <span class="genre-tag" data-aos="fade-up" data-aos-delay="300">POST ROCK</span>
+        <span class="genre-tag" data-aos="fade-up" data-aos-delay="340">ELECTRONIC</span>
+        <span class="genre-tag" data-aos="fade-up" data-aos-delay="380">LO-FI</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 앨범 -->
+  <div class="albums-wrap">
+    <section id="albums">
+      <p class="section-label" data-aos="fade-up">FAVORITE ALBUMS</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">내가 아끼는 앨범들</h2>
+      <div class="album-grid">
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="0">
+          <img src="https://loremflickr.com/400/400/album,rock" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">RADIOHEAD</p>
+            <p class="album-title">OK COMPUTER</p>
+            <p class="album-year">1997</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="80">
+          <img src="https://loremflickr.com/400/400/jazz,music" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">MILES DAVIS</p>
+            <p class="album-title">KIND OF BLUE</p>
+            <p class="album-year">1959</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="160">
+          <img src="https://loremflickr.com/400/400/vinyl,indie" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">THE NATIONAL</p>
+            <p class="album-title">SLEEP WELL BEAST</p>
+            <p class="album-year">2017</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="240">
+          <img src="https://loremflickr.com/400/400/hiphop,concert" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">KENDRICK LAMAR</p>
+            <p class="album-title">TO PIMP A BUTTERFLY</p>
+            <p class="album-year">2015</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="60">
+          <img src="https://loremflickr.com/400/400/citypop,80s" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">MARIYA TAKEUCHI</p>
+            <p class="album-title">VARIETY</p>
+            <p class="album-year">1984</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="140">
+          <img src="https://loremflickr.com/400/400/guitar,band" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">ARCTIC MONKEYS</p>
+            <p class="album-title">AM</p>
+            <p class="album-year">2013</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="220">
+          <img src="https://loremflickr.com/400/400/electronic,synth" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">BOARDS OF CANADA</p>
+            <p class="album-title">MUSIC HAS THE RIGHT</p>
+            <p class="album-year">1998</p>
+          </div>
+        </div>
+
+        <div class="album-card" data-aos="fade-up" data-aos-delay="300">
+          <img src="https://loremflickr.com/400/400/postrock,atmosphere" alt="album" />
+          <div class="album-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="album-info">
+            <p class="album-artist">GODSPEED YOU!</p>
+            <p class="album-title">F# A# INFINITY</p>
+            <p class="album-year">1997</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- 추천 트랙 -->
+  <div class="tracks-section" id="tracks">
+    <div class="tracks-inner">
+      <p class="section-label" data-aos="fade-up">MY PLAYLIST</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">지금 이 순간 추천 트랙</h2>
+      <ul class="track-list">
+
+        <li class="track-item" data-aos="fade-up" data-aos-delay="0">
+          <span class="track-num">01</span>
+          <img class="track-thumb" src="https://loremflickr.com/100/100/jazz" alt="track" />
+          <div class="track-meta">
+            <p class="track-name">All Blues</p>
+            <p class="track-artist">Miles Davis</p>
+          </div>
+          <div class="track-bar"><div class="track-fill" style="width:82%"></div></div>
+          <span class="track-duration">11:33</span>
+        </li>
+
+        <li class="track-item" data-aos="fade-up" data-aos-delay="60">
+          <span class="track-num">02</span>
+          <img class="track-thumb" src="https://loremflickr.com/100/100/rock,guitar" alt="track" />
+          <div class="track-meta">
+            <p class="track-name">No Surprises</p>
+            <p class="track-artist">Radiohead</p>
+          </div>
+          <div class="track-bar"><div class="track-fill" style="width:91%"></div></div>
+          <span class="track-duration">03:48</span>
+        </li>
+
+        <li class="track-item" data-aos="fade-up" data-aos-delay="120">
+          <span class="track-num">03</span>
+          <img class="track-thumb" src="https://loremflickr.com/100/100/indie,concert" alt="track" />
+          <div class="track-meta">
+            <p class="track-name">Bloodbuzz Ohio</p>
+            <p class="track-artist">The National</p>
+          </div>
+          <div class="track-bar"><div class="track-fill" style="width:65%"></div></div>
+          <span class="track-duration">04:01</span>
+        </li>
+
+        <li class="track-item" data-aos="fade-up" data-aos-delay="180">
+          <span class="track-num">04</span>
+          <img class="track-thumb" src="https://loremflickr.com/100/100/hiphop,studio" alt="track" />
+          <div class="track-meta">
+            <p class="track-name">Alright</p>
+            <p class="track-artist">Kendrick Lamar</p>
+          </div>
+          <div class="track-bar"><div class="track-fill" style="width:78%"></div></div>
+          <span class="track-duration">03:39</span>
+        </li>
+
+        <li class="track-item" data-aos="fade-up" data-aos-delay="240">
+          <span class="track-num">05</span>
+          <img class="track-thumb" src="https://loremflickr.com/100/100/citypop,night" alt="track" />
+          <div class="track-meta">
+            <p class="track-name">Plastic Love</p>
+            <p class="track-artist">Mariya Takeuchi</p>
+          </div>
+          <div class="track-bar"><div class="track-fill" style="width:96%"></div></div>
+          <span class="track-duration">06:03</span>
+        </li>
+
+        <li class="track-item" data-aos="fade-up" data-aos-delay="300">
+          <span class="track-num">06</span>
+          <img class="track-thumb" src="https://loremflickr.com/100/100/indie,rock" alt="track" />
+          <div class="track-meta">
+            <p class="track-name">R U Mine?</p>
+            <p class="track-artist">Arctic Monkeys</p>
+          </div>
+          <div class="track-bar"><div class="track-fill" style="width:88%"></div></div>
+          <span class="track-duration">03:22</span>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <footer data-aos="fade-up">
+    <p>MUSIC IS THE SHORTHAND OF EMOTION &mdash; 2026</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 80 });
+
+    // 스크롤 진행 바
+    const progressBar = document.getElementById('progress-bar');
+    let rafId = null;
+
+    window.addEventListener('scroll', () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = pct + '%';
+        rafId = null;
+      });
+    });
+
+    // 장르 태그 토글
+    document.querySelectorAll('.genre-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        tag.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

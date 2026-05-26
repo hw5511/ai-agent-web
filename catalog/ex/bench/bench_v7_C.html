@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>멍멍 유치원 — Woof Kindergarten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Jua&family=Gamja+Flower&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      oklch(87% 0.19 96);
+    --primary: oklch(32% 0.19 265);
+    --accent:  oklch(52% 0.24 27);
+    --green:   oklch(77% 0.10 136);
+    --pink:    oklch(88% 0.06 355);
+    --text:    oklch(10% 0 0);
+    --white:   oklch(98% 0 0);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Gamja Flower', 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ── 진행 바 ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 5px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 1000;
+    transition: width 0.1s linear;
+  }
+
+  /* ── 배경 기하 패턴 (parallax) ── */
+  #geo-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .geo {
+    position: absolute;
+    will-change: transform;
+    opacity: 0.13;
+  }
+
+  /* 발바닥 = 큰 원 + 4 작은 원 (SVG) */
+  .paw { opacity: 0.10; }
+
+  /* ── 네비 ── */
+  nav {
+    position: fixed;
+    top: 5px; left: 0; right: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 48px;
+    background: var(--primary);
+  }
+
+  .nav-logo {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.4rem;
+    color: var(--bg);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-logo span {
+    display: inline-block;
+    width: 26px; height: 26px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+  }
+
+  nav ul a {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--bg);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--green); }
+
+  /* ── 공통 섹션 래퍼 ── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    padding-top: 72px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 80px;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: var(--white);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+
+  .hero-badge::before {
+    content: '';
+    display: block;
+    width: 10px; height: 10px;
+    background: var(--white);
+    border-radius: 50%;
+  }
+
+  .hero-title {
+    font-family: 'Jua', sans-serif;
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    line-height: 1.05;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--text);
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 18px 40px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .hero-cta:hover {
+    background: var(--accent);
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 var(--primary);
+  }
+
+  .hero-right {
+    background: var(--primary);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    mix-blend-mode: luminosity;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    opacity: 0.35;
+  }
+
+  .hero-float-shape {
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 280px;
+    height: 280px;
+    background: var(--accent);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    opacity: 0.25;
+    z-index: 2;
+  }
+
+  /* 세로 텍스트 데코 */
+  .hero-vert-text {
+    position: absolute;
+    left: 24px;
+    bottom: 60px;
+    writing-mode: vertical-rl;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.5;
+  }
+
+  /* 히어로 하단 삼각 클립 */
+  .clip-divider {
+    height: 80px;
+    background: var(--primary);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    margin-top: -1px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .clip-divider.green {
+    background: var(--green);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+
+  /* ── 소개 띠 ── */
+  #tagline-bar {
+    background: var(--accent);
+    color: var(--white);
+    padding: 18px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tagline-inner {
+    display: inline-flex;
+    gap: 60px;
+    animation: ticker 18s linear infinite;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .ticker-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--bg);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 60px;
+  }
+
+  /* ── 프로그램 섹션 ── */
+  #programs {
+    padding: 100px 80px;
+    background: var(--white);
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    margin-bottom: 64px;
+    gap: 20px;
+  }
+
+  .section-label {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 3px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Jua', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.1;
+    color: var(--primary);
+  }
+
+  .section-count {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 5rem;
+    color: var(--bg);
+    line-height: 1;
+  }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: 3fr 4fr 3fr 4fr;
+    gap: 0;
+    min-height: 420px;
+  }
+
+  .prog-card {
+    position: relative;
+    padding: 48px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border: 3px solid var(--primary);
+  }
+
+  .prog-card:nth-child(1) { background: var(--bg); }
+  .prog-card:nth-child(2) { background: var(--primary); color: var(--white); }
+  .prog-card:nth-child(3) { background: var(--green); }
+  .prog-card:nth-child(4) { background: var(--accent); color: var(--white); }
+
+  .prog-card:hover { transform: translateY(-8px); z-index: 10; }
+
+  .prog-shape {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px; height: 50px;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .prog-card:hover .prog-shape { transform: rotate(180deg) scale(1.2); }
+
+  .prog-shape.circle { background: var(--accent); border-radius: 50%; }
+  .prog-shape.triangle { background: var(--bg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border-radius: 0; }
+  .prog-shape.square { background: var(--green); border-radius: 0; transform: rotate(15deg); }
+  .prog-shape.square2 { background: var(--primary); border-radius: 0; transform: rotate(-20deg); }
+
+  .prog-card:hover .prog-shape.circle { background: var(--primary); }
+  .prog-card:hover .prog-shape.triangle { background: var(--accent); }
+  .prog-card:hover .prog-shape.square { background: var(--primary); }
+  .prog-card:hover .prog-shape.square2 { background: var(--bg); }
+
+  .prog-num {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+
+  .prog-title {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .prog-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    opacity: 0.85;
+  }
+
+  .prog-time {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-top: 24px;
+    opacity: 0.7;
+  }
+
+  /* ── 숫자 통계 ── */
+  #stats {
+    background: var(--primary);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .stat-item {
+    padding: 40px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-shape {
+    width: 56px; height: 56px;
+    margin: 0 auto 20px;
+  }
+
+  .stat-shape.s1 { background: var(--bg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+  .stat-shape.s2 { background: var(--accent); border-radius: 50%; }
+  .stat-shape.s3 { background: var(--green); }
+  .stat-shape.s4 { background: var(--pink); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+
+  .stat-num {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 3.2rem;
+    color: var(--bg);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-num sup {
+    font-size: 1.4rem;
+    vertical-align: super;
+  }
+
+  .stat-label {
+    font-family: 'Gamja Flower', sans-serif;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── 갤러리 ── */
+  #gallery {
+    padding: 100px 80px;
+    background: var(--bg);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, 220px);
+    gap: 12px;
+    margin-top: 56px;
+  }
+
+  .gallery-grid .g-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .g-item:nth-child(1) { grid-column: 1 / 6;  grid-row: 1 / 3; }
+  .g-item:nth-child(2) { grid-column: 6 / 9;  grid-row: 1 / 2; }
+  .g-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1 / 2; }
+  .g-item:nth-child(4) { grid-column: 6 / 10; grid-row: 2 / 3; }
+  .g-item:nth-child(5) { grid-column: 10 / 13; grid-row: 2 / 3; }
+  .g-item:nth-child(6) { grid-column: 1 / 5;  grid-row: 3 / 4; }
+  .g-item:nth-child(7) { grid-column: 5 / 9;  grid-row: 3 / 4; }
+  .g-item:nth-child(8) { grid-column: 9 / 13; grid-row: 3 / 4; }
+
+  .g-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .g-item:hover img { transform: scale(1.07); }
+
+  .g-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .g-item:hover::after { opacity: 0.25; }
+
+  .g-overlay {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: var(--accent);
+    color: var(--white);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .g-item:hover .g-overlay { opacity: 1; transform: translateY(0); }
+
+  /* ── CTA 섹션 ── */
+  #cta {
+    background: var(--accent);
+    padding: 120px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .cta-deco-circle {
+    position: absolute;
+    right: -120px;
+    top: -120px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    border: 60px solid rgba(255,255,255,0.1);
+  }
+
+  .cta-deco-tri {
+    position: absolute;
+    left: 40%;
+    bottom: -60px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.07);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+  .cta-left h2 {
+    font-family: 'Jua', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .cta-left p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+  }
+
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cta-info-item {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cta-icon {
+    width: 44px; height: 44px;
+    flex-shrink: 0;
+  }
+
+  .cta-icon.tri  { background: var(--bg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+  .cta-icon.circ { background: var(--green); border-radius: 50%; }
+  .cta-icon.sq   { background: var(--primary); }
+
+  .cta-info-item strong {
+    display: block;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bg);
+    margin-bottom: 4px;
+  }
+
+  .cta-info-item span {
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--bg);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 20px 48px;
+    text-decoration: none;
+    margin-top: 8px;
+    width: fit-content;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .cta-btn:hover {
+    background: var(--bg);
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 var(--primary);
+  }
+
+  /* ── 푸터 ── */
+  footer {
+    background: var(--text);
+    color: var(--white);
+    padding: 60px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-logo {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.8rem;
+    color: var(--bg);
+    margin-bottom: 14px;
+  }
+
+  .footer-desc {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 60px;
+    justify-content: flex-end;
+  }
+
+  .footer-col h4 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col ul li {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── 반응형 ── */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { height: 55vw; }
+    .hero-left { padding: 80px 32px; }
+    .programs-grid { grid-template-columns: 1fr 1fr; }
+    #stats { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .g-item { grid-column: auto !important; grid-row: auto !important; height: 200px; }
+    #cta { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    .footer-right { justify-content: flex-start; }
+    #programs, #gallery, #cta, footer { padding: 60px 32px; }
+    #stats { padding: 60px 32px; }
+    nav { padding: 14px 24px; }
+    .section-header { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .programs-grid { grid-template-columns: 1fr; }
+    #stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 진행 바 -->
+<div id="progress-bar"></div>
+
+<!-- 배경 기하 레이어 -->
+<div id="geo-layer">
+  <!-- 원들 -->
+  <div class="geo" style="width:320px;height:320px;background:var(--primary);border-radius:50%;top:10vh;left:-80px;" data-speed="0.06"></div>
+  <div class="geo" style="width:180px;height:180px;background:var(--accent);border-radius:50%;top:60vh;right:5vw;" data-speed="0.10"></div>
+  <div class="geo" style="width:100px;height:100px;background:var(--green);border-radius:50%;top:30vh;left:55vw;" data-speed="0.14"></div>
+  <!-- 삼각형들 -->
+  <div class="geo" style="width:260px;height:260px;background:var(--accent);clip-path:polygon(50% 0%,0% 100%,100% 100%);top:75vh;left:25vw;" data-speed="0.08"></div>
+  <div class="geo" style="width:140px;height:140px;background:var(--primary);clip-path:polygon(50% 0%,0% 100%,100% 100%);top:15vh;right:20vw;" data-speed="0.12"></div>
+  <!-- 사각형들 -->
+  <div class="geo" style="width:200px;height:200px;background:var(--green);top:85vh;right:35vw;transform:rotate(25deg);" data-speed="0.05"></div>
+  <div class="geo" style="width:80px;height:80px;background:var(--primary);top:50vh;left:20vw;transform:rotate(15deg);" data-speed="0.18"></div>
+  <!-- 발바닥 SVG 패턴들 -->
+  <svg class="geo paw" style="width:120px;top:45vh;left:68vw;" data-speed="0.09" viewBox="0 0 100 100">
+    <circle cx="50" cy="65" r="25" fill="var(--primary)"/>
+    <circle cx="25" cy="35" r="12" fill="var(--primary)"/>
+    <circle cx="45" cy="22" r="10" fill="var(--primary)"/>
+    <circle cx="65" cy="22" r="10" fill="var(--primary)"/>
+    <circle cx="80" cy="38" r="11" fill="var(--primary)"/>
+  </svg>
+  <svg class="geo paw" style="width:200px;top:20vh;left:35vw;" data-speed="0.07" viewBox="0 0 100 100">
+    <circle cx="50" cy="65" r="25" fill="var(--accent)"/>
+    <circle cx="25" cy="35" r="12" fill="var(--accent)"/>
+    <circle cx="45" cy="22" r="10" fill="var(--accent)"/>
+    <circle cx="65" cy="22" r="10" fill="var(--accent)"/>
+    <circle cx="80" cy="38" r="11" fill="var(--accent)"/>
+  </svg>
+  <svg class="geo paw" style="width:90px;top:90vh;left:8vw;" data-speed="0.13" viewBox="0 0 100 100">
+    <circle cx="50" cy="65" r="25" fill="var(--green)"/>
+    <circle cx="25" cy="35" r="12" fill="var(--green)"/>
+    <circle cx="45" cy="22" r="10" fill="var(--green)"/>
+    <circle cx="65" cy="22" r="10" fill="var(--green)"/>
+    <circle cx="80" cy="38" r="11" fill="var(--green)"/>
+  </svg>
+</div>
+
+<!-- 네비게이션 -->
+<nav>
+  <div class="nav-logo"><span></span>멍멍 유치원</div>
+  <ul>
+    <li><a href="#programs">프로그램</a></li>
+    <li><a href="#gallery">갤러리</a></li>
+    <li><a href="#cta">오시는 길</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-vert-text">Since 2019 — Seoul</div>
+    <div class="hero-badge">강아지가 행복한 곳</div>
+    <h1 class="hero-title">
+      멍멍<br>
+      <em>유치원</em>
+    </h1>
+    <p class="hero-sub">
+      우리 아이의 첫 사회생활을 함께합니다.<br>
+      놀이, 학습, 사랑 — 모두 여기 있어요.
+    </p>
+    <a href="#programs" class="hero-cta">프로그램 보기</a>
+  </div>
+  <div class="hero-right">
+    <img src="https://loremflickr.com/900/1200/dog,puppy,cute" alt="귀여운 강아지">
+    <div class="hero-float-shape"></div>
+  </div>
+</section>
+
+<!-- 구분선 -->
+<div class="clip-divider"></div>
+
+<!-- 티커 -->
+<div id="tagline-bar">
+  <div class="tagline-inner">
+    <span>Happy Dogs</span><span class="ticker-dot"></span>
+    <span>Safe &amp; Fun</span><span class="ticker-dot"></span>
+    <span>전문 케어</span><span class="ticker-dot"></span>
+    <span>소규모 반</span><span class="ticker-dot"></span>
+    <span>귀여운 친구들</span><span class="ticker-dot"></span>
+    <span>Happy Dogs</span><span class="ticker-dot"></span>
+    <span>Safe &amp; Fun</span><span class="ticker-dot"></span>
+    <span>전문 케어</span><span class="ticker-dot"></span>
+    <span>소규모 반</span><span class="ticker-dot"></span>
+    <span>귀여운 친구들</span><span class="ticker-dot"></span>
+  </div>
+</div>
+
+<!-- 프로그램 -->
+<section id="programs">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Programs</div>
+      <h2 class="section-title">하루 종일<br>즐거운 하루</h2>
+    </div>
+    <div class="section-count">04</div>
+  </div>
+  <div class="programs-grid">
+    <div class="prog-card">
+      <div class="prog-shape circle"></div>
+      <div>
+        <div class="prog-num">01 — MORNING</div>
+        <h3 class="prog-title">오전 놀이반</h3>
+        <p class="prog-desc">친구들과 처음 만나 몸을 풀고, 에너지를 발산하는 활기찬 아침 시간. 소규모로 안전하게 운영됩니다.</p>
+      </div>
+      <div class="prog-time">09:00 — 12:00</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-shape triangle"></div>
+      <div>
+        <div class="prog-num">02 — AFTERNOON</div>
+        <h3 class="prog-title">자유 탐험반</h3>
+        <p class="prog-desc">넓은 실내 놀이 공간에서 냄새 탐색, 터널, 볼 놀이 등 강아지의 본능적 호기심을 마음껏 발휘하는 오후.</p>
+      </div>
+      <div class="prog-time">13:00 — 16:00</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-shape square"></div>
+      <div>
+        <div class="prog-num">03 — GROOMING</div>
+        <h3 class="prog-title">목욕 & 그루밍</h3>
+        <p class="prog-desc">전문 그루머가 부드럽게 목욕시키고 털을 정돈해 드립니다. 깨끗하고 향기롭게 돌아가요.</p>
+      </div>
+      <div class="prog-time">화·목·토 운영</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-shape square2"></div>
+      <div>
+        <div class="prog-num">04 — TRAINING</div>
+        <h3 class="prog-title">기초 훈련반</h3>
+        <p class="prog-desc">앉아·기다려·이리와 등 기초 매너를 긍정 강화 방식으로 즐겁게 배웁니다. 보호자와 함께하는 수업도 있어요.</p>
+      </div>
+      <div class="prog-time">주 2회 / 45분</div>
+    </div>
+  </div>
+</section>
+
+<!-- 통계 -->
+<section id="stats">
+  <div class="stat-item">
+    <div class="stat-shape s1"></div>
+    <div class="stat-num">5<sup>+</sup></div>
+    <div class="stat-label">운영 연수</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-shape s2"></div>
+    <div class="stat-num">280<sup>+</sup></div>
+    <div class="stat-label">졸업 강아지</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-shape s3"></div>
+    <div class="stat-num">6<sup>:</sup>1</div>
+    <div class="stat-label">강아지 : 선생님 비율</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-shape s4"></div>
+    <div class="stat-num">98<sup>%</sup></div>
+    <div class="stat-label">재등록 만족도</div>
+  </div>
+</section>
+
+<!-- 갤러리 -->
+<section id="gallery">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">행복한 순간들</h2>
+    </div>
+    <div class="section-count">08</div>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item">
+      <img src="https://loremflickr.com/800/1000/dog,golden,retriever" alt="강아지 1">
+      <div class="g-overlay">골든 레트리버반</div>
+    </div>
+    <div class="g-item">
+      <img src="https://loremflickr.com/600/400/puppy,play,happy" alt="강아지 2">
+      <div class="g-overlay">자유 놀이 시간</div>
+    </div>
+    <div class="g-item">
+      <img src="https://loremflickr.com/600/400/dog,cute,small" alt="강아지 3">
+      <div class="g-overlay">소형견 전용반</div>
+    </div>
+    <div class="g-item">
+      <img src="https://loremflickr.com/700/400/puppy,outdoor,run" alt="강아지 4">
+      <div class="g-overlay">바깥 산책 시간</div>
+    </div>
+    <div class="g-item">
+      <img src="https://loremflickr.com/500/400/dog,friend,together" alt="강아지 5">
+      <div class="g-overlay">친구 사귀기</div>
+    </div>
+    <div class="g-item">
+      <img src="https://loremflickr.com/600/400/dog,bath,clean" alt="강아지 6">
+      <div class="g-overlay">목욕 & 그루밍</div>
+    </div>
+    <div class="g-item">
+      <img src="https://loremflickr.com/700/400/puppy,training,learn" alt="강아지 7">
+      <div class="g-overlay">훈련 클래스</div>
+    </div>
+    <div class="g-item">
+      <img src="https://loremflickr.com/600/400/dog,sleep,rest,puppy" alt="강아지 8">
+      <div class="g-overlay">낮잠 시간</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-deco-circle"></div>
+  <div class="cta-deco-tri"></div>
+
+  <div class="cta-left">
+    <h2>우리 아이를<br>데려오세요</h2>
+    <p>처음 방문은 무료 체험 1일권을 드립니다.<br>아이에게 딱 맞는 프로그램을 함께 찾아드려요.</p>
+    <br><br>
+    <a href="tel:02-1234-5678" class="cta-btn">전화 상담하기</a>
+  </div>
+
+  <div class="cta-right">
+    <div class="cta-info-item">
+      <div class="cta-icon tri"></div>
+      <div>
+        <strong>Location</strong>
+        <span>서울시 마포구 망원동 123-45<br>지하철 6호선 망원역 2번 출구 도보 5분</span>
+      </div>
+    </div>
+    <div class="cta-info-item">
+      <div class="cta-icon circ"></div>
+      <div>
+        <strong>Hours</strong>
+        <span>월 – 금  08:00 – 19:00<br>토  09:00 – 17:00  /  일요일 휴무</span>
+      </div>
+    </div>
+    <div class="cta-info-item">
+      <div class="cta-icon sq"></div>
+      <div>
+        <strong>Contact</strong>
+        <span>02-1234-5678<br>@woof_kindergarten (인스타그램)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div>
+    <div class="footer-logo">멍멍 유치원</div>
+    <p class="footer-desc">강아지가 진심으로 행복한<br>그 하루를 만들어 드립니다.</p>
+  </div>
+  <div class="footer-right">
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li>오전 놀이반</li>
+        <li>자유 탐험반</li>
+        <li>목욕 & 그루밍</li>
+        <li>기초 훈련반</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li>이용 안내</li>
+        <li>예약하기</li>
+        <li>자주 묻는 질문</li>
+        <li>오시는 길</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 멍멍 유치원. All rights reserved.</span>
+    <span>Bauhaus — Woof Kindergarten</span>
+  </div>
+</footer>
+
+<script>
+  // ── 진행 바 ──
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (scrollTop / scrollHeight * 100) + '%';
+  });
+
+  // ── 기하 도형 패럴랙스 ──
+  const geos = document.querySelectorAll('.geo');
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 60;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 60;
+  });
+
+  function animateGeos() {
+    currentX += (mouseX - currentX) * 0.06;
+    currentY += (mouseY - currentY) * 0.06;
+
+    geos.forEach(geo => {
+      const speed = parseFloat(geo.dataset.speed) || 0.08;
+      const tx = currentX * speed * 10;
+      const ty = currentY * speed * 10;
+      const base = geo.style.transform.replace(/translate\([^)]*\)\s*/g, '').replace(/translateX[^)]*\)\s*/g, '');
+      geo.style.transform = `translate(${tx}px, ${ty}px) ${base}`;
+    });
+
+    requestAnimationFrame(animateGeos);
+  }
+  animateGeos();
+
+  // ── 숫자 카운트 업 (stats 진입 시) ──
+  const statNums = document.querySelectorAll('.stat-num');
+  const targets = [5, 280, 6, 98];
+  const suffixes = ['+', '+', ':1', '%'];
+  let counted = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !counted) {
+        counted = true;
+        statNums.forEach((el, i) => {
+          const target = targets[i];
+          const suffix = suffixes[i];
+          let count = 0;
+          const step = Math.ceil(target / 40);
+          const timer = setInterval(() => {
+            count = Math.min(count + step, target);
+            if (i === 2) {
+              el.innerHTML = count + '<sup>:1</sup>';
+            } else if (i === 0) {
+              el.innerHTML = count + '<sup>+</sup>';
+            } else if (i === 1) {
+              el.innerHTML = count + '<sup>+</sup>';
+            } else {
+              el.innerHTML = count + '<sup>%</sup>';
+            }
+            if (count >= target) clearInterval(timer);
+          }, 30);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsSection = document.getElementById('stats');
+  if (statsSection) observer.observe(statsSection);
+
+  // ── 프로그램 카드 진입 애니메이션 ──
+  const cards = document.querySelectorAll('.prog-card');
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, i * 80);
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    cardObserver.observe(card);
+  });
+
+  // ── 갤러리 아이템 진입 ──
+  const gItems = document.querySelectorAll('.g-item');
+  const gObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'scale(1)';
+        gObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  gItems.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'scale(0.95)';
+    gObserver.observe(item);
+  });
+</script>
+</body>
+</html>

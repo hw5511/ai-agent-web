@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>우리 강아지 소개</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Nunito:wght@400;700;900&family=Jua&family=Gamja+Flower&display=swap" rel="stylesheet" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    :root {
+      --color-bg: #fff0f6;
+      --color-primary: #c0507a;
+      --color-accent: #f472b6;
+      --color-text: #111111;
+      --color-card: #ffffff;
+      --color-soft: #fce4f0;
+      --font-title: 'Quicksand', 'Jua', sans-serif;
+      --font-body: 'Nunito', 'Gamja Flower', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s linear;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 4px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0.8rem 2rem;
+      background: rgba(255, 240, 246, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(192, 80, 122, 0.1);
+    }
+
+    nav a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bubbles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float-up 8s ease-in-out infinite;
+    }
+
+    .bubble:nth-child(1)  { width: 120px; height: 120px; background: var(--color-accent); left: 8%;  bottom: -60px; animation-delay: 0s;   animation-duration: 9s;  }
+    .bubble:nth-child(2)  { width:  80px; height:  80px; background: var(--color-primary); left: 20%; bottom: -40px; animation-delay: 1.5s; animation-duration: 7s;  }
+    .bubble:nth-child(3)  { width: 160px; height: 160px; background: var(--color-accent); left: 40%; bottom: -80px; animation-delay: 3s;   animation-duration: 11s; }
+    .bubble:nth-child(4)  { width:  60px; height:  60px; background: var(--color-primary); left: 65%; bottom: -30px; animation-delay: 0.8s; animation-duration: 6s;  }
+    .bubble:nth-child(5)  { width: 100px; height: 100px; background: var(--color-accent); left: 80%; bottom: -50px; animation-delay: 2s;   animation-duration: 8s;  }
+
+    @keyframes float-up {
+      0%   { transform: translateY(0) scale(1); }
+      50%  { transform: translateY(-60vh) scale(1.1); }
+      100% { transform: translateY(-110vh) scale(0.9); opacity: 0; }
+    }
+
+    .paw-badge {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: bounce 2s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title span {
+      color: var(--color-accent);
+      display: inline-block;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50%       { transform: rotate(3deg); }
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--color-primary);
+      opacity: 0.75;
+      margin-top: 1rem;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-scroll-hint {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .hero-scroll-hint span {
+      font-size: 0.8rem;
+      color: var(--color-primary);
+      font-family: var(--font-title);
+    }
+
+    .scroll-arrow {
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid var(--color-primary);
+      border-bottom: 2px solid var(--color-primary);
+      transform: rotate(45deg);
+      animation: arrow-down 1.5s ease-in-out infinite;
+    }
+
+    @keyframes arrow-down {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-badge {
+      display: block;
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== SLIDER SECTION ===== */
+    #slider-section {
+      padding-top: 3rem;
+    }
+
+    .swiper {
+      width: 100%;
+      padding-bottom: 3rem !important;
+    }
+
+    .swiper-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .slide-frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(192, 80, 122, 0.2);
+      border: 4px solid var(--color-soft);
+      cursor: grab;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .slide-frame:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(192, 80, 122, 0.3);
+    }
+
+    .slide-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .slide-caption {
+      font-family: var(--font-title);
+      font-size: 1rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .swiper-pagination-bullet {
+      background: var(--color-primary) !important;
+      opacity: 0.4 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+      opacity: 1 !important;
+      background: var(--color-accent) !important;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--color-primary) !important;
+    }
+
+    /* ===== PROFILE SECTION ===== */
+    #profile {
+      padding-top: 2rem;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .profile-card {
+      background: var(--color-card);
+      border-radius: 24px;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 4px 20px rgba(192, 80, 122, 0.1);
+      border: 2px solid var(--color-soft);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(192, 80, 122, 0.2);
+    }
+
+    .profile-icon {
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .profile-label {
+      font-family: var(--font-title);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-value {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-desc {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* ===== SKILLS SECTION ===== */
+    #skills {
+      padding-top: 2rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      background: var(--color-card);
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(192, 80, 122, 0.1);
+      border: 2px solid var(--color-soft);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(192, 80, 122, 0.22);
+    }
+
+    .skill-icon {
+      font-size: 2.4rem;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .skill-name {
+      font-family: var(--font-title);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-desc {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* ===== SNACKS SECTION ===== */
+    #snacks {
+      padding-top: 2rem;
+      padding-bottom: 6rem;
+    }
+
+    .snacks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .snack-item {
+      background: var(--color-card);
+      border-radius: 16px;
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      box-shadow: 0 3px 14px rgba(192, 80, 122, 0.1);
+      border: 2px solid var(--color-soft);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .snack-item:hover {
+      transform: translateX(6px);
+      box-shadow: 0 6px 22px rgba(192, 80, 122, 0.2);
+    }
+
+    .snack-rank {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      min-width: 2.5rem;
+      text-align: center;
+    }
+
+    .snack-emoji {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .snack-info {
+      flex: 1;
+    }
+
+    .snack-name {
+      font-family: var(--font-title);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.15rem;
+    }
+
+    .snack-note {
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    .snack-love {
+      color: var(--color-accent);
+      font-size: 1.2rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--color-soft);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 0.9rem;
+      color: var(--color-primary);
+      font-family: var(--font-title);
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      nav {
+        gap: 1rem;
+        font-size: 0.85rem;
+      }
+
+      .profile-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <nav>
+    <a href="#hero">홈</a>
+    <a href="#slider-section">사진</a>
+    <a href="#profile">소개</a>
+    <a href="#skills">특기</a>
+    <a href="#snacks">간식</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bubbles">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
+    <div class="paw-badge">🐾</div>
+    <h1 class="hero-title">우리 집 최고 스타,<br><span>몽이</span> 소개합니다!</h1>
+    <p class="hero-sub">세상에서 제일 귀엽고 사랑스러운 나의 강아지</p>
+    <div class="hero-scroll-hint">
+      <span>스크롤해서 더 보기</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- SLIDER -->
+  <section id="slider-section" style="max-width: 800px;">
+    <h2 class="section-title">포토 갤러리</h2>
+    <span class="section-badge">📸</span>
+
+    <div class="swiper mySwiper" data-aos="fade-up">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="slide-frame">
+            <img src="https://loremflickr.com/800/600/dog,puppy,cute" alt="강아지 사진 1" />
+          </div>
+          <p class="slide-caption">산책 나온 날</p>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="slide-frame">
+            <img src="https://loremflickr.com/800/600/dog,fluffy,pet" alt="강아지 사진 2" />
+          </div>
+          <p class="slide-caption">낮잠 자는 중</p>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="slide-frame">
+            <img src="https://loremflickr.com/800/600/puppy,happy,play" alt="강아지 사진 3" />
+          </div>
+          <p class="slide-caption">장난감 대회 1등</p>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="slide-frame">
+            <img src="https://loremflickr.com/800/600/dog,small,cute" alt="강아지 사진 4" />
+          </div>
+          <p class="slide-caption">목욕 후 폭신폭신</p>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="slide-frame">
+            <img src="https://loremflickr.com/800/600/dog,park,outdoor" alt="강아지 사진 5" />
+          </div>
+          <p class="slide-caption">공원 나들이</p>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile">
+    <h2 class="section-title">강아지 프로필</h2>
+    <span class="section-badge">🐶</span>
+
+    <div class="profile-grid">
+
+      <div class="profile-card" data-aos="fade-up" data-aos-delay="0">
+        <span class="profile-icon">🏷</span>
+        <p class="profile-label">이름</p>
+        <p class="profile-value">몽이</p>
+        <p class="profile-desc">보송보송한 털에서 영감을 받은 이름이에요. 처음 봤을 때부터 몽이가 딱 어울렸죠!</p>
+      </div>
+
+      <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
+        <span class="profile-icon">🐩</span>
+        <p class="profile-label">품종</p>
+        <p class="profile-value">말티즈 믹스</p>
+        <p class="profile-desc">순백의 솜사탕 같은 털이 자랑이에요. 눈이 마주치면 바로 녹아버린답니다.</p>
+      </div>
+
+      <div class="profile-card" data-aos="fade-up" data-aos-delay="200">
+        <span class="profile-icon">🎂</span>
+        <p class="profile-label">생일</p>
+        <p class="profile-value">2022년 5월 3일</p>
+        <p class="profile-desc">봄에 태어난 봄 강아지예요. 매년 케이크 사진 찍는 게 우리 가족 전통이에요!</p>
+      </div>
+
+      <div class="profile-card" data-aos="fade-up" data-aos-delay="300">
+        <span class="profile-icon">💕</span>
+        <p class="profile-label">성격</p>
+        <p class="profile-value">애교쟁이 + 겁쟁이</p>
+        <p class="profile-desc">사람은 너무너무 좋아하지만 청소기 소리에는 무조건 이불 속으로 숨어요.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2 class="section-title">몽이의 특기</h2>
+    <span class="section-badge">🌟</span>
+
+    <div class="skills-grid">
+
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="0">
+        <span class="skill-icon">🤸</span>
+        <p class="skill-name">앉아 / 엎드려</p>
+        <p class="skill-desc">간식만 보이면 0.1초 만에 완벽한 자세를 취해요</p>
+      </div>
+
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="80">
+        <span class="skill-icon">🐾</span>
+        <p class="skill-name">악수 & 하이파이브</p>
+        <p class="skill-desc">오른손 왼손 모두 가능! 양손잡이 특기견이에요</p>
+      </div>
+
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="160">
+        <span class="skill-icon">💤</span>
+        <p class="skill-name">낮잠 마스터</p>
+        <p class="skill-desc">하루 14시간 수면. 어디서든 5초 만에 잠들어요</p>
+      </div>
+
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="240">
+        <span class="skill-icon">🕺</span>
+        <p class="skill-name">빙글빙글 댄스</p>
+        <p class="skill-desc">신 나는 노래가 나오면 꼬리 흔들며 제자리 회전!</p>
+      </div>
+
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="320">
+        <span class="skill-icon">👀</span>
+        <p class="skill-name">초롱초롱 눈빛 공격</p>
+        <p class="skill-desc">눈만 마주쳐도 간식이 나오게 만드는 마법의 눈빛</p>
+      </div>
+
+      <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
+        <span class="skill-icon">🎾</span>
+        <p class="skill-name">공 가져오기</p>
+        <p class="skill-desc">공을 던지면 반드시 회수해오는 100% 성공률</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SNACKS -->
+  <section id="snacks">
+    <h2 class="section-title">좋아하는 간식 순위</h2>
+    <span class="section-badge">🍖</span>
+
+    <div class="snacks-list">
+
+      <div class="snack-item" data-aos="fade-right" data-aos-delay="0">
+        <span class="snack-rank">1</span>
+        <span class="snack-emoji">🥩</span>
+        <div class="snack-info">
+          <p class="snack-name">닭가슴살 져키</p>
+          <p class="snack-note">보이는 순간 온 집안을 뛰어다닐 정도로 좋아해요</p>
+        </div>
+        <span class="snack-love">♥♥♥</span>
+      </div>
+
+      <div class="snack-item" data-aos="fade-right" data-aos-delay="80">
+        <span class="snack-rank">2</span>
+        <span class="snack-emoji">🐟</span>
+        <div class="snack-info">
+          <p class="snack-name">연어 트릿</p>
+          <p class="snack-note">냄새가 좀 나도 괜찮아요, 그 맛에 홀딱 빠진 몽이</p>
+        </div>
+        <span class="snack-love">♥♥♥</span>
+      </div>
+
+      <div class="snack-item" data-aos="fade-right" data-aos-delay="160">
+        <span class="snack-rank">3</span>
+        <span class="snack-emoji">🧀</span>
+        <div class="snack-info">
+          <p class="snack-name">강아지 치즈 스틱</p>
+          <p class="snack-note">한 번 맛 보더니 눈에 불을 켜고 달려들어요</p>
+        </div>
+        <span class="snack-love">♥♥</span>
+      </div>
+
+      <div class="snack-item" data-aos="fade-right" data-aos-delay="240">
+        <span class="snack-rank">4</span>
+        <span class="snack-emoji">🦴</span>
+        <div class="snack-info">
+          <p class="snack-name">덴탈 껌</p>
+          <p class="snack-note">이빨도 닦고 간식도 먹고! 일석이조 최애 아이템</p>
+        </div>
+        <span class="snack-love">♥♥</span>
+      </div>
+
+      <div class="snack-item" data-aos="fade-right" data-aos-delay="320">
+        <span class="snack-rank">5</span>
+        <span class="snack-emoji">🥕</span>
+        <div class="snack-info">
+          <p class="snack-name">생당근 스틱</p>
+          <p class="snack-note">씹히는 식감이 좋은지 아삭아삭 혼자 다 먹어요</p>
+        </div>
+        <span class="snack-love">♥</span>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with ♥ for 몽이 &nbsp;|&nbsp; 세상에서 제일 귀여운 강아지</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // AOS 초기화
+    AOS.init({ duration: 600, once: true, offset: 60 });
+
+    // Swiper 초기화
+    const swiper = new Swiper('.mySwiper', {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 24,
+      grabCursor: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1.2,
+          centeredSlides: true,
+        },
+      },
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+    });
+
+    // 스크롤 진행 바
+    const progressBar = document.getElementById('progress-bar');
+    let rafId = null;
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      rafId = null;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(updateProgress);
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

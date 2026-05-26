@@ -9,302 +9,617 @@
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#171717;background:#f9fafb;-webkit-font-smoothing:antialiased}
-  header{padding:64px 32px 36px;max-width:1200px;margin:0 auto}
+  header{padding:64px 32px 28px;max-width:1240px;margin:0 auto}
   .badge{display:inline-block;background:#171717;color:#fff;font-size:12px;font-weight:700;letter-spacing:.05em;padding:5px 12px;border-radius:12px}
   h1{font-size:38px;font-weight:700;letter-spacing:-.02em;margin:18px 0 10px}
-  header p{font-size:17px;color:#6b7280;line-height:1.6;max-width:680px}
+  header p{font-size:17px;color:#6b7280;line-height:1.6;max-width:720px}
   .green{color:#16a34a;font-weight:600}
-  main{max-width:1200px;margin:0 auto;padding:0 32px 80px}
-  section{margin-top:48px}
+  nav{position:sticky;top:0;z-index:10;background:rgba(249,250,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 32px}
+  nav .wrap{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px}
+  nav a{font-size:13px;color:#374151;text-decoration:none;border:1px solid #e5e7eb;background:#fff;padding:6px 12px;border-radius:999px;transition:.12s}
+  nav a:hover{border-color:#171717}
+  nav a b{color:#16a34a;font-weight:700;margin-left:4px}
+  main{max-width:1240px;margin:0 auto;padding:0 32px 80px}
+  section{margin-top:52px;scroll-margin-top:64px}
   .sec-h{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid #e5e7eb;padding-bottom:14px;margin-bottom:8px}
   .sec-h h2{font-size:24px;font-weight:700;letter-spacing:-.01em}
   .sec-h span{font-size:14px;color:#9ca3af}
-  .grp{font-size:14px;font-weight:600;color:#9ca3af;letter-spacing:.04em;margin:28px 0 14px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease}
+  .grp{font-size:14px;font-weight:600;color:#9ca3af;letter-spacing:.04em;margin:26px 0 12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+  .card{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
   .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.08);border-color:#d1d5db}
   .thumb{aspect-ratio:16/9;background:#f3f4f6;overflow:hidden;display:flex;align-items:center;justify-content:center}
   .thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
   .noimg{color:#9ca3af;font-size:13px}
-  .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
+  .meta{padding:13px 15px 15px;display:flex;flex-direction:column;gap:5px}
   .tag{font-size:12px;color:#9ca3af;font-weight:500}
   .title{font-size:15px;font-weight:600;line-height:1.4}
-  footer{max-width:1200px;margin:0 auto;padding:32px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:13px;line-height:1.7}
+  footer{max-width:1240px;margin:0 auto;padding:32px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:13px;line-height:1.7}
 </style>
 </head>
 <body>
 <header>
   <span class="badge">CATALOG · 임시</span>
   <h1>AI 에이전트 웹 — 예제 카탈로그</h1>
-  <p>수업 결과물로 재활용할 만한 완성 예제 모음이에요. 카드를 클릭하면 <span class="green">실제 페이지가 새 탭으로 열려요.</span> 마음에 드는 걸 골라주시면 상담자료 "수업 결과물 예시"에 넣을게요.</p>
+  <p>아카이브의 모든 예제를 모았어요 (총 <span class="green">121개</span>). 카드를 클릭하면 실제 페이지가 새 탭으로 열려요. 수업 결과물 예시로 쓸 것을 골라주세요.</p>
 </header>
+<nav><div class="wrap"><a href="#themes">완성 테마 랜딩 <b>24</b></a><a href="#demos">효과·인터랙션 데모 <b>9</b></a><a href="#awww">Awwwards 스타일 클론 <b>6</b></a><a href="#interactions">인터랙션 실습 예제 <b>13</b></a><a href="#intro">자기소개·포트폴리오 생성 <b>24</b></a><a href="#bench">프롬프트 벤치마크 (SPARK) <b>45</b></a></div></nav>
 <main>
-  <section>
-    <div class="sec-h"><h2>완성 테마 랜딩</h2><span>24개 · Lesson별 3안</span></div>
+  <section id="themes">
+    <div class="sec-h"><h2>완성 테마 랜딩</h2><span>24개 · Lesson별 3안 — 가장 추천하는 결과물 예시</span></div>
     <h3 class="grp">Lesson 1 · 히어로/랜딩 기본</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson1_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson1_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L1_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">1-A · 히어로/랜딩 기본</span>
-          <span class="title">봄날 플라워 — Spring Flower Studio</span>
-        </div>
+        <div class="meta"><span class="tag">1-A · 히어로/랜딩 기본</span><span class="title">봄날 플라워 — Spring Flower Studio</span></div>
       </a>
-      <a class="card" href="ex/lesson1_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson1_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L1_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">1-B · 히어로/랜딩 기본</span>
-          <span class="title">아뜰리에 파린 — 홈베이킹 클래스</span>
-        </div>
+        <div class="meta"><span class="tag">1-B · 히어로/랜딩 기본</span><span class="title">아뜰리에 파린 — 홈베이킹 클래스</span></div>
       </a>
-      <a class="card" href="ex/lesson1_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson1_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L1_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">1-C · 히어로/랜딩 기본</span>
-          <span class="title">냥이네 — 동네 고양이 카페</span>
-        </div>
+        <div class="meta"><span class="tag">1-C · 히어로/랜딩 기본</span><span class="title">냥이네 — 동네 고양이 카페</span></div>
       </a>
     </div>
     <h3 class="grp">Lesson 2 · 섹션 구조와 카드</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson2_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson2_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L2_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">2-A · 섹션 구조와 카드</span>
-          <span class="title">Atelier Blanc — Luxury Interior Studio</span>
-        </div>
+        <div class="meta"><span class="tag">2-A · 섹션 구조와 카드</span><span class="title">Atelier Blanc — Luxury Interior Studio</span></div>
       </a>
-      <a class="card" href="ex/lesson2_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson2_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L2_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">2-B · 섹션 구조와 카드</span>
-          <span class="title">페이퍼스케이프 — 독립 서점</span>
-        </div>
+        <div class="meta"><span class="tag">2-B · 섹션 구조와 카드</span><span class="title">페이퍼스케이프 — 독립 서점</span></div>
       </a>
-      <a class="card" href="ex/lesson2_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson2_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L2_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">2-C · 섹션 구조와 카드</span>
-          <span class="title">그린루트 — Vegan Skincare</span>
-        </div>
+        <div class="meta"><span class="tag">2-C · 섹션 구조와 카드</span><span class="title">그린루트 — Vegan Skincare</span></div>
       </a>
     </div>
     <h3 class="grp">Lesson 3 · 색·타이포 무드</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson3_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson3_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L3_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">3-A · 색·타이포 무드</span>
-          <span class="title">ARKH Studio</span>
-        </div>
+        <div class="meta"><span class="tag">3-A · 색·타이포 무드</span><span class="title">ARKH Studio</span></div>
       </a>
-      <a class="card" href="ex/lesson3_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson3_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L3_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">3-B · 색·타이포 무드</span>
-          <span class="title">WANDERLUST — 여행 매거진</span>
-        </div>
+        <div class="meta"><span class="tag">3-B · 색·타이포 무드</span><span class="title">WANDERLUST — 여행 매거진</span></div>
       </a>
-      <a class="card" href="ex/lesson3_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson3_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L3_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">3-C · 색·타이포 무드</span>
-          <span class="title">VOID Gallery — 전시 소개</span>
-        </div>
+        <div class="meta"><span class="tag">3-C · 색·타이포 무드</span><span class="title">VOID Gallery — 전시 소개</span></div>
       </a>
     </div>
     <h3 class="grp">Lesson 4 · 이미지·갤러리</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson4_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson4_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L4_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">4-A · 이미지·갤러리</span>
-          <span class="title">YEON — Graphic Designer Portfolio</span>
-        </div>
+        <div class="meta"><span class="tag">4-A · 이미지·갤러리</span><span class="title">YEON — Graphic Designer Portfolio</span></div>
       </a>
-      <a class="card" href="ex/lesson4_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson4_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L4_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">4-B · 이미지·갤러리</span>
-          <span class="title">Vinyl Archive — Classic Records Showroom</span>
-        </div>
+        <div class="meta"><span class="tag">4-B · 이미지·갤러리</span><span class="title">Vinyl Archive — Classic Records Showroom</span></div>
       </a>
-      <a class="card" href="ex/lesson4_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson4_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L4_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">4-C · 이미지·갤러리</span>
-          <span class="title">AXIOM — Creative Agency</span>
-        </div>
+        <div class="meta"><span class="tag">4-C · 이미지·갤러리</span><span class="title">AXIOM — Creative Agency</span></div>
       </a>
     </div>
     <h3 class="grp">Lesson 5 · 폼·연락처</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson5_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson5_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L5_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">5-A · 폼·연락처</span>
-          <span class="title">NextMind — AI의 다음 국면</span>
-        </div>
+        <div class="meta"><span class="tag">5-A · 폼·연락처</span><span class="title">NextMind — AI의 다음 국면</span></div>
       </a>
-      <a class="card" href="ex/lesson5_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson5_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L5_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">5-B · 폼·연락처</span>
-          <span class="title">ShieldCore — Cybersecurity</span>
-        </div>
+        <div class="meta"><span class="tag">5-B · 폼·연락처</span><span class="title">ShieldCore — Cybersecurity</span></div>
       </a>
-      <a class="card" href="ex/lesson5_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson5_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L5_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">5-C · 폼·연락처</span>
-          <span class="title">Stardust — An Indie Game</span>
-        </div>
+        <div class="meta"><span class="tag">5-C · 폼·연락처</span><span class="title">Stardust — An Indie Game</span></div>
       </a>
     </div>
     <h3 class="grp">Lesson 6 · 포트폴리오</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson6_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson6_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L6_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">6-A · 포트폴리오</span>
-          <span class="title">고요 — 마음챙김 명상 앱</span>
-        </div>
+        <div class="meta"><span class="tag">6-A · 포트폴리오</span><span class="title">고요 — 마음챙김 명상 앱</span></div>
       </a>
-      <a class="card" href="ex/lesson6_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson6_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L6_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">6-B · 포트폴리오</span>
-          <span class="title">별빛 천문대 — 밤하늘을 만나는 곳</span>
-        </div>
+        <div class="meta"><span class="tag">6-B · 포트폴리오</span><span class="title">별빛 천문대 — 밤하늘을 만나는 곳</span></div>
       </a>
-      <a class="card" href="ex/lesson6_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson6_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L6_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">6-C · 포트폴리오</span>
-          <span class="title">Moonlight Jazz Bar — 루프탑 재즈바</span>
-        </div>
+        <div class="meta"><span class="tag">6-C · 포트폴리오</span><span class="title">Moonlight Jazz Bar — 루프탑 재즈바</span></div>
       </a>
     </div>
     <h3 class="grp">Lesson 7 · 애니메이션·인터랙션</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson7_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson7_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L7_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">7-A · 애니메이션·인터랙션</span>
-          <span class="title">마음쉼 — 정신건강 상담 클리닉</span>
-        </div>
+        <div class="meta"><span class="tag">7-A · 애니메이션·인터랙션</span><span class="title">마음쉼 — 정신건강 상담 클리닉</span></div>
       </a>
-      <a class="card" href="ex/lesson7_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson7_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L7_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">7-B · 애니메이션·인터랙션</span>
-          <span class="title">흙과 손 — 로컬 파머스 마켓</span>
-        </div>
+        <div class="meta"><span class="tag">7-B · 애니메이션·인터랙션</span><span class="title">흙과 손 — 로컬 파머스 마켓</span></div>
       </a>
-      <a class="card" href="ex/lesson7_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson7_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L7_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">7-C · 애니메이션·인터랙션</span>
-          <span class="title">STITCH — 수제 가죽공방</span>
-        </div>
+        <div class="meta"><span class="tag">7-C · 애니메이션·인터랙션</span><span class="title">STITCH — 수제 가죽공방</span></div>
       </a>
     </div>
     <h3 class="grp">Lesson 8 · 전체 완성 랜딩</h3>
     <div class="grid">
-      <a class="card" href="ex/lesson8_A.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson8_A.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L8_A.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">8-A · 전체 완성 랜딩</span>
-          <span class="title">봄날 플라워 — Blossom Day Flower</span>
-        </div>
+        <div class="meta"><span class="tag">8-A · 전체 완성 랜딩</span><span class="title">봄날 플라워 — Blossom Day Flower</span></div>
       </a>
-      <a class="card" href="ex/lesson8_B.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson8_B.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L8_B.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">8-B · 전체 완성 랜딩</span>
-          <span class="title">밀가루 &amp; 버터 — 홈 베이킹 클래스</span>
-        </div>
+        <div class="meta"><span class="tag">8-B · 전체 완성 랜딩</span><span class="title">밀가루 &amp; 버터 — 홈 베이킹 클래스</span></div>
       </a>
-      <a class="card" href="ex/lesson8_C.html" target="_blank" rel="noopener">
+      <a class="card" href="ex/themes/lesson8_C.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/L8_C.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">8-C · 전체 완성 랜딩</span>
-          <span class="title">냥이네 — 고양이 카페</span>
-        </div>
+        <div class="meta"><span class="tag">8-C · 전체 완성 랜딩</span><span class="title">냥이네 — 고양이 카페</span></div>
       </a>
     </div>
   </section>
-  <section>
-    <div class="sec-h"><h2>효과·인터랙션 데모</h2><span>9종</span></div>
+  <section id="demos">
+    <div class="sec-h"><h2>효과·인터랙션 데모</h2><span>9개 · 단일 효과를 보여주는 미니 데모</span></div>
     <div class="grid">
       <a class="card" href="ex/demos/01_scroll_gallery/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/scroll_gallery.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">스크롤 카드 스택 갤러리</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">스크롤 카드 스택 갤러리</span></div>
       </a>
       <a class="card" href="ex/demos/02_word_by_word/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/word_by_word.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">단어별 텍스트 등장</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">단어별 텍스트 등장</span></div>
       </a>
       <a class="card" href="ex/demos/03_card_shuffle/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/card_shuffle.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">카드 펼침(FAN) 셔플</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">카드 펼침(FAN) 셔플</span></div>
       </a>
       <a class="card" href="ex/demos/04_stacking_images/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/stacking_images.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">쌓이는 이미지 스택</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">쌓이는 이미지 스택</span></div>
       </a>
       <a class="card" href="ex/demos/05_infinite_grid/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/infinite_grid.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">무한 드래그 그리드</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">무한 드래그 그리드</span></div>
       </a>
       <a class="card" href="ex/demos/06_test_gsap/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/test_gsap.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">GSAP 스크롤 트리거</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">GSAP 스크롤 트리거</span></div>
       </a>
       <a class="card" href="ex/demos/07_test_swiper/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/test_swiper.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">Swiper 커버플로우</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">Swiper 커버플로우</span></div>
       </a>
       <a class="card" href="ex/demos/08_test_aos/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/test_aos.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">AOS 등장 효과</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">AOS 등장 효과</span></div>
       </a>
       <a class="card" href="ex/demos/14_mouse_follow/index.html" target="_blank" rel="noopener">
         <div class="thumb"><img loading="lazy" src="thumbs/mouse_follow.png" alt=""></div>
-        <div class="meta">
-          <span class="tag">효과 데모</span>
-          <span class="title">마우스 패럴랙스</span>
-        </div>
+        <div class="meta"><span class="tag">효과 데모</span><span class="title">마우스 패럴랙스</span></div>
+      </a>
+    </div>
+  </section>
+  <section id="awww">
+    <div class="sec-h"><h2>Awwwards 스타일 클론</h2><span>6개 · 수상작 사이트를 클로드로 재현한 고퀄 예시</span></div>
+    <div class="grid">
+      <a class="card" href="ex/awww/awww_01_aupale/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/awww_awww_01_aupale.png" alt=""></div>
+        <div class="meta"><span class="tag">Awwwards 클론</span><span class="title">AUPALE VODKA — Born From The Untouched Wilderness</span></div>
+      </a>
+      <a class="card" href="ex/awww/awww_02_dulcedo/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/awww_awww_02_dulcedo.png" alt=""></div>
+        <div class="meta"><span class="tag">Awwwards 클론</span><span class="title">DULCEDO — Talent Agency</span></div>
+      </a>
+      <a class="card" href="ex/awww/awww_03_1820/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/awww_awww_03_1820.png" alt=""></div>
+        <div class="meta"><span class="tag">Awwwards 클론</span><span class="title">1820 PRODUCTIONS</span></div>
+      </a>
+      <a class="card" href="ex/awww/awww_04_griflan/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/awww_awww_04_griflan.png" alt=""></div>
+        <div class="meta"><span class="tag">Awwwards 클론</span><span class="title">Griflan — Strategy-Led Design Studio</span></div>
+      </a>
+      <a class="card" href="ex/awww/awww_05_oceanx/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/awww_awww_05_oceanx.png" alt=""></div>
+        <div class="meta"><span class="tag">Awwwards 클론</span><span class="title">OCEANX 2025 — A Year of Discovery</span></div>
+      </a>
+      <a class="card" href="ex/awww/awww_06_lightweight/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/awww_awww_06_lightweight.png" alt=""></div>
+        <div class="meta"><span class="tag">Awwwards 클론</span><span class="title">Lightweight — The Evolution of Performance</span></div>
+      </a>
+    </div>
+  </section>
+  <section id="interactions">
+    <div class="sec-h"><h2>인터랙션 실습 예제</h2><span>13개 · 커서·스크롤·3D 등 효과 단위 실습</span></div>
+    <div class="grid">
+      <a class="card" href="ex/interactions/lesson1_ex1/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson1_ex1.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Magnetic Button + Custom Cursor</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson1_ex2/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson1_ex2.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Flip Card Demo</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson1_ex3/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson1_ex3.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Spotlight Effect</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson2_ex1/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson2_ex1.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Horizontal Scroll Experience</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson2_ex2/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson2_ex2.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Scroll Text Color Reveal</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson2_ex3/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson2_ex3.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson3_ex1/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson3_ex1.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">NEON.SPACE | Interactive Particle</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson3_ex2/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson3_ex2.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">DAMAGED HELMET — Three.js 3D Viewer</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson3_ex3/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson3_ex3.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">VANTA.js - Interactive Backgrounds</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson3_ex4/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson3_ex4.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">CONSTELLATION</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson4_ex1/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson4_ex1.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Hero Section</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson4_ex2/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson4_ex2.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/interactions/lesson4_ex3/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/int_lesson4_ex3.png" alt=""></div>
+        <div class="meta"><span class="tag">인터랙션 실습</span><span class="title">학생 소개 페이지</span></div>
+      </a>
+    </div>
+  </section>
+  <section id="intro">
+    <div class="sec-h"><h2>자기소개·포트폴리오 생성</h2><span>24개 · 같은 과제를 프롬프트 버전(v1~v5)별로 생성한 비교본</span></div>
+    <h3 class="grp">v5 (최신)</h3>
+    <div class="grid">
+      <a class="card" href="ex/intro_tests/v5_test_A/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_A.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v5_test_B/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_B.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">My Music World</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v5_test_C/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_C.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">나를 소개합니다</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v5_test_D/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_D.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v5_test_E/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_E.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">Woohee Cafe - 오늘의 카페</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v5_test_F/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_F.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">My Travel Story</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v5_test_G/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_G.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">우리 강아지 소개</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v5_test_canvas/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v5_test_canvas.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">감성 드로잉</span></div>
+      </a>
+    </div>
+    <h3 class="grp">v1</h3>
+    <div class="grid">
+      <a class="card" href="ex/intro_tests/v1_test_A/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v1_test_A.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">PORTFOLIO — About Me</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v1_test_B/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v1_test_B.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">MY MUSIC</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v1_test_C/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v1_test_C.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">My Page</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v1_test_D/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v1_test_D.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">Portfolio</span></div>
+      </a>
+    </div>
+    <h3 class="grp">v2</h3>
+    <div class="grid">
+      <a class="card" href="ex/intro_tests/v2_test_A/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v2_test_A.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v2_test_B/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v2_test_B.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">My Music</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v2_test_C/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v2_test_C.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v2_test_D/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v2_test_D.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">Portfolio</span></div>
+      </a>
+    </div>
+    <h3 class="grp">v3</h3>
+    <div class="grid">
+      <a class="card" href="ex/intro_tests/v3_test_A/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v3_test_A.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v3_test_B/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v3_test_B.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">My Music — 음악 취미 소개</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v3_test_C/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v3_test_C.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v3_test_D/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v3_test_D.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">Portfolio</span></div>
+      </a>
+    </div>
+    <h3 class="grp">v4</h3>
+    <div class="grid">
+      <a class="card" href="ex/intro_tests/v4_test_A/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v4_test_A.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">My Introduction</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v4_test_B/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v4_test_B.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">My Music — 음악 취미 소개</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v4_test_C/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v4_test_C.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/intro_tests/v4_test_D/index.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/intro_v4_test_D.png" alt=""></div>
+        <div class="meta"><span class="tag">자기소개·포폴 생성</span><span class="title">Portfolio</span></div>
+      </a>
+    </div>
+  </section>
+  <section id="bench">
+    <div class="sec-h"><h2>프롬프트 벤치마크 (SPARK)</h2><span>45개 · 동일 주제를 SPARK 버전별로 찍은 실험본</span></div>
+    <h3 class="grp">SPARK cd</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_cd_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_cd_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK cd · A</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_cd_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_cd_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK cd · B</span><span class="title">NULL_SIGNAL — Electronic Music Producer</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_cd_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_cd_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK cd · C</span><span class="title">멍멍유치원 - 강아지들의 행복한 하루</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_cd_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_cd_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK cd · D</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_cd_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_cd_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK cd · E</span><span class="title">Maison du Grain — 오늘의 카페</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v10</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v10_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v10_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v10 · A</span><span class="title">HW — AI Developer &amp; Educator</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v10_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v10_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v10 · B</span><span class="title">VXID — Electronic Music Producer</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v10_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v10_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v10 · C</span><span class="title">퍼피랜드 - 강아지 유치원</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v10_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v10_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v10 · D</span><span class="title">Portfolio — KIM MINWOO</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v10_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v10_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v10 · E</span><span class="title">Brûlée — 오늘의 카페</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v11</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v11_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v11_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v11 · A</span><span class="title">HW — AI Developer &amp; Educator</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v11_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v11_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v11 · B</span><span class="title">NXVOID — Electronic Music Producer</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v11_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v11_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v11 · C</span><span class="title">멍멍유치원 — 우리 아이의 두 번째 집</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v11_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v11_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v11 · D</span><span class="title">Portfolio — Kim Minjun</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v11_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v11_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v11 · E</span><span class="title">Mellow Days Café — 오늘의 일상</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v12</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v12_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v12_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v12 · A</span><span class="title">소개 — HW</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v12_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v12_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v12 · B</span><span class="title">ZERO·K — PRODUCER</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v12_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v12_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v12 · C</span><span class="title">퍼피 유치원</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v12_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v12_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v12 · D</span><span class="title">KIM MINJUNE — Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v12_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v12_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v12 · E</span><span class="title">Pause · 오늘의 카페</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v5</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v5_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v5_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v5 · A</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v5_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v5_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v5 · B</span><span class="title">NXVR — Electronic Music Producer</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v5_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v5_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v5 · C</span><span class="title">멍멍 유치원 - 강아지 유치원</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v5_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v5_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v5 · D</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v5_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v5_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v5 · E</span><span class="title">Maison Brew — 오늘도 커피 한 잔</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v6</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v6_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v6_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v6 · A</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v6_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v6_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v6 · B</span><span class="title">NARIX - Electronic Music Producer</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v6_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v6_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v6 · C</span><span class="title">해피독 유치원 - Happydog Kindergarten</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v6_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v6_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v6 · D</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v6_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v6_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v6 · E</span><span class="title">Maison Cafe — 오늘의 이야기</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v7</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v7_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v7_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v7 · A</span><span class="title">About Me</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v7_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v7_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v7 · B</span><span class="title">SVOID — Electronic Music Producer</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v7_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v7_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v7 · C</span><span class="title">멍멍 유치원 — Woof Kindergarten</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v7_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v7_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v7 · D</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v7_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v7_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v7 · E</span><span class="title">Grains &amp;amp; Grounds — 카페 저널</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v8</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v8_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v8_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v8 · A</span><span class="title">HW — ABOUT ME</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v8_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v8_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v8 · B</span><span class="title">VXID — PRODUCER</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v8_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v8_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v8 · C</span><span class="title">멍멍유치원 — 강아지들의 가장 신나는 놀이터</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v8_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v8_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v8 · D</span><span class="title">Portfolio</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v8_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v8_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v8 · E</span><span class="title">Maison Doux — 오늘의 카페</span></div>
+      </a>
+    </div>
+    <h3 class="grp">SPARK v9</h3>
+    <div class="grid">
+      <a class="card" href="ex/bench/bench_v9_A.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v9_A.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v9 · A</span><span class="title">Portfolio — Web Creator</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v9_B.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v9_B.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v9 · B</span><span class="title">NEURAL — Electronic Music Producer</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v9_C.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v9_C.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v9 · C</span><span class="title">멍멍유치원 | Woof Kindergarten</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v9_D.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v9_D.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v9 · D</span><span class="title">Portfolio — Kim Minjun</span></div>
+      </a>
+      <a class="card" href="ex/bench/bench_v9_E.html" target="_blank" rel="noopener">
+        <div class="thumb"><img loading="lazy" src="thumbs/bench_v9_E.png" alt=""></div>
+        <div class="meta"><span class="tag">SPARK v9 · E</span><span class="title">Mellow Roast — 오늘의 카페</span></div>
       </a>
     </div>
   </section>
 </main>
-<footer>
-  우희 인더스트리 · AI 에이전트 웹 강의 예제 카탈로그 (임시 배포 — 선정 후 정리 예정)
-</footer>
+<footer>우희 인더스트리 · AI 에이전트 웹 강의 예제 카탈로그 (임시 배포 — 선정 후 정리 예정)</footer>
 </body>
 </html>

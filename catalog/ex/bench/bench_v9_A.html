@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Web Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: oklch(8% 0.01 260);
+  --fg: oklch(95% 0.005 260);
+  --accent: oklch(70% 0.22 140);
+  --muted: oklch(40% 0.01 260);
+  --border: oklch(18% 0.01 260);
+}
+
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Syne', 'Noto Sans KR', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid oklch(70% 0.22 140 / 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  z-index: 1000;
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.nav-links a:hover { opacity: 1; }
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+section { position: relative; z-index: 1; }
+
+/* HERO */
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  overflow: hidden;
+}
+
+.hero-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.hero-name {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(5rem, 16vw, 14rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+
+.hero-name span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%);
+  will-change: transform, opacity;
+}
+
+.hero-role {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-role-text {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.5rem);
+  font-variation-settings: "wght" 300;
+  color: oklch(60% 0.01 260);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.hero-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  opacity: 0;
+  will-change: opacity;
+}
+
+.hero-year {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  transform-origin: top;
+  animation: scrollDown 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0% { transform: scaleY(0); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+.scroll-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  color: var(--muted);
+}
+
+/* ABOUT */
+#about {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 9rem 3rem;
+  gap: 6rem;
+}
+
+.about-left {}
+
+.about-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.about-tag::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.about-headline {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-variation-settings: "wght" 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+}
+
+.about-headline em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.about-body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: oklch(58% 0.01 260);
+  font-variation-settings: "wght" 300;
+  max-width: 44ch;
+}
+
+.about-body + .about-body { margin-top: 1.25rem; }
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.stat-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.8rem;
+  font-variation-settings: "wght" 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.about-right { position: relative; }
+
+.about-visual {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(75%) contrast(1.1);
+  will-change: transform;
+}
+
+.about-frame {
+  position: absolute;
+  inset: 0;
+  border: 1px solid oklch(70% 0.22 140 / 0.25);
+  pointer-events: none;
+}
+
+.about-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+}
+
+/* SKILLS */
+#skills {
+  padding: 8rem 3rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-variation-settings: "wght" 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.section-count {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  padding-bottom: 0.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.skill-item {
+  background: var(--bg);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.skill-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  width: 0;
+  transition: width 0.45s ease;
+}
+
+.skill-item:hover::after { width: 100%; }
+
+.skill-bg {
+  position: absolute;
+  inset: 0;
+  background: oklch(12% 0.01 260);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.skill-item:hover .skill-bg { transform: translateY(0); }
+
+.skill-content {
+  position: relative;
+  z-index: 1;
+}
+
+.skill-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.skill-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-variation-settings: "wght" 600;
+  margin-bottom: 0.75rem;
+}
+
+.skill-desc {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: oklch(48% 0.01 260);
+}
+
+/* WORKS */
+#works { padding: 8rem 3rem; }
+
+.works-list { display: flex; flex-direction: column; }
+
+.work-item {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto 5rem;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.work-bg {
+  position: absolute;
+  inset: 0;
+  background: oklch(11% 0.01 260);
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
+}
+
+.work-item:hover .work-bg { transform: translateX(0); }
+
+.work-item > *:not(.work-bg) { position: relative; z-index: 1; }
+
+.work-num {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+.work-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 2rem);
+  font-variation-settings: "wght" 600;
+  transition: color 0.3s;
+}
+
+.work-item:hover .work-title { color: var(--accent); }
+
+.work-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.work-tag {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.7rem;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.work-year {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-align: right;
+}
+
+/* CONTACT */
+#contact {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 3rem;
+}
+
+.contact-headline {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(3.5rem, 11vw, 11rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  margin-bottom: 4rem;
+}
+
+.contact-headline span {
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(28% 0.01 260);
+  transition: color 0.35s, -webkit-text-stroke 0.35s;
+  cursor: pointer;
+}
+
+.contact-headline span:hover {
+  color: var(--accent);
+  -webkit-text-stroke: 1px transparent;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.contact-link {
+  color: var(--fg);
+  text-decoration: none;
+  font-variation-settings: "wght" 600;
+  position: relative;
+}
+
+.contact-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.35s ease;
+}
+
+.contact-link:hover::after { width: 100%; }
+
+footer {
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: oklch(28% 0.01 260);
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  #hero { padding: 0 1.5rem 4rem; }
+  #about {
+    grid-template-columns: 1fr;
+    padding: 7rem 1.5rem 5rem;
+    gap: 3rem;
+  }
+  .about-right { order: -1; }
+  .about-visual { aspect-ratio: 4 / 3; }
+  #skills { padding: 6rem 1.5rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  #works { padding: 6rem 1.5rem; }
+  .work-item { grid-template-columns: 2.5rem 1fr 4rem; }
+  .work-tags { display: none; }
+  #contact { padding: 6rem 1.5rem; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="progress-bar" id="progress-bar"></div>
+
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <div class="nav-logo">Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-label">Web Developer &amp; AI Instructor</div>
+  <h1 class="hero-name">
+    <span>홍</span><span>길</span><span>동</span>
+  </h1>
+  <div class="hero-role">
+    <div class="hero-role-text">Code &times; Design &times; Experience</div>
+    <div class="hero-divider"></div>
+    <div class="hero-year">2024</div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <div class="scroll-label">Scroll</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-left">
+    <div class="about-tag">About Me</div>
+    <h2 class="about-headline">
+      코드로<br>
+      세상을<br>
+      <em>설계한다</em>
+    </h2>
+    <p class="about-body">
+      웹 개발과 AI 기술의 교차점에서 일하는 크리에이터입니다.
+      단순한 페이지를 넘어 경험을 설계하고,
+      기술을 통해 사람들과 연결됩니다.
+    </p>
+    <p class="about-body">
+      현재 SBS아카데미에서 AI 에이전트와 웹 개발을 강의하며,
+      학생들이 자신만의 디지털 세계를 구축할 수 있도록 돕고 있습니다.
+    </p>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Years Exp.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">Students</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-visual">
+      <img class="about-photo" src="https://picsum.photos/seed/42/600/800" alt="Profile">
+      <div class="about-frame"></div>
+      <div class="about-caption">Seoul, Korea</div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-header">
+    <h2 class="section-title">Skills</h2>
+    <div class="section-count">06 disciplines</div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-item">
+      <div class="skill-bg"></div>
+      <div class="skill-content">
+        <div class="skill-num">01</div>
+        <div class="skill-name">Frontend Dev</div>
+        <div class="skill-desc">React, Vue, 순수 HTML/CSS/JS로 고성능 인터페이스를 구현합니다.</div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-bg"></div>
+      <div class="skill-content">
+        <div class="skill-num">02</div>
+        <div class="skill-name">AI Agent</div>
+        <div class="skill-desc">Claude API, LangChain 기반 AI 에이전트를 설계하고 구축합니다.</div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-bg"></div>
+      <div class="skill-content">
+        <div class="skill-num">03</div>
+        <div class="skill-name">UX Design</div>
+        <div class="skill-desc">사용자 행동 분석 기반의 직관적이고 아름다운 경험을 설계합니다.</div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-bg"></div>
+      <div class="skill-content">
+        <div class="skill-num">04</div>
+        <div class="skill-name">Motion Design</div>
+        <div class="skill-desc">GSAP, Three.js로 60fps 인터랙티브 애니메이션을 구현합니다.</div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-bg"></div>
+      <div class="skill-content">
+        <div class="skill-num">05</div>
+        <div class="skill-name">Backend Dev</div>
+        <div class="skill-desc">Node.js, Python 기반 API 서버와 데이터베이스를 설계합니다.</div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-bg"></div>
+      <div class="skill-content">
+        <div class="skill-num">06</div>
+        <div class="skill-name">Education</div>
+        <div class="skill-desc">복잡한 개념을 명확하게 전달하는 커리큘럼과 강의를 제작합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="section-header">
+    <h2 class="section-title">Works</h2>
+    <div class="section-count">Selected projects</div>
+  </div>
+  <div class="works-list">
+    <div class="work-item">
+      <div class="work-bg"></div>
+      <div class="work-num">01</div>
+      <div class="work-title">AI 에이전트 웹 플랫폼</div>
+      <div class="work-tags">
+        <span class="work-tag">React</span>
+        <span class="work-tag">Claude API</span>
+        <span class="work-tag">Node.js</span>
+      </div>
+      <div class="work-year">2024</div>
+    </div>
+    <div class="work-item">
+      <div class="work-bg"></div>
+      <div class="work-num">02</div>
+      <div class="work-title">인터랙티브 포트폴리오 시스템</div>
+      <div class="work-tags">
+        <span class="work-tag">GSAP</span>
+        <span class="work-tag">Three.js</span>
+        <span class="work-tag">WebGL</span>
+      </div>
+      <div class="work-year">2024</div>
+    </div>
+    <div class="work-item">
+      <div class="work-bg"></div>
+      <div class="work-num">03</div>
+      <div class="work-title">실시간 협업 에디터</div>
+      <div class="work-tags">
+        <span class="work-tag">WebSocket</span>
+        <span class="work-tag">Vue</span>
+        <span class="work-tag">Python</span>
+      </div>
+      <div class="work-year">2023</div>
+    </div>
+    <div class="work-item">
+      <div class="work-bg"></div>
+      <div class="work-num">04</div>
+      <div class="work-title">AI 강의 커리큘럼 플랫폼</div>
+      <div class="work-tags">
+        <span class="work-tag">LMS</span>
+        <span class="work-tag">Education</span>
+        <span class="work-tag">Claude API</span>
+      </div>
+      <div class="work-year">2023</div>
+    </div>
+    <div class="work-item">
+      <div class="work-bg"></div>
+      <div class="work-num">05</div>
+      <div class="work-title">Discord 자동화 봇 시스템</div>
+      <div class="work-tags">
+        <span class="work-tag">Python</span>
+        <span class="work-tag">Bot</span>
+        <span class="work-tag">Automation</span>
+      </div>
+      <div class="work-year">2023</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-headline">
+    <span>GET</span><br>
+    <span>IN</span><br>
+    <span>TOUCH</span>
+  </div>
+  <div class="contact-row">
+    <a href="mailto:computer.gangnam@gmail.com" class="contact-link">computer.gangnam@gmail.com</a>
+    <span>&middot;</span>
+    <span>Seoul, Korea</span>
+    <span>&middot;</span>
+    <a href="https://github.com/hw5511" class="contact-link" target="_blank">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2024 Portfolio. All rights reserved.</span>
+  <span>Designed &amp; Built with Code</span>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Lenis
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// Progress bar
+const progressBar = document.getElementById('progress-bar');
+lenis.on('scroll', ({ progress }) => {
+  gsap.set(progressBar, { scaleX: progress });
+});
+
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+window.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  gsap.set(cursor, { x: mouseX, y: mouseY });
+});
+
+(function tickRing() {
+  ringX += (mouseX - ringX) * 0.1;
+  ringY += (mouseY - ringY) * 0.1;
+  gsap.set(cursorRing, { x: ringX, y: ringY });
+  requestAnimationFrame(tickRing);
+})();
+
+document.querySelectorAll('a, .work-item, .skill-item, .contact-headline span').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    gsap.to(cursor, { width: 14, height: 14, duration: 0.2 });
+    gsap.to(cursorRing, { scale: 1.6, duration: 0.2 });
+  });
+  el.addEventListener('mouseleave', () => {
+    gsap.to(cursor, { width: 8, height: 8, duration: 0.2 });
+    gsap.to(cursorRing, { scale: 1, duration: 0.2 });
+  });
+});
+
+// Background Canvas — dot network
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, dots = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function mkDots() {
+  dots = [];
+  const n = Math.floor((W * H) / 14000);
+  for (let i = 0; i < n; i++) {
+    dots.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.4,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25
+    });
+  }
+}
+
+let mx = 0, my = 0;
+window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // connections
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i < dots.length; i++) {
+    for (let j = i + 1; j < dots.length; j++) {
+      const dx = dots[i].x - dots[j].x;
+      const dy = dots[i].y - dots[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 110) {
+        ctx.strokeStyle = `oklch(70% 0.22 140 / ${(1 - d / 110) * 0.18})`;
+        ctx.beginPath();
+        ctx.moveTo(dots[i].x | 0, dots[i].y | 0);
+        ctx.lineTo(dots[j].x | 0, dots[j].y | 0);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // dots (batched)
+  ctx.fillStyle = 'oklch(70% 0.22 140 / 0.5)';
+  ctx.beginPath();
+  for (const d of dots) {
+    ctx.moveTo(d.x | 0, d.y | 0);
+    ctx.arc(d.x | 0, d.y | 0, d.r, 0, Math.PI * 2);
+  }
+  ctx.fill();
+}
+
+function update() {
+  for (const d of dots) {
+    const ddx = mx - d.x;
+    const ddy = my - d.y;
+    const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+    if (dist < 130) {
+      d.vx += (ddx / dist) * 0.018;
+      d.vy += (ddy / dist) * 0.018;
+    }
+    d.vx *= 0.97;
+    d.vy *= 0.97;
+    d.x += d.vx;
+    d.y += d.vy;
+    if (d.x < 0 || d.x > W) d.vx *= -1;
+    if (d.y < 0 || d.y > H) d.vy *= -1;
+    d.x = Math.max(0, Math.min(W, d.x));
+    d.y = Math.max(0, Math.min(H, d.y));
+  }
+}
+
+function loop() {
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+resize();
+mkDots();
+loop();
+window.addEventListener('resize', () => { resize(); mkDots(); });
+
+// Hero entrance
+const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+heroTl
+  .to('.hero-label', { opacity: 1, duration: 0.9, delay: 0.4 })
+  .to('.hero-name span', { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, '-=0.5')
+  .to('.hero-role-text', { opacity: 1, duration: 0.8 }, '-=0.4')
+  .to('.hero-divider', { opacity: 1, duration: 0.8 }, '-=0.6')
+  .to('.scroll-hint', { opacity: 1, duration: 0.6 }, '-=0.2');
+
+// Kinetic typography on mousemove
+window.addEventListener('mousemove', (e) => {
+  const w = 300 + (e.clientX / window.innerWidth) * 500;
+  gsap.to('.hero-role-text', {
+    fontVariationSettings: `"wght" ${w}`,
+    duration: 0.5,
+    ease: 'power2.out'
+  });
+});
+
+// About
+gsap.from('.about-tag', {
+  scrollTrigger: { trigger: '#about', start: 'top 80%' },
+  opacity: 0, x: -24, duration: 0.8
+});
+gsap.from('.about-headline', {
+  scrollTrigger: { trigger: '#about', start: 'top 72%' },
+  opacity: 0, y: 40, duration: 1, ease: 'power3.out'
+});
+gsap.from('.about-body', {
+  scrollTrigger: { trigger: '#about', start: 'top 62%' },
+  opacity: 0, y: 20, duration: 0.8, stagger: 0.18
+});
+gsap.from('.stat-item', {
+  scrollTrigger: { trigger: '.about-stats', start: 'top 85%' },
+  opacity: 0, y: 24, duration: 0.6, stagger: 0.12
+});
+gsap.from('.about-visual', {
+  scrollTrigger: { trigger: '#about', start: 'top 72%' },
+  opacity: 0, scale: 0.95, duration: 1.3, ease: 'power3.out'
+});
+
+// Skills
+gsap.from('#skills .section-title', {
+  scrollTrigger: { trigger: '#skills', start: 'top 82%' },
+  opacity: 0, y: 48, duration: 1, ease: 'power3.out'
+});
+gsap.from('.skill-item', {
+  scrollTrigger: { trigger: '.skills-grid', start: 'top 82%' },
+  opacity: 0, y: 30, duration: 0.65, stagger: 0.1
+});
+
+// Works
+gsap.from('#works .section-title', {
+  scrollTrigger: { trigger: '#works', start: 'top 82%' },
+  opacity: 0, y: 48, duration: 1, ease: 'power3.out'
+});
+gsap.from('.work-item', {
+  scrollTrigger: { trigger: '.works-list', start: 'top 82%' },
+  opacity: 0, x: -28, duration: 0.65, stagger: 0.12
+});
+
+// Contact
+gsap.from('.contact-headline span', {
+  scrollTrigger: { trigger: '#contact', start: 'top 80%' },
+  opacity: 0, y: 60, duration: 0.8, stagger: 0.1, ease: 'power3.out'
+});
+gsap.from('.contact-row', {
+  scrollTrigger: { trigger: '#contact', start: 'top 65%' },
+  opacity: 0, y: 18, duration: 0.8
+});
+</script>
+</body>
+</html>

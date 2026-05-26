@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VXID — PRODUCER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;700&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       oklch(8% 0.005 0);
+  --primary:  oklch(91% 0.18 85);
+  --secondary:oklch(52% 0.27 270);
+  --accent:   oklch(74% 0.19 162);
+  --text:     oklch(94% 0.005 0);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: difference;
+}
+#cursor.big { width:48px; height:48px; }
+
+/* ── PROGRESS ── */
+#prog {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--primary);
+  z-index: 9998;
+  width: 0%;
+  transition: width 0.1s;
+  box-shadow: 0 0 12px var(--primary);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 40px;
+  mix-blend-mode: difference;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+
+/* ── HERO ── */
+#hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-layer {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  user-select: none;
+  will-change: transform;
+}
+
+.hl-1 {
+  font-size: clamp(120px, 22vw, 280px);
+  color: var(--primary);
+  top: 8%;
+  left: -2%;
+  opacity: 0.95;
+}
+.hl-2 {
+  font-size: clamp(90px, 16vw, 200px);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--secondary);
+  top: 30%;
+  left: 12%;
+  transform: rotate(-3deg);
+  opacity: 0.9;
+}
+.hl-3 {
+  font-size: clamp(60px, 10vw, 130px);
+  color: var(--accent);
+  bottom: 18%;
+  right: -1%;
+  transform: rotate(2deg);
+  opacity: 0.8;
+}
+.hl-4 {
+  font-size: clamp(14px, 1.4vw, 20px);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  bottom: 38%;
+  left: 5%;
+  opacity: 0.55;
+}
+.hl-5 {
+  font-size: clamp(200px, 36vw, 500px);
+  color: transparent;
+  -webkit-text-stroke: 0.5px rgba(255,255,255,0.04);
+  bottom: -8%;
+  right: -5%;
+  pointer-events: none;
+}
+
+.hero-tag {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero-tag span {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.7;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  writing-mode: vertical-rl;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.3;
+  animation: blink 2.4s infinite;
+}
+@keyframes blink {
+  0%,100% { opacity:0.3; }
+  50% { opacity:0.9; }
+}
+
+/* glitch animation */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  -webkit-text-stroke: inherit;
+}
+.glitch::before {
+  color: var(--secondary);
+  clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  animation: glitch-a 3.5s infinite steps(1);
+}
+.glitch::after {
+  color: var(--accent);
+  clip-path: polygon(0 65%, 100% 65%, 100% 80%, 0 80%);
+  animation: glitch-b 4.1s infinite steps(1);
+}
+@keyframes glitch-a {
+  0%,89%,100% { transform: translate(0); opacity:0; }
+  90% { transform: translate(-6px, 2px); opacity:1; }
+  94% { transform: translate(4px, -1px); opacity:1; }
+  97% { transform: translate(-3px, 0); opacity:0.8; }
+}
+@keyframes glitch-b {
+  0%,85%,100% { transform: translate(0); opacity:0; }
+  86% { transform: translate(7px, -3px); opacity:1; }
+  92% { transform: translate(-4px, 1px); opacity:1; }
+  96% { transform: translate(2px, 2px); opacity:0.6; }
+}
+
+/* ── TRACKS ── */
+#tracks {
+  position: relative;
+  padding: 8vh 0 10vh;
+  overflow: hidden;
+}
+
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.6;
+  padding: 0 5vw;
+  margin-bottom: 6vh;
+}
+
+.track-item {
+  position: relative;
+  padding: 0 5vw;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  gap: 24px;
+  min-height: 80px;
+  cursor: none;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.track-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.track-item:hover { background: rgba(255,255,255,0.025); }
+
+.track-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.12);
+  line-height: 1;
+  transition: -webkit-text-stroke-color 0.3s, color 0.3s;
+  user-select: none;
+}
+.track-item:hover .track-num {
+  color: var(--primary);
+  -webkit-text-stroke-color: var(--primary);
+  opacity: 0.15;
+}
+
+.track-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.track-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+  transition: color 0.2s, transform 0.3s;
+}
+.track-item:hover .track-title {
+  color: var(--primary);
+  transform: translateX(8px);
+}
+.track-meta {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  display: flex;
+  gap: 16px;
+}
+
+.track-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.track-duration {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  opacity: 0.3;
+  letter-spacing: 0.1em;
+}
+.track-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid currentColor;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+.track-tag.y { color: var(--primary); }
+.track-tag.p { color: var(--secondary); }
+.track-tag.g { color: var(--accent); }
+.track-item:hover .track-tag { opacity: 0.9; }
+
+/* floating displaced number */
+.track-bg-num {
+  position: absolute;
+  right: -1%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11rem;
+  color: transparent;
+  -webkit-text-stroke: 0.5px rgba(255,255,255,0.03);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* ── SHOWS ── */
+#shows {
+  position: relative;
+  padding: 10vh 5vw;
+  min-height: 80vh;
+  overflow: hidden;
+}
+
+.shows-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8vh;
+}
+.shows-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 1;
+  color: var(--text);
+  transform: rotate(-1.5deg);
+  display: inline-block;
+}
+.shows-count {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.show-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.show-card {
+  position: relative;
+  padding: 28px 24px;
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: none;
+  transition: border-color 0.3s;
+  overflow: hidden;
+}
+.show-card:hover { border-color: var(--primary); }
+
+.show-card.c1 {
+  grid-column: 1 / 6;
+  grid-row: 1;
+  transform: rotate(-0.8deg);
+  margin-top: 0;
+}
+.show-card.c2 {
+  grid-column: 5 / 10;
+  grid-row: 1;
+  transform: rotate(1.2deg);
+  margin-top: 24px;
+}
+.show-card.c3 {
+  grid-column: 8 / 13;
+  grid-row: 1;
+  transform: rotate(-0.5deg);
+  margin-top: -12px;
+}
+.show-card.c4 {
+  grid-column: 2 / 7;
+  grid-row: 2;
+  transform: rotate(0.9deg);
+  margin-top: -20px;
+}
+.show-card.c5 {
+  grid-column: 6 / 11;
+  grid-row: 2;
+  transform: rotate(-1.4deg);
+  margin-top: 16px;
+}
+.show-card.c6 {
+  grid-column: 9 / 13;
+  grid-row: 2;
+  transform: rotate(0.6deg);
+  margin-top: -8px;
+}
+
+.show-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.show-card:hover::before { opacity: 0.04; }
+
+.show-date {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  line-height: 1;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.show-venue {
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.show-city {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 16px;
+}
+.show-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.show-type {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border: 1px solid;
+  opacity: 0.5;
+}
+.show-type.live { color: var(--accent); border-color: var(--accent); }
+.show-type.dj   { color: var(--secondary); border-color: var(--secondary); }
+.show-type.fest { color: var(--primary); border-color: var(--primary); }
+
+.show-avail {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+.show-card:hover .show-avail { opacity: 0.9; }
+
+/* diagonal text behind shows */
+.shows-bg-text {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 18vw, 240px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.025);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  transform: rotate(-8deg);
+  top: 20%;
+  left: -5%;
+}
+
+/* ── ABOUT STRIP ── */
+#about {
+  position: relative;
+  padding: 12vh 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8vw;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.about-left {}
+.about-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.9;
+  margin-bottom: 32px;
+}
+.about-heading span {
+  display: block;
+}
+.about-heading .ah-1 { color: var(--text); }
+.about-heading .ah-2 {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--secondary);
+  transform: translateX(20px);
+  display: inline-block;
+}
+.about-heading .ah-3 { color: var(--accent); font-size: 0.6em; }
+
+.about-body {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  opacity: 0.6;
+  max-width: 440px;
+}
+.about-body p + p { margin-top: 1em; }
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  color: var(--primary);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.35;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 12px 0;
+  background: var(--bg);
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 18s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  letter-spacing: 0.12em;
+  padding: 0 40px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+.marquee-item.accent {
+  color: var(--primary);
+  -webkit-text-stroke: 0;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 6vh 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+}
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.footer-email {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.footer-email:hover { opacity: 1; }
+.footer-copy {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  opacity: 0.2;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .show-grid { grid-template-columns: 1fr 1fr; }
+  .show-card.c1,.show-card.c2,.show-card.c3,
+  .show-card.c4,.show-card.c5,.show-card.c6 {
+    grid-column: auto;
+    grid-row: auto;
+    transform: none;
+    margin: 0;
+  }
+  #about { grid-template-columns: 1fr; }
+  .about-right { margin-top: 4vh; }
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .show-grid { grid-template-columns: 1fr; }
+  .track-item { grid-template-columns: 56px 1fr auto; gap: 12px; }
+  #shows, #about { padding: 8vh 5vw; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="prog"></div>
+
+<nav>
+  <a href="#" class="nav-logo">VXID</a>
+  <ul class="nav-links">
+    <li><a href="#tracks">Tracks</a></li>
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:booking@vxid.io">Booking</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-layer hl-1 glitch" data-text="VXID">VXID</div>
+  <div class="hero-layer hl-2">PRODUCER</div>
+  <div class="hero-layer hl-3 glitch" data-text="SYSTEM">SYSTEM</div>
+  <div class="hero-layer hl-4">Electronic / Modular / Experimental</div>
+  <div class="hero-layer hl-5">01</div>
+
+  <div class="hero-tag">
+    <span>Seoul, Korea</span>
+    <span>Est. 2017</span>
+  </div>
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
+
+<!-- TRACKS -->
+<section id="tracks">
+  <p class="section-label">Discography — Selected Works</p>
+
+  <div class="track-item" data-aos="fade">
+    <span class="track-bg-num">01</span>
+    <div class="track-num">01</div>
+    <div class="track-body">
+      <div class="track-title">FRACTURE STATE</div>
+      <div class="track-meta">
+        <span>Techno</span>
+        <span>2024</span>
+        <span>Oblique Records</span>
+      </div>
+    </div>
+    <div class="track-right">
+      <span class="track-duration">7:42</span>
+      <span class="track-tag y">Single</span>
+    </div>
+  </div>
+
+  <div class="track-item" data-aos="fade">
+    <span class="track-bg-num">02</span>
+    <div class="track-num">02</div>
+    <div class="track-body">
+      <div class="track-title">NULL POINTER</div>
+      <div class="track-meta">
+        <span>Industrial</span>
+        <span>2024</span>
+        <span>Self-released</span>
+      </div>
+    </div>
+    <div class="track-right">
+      <span class="track-duration">5:18</span>
+      <span class="track-tag p">Collab</span>
+    </div>
+  </div>
+
+  <div class="track-item" data-aos="fade">
+    <span class="track-bg-num">03</span>
+    <div class="track-num">03</div>
+    <div class="track-body">
+      <div class="track-title">DEAD CHANNEL 09</div>
+      <div class="track-meta">
+        <span>Ambient Techno</span>
+        <span>2023</span>
+        <span>Haze Label</span>
+      </div>
+    </div>
+    <div class="track-right">
+      <span class="track-duration">11:03</span>
+      <span class="track-tag g">LP Cut</span>
+    </div>
+  </div>
+
+  <div class="track-item" data-aos="fade">
+    <span class="track-bg-num">04</span>
+    <div class="track-num">04</div>
+    <div class="track-body">
+      <div class="track-title">PHASE COLLAPSE</div>
+      <div class="track-meta">
+        <span>EBM</span>
+        <span>2023</span>
+        <span>Oblique Records</span>
+      </div>
+    </div>
+    <div class="track-right">
+      <span class="track-duration">6:55</span>
+      <span class="track-tag y">EP</span>
+    </div>
+  </div>
+
+  <div class="track-item" data-aos="fade">
+    <span class="track-bg-num">05</span>
+    <div class="track-num">05</div>
+    <div class="track-body">
+      <div class="track-title">SIGNAL LOSS</div>
+      <div class="track-meta">
+        <span>Noise</span>
+        <span>2022</span>
+        <span>Haze Label</span>
+      </div>
+    </div>
+    <div class="track-right">
+      <span class="track-duration">9:21</span>
+      <span class="track-tag p">Remix</span>
+    </div>
+  </div>
+
+  <div class="track-item" data-aos="fade">
+    <span class="track-bg-num">06</span>
+    <div class="track-num">06</div>
+    <div class="track-body">
+      <div class="track-title">VOID PROTOCOL</div>
+      <div class="track-meta">
+        <span>Hardcore</span>
+        <span>2022</span>
+        <span>Self-released</span>
+      </div>
+    </div>
+    <div class="track-right">
+      <span class="track-duration">4:47</span>
+      <span class="track-tag g">Single</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">VXID</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">FRACTURE STATE</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">OBLIQUE RECORDS</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">DEAD CHANNEL 09</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">SEOUL / BERLIN / TOKYO</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">ELECTRONIC PRODUCER</span>
+    <span class="marquee-item accent">*</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">VXID</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">FRACTURE STATE</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">OBLIQUE RECORDS</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">DEAD CHANNEL 09</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">SEOUL / BERLIN / TOKYO</span>
+    <span class="marquee-item accent">*</span>
+    <span class="marquee-item">ELECTRONIC PRODUCER</span>
+    <span class="marquee-item accent">*</span>
+  </div>
+</div>
+
+<!-- SHOWS -->
+<section id="shows">
+  <div class="shows-bg-text">SHOWS</div>
+
+  <div class="shows-header">
+    <h2 class="shows-title">UPCOMING<br>SHOWS</h2>
+    <span class="shows-count">6 Events — 2025</span>
+  </div>
+
+  <div class="show-grid">
+    <div class="show-card c1">
+      <div class="show-date">MAY 03</div>
+      <div class="show-venue">Contra Club</div>
+      <div class="show-city">Berlin, Germany</div>
+      <div class="show-footer">
+        <span class="show-type live">Live A/V</span>
+        <span class="show-avail">Tickets →</span>
+      </div>
+    </div>
+
+    <div class="show-card c2">
+      <div class="show-date">MAY 17</div>
+      <div class="show-venue">Cakeshop</div>
+      <div class="show-city">Seoul, Korea</div>
+      <div class="show-footer">
+        <span class="show-type dj">DJ Set</span>
+        <span class="show-avail">Free Entry</span>
+      </div>
+    </div>
+
+    <div class="show-card c3">
+      <div class="show-date">JUN 07</div>
+      <div class="show-venue">Boiler Room</div>
+      <div class="show-city">Tokyo, Japan</div>
+      <div class="show-footer">
+        <span class="show-type live">Live</span>
+        <span class="show-avail">Tickets →</span>
+      </div>
+    </div>
+
+    <div class="show-card c4">
+      <div class="show-date">JUL 12</div>
+      <div class="show-venue">Rewire Festival</div>
+      <div class="show-city">The Hague, NL</div>
+      <div class="show-footer">
+        <span class="show-type fest">Festival</span>
+        <span class="show-avail">Tickets →</span>
+      </div>
+    </div>
+
+    <div class="show-card c5">
+      <div class="show-date">AUG 23</div>
+      <div class="show-venue">Tresor</div>
+      <div class="show-city">Berlin, Germany</div>
+      <div class="show-footer">
+        <span class="show-type dj">DJ Set</span>
+        <span class="show-avail">Tickets →</span>
+      </div>
+    </div>
+
+    <div class="show-card c6">
+      <div class="show-date">SEP 06</div>
+      <div class="show-venue">Club Octagon</div>
+      <div class="show-city">Seoul, Korea</div>
+      <div class="show-footer">
+        <span class="show-type live">Live A/V</span>
+        <span class="show-avail">Tickets →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <h2 class="about-heading">
+      <span class="ah-1">NOISE</span>
+      <span class="ah-2">IS THE</span>
+      <span class="ah-3">MESSAGE</span>
+    </h2>
+    <div class="about-body">
+      <p>VXID는 서울 기반 전자음악 프로듀서이자 사운드 디자이너. 모듈러 신디사이저와 산업적 텍스처를 기반으로 테크노, EBM, 노이즈의 경계를 허무는 음악을 만든다.</p>
+      <p>2017년부터 Oblique Records, Haze Label과 함께 작업해왔으며, 베를린·도쿄·서울의 지하 클럽 씬에서 활발히 공연 중이다.</p>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="stat-row">
+      <span class="stat-num">47</span>
+      <span class="stat-label">Releases</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-num">120+</span>
+      <span class="stat-label">Live Shows</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Record Labels</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-num">8</span>
+      <span class="stat-label">Years Active</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">VXID</div>
+  <div class="footer-right">
+    <a href="mailto:booking@vxid.io" class="footer-email">booking@vxid.io</a>
+    <span class="footer-copy">&copy; 2025 VXID. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a, .track-item, .show-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
+
+// ── PROGRESS ──
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+});
+
+// ── HERO PARALLAX ──
+const layers = [
+  { el: document.querySelector('.hl-1'), speed: -0.15 },
+  { el: document.querySelector('.hl-2'), speed:  0.10 },
+  { el: document.querySelector('.hl-3'), speed: -0.08 },
+  { el: document.querySelector('.hl-5'), speed:  0.05 },
+];
+window.addEventListener('scroll', () => {
+  const sy = window.scrollY;
+  layers.forEach(({ el, speed }) => {
+    el.style.transform = `translateY(${sy * speed}px)`;
+  });
+  // hl-2 keeps its rotation
+  document.querySelector('.hl-2').style.transform =
+    `rotate(-3deg) translateY(${window.scrollY * 0.10}px)`;
+  document.querySelector('.hl-3').style.transform =
+    `rotate(2deg) translateY(${window.scrollY * -0.08}px)`;
+});
+
+// ── HERO entrance ──
+gsap.from('.hl-1', { duration: 1.2, x: -80, opacity: 0, ease: 'expo.out', delay: 0.1 });
+gsap.from('.hl-2', { duration: 1.4, x:  60, opacity: 0, ease: 'expo.out', delay: 0.25 });
+gsap.from('.hl-3', { duration: 1.0, y:  40, opacity: 0, ease: 'expo.out', delay: 0.4 });
+gsap.from('.hl-4', { duration: 1.0, y:  20, opacity: 0, ease: 'expo.out', delay: 0.6 });
+gsap.from('.hero-tag', { duration: 0.8, y: 30, opacity: 0, ease: 'power2.out', delay: 0.9 });
+
+// ── TRACKS scroll ──
+document.querySelectorAll('.track-item').forEach((item, i) => {
+  gsap.from(item, {
+    scrollTrigger: { trigger: item, start: 'top 85%' },
+    x: i % 2 === 0 ? -40 : 40,
+    opacity: 0,
+    duration: 0.7,
+    ease: 'power2.out',
+    delay: i * 0.06,
+  });
+});
+
+// ── SHOW CARDS ──
+document.querySelectorAll('.show-card').forEach((card, i) => {
+  const rotDir = i % 2 === 0 ? -1 : 1;
+  gsap.from(card, {
+    scrollTrigger: { trigger: '#shows', start: 'top 70%' },
+    y: 60,
+    rotation: rotDir * 4,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'back.out(1.2)',
+    delay: i * 0.1,
+  });
+});
+
+// ── ABOUT ──
+gsap.from('.about-heading', {
+  scrollTrigger: { trigger: '#about', start: 'top 75%' },
+  x: -60, opacity: 0, duration: 1, ease: 'expo.out'
+});
+gsap.from('.about-body', {
+  scrollTrigger: { trigger: '#about', start: 'top 70%' },
+  x: -30, opacity: 0, duration: 0.9, ease: 'power2.out', delay: 0.2
+});
+document.querySelectorAll('.stat-row').forEach((row, i) => {
+  gsap.from(row, {
+    scrollTrigger: { trigger: '#about', start: 'top 70%' },
+    x: 40, opacity: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.1
+  });
+});
+
+// ── FOOTER ──
+gsap.from('.footer-name', {
+  scrollTrigger: { trigger: 'footer', start: 'top 90%' },
+  opacity: 0, y: 30, duration: 1, ease: 'expo.out'
+});
+</script>
+</body>
+</html>

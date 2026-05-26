@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Space+Grotesk:wght@300;400;500&family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+  :root {
+    --color-bg:      oklch(20% 0.06 185);
+    --color-primary: oklch(92% 0.025 80);
+    --color-accent:  oklch(68% 0.14 30);
+    --color-text:    oklch(94% 0.01 80);
+    --color-muted:   oklch(60% 0.03 185);
+    --color-blob1:   oklch(28% 0.08 185);
+    --color-blob2:   oklch(32% 0.1 200);
+    --mx: 0.5;
+    --my: 0.5;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ---- CUSTOM CURSOR ---- */
+  .cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+  .cursor-dot {
+    width: 8px; height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--color-accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* ---- SCROLL PROGRESS ---- */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+    z-index: 1000;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-end;
+  }
+  nav a {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-muted);
+    transition: color 0.3s, transform 0.3s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    right: -1rem; top: 50%;
+    transform: translateY(-50%);
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  nav a:hover, nav a.active {
+    color: var(--color-primary);
+    transform: translateX(-4px);
+  }
+  nav a:hover::after, nav a.active::after { opacity: 1; }
+
+  /* ---- FLOATING BLOBS (background layer) ---- */
+  .blob-field {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .blob-field svg {
+    position: absolute;
+    will-change: transform;
+    opacity: 0.55;
+    filter: blur(2px);
+  }
+  .blob-a {
+    width: 60vw; height: 60vw;
+    top: -15vw; left: -15vw;
+    transform-origin: center;
+  }
+  .blob-b {
+    width: 45vw; height: 45vw;
+    bottom: 10vh; right: -10vw;
+  }
+  .blob-c {
+    width: 30vw; height: 30vw;
+    top: 40vh; left: 30vw;
+    opacity: 0.25 !important;
+  }
+
+  /* ---- SECTIONS WRAPPER ---- */
+  main { position: relative; z-index: 1; }
+
+  /* ---- SECTION: HERO ---- */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    padding: 0 8vw;
+    gap: 4rem;
+  }
+  .hero-text {
+    grid-column: 1;
+    padding-top: 10vh;
+  }
+  .hero-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .hero-name {
+    font-family: 'Bodoni Moda', 'Nanum Myeongjo', serif;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 700;
+    line-height: 0.95;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-muted);
+    max-width: 38ch;
+    font-weight: 300;
+  }
+  .hero-visual {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 60vh;
+  }
+  .hero-blob-img {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1;
+    position: relative;
+  }
+  .hero-blob-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+    animation: morph-hero 8s ease-in-out infinite alternate;
+    display: block;
+    box-shadow:
+      0 0 80px oklch(28% 0.1 185 / 0.6),
+      inset 0 0 40px oklch(20% 0.06 185 / 0.3);
+  }
+  @keyframes morph-hero {
+    0%   { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; }
+    33%  { border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%; }
+    66%  { border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%; }
+    100% { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
+  }
+  .hero-ring {
+    position: absolute;
+    inset: -15px;
+    border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+    border: 1px solid oklch(68% 0.14 30 / 0.3);
+    animation: morph-hero 8s ease-in-out infinite alternate reverse;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .scroll-hint-line {
+    width: 1px;
+    height: 3rem;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    animation: scroll-drip 1.8s ease-in-out infinite;
+  }
+  @keyframes scroll-drip {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+  }
+
+  /* ---- DIVIDER: ORGANIC WAVE ---- */
+  .wave-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    position: relative;
+    z-index: 1;
+    margin: -1px 0;
+  }
+  .wave-divider svg { display: block; }
+
+  /* ---- SECTION: ABOUT ---- */
+  #about {
+    padding: 12vh 8vw 14vh;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 6rem;
+    align-items: start;
+    background: oklch(24% 0.07 190);
+    clip-path: polygon(0 3%, 100% 0%, 100% 97%, 0% 100%);
+    position: relative;
+  }
+  .about-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .about-heading {
+    font-family: 'Bodoni Moda', 'Nanum Myeongjo', serif;
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--color-primary);
+    position: sticky;
+    top: 20vh;
+  }
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .about-para {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-weight: 300;
+    opacity: 0.85;
+  }
+  .about-para strong {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+  .about-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 1rem;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .stat-num {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* ---- SECTION: SKILLS ---- */
+  #skills {
+    padding: 14vh 8vw 12vh;
+    background: var(--color-bg);
+    position: relative;
+  }
+  .skills-header {
+    margin-bottom: 6rem;
+  }
+  .skills-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .skills-heading {
+    font-family: 'Bodoni Moda', 'Nanum Myeongjo', serif;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.1;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 0.8fr;
+    gap: 2px;
+    position: relative;
+  }
+  .skill-blob-card {
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+  .skill-blob-card::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+    background: var(--color-blob1);
+    z-index: 0;
+    transition: border-radius 0.6s ease, transform 0.4s ease;
+  }
+  .skill-blob-card:hover::before {
+    border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%;
+    transform: scale(1.05);
+    background: var(--color-blob2);
+  }
+  .skill-blob-card:hover { transform: translateY(-4px); }
+  .skill-blob-card > * { position: relative; z-index: 1; }
+  .skill-blob-card.accent-card::before {
+    background: oklch(52% 0.12 30 / 0.25);
+  }
+  .skill-blob-card.accent-card:hover::before {
+    background: oklch(52% 0.14 30 / 0.35);
+  }
+  .skill-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
+  }
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .skill-list li {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: color 0.3s;
+  }
+  .skill-list li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .skill-blob-card:hover .skill-list li { color: var(--color-text); }
+  .skill-blob-card:hover .skill-list li::before { opacity: 1; }
+
+  .skills-grid .skill-blob-card:nth-child(2) {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3.5rem 3rem;
+  }
+  .skill-blob-card:nth-child(2) .skill-name {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+  }
+  .skill-bar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .skill-bar-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .skill-bar-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  .skill-bar-track {
+    height: 3px;
+    background: oklch(40% 0.04 185);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+    border-radius: 2px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .skill-bar-fill.animated { transform: scaleX(1); }
+
+  /* ---- SECTION: WORKS ---- */
+  #works {
+    padding: 12vh 8vw 14vh;
+    background: oklch(24% 0.07 190);
+    clip-path: polygon(0 2%, 100% 0%, 100% 98%, 0% 100%);
+  }
+  .works-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .works-heading {
+    font-family: 'Bodoni Moda', 'Nanum Myeongjo', serif;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin-bottom: 5rem;
+  }
+  .works-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .work-item {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid oklch(35% 0.04 185);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: padding-left 0.4s ease;
+  }
+  .work-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 0; height: 100%;
+    background: oklch(28% 0.08 185);
+    transition: width 0.4s ease;
+    z-index: 0;
+    border-radius: 0 50% 50% 0 / 0 30% 30% 0;
+  }
+  .work-item:hover::before { width: 100%; border-radius: 0; }
+  .work-item:hover { padding-left: 1.5rem; }
+  .work-item > * { position: relative; z-index: 1; }
+  .work-num {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    letter-spacing: 0.1em;
+  }
+  .work-info {}
+  .work-title {
+    font-family: 'Bodoni Moda', 'Nanum Myeongjo', serif;
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.4rem;
+  }
+  .work-desc {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+  .work-tags {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .work-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid oklch(68% 0.14 30 / 0.3);
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .work-item:hover .work-tag {
+    background: oklch(68% 0.14 30 / 0.15);
+  }
+
+  /* ---- SECTION: CONTACT ---- */
+  #contact {
+    padding: 14vh 8vw 16vh;
+    background: var(--color-bg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    position: relative;
+  }
+  .contact-left {}
+  .contact-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .contact-heading {
+    font-family: 'Bodoni Moda', 'Nanum Myeongjo', serif;
+    font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+  .contact-heading em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+  .contact-sub {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-muted);
+    font-weight: 300;
+    max-width: 40ch;
+  }
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--color-blob1);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    text-decoration: none;
+    transition: border-radius 0.5s ease, transform 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+    border: 1px solid oklch(40% 0.06 185 / 0.5);
+  }
+  .contact-link:hover {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+    transform: translateX(8px);
+    background: var(--color-blob2);
+    border-color: oklch(68% 0.14 30 / 0.4);
+  }
+  .contact-link-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: oklch(68% 0.14 30 / 0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+  }
+  .contact-link:hover .contact-link-icon {
+    background: oklch(68% 0.14 30 / 0.4);
+  }
+  .contact-link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .contact-link-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .contact-link-value {
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: oklch(16% 0.05 185);
+    padding: 3rem 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-primary);
+    opacity: 0.6;
+  }
+  .footer-copy {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    text-transform: uppercase;
+  }
+
+  /* ---- GSAP INITIAL STATES ---- */
+  .reveal { opacity: 0; transform: translateY(40px); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); }
+  .reveal-right { opacity: 0; transform: translateX(40px); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    nav { display: none; }
+    #hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      padding: 12vh 6vw 8vh;
+      gap: 3rem;
+    }
+    .hero-visual { grid-column: 1; height: 50vw; }
+    #about {
+      grid-template-columns: 1fr;
+      padding: 10vh 6vw;
+      gap: 3rem;
+    }
+    .about-heading { position: static; }
+    .about-stats { gap: 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skills-grid .skill-blob-card:nth-child(2) { grid-row: auto; }
+    #contact {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 10vh 6vw;
+    }
+    .work-item {
+      grid-template-columns: 0.4fr 1fr;
+    }
+    .work-tags { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- progress -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- cursor -->
+<div class="cursor" id="cursorDot"><div class="cursor-dot"></div></div>
+<div class="cursor" id="cursorRing"><div class="cursor-ring"></div></div>
+
+<!-- background blobs -->
+<div class="blob-field">
+  <svg class="blob-a" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="oklch(28% 0.09 185)" d="M47.4,-60.1C59.9,-51.2,67.6,-35.5,70.5,-19.4C73.4,-3.3,71.5,13.2,64.2,26.6C56.9,40,44.2,50.2,30,57.1C15.8,64.1,0.1,67.7,-16.3,65.5C-32.7,63.2,-49.8,55,-59.3,42C-68.7,29,-70.5,11.2,-67.5,-5.5C-64.5,-22.2,-56.6,-37.7,-44.9,-47C-33.3,-56.4,-17.7,-59.7,-0.8,-58.7C16.1,-57.7,34.9,-69,47.4,-60.1Z" transform="translate(100 100)">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite"
+        values="M47.4,-60.1C59.9,-51.2,67.6,-35.5,70.5,-19.4C73.4,-3.3,71.5,13.2,64.2,26.6C56.9,40,44.2,50.2,30,57.1C15.8,64.1,0.1,67.7,-16.3,65.5C-32.7,63.2,-49.8,55,-59.3,42C-68.7,29,-70.5,11.2,-67.5,-5.5C-64.5,-22.2,-56.6,-37.7,-44.9,-47C-33.3,-56.4,-17.7,-59.7,-0.8,-58.7C16.1,-57.7,34.9,-69,47.4,-60.1Z;M38,-53.1C50.4,-43.9,62.3,-34.3,67.5,-21.3C72.7,-8.3,71.2,8.1,64.7,21.5C58.2,34.9,46.6,45.3,33.5,53.5C20.4,61.6,5.7,67.5,-10.4,67.5C-26.4,67.5,-44,61.6,-55.2,50.2C-66.3,38.7,-71,21.7,-70.1,5.3C-69.2,-11.1,-62.6,-27,-51.9,-37.2C-41.2,-47.4,-26.3,-52,-11.6,-55.4C3.1,-58.8,25.6,-62.2,38,-53.1Z;M47.4,-60.1C59.9,-51.2,67.6,-35.5,70.5,-19.4C73.4,-3.3,71.5,13.2,64.2,26.6C56.9,40,44.2,50.2,30,57.1C15.8,64.1,0.1,67.7,-16.3,65.5C-32.7,63.2,-49.8,55,-59.3,42C-68.7,29,-70.5,11.2,-67.5,-5.5C-64.5,-22.2,-56.6,-37.7,-44.9,-47C-33.3,-56.4,-17.7,-59.7,-0.8,-58.7C16.1,-57.7,34.9,-69,47.4,-60.1Z"/>
+    </path>
+  </svg>
+  <svg class="blob-b" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="oklch(32% 0.1 200 / 0.7)" d="M38,-53.1C50.4,-43.9,62.3,-34.3,67.5,-21.3C72.7,-8.3,71.2,8.1,64.7,21.5C58.2,34.9,46.6,45.3,33.5,53.5C20.4,61.6,5.7,67.5,-10.4,67.5C-26.4,67.5,-44,61.6,-55.2,50.2C-66.3,38.7,-71,21.7,-70.1,5.3C-69.2,-11.1,-62.6,-27,-51.9,-37.2C-41.2,-47.4,-26.3,-52,-11.6,-55.4C3.1,-58.8,25.6,-62.2,38,-53.1Z" transform="translate(100 100)">
+      <animate attributeName="d" dur="15s" repeatCount="indefinite"
+        values="M38,-53.1C50.4,-43.9,62.3,-34.3,67.5,-21.3C72.7,-8.3,71.2,8.1,64.7,21.5C58.2,34.9,46.6,45.3,33.5,53.5C20.4,61.6,5.7,67.5,-10.4,67.5C-26.4,67.5,-44,61.6,-55.2,50.2C-66.3,38.7,-71,21.7,-70.1,5.3C-69.2,-11.1,-62.6,-27,-51.9,-37.2C-41.2,-47.4,-26.3,-52,-11.6,-55.4C3.1,-58.8,25.6,-62.2,38,-53.1Z;M47.4,-60.1C59.9,-51.2,67.6,-35.5,70.5,-19.4C73.4,-3.3,71.5,13.2,64.2,26.6C56.9,40,44.2,50.2,30,57.1C15.8,64.1,0.1,67.7,-16.3,65.5C-32.7,63.2,-49.8,55,-59.3,42C-68.7,29,-70.5,11.2,-67.5,-5.5C-64.5,-22.2,-56.6,-37.7,-44.9,-47C-33.3,-56.4,-17.7,-59.7,-0.8,-58.7C16.1,-57.7,34.9,-69,47.4,-60.1Z;M38,-53.1C50.4,-43.9,62.3,-34.3,67.5,-21.3C72.7,-8.3,71.2,8.1,64.7,21.5C58.2,34.9,46.6,45.3,33.5,53.5C20.4,61.6,5.7,67.5,-10.4,67.5C-26.4,67.5,-44,61.6,-55.2,50.2C-66.3,38.7,-71,21.7,-70.1,5.3C-69.2,-11.1,-62.6,-27,-51.9,-37.2C-41.2,-47.4,-26.3,-52,-11.6,-55.4C3.1,-58.8,25.6,-62.2,38,-53.1Z"/>
+    </path>
+  </svg>
+  <svg class="blob-c" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="oklch(68% 0.14 30 / 0.15)" d="M43.8,-58.4C56.6,-49.2,66.5,-35.6,70.2,-20.4C73.9,-5.3,71.5,11.5,63.9,25.2C56.3,38.9,43.5,49.6,29.2,57.1C14.9,64.6,-0.9,69,-16.4,66.1C-31.9,63.2,-47.1,53.1,-57.8,39.5C-68.4,25.8,-74.5,8.6,-72.4,-7.5C-70.3,-23.6,-60,-38.6,-47.2,-47.9C-34.4,-57.3,-19.2,-61.1,-2.6,-58.1C14,-55.1,31,-67.6,43.8,-58.4Z" transform="translate(100 100)">
+      <animate attributeName="d" dur="10s" repeatCount="indefinite"
+        values="M43.8,-58.4C56.6,-49.2,66.5,-35.6,70.2,-20.4C73.9,-5.3,71.5,11.5,63.9,25.2C56.3,38.9,43.5,49.6,29.2,57.1C14.9,64.6,-0.9,69,-16.4,66.1C-31.9,63.2,-47.1,53.1,-57.8,39.5C-68.4,25.8,-74.5,8.6,-72.4,-7.5C-70.3,-23.6,-60,-38.6,-47.2,-47.9C-34.4,-57.3,-19.2,-61.1,-2.6,-58.1C14,-55.1,31,-67.6,43.8,-58.4Z;M38,-53.1C50.4,-43.9,62.3,-34.3,67.5,-21.3C72.7,-8.3,71.2,8.1,64.7,21.5C58.2,34.9,46.6,45.3,33.5,53.5C20.4,61.6,5.7,67.5,-10.4,67.5C-26.4,67.5,-44,61.6,-55.2,50.2C-66.3,38.7,-71,21.7,-70.1,5.3C-69.2,-11.1,-62.6,-27,-51.9,-37.2C-41.2,-47.4,-26.3,-52,-11.6,-55.4C3.1,-58.8,25.6,-62.2,38,-53.1Z;M43.8,-58.4C56.6,-49.2,66.5,-35.6,70.2,-20.4C73.9,-5.3,71.5,11.5,63.9,25.2C56.3,38.9,43.5,49.6,29.2,57.1C14.9,64.6,-0.9,69,-16.4,66.1C-31.9,63.2,-47.1,53.1,-57.8,39.5C-68.4,25.8,-74.5,8.6,-72.4,-7.5C-70.3,-23.6,-60,-38.6,-47.2,-47.9C-34.4,-57.3,-19.2,-61.1,-2.6,-58.1C14,-55.1,31,-67.6,43.8,-58.4Z"/>
+    </path>
+  </svg>
+</div>
+
+<!-- navigation -->
+<nav id="sideNav">
+  <a href="#hero" class="active">Home</a>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#works">Works</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-label reveal">Creative Developer</p>
+      <h1 class="hero-name reveal">
+        Hello,<br>
+        I'm <em>Your<br>Name</em>
+      </h1>
+      <p class="hero-desc reveal">
+        경계를 넘는 디지털 경험을 설계합니다.<br>
+        코드와 디자인 사이 어딘가, <strong style="color:var(--color-accent)">유기적인 무언가</strong>를 만듭니다.
+      </p>
+    </div>
+    <div class="hero-visual reveal-right">
+      <div class="hero-blob-img">
+        <img src="https://picsum.photos/seed/portrait42/600/600" alt="profile">
+        <div class="hero-ring"></div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div>
+      <p class="about-tag reveal">About</p>
+      <h2 class="about-heading reveal">Who<br><em style="font-style:italic;color:var(--color-accent)">am</em><br>I</h2>
+    </div>
+    <div class="about-body">
+      <p class="about-para reveal">
+        저는 <strong>프론트엔드 개발자</strong>이자 <strong>디지털 아티스트</strong>입니다.
+        인터페이스는 단순한 도구가 아니라 사용자와 세계 사이의 감각적 접점이라고 믿습니다.
+      </p>
+      <p class="about-para reveal">
+        HTML, CSS, JavaScript를 예술 표현의 매체로 사용하며,
+        브라우저 위에서 살아 숨쉬는 경험을 만드는 것에 깊은 흥미를 느낍니다.
+        <strong>표준을 따르지 않고, 기대를 깨는 것</strong>이 저의 방식입니다.
+      </p>
+      <div class="about-stats reveal">
+        <div class="stat">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Years Exp</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">40+</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">12+</span>
+          <span class="stat-label">Clients</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="skills-header">
+      <p class="skills-tag reveal">Skills</p>
+      <h2 class="skills-heading reveal">What I<br><em style="font-style:italic;color:var(--color-accent)">do</em></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-blob-card reveal">
+        <h3 class="skill-name">Design</h3>
+        <ul class="skill-list">
+          <li>Figma / Prototyping</li>
+          <li>Motion Design</li>
+          <li>UI / UX Research</li>
+          <li>Generative Art</li>
+        </ul>
+      </div>
+      <div class="skill-blob-card accent-card reveal">
+        <h3 class="skill-name">Development</h3>
+        <div class="skill-bar-group">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>HTML / CSS</span><span>95%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0.95"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>JavaScript</span><span>88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0.88"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>React / Next.js</span><span>80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0.80"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>GSAP / WebGL</span><span>72%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0.72"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>Three.js</span><span>65%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0.65"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="skill-blob-card reveal">
+        <h3 class="skill-name">Creative</h3>
+        <ul class="skill-list">
+          <li>Interactive Art</li>
+          <li>Shader / GLSL</li>
+          <li>AI Art Direction</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works">
+    <p class="works-tag reveal">Works</p>
+    <h2 class="works-heading reveal">Selected<br><em style="font-style:italic;color:var(--color-accent)">Projects</em></h2>
+    <div class="works-list">
+      <div class="work-item reveal">
+        <span class="work-num">01</span>
+        <div class="work-info">
+          <h3 class="work-title">Liquid Canvas</h3>
+          <p class="work-desc">실시간 유체 시뮬레이션 인터랙티브 설치 작품</p>
+        </div>
+        <div class="work-tags">
+          <span class="work-tag">WebGL</span>
+          <span class="work-tag">GLSL</span>
+        </div>
+      </div>
+      <div class="work-item reveal">
+        <span class="work-num">02</span>
+        <div class="work-info">
+          <h3 class="work-title">Morphic Brand</h3>
+          <p class="work-desc">생동감 있는 브랜드 아이덴티티 시스템 디자인</p>
+        </div>
+        <div class="work-tags">
+          <span class="work-tag">Branding</span>
+          <span class="work-tag">Motion</span>
+        </div>
+      </div>
+      <div class="work-item reveal">
+        <span class="work-num">03</span>
+        <div class="work-info">
+          <h3 class="work-title">Organic Portfolio</h3>
+          <p class="work-desc">유기적 형태의 포트폴리오 웹사이트</p>
+        </div>
+        <div class="work-tags">
+          <span class="work-tag">GSAP</span>
+          <span class="work-tag">CSS</span>
+        </div>
+      </div>
+      <div class="work-item reveal">
+        <span class="work-num">04</span>
+        <div class="work-info">
+          <h3 class="work-title">Generative Spaces</h3>
+          <p class="work-desc">생성형 AI와 Three.js를 결합한 가상 공간 탐험</p>
+        </div>
+        <div class="work-tags">
+          <span class="work-tag">Three.js</span>
+          <span class="work-tag">AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-left">
+      <p class="contact-tag reveal">Contact</p>
+      <h2 class="contact-heading reveal">
+        Let's<br>
+        <em>Create</em><br>
+        Together
+      </h2>
+      <p class="contact-sub reveal">
+        새로운 프로젝트, 협업, 아이디어 교환 —<br>
+        모든 대화를 환영합니다.
+      </p>
+    </div>
+    <div class="contact-right">
+      <a class="contact-link reveal" href="mailto:hello@example.com">
+        <div class="contact-link-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--color-accent)">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">hello@example.com</span>
+        </div>
+      </a>
+      <a class="contact-link reveal" href="#">
+        <div class="contact-link-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--color-accent)">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-value">github.com/yourname</span>
+        </div>
+      </a>
+      <a class="contact-link reveal" href="#">
+        <div class="contact-link-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--color-accent)">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/yourname</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-name">Your Name</span>
+  <span class="footer-copy">2026 &mdash; All rights reserved</span>
+</footer>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ---- CURSOR ----
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    gsap.set(dot, { x: mouseX, y: mouseY });
+  });
+
+  (function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    gsap.set(ring, { x: ringX, y: ringY });
+    requestAnimationFrame(animateRing);
+  })();
+
+  document.querySelectorAll('a, button, .work-item, .skill-blob-card, .contact-link').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.querySelector('.cursor-ring').style.width = '60px';
+      ring.querySelector('.cursor-ring').style.height = '60px';
+      ring.querySelector('.cursor-ring').style.borderColor = 'var(--color-primary)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.querySelector('.cursor-ring').style.width = '40px';
+      ring.querySelector('.cursor-ring').style.height = '40px';
+      ring.querySelector('.cursor-ring').style.borderColor = 'var(--color-accent)';
+    });
+  });
+
+  // ---- PROGRESS BAR ----
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    progressBar.style.width = pct + '%';
+  });
+
+  // ---- BACKGROUND BLOB MOUSE PARALLAX ----
+  const blobA = document.querySelector('.blob-a');
+  const blobB = document.querySelector('.blob-b');
+  const blobC = document.querySelector('.blob-c');
+  document.addEventListener('mousemove', e => {
+    const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+    const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+    gsap.to(blobA, { x: nx * 30, y: ny * 20, duration: 2, ease: 'power2.out' });
+    gsap.to(blobB, { x: nx * -20, y: ny * -30, duration: 2.5, ease: 'power2.out' });
+    gsap.to(blobC, { x: nx * 15, y: ny * 15, duration: 1.8, ease: 'power2.out' });
+  });
+
+  // ---- REVEAL ANIMATIONS ----
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1, y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  gsap.utils.toArray('.reveal-left').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, x: -60 },
+      {
+        opacity: 1, x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  gsap.utils.toArray('.reveal-right').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, x: 60 },
+      {
+        opacity: 1, x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  // ---- SKILL BARS ----
+  document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+    ScrollTrigger.create({
+      trigger: bar,
+      start: 'top 85%',
+      onEnter: () => {
+        const w = bar.dataset.width;
+        bar.style.transform = `scaleX(${w})`;
+        bar.classList.add('animated');
+      }
+    });
+  });
+
+  // ---- ACTIVE NAV ----
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ---- HERO INITIAL ANIMATION ----
+  const heroTl = gsap.timeline({ delay: 0.3 });
+  heroTl
+    .fromTo('.hero-label', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+    .fromTo('.hero-name',  { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.4')
+    .fromTo('.hero-desc',  { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+    .fromTo('.hero-visual',{ opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out' }, '-=0.8');
+</script>
+</body>
+</html>

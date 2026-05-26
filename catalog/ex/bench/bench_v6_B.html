@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NARIX - Electronic Music Producer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <style>
+    :root {
+      --color-bg:        oklch(15.9% 0.0 271.2);
+      --color-secondary: oklch(64.6% 0.173 151.2);
+      --color-primary:   oklch(78.1% 0.197 324.4);
+      --color-accent:    oklch(89.2% 0.154 92.7);
+      --color-text:      oklch(95.5% 0.0 271.2);
+      --color-muted:     oklch(45% 0.02 271.2);
+      --color-surface:   oklch(20% 0.012 271.2);
+      --color-border:    oklch(25% 0.02 271.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Progress Bar ─────────────────────── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-accent));
+      z-index: 1000;
+      transition: width 0.08s linear;
+    }
+
+    /* ── Nav ──────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem 5rem;
+      z-index: 100;
+    }
+    nav::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, oklch(15.9% 0.0 271.2 / 0.9) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.35em;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--color-primary); }
+
+    /* ── SECTION 1: HERO (full-bleed) ─────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://picsum.photos/seed/djstage88/1600/900');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.12) saturate(0.2);
+    }
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 5rem 7rem;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 44px;
+      height: 1px;
+      background: var(--color-secondary);
+      box-shadow: 0 0 10px var(--color-secondary);
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      font-size: clamp(7rem, 20vw, 20rem);
+      line-height: 0.82;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      text-shadow: 0 0 60px oklch(78.1% 0.197 324.4 / 0.15);
+    }
+    .hero-title .glow-line {
+      display: block;
+      color: var(--color-primary);
+      text-shadow:
+        0 0 20px var(--color-primary),
+        0 0 60px oklch(78.1% 0.197 324.4 / 0.55),
+        0 0 120px oklch(78.1% 0.197 324.4 / 0.25);
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+    .hero-genre {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+    .hero-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--color-border);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      right: 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 2;
+    }
+    .hero-scroll span {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 56px;
+      background: linear-gradient(to bottom, var(--color-muted), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50%       { opacity: 0.4; transform: scaleY(0.6); }
+    }
+
+    /* ── SECTION 2: ABOUT (editorial 1fr 2fr) ── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+    .about-stats {
+      background: var(--color-surface);
+      padding: 9rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3.5rem;
+      border-right: 1px solid var(--color-border);
+    }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--color-accent);
+      text-shadow: 0 0 24px oklch(89.2% 0.154 92.7 / 0.4);
+    }
+    .stat-label {
+      font-size: 0.66rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: 0.3rem;
+    }
+    .about-content {
+      padding: 9rem 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 2rem;
+    }
+    .about-heading {
+      font-family: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      line-height: 0.95;
+      margin-bottom: 2.5rem;
+    }
+    .about-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: oklch(70% 0.02 271.2);
+      max-width: 540px;
+    }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2.5rem;
+    }
+    .tag {
+      padding: 0.35rem 0.9rem;
+      border: 1px solid oklch(35% 0.06 151.2);
+      color: var(--color-secondary);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+    .tag:hover { background: oklch(30% 0.05 151.2 / 0.2); }
+
+    /* ── SECTION 3: TRACKS (horizontal-scroll) ── */
+    .tracks-section {
+      padding: 9rem 0 9rem 5rem;
+      overflow: hidden;
+    }
+    .tracks-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-right: 5rem;
+      margin-bottom: 3.5rem;
+    }
+    .tracks-heading {
+      font-family: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      line-height: 0.95;
+    }
+    .tracks-hint {
+      font-size: 0.66rem;
+      letter-spacing: 0.25em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+    .swiper { overflow: visible; }
+    .track-card {
+      width: 300px !important;
+      background: var(--color-surface);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.35s;
+    }
+    .track-card:hover { transform: translateY(-6px); }
+    .track-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, oklch(78.1% 0.197 324.4 / 0.06), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .track-card:hover::before { opacity: 1; }
+    .track-img {
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .track-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.3) brightness(0.75);
+      transition: filter 0.45s, transform 0.55s;
+    }
+    .track-card:hover .track-img img {
+      filter: saturate(1.3) brightness(0.85);
+      transform: scale(1.06);
+    }
+    .track-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: oklch(0% 0 0 / 0.45);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .track-card:hover .track-play-overlay { opacity: 1; }
+    .play-ring {
+      width: 54px;
+      height: 54px;
+      border: 2px solid var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px oklch(78.1% 0.197 324.4 / 0.55);
+    }
+    .play-ring svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--color-primary);
+      margin-left: 3px;
+    }
+    .track-info { padding: 1.4rem 1.4rem 0.8rem; }
+    .track-genre {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 0.4rem;
+    }
+    .track-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+    .track-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+    }
+    .track-bpm {
+      font-size: 0.65rem;
+      color: var(--color-muted);
+      letter-spacing: 0.15em;
+    }
+    .track-duration {
+      font-size: 0.65rem;
+      color: var(--color-accent);
+      font-variant-numeric: tabular-nums;
+    }
+    .track-waveform {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 30px;
+      padding: 0 1.4rem 1.2rem;
+    }
+    .wave-bar {
+      flex: 1;
+      background: oklch(38% 0.06 324.4);
+      border-radius: 1px;
+      transition: background 0.3s;
+    }
+    .track-card:hover .wave-bar { background: var(--color-primary); }
+
+    /* ── SECTION 4: SHOWS (editorial 2fr 1fr) ── */
+    .shows-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      min-height: 85vh;
+    }
+    .shows-list {
+      padding: 9rem 5rem;
+      border-right: 1px solid var(--color-border);
+    }
+    .shows-heading {
+      font-family: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      line-height: 0.95;
+      margin-bottom: 3.5rem;
+    }
+    .show-item {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid oklch(22% 0.015 271.2);
+      cursor: pointer;
+      position: relative;
+      transition: padding-left 0.3s;
+    }
+    .show-item::before {
+      content: '';
+      position: absolute;
+      left: -5rem;
+      right: -5rem;
+      top: 0;
+      bottom: 0;
+      background: oklch(64.6% 0.173 151.2 / 0);
+      transition: background 0.3s;
+      z-index: -1;
+    }
+    .show-item:hover::before { background: oklch(64.6% 0.173 151.2 / 0.04); }
+    .show-item:hover { padding-left: 0.5rem; }
+    .show-date {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: var(--color-muted);
+      transition: color 0.3s;
+    }
+    .show-item:hover .show-date { color: var(--color-secondary); }
+    .show-venue-wrap {}
+    .show-venue {
+      font-family: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      font-size: 1.9rem;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+    .show-city {
+      display: block;
+      font-size: 0.66rem;
+      letter-spacing: 0.28em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      margin-top: 0.15rem;
+    }
+    .show-badge {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border: 1px solid oklch(40% 0.07 324.4);
+      color: var(--color-primary);
+      white-space: nowrap;
+      transition: background 0.3s;
+    }
+    .show-badge:hover { background: oklch(35% 0.07 324.4 / 0.2); }
+    .show-badge.sold-out {
+      border-color: var(--color-border);
+      color: var(--color-muted);
+    }
+    .shows-visual {
+      position: relative;
+      overflow: hidden;
+    }
+    .shows-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35) saturate(0.4);
+    }
+    .shows-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        oklch(64.6% 0.173 151.2 / 0.12) 0%,
+        oklch(78.1% 0.197 324.4 / 0.10) 100%
+      );
+    }
+    .shows-visual-info {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 3rem;
+      right: 3rem;
+    }
+    .shows-visual-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      color: var(--color-secondary);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .shows-visual-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 0.95;
+      text-shadow: 0 0 30px oklch(64.6% 0.173 151.2 / 0.4);
+    }
+
+    /* ── SECTION 5: CONTACT (stacked-column) ── */
+    .contact-section {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 12rem 2rem 14rem;
+    }
+    .contact-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 2rem;
+    }
+    .contact-heading {
+      font-family: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+    }
+    .contact-sub {
+      font-size: 0.9rem;
+      color: oklch(60% 0.02 271.2);
+      line-height: 1.9;
+      margin-bottom: 4rem;
+    }
+    .contact-link-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--color-border);
+      cursor: pointer;
+      transition: padding-left 0.3s;
+    }
+    .contact-link-item:hover { padding-left: 0.8rem; }
+    .contact-link-name {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+    .contact-link-handle {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      transition: color 0.3s;
+    }
+    .contact-link-item:hover .contact-link-handle { color: var(--color-primary); }
+    .contact-arrow {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      transition: transform 0.3s, color 0.3s;
+    }
+    .contact-link-item:hover .contact-arrow { transform: translateX(5px); color: var(--color-primary); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 2.5rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      color: var(--color-muted);
+    }
+    .footer-copy {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 2rem 6rem; }
+      .hero-scroll { right: 2rem; }
+      .about { grid-template-columns: 1fr; }
+      .about-stats {
+        padding: 4rem 2rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .about-content { padding: 4rem 2rem; }
+      .tracks-section { padding: 6rem 0 6rem 2rem; }
+      .tracks-header { padding-right: 2rem; }
+      .track-card { width: 260px !important; }
+      .shows-section { grid-template-columns: 1fr; }
+      .shows-list { padding: 6rem 2rem; }
+      .shows-visual { display: none; }
+      .show-item { grid-template-columns: 100px 1fr; }
+      .show-badge { display: none; }
+      .contact-section { padding: 8rem 2rem 10rem; }
+      footer { padding: 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <a href="#" class="nav-logo">NARIX</a>
+  <ul class="nav-links">
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#tracks">TRACKS</a></li>
+    <li><a href="#shows">SHOWS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Electronic Music Producer</div>
+    <h1 class="hero-title">
+      N<span class="glow-line">ΛRIX</span>
+    </h1>
+    <div class="hero-meta">
+      <span class="hero-genre">DARK TECHNO</span>
+      <div class="hero-divider"></div>
+      <span class="hero-genre">INDUSTRIAL</span>
+      <div class="hero-divider"></div>
+      <span class="hero-genre">AMBIENT</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ══════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="about-stats">
+    <div class="stat-item">
+      <div class="stat-number">48</div>
+      <div class="stat-label">Released Tracks</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2.4M</div>
+      <div class="stat-label">Total Plays</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">127</div>
+      <div class="stat-label">Live Shows</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">12</div>
+      <div class="stat-label">Countries</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-label">// ABOUT</div>
+    <h2 class="about-heading">SOUND BETWEEN<br>NOISE AND ORDER</h2>
+    <p class="about-text">
+      NARIX는 서울 기반의 전자음악 프로듀서이자 라이브 퍼포머.
+      다크 테크노, 인더스트리얼, 앰비언트 사운드스케이프를 넘나들며
+      기계적 질감과 감정적 깊이를 동시에 추구한다.<br><br>
+      베를린의 지하 클럽 신과 서울의 실험적 공간에서 자신만의 소리를 구축해왔으며,
+      도시의 긴장감과 정적 사이 경계를 음악으로 탐구한다.
+    </p>
+    <div class="about-tags">
+      <span class="tag">DARK TECHNO</span>
+      <span class="tag">INDUSTRIAL</span>
+      <span class="tag">AMBIENT</span>
+      <span class="tag">EBM</span>
+      <span class="tag">EXPERIMENTAL</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRACKS ═════════════════════════════════ -->
+<section class="tracks-section" id="tracks">
+  <div class="tracks-header">
+    <div>
+      <div class="section-label">// DISCOGRAPHY</div>
+      <h2 class="tracks-heading">TRACKS</h2>
+    </div>
+    <div class="tracks-hint">DRAG TO EXPLORE</div>
+  </div>
+
+  <div class="swiper" id="tracksSwiper">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide track-card">
+        <div class="track-img">
+          <img src="https://picsum.photos/seed/nrx01/300/300" alt="Phantom Signal">
+          <div class="track-play-overlay">
+            <div class="play-ring">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="track-info">
+          <div class="track-genre">DARK TECHNO</div>
+          <div class="track-title">PHANTOM SIGNAL</div>
+          <div class="track-meta">
+            <span class="track-bpm">138 BPM</span>
+            <span class="track-duration">6:32</span>
+          </div>
+        </div>
+        <div class="track-waveform" id="wf1"></div>
+      </div>
+
+      <div class="swiper-slide track-card">
+        <div class="track-img">
+          <img src="https://picsum.photos/seed/nrx02/300/300" alt="Neon Collapse">
+          <div class="track-play-overlay">
+            <div class="play-ring">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="track-info">
+          <div class="track-genre">AMBIENT TECHNO</div>
+          <div class="track-title">NEON COLLAPSE</div>
+          <div class="track-meta">
+            <span class="track-bpm">126 BPM</span>
+            <span class="track-duration">7:14</span>
+          </div>
+        </div>
+        <div class="track-waveform" id="wf2"></div>
+      </div>
+
+      <div class="swiper-slide track-card">
+        <div class="track-img">
+          <img src="https://picsum.photos/seed/nrx03/300/300" alt="Void Protocol">
+          <div class="track-play-overlay">
+            <div class="play-ring">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="track-info">
+          <div class="track-genre">INDUSTRIAL</div>
+          <div class="track-title">VOID PROTOCOL</div>
+          <div class="track-meta">
+            <span class="track-bpm">145 BPM</span>
+            <span class="track-duration">5:48</span>
+          </div>
+        </div>
+        <div class="track-waveform" id="wf3"></div>
+      </div>
+
+      <div class="swiper-slide track-card">
+        <div class="track-img">
+          <img src="https://picsum.photos/seed/nrx04/300/300" alt="Chromatic Drift">
+          <div class="track-play-overlay">
+            <div class="play-ring">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="track-info">
+          <div class="track-genre">DEEP TECHNO</div>
+          <div class="track-title">CHROMATIC DRIFT</div>
+          <div class="track-meta">
+            <span class="track-bpm">132 BPM</span>
+            <span class="track-duration">8:01</span>
+          </div>
+        </div>
+        <div class="track-waveform" id="wf4"></div>
+      </div>
+
+      <div class="swiper-slide track-card">
+        <div class="track-img">
+          <img src="https://picsum.photos/seed/nrx05/300/300" alt="Binary Ghost">
+          <div class="track-play-overlay">
+            <div class="play-ring">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="track-info">
+          <div class="track-genre">EBM</div>
+          <div class="track-title">BINARY GHOST</div>
+          <div class="track-meta">
+            <span class="track-bpm">142 BPM</span>
+            <span class="track-duration">6:15</span>
+          </div>
+        </div>
+        <div class="track-waveform" id="wf5"></div>
+      </div>
+
+      <div class="swiper-slide track-card">
+        <div class="track-img">
+          <img src="https://picsum.photos/seed/nrx06/300/300" alt="Sigma Wave">
+          <div class="track-play-overlay">
+            <div class="play-ring">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="track-info">
+          <div class="track-genre">EXPERIMENTAL</div>
+          <div class="track-title">SIGMA WAVE</div>
+          <div class="track-meta">
+            <span class="track-bpm">-- BPM</span>
+            <span class="track-duration">9:23</span>
+          </div>
+        </div>
+        <div class="track-waveform" id="wf6"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHOWS ══════════════════════════════════ -->
+<section class="shows-section" id="shows">
+  <div class="shows-list">
+    <div class="section-label">// UPCOMING SHOWS</div>
+    <h2 class="shows-heading">LIVE</h2>
+
+    <div class="show-item">
+      <div class="show-date">2026.05.15</div>
+      <div class="show-venue-wrap">
+        <div class="show-venue">CLUB CONTRA</div>
+        <span class="show-city">Seoul, KR</span>
+      </div>
+      <div class="show-badge">TICKETS</div>
+    </div>
+
+    <div class="show-item">
+      <div class="show-date">2026.05.28</div>
+      <div class="show-venue-wrap">
+        <div class="show-venue">MODULAR FESTIVAL</div>
+        <span class="show-city">Busan, KR</span>
+      </div>
+      <div class="show-badge">TICKETS</div>
+    </div>
+
+    <div class="show-item">
+      <div class="show-date">2026.06.07</div>
+      <div class="show-venue-wrap">
+        <div class="show-venue">FABRIC</div>
+        <span class="show-city">London, UK</span>
+      </div>
+      <div class="show-badge sold-out">SOLD OUT</div>
+    </div>
+
+    <div class="show-item">
+      <div class="show-date">2026.06.21</div>
+      <div class="show-venue-wrap">
+        <div class="show-venue">BERGHAIN</div>
+        <span class="show-city">Berlin, DE</span>
+      </div>
+      <div class="show-badge">TICKETS</div>
+    </div>
+
+    <div class="show-item">
+      <div class="show-date">2026.07.04</div>
+      <div class="show-venue-wrap">
+        <div class="show-venue">MOVEMENT</div>
+        <span class="show-city">Detroit, US</span>
+      </div>
+      <div class="show-badge sold-out">SOLD OUT</div>
+    </div>
+
+    <div class="show-item">
+      <div class="show-date">2026.07.18</div>
+      <div class="show-venue-wrap">
+        <div class="show-venue">AWAKENINGS</div>
+        <span class="show-city">Amsterdam, NL</span>
+      </div>
+      <div class="show-badge">TICKETS</div>
+    </div>
+
+  </div>
+
+  <div class="shows-visual">
+    <img src="https://picsum.photos/seed/nrxlive/800/1100" alt="NARIX Live">
+    <div class="shows-visual-overlay"></div>
+    <div class="shows-visual-info">
+      <div class="shows-visual-eyebrow">NEXT SHOW</div>
+      <div class="shows-visual-title">CLUB CONTRA<br>SEOUL</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ════════════════════════════════ -->
+<section class="contact-section" id="contact">
+  <div class="contact-label">// CONTACT</div>
+  <h2 class="contact-heading">LET'S<br>CONNECT</h2>
+  <p class="contact-sub">
+    부킹 문의, 협업 제안, 릴리즈 파트너십 관련 문의는<br>아래 채널로 연락 바랍니다.
+  </p>
+
+  <div>
+    <div class="contact-link-item">
+      <span class="contact-link-name">BOOKING</span>
+      <span class="contact-link-handle">booking@narix.io</span>
+      <span class="contact-arrow">→</span>
+    </div>
+    <div class="contact-link-item">
+      <span class="contact-link-name">INSTAGRAM</span>
+      <span class="contact-link-handle">@narix_music</span>
+      <span class="contact-arrow">→</span>
+    </div>
+    <div class="contact-link-item">
+      <span class="contact-link-name">SOUNDCLOUD</span>
+      <span class="contact-link-handle">soundcloud.com/narix</span>
+      <span class="contact-arrow">→</span>
+    </div>
+    <div class="contact-link-item">
+      <span class="contact-link-name">BANDCAMP</span>
+      <span class="contact-link-handle">narix.bandcamp.com</span>
+      <span class="contact-arrow">→</span>
+    </div>
+    <div class="contact-link-item">
+      <span class="contact-link-name">RESIDENT ADVISOR</span>
+      <span class="contact-link-handle">ra.co/dj/narix</span>
+      <span class="contact-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">NARIX</div>
+  <div class="footer-copy">&copy; 2026 NARIX. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<!-- ═══ Scripts ═══════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ── Progress bar
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  }, { passive: true });
+
+  // ── Hero canvas: particles + waveforms
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, ptArr = [], wavePhase = 0;
+
+  function resizeCanvas() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    buildParticles();
+  }
+
+  function buildParticles() {
+    ptArr = [];
+    const n = Math.floor(W / 9);
+    const palette = [
+      [0, 170, 83],
+      [244, 134, 253],
+      [255, 216, 81],
+    ];
+    for (let i = 0; i < n; i++) {
+      const c = palette[i % 3];
+      ptArr.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: (Math.random() - 0.5) * 0.28,
+        r: Math.random() * 1.4 + 0.3,
+        a: Math.random() * 0.45 + 0.08,
+        cr: c[0], cg: c[1], cb: c[2],
+      });
+    }
+  }
+
+  function drawCanvas() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Waveforms
+    const waveConfigs = [
+      { yRatio: 0.65, freq1: 0.007, freq2: 0.018, amp1: 55, amp2: 18, r: 0, g: 170, b: 83,  alpha: 0.12 },
+      { yRatio: 0.72, freq1: 0.010, freq2: 0.025, amp1: 40, amp2: 14, r: 244, g: 134, b: 253, alpha: 0.10 },
+    ];
+    waveConfigs.forEach((wc, wi) => {
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(${wc.r},${wc.g},${wc.b},${wc.alpha})`;
+      for (let x = 0; x < W; x += 2) {
+        const y = H * wc.yRatio
+          + Math.sin(x * wc.freq1 + wavePhase + wi * 1.1) * wc.amp1
+          + Math.sin(x * wc.freq2 + wavePhase * 1.4 + wi) * wc.amp2;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+
+    // Particles
+    ptArr.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.cr},${p.cg},${p.cb},${p.a})`;
+      ctx.fill();
+    });
+
+    wavePhase += 0.011;
+    requestAnimationFrame(drawCanvas);
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  drawCanvas();
+
+  // ── Waveform bars
+  function buildWaveform(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    for (let i = 0; i < 44; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'wave-bar';
+      bar.style.height = (Math.random() * 22 + 4) + 'px';
+      el.appendChild(bar);
+    }
+  }
+  for (let i = 1; i <= 6; i++) buildWaveform('wf' + i);
+
+  // ── Swiper
+  new Swiper('#tracksSwiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 20,
+    freeMode: true,
+    grabCursor: true,
+  });
+
+  // ── GSAP ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.from('.hero-eyebrow', { y: 24, opacity: 0, duration: 0.8, ease: 'power2.out' })
+    .from('.hero-title',   { y: 50, opacity: 0, duration: 1.0, ease: 'power3.out' }, '-=0.5')
+    .from('.hero-meta',    { y: 20, opacity: 0, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+    .from('.hero-scroll',  { opacity: 0, duration: 0.6 }, '-=0.2');
+
+  // About stats
+  gsap.from('.stat-item', {
+    scrollTrigger: { trigger: '.about', start: 'top 72%' },
+    y: 40, opacity: 0, duration: 0.75, stagger: 0.14, ease: 'power3.out',
+  });
+  gsap.from('.about-content > *', {
+    scrollTrigger: { trigger: '.about-content', start: 'top 72%' },
+    y: 28, opacity: 0, duration: 0.65, stagger: 0.1, ease: 'power2.out',
+  });
+
+  // Tracks
+  gsap.from('.tracks-header', {
+    scrollTrigger: { trigger: '.tracks-section', start: 'top 76%' },
+    y: 28, opacity: 0, duration: 0.6, ease: 'power2.out',
+  });
+
+  // Shows
+  gsap.from('.show-item', {
+    scrollTrigger: { trigger: '.shows-section', start: 'top 72%' },
+    x: -28, opacity: 0, duration: 0.55, stagger: 0.09, ease: 'power2.out',
+  });
+  gsap.from('.shows-visual', {
+    scrollTrigger: { trigger: '.shows-section', start: 'top 72%' },
+    opacity: 0, duration: 1.2, ease: 'power2.out',
+  });
+
+  // Contact
+  gsap.from('.contact-section > *', {
+    scrollTrigger: { trigger: '.contact-section', start: 'top 76%' },
+    y: 28, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out',
+  });
+
+})();
+</script>
+
+</body>
+</html>

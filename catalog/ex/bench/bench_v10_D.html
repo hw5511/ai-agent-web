@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — KIM MINWOO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080808;
+  --fg: #f0f0f0;
+  --accent: #aaff00;
+  --border: rgba(255,255,255,0.08);
+  --mono: 'Syne', sans-serif;
+}
+
+html { background: var(--bg); color: var(--fg); scroll-behavior: auto; }
+body { background: var(--bg); overflow-x: hidden; }
+
+#progress {
+  position: fixed; top: 0; left: 0; height: 2px;
+  background: var(--accent); width: 0%; z-index: 1000;
+  pointer-events: none;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; width: 100%;
+  padding: 1.5rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 100; mix-blend-mode: difference;
+}
+.nav-logo {
+  font-family: var(--mono); font-weight: 800; font-size: 0.95rem;
+  letter-spacing: 0.25em; color: var(--fg); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: 0.75rem; color: var(--fg);
+  text-decoration: none; letter-spacing: 0.12em; opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.nav-links a:hover { opacity: 1; }
+
+/* ── HERO ── */
+#hero {
+  position: relative; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+#hero-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0.25; pointer-events: none;
+}
+
+.hero-name {
+  position: relative; z-index: 2;
+  text-align: center; line-height: 0.88;
+  pointer-events: none;
+}
+
+.hero-name .word {
+  font-family: var(--mono); font-weight: 800;
+  font-size: clamp(5.5rem, 15vw, 15rem);
+  letter-spacing: -0.03em; color: var(--fg);
+  display: block; will-change: transform;
+}
+
+.hero-name .word.accent { color: var(--accent); }
+
+.hero-sub {
+  position: absolute; bottom: 7%; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.4em;
+  color: var(--accent); text-transform: uppercase; z-index: 2;
+  display: flex; align-items: center; gap: 1.2rem; white-space: nowrap;
+}
+.hero-sub::before, .hero-sub::after {
+  content: ''; display: block; width: 36px; height: 1px; background: var(--accent);
+}
+
+.scroll-hint {
+  position: absolute; bottom: 4%; right: 2.5rem;
+  writing-mode: vertical-rl;
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.35em; color: rgba(255,255,255,0.25);
+  z-index: 2; user-select: none;
+}
+
+/* ── WORKS ── */
+#works {
+  padding: 9rem 0 5rem;
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  padding: 0 2.5rem 3.5rem;
+  display: flex; align-items: baseline; gap: 1.5rem;
+}
+.section-num {
+  font-family: var(--mono); font-size: 0.7rem;
+  color: var(--accent); letter-spacing: 0.25em;
+}
+.section-title {
+  font-family: var(--mono); font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  letter-spacing: -0.03em; line-height: 1;
+}
+
+.swiper-works {
+  padding: 0 2.5rem 4rem !important;
+  cursor: grab;
+}
+.swiper-works:active { cursor: grabbing; }
+
+.work-slide { width: clamp(300px, 65vw, 600px) !important; }
+
+.work-card {
+  position: relative; overflow: hidden; border-radius: 3px;
+  aspect-ratio: 4/3; background: #111;
+}
+.work-card img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.work-card:hover img { transform: scale(1.05); }
+
+.work-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+  opacity: 0; transition: opacity 0.35s;
+  display: flex; align-items: flex-end; padding: 1.5rem;
+}
+.work-card:hover .work-overlay { opacity: 1; }
+.work-tag {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.22em;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 0.3em 0.9em;
+}
+
+.work-info {
+  padding: 1.25rem 0;
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.work-title { font-family: var(--mono); font-weight: 700; font-size: 1.05rem; }
+.work-year {
+  font-family: var(--mono); font-size: 0.7rem;
+  color: var(--accent); letter-spacing: 0.18em;
+}
+
+/* ── SKILLS ── */
+#skills {
+  padding: 9rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.skills-grid {
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+
+.skill-row {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  opacity: 0; transform: translateY(28px);
+  will-change: transform, opacity;
+}
+
+.skill-name {
+  font-family: var(--mono); font-weight: 800;
+  font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+.skill-cat {
+  font-family: var(--mono); font-size: 0.65rem;
+  color: var(--accent); letter-spacing: 0.22em; text-transform: uppercase;
+}
+
+/* ── CONTACT ── */
+#contact {
+  padding: 10rem 2.5rem 6rem;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center; gap: 3rem;
+}
+
+.contact-cta {
+  font-family: var(--mono); font-weight: 800;
+  font-size: clamp(3.5rem, 11vw, 11rem);
+  letter-spacing: -0.04em; line-height: 0.88;
+  color: var(--fg);
+}
+.contact-cta .hl { color: var(--accent); }
+
+.contact-email {
+  font-family: var(--mono);
+  font-size: clamp(0.9rem, 2vw, 1.35rem);
+  color: rgba(255,255,255,0.45); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding-bottom: 0.3em; letter-spacing: 0.05em;
+  transition: color 0.3s, border-color 0.3s;
+}
+.contact-email:hover { color: var(--accent); border-color: var(--accent); }
+
+.contact-links {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+.contact-links a {
+  font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.22em; color: rgba(255,255,255,0.35);
+  text-decoration: none; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.contact-links a:hover { color: var(--fg); }
+
+.contact-foot {
+  font-family: var(--mono); font-size: 0.65rem;
+  color: rgba(255,255,255,0.18); letter-spacing: 0.2em;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .skills-grid { grid-template-columns: 1fr; }
+  .hero-name .word { font-size: clamp(4rem, 20vw, 8rem); }
+  .contact-cta { font-size: clamp(2.8rem, 16vw, 5rem); }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <a href="#" class="nav-logo">KM</a>
+  <ul class="nav-links">
+    <li><a href="#works">Works</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-name" id="hero-name">
+    <span class="word" id="w0">KIM</span>
+    <span class="word" id="w1">MIN</span>
+    <span class="word accent" id="w2">WOO</span>
+  </div>
+  <div class="hero-sub">Creative Developer</div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">WORKS</h2>
+  </div>
+  <div class="swiper swiper-works">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide work-slide">
+        <div class="work-card">
+          <img src="https://loremflickr.com/600/450/design,web,dark" alt="Aura Studio">
+          <div class="work-overlay"><span class="work-tag">WEB DESIGN</span></div>
+        </div>
+        <div class="work-info"><span class="work-title">Aura Studio</span><span class="work-year">2024</span></div>
+      </div>
+      <div class="swiper-slide work-slide">
+        <div class="work-card">
+          <img src="https://loremflickr.com/600/450/branding,identity,black" alt="Neon Collective">
+          <div class="work-overlay"><span class="work-tag">BRANDING</span></div>
+        </div>
+        <div class="work-info"><span class="work-title">Neon Collective</span><span class="work-year">2024</span></div>
+      </div>
+      <div class="swiper-slide work-slide">
+        <div class="work-card">
+          <img src="https://loremflickr.com/600/450/interface,mobile,ui" alt="Vibe App">
+          <div class="work-overlay"><span class="work-tag">UI / UX</span></div>
+        </div>
+        <div class="work-info"><span class="work-title">Vibe App</span><span class="work-year">2023</span></div>
+      </div>
+      <div class="swiper-slide work-slide">
+        <div class="work-card">
+          <img src="https://loremflickr.com/600/450/motion,abstract,graphic" alt="Pulse Identity">
+          <div class="work-overlay"><span class="work-tag">MOTION</span></div>
+        </div>
+        <div class="work-info"><span class="work-title">Pulse Identity</span><span class="work-year">2023</span></div>
+      </div>
+      <div class="swiper-slide work-slide">
+        <div class="work-card">
+          <img src="https://loremflickr.com/600/450/photography,art,studio" alt="Frame Co">
+          <div class="work-overlay"><span class="work-tag">ART DIRECTION</span></div>
+        </div>
+        <div class="work-info"><span class="work-title">Frame &amp; Co.</span><span class="work-year">2022</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header" style="padding-left:2.5rem; padding-right:2.5rem;">
+    <span class="section-num">02</span>
+    <h2 class="section-title">SKILLS</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-row"><span class="skill-name">HTML / CSS</span><span class="skill-cat">Foundation</span></div>
+    <div class="skill-row"><span class="skill-name">JavaScript</span><span class="skill-cat">Frontend</span></div>
+    <div class="skill-row"><span class="skill-name">React</span><span class="skill-cat">Framework</span></div>
+    <div class="skill-row"><span class="skill-name">GSAP / Three</span><span class="skill-cat">Animation</span></div>
+    <div class="skill-row"><span class="skill-name">Figma</span><span class="skill-cat">Design</span></div>
+    <div class="skill-row"><span class="skill-name">Node.js</span><span class="skill-cat">Backend</span></div>
+    <div class="skill-row"><span class="skill-name">AI / LLM</span><span class="skill-cat">Emerging</span></div>
+    <div class="skill-row"><span class="skill-name">Motion Design</span><span class="skill-cat">Visual</span></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-cta">
+    LET'S<br><span class="hl">WORK</span><br>TOGETHER
+  </div>
+  <a href="mailto:hello@kimminwoo.dev" class="contact-email">hello@kimminwoo.dev</a>
+  <ul class="contact-links">
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="#">Behance</a></li>
+  </ul>
+  <p class="contact-foot">© 2024 KIM MINWOO — ALL RIGHTS RESERVED</p>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Lenis boilerplate
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// Progress bar
+lenis.on('scroll', ({ progress }) => {
+  document.getElementById('progress').style.width = (progress * 100) + '%';
+});
+
+// ── Canvas dot grid (SURPRISE ELEMENT) ──
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, dots = [], mouse = { x: -9999, y: -9999 };
+
+function initCanvas() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  dots = [];
+  const gap = 42;
+  for (let x = gap / 2; x < W; x += gap) {
+    for (let y = gap / 2; y < H; y += gap) {
+      dots.push({ x, y, ox: x, oy: y, vx: 0, vy: 0, r: 1.2 });
+    }
+  }
+}
+
+let rafId;
+function drawDots(ts) {
+  ctx.clearRect(0, 0, W, H);
+
+  // Read phase — compute all positions
+  const len = dots.length;
+  for (let i = 0; i < len; i++) {
+    const d = dots[i];
+    const dx = mouse.x - d.x;
+    const dy = mouse.y - d.y;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    const force = Math.max(0, 100 - dist) / 100;
+    d.vx += (-(dx / dist) * force * 4) + (d.ox - d.x) * 0.06;
+    d.vy += (-(dy / dist) * force * 4) + (d.oy - d.y) * 0.06;
+    d.vx *= 0.82; d.vy *= 0.82;
+    d.x += d.vx; d.y += d.vy;
+    d.r = 1.2 + force * 2.5;
+  }
+
+  // Write phase — batch all dots into one path
+  ctx.fillStyle = '#aaff00';
+  ctx.beginPath();
+  for (let i = 0; i < len; i++) {
+    const d = dots[i];
+    ctx.moveTo(d.x + d.r, d.y);
+    ctx.arc(d.x, d.y, d.r, 0, 6.2832);
+  }
+  ctx.fill();
+
+  rafId = requestAnimationFrame(drawDots);
+}
+
+initCanvas();
+rafId = requestAnimationFrame(drawDots);
+
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(rafId);
+  initCanvas();
+  rafId = requestAnimationFrame(drawDots);
+});
+
+document.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+// ── Hero name magnetic repulsion ──
+const words = document.querySelectorAll('.word');
+document.addEventListener('mousemove', e => {
+  words.forEach(word => {
+    const rect = word.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    const maxDist = 320;
+    if (dist < maxDist) {
+      const force = (1 - dist / maxDist) * 24;
+      gsap.to(word, {
+        x: -(dx / dist) * force,
+        y: -(dy / dist) * force,
+        duration: 0.55, ease: 'power2.out', overwrite: 'auto'
+      });
+    } else {
+      gsap.to(word, {
+        x: 0, y: 0,
+        duration: 0.9, ease: 'elastic.out(1, 0.35)', overwrite: 'auto'
+      });
+    }
+  });
+});
+
+// ── Hero entrance ──
+gsap.from('nav', { opacity: 0, y: -16, duration: 0.9, delay: 0.2, ease: 'power3.out' });
+gsap.from(words, {
+  yPercent: 110, opacity: 0,
+  duration: 1.3, stagger: 0.11,
+  ease: 'expo.out', delay: 0.4
+});
+gsap.from(['.hero-sub', '.scroll-hint'], {
+  opacity: 0, y: 18, duration: 1,
+  stagger: 0.12, delay: 1, ease: 'power3.out'
+});
+
+// ── Swiper ──
+new Swiper('.swiper-works', {
+  slidesPerView: 'auto',
+  spaceBetween: 20,
+  freeMode: true,
+  grabCursor: true,
+  mousewheel: { forceToAxis: true },
+});
+
+// ── Skills scroll reveal ──
+gsap.utils.toArray('.skill-row').forEach((row, i) => {
+  gsap.to(row, {
+    opacity: 1, y: 0,
+    duration: 0.65, ease: 'power3.out',
+    delay: (i % 2) * 0.08,
+    scrollTrigger: {
+      trigger: row,
+      start: 'top 87%',
+      toggleActions: 'play none none none'
+    }
+  });
+});
+
+// ── Contact entrance ──
+gsap.from('.contact-cta', {
+  opacity: 0, y: 55, duration: 1.1, ease: 'expo.out',
+  scrollTrigger: { trigger: '#contact', start: 'top 72%' }
+});
+gsap.from('.contact-email', {
+  opacity: 0, y: 20, duration: 0.7, ease: 'power3.out',
+  scrollTrigger: { trigger: '.contact-email', start: 'top 88%' }
+});
+gsap.from('.contact-links li', {
+  opacity: 0, y: 14, stagger: 0.07, duration: 0.5, ease: 'power2.out',
+  scrollTrigger: { trigger: '.contact-links', start: 'top 90%' }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizontal Scroll Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --color-bg: #9bae27;
+      --color-secondary: #c44039;
+      --color-primary: #250dd6;
+      --color-accent: #2de4a6;
+      --color-text: #111111;
+      --font-title: 'Bebas Neue', 'Noto Sans KR', sans-serif;
+      --font-body: 'Space Mono', 'Noto Sans KR', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ---- 스크롤 진행 바 ---- */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background: var(--color-primary);
+      z-index: 1000;
+      transition: background 0.3s;
+      will-change: width;
+    }
+
+    /* ---- 히어로 섹션 ---- */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-label {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      text-align: center;
+      color: var(--color-text);
+    }
+
+    .hero-title span {
+      color: var(--color-primary);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      opacity: 0.65;
+      text-align: center;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 48px;
+      background: var(--color-text);
+      animation: scrollDown 1.6s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ---- 수평 스크롤 섹션 ---- */
+    .horizontal-section {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panels-wrapper {
+      display: flex;
+      width: 400vw;
+      height: 100vh;
+      will-change: transform;
+    }
+
+    .panel {
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel-1 { background: var(--color-bg); color: #111111; }
+    .panel-2 { background: var(--color-secondary); color: #ffffff; }
+    .panel-3 { background: var(--color-primary); color: #ffffff; }
+    .panel-4 { background: var(--color-accent); color: #111111; }
+
+    .panel-inner {
+      max-width: 700px;
+      padding: 4rem 2rem;
+      text-align: left;
+    }
+
+    .panel-number {
+      font-family: var(--font-title);
+      font-size: clamp(6rem, 18vw, 14rem);
+      line-height: 1;
+      opacity: 0.08;
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      pointer-events: none;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-tag {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 1.2rem;
+    }
+
+    .panel-title {
+      font-family: var(--font-title);
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.8rem;
+    }
+
+    .panel-desc {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+      opacity: 0.75;
+      max-width: 480px;
+    }
+
+    .panel-badge {
+      display: inline-block;
+      margin-top: 2.4rem;
+      padding: 0.7rem 1.6rem;
+      border: 2px solid currentColor;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .panel-1 .panel-badge:hover { background: #111111; color: var(--color-bg); }
+    .panel-2 .panel-badge:hover { background: #ffffff; color: var(--color-secondary); }
+    .panel-3 .panel-badge:hover { background: #ffffff; color: var(--color-primary); }
+    .panel-4 .panel-badge:hover { background: #111111; color: var(--color-accent); }
+
+    /* 패널 인디케이터 */
+    .panel-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.25;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .indicator-dot.active {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    /* 패널 카운터 */
+    .panel-counter {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3rem;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      opacity: 0.45;
+    }
+
+    /* ---- 마무리 섹션 ---- */
+    .outro {
+      min-height: 100vh;
+      background: #111111;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .outro-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 1.5rem;
+    }
+
+    .outro-title {
+      font-family: var(--font-title);
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .outro-title em {
+      font-style: normal;
+      color: var(--color-accent);
+    }
+
+    .outro-desc {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      opacity: 0.55;
+      max-width: 500px;
+      margin-bottom: 3rem;
+    }
+
+    .outro-cta {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      background: var(--color-accent);
+      color: #111111;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(45, 228, 166, 0.3);
+    }
+
+    .outro-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(45, 228, 166, 0.45);
+    }
+
+    .outro-bg-text {
+      position: absolute;
+      font-family: var(--font-title);
+      font-size: clamp(8rem, 22vw, 18rem);
+      letter-spacing: -0.02em;
+      opacity: 0.04;
+      pointer-events: none;
+      white-space: nowrap;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ---- 반응형 ---- */
+    @media (max-width: 768px) {
+      .panel-inner {
+        padding: 2rem 1.5rem;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 14vw, 5rem);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 스크롤 진행 바 -->
+  <div id="progress-bar"></div>
+
+  <!-- 히어로 섹션 -->
+  <section class="hero" id="hero">
+    <p class="hero-label">Scroll Experience</p>
+    <h1 class="hero-title">HORIZONTAL<br><span>JOURNEY</span></h1>
+    <p class="hero-sub">세로로 스크롤하면 가로로 움직이는 경험</p>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- 수평 스크롤 섹션 -->
+  <section class="horizontal-section" id="horizontal-section">
+    <div class="panels-wrapper" id="panels-wrapper">
+
+      <!-- Panel 1 -->
+      <div class="panel panel-1">
+        <span class="panel-number">01</span>
+        <div class="panel-inner">
+          <p class="panel-tag">Chapter 01 &mdash; Concept</p>
+          <h2 class="panel-title">DESIGN<br>THINKING</h2>
+          <p class="panel-desc">
+            좋은 디자인은 단순함에서 출발합니다.<br>
+            사용자의 시선을 자연스럽게 유도하고<br>
+            핵심 메시지를 명확하게 전달합니다.
+          </p>
+          <div class="panel-badge">Explore</div>
+        </div>
+        <div class="panel-indicator">
+          <div class="indicator-dot active"></div>
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot"></div>
+        </div>
+        <div class="panel-counter">01 / 04</div>
+      </div>
+
+      <!-- Panel 2 -->
+      <div class="panel panel-2">
+        <span class="panel-number">02</span>
+        <div class="panel-inner">
+          <p class="panel-tag">Chapter 02 &mdash; Build</p>
+          <h2 class="panel-title">DEVELOP<br>WITH SOUL</h2>
+          <p class="panel-desc">
+            코드는 단순한 명령어가 아닙니다.<br>
+            생각을 구조화하고 경험을 구현하는<br>
+            창의적인 언어입니다.
+          </p>
+          <div class="panel-badge">Explore</div>
+        </div>
+        <div class="panel-indicator">
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot active"></div>
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot"></div>
+        </div>
+        <div class="panel-counter">02 / 04</div>
+      </div>
+
+      <!-- Panel 3 -->
+      <div class="panel panel-3">
+        <span class="panel-number">03</span>
+        <div class="panel-inner">
+          <p class="panel-tag">Chapter 03 &mdash; Motion</p>
+          <h2 class="panel-title">ANIMATE<br>THE WEB</h2>
+          <p class="panel-desc">
+            움직임은 감정을 전달합니다.<br>
+            섬세한 인터랙션 하나가 사용자와<br>
+            브랜드 사이의 깊은 연결을 만듭니다.
+          </p>
+          <div class="panel-badge">Explore</div>
+        </div>
+        <div class="panel-indicator">
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot active"></div>
+          <div class="indicator-dot"></div>
+        </div>
+        <div class="panel-counter">03 / 04</div>
+      </div>
+
+      <!-- Panel 4 -->
+      <div class="panel panel-4">
+        <span class="panel-number">04</span>
+        <div class="panel-inner">
+          <p class="panel-tag">Chapter 04 &mdash; Launch</p>
+          <h2 class="panel-title">SHIP IT<br>BOLDLY</h2>
+          <p class="panel-desc">
+            완벽함을 기다리지 마세요.<br>
+            지금 배포하고, 사용자에게서 배우고,<br>
+            더 나은 버전으로 계속 나아가세요.
+          </p>
+          <div class="panel-badge">Explore</div>
+        </div>
+        <div class="panel-indicator">
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot"></div>
+          <div class="indicator-dot active"></div>
+        </div>
+        <div class="panel-counter">04 / 04</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 마무리 섹션 -->
+  <section class="outro" id="outro">
+    <div class="outro-bg-text">END</div>
+    <p class="outro-eyebrow">Journey Complete</p>
+    <h2 class="outro-title">READY TO<br><em>CREATE?</em></h2>
+    <p class="outro-desc">
+      네 개의 챕터를 모두 지나왔습니다.<br>
+      이제 당신만의 여정을 시작할 차례입니다.
+    </p>
+    <button class="outro-cta">Get Started</button>
+  </section>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ---- 수평 스크롤 pinning ----
+    const panelsWrapper = document.getElementById('panels-wrapper');
+    const panels = gsap.utils.toArray('.panel');
+    const totalPanels = panels.length;
+
+    gsap.to(panelsWrapper, {
+      x: () => -(panelsWrapper.scrollWidth - window.innerWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#horizontal-section',
+        pin: true,
+        scrub: 1,
+        end: () => '+=' + (totalPanels - 1) * window.innerWidth,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const currentIndex = Math.round(progress * (totalPanels - 1));
+          updateIndicators(currentIndex);
+        }
+      }
+    });
+
+    // 패널별 콘텐츠 등장 애니메이션
+    panels.forEach((panel, i) => {
+      const inner = panel.querySelector('.panel-inner');
+      const tag = panel.querySelector('.panel-tag');
+      const title = panel.querySelector('.panel-title');
+      const desc = panel.querySelector('.panel-desc');
+      const badge = panel.querySelector('.panel-badge');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#horizontal-section',
+          start: 'top top',
+          end: () => '+=' + (totalPanels - 1) * window.innerWidth,
+          scrub: 1,
+        }
+      });
+
+      const panelProgress = i / totalPanels;
+      const startProgress = Math.max(0, panelProgress - 0.05);
+
+      gsap.set([tag, title, desc, badge], { opacity: 0, y: 40 });
+
+      ScrollTrigger.create({
+        trigger: '#horizontal-section',
+        start: 'top top',
+        end: () => '+=' + (totalPanels - 1) * window.innerWidth,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const panelFloat = progress * (totalPanels - 1);
+          const distFromPanel = Math.abs(panelFloat - i);
+
+          if (distFromPanel < 0.6) {
+            const show = 1 - distFromPanel / 0.6;
+            gsap.to([tag, title, desc, badge], {
+              opacity: show * (distFromPanel < 0.3 ? 1 : 0.75),
+              y: (1 - show) * 30,
+              duration: 0.1,
+              overwrite: true,
+              stagger: 0
+            });
+          } else {
+            gsap.to([tag, title, desc, badge], {
+              opacity: 0,
+              y: 30,
+              duration: 0.1,
+              overwrite: true
+            });
+          }
+        }
+      });
+    });
+
+    // ---- 인디케이터 업데이트 ----
+    function updateIndicators(activeIndex) {
+      panels.forEach((panel, pIdx) => {
+        const dots = panel.querySelectorAll('.indicator-dot');
+        dots.forEach((dot, dIdx) => {
+          dot.classList.toggle('active', dIdx === activeIndex);
+        });
+      });
+    }
+
+    // ---- 히어로 등장 애니메이션 ----
+    gsap.from('.hero-label', { opacity: 0, y: 20, duration: 0.8, delay: 0.3 });
+    gsap.from('.hero-title', { opacity: 0, y: 40, duration: 1, delay: 0.5, ease: 'power3.out' });
+    gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 0.8, delay: 0.9 });
+    gsap.from('.scroll-hint', { opacity: 0, duration: 0.8, delay: 1.3 });
+
+    // ---- 히어로 스크롤 페이드 ----
+    gsap.to('.hero-title, .hero-label, .hero-sub', {
+      opacity: 0,
+      y: -60,
+      ease: 'power2.in',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'center center',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+
+    // ---- 마무리 섹션 등장 ----
+    gsap.from('.outro-eyebrow', {
+      opacity: 0, y: 30, duration: 0.8,
+      scrollTrigger: { trigger: '.outro', start: 'top 80%' }
+    });
+    gsap.from('.outro-title', {
+      opacity: 0, y: 50, duration: 1, delay: 0.15,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.outro', start: 'top 80%' }
+    });
+    gsap.from('.outro-desc', {
+      opacity: 0, y: 30, duration: 0.8, delay: 0.35,
+      scrollTrigger: { trigger: '.outro', start: 'top 80%' }
+    });
+    gsap.from('.outro-cta', {
+      opacity: 0, y: 20, scale: 0.95, duration: 0.7, delay: 0.55,
+      scrollTrigger: { trigger: '.outro', start: 'top 80%' }
+    });
+
+    // ---- 스크롤 진행 바 ----
+    const progressBar = document.getElementById('progress-bar');
+
+    ScrollTrigger.create({
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: (self) => {
+        requestAnimationFrame(() => {
+          progressBar.style.width = (self.progress * 100) + '%';
+        });
+      }
+    });
+
+    // ---- 리사이즈 대응 ----
+    window.addEventListener('resize', () => {
+      ScrollTrigger.refresh();
+    });
+  </script>
+</body>
+</html>

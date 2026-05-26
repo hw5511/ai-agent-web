@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>해피독 유치원 - Happydog Kindergarten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&family=Nunito:wght@400;600;700&family=Jua&family=Gamja+Flower&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <style>
+    :root {
+      --color-bg:      oklch(96.9% 0.002 199.9);
+      --color-primary: oklch(65.4% 0.225 35.5);
+      --color-accent:  oklch(57.0% 0.135 140.6);
+      --color-text:    oklch(18% 0.01 200);
+      --color-soft:    oklch(92% 0.018 60);
+      --color-primary-light: oklch(90% 0.06 35.5);
+      --color-accent-light:  oklch(88% 0.05 140.6);
+      --font-display: 'Quicksand', 'Jua', sans-serif;
+      --font-body:    'Nunito', 'Gamja Flower', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: var(--color-primary);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.08s linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: oklch(96.9% 0.002 199.9 / 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid oklch(88% 0.01 200);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--color-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--color-primary); }
+
+    .nav-cta {
+      background: var(--color-primary);
+      color: #fff !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 99px;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO: split-screen ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      padding-top: 70px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 5rem 6rem 6rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 0.4rem 1rem;
+      border-radius: 99px;
+      margin-bottom: 1.8rem;
+      width: fit-content;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .hero-title span { color: var(--color-primary); }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.75;
+      color: oklch(40% 0.01 200);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 2rem;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .btn-ghost {
+      display: inline-block;
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.85rem 1.5rem;
+      text-decoration: none;
+      border-bottom: 2px solid var(--color-primary);
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--color-primary); }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-image-tag {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      box-shadow: 0 8px 30px oklch(0% 0 0 / 0.1);
+    }
+
+    .tag-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .tag-text {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--color-text);
+    }
+
+    /* ── INTRO: stacked-column ── */
+    .intro {
+      padding: 9rem 2rem;
+      background: var(--color-soft);
+    }
+
+    .intro-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .intro-desc {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: oklch(38% 0.01 200);
+      margin-bottom: 3.5rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.8rem;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: oklch(45% 0.01 200);
+    }
+
+    /* ── PROGRAMS: editorial ── */
+    .programs {
+      padding: 8rem 5rem;
+    }
+
+    .programs-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 5rem;
+    }
+
+    .programs-header .section-title {
+      margin-bottom: 0;
+    }
+
+    .programs-desc {
+      max-width: 300px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: oklch(42% 0.01 200);
+    }
+
+    /* 프로그램 카드 1 - grid: 2fr 1fr */
+    .prog-card-1 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+      align-items: center;
+    }
+
+    /* 프로그램 카드 2 - grid: 1fr 2fr */
+    .prog-card-2 {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+      align-items: center;
+    }
+
+    /* 프로그램 카드 3 - grid: 1fr 1fr 1.5fr */
+    .prog-card-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .prog-image {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .prog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .prog-image:hover img { transform: scale(1.04); }
+
+    .prog-image-tall { height: 360px; }
+    .prog-image-med  { height: 280px; }
+    .prog-image-full { height: 100%; min-height: 240px; }
+
+    .prog-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .prog-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 4rem;
+      color: var(--color-primary-light);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .prog-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 0.3rem 0.8rem;
+      border-radius: 99px;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .prog-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      line-height: 1.2;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.02em;
+    }
+
+    .prog-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: oklch(40% 0.01 200);
+      margin-bottom: 1.2rem;
+    }
+
+    .prog-days {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .prog-extra {
+      background: var(--color-primary);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #fff;
+    }
+
+    .prog-extra-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .prog-extra-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .prog-extra-list li {
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding-left: 1.2rem;
+      position: relative;
+      color: oklch(95% 0.02 35.5);
+    }
+
+    .prog-extra-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: oklch(95% 0.05 35.5 / 0.7);
+    }
+
+    .prog-extra-price {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .prog-extra-price span {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    /* ── GALLERY: mosaic ── */
+    .gallery {
+      padding: 8rem 4rem;
+      background: var(--color-soft);
+    }
+
+    .gallery-header {
+      max-width: 640px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 220px;
+      gap: 12px;
+    }
+
+    .mosaic-item {
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .mosaic-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .mosaic-item:hover img { transform: scale(1.06); }
+
+    .mosaic-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .mosaic-item:nth-child(4) { grid-column: span 2; }
+    .mosaic-item:nth-child(6) { grid-column: span 2; }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 9rem 2rem;
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-title {
+      margin-bottom: 1rem;
+    }
+
+    .contact-sub {
+      font-size: 1.05rem;
+      color: oklch(42% 0.01 200);
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-card {
+      background: var(--color-soft);
+      border-radius: 14px;
+      padding: 1.8rem 1.4rem;
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.3rem;
+    }
+
+    .icon-orange { background: var(--color-primary-light); }
+    .icon-green  { background: var(--color-accent-light); }
+    .icon-soft   { background: oklch(85% 0.03 200); }
+
+    .contact-card-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: oklch(50% 0.01 200);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card-value {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+
+    .contact-cta {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      padding: 1.1rem 3rem;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .contact-cta:hover { transform: translateY(-3px); opacity: 0.9; }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid oklch(88% 0.01 200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--color-primary);
+    }
+
+    .footer-copy {
+      font-size: 0.82rem;
+      color: oklch(58% 0.01 200);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .nav { padding: 1rem 1.8rem; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-image { height: 55vw; }
+      .hero-text { padding: 5rem 2rem 3rem; }
+      .hero-title { font-size: 2.6rem; }
+
+      .intro { padding: 5rem 2rem; }
+      .stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .stat-number { font-size: 2rem; }
+
+      .programs { padding: 5rem 2rem; }
+      .programs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .prog-card-1, .prog-card-2 { grid-template-columns: 1fr; }
+      .prog-card-3 { grid-template-columns: 1fr; }
+      .prog-image-tall, .prog-image-med { height: 220px; }
+
+      .gallery { padding: 5rem 1.5rem; }
+      .mosaic { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+      .mosaic-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .mosaic-item:nth-child(4) { grid-column: span 1; }
+      .mosaic-item:nth-child(6) { grid-column: span 1; }
+
+      .contact { padding: 5rem 2rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">HappyDog</a>
+    <ul class="nav-links">
+      <li><a href="#intro">소개</a></li>
+      <li><a href="#programs">프로그램</a></li>
+      <li><a href="#gallery">갤러리</a></li>
+      <li><a href="#contact" class="nav-cta">입학 상담</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO: split-screen -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-badge">강아지 유치원</span>
+      <h1 class="hero-title">
+        매일이<br>
+        <span>신나는</span><br>
+        해피독 유치원
+      </h1>
+      <p class="hero-desc">
+        우리 아이의 첫 친구를 만들어드립니다.<br>
+        전문 트레이너와 함께하는 안전하고 즐거운 하루.
+      </p>
+      <div class="hero-actions">
+        <a href="#programs" class="btn-primary">프로그램 보기</a>
+        <a href="#gallery" class="btn-ghost">갤러리 보기</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://loremflickr.com/900/1000/puppy,dog" alt="행복한 강아지">
+      <div class="hero-image-tag">
+        <div class="tag-dot"></div>
+        <span class="tag-text">현재 30마리 등원 중</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO: stacked-column -->
+  <section class="intro" id="intro">
+    <div class="intro-inner">
+      <span class="section-label" data-aos="fade-up">About Us</span>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">
+        강아지가 행복한<br>공간을 만들어요
+      </h2>
+      <p class="intro-desc" data-aos="fade-up" data-aos-delay="160">
+        해피독 유치원은 2017년부터 서울 마포구에서 운영해온 강아지 전문 유치원입니다.
+        개별 기질 분석부터 그룹 활동, 실외 탐험까지 — 우리 아이의 몸과 마음이 함께 자라는 공간입니다.
+        모든 프로그램은 인증받은 반려동물 행동 전문가가 직접 설계합니다.
+      </p>
+      <div class="stats" data-aos="fade-up" data-aos-delay="240">
+        <div class="stat-item">
+          <div class="stat-number">120+</div>
+          <div class="stat-label">등록 강아지</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">8</div>
+          <div class="stat-label">전문 트레이너</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">7년</div>
+          <div class="stat-label">운영 연수</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS: editorial -->
+  <section class="programs" id="programs">
+    <div class="programs-header" data-aos="fade-up">
+      <h2 class="section-title">우리의 프로그램</h2>
+      <p class="programs-desc">
+        아이의 나이, 크기, 기질에 맞춘 세 가지 클래스를 운영합니다.
+        모든 클래스는 소규모로 진행됩니다.
+      </p>
+    </div>
+
+    <!-- 프로그램 1: 2fr 1fr -->
+    <div class="prog-card-1" data-aos="fade-up">
+      <div class="prog-image prog-image-tall">
+        <img src="https://loremflickr.com/800/700/dog,play,group" alt="사회화 클래스">
+      </div>
+      <div class="prog-content">
+        <div class="prog-num">01</div>
+        <span class="prog-tag">Monday · Wed · Fri</span>
+        <h3 class="prog-title">사회화 클래스</h3>
+        <p class="prog-text">
+          또래 강아지들과 어울리며 자연스럽게 사회성을 키웁니다.
+          짖음 제어, 기다리기, 인사하기 등 기본 예절을 놀이 속에서 배웁니다.
+          소형견 ~ 대형견 분리 운영으로 안전합니다.
+        </p>
+        <span class="prog-days">최대 8마리 소규모 진행</span>
+      </div>
+    </div>
+
+    <!-- 프로그램 2: 1fr 2fr -->
+    <div class="prog-card-2" data-aos="fade-up">
+      <div class="prog-content">
+        <div class="prog-num">02</div>
+        <span class="prog-tag">Tue · Thu · Sat</span>
+        <h3 class="prog-title">신나는 놀이 클래스</h3>
+        <p class="prog-text">
+          에너지가 넘치는 아이를 위한 활동형 클래스입니다.
+          터널, 허들, 공놀이 등 다양한 어질리티 활동으로 건강한 에너지 발산을 도와줍니다.
+          운동 후 마사지와 쿨다운 타임을 포함합니다.
+        </p>
+        <span class="prog-days">최대 6마리 소규모 진행</span>
+      </div>
+      <div class="prog-image prog-image-tall">
+        <img src="https://loremflickr.com/800/700/dog,running,happy" alt="놀이 클래스">
+      </div>
+    </div>
+
+    <!-- 프로그램 3: 1fr 1fr 1.5fr -->
+    <div class="prog-card-3" data-aos="fade-up">
+      <div class="prog-image prog-image-full">
+        <img src="https://loremflickr.com/600/500/dog,nature,walk" alt="탐험 클래스">
+      </div>
+      <div class="prog-content">
+        <div class="prog-num">03</div>
+        <span class="prog-tag">Mon - Fri</span>
+        <h3 class="prog-title">감각 탐험 클래스</h3>
+        <p class="prog-text">
+          자연 속 산책과 냄새 탐험으로 강아지의 감각을 자극합니다.
+          인근 공원 산책, 모래 놀이, 물놀이(여름)를 포함합니다.
+        </p>
+        <span class="prog-days">주 5일 종일반 운영</span>
+      </div>
+      <div class="prog-extra">
+        <div>
+          <div class="prog-extra-title">종일반<br>패키지</div>
+          <ul class="prog-extra-list">
+            <li>오전 사회화 + 오후 놀이</li>
+            <li>점심 식사 케어 포함</li>
+            <li>하루 활동 리포트 전송</li>
+            <li>월 1회 건강 체크</li>
+          </ul>
+        </div>
+        <div class="prog-extra-price">180,000 <span>/ 월</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY: mosaic -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-header">
+      <span class="section-label" data-aos="fade-up">Daily Life</span>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">즐거운 하루하루</h2>
+      <p class="intro-desc" data-aos="fade-up" data-aos-delay="160">
+        해피독 유치원의 일상을 만나보세요.
+      </p>
+    </div>
+
+    <div class="mosaic" data-aos="fade-up" data-aos-delay="100">
+      <div class="mosaic-item">
+        <img src="https://loremflickr.com/800/800/puppy,cute" alt="귀여운 강아지">
+      </div>
+      <div class="mosaic-item">
+        <img src="https://loremflickr.com/400/220/dog,friends" alt="강아지 친구들">
+      </div>
+      <div class="mosaic-item">
+        <img src="https://loremflickr.com/400/220/dog,outdoor" alt="야외 활동">
+      </div>
+      <div class="mosaic-item">
+        <img src="https://loremflickr.com/800/220/dog,play,ball" alt="공놀이">
+      </div>
+      <div class="mosaic-item">
+        <img src="https://loremflickr.com/400/220/puppy,sleep" alt="낮잠">
+      </div>
+      <div class="mosaic-item">
+        <img src="https://loremflickr.com/800/220/dog,walk,park" alt="공원 산책">
+      </div>
+      <div class="mosaic-item">
+        <img src="https://loremflickr.com/400/220/dog,training" alt="훈련">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT: stacked-column -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <span class="section-label" data-aos="fade-up">Contact</span>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">입학 상담 받기</h2>
+      <p class="contact-sub" data-aos="fade-up" data-aos-delay="160">
+        우리 아이에게 딱 맞는 프로그램을 찾아드립니다.<br>
+        언제든 연락주세요.
+      </p>
+      <div class="contact-grid" data-aos="fade-up" data-aos-delay="200">
+        <div class="contact-card">
+          <div class="contact-icon icon-orange">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--color-primary)">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.49 12 19.79 19.79 0 01.42 3.42 2 2 0 012.41 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <div class="contact-card-title">전화 상담</div>
+          <div class="contact-card-value">02-1234-5678</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon icon-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--color-accent)">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="contact-card-title">운영 시간</div>
+          <div class="contact-card-value">월 - 토<br>08:00 ~ 18:00</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon icon-soft">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: oklch(45% 0.05 200)">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-card-title">위치</div>
+          <div class="contact-card-value">서울시 마포구<br>강아지길 123</div>
+        </div>
+      </div>
+      <a href="tel:0212345678" class="contact-cta" data-aos="fade-up" data-aos-delay="280">
+        지금 바로 전화하기
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">HappyDog Kindergarten</div>
+    <div class="footer-copy">2024 해피독 유치원. All rights reserved.</div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60
+    });
+
+    // 스크롤 진행 바
+    const progressBar = document.getElementById('progressBar');
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
+</body>
+</html>

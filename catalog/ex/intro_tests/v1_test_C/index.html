@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Page</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #111;
+      --accent: #00ff9d;
+      --text: #ffffff;
+      --muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', 'Noto Sans KR', monospace;
+      letter-spacing: 0.05em;
+      overflow-x: hidden;
+    }
+
+    /* ── 스크롤 진행 바 ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      position: relative;
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(5rem, 14vw, 12rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s ease forwards;
+    }
+
+    .hero-name span {
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      margin-top: 32px;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: #ccc;
+      letter-spacing: 0.08em;
+      max-width: 480px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s ease forwards;
+    }
+
+    .hero-line {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin: 36px auto 0;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s ease forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.2s ease forwards;
+    }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg);
+      animation: bounce 1.6s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(6px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION 공통 ── */
+    section {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      letter-spacing: 0.06em;
+      margin-bottom: 56px;
+    }
+
+    /* ── PHOTO SLIDER ── */
+    #photos {
+      max-width: 100%;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+
+    #photos .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .swiper {
+      width: 100%;
+      padding-bottom: 48px !important;
+    }
+
+    .swiper-slide {
+      width: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: grab;
+      will-change: transform;
+    }
+
+    .swiper-slide:active { cursor: grabbing; }
+
+    .slide-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: brightness(0.75) saturate(0.8);
+    }
+
+    .swiper-slide:hover .slide-img {
+      transform: scale(1.03);
+      filter: brightness(1) saturate(1);
+    }
+
+    .slide-caption {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+
+    .swiper-pagination-bullet {
+      background: var(--muted) !important;
+      opacity: 1 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--accent) !important;
+      width: 24px !important;
+      border-radius: 4px !important;
+    }
+
+    /* ── SKILLS ── */
+    #skills .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-card {
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 255, 157, 0.12);
+    }
+
+    .skill-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.8rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .skill-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .skill-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .skill-bar-wrap {
+      margin-top: 20px;
+      height: 3px;
+      background: #2a2a2a;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #1e1e1e;
+      text-align: center;
+      padding: 48px 24px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .swiper-slide { width: 260px; }
+      section { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- HERO -->
+  <div id="hero">
+    <p class="hero-tag">Hello, I am</p>
+    <h1 class="hero-name">KIM<br /><span>MINJI</span></h1>
+    <p class="hero-desc">
+      디자인을 좋아하고, 코딩을 배우는 중인 대학생.<br />
+      음악과 사진, 그리고 커피 없이는 못 사는 사람.
+    </p>
+    <div class="hero-line"></div>
+    <div class="scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </div>
+
+  <!-- PHOTOS -->
+  <div id="photos">
+    <div class="inner">
+      <p class="section-label" data-aos="fade-up">Gallery</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">내가 좋아하는 것들</h2>
+    </div>
+
+    <div class="swiper" data-aos="fade-up" data-aos-delay="160">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://loremflickr.com/640/853/coffee" alt="coffee" loading="lazy" />
+          <p class="slide-caption">COFFEE</p>
+        </div>
+
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://loremflickr.com/640/853/music" alt="music" loading="lazy" />
+          <p class="slide-caption">MUSIC</p>
+        </div>
+
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://loremflickr.com/640/853/photography" alt="photography" loading="lazy" />
+          <p class="slide-caption">PHOTOGRAPHY</p>
+        </div>
+
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://loremflickr.com/640/853/travel,city" alt="travel" loading="lazy" />
+          <p class="slide-caption">TRAVEL</p>
+        </div>
+
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://loremflickr.com/640/853/book,reading" alt="book" loading="lazy" />
+          <p class="slide-caption">READING</p>
+        </div>
+
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://loremflickr.com/640/853/film,cinema" alt="film" loading="lazy" />
+          <p class="slide-caption">FILM</p>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label" data-aos="fade-up">What I do</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">내가 잘하는 것들</h2>
+
+    <div class="grid">
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="skill-num">01</div>
+        <div class="skill-name">UI / UX DESIGN</div>
+        <div class="skill-desc">Figma로 프로토타입 만들기를 즐기고, 사용하기 편한 화면을 설계하는 것을 좋아해요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" data-level="85"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="skill-num">02</div>
+        <div class="skill-name">PHOTOGRAPHY</div>
+        <div class="skill-desc">일상의 순간을 필름 카메라로 담는 것을 즐겨요. 빛과 구도에 관심이 많아요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" data-level="78"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="skill-num">03</div>
+        <div class="skill-name">FRONT-END</div>
+        <div class="skill-desc">HTML, CSS, JavaScript를 배우는 중이에요. 인터랙티브한 웹에 점점 빠져들고 있어요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" data-level="60"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="skill-num">04</div>
+        <div class="skill-name">VIDEO EDITING</div>
+        <div class="skill-desc">Premiere Pro로 브이로그를 편집해요. 음악 싱크를 맞추는 게 제일 재미있어요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" data-level="70"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="320">
+        <div class="skill-num">05</div>
+        <div class="skill-name">ILLUSTRATION</div>
+        <div class="skill-desc">아이패드로 캐릭터 일러스트를 그려요. 친구들 프로필 이미지도 그려준 적 있어요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" data-level="65"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="skill-num">06</div>
+        <div class="skill-name">COMMUNICATION</div>
+        <div class="skill-desc">팀 프로젝트에서 의견을 모으고 분위기를 이끌어가는 역할을 자주 맡아요.</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" data-level="90"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>MADE WITH &hearts; &mdash; 2026</p>
+  </footer>
+
+  <script>
+    // 스크롤 진행 바
+    const bar = document.getElementById('progress-bar');
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrolled = window.scrollY;
+          const total = document.body.scrollHeight - window.innerHeight;
+          bar.style.width = (scrolled / total * 100) + '%';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // AOS 초기화
+    AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 80 });
+
+    // Swiper 초기화
+    new Swiper('.swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 20,
+      grabCursor: true,
+      centeredSlides: false,
+      freeMode: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        0:   { spaceBetween: 14 },
+        768: { spaceBetween: 20 },
+      }
+    });
+
+    // 스킬 바 애니메이션 (AOS 등장 후 실행)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target.querySelector('.skill-bar');
+          if (bar) bar.style.width = bar.dataset.level + '%';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.skill-card').forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>

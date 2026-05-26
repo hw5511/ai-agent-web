@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Cafe — 오늘의 이야기</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <style>
+    :root {
+      --color-bg:        oklch(94.9% 0.019 80.1);
+      --color-secondary: oklch(88.1% 0.045 79.3);
+      --color-primary:   oklch(39.2% 0.05 46.6);
+      --color-accent:    oklch(67.3% 0.112 60.5);
+      --color-text:      oklch(23.5% 0.033 57.1);
+      --color-text-muted: oklch(52% 0.03 60);
+      --font-display: 'Playfair Display', 'Noto Serif KR', serif;
+      --font-body:    'Lora', 'Noto Sans KR', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Scroll Progress Bar ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: oklch(94.9% 0.019 80.1 / 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid oklch(88.1% 0.045 79.3);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--color-accent); }
+
+    /* ── SECTION 1: Hero — split-screen ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      padding-top: 64px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 6rem 8rem 8rem;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1.6rem;
+      font-family: var(--font-body);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--color-primary);
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 380px;
+      margin-bottom: 2.8rem;
+      line-height: 1.8;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero-date {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+    }
+
+    .btn-scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--color-primary);
+      text-decoration: none;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-scroll:hover { opacity: 0.6; }
+
+    .btn-scroll-arrow {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 8s ease;
+    }
+
+    .hero-image:hover img { transform: scale(1.04); }
+
+    .hero-image-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40%;
+      background: linear-gradient(to top, oklch(39.2% 0.05 46.6 / 0.35), transparent);
+    }
+
+    /* ── SECTION 2: 오늘의 메뉴 — editorial ── */
+    .menu-section {
+      padding: 8rem 8rem;
+      background: var(--color-bg);
+    }
+
+    .section-header {
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.2;
+    }
+
+    /* Editorial row 1: 2fr 1fr */
+    .menu-row-1 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Editorial row 2: 1fr 1fr 2fr */
+    .menu-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr;
+      gap: 2rem;
+    }
+
+    .menu-card {
+      background: var(--color-secondary);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px oklch(23.5% 0.033 57.1 / 0.12);
+    }
+
+    .menu-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .menu-card.tall .menu-card-img {
+      aspect-ratio: 4/5;
+    }
+
+    .menu-card-body {
+      padding: 1.6rem 1.8rem 2rem;
+    }
+
+    .menu-card-category {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-card-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .menu-card-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.2rem;
+      line-height: 1.7;
+    }
+
+    .menu-card-price {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .menu-card.featured .menu-card-name {
+      font-size: 1.6rem;
+    }
+
+    .menu-card.featured .menu-card-desc {
+      font-size: 0.95rem;
+    }
+
+    /* ── SECTION 3: 갤러리 — mosaic ── */
+    .gallery-section {
+      padding: 8rem 8rem;
+      background: var(--color-secondary);
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 220px;
+      gap: 1rem;
+    }
+
+    .mosaic-item {
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .mosaic-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .mosaic-item:hover img { transform: scale(1.06); }
+
+    .mosaic-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .mosaic-item:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+    .mosaic-item:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+    .mosaic-item:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+    .mosaic-item:nth-child(5) { grid-column: span 1; grid-row: span 2; }
+    .mosaic-item:nth-child(6) { grid-column: span 1; grid-row: span 1; }
+    .mosaic-item:nth-child(7) { grid-column: span 2; grid-row: span 1; }
+
+    /* ── SECTION 4: 소개 — stacked-column ── */
+    .about-section {
+      padding: 10rem 8rem;
+      background: var(--color-bg);
+    }
+
+    .about-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-style: italic;
+      color: var(--color-primary);
+      line-height: 1.5;
+      margin-bottom: 2.4rem;
+    }
+
+    .about-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--color-accent);
+      margin: 0 auto 2.4rem;
+    }
+
+    .about-desc {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      margin-bottom: 4rem;
+      line-height: 1.9;
+    }
+
+    .about-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-top: 4rem;
+      text-align: left;
+    }
+
+    .about-info-item {
+      padding: 2rem 1.8rem;
+      background: var(--color-secondary);
+    }
+
+    .about-info-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .about-info-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--color-primary);
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 3rem 8rem;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-bg);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: oklch(88.1% 0.045 79.3 / 0.6);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      nav { padding: 1.2rem 2.5rem; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { padding: 8rem 2.5rem 4rem; }
+      .hero-image { height: 60vw; }
+
+      .menu-section,
+      .gallery-section,
+      .about-section { padding: 5rem 2.5rem; }
+
+      .menu-row-1,
+      .menu-row-2 { grid-template-columns: 1fr; }
+
+      .mosaic { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+      .mosaic-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+      .mosaic-item:nth-child(4) { grid-column: span 2; }
+      .mosaic-item:nth-child(7) { grid-column: span 2; }
+
+      .about-info-grid { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; gap: 1rem; padding: 2.5rem; text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero-text { padding: 7rem 1.5rem 3rem; }
+      .menu-section,
+      .gallery-section,
+      .about-section { padding: 4rem 1.5rem; }
+      .mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="#">Maison Cafe</a>
+    <ul class="nav-links">
+      <li><a href="#menu">오늘의 메뉴</a></li>
+      <li><a href="#gallery">갤러리</a></li>
+      <li><a href="#about">소개</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section 1: Hero — split-screen -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-tag" data-aos="fade-up" data-aos-duration="700">Today's Story — 2026.04.21</span>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+        따뜻한 한 잔,<br><em>오늘의 여유</em>를<br>담았습니다
+      </h1>
+      <p class="hero-desc" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+        봄 햇살이 스며드는 창가에서,
+        오늘도 정성껏 내린 커피 한 잔을 소개합니다.
+        제철 재료로 만든 오늘의 메뉴를 만나보세요.
+      </p>
+      <div class="hero-meta" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
+        <span class="hero-date">Mon — Sat &nbsp;09:00 – 21:00</span>
+        <a class="btn-scroll" href="#menu">
+          <span class="btn-scroll-arrow">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M6 2v8M3 8l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          메뉴 보기
+        </a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://loremflickr.com/900/1100/cafe,coffee,interior" alt="카페 인테리어">
+      <div class="hero-image-overlay"></div>
+    </div>
+  </section>
+
+  <!-- Section 2: 오늘의 메뉴 — editorial -->
+  <section class="menu-section" id="menu">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">Today's Menu</span>
+      <h2 class="section-title">오늘의 메뉴</h2>
+    </div>
+
+    <!-- Row 1: 2fr 1fr -->
+    <div class="menu-row-1">
+      <div class="menu-card featured" data-aos="fade-up" data-aos-duration="600">
+        <img class="menu-card-img" src="https://loremflickr.com/800/450/latte,coffee,art" alt="시그니처 라떼">
+        <div class="menu-card-body">
+          <div class="menu-card-category">Signature Drink</div>
+          <div class="menu-card-name">봄날 라벤더 라떼</div>
+          <div class="menu-card-desc">
+            제주 라벤더 시럽과 싱글 오리진 에스프레소의 만남.
+            달콤하고 은은한 꽃향기가 봄의 기분을 전해드립니다.
+          </div>
+          <div class="menu-card-price">7,500원</div>
+        </div>
+      </div>
+      <div class="menu-card tall" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+        <img class="menu-card-img" src="https://loremflickr.com/400/500/croissant,pastry,bakery" alt="크로아상">
+        <div class="menu-card-body">
+          <div class="menu-card-category">Bakery</div>
+          <div class="menu-card-name">버터 크로아상</div>
+          <div class="menu-card-desc">매일 아침 직접 구운 바삭한 버터 크로아상</div>
+          <div class="menu-card-price">4,200원</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 1fr 1fr 2fr -->
+    <div class="menu-row-2">
+      <div class="menu-card" data-aos="fade-up" data-aos-duration="600">
+        <img class="menu-card-img" src="https://loremflickr.com/400/300/tea,earl-grey,cup" alt="얼그레이 블렌드">
+        <div class="menu-card-body">
+          <div class="menu-card-category">Tea</div>
+          <div class="menu-card-name">얼그레이 밀크티</div>
+          <div class="menu-card-desc">부드럽고 깊은 홍차 블렌드</div>
+          <div class="menu-card-price">6,000원</div>
+        </div>
+      </div>
+      <div class="menu-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="80">
+        <img class="menu-card-img" src="https://loremflickr.com/400/300/macaron,dessert,pastel" alt="마카롱">
+        <div class="menu-card-body">
+          <div class="menu-card-category">Dessert</div>
+          <div class="menu-card-name">바닐라 마카롱</div>
+          <div class="menu-card-desc">하루 한정 12개, 마감 일찍 됩니다</div>
+          <div class="menu-card-price">3,500원</div>
+        </div>
+      </div>
+      <div class="menu-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="160">
+        <img class="menu-card-img" src="https://loremflickr.com/800/450/avocado,toast,brunch,cafe" alt="아보카도 토스트">
+        <div class="menu-card-body">
+          <div class="menu-card-category">Brunch</div>
+          <div class="menu-card-name">아보카도 사워도우 토스트</div>
+          <div class="menu-card-desc">
+            천연 발효 사워도우 위에 신선한 아보카도 크림, 방울토마토,
+            루꼴라를 얹은 브런치 메뉴. 오전 11시까지 주문 가능합니다.
+          </div>
+          <div class="menu-card-price">12,000원</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: 갤러리 — mosaic -->
+  <section class="gallery-section" id="gallery">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">Atmosphere</span>
+      <h2 class="section-title">카페의 하루</h2>
+    </div>
+
+    <div class="mosaic">
+      <div class="mosaic-item" data-aos="fade-up" data-aos-duration="600">
+        <img src="https://loremflickr.com/700/880/cafe,interior,warm" alt="카페 내부">
+      </div>
+      <div class="mosaic-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="60">
+        <img src="https://loremflickr.com/350/220/coffee,barista" alt="바리스타">
+      </div>
+      <div class="mosaic-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="120">
+        <img src="https://loremflickr.com/350/220/window,light,cafe" alt="창가">
+      </div>
+      <div class="mosaic-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="180">
+        <img src="https://loremflickr.com/700/220/coffee,cup,morning" alt="커피 한 잔">
+      </div>
+      <div class="mosaic-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="240">
+        <img src="https://loremflickr.com/350/440/plant,cozy,interior" alt="식물">
+      </div>
+      <div class="mosaic-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+        <img src="https://loremflickr.com/350/220/latte,art,milk" alt="라떼 아트">
+      </div>
+      <div class="mosaic-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="360">
+        <img src="https://loremflickr.com/700/220/bakery,bread,pastry" alt="베이커리">
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: 소개 — stacked-column -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <blockquote class="about-quote" data-aos="fade-up" data-aos-duration="700">
+        "좋은 하루는<br>좋은 커피 한 잔에서 시작됩니다"
+      </blockquote>
+      <div class="about-divider" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100"></div>
+      <p class="about-desc" data-aos="fade-up" data-aos-duration="700" data-aos-delay="150">
+        2018년 봄, 작은 골목에서 시작된 Maison Cafe는<br>
+        매일 아침 직접 로스팅한 원두와 제철 재료로 만든 디저트를<br>
+        여러분의 하루에 담아드리고 있습니다.
+      </p>
+
+      <div class="about-info-grid" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+        <div class="about-info-item">
+          <div class="about-info-label">영업 시간</div>
+          <div class="about-info-value">
+            월 – 금 &nbsp;09:00 – 21:00<br>
+            토 – 일 &nbsp;10:00 – 22:00
+          </div>
+        </div>
+        <div class="about-info-item">
+          <div class="about-info-label">위치</div>
+          <div class="about-info-value">
+            서울시 마포구<br>연남동 239-12
+          </div>
+        </div>
+        <div class="about-info-item">
+          <div class="about-info-label">문의</div>
+          <div class="about-info-value">
+            02-000-0000<br>hello@maison.cafe
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Maison Cafe</div>
+    <div class="footer-copy">2026 Maison Cafe. All rights reserved.</div>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      offset: 80,
+      easing: 'ease-out-cubic'
+    });
+
+    // Scroll progress bar
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (scrollTop / scrollHeight * 100) + '%';
+    }, { passive: true });
+  </script>
+</body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VXID — Electronic Music Producer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+:root {
+  --bg:    oklch(5% 0.015 260);
+  --bg2:   oklch(8% 0.02 260);
+  --cyan:  oklch(72% 0.22 195);
+  --pink:  oklch(65% 0.28 340);
+  --text:  oklch(92% 0.01 260);
+  --muted: oklch(42% 0.05 260);
+  --dim:   oklch(18% 0.04 260);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Progress ── */
+#bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ── Cursor ── */
+#dot {
+  position: fixed; width: 6px; height: 6px;
+  background: var(--cyan); border-radius: 50%;
+  pointer-events: none; z-index: 9998; mix-blend-mode: screen;
+  will-change: transform;
+  box-shadow: 0 0 10px var(--cyan), 0 0 24px var(--cyan);
+}
+#ring {
+  position: fixed; width: 28px; height: 28px;
+  border: 1px solid oklch(72% 0.22 195 / 0.35);
+  border-radius: 50%;
+  pointer-events: none; z-index: 9997;
+  will-change: transform;
+  transition: opacity 0.3s;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 28px 56px;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 200;
+  background: linear-gradient(to bottom, oklch(5% 0.015 260 / 0.9) 0%, transparent 100%);
+}
+.logo {
+  font-size: 1rem; font-weight: 800;
+  letter-spacing: 0.45em; color: var(--cyan);
+  text-shadow: 0 0 24px var(--cyan);
+}
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--cyan); }
+
+/* ── Hero ── */
+#hero {
+  position: relative; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+#osc-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 0; opacity: 0.9;
+}
+
+/* CRT scanline overlay */
+#hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    oklch(0% 0 0 / 0.08) 2px,
+    oklch(0% 0 0 / 0.08) 4px
+  );
+  animation: scan 8s linear infinite;
+}
+@keyframes scan {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 400px; }
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  text-align: center;
+  user-select: none;
+}
+.hero-tag {
+  font-size: 0.65rem; letter-spacing: 0.5em;
+  text-transform: uppercase; color: var(--pink);
+  margin-bottom: 20px;
+  text-shadow: 0 0 16px var(--pink);
+}
+.hero-title {
+  font-size: clamp(6rem, 18vw, 16rem);
+  font-weight: 800; line-height: 0.88;
+  letter-spacing: -0.03em; color: var(--text);
+  position: relative;
+  will-change: transform;
+}
+.hero-title::before,
+.hero-title::after {
+  content: attr(data-text);
+  position: absolute; top: 0; left: 0; right: 0;
+  pointer-events: none;
+}
+.hero-title::before {
+  color: var(--cyan); text-shadow: -3px 0 var(--cyan);
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+  opacity: 0;
+}
+.hero-title::after {
+  color: var(--pink); text-shadow: 3px 0 var(--pink);
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  opacity: 0;
+}
+.hero-title.glitch::before { opacity: 1; animation: gt 0.18s steps(1); }
+.hero-title.glitch::after  { opacity: 1; animation: gb 0.18s steps(1); }
+
+@keyframes gt {
+  0%   { transform: translate(0); }
+  25%  { transform: translate(-5px, -2px); }
+  50%  { transform: translate(5px, 2px); }
+  75%  { transform: translate(-3px, 1px); }
+  100% { transform: translate(0); }
+}
+@keyframes gb {
+  0%   { transform: translate(0); }
+  25%  { transform: translate(5px, 2px); }
+  50%  { transform: translate(-5px, -2px); }
+  75%  { transform: translate(3px, -1px); }
+  100% { transform: translate(0); }
+}
+
+.hero-meta {
+  margin-top: 28px; font-size: 0.75rem;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+}
+.hero-hint {
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%); z-index: 2;
+  font-size: 0.6rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--muted);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.hint-line {
+  width: 1px; height: 56px;
+  background: linear-gradient(to bottom, var(--cyan), transparent);
+  animation: pulse-line 2.2s ease-in-out infinite;
+}
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.7); }
+  50%       { opacity: 1;   transform: scaleY(1); }
+}
+
+/* ── Section base ── */
+section { padding: 120px 0; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 56px; }
+.sec-label {
+  font-size: 0.6rem; letter-spacing: 0.5em;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 12px;
+}
+.sec-title {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800; line-height: 0.95;
+  letter-spacing: -0.025em; margin-bottom: 72px;
+}
+
+/* ── Tracks ── */
+#tracks { background: var(--bg); }
+#tracks .wrap::before {
+  content: ''; display: block; height: 1px; margin-bottom: 80px;
+  background: linear-gradient(90deg, transparent, var(--cyan) 40%, transparent);
+  opacity: 0.5;
+}
+
+.track-list { display: flex; flex-direction: column; }
+.track {
+  display: grid;
+  grid-template-columns: 36px 1fr 200px 64px;
+  align-items: center; gap: 28px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--dim);
+  position: relative;
+  cursor: pointer;
+  transition: padding-left 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+.track::before {
+  content: ''; position: absolute; left: -56px; top: 0; bottom: 0;
+  width: 2px; background: var(--cyan);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.track:hover { padding-left: 18px; }
+.track:hover::before { transform: scaleY(1); }
+
+.t-num {
+  font-size: 0.65rem; font-weight: 700;
+  color: var(--muted); letter-spacing: 0.08em;
+  transition: color 0.3s;
+  font-variant-numeric: tabular-nums;
+}
+.track:hover .t-num { color: var(--cyan); }
+
+.t-info { display: flex; flex-direction: column; gap: 5px; }
+.t-name {
+  font-size: 1.05rem; font-weight: 700; letter-spacing: 0.06em;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.track:hover .t-name { color: var(--cyan); text-shadow: 0 0 20px var(--cyan); }
+.t-genre {
+  font-size: 0.6rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* Inline waveform */
+.t-wave {
+  display: flex; align-items: center; gap: 2px; height: 28px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.track:hover .t-wave { opacity: 1; }
+.w-bar {
+  width: 3px; border-radius: 2px;
+  background: var(--cyan); opacity: 0.55;
+  transition: height 0.15s ease;
+}
+
+.t-dur {
+  font-size: 0.72rem; color: var(--muted);
+  letter-spacing: 0.1em; text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Shows ── */
+#shows { background: var(--bg2); }
+#shows .wrap::before {
+  content: ''; display: block; height: 1px; margin-bottom: 80px;
+  background: linear-gradient(90deg, transparent, var(--pink) 40%, transparent);
+  opacity: 0.5;
+}
+
+.show-list { display: flex; flex-direction: column; }
+.show {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: center; gap: 48px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--dim);
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.show::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, oklch(65% 0.28 340 / 0.04), transparent);
+  transform: translateX(-110%);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.show:hover::after { transform: translateX(0); }
+
+.s-date { display: flex; flex-direction: column; gap: 3px; }
+.s-day {
+  font-size: 2.8rem; font-weight: 800; line-height: 1;
+  color: var(--pink); text-shadow: 0 0 28px var(--pink);
+  font-variant-numeric: tabular-nums;
+}
+.s-month {
+  font-size: 0.6rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.s-info { display: flex; flex-direction: column; gap: 6px; }
+.s-venue {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: 0.04em;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.show:hover .s-venue { color: var(--pink); text-shadow: 0 0 20px var(--pink); }
+.s-city {
+  font-size: 0.65rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.s-btn {
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+  padding: 12px 24px; border: 1px solid var(--dim);
+  color: var(--muted); position: relative; z-index: 1;
+  transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  white-space: nowrap;
+}
+.show:hover .s-btn {
+  color: var(--pink); border-color: oklch(65% 0.28 340 / 0.5);
+  box-shadow: 0 0 20px oklch(65% 0.28 340 / 0.25);
+}
+
+/* ── Contact ── */
+#contact { background: var(--bg); }
+#contact .wrap::before {
+  content: ''; display: block; height: 1px; margin-bottom: 80px;
+  background: linear-gradient(90deg, transparent, var(--cyan) 40%, transparent);
+  opacity: 0.5;
+}
+
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.contact-left .big {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800; line-height: 1.08; margin-bottom: 24px;
+}
+.contact-left .big em { font-style: normal; color: var(--cyan); }
+.contact-left p {
+  color: var(--muted); font-size: 0.88rem; line-height: 1.75;
+  letter-spacing: 0.02em;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.c-link {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 24px;
+  border: 1px solid var(--dim);
+  text-decoration: none; color: var(--text);
+  position: relative; overflow: hidden;
+  transition: padding-left 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+              border-color 0.35s, color 0.35s;
+}
+.c-link::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--cyan);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.c-link:hover { padding-left: 36px; color: var(--cyan); border-color: oklch(72% 0.22 195 / 0.35); }
+.c-link:hover::before { transform: scaleY(1); }
+.c-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; }
+.c-arrow { transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1); }
+.c-link:hover .c-arrow { transform: translateX(8px); }
+
+/* ── Footer ── */
+footer {
+  padding: 36px 56px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--dim);
+}
+.f-copy { font-size: 0.6rem; letter-spacing: 0.22em; color: var(--muted); }
+
+/* ── Reveal ── */
+.rv { opacity: 0; transform: translateY(44px); will-change: transform, opacity; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  .wrap { padding: 0 24px; }
+  section { padding: 80px 0; }
+  .hero-title { font-size: clamp(4rem, 22vw, 7rem); }
+  .track { grid-template-columns: 28px 1fr 52px; }
+  .t-wave { display: none; }
+  .show { grid-template-columns: 80px 1fr; }
+  .s-btn { display: none; }
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+<div id="dot"></div>
+<div id="ring"></div>
+
+<nav>
+  <div class="logo">VXID</div>
+  <ul class="nav-links">
+    <li><a href="#tracks">Tracks</a></li>
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <canvas id="osc-canvas"></canvas>
+  <div class="hero-inner">
+    <p class="hero-tag">Electronic Music Producer · Seoul</p>
+    <h1 class="hero-title" data-text="VXID">VXID</h1>
+    <p class="hero-meta">Dark Techno &nbsp;·&nbsp; Industrial &nbsp;·&nbsp; Experimental</p>
+  </div>
+  <div class="hero-hint">
+    <span>Move Mouse · Scroll</span>
+    <div class="hint-line"></div>
+  </div>
+</section>
+
+<section id="tracks">
+  <div class="wrap">
+    <p class="sec-label rv">Discography</p>
+    <h2 class="sec-title rv">Tracks</h2>
+    <div class="track-list">
+
+      <div class="track rv">
+        <span class="t-num">01</span>
+        <div class="t-info">
+          <span class="t-name">VOID PROTOCOL</span>
+          <span class="t-genre">Dark Techno · 140 BPM</span>
+        </div>
+        <div class="t-wave"></div>
+        <span class="t-dur">5:23</span>
+      </div>
+
+      <div class="track rv">
+        <span class="t-num">02</span>
+        <div class="t-info">
+          <span class="t-name">NEON GHOST</span>
+          <span class="t-genre">Industrial · 138 BPM</span>
+        </div>
+        <div class="t-wave"></div>
+        <span class="t-dur">4:47</span>
+      </div>
+
+      <div class="track rv">
+        <span class="t-num">03</span>
+        <div class="t-info">
+          <span class="t-name">DIGITAL RAIN</span>
+          <span class="t-genre">Ambient Techno · 128 BPM</span>
+        </div>
+        <div class="t-wave"></div>
+        <span class="t-dur">6:12</span>
+      </div>
+
+      <div class="track rv">
+        <span class="t-num">04</span>
+        <div class="t-info">
+          <span class="t-name">SYNTHETIC SOUL</span>
+          <span class="t-genre">Melodic Techno · 132 BPM</span>
+        </div>
+        <div class="t-wave"></div>
+        <span class="t-dur">5:55</span>
+      </div>
+
+      <div class="track rv">
+        <span class="t-num">05</span>
+        <div class="t-info">
+          <span class="t-name">DARK MATTER</span>
+          <span class="t-genre">Noise · Experimental</span>
+        </div>
+        <div class="t-wave"></div>
+        <span class="t-dur">7:03</span>
+      </div>
+
+      <div class="track rv">
+        <span class="t-num">06</span>
+        <div class="t-info">
+          <span class="t-name">PULSE DECAY</span>
+          <span class="t-genre">EBM · 136 BPM</span>
+        </div>
+        <div class="t-wave"></div>
+        <span class="t-dur">4:31</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="shows">
+  <div class="wrap">
+    <p class="sec-label rv">Live</p>
+    <h2 class="sec-title rv">Upcoming Shows</h2>
+    <div class="show-list">
+
+      <div class="show rv">
+        <div class="s-date"><span class="s-day">03</span><span class="s-month">May 2026</span></div>
+        <div class="s-info"><span class="s-venue">Fabric</span><span class="s-city">London, United Kingdom</span></div>
+        <span class="s-btn">Tickets →</span>
+      </div>
+
+      <div class="show rv">
+        <div class="s-date"><span class="s-day">17</span><span class="s-month">May 2026</span></div>
+        <div class="s-info"><span class="s-venue">Berghain</span><span class="s-city">Berlin, Germany</span></div>
+        <span class="s-btn">Tickets →</span>
+      </div>
+
+      <div class="show rv">
+        <div class="s-date"><span class="s-day">07</span><span class="s-month">Jun 2026</span></div>
+        <div class="s-info"><span class="s-venue">Rex Club</span><span class="s-city">Paris, France</span></div>
+        <span class="s-btn">Tickets →</span>
+      </div>
+
+      <div class="show rv">
+        <div class="s-date"><span class="s-day">21</span><span class="s-month">Jun 2026</span></div>
+        <div class="s-info"><span class="s-venue">Shelter</span><span class="s-city">Amsterdam, Netherlands</span></div>
+        <span class="s-btn">Tickets →</span>
+      </div>
+
+      <div class="show rv">
+        <div class="s-date"><span class="s-day">04</span><span class="s-month">Jul 2026</span></div>
+        <div class="s-info"><span class="s-venue">Tresor</span><span class="s-city">Berlin, Germany</span></div>
+        <span class="s-btn">Tickets →</span>
+      </div>
+
+      <div class="show rv">
+        <div class="s-date"><span class="s-day">19</span><span class="s-month">Jul 2026</span></div>
+        <div class="s-info"><span class="s-venue">Shelter Seoul</span><span class="s-city">Seoul, South Korea</span></div>
+        <span class="s-btn">Tickets →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-left rv">
+        <h2 class="big">Let's make<br><em>noise</em><br>together.</h2>
+        <p>Bookings, collaborations, and label inquiries. Based in Seoul, available worldwide.</p>
+      </div>
+      <div class="contact-links rv">
+        <a href="#" class="c-link">
+          <span class="c-label">Booking Inquiry</span>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="#" class="c-link">
+          <span class="c-label">SoundCloud</span>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="#" class="c-link">
+          <span class="c-label">Bandcamp</span>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="#" class="c-link">
+          <span class="c-label">Instagram</span>
+          <span class="c-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="f-copy">© 2026 VXID. All rights reserved.</span>
+  <span class="f-copy">Seoul — Berlin — London</span>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Lenis ──
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// progress bar
+lenis.on('scroll', ({ scroll, limit }) => {
+  document.getElementById('bar').style.width = (scroll / limit * 100) + '%';
+});
+
+// ── Cursor ──
+const dot  = document.getElementById('dot');
+const ring = document.getElementById('ring');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my;
+
+document.addEventListener('mousemove', (e) => {
+  mx = e.clientX; my = e.clientY;
+  gsap.to(dot, { x: mx - 3, y: my - 3, duration: 0.08, ease: 'none' });
+});
+
+(function ringLoop() {
+  rx += (mx - rx - 14) * 0.13;
+  ry += (my - ry - 14) * 0.13;
+  gsap.set(ring, { x: rx, y: ry });
+  requestAnimationFrame(ringLoop);
+})();
+
+const hoverEls = document.querySelectorAll('a, .track, .show');
+hoverEls.forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    gsap.to(dot,  { scale: 3.5, duration: 0.3 });
+    gsap.to(ring, { scale: 1.6, opacity: 0.4, duration: 0.3 });
+  });
+  el.addEventListener('mouseleave', () => {
+    gsap.to(dot,  { scale: 1, duration: 0.3 });
+    gsap.to(ring, { scale: 1, opacity: 1, duration: 0.3 });
+  });
+});
+
+// ── Oscilloscope Canvas (SURPRISE ELEMENT) ──
+// Mouse X = frequency multiplier, Mouse Y = amplitude + noise intensity
+const osc = document.getElementById('osc-canvas');
+const ctx = osc.getContext('2d');
+let W, H;
+
+function resizeOsc() {
+  W = osc.width  = osc.offsetWidth;
+  H = osc.height = osc.offsetHeight;
+}
+resizeOsc();
+window.addEventListener('resize', resizeOsc);
+
+let heroMx = 0.5, heroMy = 0.5;
+document.getElementById('hero').addEventListener('mousemove', (e) => {
+  const r = osc.getBoundingClientRect();
+  heroMx = (e.clientX - r.left) / r.width;
+  heroMy = (e.clientY - r.top)  / r.height;
+});
+
+let t = 0;
+function drawOsc() {
+  ctx.clearRect(0, 0, W, H);
+
+  const freqA = 1.5 + heroMx * 4.5;    // 1.5 – 6 cycles across screen
+  const freqB = freqA * 1.618;          // golden ratio harmonic
+  const amp   = 60 + (1 - heroMy) * 100;
+  const noise = heroMy * 20;
+
+  const points = 512;
+  const step   = W / points;
+
+  // Layer 1 — cyan wave
+  ctx.beginPath();
+  for (let i = 0; i <= points; i++) {
+    const x = i * step;
+    const nz = (Math.random() - 0.5) * noise;
+    const y  = H / 2
+              + Math.sin((i / points) * Math.PI * 2 * freqA + t) * amp * 0.6
+              + Math.sin((i / points) * Math.PI * 2 * freqB + t * 1.3) * amp * 0.4
+              + nz;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = `oklch(72% 0.22 195 / 0.65)`;
+  ctx.lineWidth = 1.5;
+  ctx.shadowColor = `oklch(72% 0.22 195)`;
+  ctx.shadowBlur = 12;
+  ctx.stroke();
+
+  // Layer 2 — pink wave (phase shifted)
+  ctx.beginPath();
+  for (let i = 0; i <= points; i++) {
+    const x = i * step;
+    const nz = (Math.random() - 0.5) * noise * 0.5;
+    const y  = H / 2
+              + Math.sin((i / points) * Math.PI * 2 * freqA + t + Math.PI) * amp * 0.35
+              + Math.sin((i / points) * Math.PI * 2 * freqB * 0.5 + t * 0.7) * amp * 0.25
+              + nz;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = `oklch(65% 0.28 340 / 0.45)`;
+  ctx.lineWidth = 1;
+  ctx.shadowColor = `oklch(65% 0.28 340)`;
+  ctx.shadowBlur = 10;
+  ctx.stroke();
+
+  // Layer 3 — glow fill under cyan wave
+  ctx.beginPath();
+  ctx.moveTo(0, H / 2);
+  for (let i = 0; i <= points; i++) {
+    const x = i * step;
+    const y  = H / 2
+              + Math.sin((i / points) * Math.PI * 2 * freqA + t) * amp * 0.6
+              + Math.sin((i / points) * Math.PI * 2 * freqB + t * 1.3) * amp * 0.4;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.lineTo(W, H / 2);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0, H / 2 - amp, 0, H / 2 + amp);
+  grad.addColorStop(0,   `oklch(72% 0.22 195 / 0.08)`);
+  grad.addColorStop(0.5, `oklch(72% 0.22 195 / 0.02)`);
+  grad.addColorStop(1,   `oklch(72% 0.22 195 / 0.0)`);
+  ctx.fillStyle = grad;
+  ctx.shadowBlur = 0;
+  ctx.fill();
+
+  // Horizontal center line
+  ctx.beginPath();
+  ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2);
+  ctx.strokeStyle = `oklch(72% 0.22 195 / 0.08)`;
+  ctx.lineWidth = 1;
+  ctx.shadowBlur = 0;
+  ctx.stroke();
+
+  t += 0.018;
+  requestAnimationFrame(drawOsc);
+}
+drawOsc();
+
+// ── Glitch ──
+const heroTitle = document.querySelector('.hero-title');
+function triggerGlitch() {
+  heroTitle.classList.add('glitch');
+  setTimeout(() => heroTitle.classList.remove('glitch'), 180);
+  setTimeout(triggerGlitch, Math.random() * 3500 + 800);
+}
+triggerGlitch();
+
+// ── Waveform bars ──
+document.querySelectorAll('.t-wave').forEach(wave => {
+  for (let i = 0; i < 22; i++) {
+    const b = document.createElement('div');
+    b.className = 'w-bar';
+    b.style.height = (Math.random() * 22 + 4) + 'px';
+    wave.appendChild(b);
+  }
+});
+
+document.querySelectorAll('.track').forEach(track => {
+  const bars = track.querySelectorAll('.w-bar');
+  let afs = [];
+
+  track.addEventListener('mouseenter', () => {
+    bars.forEach((bar, i) => {
+      const step = () => {
+        const h = Math.random() * 22 + 4;
+        gsap.to(bar, {
+          height: h, duration: Math.random() * 0.25 + 0.08,
+          ease: 'power1.inOut',
+          onComplete: () => { afs[i] = requestAnimationFrame(step); }
+        });
+      };
+      setTimeout(step, i * 18);
+    });
+  });
+
+  track.addEventListener('mouseleave', () => {
+    afs.forEach(f => cancelAnimationFrame(f));
+  });
+});
+
+// ── ScrollTrigger reveals ──
+gsap.utils.toArray('.rv').forEach((el, i) => {
+  gsap.fromTo(el,
+    { opacity: 0, y: 52 },
+    {
+      opacity: 1, y: 0, duration: 0.95, ease: 'power3.out',
+      delay: (i % 3) * 0.07,
+      scrollTrigger: { trigger: el, start: 'top 86%', once: true }
+    }
+  );
+});
+
+// ── Hero entrance ──
+const tl = gsap.timeline({ delay: 0.2 });
+tl.fromTo('.hero-tag',   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.9 })
+  .fromTo('.hero-title', { opacity: 0, y: 72 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, '-=0.5')
+  .fromTo('.hero-meta',  { opacity: 0 },         { opacity: 1, duration: 0.8 }, '-=0.4')
+  .fromTo('.hero-hint',  { opacity: 0 },         { opacity: 1, duration: 0.8 }, '-=0.2');
+</script>
+</body>
+</html>

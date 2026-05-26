@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Travel Story</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito+Sans:wght@300;400;600;700&family=Do+Hyeon&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #e3e2ac;
+      --color-primary: #2b7bca;
+      --color-accent: #b30a1a;
+      --color-text: #111111;
+      --color-surface: rgba(255,255,255,0.6);
+      --font-title: 'Abril Fatface', 'Do Hyeon', serif;
+      --font-body: 'Nunito Sans', 'Noto Sans KR', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* --- 스크롤 진행 바 --- */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: var(--color-primary);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* --- 네비게이션 --- */
+    nav {
+      position: fixed;
+      top: 4px; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(227, 226, 172, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(43, 123, 202, 0.15);
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--color-accent);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--color-primary); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* --- 히어로 섹션 --- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+    }
+
+    .shape-1 {
+      width: 420px; height: 420px;
+      background: var(--color-primary);
+      top: -100px; right: -80px;
+    }
+
+    .shape-2 {
+      width: 280px; height: 280px;
+      background: var(--color-accent);
+      bottom: 40px; left: -60px;
+    }
+
+    .shape-3 {
+      width: 180px; height: 180px;
+      background: var(--color-primary);
+      bottom: 120px; right: 15%;
+      opacity: 0.12;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      line-height: 1.0;
+      letter-spacing: 0.03em;
+      color: var(--color-text);
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      color: var(--color-primary);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #444;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-title);
+      font-size: 2.8rem;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #666;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.5;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--color-text);
+      animation: scrollDown 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* --- 섹션 공통 --- */
+    section {
+      padding: 100px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: 0.04em;
+      color: var(--color-text);
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: #555;
+      max-width: 520px;
+      margin-bottom: 56px;
+      font-weight: 300;
+    }
+
+    /* --- 나라 목록 --- */
+    #countries {
+      background: rgba(255,255,255,0.35);
+      max-width: 100%;
+      padding: 100px 0;
+    }
+
+    #countries .inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .country-card {
+      background: var(--color-surface);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 24px 20px;
+      border: 1px solid rgba(43, 123, 202, 0.15);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .country-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(43, 123, 202, 0.18);
+      border-color: var(--color-primary);
+    }
+
+    .country-flag {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .country-info {
+      flex: 1;
+    }
+
+    .country-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-text);
+    }
+
+    .country-year {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 2px;
+    }
+
+    .country-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    /* --- 갤러리 (Swiper) --- */
+    #gallery {
+      padding: 100px 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    #gallery .inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .swiper {
+      width: 100%;
+      padding: 16px 0 48px !important;
+      overflow: visible !important;
+    }
+
+    .swiper-wrapper {
+      align-items: center;
+    }
+
+    .swiper-slide {
+      width: 320px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: grab;
+    }
+
+    .swiper-slide:active { cursor: grabbing; }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+
+    .swiper-slide:hover img {
+      transform: scale(1.04);
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      padding: 40px 18px 18px;
+      color: #fff;
+    }
+
+    .slide-country {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+
+    .slide-title {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .swiper-slide-active {
+      transform: scale(1.04);
+      box-shadow: 0 16px 56px rgba(43, 123, 202, 0.22);
+    }
+
+    .swiper-pagination-bullet {
+      background: var(--color-primary) !important;
+      opacity: 0.4;
+    }
+
+    .swiper-pagination-bullet-active {
+      opacity: 1 !important;
+    }
+
+    .drag-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .drag-hint svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* --- 여행 이야기 --- */
+    #stories {
+      padding: 100px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 32px;
+    }
+
+    .story-card {
+      background: var(--color-surface);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(43, 123, 202, 0.12);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .story-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(43, 123, 202, 0.15);
+    }
+
+    .story-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+    }
+
+    .story-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+
+    .story-card:hover .story-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .story-country-tag {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .story-body {
+      padding: 24px;
+    }
+
+    .story-date {
+      font-size: 0.75rem;
+      color: #888;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .story-title {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      color: var(--color-text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .story-text {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .story-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: gap 0.3s;
+    }
+
+    .story-more:hover { gap: 12px; }
+
+    /* --- 푸터 --- */
+    footer {
+      text-align: center;
+      padding: 56px 24px;
+      border-top: 1px solid rgba(43, 123, 202, 0.15);
+      background: rgba(255,255,255,0.25);
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    /* --- 반응형 --- */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      #countries .inner, #gallery .inner, #stories { padding: 80px 24px; }
+      .swiper-slide { width: 260px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <nav>
+    <a href="#hero" class="nav-logo">Wanderer</a>
+    <ul class="nav-links">
+      <li><a href="#countries">나라 목록</a></li>
+      <li><a href="#gallery">갤러리</a></li>
+      <li><a href="#stories">여행 이야기</a></li>
+    </ul>
+  </nav>
+
+  <!-- 히어로 -->
+  <section id="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-tag">Travel Diary</div>
+    <h1 class="hero-title">Explore the<br><span>World</span></h1>
+    <p class="hero-sub">세상의 모든 순간을 담는 여행 기록. 바람처럼 자유롭게, 빛처럼 선명하게.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Countries</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">38</div>
+        <div class="stat-label">Cities</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">247</div>
+        <div class="stat-label">Photos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5yr</div>
+        <div class="stat-label">Journey</div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- 나라 목록 -->
+  <div id="countries">
+    <div class="inner">
+      <p class="section-label">Visited Countries</p>
+      <h2 class="section-title">다녀온 나라들</h2>
+      <p class="section-desc">지금까지 발자국을 남긴 12개국의 이야기.</p>
+      <div class="country-grid">
+        <div class="country-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="country-flag">🇯🇵</div>
+          <div class="country-info">
+            <div class="country-name">일본</div>
+            <div class="country-year">2019 · 2022</div>
+          </div>
+          <span class="country-badge">3x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="60">
+          <div class="country-flag">🇫🇷</div>
+          <div class="country-info">
+            <div class="country-name">프랑스</div>
+            <div class="country-year">2020</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="120">
+          <div class="country-flag">🇮🇹</div>
+          <div class="country-info">
+            <div class="country-name">이탈리아</div>
+            <div class="country-year">2020</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="180">
+          <div class="country-flag">🇹🇭</div>
+          <div class="country-info">
+            <div class="country-name">태국</div>
+            <div class="country-year">2021 · 2023</div>
+          </div>
+          <span class="country-badge">2x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="240">
+          <div class="country-flag">🇻🇳</div>
+          <div class="country-info">
+            <div class="country-name">베트남</div>
+            <div class="country-year">2021</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="country-flag">🇪🇸</div>
+          <div class="country-info">
+            <div class="country-name">스페인</div>
+            <div class="country-year">2022</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="360">
+          <div class="country-flag">🇵🇹</div>
+          <div class="country-info">
+            <div class="country-name">포르투갈</div>
+            <div class="country-year">2022</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="420">
+          <div class="country-flag">🇬🇷</div>
+          <div class="country-info">
+            <div class="country-name">그리스</div>
+            <div class="country-year">2023</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="480">
+          <div class="country-flag">🇹🇷</div>
+          <div class="country-info">
+            <div class="country-name">튀르키예</div>
+            <div class="country-year">2023</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="540">
+          <div class="country-flag">🇲🇾</div>
+          <div class="country-info">
+            <div class="country-name">말레이시아</div>
+            <div class="country-year">2024</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="country-flag">🇲🇽</div>
+          <div class="country-info">
+            <div class="country-name">멕시코</div>
+            <div class="country-year">2024</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+        <div class="country-card" data-aos="fade-up" data-aos-delay="660">
+          <div class="country-flag">🇵🇪</div>
+          <div class="country-info">
+            <div class="country-name">페루</div>
+            <div class="country-year">2025</div>
+          </div>
+          <span class="country-badge">1x</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 갤러리 -->
+  <div id="gallery">
+    <div class="inner">
+      <p class="section-label">Photo Gallery</p>
+      <h2 class="section-title">사진 갤러리</h2>
+      <p class="section-desc">드래그하거나 스와이프해서 사진을 넘겨보세요.</p>
+      <div class="drag-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+        </svg>
+        좌우로 드래그하여 사진 탐색
+      </div>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/tokyo,japan" alt="도쿄">
+            <div class="slide-caption">
+              <div class="slide-country">Japan</div>
+              <div class="slide-title">도쿄의 봄날</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/paris,eiffel" alt="파리">
+            <div class="slide-caption">
+              <div class="slide-country">France</div>
+              <div class="slide-title">에펠탑의 황혼</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/santorini,greece" alt="산토리니">
+            <div class="slide-caption">
+              <div class="slide-country">Greece</div>
+              <div class="slide-title">산토리니의 파란 지붕</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/rome,italy" alt="로마">
+            <div class="slide-caption">
+              <div class="slide-country">Italy</div>
+              <div class="slide-title">로마의 고대 유적</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/bangkok,thailand" alt="방콕">
+            <div class="slide-caption">
+              <div class="slide-country">Thailand</div>
+              <div class="slide-title">방콕의 황금 사원</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/barcelona,spain" alt="바르셀로나">
+            <div class="slide-caption">
+              <div class="slide-country">Spain</div>
+              <div class="slide-title">가우디의 도시</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/istanbul,turkey" alt="이스탄불">
+            <div class="slide-caption">
+              <div class="slide-country">Turkey</div>
+              <div class="slide-title">두 대륙이 만나는 곳</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/hanoi,vietnam" alt="하노이">
+            <div class="slide-caption">
+              <div class="slide-country">Vietnam</div>
+              <div class="slide-title">하노이 올드 쿼터</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/machu,picchu" alt="마추픽추">
+            <div class="slide-caption">
+              <div class="slide-country">Peru</div>
+              <div class="slide-title">잃어버린 도시, 마추픽추</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://loremflickr.com/320/240/lisbon,portugal" alt="리스본">
+            <div class="slide-caption">
+              <div class="slide-country">Portugal</div>
+              <div class="slide-title">리스본의 트램</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 여행 이야기 -->
+  <section id="stories">
+    <p class="section-label">Travel Stories</p>
+    <h2 class="section-title">여행 이야기</h2>
+    <p class="section-desc">스크롤하면 하나씩 펼쳐지는 나만의 여행 기록.</p>
+    <div class="stories-grid">
+      <div class="story-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="story-img-wrap">
+          <img src="https://loremflickr.com/600/400/kyoto,japan" alt="교토">
+          <span class="story-country-tag">Japan</span>
+        </div>
+        <div class="story-body">
+          <div class="story-date">2022년 4월 · 교토</div>
+          <h3 class="story-title">벚꽃 아래 걷다</h3>
+          <p class="story-text">교토의 마루야마 공원, 수천 개의 꽃잎이 쏟아지던 그 오후. 세상 모든 시간이 멈춘 것 같았다.</p>
+          <a href="#" class="story-more">Read More &rarr;</a>
+        </div>
+      </div>
+      <div class="story-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="story-img-wrap">
+          <img src="https://loremflickr.com/600/400/oia,santorini" alt="산토리니">
+          <span class="story-country-tag">Greece</span>
+        </div>
+        <div class="story-body">
+          <div class="story-date">2023년 8월 · 산토리니</div>
+          <h3 class="story-title">파란 지붕의 석양</h3>
+          <p class="story-text">오이아 마을 골목 끝, 에게해를 물들이는 석양 앞에서 아무 말 없이 한 시간을 서 있었다.</p>
+          <a href="#" class="story-more">Read More &rarr;</a>
+        </div>
+      </div>
+      <div class="story-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="story-img-wrap">
+          <img src="https://loremflickr.com/600/400/machu,picchu,inca" alt="마추픽추">
+          <span class="story-country-tag">Peru</span>
+        </div>
+        <div class="story-body">
+          <div class="story-date">2025년 2월 · 마추픽추</div>
+          <h3 class="story-title">잉카의 신비를 걷다</h3>
+          <p class="story-text">구름 속에 잠긴 고대 도시. 4시간의 트레킹 끝에 만난 마추픽추는 숨을 멈추게 했다.</p>
+          <a href="#" class="story-more">Read More &rarr;</a>
+        </div>
+      </div>
+      <div class="story-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="story-img-wrap">
+          <img src="https://loremflickr.com/600/400/istanbul,bosphorus" alt="이스탄불">
+          <span class="story-country-tag">Turkey</span>
+        </div>
+        <div class="story-body">
+          <div class="story-date">2023년 10월 · 이스탄불</div>
+          <h3 class="story-title">두 대륙의 경계에서</h3>
+          <p class="story-text">보스포루스 해협 위에서 차를 마시며, 아시아와 유럽이 마주보는 풍경을 바라봤다.</p>
+          <a href="#" class="story-more">Read More &rarr;</a>
+        </div>
+      </div>
+      <div class="story-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="story-img-wrap">
+          <img src="https://loremflickr.com/600/400/barcelona,sagrada" alt="바르셀로나">
+          <span class="story-country-tag">Spain</span>
+        </div>
+        <div class="story-body">
+          <div class="story-date">2022년 9월 · 바르셀로나</div>
+          <h3 class="story-title">가우디가 꿈꾼 도시</h3>
+          <p class="story-text">사그라다 파밀리아 내부, 스테인드글라스를 통과한 빛이 온 몸을 물들이던 순간의 경이로움.</p>
+          <a href="#" class="story-more">Read More &rarr;</a>
+        </div>
+      </div>
+      <div class="story-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="story-img-wrap">
+          <img src="https://loremflickr.com/600/400/hoi-an,vietnam,lantern" alt="호이안">
+          <span class="story-country-tag">Vietnam</span>
+        </div>
+        <div class="story-body">
+          <div class="story-date">2021년 3월 · 호이안</div>
+          <h3 class="story-title">등불이 강을 따라 흐르던 밤</h3>
+          <p class="story-text">호이안의 밤, 수백 개의 등불이 투본강 위에 퍼지던 풍경은 평생 잊지 못할 것이다.</p>
+          <a href="#" class="story-more">Read More &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="footer-logo">Wanderer</div>
+    <p>세상의 모든 길은 새로운 이야기로 이어진다.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // AOS 초기화
+    AOS.init({ duration: 700, once: true, offset: 80 });
+
+    // Swiper 초기화
+    const swiper = new Swiper('.mySwiper', {
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      spaceBetween: 24,
+      grabCursor: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        768: { spaceBetween: 32 }
+      }
+    });
+
+    // 스크롤 진행 바
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('progress-bar').style.width = progress + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+  </script>
+</body>
+</html>

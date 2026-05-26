@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;700&family=Noto+Serif+KR:wght@700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    :root {
+      --color-bg:      oklch(96.5% 0.002 167.5);
+      --color-primary: oklch(56.1% 0.212 22.7);
+      --color-accent:  oklch(16.5% 0.031 223.4);
+      --color-text:    oklch(16.5% 0.031 223.4);
+      --color-muted:   oklch(55% 0.01 200);
+      --color-surface: oklch(92% 0.004 167.5);
+
+      --font-display: 'Bebas Neue', 'Noto Serif KR', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+      --font-body:    'Noto Sans KR', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── 진행바 ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--color-primary);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: oklch(96.5% 0.002 167.5 / 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid oklch(16.5% 0.031 223.4 / 0.08);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-decoration: none;
+      color: var(--color-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--color-primary); }
+
+    /* ── HERO (full-bleed) ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero-text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 6rem 8rem 8rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 8vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name span {
+      color: var(--color-primary);
+    }
+
+    .hero-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      max-width: 38ch;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      background: var(--color-accent);
+      color: var(--color-bg);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-start;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    .hero-image-col {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        oklch(56.1% 0.212 22.7 / 0.15) 0%,
+        transparent 60%
+      );
+    }
+
+    .hero-index {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      font-family: var(--font-display);
+      font-size: 8rem;
+      line-height: 1;
+      color: oklch(96.5% 0.002 167.5 / 0.25);
+      pointer-events: none;
+    }
+
+    /* ── ABOUT (stacked-column + editorial) ── */
+    #about {
+      padding: 10rem 0;
+    }
+
+    .stacked-col {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+      margin-bottom: 3rem;
+    }
+
+    .about-editorial {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .about-body p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--color-text);
+      margin-bottom: 1.4rem;
+    }
+
+    .about-aside {
+      padding-top: 0.4rem;
+    }
+
+    .aside-item {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid oklch(16.5% 0.031 223.4 / 0.12);
+    }
+
+    .aside-item:last-child {
+      border-bottom: none;
+    }
+
+    .aside-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .aside-value {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    /* ── SKILLS (mosaic-like asymmetric grid) ── */
+    #skills {
+      padding: 8rem 0;
+      background: var(--color-surface);
+    }
+
+    .skills-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .skills-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+
+    .skills-desc {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      line-height: 1.8;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--color-bg);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+      cursor: default;
+    }
+
+    .skill-card:hover { transform: translateY(-4px); }
+
+    .skill-card:nth-child(1) {
+      grid-column: span 2;
+    }
+
+    .skill-card:nth-child(4) {
+      grid-column: span 2;
+    }
+
+    .skill-card-num {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      line-height: 1;
+      color: oklch(56.1% 0.212 22.7 / 0.12);
+      position: absolute;
+      bottom: 1.2rem;
+      right: 1.5rem;
+    }
+
+    .skill-card-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
+      color: var(--color-accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid oklch(16.5% 0.031 223.4 / 0.25);
+      color: var(--color-muted);
+    }
+
+    .tag.active {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* ── INTERESTS (editorial 1fr 2fr / 2fr 1fr) ── */
+    #interests {
+      padding: 10rem 0;
+    }
+
+    .interests-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .int-row-1 {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .int-row-2 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .int-img {
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .int-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .int-img:hover img { transform: scale(1.04); }
+
+    .int-text h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .int-text p {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      line-height: 1.9;
+    }
+
+    /* ── CONTACT (full-bleed dark) ── */
+    #contact {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      background: var(--color-accent);
+      overflow: hidden;
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-big {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.9;
+      letter-spacing: 0.05em;
+      color: var(--color-bg);
+      margin-bottom: 2rem;
+    }
+
+    .contact-big span { color: var(--color-primary); }
+
+    .contact-sub {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: oklch(96.5% 0.002 167.5 / 0.55);
+      letter-spacing: 0.12em;
+      margin-bottom: 3rem;
+    }
+
+    .contact-email {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--color-bg);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border-bottom: 1px solid oklch(96.5% 0.002 167.5 / 0.35);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .contact-email:hover {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .contact-bg-text {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 22rem;
+      line-height: 1;
+      color: oklch(16.5% 0.031 223.4 / 0.08);
+      bottom: -4rem;
+      right: -4rem;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: oklch(12% 0.02 220);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: oklch(55% 0.01 200);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-right {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: oklch(55% 0.01 200);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-image-col {
+        height: 55vw;
+        max-height: 360px;
+      }
+
+      .hero-text-col {
+        padding: 8rem 2rem 4rem;
+        order: 2;
+      }
+
+      .hero-image-col { order: 1; }
+
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.4rem; }
+
+      .about-editorial { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-card:nth-child(1),
+      .skill-card:nth-child(4) { grid-column: span 1; }
+
+      .int-row-1,
+      .int-row-2 { grid-template-columns: 1fr; }
+      .int-row-2 .int-img { order: -1; }
+
+      .skills-inner,
+      .interests-inner { padding: 0 1.5rem; }
+      .stacked-col { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 진행바 -->
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">ABOUT ME</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text-col" data-aos="fade-right" data-aos-duration="900">
+      <p class="hero-label">Hello, World — 안녕하세요</p>
+      <h1 class="hero-name">KIM<br/><span>JIYEON</span></h1>
+      <p class="hero-tagline">
+        저는 코드와 디자인이 만나는 지점을 탐구하는<br/>
+        프론트엔드 개발자입니다.<br/>
+        아이디어를 실제 경험으로 만드는 일을 좋아합니다.
+      </p>
+      <a href="#contact" class="hero-cta">Get in Touch</a>
+    </div>
+    <div class="hero-image-col">
+      <img src="https://picsum.photos/seed/portrait01/900/1100" alt="profile" />
+      <div class="hero-image-overlay"></div>
+      <div class="hero-index">01</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="stacked-col">
+      <p class="section-label" data-aos="fade-up">01 — About</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">WHO<br/>I AM</h2>
+    </div>
+    <div class="stacked-col" style="max-width:900px">
+      <div class="about-editorial" data-aos="fade-up" data-aos-delay="120">
+        <div class="about-body">
+          <p>
+            디지털과 감성이 공존하는 인터페이스를 만드는 것에 열정을 가지고 있습니다.
+            사용자가 화면을 처음 마주하는 순간부터 마지막 인터랙션까지,
+            모든 경험이 의도적으로 설계되어야 한다고 믿습니다.
+          </p>
+          <p>
+            현재는 웹 개발과 AI 에이전트를 결합한 프로젝트를 공부하고 있으며,
+            복잡한 기술을 누구나 쉽게 접근할 수 있는 형태로 풀어내는 데
+            관심이 있습니다.
+          </p>
+          <p>
+            새로운 도전을 두려워하지 않고, 매 프로젝트마다 더 나은 방법을
+            찾아가는 과정 자체를 즐깁니다.
+          </p>
+        </div>
+        <div class="about-aside">
+          <div class="aside-item">
+            <p class="aside-label">Location</p>
+            <p class="aside-value">Seoul, Korea</p>
+          </div>
+          <div class="aside-item">
+            <p class="aside-label">Focus</p>
+            <p class="aside-value">Frontend &amp; AI Web</p>
+          </div>
+          <div class="aside-item">
+            <p class="aside-label">Education</p>
+            <p class="aside-value">SBS 아카데미</p>
+          </div>
+          <div class="aside-item">
+            <p class="aside-label">Status</p>
+            <p class="aside-value" style="color: var(--color-primary)">Available for work</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="skills-inner">
+      <div class="skills-header">
+        <div>
+          <p class="section-label" data-aos="fade-up">02 — Skills</p>
+          <h2 class="section-title" data-aos="fade-up" data-aos-delay="60">WHAT<br/>I DO</h2>
+        </div>
+        <p class="skills-desc" data-aos="fade-up" data-aos-delay="120">
+          프론트엔드 개발을 중심으로 UI/UX 디자인, AI 에이전트 개발까지
+          다양한 영역을 넘나들며 작업합니다. 기술은 도구일 뿐,
+          결국 사람을 위한 경험을 만드는 것이 목표입니다.
+        </p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="skill-card-num">01</div>
+          <p class="skill-card-title">Frontend Dev</p>
+          <p style="font-size:0.88rem; color:var(--color-muted); line-height:1.7">
+            HTML, CSS, JavaScript를 기반으로 인터랙티브한 웹 경험을 구현합니다.
+            애니메이션과 레이아웃에 특히 집중합니다.
+          </p>
+          <div class="skill-card-tags">
+            <span class="tag active">HTML</span>
+            <span class="tag active">CSS</span>
+            <span class="tag active">JavaScript</span>
+            <span class="tag">React</span>
+            <span class="tag">GSAP</span>
+          </div>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="skill-card-num">02</div>
+          <p class="skill-card-title">UI / UX</p>
+          <p style="font-size:0.88rem; color:var(--color-muted); line-height:1.7">
+            사용자 경험을 중심에 두고 시각적으로 일관된 디자인을 추구합니다.
+          </p>
+          <div class="skill-card-tags">
+            <span class="tag active">Figma</span>
+            <span class="tag">Typography</span>
+            <span class="tag">Color Theory</span>
+          </div>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="skill-card-num">03</div>
+          <p class="skill-card-title">AI Agent</p>
+          <p style="font-size:0.88rem; color:var(--color-muted); line-height:1.7">
+            Claude API를 활용한 AI 에이전트를 웹과 결합하는 방법을 탐구하고 있습니다.
+          </p>
+          <div class="skill-card-tags">
+            <span class="tag active">Claude API</span>
+            <span class="tag">Python</span>
+            <span class="tag active">Prompt Engineering</span>
+          </div>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="skill-card-num">04</div>
+          <p class="skill-card-title">Tooling &amp; Workflow</p>
+          <p style="font-size:0.88rem; color:var(--color-muted); line-height:1.7">
+            개발 환경 구성과 배포 파이프라인 설정으로 효율적인 작업 흐름을 만듭니다.
+          </p>
+          <div class="skill-card-tags">
+            <span class="tag active">Git</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">GitHub Pages</span>
+            <span class="tag">Claude Code</span>
+          </div>
+        </div>
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="skill-card-num">05</div>
+          <p class="skill-card-title">Learning</p>
+          <p style="font-size:0.88rem; color:var(--color-muted); line-height:1.7">
+            끊임없이 새로운 기술을 탐구합니다.
+          </p>
+          <div class="skill-card-tags">
+            <span class="tag">Three.js</span>
+            <span class="tag">WebGL</span>
+            <span class="tag">Node.js</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <div class="interests-inner">
+      <div style="max-width:700px; margin-bottom:5rem">
+        <p class="section-label" data-aos="fade-up">03 — Interests</p>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="60">WHAT<br/>MOVES ME</h2>
+      </div>
+
+      <div class="int-row-1" data-aos="fade-up" data-aos-delay="0">
+        <div class="int-img">
+          <img src="https://picsum.photos/seed/creative01/600/450" alt="creative" />
+        </div>
+        <div class="int-text">
+          <h3>Creative Coding</h3>
+          <p>
+            코드가 예술이 될 수 있다는 믿음을 가지고 있습니다.
+            수학적 규칙에서 발생하는 예상치 못한 아름다움,
+            인터랙션이 만들어내는 순간적인 경험들이
+            저를 프로그래밍으로 이끈 이유입니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="int-row-2" data-aos="fade-up" data-aos-delay="0">
+        <div class="int-text">
+          <h3>Design &amp; Typography</h3>
+          <p>
+            좋은 타이포그래피는 보이지 않는다고 생각합니다.
+            글꼴 선택 하나, 자간 조절 하나가 전달하는 느낌을
+            완전히 바꿀 수 있습니다. 편집 디자인과 웹 타이포그래피를
+            꾸준히 공부하고 있습니다.
+          </p>
+        </div>
+        <div class="int-img">
+          <img src="https://picsum.photos/seed/design02/600/450" alt="design" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="contact-sub" data-aos="fade-up">04 — Contact</p>
+      <h2 class="contact-big" data-aos="fade-up" data-aos-delay="80">
+        LET'S<br/><span>TALK</span>
+      </h2>
+      <p style="font-family:var(--font-mono); font-size:0.82rem; color:oklch(96.5% 0.002 167.5 / 0.5); letter-spacing:0.1em; margin-bottom:2.5rem" data-aos="fade-up" data-aos-delay="140">
+        새로운 프로젝트나 협업에 열려 있습니다
+      </p>
+      <a href="mailto:hello@example.com" class="contact-email" data-aos="fade-up" data-aos-delay="200">
+        hello@example.com
+      </a>
+    </div>
+    <div class="contact-bg-text">HELLO</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-left">KIM JIYEON &mdash; 2026</span>
+    <span class="footer-right">Seoul, Korea</span>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, offset: 60, duration: 700, easing: 'ease-out-cubic' });
+
+    // 진행바
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      const pct = total > 0 ? (scrolled / total) * 100 : 0;
+      bar.style.width = pct + '%';
+    }, { passive: true });
+  </script>
+</body>
+</html>

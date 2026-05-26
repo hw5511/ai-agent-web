@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #fa4028;
+      --color-accent: #22b17a;
+      --color-text: #ffffff;
+      --font-title: 'Bebas Neue', 'Black Han Sans', sans-serif;
+      --font-body: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      mix-blend-mode: difference;
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    /* ===== SECTION 1: HERO ===== */
+    #hero {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 6vw;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1.2rem;
+      font-family: var(--font-body);
+    }
+
+    .hero-name {
+      font-family: var(--font-title);
+      font-size: clamp(5rem, 15vw, 14rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--color-text);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-name span {
+      color: var(--color-primary);
+    }
+
+    .hero-subtitle {
+      margin-top: 2.5rem;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.55);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.9rem 2.2rem;
+      border: 1.5px solid var(--color-accent);
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-accent);
+      color: #0d0d0d;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      right: -2vw;
+      bottom: -2vw;
+      font-family: var(--font-title);
+      font-size: 28vw;
+      color: rgba(255,255,255,0.02);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.4;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 50px;
+      background: var(--color-text);
+      animation: line-down 1.4s ease-in-out infinite;
+    }
+
+    @keyframes line-down {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ===== SECTION 2: WORKS ===== */
+    #works {
+      padding: 8rem 6vw;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 4rem;
+    }
+
+    .swiper {
+      width: 100%;
+      cursor: grab;
+    }
+
+    .swiper:active {
+      cursor: grabbing;
+    }
+
+    .swiper-slide {
+      width: 420px;
+      height: 560px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.9) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+
+    .swiper-slide:hover .slide-img {
+      transform: scale(1.05);
+    }
+
+    .swiper-slide:hover .slide-overlay {
+      opacity: 1;
+    }
+
+    .slide-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .slide-title {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .swiper-scrollbar {
+      background: rgba(255,255,255,0.1);
+      height: 2px;
+      margin-top: 2rem;
+    }
+
+    .swiper-scrollbar-drag {
+      background: var(--color-accent);
+      height: 100%;
+    }
+
+    /* ===== SECTION 3: SKILLS ===== */
+    #skills {
+      padding: 8rem 6vw;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .skill-card {
+      padding: 2.2rem 2.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(250,64,40,0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(250,64,40,0.35);
+      cursor: default;
+    }
+
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    .skill-category {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .skill-name {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-bar-wrap {
+      width: 100%;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      overflow: visible;
+      position: relative;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-percent {
+      position: absolute;
+      right: 0;
+      top: -1.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ===== SECTION 4: CONTACT ===== */
+    #contact {
+      padding: 8rem 6vw 6rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .contact-headline {
+      font-family: var(--font-title);
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: 0.03em;
+      line-height: 1;
+      margin-bottom: 3rem;
+    }
+
+    .contact-headline em {
+      font-style: normal;
+      color: var(--color-primary);
+      display: block;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .contact-row-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      width: 80px;
+    }
+
+    .contact-row-value {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-row-value:hover {
+      color: var(--color-accent);
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 2.8rem;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+
+    .contact-btn:hover {
+      background: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      margin-top: 6rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-sns {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-sns a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-sns a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero, #works, #skills, #contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .swiper-slide { width: 290px; height: 390px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">PORTFOLIO</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECTION 1: HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">Creative Developer &amp; Designer</p>
+    <h1 class="hero-name">
+      KIM<br /><span>JIYUN</span>
+    </h1>
+    <p class="hero-subtitle">
+      디지털 공간에서 아이디어를 실체로 만들어내는<br />
+      프론트엔드 개발자입니다.
+    </p>
+    <a href="#works" class="hero-cta">View Works &rarr;</a>
+    <div class="hero-bg-text">FOLIO</div>
+    <div class="hero-scroll-hint">Scroll</div>
+  </section>
+
+  <!-- SECTION 2: WORKS -->
+  <section id="works">
+    <p class="section-label">02 / Works</p>
+    <h2 class="section-title">SELECTED<br />PROJECTS</h2>
+
+    <div class="swiper works-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://picsum.photos/seed/p1/840/1120" alt="Project 01" loading="lazy" />
+          <div class="slide-overlay">
+            <span class="slide-tag">Web Design</span>
+            <p class="slide-title">Brand Studio</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://picsum.photos/seed/p2/840/1120" alt="Project 02" loading="lazy" />
+          <div class="slide-overlay">
+            <span class="slide-tag">Interactive</span>
+            <p class="slide-title">Motion Portal</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://picsum.photos/seed/p3/840/1120" alt="Project 03" loading="lazy" />
+          <div class="slide-overlay">
+            <span class="slide-tag">UI / UX</span>
+            <p class="slide-title">App Dashboard</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://picsum.photos/seed/p4/840/1120" alt="Project 04" loading="lazy" />
+          <div class="slide-overlay">
+            <span class="slide-tag">3D / WebGL</span>
+            <p class="slide-title">Space Explorer</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://picsum.photos/seed/p5/840/1120" alt="Project 05" loading="lazy" />
+          <div class="slide-overlay">
+            <span class="slide-tag">E-Commerce</span>
+            <p class="slide-title">Minimal Shop</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img class="slide-img" src="https://picsum.photos/seed/p6/840/1120" alt="Project 06" loading="lazy" />
+          <div class="slide-overlay">
+            <span class="slide-tag">Identity</span>
+            <p class="slide-title">Type Lab</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-scrollbar"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SKILLS -->
+  <section id="skills">
+    <p class="section-label">03 / Skills</p>
+    <h2 class="section-title" data-aos="fade-up">WHAT I<br />DO BEST</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="0" data-skill="92">
+        <p class="skill-category">Frontend</p>
+        <p class="skill-name">HTML / CSS</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar"></div>
+          <span class="skill-percent">92%</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="100" data-skill="85">
+        <p class="skill-category">Framework</p>
+        <p class="skill-name">React / Next</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar"></div>
+          <span class="skill-percent">85%</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="200" data-skill="78">
+        <p class="skill-category">Animation</p>
+        <p class="skill-name">GSAP / Three</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar"></div>
+          <span class="skill-percent">78%</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="300" data-skill="88">
+        <p class="skill-category">Language</p>
+        <p class="skill-name">JavaScript</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar"></div>
+          <span class="skill-percent">88%</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="400" data-skill="70">
+        <p class="skill-category">Backend</p>
+        <p class="skill-name">Node / Python</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar"></div>
+          <span class="skill-percent">70%</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="500" data-skill="80">
+        <p class="skill-category">Design</p>
+        <p class="skill-name">Figma / PS</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar"></div>
+          <span class="skill-percent">80%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: CONTACT -->
+  <section id="contact">
+    <p class="section-label">04 / Contact</p>
+    <h2 class="contact-headline" data-aos="fade-up">
+      LET'S
+      <em>WORK</em>
+      TOGETHER
+    </h2>
+
+    <div class="contact-info" data-aos="fade-up" data-aos-delay="100">
+      <div class="contact-row">
+        <span class="contact-row-label">Email</span>
+        <a href="mailto:hello@jiyun.dev" class="contact-row-value">hello@jiyun.dev</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">GitHub</span>
+        <a href="#" class="contact-row-value">github.com/jiyun</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Location</span>
+        <span class="contact-row-value">Seoul, South Korea</span>
+      </div>
+    </div>
+
+    <a href="mailto:hello@jiyun.dev" class="contact-btn" data-aos="fade-up" data-aos-delay="200">
+      Send Message &rarr;
+    </a>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Kim Jiyun. All rights reserved.</p>
+      <div class="footer-sns">
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // AOS init
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out',
+      once: true,
+      offset: 80
+    });
+
+    // Swiper (drag)
+    new Swiper('.works-swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 24,
+      grabCursor: true,
+      freeMode: true,
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        draggable: true
+      }
+    });
+
+    // Scroll progress bar
+    (function () {
+      var bar = document.getElementById('progress-bar');
+      window.addEventListener('scroll', function () {
+        var total = document.body.scrollHeight - window.innerHeight;
+        var pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+        bar.style.width = pct + '%';
+      }, { passive: true });
+    })();
+
+    // Skill bars trigger
+    (function () {
+      var cards = document.querySelectorAll('.skill-card[data-skill]');
+
+      function triggerBar(card) {
+        var pct = card.getAttribute('data-skill');
+        var bar = card.querySelector('.skill-bar');
+        if (bar && !bar.dataset.done) {
+          bar.dataset.done = '1';
+          requestAnimationFrame(function () {
+            bar.style.width = pct + '%';
+          });
+        }
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            triggerBar(entry.target);
+          }
+        });
+      }, { threshold: 0.35 });
+
+      cards.forEach(function (card) {
+        observer.observe(card);
+      });
+    })();
+  </script>
+</body>
+</html>

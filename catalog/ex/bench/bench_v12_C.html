@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>퍼피 유치원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;400;500&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --y: oklch(88% 0.22 95);
+      --c: oklch(62% 0.22 22);
+      --b: oklch(68% 0.18 240);
+      --l: oklch(82% 0.20 140);
+      --d: oklch(15% 0.01 0);
+      --w: oklch(99% 0 0);
+      --bg: oklch(98% 0.005 80);
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      font-family: 'Gmarket Sans', sans-serif;
+      background: var(--bg);
+      color: var(--d);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--c);
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: multiply;
+      will-change: transform;
+    }
+    .cursor.big { width: 32px; height: 32px; }
+
+    .v12-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 100%;
+      background: var(--c);
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 9998;
+      will-change: transform;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: var(--d);
+      color: var(--w);
+      padding: 0.4rem 1rem;
+      border-radius: 3px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      padding: 0.55rem 1.4rem;
+      border-radius: 40px;
+      border: 1px solid oklch(90% 0 0);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--d);
+      font-size: 0.82rem;
+      font-weight: 300;
+      opacity: 0.65;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; cursor: none; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: var(--y);
+      overflow: hidden;
+    }
+
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-bottom {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 4rem; right: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--d);
+      opacity: 0.55;
+    }
+
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--d);
+      opacity: 0.4;
+    }
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--d);
+    }
+
+    /* STRIP */
+    .strip {
+      display: flex;
+      height: 10px;
+    }
+    .strip span { flex: 1; }
+
+    /* ABOUT */
+    .about {
+      padding: 9rem 4rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: center;
+      background: var(--w);
+    }
+
+    .about-imgs {
+      position: relative;
+      height: 520px;
+    }
+
+    .img-a {
+      position: absolute;
+      top: 0; left: 0;
+      width: 65%; height: 78%;
+      object-fit: cover;
+      will-change: transform;
+    }
+
+    .img-b {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 58%; height: 63%;
+      object-fit: cover;
+      outline: 8px solid var(--y);
+      will-change: transform;
+    }
+
+    .img-badge {
+      position: absolute;
+      top: 44%; left: 42%;
+      background: var(--c);
+      color: var(--w);
+      font-size: 0.78rem;
+      font-weight: 400;
+      padding: 0.55rem 1.1rem;
+      border-radius: 3px;
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--c);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .section-h {
+      font-size: clamp(1.9rem, 3.5vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-p {
+      font-size: 0.93rem;
+      line-height: 1.88;
+      color: oklch(42% 0.01 0);
+      font-weight: 300;
+    }
+
+    /* PROGRAMS */
+    .programs {
+      padding: 9rem 4rem;
+      background: var(--d);
+    }
+
+    .prog-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+
+    .prog-head .section-h { color: var(--w); }
+    .prog-head .eyebrow { color: var(--y); }
+
+    .prog-right {
+      font-size: 0.88rem;
+      color: oklch(62% 0.01 0);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 28ch;
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+
+    .bc {
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+      will-change: transform;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .bc:hover { transform: translateY(-6px) scale(1.015); }
+
+    .bc-1 { grid-column: span 4; background: var(--c); min-height: 240px; }
+    .bc-2 { grid-column: span 2; background: var(--b); min-height: 240px; }
+    .bc-3 { grid-column: span 2; background: var(--l); min-height: 220px; }
+    .bc-4 { grid-column: span 4; background: oklch(21% 0.01 0); min-height: 220px; }
+
+    .bc-n {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .bc-3 .bc-n { color: rgba(0,0,0,0.38); }
+
+    .bc-h {
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      font-weight: 500;
+      color: var(--w);
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+    }
+    .bc-3 .bc-h { color: var(--d); }
+
+    .bc-p {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.72;
+      font-weight: 300;
+      max-width: 36ch;
+    }
+    .bc-3 .bc-p { color: rgba(0,0,0,0.58); }
+
+    .bc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.4rem;
+    }
+    .bc-tag {
+      font-size: 0.7rem;
+      padding: 0.22rem 0.7rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.28);
+      color: var(--w);
+      font-weight: 300;
+    }
+    .bc-3 .bc-tag { border-color: rgba(0,0,0,0.2); color: var(--d); }
+
+    .bc-img {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 42%; height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .bc:hover .bc-img { opacity: 0.35; }
+
+    /* GALLERY */
+    .gallery {
+      background: var(--y);
+      padding: 8rem 4rem 4rem;
+      overflow: hidden;
+    }
+
+    .gal-track {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 3rem;
+      will-change: transform;
+    }
+
+    .gal-item {
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    .gal-item:nth-child(odd)  { width: 300px; height: 400px; }
+    .gal-item:nth-child(even) { width: 240px; height: 340px; align-self: flex-end; }
+
+    .gal-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .gal-item:hover img { transform: scale(1.06); }
+
+    .gal-label {
+      position: absolute;
+      bottom: 0.8rem; left: 0.8rem;
+      background: var(--w);
+      font-size: 0.7rem;
+      font-weight: 400;
+      padding: 0.22rem 0.65rem;
+      border-radius: 2px;
+    }
+
+    /* SCHEDULE */
+    .schedule {
+      padding: 9rem 4rem;
+      background: var(--bg);
+    }
+
+    .sch-wrap {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 8rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+
+    .sch-dots {
+      display: flex;
+      gap: 0.45rem;
+      margin-top: 2rem;
+    }
+    .sch-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    .sch-list { display: flex; flex-direction: column; }
+
+    .sch-item {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 2rem;
+      padding: 2.2rem 0;
+      border-top: 1px solid oklch(88% 0 0);
+      opacity: 0.28;
+      transition: opacity 0.45s;
+      will-change: opacity;
+    }
+    .sch-item.on { opacity: 1; }
+
+    .sch-time {
+      font-size: 0.76rem;
+      color: var(--c);
+      letter-spacing: 0.08em;
+      font-weight: 400;
+      padding-top: 0.25rem;
+    }
+
+    .sch-title {
+      font-size: 1.12rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .sch-desc {
+      font-size: 0.86rem;
+      color: oklch(50% 0.01 0);
+      line-height: 1.72;
+      font-weight: 300;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 10rem 4rem;
+      background: var(--c);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg {
+      position: absolute;
+      font-size: clamp(6rem, 20vw, 20rem);
+      font-weight: 500;
+      color: oklch(57% 0.22 22);
+      bottom: -1rem; left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .cta-h {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 500;
+      color: var(--w);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.8rem;
+      will-change: transform;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-p {
+      font-size: 1rem;
+      color: oklch(92% 0.05 22);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--w);
+      color: var(--c);
+      padding: 1rem 3rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      font-family: inherit;
+      border: none;
+      border-radius: 4px;
+      cursor: none;
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+      will-change: transform;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+    }
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    }
+    .btn:active { transform: translateY(0) scale(0.98); }
+
+    footer {
+      padding: 3rem 4rem;
+      background: var(--d);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-size: 0.76rem;
+      color: oklch(46% 0.01 0);
+      font-weight: 300;
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { display: none; }
+      .about { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+      .about-imgs { height: 340px; }
+      .programs { padding: 5rem 2rem; }
+      .prog-head { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .bento { grid-template-columns: 1fr; }
+      .bc-1, .bc-2, .bc-3, .bc-4 { grid-column: span 1; }
+      .gallery { padding: 5rem 2rem 2rem; }
+      .schedule { padding: 5rem 2rem; }
+      .sch-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .cta { padding: 6rem 2rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
+      .hero-bottom { left: 2rem; right: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="v12Cursor"></div>
+  <div class="v12-progress" id="v12Progress"></div>
+
+  <nav>
+    <div class="nav-logo">퍼피 유치원</div>
+    <ul class="nav-links">
+      <li><a href="#programs">프로그램</a></li>
+      <li><a href="#gallery">갤러리</a></li>
+      <li><a href="#schedule">일과표</a></li>
+      <li><a href="#contact">상담 신청</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-bottom">
+      <p class="hero-tag">강아지의 두 번째 집 · Since 2018</p>
+      <p class="hero-scroll">SCROLL</p>
+    </div>
+  </section>
+
+  <div class="strip">
+    <span style="background:var(--c)"></span>
+    <span style="background:var(--y)"></span>
+    <span style="background:var(--b)"></span>
+    <span style="background:var(--l)"></span>
+    <span style="background:var(--d)"></span>
+  </div>
+
+  <section class="about">
+    <div class="about-imgs">
+      <img class="img-a" src="https://loremflickr.com/600/480/puppy,dog,cute" alt="강아지">
+      <img class="img-b" src="https://loremflickr.com/480/380/dog,play,happy" alt="강아지 놀이">
+      <div class="img-badge">★ 안전 인증 A등급</div>
+    </div>
+    <div class="about-txt">
+      <p class="eyebrow">ABOUT US</p>
+      <h2 class="section-h">모든 강아지의<br>빛나는 하루</h2>
+      <p class="section-p">퍼피 유치원은 반려견이 안전하고 즐겁게 사회화를 경험하는 공간입니다. 전문 트레이너가 함께하는 구조화된 프로그램으로 신체적, 정서적 발달을 함께 돕습니다.</p>
+    </div>
+  </section>
+
+  <section class="programs" id="programs">
+    <div class="prog-head">
+      <div>
+        <p class="eyebrow">PROGRAMS</p>
+        <h2 class="section-h">아이에게 딱 맞는<br>프로그램</h2>
+      </div>
+      <p class="prog-right">강아지의 나이와 성격에 맞춰 설계된 전문 프로그램으로 매일 새로운 경험을 제공합니다.</p>
+    </div>
+    <div class="bento">
+      <div class="bc bc-1">
+        <p class="bc-n">01 —</p>
+        <h3 class="bc-h">종일 돌봄<br>프로그램</h3>
+        <p class="bc-p">오전 8시부터 오후 7시까지, 전문 케어 스태프가 상시 동행하는 안심 돌봄 서비스입니다.</p>
+        <div class="bc-tags">
+          <span class="bc-tag">8h 케어</span>
+          <span class="bc-tag">전담 스태프</span>
+          <span class="bc-tag">간식 포함</span>
+        </div>
+        <img class="bc-img" src="https://loremflickr.com/400/300/dog,sleep" alt="">
+      </div>
+      <div class="bc bc-2">
+        <p class="bc-n">02 —</p>
+        <h3 class="bc-h">사회화<br>클래스</h3>
+        <p class="bc-p">또래 친구들과 함께 놀며 건강한 사회성을 기릅니다.</p>
+        <div class="bc-tags">
+          <span class="bc-tag">소그룹</span>
+          <span class="bc-tag">또래 매칭</span>
+        </div>
+        <img class="bc-img" src="https://loremflickr.com/300/250/puppies,dogs" alt="">
+      </div>
+      <div class="bc bc-3">
+        <p class="bc-n">03 —</p>
+        <h3 class="bc-h">기초 훈련<br>클래스</h3>
+        <p class="bc-p">앉아, 기다려 — 긍정 강화 방식으로 재미있게 배웁니다.</p>
+        <div class="bc-tags">
+          <span class="bc-tag">긍정 강화</span>
+          <span class="bc-tag">6주 과정</span>
+        </div>
+        <img class="bc-img" src="https://loremflickr.com/300/250/dog,training" alt="">
+      </div>
+      <div class="bc bc-4">
+        <p class="bc-n">04 —</p>
+        <h3 class="bc-h">프리미엄 스파 &amp;<br>그루밍</h3>
+        <p class="bc-p">피부 타입 맞춤 샴푸와 전신 케어. 돌아올 때는 더욱 빛나는 아이로 변신합니다.</p>
+        <div class="bc-tags">
+          <span class="bc-tag">맞춤 샴푸</span>
+          <span class="bc-tag">전신 케어</span>
+          <span class="bc-tag">픽업 가능</span>
+        </div>
+        <img class="bc-img" src="https://loremflickr.com/400/300/dog,grooming" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <p class="eyebrow">GALLERY</p>
+    <h2 class="section-h">오늘의 우리 아이들</h2>
+    <div class="gal-track" id="galTrack">
+      <div class="gal-item">
+        <img src="https://loremflickr.com/300/400/puppy,golden,cute" alt="강아지 1">
+        <div class="gal-label">행복한 월요일</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://loremflickr.com/240/340/dog,play,small" alt="강아지 2">
+        <div class="gal-label">친구 만났어요</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://loremflickr.com/300/400/puppy,labrador" alt="강아지 3">
+        <div class="gal-label">낮잠 시간</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://loremflickr.com/240/340/dog,running" alt="강아지 4">
+        <div class="gal-label">신나게 달리기</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://loremflickr.com/300/400/puppy,poodle" alt="강아지 5">
+        <div class="gal-label">간식 타임</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://loremflickr.com/240/340/dog,friends" alt="강아지 6">
+        <div class="gal-label">베프랑 함께</div>
+      </div>
+      <div class="gal-item">
+        <img src="https://loremflickr.com/300/400/puppy,outdoor,grass" alt="강아지 7">
+        <div class="gal-label">바깥 놀이</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="schedule" id="schedule">
+    <p class="eyebrow">DAILY SCHEDULE</p>
+    <h2 class="section-h">하루 일과표</h2>
+    <div class="sch-wrap">
+      <div>
+        <p class="section-p">구조화된 루틴이 강아지에게 안정감을 줍니다. 매일 같은 시간, 같은 방식으로 사랑을 전합니다.</p>
+        <div class="sch-dots">
+          <div class="sch-dot" style="background:var(--c)"></div>
+          <div class="sch-dot" style="background:var(--y)"></div>
+          <div class="sch-dot" style="background:var(--b)"></div>
+          <div class="sch-dot" style="background:var(--l)"></div>
+        </div>
+      </div>
+      <div class="sch-list" id="schList">
+        <div class="sch-item on">
+          <span class="sch-time">08:00</span>
+          <div>
+            <p class="sch-title">등원 &amp; 건강 체크</p>
+            <p class="sch-desc">체온, 컨디션 확인 후 입장. 오늘의 상태를 보호자와 공유합니다.</p>
+          </div>
+        </div>
+        <div class="sch-item">
+          <span class="sch-time">09:30</span>
+          <div>
+            <p class="sch-title">아침 산책 &amp; 자유 놀이</p>
+            <p class="sch-desc">바깥 공기를 마시며 에너지를 발산하는 황금 시간.</p>
+          </div>
+        </div>
+        <div class="sch-item">
+          <span class="sch-time">11:00</span>
+          <div>
+            <p class="sch-title">소그룹 사회화 클래스</p>
+            <p class="sch-desc">또래와의 상호작용, 기초 명령어 훈련 (긍정 강화 방식).</p>
+          </div>
+        </div>
+        <div class="sch-item">
+          <span class="sch-time">13:00</span>
+          <div>
+            <p class="sch-title">점심 &amp; 낮잠</p>
+            <p class="sch-desc">오너가 준비한 식사 또는 원내 제공 메뉴 선택 가능.</p>
+          </div>
+        </div>
+        <div class="sch-item">
+          <span class="sch-time">15:00</span>
+          <div>
+            <p class="sch-title">오후 자유 놀이</p>
+            <p class="sch-desc">실내 어질리티, 장난감, 친구와 마음껏 뛰어다니는 시간.</p>
+          </div>
+        </div>
+        <div class="sch-item">
+          <span class="sch-time">19:00</span>
+          <div>
+            <p class="sch-title">하원 &amp; 일일 리포트</p>
+            <p class="sch-desc">오늘의 활동, 식사량, 컨디션 리포트를 보호자에게 전달합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="cta-bg">WOOF</div>
+    <h2 class="cta-h">우리 아이<br>데려오세요</h2>
+    <p class="cta-p">첫 방문 체험 수업은 무료입니다.<br>아이의 성격과 필요를 함께 파악해 드립니다.</p>
+    <a href="#" class="btn">무료 체험 신청하기</a>
+  </section>
+
+  <footer>
+    <p>© 2026 퍼피 유치원 — Puppy Kindergarten</p>
+    <p>서울 마포구 연남동 · 02-1234-5678</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const v12_lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    v12_lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => v12_lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // Progress bar
+    {
+      const v12_prog = document.getElementById('v12Progress');
+      ScrollTrigger.create({
+        start: 'top top',
+        end: 'bottom bottom',
+        onUpdate: (self) => gsap.set(v12_prog, { scaleX: self.progress })
+      });
+    }
+
+    // Custom cursor
+    {
+      const v12_cur = document.getElementById('v12Cursor');
+      let v12_mx = 0, v12_my = 0, v12_cx = 0, v12_cy = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        v12_mx = e.clientX;
+        v12_my = e.clientY;
+      });
+
+      const v12_tickCursor = () => {
+        v12_cx += (v12_mx - v12_cx) * 0.14;
+        v12_cy += (v12_my - v12_cy) * 0.14;
+        gsap.set(v12_cur, { x: v12_cx - 8, y: v12_cy - 8 });
+        requestAnimationFrame(v12_tickCursor);
+      };
+      v12_tickCursor();
+
+      document.querySelectorAll('a, button, .bc').forEach((el) => {
+        el.addEventListener('mouseenter', () => v12_cur.classList.add('big'));
+        el.addEventListener('mouseleave', () => v12_cur.classList.remove('big'));
+      });
+    }
+
+    // === HERO PARTICLE TYPOGRAPHY ===
+    {
+      const v12_canvas = document.getElementById('heroCanvas');
+      const v12_ctx = v12_canvas.getContext('2d');
+      let v12_pts = [];
+      let v12_mpos = { x: -9999, y: -9999 };
+      let v12_cw = 0, v12_ch = 0;
+
+      const v12_setSize = () => {
+        v12_cw = v12_canvas.width = v12_canvas.offsetWidth;
+        v12_ch = v12_canvas.height = v12_canvas.offsetHeight;
+      };
+
+      const v12_sampleText = () => {
+        const v12_off = document.createElement('canvas');
+        v12_off.width = v12_cw;
+        v12_off.height = v12_ch;
+        const v12_oc = v12_off.getContext('2d');
+        const v12_fs = Math.min(v12_cw * 0.24, 200);
+
+        v12_oc.fillStyle = '#000';
+        v12_oc.font = `500 ${v12_fs}px 'Gmarket Sans', sans-serif`;
+        v12_oc.textAlign = 'center';
+        v12_oc.textBaseline = 'middle';
+        v12_oc.fillText('PUPPY', v12_cw / 2, v12_ch / 2 - v12_fs * 0.28);
+
+        v12_oc.font = `300 ${v12_fs * 0.3}px 'Gmarket Sans', sans-serif`;
+        v12_oc.fillText('강아지의 두 번째 집', v12_cw / 2, v12_ch / 2 + v12_fs * 0.52);
+
+        const v12_imgd = v12_oc.getImageData(0, 0, v12_cw, v12_ch).data;
+        const v12_out = [];
+        const v12_gap = 7;
+
+        for (let y = 0; y < v12_ch; y += v12_gap) {
+          for (let x = 0; x < v12_cw; x += v12_gap) {
+            if (v12_imgd[(y * v12_cw + x) * 4 + 3] > 128) {
+              v12_out.push({ x, y });
+            }
+          }
+        }
+        return v12_out;
+      };
+
+      const v12_buildPts = () => {
+        const v12_targets = v12_sampleText();
+        v12_pts = v12_targets.map((t) => ({
+          x: Math.random() * v12_cw,
+          y: Math.random() * v12_ch,
+          tx: t.x,
+          ty: t.y,
+          vx: (Math.random() - 0.5) * 6,
+          vy: (Math.random() - 0.5) * 6,
+          r: Math.random() * 2 + 1.5,
+          isDark: Math.random() > 0.22
+        }));
+      };
+
+      const v12_drawFrame = () => {
+        v12_ctx.clearRect(0, 0, v12_cw, v12_ch);
+
+        const v12_dark = [];
+        const v12_coral = [];
+
+        for (let i = 0; i < v12_pts.length; i++) {
+          const p = v12_pts[i];
+          const v12_ddx = p.tx - p.x;
+          const v12_ddy = p.ty - p.y;
+          const v12_ex = p.x - v12_mpos.x;
+          const v12_ey = p.y - v12_mpos.y;
+          const v12_ed = Math.sqrt(v12_ex * v12_ex + v12_ey * v12_ey) || 1;
+
+          if (v12_ed < 90) {
+            const v12_f = (90 - v12_ed) / 90;
+            p.vx += (v12_ex / v12_ed) * v12_f * 4.5;
+            p.vy += (v12_ey / v12_ed) * v12_f * 4.5;
+          }
+
+          p.vx += v12_ddx * 0.065;
+          p.vy += v12_ddy * 0.065;
+          p.vx *= 0.87;
+          p.vy *= 0.87;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.isDark) { v12_dark.push(p); } else { v12_coral.push(p); }
+        }
+
+        v12_ctx.fillStyle = 'oklch(15% 0.01 0)';
+        v12_ctx.beginPath();
+        for (let i = 0; i < v12_dark.length; i++) {
+          const p = v12_dark[i];
+          v12_ctx.moveTo(p.x + p.r, p.y);
+          v12_ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+        }
+        v12_ctx.fill();
+
+        v12_ctx.fillStyle = 'oklch(62% 0.22 22)';
+        v12_ctx.beginPath();
+        for (let i = 0; i < v12_coral.length; i++) {
+          const p = v12_coral[i];
+          v12_ctx.moveTo(p.x + p.r, p.y);
+          v12_ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+        }
+        v12_ctx.fill();
+
+        requestAnimationFrame(v12_drawFrame);
+      };
+
+      v12_canvas.addEventListener('mousemove', (e) => {
+        const v12_rect = v12_canvas.getBoundingClientRect();
+        v12_mpos.x = e.clientX - v12_rect.left;
+        v12_mpos.y = e.clientY - v12_rect.top;
+      });
+      v12_canvas.addEventListener('mouseleave', () => {
+        v12_mpos.x = -9999;
+        v12_mpos.y = -9999;
+      });
+
+      window.addEventListener('resize', () => {
+        v12_setSize();
+        document.fonts.ready.then(v12_buildPts);
+      });
+
+      v12_setSize();
+      document.fonts.ready.then(() => {
+        v12_buildPts();
+        v12_drawFrame();
+      });
+    }
+
+    // About parallax
+    {
+      gsap.to('.img-a', {
+        yPercent: -12, ease: 'none',
+        scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: 1 }
+      });
+      gsap.to('.img-b', {
+        yPercent: 12, ease: 'none',
+        scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: 1 }
+      });
+      gsap.from('.about-txt > *', {
+        y: 35, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: '.about-txt', start: 'top 78%' }
+      });
+    }
+
+    // Bento entrance
+    {
+      gsap.from('.bc', {
+        y: 50, opacity: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: '.bento', start: 'top 78%' }
+      });
+    }
+
+    // Gallery horizontal pin
+    {
+      const v12_track = document.getElementById('galTrack');
+      const v12_getTW = () => v12_track.scrollWidth - window.innerWidth + 80;
+
+      gsap.to(v12_track, {
+        x: () => -v12_getTW(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.gallery',
+          start: 'top top',
+          end: () => `+=${v12_getTW() + 400}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    }
+
+    // Schedule active highlight
+    {
+      const v12_schItems = document.querySelectorAll('.sch-item');
+      v12_schItems.forEach((item) => {
+        ScrollTrigger.create({
+          trigger: item,
+          start: 'top 62%',
+          onEnter: () => {
+            v12_schItems.forEach((el) => el.classList.remove('on'));
+            item.classList.add('on');
+          },
+          onEnterBack: () => {
+            v12_schItems.forEach((el) => el.classList.remove('on'));
+            item.classList.add('on');
+          }
+        });
+      });
+    }
+
+    // CTA entrance
+    {
+      gsap.from('.cta-h', {
+        yPercent: 25, opacity: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.cta', start: 'top 75%' }
+      });
+    }
+  </script>
+</body>
+</html>

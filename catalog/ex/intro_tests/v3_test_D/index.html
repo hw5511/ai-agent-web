@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    :root {
+      --color-bg: #0d0d0d;
+      --color-primary: #e53c69;
+      --color-accent: #f2e400;
+      --color-text: #ffffff;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.05em;
+      overflow-x: hidden;
+    }
+
+    /* ── 스크롤 진행 바 ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ── 네비게이션 ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.9) 0%, transparent 100%);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 20vw, 320px);
+      color: rgba(255,255,255,0.03);
+      letter-spacing: 0.05em;
+      user-select: none;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 14vw, 200px);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--color-text);
+    }
+
+    .hero-name span {
+      color: var(--color-primary);
+    }
+
+    .hero-sub {
+      margin-top: 24px;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: inline-block;
+      padding: 14px 40px;
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--color-primary), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ── 섹션 공통 ── */
+    section {
+      padding: 120px 48px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 7vw, 96px);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 64px;
+    }
+
+    /* ── WORKS (Swiper) ── */
+    #works {
+      background: #0a0a0a;
+    }
+
+    .works-header {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .swiper {
+      width: 100%;
+      padding: 16px 0 48px;
+      cursor: grab;
+    }
+
+    .swiper:active {
+      cursor: grabbing;
+    }
+
+    .swiper-slide {
+      width: 360px;
+    }
+
+    .work-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: #1a1a1a;
+    }
+
+    .work-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .work-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .work-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .work-card:hover .work-card-overlay {
+      opacity: 1;
+    }
+
+    .work-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: var(--color-text);
+    }
+
+    .work-card-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .swiper-scrollbar {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .swiper-scrollbar-drag {
+      background: var(--color-primary);
+    }
+
+    /* ── SKILLS ── */
+    #skills {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skill-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .skill-name {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text);
+    }
+
+    .skill-pct {
+      font-size: 0.75rem;
+      color: var(--color-accent);
+    }
+
+    .skill-bar-bg {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: #080808;
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.8;
+      letter-spacing: 0.06em;
+      margin-bottom: 56px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+
+    .contact-link {
+      display: inline-block;
+      padding: 12px 32px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .contact-link:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .contact-link.primary {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    .contact-link.primary:hover {
+      background: transparent;
+      color: var(--color-primary);
+    }
+
+    .contact-email-display {
+      font-size: 1.2rem;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    footer {
+      padding: 32px 48px;
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.2);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ── 마우스 커서 하이라이트 ── */
+    #cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s;
+      will-change: transform;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(242, 228, 0, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9997;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 24px;
+      }
+      .nav-links {
+        gap: 20px;
+      }
+      section {
+        padding: 80px 24px;
+      }
+      .hero-name {
+        font-size: clamp(56px, 16vw, 100px);
+      }
+      .swiper-slide {
+        width: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 스크롤 진행 바 -->
+  <div id="progress-bar"></div>
+
+  <!-- 커서 -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- 네비게이션 -->
+  <nav>
+    <div class="nav-logo">PORTFOLIO</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECTION 1: HERO -->
+  <section id="hero">
+    <div class="hero-bg-text" aria-hidden="true">PORTFOLIO</div>
+    <div class="hero-content">
+      <p class="hero-label">Creative Developer</p>
+      <h1 class="hero-name">YOUR<br /><span>NAME</span></h1>
+      <p class="hero-sub">Design &nbsp;/&nbsp; Development &nbsp;/&nbsp; Interaction</p>
+      <a href="#works" class="hero-cta">View My Work</a>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- SECTION 2: WORKS (Swiper 드래그 슬라이더) -->
+  <section id="works">
+    <div class="works-header">
+      <p class="section-label">02 — Selected Works</p>
+      <h2 class="section-title">WORKS</h2>
+    </div>
+    <div class="swiper works-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="work-card">
+            <img src="https://picsum.photos/seed/w1/720/540" alt="Work 1" loading="lazy" />
+            <div class="work-card-overlay">
+              <div class="work-card-title">Project One</div>
+              <div class="work-card-tag">UI Design · 2024</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="work-card">
+            <img src="https://picsum.photos/seed/w2/720/540" alt="Work 2" loading="lazy" />
+            <div class="work-card-overlay">
+              <div class="work-card-title">Project Two</div>
+              <div class="work-card-tag">Interaction · 2024</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="work-card">
+            <img src="https://picsum.photos/seed/w3/720/540" alt="Work 3" loading="lazy" />
+            <div class="work-card-overlay">
+              <div class="work-card-title">Project Three</div>
+              <div class="work-card-tag">Branding · 2023</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="work-card">
+            <img src="https://picsum.photos/seed/w4/720/540" alt="Work 4" loading="lazy" />
+            <div class="work-card-overlay">
+              <div class="work-card-title">Project Four</div>
+              <div class="work-card-tag">Web Dev · 2023</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="work-card">
+            <img src="https://picsum.photos/seed/w5/720/540" alt="Work 5" loading="lazy" />
+            <div class="work-card-overlay">
+              <div class="work-card-title">Project Five</div>
+              <div class="work-card-tag">Motion · 2023</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="work-card">
+            <img src="https://picsum.photos/seed/w6/720/540" alt="Work 6" loading="lazy" />
+            <div class="work-card-overlay">
+              <div class="work-card-title">Project Six</div>
+              <div class="work-card-tag">3D Design · 2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-scrollbar"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SKILLS (스크롤 등장) -->
+  <section id="skills">
+    <p class="section-label" data-aos="fade-up">03 — Expertise</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">SKILLS</h2>
+
+    <div class="skill-list">
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-meta">
+          <span class="skill-name">HTML / CSS</span>
+          <span class="skill-pct">95%</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" data-pct="95"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="160">
+        <div class="skill-meta">
+          <span class="skill-name">JavaScript</span>
+          <span class="skill-pct">88%</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" data-pct="88"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="220">
+        <div class="skill-meta">
+          <span class="skill-name">React</span>
+          <span class="skill-pct">80%</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" data-pct="80"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="280">
+        <div class="skill-meta">
+          <span class="skill-name">UI / UX Design</span>
+          <span class="skill-pct">85%</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" data-pct="85"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="340">
+        <div class="skill-meta">
+          <span class="skill-name">GSAP / Animation</span>
+          <span class="skill-pct">75%</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" data-pct="75"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="skill-meta">
+          <span class="skill-name">Figma</span>
+          <span class="skill-pct">90%</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" data-pct="90"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label" data-aos="fade-up">04 — Contact</p>
+      <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">LET'S TALK</h2>
+      <p class="contact-desc" data-aos="fade-up" data-aos-delay="100">
+        새로운 프로젝트나 협업 제안이 있으시면 언제든지 연락해 주세요.<br />
+        함께 멋진 것을 만들어봐요.
+      </p>
+      <p class="contact-email-display" data-aos="fade-up" data-aos-delay="150">
+        hello@yourname.com
+      </p>
+      <div class="contact-links" data-aos="fade-up" data-aos-delay="200">
+        <a href="mailto:hello@yourname.com" class="contact-link primary">Send Email</a>
+        <a href="#" class="contact-link">GitHub</a>
+        <a href="#" class="contact-link">LinkedIn</a>
+        <a href="#" class="contact-link">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 &nbsp; YOUR NAME &nbsp; — &nbsp; All rights reserved</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // AOS 초기화
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    // Swiper 드래그 슬라이더
+    const worksSwiper = new Swiper('.works-swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 24,
+      freeMode: true,
+      grabCursor: true,
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        draggable: true
+      },
+      breakpoints: {
+        768: {
+          spaceBetween: 32
+        }
+      }
+    });
+
+    // 스크롤 진행 바
+    const progressBar = document.getElementById('progress-bar');
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // 스킬 바 애니메이션 — IntersectionObserver
+    const skillFills = document.querySelectorAll('.skill-bar-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const pct = entry.target.getAttribute('data-pct');
+          entry.target.style.width = pct + '%';
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    skillFills.forEach(el => skillObserver.observe(el));
+
+    // 커스텀 커서 (lerp 보간)
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0;
+    let rx = 0, ry = 0;
+
+    window.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
+    });
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function animateCursor() {
+      rx = lerp(rx, mx, 0.12);
+      ry = lerp(ry, my, 0.12);
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // 히어로 배경 텍스트 패럴랙스
+    const heroBgText = document.querySelector('.hero-bg-text');
+    let lastScrollY = 0;
+    function onScroll() {
+      lastScrollY = window.scrollY;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    function rafScroll() {
+      if (heroBgText) {
+        heroBgText.style.transform = 'translateY(' + (lastScrollY * 0.3) + 'px)';
+      }
+      requestAnimationFrame(rafScroll);
+    }
+    rafScroll();
+  </script>
+</body>
+</html>
