@@ -43,7 +43,8 @@
   chooseCards.forEach(function(card) {
     card.addEventListener('click', function(e) {
       e.preventDefault();
-      setTrack(card.getAttribute('data-track-choose'), { scrollTo: 'intro' });
+      // 스크롤 없이 트랙만 전환 — 히어로에서 4개 항목 변화를 그대로 확인
+      setTrack(card.getAttribute('data-track-choose'));
     });
   });
 
