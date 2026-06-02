@@ -106,18 +106,18 @@ body {
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: clamp(var(--space-lg), 4vw, var(--space-2xl));
-  flex-wrap: wrap;
+  gap: clamp(var(--space-md), 2.5vw, var(--space-xl));
+  flex-wrap: nowrap;
   margin-top: var(--space-lg);
   padding-top: var(--space-lg);
   border-top: 1px solid rgba(255,255,255,0.1);
   width: 100%;
-  max-width: 720px;
+  max-width: 900px;
 }
-.stat-item { text-align: center; }
+.stat-item { text-align: center; min-width: 0; }
 .stat-value {
   display: block;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.3rem, 2.6vw, 2.1rem);
   font-weight: 900;
   line-height: 1;
   margin-bottom: var(--space-xs);
@@ -709,6 +709,9 @@ body.track-advanced [data-track="basic"] {
   .roadmap-track-list { grid-template-columns: 1fr; }
   .track-tabbar-title { display: none; }
   .track-tabbar-inner { justify-content: center; }
+  .hero-stats { flex-wrap: wrap; gap: var(--space-md); }
+  .hero-stats .stat-item { flex: 0 0 calc(50% - var(--space-md)); }
+  .hero-stats .stat-value { font-size: 1.05rem; }
 }
 
 /* ===== Example modal (수업 결과물 미리보기) ===== */
