@@ -65,9 +65,20 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 
 ---
 
-## Round 3 — 미니멀 주제 일반화 검증 (plain)  [진행중]
+## Round 3 — 미니멀 주제 일반화 검증 (plain)  [완료 2026-06-03]
 
-- **가설**: 실용·미니멀 주제(`PLAIN` 메모앱)에서 ① v2-full 다이얼 분기가 MOTION을 낮춰 과한 장치를 피하고
-  ② v1은 "무조건 SURPRISE" 탓에 과잉 연출하거나 톤 부조화를 보일 수 있다. ③ reduced-motion 버그 재현 여부.
-- **세팅**: `prompts/plain.txt`, sonnet, 4-variant.
-- **결과**: _(생성 후 기입)_
+- **세팅**: `prompts/plain.txt`, sonnet, 4-variant. 상세: `experiments/R3_plain/scorecard.md`.
+- **발견 1 (다이얼 분기 작동)**: v2-full이 미니멀 주제에 DIALS를 스스로 낮춤(VARIANCE 3 / MOTION 3 "파티클·3D 금지" / DENSITY 2). 결과도 절제된 좌측정렬 헤드라인. → v1의 "무조건 SURPRISE"와 달리 톤 적합. **다이얼 채택 가치 확인.**
+- **발견 2 (reduced-motion 비결정적 버그)**: 가시성 = **v2-full ✅ > v2-core ⚠️(헤드라인 누락) > base ✅ > v1 ❌(전체 백지)**.
+  - v1: reduced-motion 미처리 → reveal 은닉으로 페이지 백지(정상화면은 멋지나 접근성 최악).
+  - v2-core: 히어로가 JS 타이핑(빈 DOM)→ reduced-motion 시 텍스트 증발. **R2와 버그 주체 역전 → 비결정적.**
+  - 근본원인: SPARK가 JS 텍스트효과를 권장하나 **DOM 완성텍스트(progressive enhancement)를 미강제**.
+- **결론 / v2-final 필수**:
+  1. reduced-motion = 애니 비활성 + **모든 reveal 최종 가시상태 즉시 복원**.
+  2. **텍스트 progressive enhancement**(DOM에 완성 텍스트, JS는 enhancement만).
+  3. v2-full 다이얼을 v2-final 기반으로 채택 + sweep1 정량 게이트 결합.
+
+---
+
+## Round 4 — v2-final 검증  [예정]
+- v2-final(다이얼 + reduced-motion/텍스트 강제 + 정량 게이트) vs v1 vs v2-full 재대결. mokza+plain 양 주제.
