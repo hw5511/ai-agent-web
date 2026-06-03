@@ -133,3 +133,14 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - **부차**: Lenis 권장 CSS 리셋 부재.
 - **조치(규칙화)**: v3에 `LENIS CSS 충돌 가드` 추가 — html `scroll-behavior:smooth` 금지 + Lenis CSS 리셋 강제 + Self-Audit `LENIS_GUARD`/`PERF_CHECK` 점검. (변경점 ⑬)
 - **교훈**: "라이브러리 강제(Lenis 필수)"는 그 라이브러리의 알려진 gotcha 가드까지 동봉해야 안전.
+
+---
+
+## Round 6 — v4 5케이스 (LIGHTBULB 자가활성 + 자기검수·정제)  [완료 2026-06-03]
+- 5케이스(서점/페스티벌/도자기/다이닝/아트전시), sonnet, stream-json 캡처. 상세: `experiments/R6_v4/scorecard.md`.
+- **LIGHTBULB 자가활성 ✅**: 5케이스 전부 모델이 STEP0에서 직접 curl(ideas+pinches) 실행·인용·적용. 자가 활성 강제 성공.
+- **❌ 결정론 버그**: 모델이 curl에 `random.seed(42)` 추가 → 5케이스 영감 전부 동일(lb-006/103/140/p-021). LIGHTBULB "매번 새 영감" 가치 상실. (다이얼+도메인이 톤은 차별화했으나 영감 다양성 0)
+  - **조치**: v4 STEP0에 "LIGHTBULB 픽 random.seed 고정 금지(seeded 생성배경과 구분)" NEVER 추가.
+- **PHASE 5 자기검수·정제 ✅**: case1에서 em-dash 7개 자가 수정. Lenis 가드 5케이스 전부 리셋 포함→R5 휠먹통 재발 안 함. reduced-motion 정상.
+  - 경미: 모델이 "scroll-behavior:smooth 없음" 보고했으나 실제론 존재(리셋이 무력화→런타임 안전). 점검 문구 정밀화 여지.
+- **판정**: v4 두 핵심(자가활성·자기검수) 작동. seed 금지 수정 후 재확인 필요(Round 7 후보).
