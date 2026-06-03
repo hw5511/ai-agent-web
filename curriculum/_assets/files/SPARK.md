@@ -12,13 +12,13 @@
 
 ## LIGHTBULB 연동 (3-SPARK 영감 주입)
 
-3-SPARK / AESTHETIC_PINCH / FONT는 강사(우희)의 **공개 레포 `hw5511/lightbulb-skill`** 에서 가져옵니다.
+3-SPARK / AESTHETIC_PINCH / FONT는 강사(우희)의 **공개 레포 `hw5511/ai-agent-web`(skills/lightbulb)** 에서 가져옵니다.
 (인사이트 120개 · 미감 30개 · 폰트 10종 — 강사가 직접 큐레이션한 영감 저장소입니다.)
 
 작업을 시작하기 전, 아래 명령으로 이번 작업에 쓸 영감 블록을 뽑아 **프롬프트 맨 위에 붙여넣으세요.**
 
 ```bash
-curl -s https://raw.githubusercontent.com/hw5511/lightbulb-skill/main/ideas.json | python -c "
+curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/ideas.json | python -c "
 import sys, json, random
 ideas = json.load(sys.stdin)['ideas']
 pick = lambda t: random.choice([i for i in ideas if i.get('spark_type')==t])
@@ -29,7 +29,7 @@ print(f'INTERACTION_SPARK: [{is_[\"title\"]}] {is_[\"body\"]}')
 print(f'VISUAL_SPARK: [{vs[\"title\"]}] {vs[\"body\"]}')
 print('</lightbulb_ignition>')
 "
-curl -s https://raw.githubusercontent.com/hw5511/lightbulb-skill/main/pinches.json | python -c "
+curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/pinches.json | python -c "
 import sys, json, random
 p = random.choice(json.load(sys.stdin)['pinches'])
 print(f'AESTHETIC_PINCH: [{p[\"title\"]}] {p[\"body\"]}')
@@ -122,7 +122,7 @@ FORBIDDEN_WEIGHT: [이 폰트에서 사용 금지인 weight 목록]
 | Gmarket Sans | geometric, friendly, commerce, bright | good | 500 OK |
 | Jua | cute, playful, kids, casual | poor | 400 고정 (heading only) |
 
-> 전체 폰트 데이터는 `hw5511/lightbulb-skill`의 `fonts.json` 참조 (강사 큐레이션).
+> 전체 폰트 데이터는 `hw5511/ai-agent-web`(skills/lightbulb)의 `fonts.json` 참조 (강사 큐레이션).
 
 **NEVER:**
 - 한글 폰트 weight 700+을 `bold_readability: "poor"` 또는 `"medium"` 폰트에 적용
@@ -379,4 +379,4 @@ VERDICT: FAIL 항목 있으면 수정 후 재검증
 - `https://picsum.photos/seed/{N}/{width}/{height}`
 
 ---
-*SPARK.md — 우희 인더스트리 커스텀 시스템 프롬프트. 영감 소스: github.com/hw5511/lightbulb-skill (public)*
+*SPARK.md — 우희 인더스트리 커스텀 시스템 프롬프트. 영감 소스: github.com/hw5511/ai-agent-web/tree/main/skills/lightbulb (public)*
