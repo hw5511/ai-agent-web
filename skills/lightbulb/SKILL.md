@@ -35,7 +35,7 @@ AI 에이전트가 웹/디자인 작업 시 창의성을 높이기 위해 참조
 작업 시작 전 전 카테고리에서 랜덤으로 5~6개 인사이트를 가져와 영감으로 활용:
 
 ```bash
-curl -s https://raw.githubusercontent.com/hw5511/lightbulb-skill/main/ideas.json | python -c "
+curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/ideas.json | python -c "
 import sys, json, random
 data = json.load(sys.stdin)
 ideas = [i for i in data['ideas'] if i['status'] in ['reviewed', 'in-use']]
@@ -51,7 +51,7 @@ for i in sample:
 특정 카테고리 인사이트만 집중적으로 참조할 때:
 
 ```bash
-curl -s https://raw.githubusercontent.com/hw5511/lightbulb-skill/main/ideas.json | python -c "
+curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/ideas.json | python -c "
 import sys, json, random
 data = json.load(sys.stdin)
 ideas = data['ideas']
@@ -73,7 +73,7 @@ for i in sample:
 특정 기법/주제의 인사이트만 선택할 때:
 
 ```bash
-curl -s https://raw.githubusercontent.com/hw5511/lightbulb-skill/main/ideas.json | python -c "
+curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/ideas.json | python -c "
 import sys, json, random
 data = json.load(sys.stdin)
 ideas = data['ideas']
@@ -95,7 +95,7 @@ for i in sample:
 web + design 인사이트를 섞어서 균형있게 가져올 때:
 
 ```bash
-curl -s https://raw.githubusercontent.com/hw5511/lightbulb-skill/main/ideas.json | python -c "
+curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/ideas.json | python -c "
 import sys, json, random
 data = json.load(sys.stdin)
 ideas = data['ideas']
@@ -114,7 +114,7 @@ for i in sample:
 claude -p 실행 전 인사이트를 읽어 프롬프트 상단에 주입한다:
 
 ```bash
-INSIGHTS=$(curl -s https://raw.githubusercontent.com/hw5511/lightbulb-skill/main/ideas.json | python -c "
+INSIGHTS=$(curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/ideas.json | python -c "
 import sys, json, random
 data = json.load(sys.stdin)
 ideas = [i for i in data['ideas'] if i['status'] in ['reviewed','in-use']]
@@ -132,13 +132,13 @@ ${USER_PROMPT}"
 ### 6. 아이디어 추가 (GitHub API)
 ```bash
 # 현재 파일 SHA 확인
-SHA=$(curl -s https://api.github.com/repos/hw5511/lightbulb-skill/contents/ideas.json \
+SHA=$(curl -s https://api.github.com/repos/hw5511/ai-agent-web/contents/skills/lightbulb/ideas.json \
   -H "Authorization: token ${LIGHTBULB_PAT}" | python -c "import sys,json; print(json.load(sys.stdin)['sha'])")
 
 # 수정된 ideas.json을 base64로 인코딩하여 업로드
 CONTENT=$(python -c "import base64; print(base64.b64encode(open('ideas.json','rb').read()).decode())")
 
-curl -s -X PUT https://api.github.com/repos/hw5511/lightbulb-skill/contents/ideas.json \
+curl -s -X PUT https://api.github.com/repos/hw5511/ai-agent-web/contents/skills/lightbulb/ideas.json \
   -H "Authorization: token ${LIGHTBULB_PAT}" \
   -H "Content-Type: application/json" \
   -d "{\"message\":\"Add new idea\",\"content\":\"${CONTENT}\",\"sha\":\"${SHA}\"}"
