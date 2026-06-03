@@ -107,3 +107,20 @@ obra/superpowers brainstorming · UI/UX Pro Max.
   - 접근성(aria/focus) 확보, JS 전용 빈 텍스트 0.
 - **판정: v2-final 채택 권장.** v1의 미감 유지 + v2-core/full의 비결정적 버그 제거 + 정량 게이트.
 - **남은 작업**: v2-final을 "디자이너 우위"로 재서술(엔지니어링=floor) → v2 최종 확정 → v3(멀티파일·무제한) 실험.
+
+---
+
+## Round 5 — v3 멀티파일 검증 (v2-final 단일 vs v3)  [완료 2026-06-03]
+- 멀티섹션 주제(NOCTURNE 향수). 상세: `experiments/R5_nocturne/scorecard.md`.
+- **결과**:
+  - v3가 `index.html`(439L) + `styles.css`(1376L) + `script.js`(418L)로 **진짜 분리·링크, 깨진 링크 0**, styles.css 실제 적용 렌더.
+  - 글자수 천장 제거 → v2-final(단일 1283L, 옛 1500 상한 근접) 대비 **상한 없이 확장**.
+  - reduced-motion 안전(h1 정상), 디자인 강화 반영(비대칭 분할 헤드라인 "NOC/TURNE").
+- **판정: v3 채택 가능.** v2-final 강점 승계 + 규모 천장 제거. (외부 CDN 미로드는 샌드박스 탓, v3 결함 아님)
+
+---
+
+## 연구 종합 (v1 → v3)
+- v1(미감) → v2-final(접근성 floor·reduced-motion·정량게이트·다이얼·디자이너 우위) → v3(멀티파일·무제한·디자인 강화).
+- 라이브 `SPARK.md` 반영은 **CEO 확인 후**. 권장: 단일 페이지=v2-final, 규모 큰 사이트=v3.
+- 후속: 더 큰 사이트/다주제 반복, 인트로 과지연 가드, 비-시각축(성능예산·SEO·전환카피)은 별도 트랙.
