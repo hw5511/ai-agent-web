@@ -44,7 +44,14 @@ for spec in "$@"; do
     > "$LAB/$name.log" 2>&1 )
   rc=$?
   if [ -f "$dir/index.html" ]; then
-    echo "    [$name] 완료 rc=$rc | $(wc -l <"$dir/index.html") lines, $(wc -c <"$dir/index.html") bytes"
+    # 멀티파일(v3) 산출 여부 + 링크 정합성 점검
+    extra=""
+    for ef in styles.css style.css script.js main.js; do
+      [ -f "$dir/$ef" ] && extra="$extra $ef:$(wc -l <"$dir/$ef")L"
+    done
+    linkcss=$(grep -oc 'rel="stylesheet"' "$dir/index.html")
+    linkjs=$(grep -oc '<script[^>]*src=' "$dir/index.html")
+    echo "    [$name] 완료 rc=$rc | index.html $(wc -l <"$dir/index.html")L | linked[css:$linkcss js:$linkjs] | files:${extra:- (단일)}"
   else
     echo "    [$name] index.html 미생성 rc=$rc (로그: $LAB/$name.log)"
   fi
