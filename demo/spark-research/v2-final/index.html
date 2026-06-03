@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOCTURNE · 밤의 향수</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+:root {
+  --bg:           oklch(8% 0.015 40);
+  --bg-2:         oklch(11% 0.015 40);
+  --bg-3:         oklch(15% 0.012 40);
+  --text:         oklch(88% 0.008 50);
+  --text-dim:     oklch(52% 0.012 50);
+  --accent:       oklch(65% 0.15 72);
+  --accent-light: oklch(78% 0.12 72);
+  --border:       oklch(22% 0.012 40);
+  --serif:        'Noto Serif KR', serif;
+  --display:      'Playfair Display', serif;
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* PROGRESS */
+#noc-progress {
+  position: fixed; top: 0; left: 0;
+  width: 0%; height: 2px;
+  background: var(--accent);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* NAV */
+#noc-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  padding: 1.6rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
+#noc-nav.scrolled {
+  background: oklch(8% 0.015 40 / 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px; min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 1px;
+  background: var(--text);
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-burger:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* HERO */
+#noc-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5.5rem;
+  overflow: hidden;
+}
+#noc-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+.hero-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  position: relative; z-index: 2;
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(4.5rem, 14vw, 12rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  position: relative; z-index: 2;
+  text-wrap: balance;
+  will-change: transform, opacity;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  margin-top: 2rem;
+  font-size: clamp(0.82rem, 1.4vw, 0.96rem);
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: 38ch;
+  letter-spacing: 0.04em;
+  line-height: 1.85;
+  text-wrap: pretty;
+  position: relative; z-index: 2;
+  will-change: transform, opacity;
+}
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.8rem; right: 3rem;
+  display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  color: var(--text-dim); text-transform: uppercase;
+  z-index: 2;
+}
+.hero-scroll-line {
+  width: 44px; height: 1px;
+  background: var(--text-dim);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* REVEAL base */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: transform, opacity;
+}
+
+/* PHILOSOPHY */
+#noc-philosophy {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+.philo-left {
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.philo-vert-text {
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.18em;
+  color: oklch(18% 0.02 40);
+  user-select: none;
+  will-change: transform;
+}
+.philo-right {
+  padding: 11rem 5rem 9rem 5rem;
+}
+.section-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+.philo-heading {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1.22;
+  margin-bottom: 2.8rem;
+  text-wrap: balance;
+}
+.philo-heading em { font-style: italic; color: var(--accent); }
+.philo-body {
+  font-size: 0.93rem;
+  color: var(--text-dim);
+  max-width: 52ch;
+  margin-bottom: 1.8rem;
+  line-height: 1.95;
+  text-wrap: pretty;
+}
+.philo-rule {
+  width: 42px; height: 1px;
+  background: var(--accent);
+  margin: 3.2rem 0;
+}
+.philo-manifesto {
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--text);
+  max-width: 38ch;
+}
+
+/* COLLECTION */
+#noc-collection {
+  padding: 10rem 3rem;
+  background: var(--bg-2);
+}
+.collection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4.5rem;
+  gap: 2rem;
+}
+.collection-title {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+.collection-sub {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  max-width: 26ch;
+  text-align: right;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+.collection-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+}
+.frag-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-3);
+  display: block;
+}
+.frag-card:nth-child(1) { grid-row: span 2; }
+.frag-card:nth-child(4) { grid-column: span 2; }
+.frag-card-img {
+  width: 100%; height: 100%;
+  min-height: 260px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s var(--ease-out);
+  will-change: transform;
+}
+.frag-card:nth-child(1) .frag-card-img { min-height: 520px; }
+.frag-card:nth-child(4) .frag-card-img { min-height: 320px; max-height: 380px; }
+.frag-card-body {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem 2rem 2.2rem;
+  background: linear-gradient(to top,
+    oklch(8% 0.015 40 / 0.97) 0%,
+    oklch(8% 0.015 40 / 0.6) 55%,
+    transparent 100%);
+  transition: opacity 0.3s;
+}
+.frag-card:hover .frag-card-body { opacity: 0; }
+.frag-number {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-weight: 300;
+}
+.frag-name-en {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 2.3vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.frag-name-ko {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+.frag-note-tags {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+}
+.frag-tag {
+  font-size: 0.62rem;
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.55rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* Note overlay (SURPRISE: spring reveal) */
+.frag-note-overlay {
+  position: absolute; inset: 0;
+  background: oklch(8% 0.015 40 / 0.97);
+  padding: 2.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s var(--ease-out);
+}
+.frag-card:hover .frag-note-overlay { opacity: 1; pointer-events: auto; }
+.overlay-name {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 400;
+  color: var(--accent-light);
+  margin-bottom: 2rem;
+}
+.note-pyramid { display: flex; flex-direction: column; gap: 1.3rem; }
+.note-tier { display: flex; gap: 1.2rem; align-items: flex-start; }
+.tier-badge {
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  min-width: 2.8rem;
+  padding-top: 0.18rem;
+  font-weight: 300;
+}
+.tier-notes {
+  font-size: 0.83rem;
+  color: var(--text);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+/* PROCESS */
+#noc-process {
+  padding: 10rem 3rem;
+}
+.process-header { margin-bottom: 5.5rem; }
+.process-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  max-width: 18ch;
+  text-wrap: balance;
+  margin-top: 1.5rem;
+}
+.process-track {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--border);
+}
+.process-step {
+  padding: 3rem 2rem 3rem 0;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.process-step:last-child { border-right: none; }
+.step-bar {
+  position: absolute; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: var(--accent);
+  transition: width 0.55s var(--ease-out);
+}
+.process-step.in-view .step-bar { width: 100%; }
+.step-num {
+  font-family: var(--display);
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: oklch(20% 0.02 40);
+  margin-bottom: 2rem;
+  font-variant-numeric: tabular-nums;
+}
+.step-title {
+  font-family: var(--display);
+  font-size: 1.08rem;
+  font-weight: 400;
+  margin-bottom: 0.9rem;
+}
+.step-body {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+/* STORE */
+#noc-store {
+  background: var(--bg-2);
+  padding: 10rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.store-title {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin-top: 1.5rem;
+}
+.store-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.95;
+  max-width: 46ch;
+  margin-bottom: 3rem;
+  text-wrap: pretty;
+}
+.store-details { list-style: none; margin-bottom: 3.5rem; }
+.store-detail {
+  display: flex; gap: 2rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid oklch(18% 0.01 40);
+  font-size: 0.82rem;
+  align-items: baseline;
+}
+.detail-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  min-width: 3.5rem;
+  font-weight: 300;
+}
+.detail-val { color: var(--text-dim); }
+.store-map-block {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.map-grid-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(oklch(28% 0.01 40 / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(28% 0.01 40 / 0.35) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.map-label {
+  position: absolute;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  bottom: 1.2rem; left: 1.5rem;
+}
+.map-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 18px var(--accent);
+  position: relative; z-index: 2;
+}
+.map-dot::after {
+  content: '';
+  position: absolute; inset: -10px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.35;
+  animation: noc-pulse 2.8s ease-in-out infinite;
+}
+@keyframes noc-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(2.2); opacity: 0; }
+}
+
+/* RESERVATION FORM */
+.form-title {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  margin-top: 1.5rem;
+  margin-bottom: 2.8rem;
+  text-wrap: balance;
+}
+.form-group { margin-bottom: 1.6rem; }
+.form-group label {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+  font-weight: 300;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: oklch(13% 0.01 40);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.85rem 1rem;
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-weight: 300;
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--accent); }
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group select option { background: oklch(11% 0.015 40); }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.95rem 2.8rem;
+  font-family: var(--serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 300;
+  transition: background 0.22s, color 0.22s;
+  min-width: 44px; min-height: 44px;
+  touch-action: manipulation;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.form-submit:hover { background: var(--accent); color: var(--bg); }
+.form-submit:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.form-success {
+  display: none;
+  padding: 1.5rem;
+  border: 1px solid var(--accent);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+#noc-footer {
+  padding: 5.5rem 3rem 3rem;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 3rem;
+}
+.footer-brand-name {
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  margin-bottom: 1rem;
+}
+.footer-tagline {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+  max-width: 30ch;
+  text-wrap: pretty;
+}
+.footer-col-heading {
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1.3rem;
+  font-weight: 300;
+}
+.footer-col-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.footer-col-links a {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.footer-col-links a:hover { color: var(--text); }
+.footer-col-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.footer-bottom {
+  grid-column: 1 / -1;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  gap: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .process-track { grid-template-columns: repeat(3, 1fr); }
+  .process-step:nth-child(3n) { border-right: none; }
+}
+@media (max-width: 900px) {
+  #noc-nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  #noc-hero { padding: 0 1.5rem 5rem; }
+  .hero-scroll-hint { right: 1.5rem; bottom: 2rem; }
+  #noc-philosophy { grid-template-columns: 1fr; }
+  .philo-left { display: none; }
+  .philo-right { padding: 8rem 1.5rem 5rem; }
+  #noc-collection { padding: 7rem 1.5rem; }
+  .collection-header { flex-direction: column; align-items: flex-start; }
+  .collection-sub { text-align: left; }
+  .collection-grid { grid-template-columns: 1fr; }
+  .frag-card:nth-child(1),
+  .frag-card:nth-child(4) { grid-row: auto; grid-column: auto; }
+  #noc-process { padding: 7rem 1.5rem; }
+  .process-track { grid-template-columns: 1fr 1fr; }
+  .process-step:nth-child(2n) { border-right: none; }
+  .process-step:nth-child(3n) { border-right: 1px solid var(--border); }
+  .process-step:nth-child(2n):not(:last-child) { border-right: none; }
+  #noc-store { grid-template-columns: 1fr; padding: 7rem 1.5rem; gap: 4rem; }
+  #noc-footer { grid-template-columns: 1fr; padding: 4rem 1.5rem 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .process-track { grid-template-columns: 1fr; }
+  .process-step { border-right: none !important; }
+}
+
+/* REDUCED-MOTION: content fully visible */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal,
+  .hero-eyebrow, .hero-title, .hero-sub,
+  .philo-heading, .philo-body, .philo-manifesto, .philo-rule,
+  .collection-title, .collection-sub,
+  .frag-card, .process-step,
+  .store-title, .store-desc, .store-details,
+  .store-map-block, .form-title,
+  .section-eyebrow, .process-title {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-scroll-line { transform: scaleX(1) !important; }
+  .step-bar { width: 100% !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="noc-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="스크롤 진행도"></div>
+
+<canvas id="noc-canvas" aria-hidden="true"></canvas>
+
+<nav id="noc-nav" role="navigation" aria-label="주 내비게이션">
+  <a href="#noc-hero" class="nav-logo" aria-label="NOCTURNE 홈으로">NOCTURNE</a>
+  <ul class="nav-links" role="list">
+    <li><a href="#noc-philosophy">철학</a></li>
+    <li><a href="#noc-collection">컬렉션</a></li>
+    <li><a href="#noc-process">조향</a></li>
+    <li><a href="#noc-store">예약</a></li>
+  </ul>
+  <button class="nav-burger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="noc-mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section id="noc-hero" aria-labelledby="hero-h1">
+  <p class="hero-eyebrow">Seoul, Korea &nbsp;&bull;&nbsp; Est. 2019</p>
+  <h1 class="hero-title" id="hero-h1">Noc<em>turne</em></h1>
+  <p class="hero-sub">
+    밤이 가장 솔직할 때, 감각은 가장 예민해진다.<br>
+    어둠 속에서만 피어나는 향기를 증류합니다.
+  </p>
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span class="hero-scroll-line"></span>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="noc-philosophy" aria-labelledby="philo-h2">
+  <div class="philo-left" aria-hidden="true">
+    <span class="philo-vert-text">NOCTURNE</span>
+  </div>
+  <div class="philo-right">
+    <p class="section-eyebrow reveal">Brand Philosophy</p>
+    <h2 class="philo-heading reveal" id="philo-h2">
+      향기는 기억이고,<br><em>기억은 영원하다</em>
+    </h2>
+    <p class="philo-body reveal">
+      NOCTURNE은 서울의 밤에서 태어난 독립 향수 브랜드입니다. 우리는 도시의
+      야경 속 감각들을 찾아다닙니다. 비 온 뒤 아스팔트의 냄새, 새벽 네 시의
+      카페 향, 연인의 코트에 스민 향기.
+    </p>
+    <p class="philo-body reveal">
+      모든 향수는 하나의 서사입니다. 우리의 조향사들은 화학 공식이 아닌
+      감정의 언어로 일합니다. 시간이 지나도 변하지 않는 단 하나의 인상을
+      만드는 것, 그것이 NOCTURNE의 철학입니다.
+    </p>
+    <div class="philo-rule reveal" aria-hidden="true"></div>
+    <blockquote class="philo-manifesto reveal">
+      "좋은 향수는 눈을 감게 만든다.<br>위대한 향수는 다른 곳으로 데려간다."
+    </blockquote>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section id="noc-collection" aria-labelledby="coll-h2">
+  <div class="collection-header">
+    <h2 class="collection-title reveal" id="coll-h2">Signature<br>Collection</h2>
+    <p class="collection-sub reveal">네 개의 향수, 네 개의 밤.<br>각각의 이야기를 담았습니다.</p>
+  </div>
+
+  <div class="collection-grid" role="list">
+
+    <article class="frag-card reveal" role="listitem" tabindex="0" aria-label="No.01 밤의 여정 상세 보기">
+      <img class="frag-card-img"
+        src="https://picsum.photos/seed/101/800/1200"
+        alt="밤의 여정 향수 이미지" width="800" height="1200" loading="lazy">
+      <div class="frag-card-body">
+        <p class="frag-number">No. 01</p>
+        <h3 class="frag-name-en">Night Journey</h3>
+        <p class="frag-name-ko">밤의 여정</p>
+        <div class="frag-note-tags">
+          <span class="frag-tag">베르가못</span>
+          <span class="frag-tag">가죽</span>
+          <span class="frag-tag">앰버</span>
+        </div>
+      </div>
+      <div class="frag-note-overlay" aria-hidden="true">
+        <p class="overlay-name">Night Journey</p>
+        <div class="note-pyramid">
+          <div class="note-tier">
+            <span class="tier-badge">Top</span>
+            <span class="tier-notes">베르가못, 핑크 페퍼, 카다멈</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Heart</span>
+            <span class="tier-notes">가죽, 검은 붓꽃, 제라늄</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Base</span>
+            <span class="tier-notes">다크 우드, 앰버, 벳트버</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="frag-card reveal" role="listitem" tabindex="0" aria-label="No.02 달빛 정원 상세 보기">
+      <img class="frag-card-img"
+        src="https://picsum.photos/seed/202/800/600"
+        alt="달빛 정원 향수 이미지" width="800" height="600" loading="lazy">
+      <div class="frag-card-body">
+        <p class="frag-number">No. 02</p>
+        <h3 class="frag-name-en">Moonlit Garden</h3>
+        <p class="frag-name-ko">달빛 정원</p>
+        <div class="frag-note-tags">
+          <span class="frag-tag">유자</span>
+          <span class="frag-tag">자스민</span>
+          <span class="frag-tag">머스크</span>
+        </div>
+      </div>
+      <div class="frag-note-overlay" aria-hidden="true">
+        <p class="overlay-name">Moonlit Garden</p>
+        <div class="note-pyramid">
+          <div class="note-tier">
+            <span class="tier-badge">Top</span>
+            <span class="tier-notes">유자, 네롤리, 유칼립투스</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Heart</span>
+            <span class="tier-notes">자스민, 흰 모란, 릴리</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Base</span>
+            <span class="tier-notes">화이트 머스크, 샌달우드, 시더</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="frag-card reveal" role="listitem" tabindex="0" aria-label="No.03 잠든 숲 상세 보기">
+      <img class="frag-card-img"
+        src="https://picsum.photos/seed/303/800/600"
+        alt="잠든 숲 향수 이미지" width="800" height="600" loading="lazy">
+      <div class="frag-card-body">
+        <p class="frag-number">No. 03</p>
+        <h3 class="frag-name-en">Sleeping Forest</h3>
+        <p class="frag-name-ko">잠든 숲</p>
+        <div class="frag-note-tags">
+          <span class="frag-tag">삼나무</span>
+          <span class="frag-tag">모스</span>
+          <span class="frag-tag">벳트버</span>
+        </div>
+      </div>
+      <div class="frag-note-overlay" aria-hidden="true">
+        <p class="overlay-name">Sleeping Forest</p>
+        <div class="note-pyramid">
+          <div class="note-tier">
+            <span class="tier-badge">Top</span>
+            <span class="tier-notes">삼나무, 녹차, 은방울꽃</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Heart</span>
+            <span class="tier-notes">바이올렛 리프, 모스, 아이리스</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Base</span>
+            <span class="tier-notes">벳트버, 파촐리, 흙 토프</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="frag-card reveal" role="listitem" tabindex="0" aria-label="No.04 검은 장미 상세 보기">
+      <img class="frag-card-img"
+        src="https://picsum.photos/seed/404/1200/500"
+        alt="검은 장미 향수 이미지" width="1200" height="500" loading="lazy">
+      <div class="frag-card-body">
+        <p class="frag-number">No. 04</p>
+        <h3 class="frag-name-en">Black Rose</h3>
+        <p class="frag-name-ko">검은 장미</p>
+        <div class="frag-note-tags">
+          <span class="frag-tag">장미</span>
+          <span class="frag-tag">인센스</span>
+          <span class="frag-tag">아가르우드</span>
+        </div>
+      </div>
+      <div class="frag-note-overlay" aria-hidden="true">
+        <p class="overlay-name">Black Rose</p>
+        <div class="note-pyramid">
+          <div class="note-tier">
+            <span class="tier-badge">Top</span>
+            <span class="tier-notes">다마스크 장미, 블랙 커런트</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Heart</span>
+            <span class="tier-notes">튜베로즈, 인센스, 제비꽃</span>
+          </div>
+          <div class="note-tier">
+            <span class="tier-badge">Base</span>
+            <span class="tier-notes">아가르우드, 앰버, 블랙 머스크</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="noc-process" aria-labelledby="proc-h2">
+  <div class="process-header">
+    <p class="section-eyebrow reveal">The Art of Perfumery</p>
+    <h2 class="process-title reveal" id="proc-h2">조향의<br>다섯 단계</h2>
+  </div>
+  <div class="process-track">
+    <div class="process-step reveal">
+      <div class="step-bar" aria-hidden="true"></div>
+      <p class="step-num" aria-hidden="true">01</p>
+      <h3 class="step-title">채집</h3>
+      <p class="step-body">원료를 찾아 세계를 여행합니다. 그라스의 장미, 스리랑카의 시나몬, 한국의 솔잎. 산지의 계절과 토양이 향기를 결정합니다.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-bar" aria-hidden="true"></div>
+      <p class="step-num" aria-hidden="true">02</p>
+      <h3 class="step-title">증류</h3>
+      <p class="step-body">수증기 증류와 냉압착으로 순수한 에센셜 오일을 추출합니다. 장미 한 방울을 위해 수천 장의 꽃잎이 필요합니다.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-bar" aria-hidden="true"></div>
+      <p class="step-num" aria-hidden="true">03</p>
+      <h3 class="step-title">조향</h3>
+      <p class="step-body">조향사가 수백 가지 원료 중에서 선택하고 비율을 조율합니다. 하나의 향수가 완성되기까지 수백 번의 시도가 있습니다.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-bar" aria-hidden="true"></div>
+      <p class="step-num" aria-hidden="true">04</p>
+      <h3 class="step-title">숙성</h3>
+      <p class="step-body">조향된 향수는 최소 6개월간 어두운 저장실에서 숙성됩니다. 시간이 분자를 통합시키고, 향기는 하나의 서사가 됩니다.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-bar" aria-hidden="true"></div>
+      <p class="step-num" aria-hidden="true">05</p>
+      <h3 class="step-title">완성</h3>
+      <p class="step-body">수작업으로 병입하고 각 병에 일련번호를 새깁니다. NOCTURNE의 모든 향수는 한정 수량으로만 제작됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORE & RESERVATION -->
+<section id="noc-store" aria-labelledby="store-h2">
+  <div>
+    <p class="section-eyebrow reveal">Flagship Store</p>
+    <h2 class="store-title reveal" id="store-h2">감각을 경험하는<br>공간</h2>
+    <p class="store-desc reveal">
+      서울 한남동의 플래그십 스토어에서 전문 조향사와 함께
+      당신만의 향수를 찾아보세요. 사전 예약을 통해 프라이빗
+      컨설팅 서비스를 이용하실 수 있습니다.
+    </p>
+    <ul class="store-details reveal" role="list">
+      <li class="store-detail">
+        <span class="detail-label">주소</span>
+        <span class="detail-val">서울특별시 용산구 한남동 734-5</span>
+      </li>
+      <li class="store-detail">
+        <span class="detail-label">운영</span>
+        <span class="detail-val">화요일&nbsp;&ndash;&nbsp;일요일 &nbsp;/&nbsp; 오전 11시&nbsp;&ndash;&nbsp;오후 8시</span>
+      </li>
+      <li class="store-detail">
+        <span class="detail-label">연락</span>
+        <span class="detail-val">02-794-0000</span>
+      </li>
+      <li class="store-detail">
+        <span class="detail-label">주차</span>
+        <span class="detail-val">인근 공용 주차장 이용 (2시간 무료 지원)</span>
+      </li>
+    </ul>
+    <div class="store-map-block reveal" role="img" aria-label="한남동 매장 위치 지도">
+      <div class="map-grid-lines" aria-hidden="true"></div>
+      <div class="map-dot" aria-hidden="true"></div>
+      <span class="map-label">서울 한남동 734-5</span>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-eyebrow reveal">Private Consultation</p>
+    <h3 class="form-title reveal">조향 컨설팅 예약</h3>
+    <form id="noc-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">성함</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+          <label for="f-phone">연락처</label>
+          <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="010-0000-0000" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-date">희망 날짜</label>
+          <input type="date" id="f-date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="f-time">희망 시간</label>
+          <select id="f-time" name="time">
+            <option value="">시간 선택</option>
+            <option value="11">오전 11:00</option>
+            <option value="13">오후 1:00</option>
+            <option value="15">오후 3:00</option>
+            <option value="17">오후 5:00</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="f-service">서비스 선택</label>
+        <select id="f-service" name="service">
+          <option value="">서비스를 선택해주세요</option>
+          <option value="consultation">개인 맞춤 컨설팅 (60분)</option>
+          <option value="workshop">조향 워크샵 (120분)</option>
+          <option value="bespoke">비스포크 향수 제작 (240분)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-note">전달 사항</label>
+        <textarea id="f-note" name="note" placeholder="원하시는 향의 분위기나 특별한 요청사항을 알려주세요."></textarea>
+      </div>
+      <button type="submit" class="form-submit">예약 신청</button>
+    </form>
+    <div class="form-success" role="status" aria-live="polite">
+      예약 신청이 완료되었습니다. 확인 후 영업일 기준 1일 이내 연락드리겠습니다.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="noc-footer" role="contentinfo">
+  <div>
+    <p class="footer-brand-name">NOCTURNE</p>
+    <p class="footer-tagline">어둠 속에서 피어난 향기.<br>서울, 한남동.</p>
+  </div>
+  <nav aria-label="컬렉션 페이지 링크">
+    <p class="footer-col-heading">Collection</p>
+    <ul class="footer-col-links" role="list">
+      <li><a href="#noc-collection">No.01 Night Journey</a></li>
+      <li><a href="#noc-collection">No.02 Moonlit Garden</a></li>
+      <li><a href="#noc-collection">No.03 Sleeping Forest</a></li>
+      <li><a href="#noc-collection">No.04 Black Rose</a></li>
+    </ul>
+  </nav>
+  <nav aria-label="브랜드 페이지 링크">
+    <p class="footer-col-heading">Brand</p>
+    <ul class="footer-col-links" role="list">
+      <li><a href="#noc-philosophy">브랜드 철학</a></li>
+      <li><a href="#noc-process">조향 과정</a></li>
+      <li><a href="#noc-store">매장 안내</a></li>
+      <li><a href="#noc-store">예약 신청</a></li>
+    </ul>
+  </nav>
+  <div class="footer-bottom">
+    <span>&copy; 2026 NOCTURNE. All rights reserved.</span>
+    <span>Seoul, Korea</span>
+  </div>
+</footer>
+
+<script>
+{
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── SEEDED PRNG (Mulberry32) ── */
+  function noc_seeded(seed) {
+    let s = seed;
+    return function() {
+      s |= 0; s = s + 0x6D2B79F5 | 0;
+      let t = Math.imul(s ^ s >>> 15, 1 | s);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  /* ── CANVAS SMOKE PARTICLES (seeded, deterministic) ── */
+  const noc_canvas = document.getElementById('noc-canvas');
+  const noc_ctx = noc_canvas.getContext('2d');
+  const noc_rng = noc_seeded(42);
+  let noc_w = 0, noc_h = 0;
+  const NOC_COUNT = 70;
+  const noc_parts = [];
+
+  function noc_resize() {
+    noc_w = noc_canvas.width = window.innerWidth;
+    noc_h = noc_canvas.height = window.innerHeight;
+  }
+
+  function noc_initParts() {
+    noc_parts.length = 0;
+    for (let i = 0; i < NOC_COUNT; i++) {
+      noc_parts.push({
+        x:      noc_rng() * noc_w,
+        y:      noc_rng() * noc_h,
+        r:      noc_rng() * 2.2 + 0.4,
+        vx:     (noc_rng() - 0.5) * 0.25,
+        vy:     -(noc_rng() * 0.35 + 0.08),
+        phase:  noc_rng() * Math.PI * 2,
+        freq:   noc_rng() * 0.004 + 0.002,
+        drift:  (noc_rng() - 0.5) * 0.4,
+      });
+    }
+  }
+
+  let noc_tick = 0;
+  function noc_draw() {
+    noc_ctx.clearRect(0, 0, noc_w, noc_h);
+    noc_tick++;
+
+    const g = noc_ctx.createRadialGradient(
+      noc_w * 0.25, noc_h * 0.75, 0,
+      noc_w * 0.25, noc_h * 0.75, noc_w * 0.55
+    );
+    g.addColorStop(0, 'rgba(175, 110, 30, 0.045)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    noc_ctx.fillStyle = g;
+    noc_ctx.fillRect(0, 0, noc_w, noc_h);
+
+    noc_ctx.beginPath();
+    for (let i = 0; i < NOC_COUNT; i++) {
+      const p = noc_parts[i];
+      p.x += p.vx + Math.sin(noc_tick * p.freq + p.phase) * p.drift;
+      p.y += p.vy;
+      if (p.y < -10) { p.y = noc_h + 10; p.x = noc_rng() * noc_w; }
+      if (p.x < -10) p.x = noc_w + 10;
+      if (p.x > noc_w + 10) p.x = -10;
+      noc_ctx.moveTo(p.x + p.r, p.y);
+      noc_ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    }
+    noc_ctx.fillStyle = 'rgba(196,145,58,0.16)';
+    noc_ctx.fill();
+
+    requestAnimationFrame(noc_draw);
+  }
+
+  noc_resize(); noc_initParts(); noc_draw();
+  window.addEventListener('resize', () => { noc_resize(); noc_initParts(); });
+
+  /* ── LENIS ── */
+  const noc_lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  noc_lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => noc_lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  /* ── PROGRESS BAR ── */
+  const noc_pbar = document.getElementById('noc-progress');
+  noc_lenis.on('scroll', ({ scroll, limit }) => {
+    const pct = limit > 0 ? (scroll / limit) * 100 : 0;
+    noc_pbar.style.width = pct + '%';
+    noc_pbar.setAttribute('aria-valuenow', Math.round(pct));
+  });
+
+  /* ── NAV SCROLL STATE ── */
+  const noc_nav = document.getElementById('noc-nav');
+  ScrollTrigger.create({
+    start: '80px top',
+    onEnter: () => noc_nav.classList.add('scrolled'),
+    onLeaveBack: () => noc_nav.classList.remove('scrolled'),
+  });
+
+  /* ── ANCHOR NAV via lenis ── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const id = link.getAttribute('href');
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        noc_lenis.scrollTo(target, { offset: -72, duration: 1.35 });
+      }
+    });
+  });
+
+  /* ── MOBILE BURGER (toggle nav-links visibility) ── */
+  const noc_burger = document.querySelector('.nav-burger');
+  const noc_navLinks = document.querySelector('.nav-links');
+  let noc_menuOpen = false;
+  noc_burger.addEventListener('click', () => {
+    noc_menuOpen = !noc_menuOpen;
+    noc_burger.setAttribute('aria-expanded', noc_menuOpen);
+    noc_navLinks.style.display = noc_menuOpen ? 'flex' : '';
+    noc_navLinks.style.flexDirection = 'column';
+    noc_navLinks.style.position = 'absolute';
+    noc_navLinks.style.top = '100%';
+    noc_navLinks.style.left = '0';
+    noc_navLinks.style.right = '0';
+    noc_navLinks.style.padding = '1.5rem';
+    noc_navLinks.style.background = 'oklch(8% 0.015 40 / 0.97)';
+    noc_navLinks.style.backdropFilter = 'blur(12px)';
+    if (!noc_menuOpen) { noc_navLinks.removeAttribute('style'); }
+  });
+
+  /* ── HERO ENTRANCE ── */
+  const noc_heroTl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.2 });
+  noc_heroTl
+    .fromTo('.hero-eyebrow',  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.75 })
+    .fromTo('.hero-title',    { opacity: 0, y: 45 }, { opacity: 1, y: 0, duration: 1.1 }, '-=0.45')
+    .fromTo('.hero-sub',      { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.5')
+    .fromTo('.hero-scroll-line', { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+  /* ── SCROLL REVEALS ── */
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.closest('#noc-hero')) return;
+    gsap.fromTo(el,
+      { opacity: 0, y: 28 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.72, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 87%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+  });
+
+  /* ── PROCESS STEP BARS ── */
+  document.querySelectorAll('.process-step').forEach(step => {
+    ScrollTrigger.create({
+      trigger: step,
+      start: 'top 78%',
+      onEnter: () => step.classList.add('in-view'),
+    });
+  });
+
+  /* ── PHILO VERTICAL TEXT PARALLAX ── */
+  gsap.to('.philo-vert-text', {
+    y: 90,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#noc-philosophy',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1,
+    }
+  });
+
+  /* ── HERO TITLE PARALLAX ── */
+  gsap.to('.hero-title', {
+    y: 55,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#noc-hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1,
+    }
+  });
+
+  /* ── COLLECTION CARD SPRING (INTERACTION_SPARK: weight and elasticity) ── */
+  document.querySelectorAll('.frag-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      gsap.to(card, { scale: 1.012, duration: 0.45, ease: 'back.out(2)' });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { scale: 1, duration: 0.38, ease: 'power2.out' });
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.querySelector('.frag-note-overlay').style.opacity =
+          card.querySelector('.frag-note-overlay').style.opacity === '1' ? '' : '1';
+      }
+    });
+  });
+
+  /* ── FORM SUBMIT ── */
+  const noc_form = document.getElementById('noc-form');
+  const noc_success = document.querySelector('.form-success');
+  noc_form.addEventListener('submit', e => {
+    e.preventDefault();
+    noc_form.style.display = 'none';
+    noc_success.style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
