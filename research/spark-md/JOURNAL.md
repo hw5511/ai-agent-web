@@ -80,5 +80,17 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 
 ---
 
-## Round 4 — v2-final 검증  [예정]
-- v2-final(다이얼 + reduced-motion/텍스트 강제 + 정량 게이트) vs v1 vs v2-full 재대결. mokza+plain 양 주제.
+## ★ 연구 방향 결정 (2026-06-03, CEO)
+
+- **정체성 진단**: 현 SPARK는 "범용"이 아니라 **고퀄 단일 랜딩/브랜드 페이지 생성기**(단일 index.html·인라인·≤1500줄·GSAP/Lenis/Three). SaaS 앱/대시보드/데이터 제품 UI는 구조상 커버 못 함.
+- **CEO 결정**:
+  1. 범위(랜딩 특화 vs 범용)는 **일단 관찰하며 유지** — 성급히 확정 안 함.
+  2. **구조 실험 채택(v3 방향)**: **글자수 제한 해제 + CSS/JS/HTML 별도 파일 작성 후 링크** 방식 시도.
+     → 단일 인라인 1500줄 제약이 "더 크고 복잡한(=범용에 가까운) 산출물"을 막는 핵심 병목. 이를 푸는 게 범용화의 1차 관문.
+  3. **순서**: v2 먼저 마무리(Round 4 + 최종 리포트 + v2-final 확정) → 그 다음 위 구조 변경을 v3 실험으로.
+- **v3 실험 설계 메모(예정)**: 동일 프롬프트로 (a) v2-final(단일 인라인) vs (b) v2-final + "멀티파일·무제한" 변형을 비교 — 산출물 규모/품질/유지보수성/링크 정합성. 멀티파일은 harness가 index.html 외 css/js도 생성·수거하도록 확장 필요.
+
+---
+
+## Round 4 — v2-final 검증  [진행중]
+- v2-final(다이얼 + reduced-motion/텍스트 강제 + 정량 게이트) vs v1 vs v2-full. R4a=mokza, R4b=plain.
