@@ -3,8 +3,9 @@
 > 이미 조사한 스킬. 다음 sweep은 **여기 있는 것을 제외**하고 새 스킬만 찾는다.
 
 ## 커버리지 요약
-- 마지막 sweep: **sweep 1 (완료 2026-06-03)**
-- 누적 조사 스킬: 약 30종 (아래)
+- 마지막 sweep: **sweep 2 (완료 2026-06-03)** — 신규 유용 지식 10건(16~25), 시각축/래퍼는 수렴
+- 누적 조사 스킬: 약 50종 (아래)
+- 다음: sweep 3는 신규성 빈약 예상 → 저빈도(또는 GEO/structured-data 본문 정독 한정)
 
 ## 조사 완료 목록 (sweep 1)
 
@@ -57,7 +58,13 @@
 - [design] slide-design (proyecto26) / frontend-slides (zarazhangrui) — 대체로 중복
 - [design] email-design (inference-sh) — 비전이(제외)
 
-## 다음 sweep 후보 큐 (미조사 의심 — sweep 2 잔여 / sweep 3 타깃)
+### sweep 2 deep-dive 추가
+- [motion] gsap-skills 나머지: timeline / utils / react / frameworks (greensock) — 대체로 중복/코드헬퍼
+- [process] impeccable: critique / distill / quieter / bolder / delight (pbakaus) — critique·delight·distill 신규
+- [design] freshtechbro/claudedesignskills: web3d-integration-patterns ★ / modern-web-design ★ / barba-js / locomotive-scroll(=Lenis 중복) / animejs·lottie·pixi·spline·rive(래퍼)
+- [seo] aaron-he-zhu/seo-geo, huifer/claude-code-seo, aevans-eng/seo-skill — GEO/structured-data 신규 영역(미정독)
+
+## 다음 sweep 후보 큐 (sweep 3 — 신규성 빈약 예상, 저빈도)
 - pbakaus impeccable 세트의 개별 스킬 상세(critique/distill 등 본문)
 - deanpeters/phuryn/product-on-purpose pm-skills의 개별 하위 스킬 다수(아직 대표만 봄)
 - skills.sh 기타 토픽: animation/3d/accessibility/content/seo 카테고리 미탐색 스킬

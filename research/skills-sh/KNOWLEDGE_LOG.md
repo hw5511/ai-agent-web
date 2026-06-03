@@ -49,4 +49,16 @@
 
 **중복(수렴)으로 등재 안 함**: slide-design/dashboard의 8pt·토큰·60-30-10·AI slop 회피(=sweep1 taste/web-design-guidelines와 중복), email-design(600px/Outlook/table은 모던 웹 비전이).
 
-> sweep 2 잔여: pbakaus impeccable 개별 본문 / gsap 나머지 / a11y·3d 토픽 (deep-dive 에이전트 진행 중).
+### sweep 2 deep-dive (2026-06-03) — 신규 5건 + GEO 영역
+
+21. `[motion/3d]` **디바이스 등급별 3-tier 모션 강등 + 라이브러리 라우팅 + 예산** — Full 60fps / Reduced 30fps·spring off / Minimal static, 배터리≤20%→Minimal; on-demand 렌더(frameloop=demand) CPU 80~90%↓; **속성당 라이브러리 1개**; 코어<100KB·lazy 각<150KB·활성 tween<20; WebGL 미지원 시 SVG+CSS fallback. — freshtechbro/web3d-integration-patterns — SPARK 60fps/접근성을 *실행가능 의사결정*으로 격상 — (후보, 강력)
+22. `[content/ux]` **상태별 마이크로-딜라이트 + 가드레일** — success/empty/loading/error + interactive 순간에 micro-interaction, character copy, 촉각 피드백; **이스터에그/축하는 skippable·코어 태스크 지연 금지**. — impeccable/delight — SPARK 미보유 — (후보)
+23. `[process]` **사후 self-critique 루프** — 10차원(hierarchy/IA/typo/color/state/microcopy/affordance…) + **2회 독립 병렬 평가**(편향 제거) + AI-slop 텔 탐지 + 임팩트순 수정. — impeccable/critique — SPARK는 생성 위주, 검수 패스 없음 — (후보)
+24. `[design/motion]` **구체 수치 토큰** — OKLCH 색공간, CWV(LCP<2.5s/INP<200ms/CLS<0.1), micro-interaction(press 0.95·hover 1.05~1.1·spring stiffness400/damping17), duration 150/250/400ms, focus 3px+2px offset, skeleton>spinner. — freshtechbro/modern-web-design — 일부 중복, 수치값은 신규 — (후보)
+25. `[process]` **양방향 intensity 변환 어휘(distill/quieter/bolder)** — 생성 산출물을 *사후에* 한 단계 줄이거나(quieter: 채도↓·여백↑·모션 빈도↓) 키우는(bolder) 명령형 변환. SPARK 다이얼(생성 전)과 보완(생성 후). — impeccable — (후보)
+
+**보너스 신규 영역(미정독, 존재 확인)**: SEO/GEO/structured-data(JSON-LD Organization/Article/Product/FAQ/Breadcrumb + AI봇 접근 + 생성형엔진최적화) — addyosmani·aaron-he-zhu·huifer. SPARK 완전 미보유.
+
+**중복(수렴)**: gsap-timeline/utils/frameworks(코드 헬퍼·라이프사이클, 시스템프롬프트 가치 낮음), gsap-react(React 한정), locomotive-scroll(=Lenis 중복), bolder 절반(폰트/대비 기존 보유), animejs/lottie/pixi/spline/rive 등 라이브러리 래퍼.
+
+> **sweep 2 종료. 수렴 신호**: 순수 미감·라이브러리 래퍼는 거의 중복. 신규 가치는 *비-시각축*(성능예산·SEO/GEO·전환카피/CRO·데이터시각화)과 *메타 의사결정*(3D 디바이스 등급·self-critique·상태별 delight)에 집중. sweep 3는 신규성 빈약 예상 → 빈도 낮춤.
