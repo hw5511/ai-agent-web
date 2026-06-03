@@ -124,3 +124,12 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - v1(미감) → v2-final(접근성 floor·reduced-motion·정량게이트·다이얼·디자이너 우위) → v3(멀티파일·무제한·디자인 강화).
 - 라이브 `SPARK.md` 반영은 **CEO 확인 후**. 권장: 단일 페이지=v2-final, 규모 큰 사이트=v3.
 - 후속: 더 큰 사이트/다주제 반복, 인트로 과지연 가드, 비-시각축(성능예산·SEO·전환카피)은 별도 트랙.
+
+---
+
+## R5 후속 — Lenis 휠 먹통 버그 → v3 규칙화 (2026-06-03)
+- **증상**: 배포한 v3(NOCTURNE) 휠 스크롤이 끊겨 스크롤바 수동 드래그해야 함.
+- **원인**: `styles.css` `html { scroll-behavior: smooth }` ↔ Lenis(JS 부드러운 스크롤, 휠 preventDefault) **이중 부드러움 충돌**. 네이티브 smooth가 Lenis의 프레임별 scrollTo를 재애니메이션 → 먹통. 스크롤바 드래그는 Lenis 휠핸들러 우회라 동작.
+- **부차**: Lenis 권장 CSS 리셋 부재.
+- **조치(규칙화)**: v3에 `LENIS CSS 충돌 가드` 추가 — html `scroll-behavior:smooth` 금지 + Lenis CSS 리셋 강제 + Self-Audit `LENIS_GUARD`/`PERF_CHECK` 점검. (변경점 ⑬)
+- **교훈**: "라이브러리 강제(Lenis 필수)"는 그 라이브러리의 알려진 gotcha 가드까지 동봉해야 안전.
