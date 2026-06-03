@@ -34,4 +34,19 @@
 **D. 실험 버그를 막는 규칙 (Round 2 직결)**
 15. `[motion]` **reduced-motion 전면 차단 + 최종 가시상태 복원** — 전 모션 스킬 공통("opacity/color도 예외 없음"). Round 2의 v2-full 콘텐츠 은닉 버그를 직접 방지 — web-animation-design 외 — **v2-final 필수 반영(검증중→반영예정)**
 
-> 다음 sweep(2)에서 후보 큐(개별 pm 하위스킬, gsap 나머지, skills.sh animation/3d/a11y 토픽) 탐색 예정.
+> sweep 1 종료. 아래 sweep 2 누적.
+
+### sweep 2 (2026-06-03) — 인접 비-시각 축에서 신규 5건 (시각축은 대체로 수렴)
+
+> 핵심: 순수 미감(슬라이드/대시보드/이메일/illustration)은 sweep1과 **수렴(중복)**. 진짜 신규는 SPARK가
+> 거의 안 다루던 **성능 예산 · SEO/head · 전환 카피/CRO · 데이터시각화** 축에서 나옴.
+
+16. `[performance]` **로드 성능 예산(정량) + CWV 타깃** — 총<1.5MB / JS<300KB / 이미지(above-fold)<500KB / 폰트<100KB; LCP<2.5s·FCP<1.8s·TBT<200ms·TTFB<800ms; AVIF→WebP→SVG, font-display:swap, Brotli. — addyosmani/web-quality-skills — SPARK는 모션 성능만 다루고 **로드 예산 전무**(GSAP/Three.js 다용으로 무거워짐) → 최고 임팩트 — (후보)
+17. `[content]` **전환 카피 규칙** — 헤드라인 "{성과} without {고통}"·"The {카테고리} for {대상}", CTA=[동사]+[얻는것]+[수식어], 금지어(Submit/Learn More/Click Here/streamline/느낌표), 혜택>기능·구체>모호. — coreyhaines31/marketingskills — SPARK는 시각 강박, **카피 규칙 없음** → 텍스트 설득력 보강 — (후보)
+18. `[seo]` **`<head>`/SEO·OG·JSON-LD 시맨틱** — title 50~60자·desc 150~160자·단일 h1·`<html lang>`·self-canonical·JSON-LD(Organization/Article/Product/FAQ/Breadcrumb)·URL 하이픈/소문자. — addyosmani/web-quality-skills — SPARK 산출물 검색·공유 품질 직접 향상 — (후보)
+19. `[content]` **CRO 7차원 + 신뢰신호/반론처리** — 가치제안 5초 이해, 신뢰신호를 CTA 근처·혜택 직후, 폼 마찰 축소, 페이지 구조(SocialProof→Problem→Solution→HowItWorks→Objection→FinalCTA). — coreyhaines31/marketingskills — 전환형 랜딩 구조 검증 — (후보)
+20. `[dataviz]` **데이터시각화 3원칙** — "차트 제목=인사이트 진술"·"막대 항상 0 기준"·"적/녹 단독 인코딩 금지(색맹 8%)", 6개초과 pie·3D차트·dual-axis 금지. — Anthropic data-visualization — 메트릭/데이터형 랜딩 섹션 한정 전이 — (후보)
+
+**중복(수렴)으로 등재 안 함**: slide-design/dashboard의 8pt·토큰·60-30-10·AI slop 회피(=sweep1 taste/web-design-guidelines와 중복), email-design(600px/Outlook/table은 모던 웹 비전이).
+
+> sweep 2 잔여: pbakaus impeccable 개별 본문 / gsap 나머지 / a11y·3d 토픽 (deep-dive 에이전트 진행 중).

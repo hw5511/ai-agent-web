@@ -48,7 +48,16 @@
 - [motion] lenis (darkroomengineering)
 - [motion] threejs-skills (CloudAI-X) / webgpu (dgreenheck) / shader-dev (MiniMax-AI)
 
-## 다음 sweep 후보 큐 (미조사 의심 — sweep 2 우선 타깃)
+### sweep 2 추가 (인접 신규 영역)
+- [performance] web-quality-skills: performance / core-web-vitals (addyosmani) — 성능 예산·CWV
+- [seo] web-quality-skills: seo / best-practices / a11y (addyosmani)
+- [content] marketingskills: copywriting / cro (coreyhaines31)
+- [dataviz] data-visualization (Anthropic knowledge-work)
+- [design] typeui.sh dashboard — 대체로 중복(8pt/토큰)
+- [design] slide-design (proyecto26) / frontend-slides (zarazhangrui) — 대체로 중복
+- [design] email-design (inference-sh) — 비전이(제외)
+
+## 다음 sweep 후보 큐 (미조사 의심 — sweep 2 잔여 / sweep 3 타깃)
 - pbakaus impeccable 세트의 개별 스킬 상세(critique/distill 등 본문)
 - deanpeters/phuryn/product-on-purpose pm-skills의 개별 하위 스킬 다수(아직 대표만 봄)
 - skills.sh 기타 토픽: animation/3d/accessibility/content/seo 카테고리 미탐색 스킬
