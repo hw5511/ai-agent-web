@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NOCTURNE — 서울 기반 독립 향수 하우스. 밤의 언어로 빚은 향수.">
+  <title>NOCTURNE — 독립 향수 하우스</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="site-nav" id="spark_nav" aria-label="주 탐색">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="NOCTURNE 홈으로">
+        <span class="nav-wordmark">NOCTURNE</span>
+      </a>
+      <ul class="nav-links" id="spark_navLinks" role="list">
+        <li><a href="#spark_philosophy" class="nav-link">철학</a></li>
+        <li><a href="#spark_collection" class="nav-link">컬렉션</a></li>
+        <li><a href="#spark_process" class="nav-link">조향</a></li>
+        <li><a href="#spark_atelier" class="nav-link">아틀리에</a></li>
+      </ul>
+      <a href="#spark_atelier" class="nav-cta">예약하기</a>
+      <button class="nav-toggle" id="spark_navToggle"
+              aria-label="메뉴 열기"
+              aria-expanded="false"
+              aria-controls="spark_navLinks">
+        <span class="toggle-bar"></span>
+        <span class="toggle-bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────── -->
+  <section class="section-hero" id="spark_hero" aria-label="히어로 섹션">
+    <canvas id="spark_heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="hero-kicker">독립 향수 하우스&nbsp;·&nbsp;Seoul&nbsp;2019</p>
+      <h1 class="hero-title">
+        <span class="hero-title-top">NOC</span>
+        <span class="hero-title-bot">TURNE</span>
+      </h1>
+      <p class="hero-tagline">밤이 깊어야<br>향이 피어난다</p>
+      <a href="#spark_collection" class="hero-cta" aria-label="시그니처 컬렉션 섹션으로 이동">
+        <span class="hero-cta-text">컬렉션 보기</span>
+        <svg class="hero-cta-icon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <div class="scroll-cue-line"></div>
+      <span class="scroll-cue-label">스크롤</span>
+    </div>
+  </section>
+
+  <!-- ── Philosophy ──────────────────────────────────────── -->
+  <section class="section-philosophy" id="spark_philosophy" aria-labelledby="philosophy-heading">
+    <div class="philosophy-inner">
+
+      <div class="philosophy-quote-block" data-reveal="quote">
+        <blockquote class="philosophy-quote">
+          <p class="quote-text">"낮은 모든 것을 드러내지만,<br>밤은 본질만을 남긴다."</p>
+          <cite class="quote-cite">— NOCTURNE, 브랜드 노트 2019</cite>
+        </blockquote>
+        <div class="quote-line" aria-hidden="true"></div>
+      </div>
+
+      <div class="philosophy-body">
+        <h2 class="philosophy-heading" id="philosophy-heading" data-reveal>밤의 언어에 대하여</h2>
+        <div class="philosophy-text" data-reveal>
+          <p>NOCTURNE은 2019년 서울에서 시작된 독립 향수 하우스입니다. 우리는 밤의 특정한 순간들 — 도시가 고요해지는 새벽 두 시, 빗속의 가로등 아래, 오래된 서재의 한 구석 — 을 향으로 번역합니다.</p>
+          <p>각각의 향은 단순한 향기가 아닙니다. 그것은 기억의 언어이며, 감각의 시입니다. 우리는 전 세계의 단일 원산지 원료만을 사용하고, 연간 소량 생산을 고집합니다. 하나의 향을 완성하는 데 평균 8개월이 걸립니다.</p>
+        </div>
+        <ul class="philosophy-pillars" role="list" data-reveal>
+          <li class="pillar">
+            <span class="pillar-num" aria-hidden="true">01</span>
+            <span class="pillar-text">연간 소량 생산</span>
+          </li>
+          <li class="pillar">
+            <span class="pillar-num" aria-hidden="true">02</span>
+            <span class="pillar-text">단일 원산지 원료</span>
+          </li>
+          <li class="pillar">
+            <span class="pillar-num" aria-hidden="true">03</span>
+            <span class="pillar-text">서울 기반 조향사</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Collection ──────────────────────────────────────── -->
+  <section class="section-collection" id="spark_collection" aria-labelledby="collection-heading">
+    <div class="collection-header" data-reveal>
+      <p class="section-eyebrow">SIGNATURE COLLECTION</p>
+      <h2 class="collection-heading" id="collection-heading">시그니처 컬렉션</h2>
+      <p class="collection-year">2024 에디션&nbsp;·&nbsp;각 연간 200병 한정</p>
+    </div>
+
+    <div class="collection-grid">
+
+      <!-- No.01 NUIT ABSOLUE — featured tall card -->
+      <article class="frag-card frag-card--featured" data-reveal>
+        <div class="frag-card-inner">
+          <div class="frag-deco" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none" stroke="currentColor">
+              <circle cx="40" cy="40" r="32" stroke-width="0.5" opacity="0.35"/>
+              <circle cx="40" cy="40" r="20" stroke-width="0.5" opacity="0.5"/>
+              <line x1="40" y1="4" x2="40" y2="76" stroke-width="0.5" opacity="0.25"/>
+              <line x1="4" y1="40" x2="76" y2="40" stroke-width="0.5" opacity="0.25"/>
+              <line x1="12" y1="12" x2="68" y2="68" stroke-width="0.5" opacity="0.18"/>
+              <line x1="68" y1="12" x2="12" y2="68" stroke-width="0.5" opacity="0.18"/>
+              <circle cx="40" cy="40" r="5" fill="currentColor" opacity="0.45"/>
+              <circle cx="40" cy="40" r="2" fill="currentColor" opacity="0.7"/>
+            </svg>
+          </div>
+          <header class="frag-header">
+            <p class="frag-num">No.01</p>
+            <h3 class="frag-name">NUIT<br>ABSOLUE</h3>
+            <p class="frag-name-kr">절대의 밤</p>
+          </header>
+          <div class="frag-notes">
+            <p class="frag-notes-label">노트 구성</p>
+            <ul class="frag-notes-list" role="list">
+              <li>오드</li>
+              <li>블랙 로즈</li>
+              <li>다크 머스크</li>
+              <li>베티버</li>
+            </ul>
+          </div>
+          <div class="frag-bottom">
+            <p class="frag-desc">어둠의 심장에서 피어나는 관능적인 오리엔탈. 밤이 가장 깊은 순간의 농밀한 향.</p>
+            <a href="#spark_atelier" class="frag-cta" aria-label="NUIT ABSOLUE 예약 문의하기">
+              <span>예약 문의</span>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                   stroke-width="1.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- No.02 LUNE CLAIRE -->
+      <article class="frag-card" data-reveal>
+        <div class="frag-card-inner">
+          <div class="frag-deco" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none" stroke="currentColor">
+              <path d="M52 18 A26 26 0 1 0 52 62 A18 18 0 1 1 52 18"
+                    stroke-width="0.5" opacity="0.5"/>
+              <circle cx="54" cy="19" r="3.5" fill="currentColor" opacity="0.35"/>
+            </svg>
+          </div>
+          <header class="frag-header">
+            <p class="frag-num">No.02</p>
+            <h3 class="frag-name">LUNE<br>CLAIRE</h3>
+            <p class="frag-name-kr">맑은 달빛</p>
+          </header>
+          <div class="frag-notes">
+            <p class="frag-notes-label">노트 구성</p>
+            <ul class="frag-notes-list" role="list">
+              <li>아이리스</li>
+              <li>화이트 머스크</li>
+              <li>문플라워</li>
+              <li>파우더</li>
+            </ul>
+          </div>
+          <div class="frag-bottom">
+            <p class="frag-desc">달빛처럼 서늘하고 투명한 플로럴 머스크.</p>
+            <a href="#spark_atelier" class="frag-cta" aria-label="LUNE CLAIRE 예약 문의하기">
+              <span>예약 문의</span>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                   stroke-width="1.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- No.03 BRUME NOCTURNE -->
+      <article class="frag-card" data-reveal>
+        <div class="frag-card-inner">
+          <div class="frag-deco" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none" stroke="currentColor">
+              <line x1="8"  y1="24" x2="72" y2="24" stroke-width="0.5" opacity="0.5"/>
+              <line x1="14" y1="34" x2="66" y2="34" stroke-width="0.5" opacity="0.4"/>
+              <line x1="8"  y1="44" x2="72" y2="44" stroke-width="0.5" opacity="0.5"/>
+              <line x1="18" y1="54" x2="62" y2="54" stroke-width="0.5" opacity="0.3"/>
+              <line x1="26" y1="64" x2="54" y2="64" stroke-width="0.5" opacity="0.2"/>
+            </svg>
+          </div>
+          <header class="frag-header">
+            <p class="frag-num">No.03</p>
+            <h3 class="frag-name">BRUME<br>NOCTURNE</h3>
+            <p class="frag-name-kr">밤의 안개</p>
+          </header>
+          <div class="frag-notes">
+            <p class="frag-notes-label">노트 구성</p>
+            <ul class="frag-notes-list" role="list">
+              <li>히노키</li>
+              <li>시더우드</li>
+              <li>베티버</li>
+              <li>냉안개 어코드</li>
+            </ul>
+          </div>
+          <div class="frag-bottom">
+            <p class="frag-desc">산속 새벽 안개의 차갑고 수목적인 우디 아로마틱.</p>
+            <a href="#spark_atelier" class="frag-cta" aria-label="BRUME NOCTURNE 예약 문의하기">
+              <span>예약 문의</span>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                   stroke-width="1.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- No.04 AUBE SECRÈTE — wide bottom card -->
+      <article class="frag-card frag-card--wide" data-reveal>
+        <div class="frag-card-inner">
+          <div class="frag-deco frag-deco--wide" aria-hidden="true">
+            <svg viewBox="0 0 160 80" fill="none" stroke="currentColor">
+              <path d="M15 62 Q60 8 105 62"  stroke-width="0.5" opacity="0.45"/>
+              <path d="M35 62 Q80 12 125 62" stroke-width="0.5" opacity="0.3"/>
+              <path d="M55 62 Q100 18 145 62" stroke-width="0.5" opacity="0.18"/>
+              <circle cx="80" cy="30" r="9"  stroke-width="0.5" opacity="0.4"/>
+              <circle cx="80" cy="30" r="2.5" fill="currentColor" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="frag-wide-layout">
+            <header class="frag-header">
+              <p class="frag-num">No.04</p>
+              <h3 class="frag-name">AUBE<br>SECRÈTE</h3>
+              <p class="frag-name-kr">비밀의 새벽</p>
+            </header>
+            <div class="frag-wide-right">
+              <div class="frag-notes">
+                <p class="frag-notes-label">노트 구성</p>
+                <ul class="frag-notes-list frag-notes-list--inline" role="list">
+                  <li>자스민</li>
+                  <li>앰버</li>
+                  <li>샌달우드</li>
+                  <li>핑크 페퍼</li>
+                </ul>
+              </div>
+              <div class="frag-bottom">
+                <p class="frag-desc">밤과 낮의 경계에서 피어나는 따뜻한 플로럴 앰버. 이른 새벽의 온기를 담았다.</p>
+                <a href="#spark_atelier" class="frag-cta" aria-label="AUBE SECRÈTE 예약 문의하기">
+                  <span>예약 문의</span>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                       stroke-width="1.5" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── Process ─────────────────────────────────────────── -->
+  <section class="section-process" id="spark_process" aria-labelledby="process-heading">
+    <div class="process-inner">
+      <div class="process-header" data-reveal>
+        <p class="section-eyebrow">THE CRAFT</p>
+        <h2 id="process-heading">조향 과정</h2>
+        <p class="process-subtitle">향 하나가 태어나기까지</p>
+      </div>
+      <ol class="process-list" role="list">
+        <li class="process-step" data-reveal>
+          <span class="step-num" aria-hidden="true">01</span>
+          <div class="step-content">
+            <h3 class="step-title">영감의 포착</h3>
+            <p class="step-desc">밤의 특정 장면, 감각의 기억을 메모하는 것에서 모든 향이 시작됩니다. 도시의 고요, 빗소리, 낡은 책의 냄새 — 언어로는 다 담기지 않는 순간들을 향으로 옮길 단서를 찾습니다.</p>
+          </div>
+        </li>
+        <li class="process-step" data-reveal>
+          <span class="step-num" aria-hidden="true">02</span>
+          <div class="step-content">
+            <h3 class="step-title">원료의 선별</h3>
+            <p class="step-desc">모로코의 로즈 앱솔루트, 인도 미소르의 샌달우드, 솔로몬 제도의 파촐리. 원산지가 향의 성격을 결정합니다. 우리는 하나의 원료를 확정하기 위해 평균 12개 이상의 샘플을 비교합니다.</p>
+          </div>
+        </li>
+        <li class="process-step" data-reveal>
+          <span class="step-num" aria-hidden="true">03</span>
+          <div class="step-content">
+            <h3 class="step-title">배합과 실험</h3>
+            <p class="step-desc">조향사의 코는 하루 스무 개 이상의 향을 구별하지 못합니다. 배합 실험은 수십 회에서 때론 수백 회에 이릅니다. 드라이다운 오일 비율이 0.5%만 달라져도 전혀 다른 향이 됩니다.</p>
+          </div>
+        </li>
+        <li class="process-step" data-reveal>
+          <span class="step-num" aria-hidden="true">04</span>
+          <div class="step-content">
+            <h3 class="step-title">숙성과 경청</h3>
+            <p class="step-desc">완성된 배합은 최소 6주 동안 어두운 공간에서 숙성됩니다. 향은 시간이 지나면서 말을 바꿉니다. 조향사는 그 변화를 경청하고, 필요하다면 다시 처음으로 돌아갑니다.</p>
+          </div>
+        </li>
+        <li class="process-step" data-reveal>
+          <span class="step-num" aria-hidden="true">05</span>
+          <div class="step-content">
+            <h3 class="step-title">명명과 출시</h3>
+            <p class="step-desc">향의 본질을 담은 이름이 붙여집니다. NOCTURNE의 모든 향은 연간 200병 한정으로 생산됩니다. 향수병은 서울의 유리 공방과의 협업으로 수제 제작됩니다.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── Atelier ──────────────────────────────────────────── -->
+  <section class="section-atelier" id="spark_atelier" aria-labelledby="atelier-heading">
+    <div class="atelier-inner">
+
+      <div class="atelier-info" data-reveal>
+        <p class="section-eyebrow">ATELIER</p>
+        <h2 id="atelier-heading">아틀리에</h2>
+        <p class="atelier-desc">북촌에 위치한 NOCTURNE 아틀리에에서 조향사와 함께 향을 직접 경험하세요. 방문은 사전 예약으로만 진행됩니다.</p>
+        <dl class="atelier-details">
+          <div class="detail-row">
+            <dt>위치</dt>
+            <dd>서울시 종로구 북촌로&nbsp;47, 2층</dd>
+          </div>
+          <div class="detail-row">
+            <dt>운영</dt>
+            <dd>화&thinsp;–&thinsp;일&nbsp;&nbsp;12:00&nbsp;–&nbsp;19:00<br>
+              <span class="detail-note">월요일 휴무</span></dd>
+          </div>
+          <div class="detail-row">
+            <dt>연락</dt>
+            <dd>hello@nocturne.kr</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="atelier-form-wrap" data-reveal>
+        <h3 class="reservation-title">방문 예약 문의</h3>
+        <form class="reservation-form" id="spark_reservationForm" novalidate>
+          <div class="form-group">
+            <label for="res-name">성함</label>
+            <input type="text" id="res-name" name="name"
+                   autocomplete="name" required placeholder="홍길동">
+          </div>
+          <div class="form-group">
+            <label for="res-email">이메일</label>
+            <input type="email" id="res-email" name="email"
+                   autocomplete="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="res-date">희망 방문일</label>
+            <input type="date" id="res-date" name="date" required>
+          </div>
+          <div class="form-group">
+            <label for="res-message">
+              메시지
+              <span class="form-optional" aria-label="선택 입력">(선택)</span>
+            </label>
+            <textarea id="res-message" name="message" rows="4"
+                      placeholder="문의하실 내용을 자유롭게 적어주세요."></textarea>
+          </div>
+          <button type="submit" class="form-submit">예약 문의 보내기</button>
+          <p class="form-success" id="spark_formSuccess" aria-live="polite" hidden>
+            문의가 접수되었습니다. 곧 연락드리겠습니다.
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-wordmark">NOCTURNE</p>
+          <p class="footer-tagline">밤을 향으로 기억하다</p>
+        </div>
+        <nav class="footer-nav" aria-label="푸터 탐색">
+          <div class="footer-nav-col">
+            <p class="footer-nav-title">컬렉션</p>
+            <ul role="list">
+              <li><a href="#spark_collection">Nuit Absolue</a></li>
+              <li><a href="#spark_collection">Lune Claire</a></li>
+              <li><a href="#spark_collection">Brume Nocturne</a></li>
+              <li><a href="#spark_collection">Aube&nbsp;Secrète</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav-col">
+            <p class="footer-nav-title">브랜드</p>
+            <ul role="list">
+              <li><a href="#spark_philosophy">철학</a></li>
+              <li><a href="#spark_process">조향 과정</a></li>
+              <li><a href="#spark_atelier">아틀리에</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav-col">
+            <p class="footer-nav-title">소셜</p>
+            <ul role="list">
+              <li><a href="#" aria-label="NOCTURNE 인스타그램">Instagram</a></li>
+              <li><a href="#" aria-label="NOCTURNE 네이버 블로그">Blog</a></li>
+              <li><a href="#" aria-label="NOCTURNE 뉴스레터 구독">Newsletter</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy;&nbsp;2024 NOCTURNE. All rights reserved.</p>
+        <ul class="footer-legal" role="list">
+          <li><a href="#">개인정보 처리방침</a></li>
+          <li><a href="#">이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Scroll Progress ─────────────────────────────────── -->
+  <div id="spark_progressBar" class="scroll-progress"
+       role="progressbar" aria-hidden="true"
+       aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- ── Libraries ───────────────────────────────────────── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
