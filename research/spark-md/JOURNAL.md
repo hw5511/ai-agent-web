@@ -99,5 +99,11 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 
 ---
 
-## Round 4 — v2-final 검증  [진행중]
-- v2-final(다이얼 + reduced-motion/텍스트 강제 + 정량 게이트) vs v1 vs v2-full. R4a=mokza, R4b=plain.
+## Round 4 — v2-final 검증  [완료 2026-06-03]
+- R4a(mokza, v1/v2-full/v2-final) + R4b(plain, v2-core/v2-final). 상세: `experiments/R4_verify/scorecard.md`.
+- **결과**:
+  - em-dash 게이트 작동: v1=8 → v2-final=0.
+  - reduced-motion 안전: v2-final은 mokza·plain 양쪽에서 콘텐츠 완전 표시. 반면 **v2-core는 plain에서 헤드라인 또 증발**(버그 재발) → v2-final이 progressive-enhancement+가시복원으로 차단.
+  - 접근성(aria/focus) 확보, JS 전용 빈 텍스트 0.
+- **판정: v2-final 채택 권장.** v1의 미감 유지 + v2-core/full의 비결정적 버그 제거 + 정량 게이트.
+- **남은 작업**: v2-final을 "디자이너 우위"로 재서술(엔지니어링=floor) → v2 최종 확정 → v3(멀티파일·무제한) 실험.
