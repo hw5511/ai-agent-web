@@ -50,9 +50,24 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 
 ---
 
-## Round 2 — v2 변형 격리실험 (base vs v1 vs v2-core vs v2-full)  [예정]
+## Round 2 — v2 변형 격리실험 (base vs v1 vs v2-core vs v2-full)  [완료 2026-06-03]
 
-- **가설**: v2-core(접근성+타이포+DB동기화)는 v1의 미감을 유지하면서 A11Y/TYPO 게이트를 통과한다.
-  v2-full(다이얼+규칙분기 포함)은 톤 제어가 가능해지나 변수가 늘어 결과 분산이 커질 수 있다.
-- **세팅**: 동일 프롬프트(가능하면 주제 1개 추가), 4-variant 동시 생성.
-- **결과**: _(v2 버전 작성 후 진행)_
+- **세팅**: `prompts/mokza.txt`, sonnet, 4-variant. 상세: `experiments/R2_mokza/scorecard.md`.
+- **자동 게이트 결과** (focus-visible / reduced-motion / aria-label / tabular / text-wrap):
+  base·v1 = 전부 0 → **v2-core(5/2/16/2/15), v2-full(4/3/12/1/7)** 로 사각지대 메움 입증.
+- **시각 판정**: v2-core가 다크 에디토리얼 + 충실한 본문 + reduced-motion 정상으로 **종합 최상**.
+  v2-full 히어로는 가장 정제됐으나 **reduced-motion에서 본문이 숨겨지는 회귀 버그**.
+- **★ 핵심 발견**: v2-full의 reduced-motion 블록이 `*-duration:0.01ms`만 적용하고 reveal 요소의
+  `opacity:1`/`transform:none` 복원을 누락 → 콘텐츠 은닉. v2-core는 명시 복원하여 정상.
+- **결론**:
+  - v2가 v1 대비 접근성·타이포에서 실효 개선 확인. 현재 **v2-core가 가장 안전·완성**.
+  - v2-full spec 보강 필요: *"reduced-motion 분기 = 애니메이션 비활성 + 모든 reveal 요소를 최종 가시 상태로 즉시 복원"*.
+
+---
+
+## Round 3 — 미니멀 주제 일반화 검증 (plain)  [진행중]
+
+- **가설**: 실용·미니멀 주제(`PLAIN` 메모앱)에서 ① v2-full 다이얼 분기가 MOTION을 낮춰 과한 장치를 피하고
+  ② v1은 "무조건 SURPRISE" 탓에 과잉 연출하거나 톤 부조화를 보일 수 있다. ③ reduced-motion 버그 재현 여부.
+- **세팅**: `prompts/plain.txt`, sonnet, 4-variant.
+- **결과**: _(생성 후 기입)_
