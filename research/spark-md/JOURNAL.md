@@ -202,3 +202,11 @@ obra/superpowers brainstorming · UI/UX Pro Max.
   - **floor 유지**: 히어로 경험에도 정적 폴백(키보드/reduced-motion/JS-off에서 핵심 메시지·CTA 보임). 본문 텍스트는 항상 DOM에.
   - v4 자산 전부 승계(자기검수·Lenis가드·다이얼·멀티파일·LIGHTBULB 자가활성).
 - 다음: v5 작성 → 검증(천문대 등 동일 주제로 D vs v5 비교, 히어로 파격 + 본문 접근성 동시 충족 확인).
+
+---
+
+## Round 10 — v5 검증 (EXPERIENCE-HERO + CONTENT-BODY)  [완료 2026-06-04]
+- 2주제(천문대/향수), 상세: `experiments/R10_v5/`.
+- **성공**: 둘 다 캔버스 인터랙티브 히어로 + 다수 읽기 섹션(observatory 4섹션/nocturne 5섹션).
+- observatory(=D 동일주제) 직접비교: 히어로=별자리 캔버스+"커서를 움직여 별자리를 찾으세요"(B식). reduced-motion서 h1+본문 715자 정상(D의 빈화면 해결). 본문="고요함이 곧 선명함이다"+데이터(tabular) 완전 읽기 가능.
+- **판정: v5 = 창의성(경험 히어로) + 접근성(본문/폴백) 균형 달성.** D의 약점 보완. 다음 체크포인트 후보.
