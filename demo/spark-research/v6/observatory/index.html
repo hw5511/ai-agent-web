@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="이안(夷安) 천문대, 경기도 양평. 도시를 떠나 밤하늘을 보러 오는 사람들을 위한 작은 천문대.">
+  <title>이안 천문대 · 夷安 Observatory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress-bar" role="progressbar" aria-label="페이지 스크롤 진행도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="progress-fill" id="js-progress"></div>
+  </div>
+
+  <nav class="site-nav" role="navigation" aria-label="메인 내비게이션">
+    <a href="#" class="nav-logo" aria-label="이안 천문대 홈으로">
+      <span class="nav-logo-kr">이안</span><span class="nav-logo-sep" aria-hidden="true"></span><span class="nav-logo-en">夷安</span>
+    </a>
+    <a href="#visit" class="nav-cta">방문 예약</a>
+  </nav>
+
+  <!-- ───────────── HERO (경험 구역) ───────────── -->
+  <section id="hero" class="hero" aria-label="천문대 소개 히어로">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <p class="hero-location" aria-label="위치">경기도 양평 &nbsp;·&nbsp; 해발 312m</p>
+      <h1 class="hero-title">
+        빛이 닿지 않는 곳에서<br>
+        비로소 보이는 것들
+      </h1>
+      <p class="hero-sub">
+        이안(夷安)은 도시의 빛을 떠나온 사람들을 위한<br>
+        작은 천문대입니다.
+      </p>
+      <a href="#about" class="hero-scroll-cue" aria-label="아래 내용 보기">
+        <span class="hero-scroll-text">아래로</span>
+        <svg class="hero-scroll-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <line x1="10" y1="3" x2="10" y2="17" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <polyline points="5,12 10,17 15,12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <p class="hero-hint" aria-hidden="true">마우스를 움직여 초점을 맞춰보세요</p>
+  </section>
+
+  <!-- ───────────── ABOUT ───────────── -->
+  <section id="about" class="section-about reveal-section">
+    <div class="about-inner">
+      <div class="about-quote-col">
+        <blockquote class="about-quote">
+          <p>"우리는 매일 밤<br>별을 잃어가고 있습니다.<br>이안은 그 별들이<br>아직 남아있는 곳입니다."</p>
+        </blockquote>
+        <cite class="about-cite">설립자 노트, 2019</cite>
+      </div>
+
+      <div class="about-text-col">
+        <p class="about-label">천문대에 대하여</p>
+        <p class="about-body">
+          이안(夷安)은 '편안한 쉼'을 뜻합니다. 2019년, 광공해에서 충분히 멀리 떨어진 이 자리에 문을 열었습니다.
+        </p>
+        <p class="about-body">
+          하루 여섯 명을 넘지 않습니다. 서두르지 않아도 됩니다. 눈이 어둠에 충분히 적응할 때까지(보통 30분), 우리는 그저 기다립니다.
+        </p>
+        <div class="about-facts">
+          <div class="about-fact">
+            <span class="about-fact-num">6</span>
+            <span class="about-fact-label">일일 최대 인원</span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-num">312</span>
+            <span class="about-fact-label">해발 고도 (m)</span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-num">보름</span>
+            <span class="about-fact-label">월 운휴 기간</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-rule" aria-hidden="true"></div>
+  </section>
+
+  <!-- ───────────── PROGRAMS ───────────── -->
+  <section id="programs" class="section-programs reveal-section" aria-label="관측 프로그램">
+    <header class="programs-header">
+      <h2 class="programs-title">관측 프로그램</h2>
+      <p class="programs-note">날씨와 달의 위상에 따라 일부 프로그램은 변경될 수 있습니다.</p>
+    </header>
+
+    <div class="programs-grid" role="list">
+      <article class="program-card program-card--wide" role="listitem">
+        <div class="program-card-inner">
+          <span class="program-num" aria-hidden="true">01</span>
+          <h3 class="program-name">맨눈 관측</h3>
+          <p class="program-desc">
+            아무것도 필요 없습니다. 담요를 덮고 누워 눈으로만 봅니다.
+            어둠에 적응하는 30분이 지나면, 당신이 얼마나 많은 것을 보지 못했는지 알게 됩니다.
+          </p>
+          <div class="program-meta">
+            <span class="program-time">오후 9시&nbsp;–&nbsp;자정</span>
+            <span class="program-price">1인 45,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="program-card" role="listitem">
+        <div class="program-card-inner">
+          <span class="program-num" aria-hidden="true">02</span>
+          <h3 class="program-name">망원경 관측</h3>
+          <p class="program-desc">
+            목성의 줄무늬, 토성의 고리, 달의 크레이터.
+            처음 본 순간은 오래 기억됩니다.
+          </p>
+          <div class="program-meta">
+            <span class="program-time">오후 9시&nbsp;–&nbsp;자정</span>
+            <span class="program-price">1인 65,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="program-card" role="listitem">
+        <div class="program-card-inner">
+          <span class="program-num" aria-hidden="true">03</span>
+          <h3 class="program-name">새벽 관측</h3>
+          <p class="program-desc">
+            자정이 넘으면 하늘이 달라집니다. 은하수의 중심부가 지평선 위로 떠오르는 시간입니다.
+          </p>
+          <div class="program-meta">
+            <span class="program-time">자정&nbsp;–&nbsp;새벽 3시</span>
+            <span class="program-price">1인 75,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="program-card program-card--highlight" role="listitem">
+        <div class="program-card-inner">
+          <span class="program-num" aria-hidden="true">04</span>
+          <h3 class="program-name">천체 사진 동행</h3>
+          <p class="program-desc">
+            카메라를 가져오세요. 적도의, 인터벌로미터, 노출 설정까지 함께합니다.
+            집에 돌아갈 때 밤하늘 사진을 가져가세요.
+          </p>
+          <div class="program-meta">
+            <span class="program-time">오후 8시&nbsp;–&nbsp;새벽 2시</span>
+            <span class="program-price">1인 120,000원</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ───────────── VISIT ───────────── -->
+  <section id="visit" class="section-visit reveal-section" aria-label="방문 안내">
+    <div class="visit-inner">
+      <div class="visit-heading">
+        <h2 class="visit-title">방문 안내</h2>
+        <p class="visit-sub">예약 없이는 입장할 수 없습니다.<br>보름달 전후 3일은 운휴합니다.</p>
+      </div>
+
+      <dl class="visit-details">
+        <div class="visit-row">
+          <dt class="visit-label">위치</dt>
+          <dd class="visit-value">
+            경기도 양평군 청운면 가현리 산&nbsp;14-7
+            <span class="visit-note">서울 청량리역에서 차로 약 90분</span>
+          </dd>
+        </div>
+        <div class="visit-row">
+          <dt class="visit-label">운영</dt>
+          <dd class="visit-value">
+            목요일&nbsp;–&nbsp;일요일 (월·화·수 휴무)
+            <span class="visit-note">기상 악화 시 당일 취소 안내</span>
+          </dd>
+        </div>
+        <div class="visit-row">
+          <dt class="visit-label">예약</dt>
+          <dd class="visit-value">
+            카카오 채널 또는 전화
+            <span class="visit-note">방문 3일 전까지 예약 필수</span>
+          </dd>
+        </div>
+        <div class="visit-row">
+          <dt class="visit-label">준비물</dt>
+          <dd class="visit-value">
+            두꺼운 외투, 빨간 조명 손전등
+            <span class="visit-note">빨간 조명은 암순응 유지에 필요합니다</span>
+          </dd>
+        </div>
+      </dl>
+
+      <a href="tel:031-000-0000" class="visit-cta">예약 문의 &nbsp;031-000-0000</a>
+    </div>
+  </section>
+
+  <!-- ───────────── FOOTER ───────────── -->
+  <footer class="site-footer" aria-label="사이트 정보">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-name">이안 천문대</p>
+        <p class="footer-name-sub">夷安 Observatory</p>
+      </div>
+      <div class="footer-info">
+        <p>경기도 양평군 청운면 가현리 산&nbsp;14-7</p>
+        <p>사업자등록번호&nbsp;123-45-67890</p>
+        <p class="footer-copy">&copy;&nbsp;2024 이안 천문대. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
