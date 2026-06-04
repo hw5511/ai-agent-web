@@ -144,3 +144,13 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - **PHASE 5 자기검수·정제 ✅**: case1에서 em-dash 7개 자가 수정. Lenis 가드 5케이스 전부 리셋 포함→R5 휠먹통 재발 안 함. reduced-motion 정상.
   - 경미: 모델이 "scroll-behavior:smooth 없음" 보고했으나 실제론 존재(리셋이 무력화→런타임 안전). 점검 문구 정밀화 여지.
 - **판정**: v4 두 핵심(자가활성·자기검수) 작동. seed 금지 수정 후 재확인 필요(Round 7 후보).
+
+---
+
+## Round 7 — v4 seed 수정본 재검증  [완료 2026-06-03]
+- 5케이스 재실행(seed 금지 규칙 적용). 상세: `experiments/R7_v4_seedfix/`.
+- **★ seed 버그 해결 확인**:
+  - LIGHTBULB curl에 random.seed 없음 = 5/5 ✅ (case5의 'random.seed' 1회는 모델이 *규칙을 이해하고 언급한 추론 문장*이었음 — curl 2개 모두 seed 無).
+  - id가 케이스마다 전부 고유: case1 lb-022/163/189 · case2 lb-019/051/055… · case3 lb-139/185/190 · case4 lb-160/181/194 · case5 lb-103/175/182. (R6: 전부 lb-006/103/140 동일 → 해결)
+- **floor 유지**: Lenis 리셋 5/5, reduced-motion 5/5, 멀티파일 5/5.
+- **판정: v4 확정 가능.** LIGHTBULB 자가활성+다양성 ✅, 자기검수·정제 ✅, 멀티파일·Lenis가드·reduced-motion ✅.
