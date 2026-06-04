@@ -62,3 +62,12 @@
 **중복(수렴)**: gsap-timeline/utils/frameworks(코드 헬퍼·라이프사이클, 시스템프롬프트 가치 낮음), gsap-react(React 한정), locomotive-scroll(=Lenis 중복), bolder 절반(폰트/대비 기존 보유), animejs/lottie/pixi/spline/rive 등 라이브러리 래퍼.
 
 > **sweep 2 종료. 수렴 신호**: 순수 미감·라이브러리 래퍼는 거의 중복. 신규 가치는 *비-시각축*(성능예산·SEO/GEO·전환카피/CRO·데이터시각화)과 *메타 의사결정*(3D 디바이스 등급·self-critique·상태별 delight)에 집중. sweep 3는 신규성 빈약 예상 → 빈도 낮춤.
+
+### sweep 3 (2026-06-04) — 발상법/창의 컨셉팅 (v6용)
+26. `[ideation]` **Random Entry/Forced Connection (de Bono)** — 무관 자극을 강제 주입해 1차 연상 우회. LIGHTBULB가 이미 이 계열 → spark를 "도메인 우회 다리"로 재사용. — debonogroup
+27. `[ideation]` **Bisociation/메타포 전이** — 먼 두 프레임 충돌(거리 멀수록 신규성↑). 도메인을 1차 명사 대신 "먼 영역 메커니즘"으로 번역. — Koestler/conceptual blending
+28. `[ideation]` **SIT Subtraction + Worst-Flip** — 필수처럼 보이는 요소 제거(워크맨식) / 최악 클리셰의 정반대. BANNED_CLICHE를 능동 발산엔진으로. — SIT wiki, IxDF
+29. `[skill]` **creative-director-skill (smixs)** ★ — 20+ 발상법 코드화. 차용: ①structural×associative×disruptive 3군 강제 로테이션 ②saturation cap(흔한 메커니즘 originality 패널티)→PREDICTABILITY 강화 ③tension test. — github.com/smixs/creative-director-skill
+30. `[skill]` **oblique-skill (jakedahn)** — Oblique Strategies 113카드 랜덤4→1택. SPARK의 CHOSEN_SPARK 4→1 패턴 검증. — github.com/jakedahn/oblique-skill
+
+> 결론: skills.sh 상위엔 발상 신규 없음(brainstorming 유일). GitHub creative-director-skill이 핵심 신규. → v6 PHASE 0.5(Concept Divergence)로 흡수.
