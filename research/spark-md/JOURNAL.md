@@ -220,3 +220,12 @@ obra/superpowers brainstorming · UI/UX Pro Max.
   - 핵심: **LIGHTBULB 랜덤 spark = 강제연결 씨앗.** "도메인 × 무관한 spark"의 억지 조합에서 비(非)자명 컨셉 도출.
   - 컨셉 단계에 "뻔한 첫 연상 금지(BANNED_OBVIOUS)" + 후보 N개 발산 후 가장 비자명한 것 선택.
 - **다음**: skills.sh sweep 3(발상법/브레인스토밍/컨셉팅 집중, dedup) → v6 설계. (sweep1에 obra/superpowers brainstorming 기보유)
+
+---
+
+## Round 11 — v6 검증 (Concept Divergence)  [완료 2026-06-04]
+- 수렴났던 천문대/향수 재실행. 상세: `experiments/R11_v6/`.
+- **★ 별자리 클리셰 탈출 성공**: 천문대→**보케/초점**("빛이 닿지 않는 곳에서 비로소 보이는 것들"), 향수→**공기의 진동/파동·향의 부재(SIT Subtraction)**("밤은 향기로 기억된다"). 둘 다 index.html에 별/star 언급 0.
+- BANNED_OBVIOUS 작동(향수: 별빛·밤하늘·어둠·촛불 금지 자가적발). 발산법 실사용(Bisociation/SIT).
+- 균형(v5) 유지: 경험 히어로+본문(4/5섹션), reduced-motion 정상.
+- **판정: v6 성공 — 컨셉 수렴 해결 + 균형 유지. 현재 최상위 후보.**
