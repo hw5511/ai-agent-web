@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>토림 · 수제 도자기 공방</title>
+  <meta name="description" content="서울 은평구 토림 도예 공방. 흙과 손이 만드는 단 하나의 작품.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+  <nav class="nav" id="mainNav" aria-label="주요 내비게이션">
+    <a href="#hero" class="nav-logo" aria-label="토림 홈으로 이동">
+      <span class="nav-logo-kr">토림</span>
+      <span class="nav-logo-en">TORIM</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks">
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#about" class="nav-link">작가 소개</a></li>
+      <li><a href="#gallery" class="nav-link">작품 갤러리</a></li>
+      <li><a href="#process" class="nav-link">작업 과정</a></li>
+      <li><a href="#classes" class="nav-link">클래스 안내</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" class="hero">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-wheel-deco" aria-hidden="true">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+            <circle cx="36" cy="36" r="33" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+            <circle cx="36" cy="36" r="22" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+            <circle cx="36" cy="36" r="10" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+            <circle cx="36" cy="36" r="2.5" fill="currentColor" opacity="0.4"/>
+          </svg>
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-title-main">토림</span>
+          <em class="hero-title-sub">Torim Studio</em>
+        </h1>
+        <p class="hero-desc">흙이 손을 기억하고,<br>손이 흙을 닮아가는 곳.</p>
+        <a href="#gallery" class="hero-cta">작품 보기</a>
+      </div>
+
+      <div class="hero-image-wrap">
+        <div class="hero-image-frame">
+          <img
+            src="https://loremflickr.com/720/900/pottery,ceramic,clay"
+            alt="토림 공방에서 손으로 빚은 도자기"
+            class="hero-image"
+            width="720"
+            height="900"
+          >
+        </div>
+        <div class="hero-image-tag" aria-hidden="true">
+          <span>서울 은평구</span>
+          <span>2012&#x2013;</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="about">
+    <div class="about-inner">
+      <div class="about-image-wrap" data-reveal="left">
+        <img
+          src="https://loremflickr.com/600/750/pottery,artist,hands,craft"
+          alt="도예가 이도은의 작업 모습"
+          class="about-image"
+          width="600"
+          height="750"
+          loading="lazy"
+        >
+        <div class="about-image-accent" aria-hidden="true"></div>
+      </div>
+      <div class="about-text" data-reveal="right">
+        <h2 class="about-heading">흙 속에 숨겨진<br>시간을 빚습니다</h2>
+        <p class="about-body">
+          열두 해 동안 흙과 함께한 도예가 이도은은 물레 위에서 완성되는 형태보다
+          그 이전의 순간에 주목합니다. 손가락이 지나간 자리, 누르고 당기는 힘의 기억이
+          도자기의 표면에 고스란히 남습니다.
+        </p>
+        <p class="about-body">
+          국내산 태토를 직접 선별하여 사용하며, 모든 작품은 단 하나의 원본으로
+          세상에 나옵니다. 같은 형태는 없습니다. 같은 온도도 없습니다.
+        </p>
+        <dl class="about-stats">
+          <div class="about-stat">
+            <dt>공방 개설</dt>
+            <dd>2012년</dd>
+          </div>
+          <div class="about-stat">
+            <dt>소재지</dt>
+            <dd>서울 은평구</dd>
+          </div>
+          <div class="about-stat">
+            <dt>소성 방식</dt>
+            <dd>전기 &amp; 가스 가마</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALLERY ===================== -->
+  <section id="gallery" class="gallery">
+    <div class="gallery-header" data-reveal="up">
+      <p class="section-eyebrow">작품 갤러리</p>
+      <h2 class="gallery-heading">각각의 작품은<br>단 한 번의 불길을 지납니다</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <figure class="gallery-item gallery-item--tall" aria-label="달항아리">
+        <img
+          src="https://loremflickr.com/600/800/pottery,moonjar,white,ceramic"
+          alt="순백의 달항아리, 2024"
+          class="gallery-img"
+          width="600"
+          height="800"
+          loading="lazy"
+        >
+        <figcaption class="gallery-caption">
+          <span class="gallery-title">달항아리</span>
+          <span class="gallery-year">2024</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item gallery-item--square" aria-label="찻잔 세트">
+        <img
+          src="https://loremflickr.com/600/600/teacup,ceramic,handmade,clay"
+          alt="손 성형 찻잔 세트, 2024"
+          class="gallery-img"
+          width="600"
+          height="600"
+          loading="lazy"
+        >
+        <figcaption class="gallery-caption">
+          <span class="gallery-title">찻잔 세트</span>
+          <span class="gallery-year">2024</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item gallery-item--wide" aria-label="무유 화병">
+        <img
+          src="https://loremflickr.com/900/500/ceramic,vase,glaze,stoneware"
+          alt="무유 화병, 2024"
+          class="gallery-img"
+          width="900"
+          height="500"
+          loading="lazy"
+        >
+        <figcaption class="gallery-caption">
+          <span class="gallery-title">무유 화병</span>
+          <span class="gallery-year">2024</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item gallery-item--square" aria-label="일상의 밥그릇">
+        <img
+          src="https://loremflickr.com/600/600/bowl,ceramic,earthenware,handcraft"
+          alt="일상의 밥그릇, 2023"
+          class="gallery-img"
+          width="600"
+          height="600"
+          loading="lazy"
+        >
+        <figcaption class="gallery-caption">
+          <span class="gallery-title">일상의 밥그릇</span>
+          <span class="gallery-year">2023</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item gallery-item--tall" aria-label="각진 화기">
+        <img
+          src="https://loremflickr.com/600/800/stoneware,sculpture,pottery,art"
+          alt="각진 화기, 2023"
+          class="gallery-img"
+          width="600"
+          height="800"
+          loading="lazy"
+        >
+        <figcaption class="gallery-caption">
+          <span class="gallery-title">각진 화기</span>
+          <span class="gallery-year">2023</span>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item gallery-item--wide" aria-label="접시 컬렉션">
+        <img
+          src="https://loremflickr.com/900/500/plate,ceramic,studio,craft"
+          alt="접시 컬렉션, 2022"
+          class="gallery-img"
+          width="900"
+          height="500"
+          loading="lazy"
+        >
+        <figcaption class="gallery-caption">
+          <span class="gallery-title">접시 컬렉션</span>
+          <span class="gallery-year">2022</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS ===================== -->
+  <section id="process" class="process">
+    <div class="process-header" data-reveal="up">
+      <h2 class="process-heading">흙이 작품이 되기까지</h2>
+    </div>
+    <div class="process-track-wrapper" id="processWrapper">
+      <div class="process-track" id="processTrack">
+        <article class="process-step">
+          <div class="process-step-num" aria-hidden="true">01</div>
+          <h3 class="process-step-title">흙 고르기</h3>
+          <p class="process-step-desc">
+            국내산 태토를 손으로 직접 만지며 수분과 점성을 확인합니다.
+            같은 산지에서 온 흙이라도 계절마다 성질이 다릅니다.
+          </p>
+        </article>
+        <article class="process-step">
+          <div class="process-step-num" aria-hidden="true">02</div>
+          <h3 class="process-step-title">흙 빚기</h3>
+          <p class="process-step-desc">
+            물레 또는 손 성형으로 형태를 만듭니다.
+            힘의 방향과 속도가 작품의 표정을 결정합니다.
+          </p>
+        </article>
+        <article class="process-step">
+          <div class="process-step-num" aria-hidden="true">03</div>
+          <h3 class="process-step-title">초벌구이</h3>
+          <p class="process-step-desc">
+            800도의 가마에서 1차 소성합니다.
+            흙이 처음으로 단단해지는 순간입니다.
+          </p>
+        </article>
+        <article class="process-step">
+          <div class="process-step-num" aria-hidden="true">04</div>
+          <h3 class="process-step-title">유약 입히기</h3>
+          <p class="process-step-desc">
+            직접 배합한 유약을 덧입힙니다.
+            유약은 소성 후에야 진짜 색을 드러냅니다. 그 기다림도 과정의 일부입니다.
+          </p>
+        </article>
+        <article class="process-step">
+          <div class="process-step-num" aria-hidden="true">05</div>
+          <h3 class="process-step-title">재벌구이</h3>
+          <p class="process-step-desc">
+            1,230도에서 마지막 불길을 지납니다.
+            가마 문을 여는 순간까지, 완성된 색은 아무도 모릅니다.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CLASSES ===================== -->
+  <section id="classes" class="classes">
+    <div class="classes-header" data-reveal="up">
+      <p class="section-eyebrow">클래스 안내</p>
+      <h2 class="classes-heading">직접 손을 대보세요</h2>
+    </div>
+    <div class="classes-grid">
+      <article class="class-card class-card--featured" data-reveal="up" tabindex="0">
+        <div class="class-card-inner">
+          <div class="class-card-tag">입문</div>
+          <h3 class="class-card-title">원데이 클래스</h3>
+          <p class="class-card-desc">
+            처음 흙을 만지는 분을 위한 3시간 체험입니다.
+            손 성형 또는 물레 중 선택하여 작은 그릇 하나를 완성합니다.
+          </p>
+          <dl class="class-info">
+            <div class="class-info-row"><dt>시간</dt><dd>3시간</dd></div>
+            <div class="class-info-row"><dt>인원</dt><dd>최대 6인</dd></div>
+            <div class="class-info-row"><dt>금액</dt><dd>75,000원</dd></div>
+          </dl>
+          <a href="#contact" class="class-cta">신청하기</a>
+        </div>
+        <div class="class-card-deco" aria-hidden="true">
+          <svg viewBox="0 0 200 200" fill="none">
+            <circle cx="100" cy="100" r="90" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
+            <circle cx="100" cy="100" r="60" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
+            <circle cx="100" cy="100" r="30" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
+          </svg>
+        </div>
+      </article>
+
+      <article class="class-card" data-reveal="up" data-delay="0.15" tabindex="0">
+        <div class="class-card-inner">
+          <div class="class-card-tag">정규</div>
+          <h3 class="class-card-title">월 정기 클래스</h3>
+          <p class="class-card-desc">
+            월 4회, 매 회 2시간. 물레 성형을 중심으로
+            기초 기술부터 유약 배합까지 단계별로 배웁니다.
+          </p>
+          <dl class="class-info">
+            <div class="class-info-row"><dt>시간</dt><dd>월 4회 · 2시간</dd></div>
+            <div class="class-info-row"><dt>인원</dt><dd>최대 4인</dd></div>
+            <div class="class-info-row"><dt>금액</dt><dd>180,000원 / 월</dd></div>
+          </dl>
+          <a href="#contact" class="class-cta">신청하기</a>
+        </div>
+      </article>
+
+      <article class="class-card" data-reveal="up" data-delay="0.3" tabindex="0">
+        <div class="class-card-inner">
+          <div class="class-card-tag">심화</div>
+          <h3 class="class-card-title">심화 과정</h3>
+          <p class="class-card-desc">
+            월 8회, 자신만의 작품 세계를 탐색합니다.
+            개인 작업 공간과 가마 사용권이 포함됩니다.
+          </p>
+          <dl class="class-info">
+            <div class="class-info-row"><dt>시간</dt><dd>월 8회 · 2시간</dd></div>
+            <div class="class-info-row"><dt>인원</dt><dd>최대 2인</dd></div>
+            <div class="class-info-row"><dt>금액</dt><dd>320,000원 / 월</dd></div>
+          </dl>
+          <a href="#contact" class="class-cta">신청하기</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">토림</p>
+        <p class="footer-tagline">흙과 손이 만나는 자리</p>
+      </div>
+      <div class="footer-info">
+        <address class="footer-address">
+          서울특별시 은평구 진관동 토림 도예 공방
+        </address>
+        <p class="footer-contact">
+          <a href="mailto:hello@torim.kr">hello@torim.kr</a><br>
+          <a href="tel:0200000000">02-000-0000</a>
+        </p>
+        <p class="footer-hours">
+          화&#x2013;일 오전 10시&#x2013;오후 6시<br>
+          월요일 휴무
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="푸터 내비게이션">
+        <ul role="list">
+          <li><a href="#about">작가 소개</a></li>
+          <li><a href="#gallery">작품 갤러리</a></li>
+          <li><a href="#process">작업 과정</a></li>
+          <li><a href="#classes">클래스 안내</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&#169; 2024 토림 도예 공방. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

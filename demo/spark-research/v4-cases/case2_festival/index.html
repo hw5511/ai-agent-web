@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko" class="lenis">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PULSE 2026 -- 전자음악 페스티벌. 2026년 8월 14일-16일, 서울 월드컵경기장." />
+  <title>PULSE 2026 -- 전자음악 페스티벌</title>
+
+  <!-- Pretendard -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <!-- Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lenis -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Scroll progress bar -->
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+  <!-- ======= NAV ======= -->
+  <nav class="nav" id="mainNav" role="navigation" aria-label="메인 네비게이션">
+    <a href="#hero" class="nav-logo" aria-label="PULSE 2026 홈으로">
+      <span class="nav-logo-text">PULSE</span>
+      <span class="nav-logo-year">2026</span>
+    </a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#lineup" class="nav-link">라인업</a></li>
+      <li><a href="#timetable" class="nav-link">타임테이블</a></li>
+      <li><a href="#ticket" class="nav-link">티켓</a></li>
+      <li><a href="#venue" class="nav-link">장소</a></li>
+    </ul>
+    <a href="#ticket" class="nav-cta">티켓 구매</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </button>
+  </nav>
+
+  <!-- ======= HERO ======= -->
+  <section class="hero" id="hero" aria-labelledby="heroTitle">
+    <!-- Canvas: fixed behind hero via clip -->
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <!-- Chromatic aberration overlay -->
+    <div class="hero-ca-overlay" aria-hidden="true"></div>
+    <!-- Film grain overlay -->
+    <div class="hero-grain" aria-hidden="true"></div>
+    <!-- Bloom overlay -->
+    <div class="hero-bloom" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-reveal>
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">ELECTRONIC MUSIC FESTIVAL</span>
+      </div>
+      <h1 class="hero-title" id="heroTitle" data-reveal>
+        <span class="title-line title-pulse">PULSE</span>
+        <span class="title-line title-year">2026</span>
+      </h1>
+      <p class="hero-sub" data-reveal>
+        2026.08.14&ndash;16 &middot; 서울 월드컵경기장
+      </p>
+
+      <!-- Countdown -->
+      <div class="countdown" id="countdown" aria-label="페스티벌까지 남은 시간" data-reveal>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cdDays">000</span>
+          <span class="countdown-label">DAYS</span>
+        </div>
+        <div class="countdown-sep" aria-hidden="true">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cdHours">00</span>
+          <span class="countdown-label">HRS</span>
+        </div>
+        <div class="countdown-sep" aria-hidden="true">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cdMins">00</span>
+          <span class="countdown-label">MIN</span>
+        </div>
+        <div class="countdown-sep" aria-hidden="true">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cdSecs">00</span>
+          <span class="countdown-label">SEC</span>
+        </div>
+      </div>
+
+      <div class="hero-cta" data-reveal>
+        <a href="#ticket" class="btn btn-primary">티켓 구매</a>
+        <a href="#lineup" class="btn btn-ghost">라인업 보기</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="scroll-label">SCROLL</span>
+      <span class="scroll-arrow"></span>
+    </div>
+  </section>
+
+  <!-- ======= LINEUP ======= -->
+  <section class="section-lineup" id="lineup" aria-labelledby="lineupTitle">
+
+    <!-- Infinite marquee ticker -->
+    <div class="marquee-wrapper" aria-hidden="true">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="marquee-item">BICEP</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">CHARLOTTE DE WITTE</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">PEGGY GOU</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">FOUR TET</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">BONOBO</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">KODE9</span>
+        <span class="marquee-dot">+</span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee-item">BICEP</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">CHARLOTTE DE WITTE</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">PEGGY GOU</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">FOUR TET</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">BONOBO</span>
+        <span class="marquee-dot">+</span>
+        <span class="marquee-item">KODE9</span>
+        <span class="marquee-dot">+</span>
+      </div>
+    </div>
+
+    <div class="section-inner">
+      <div class="section-header" data-reveal>
+        <h2 class="section-title" id="lineupTitle">라인업</h2>
+        <p class="section-sub">2026 헤드라이너 6인</p>
+      </div>
+
+      <div class="lineup-grid">
+
+        <!-- Artist 1 -->
+        <article class="artist-card" data-reveal data-reveal-delay="0">
+          <div class="artist-img-wrap">
+            <img
+              src="https://picsum.photos/seed/bicep2026/600/400"
+              alt="BICEP 아티스트 사진"
+              width="600" height="400"
+              loading="lazy"
+              class="artist-img"
+            />
+            <div class="artist-img-noise" aria-hidden="true"></div>
+          </div>
+          <div class="artist-info">
+            <div class="artist-tags">
+              <span class="tag tag-nation">UK</span>
+              <span class="tag tag-genre">Melodic Techno</span>
+            </div>
+            <h3 class="artist-name">BICEP</h3>
+            <p class="artist-day">8월 14일 -- MAIN STAGE</p>
+          </div>
+        </article>
+
+        <!-- Artist 2 -->
+        <article class="artist-card artist-card--tall" data-reveal data-reveal-delay="1">
+          <div class="artist-img-wrap">
+            <img
+              src="https://picsum.photos/seed/cdewitte2026/600/700"
+              alt="Charlotte de Witte 아티스트 사진"
+              width="600" height="700"
+              loading="lazy"
+              class="artist-img"
+            />
+            <div class="artist-img-noise" aria-hidden="true"></div>
+          </div>
+          <div class="artist-info">
+            <div class="artist-tags">
+              <span class="tag tag-nation">BE</span>
+              <span class="tag tag-genre">Techno</span>
+            </div>
+            <h3 class="artist-name">CHARLOTTE<br/>DE WITTE</h3>
+            <p class="artist-day">8월 15일 -- MAIN STAGE</p>
+          </div>
+        </article>
+
+        <!-- Artist 3 -->
+        <article class="artist-card" data-reveal data-reveal-delay="2">
+          <div class="artist-img-wrap">
+            <img
+              src="https://picsum.photos/seed/peggygou2026/600/400"
+              alt="Peggy Gou 아티스트 사진"
+              width="600" height="400"
+              loading="lazy"
+              class="artist-img"
+            />
+            <div class="artist-img-noise" aria-hidden="true"></div>
+          </div>
+          <div class="artist-info">
+            <div class="artist-tags">
+              <span class="tag tag-nation">KR</span>
+              <span class="tag tag-genre">House / DJ</span>
+            </div>
+            <h3 class="artist-name">PEGGY GOU</h3>
+            <p class="artist-day">8월 16일 -- MAIN STAGE</p>
+          </div>
+        </article>
+
+        <!-- Artist 4 -->
+        <article class="artist-card artist-card--wide" data-reveal data-reveal-delay="0">
+          <div class="artist-img-wrap">
+            <img
+              src="https://picsum.photos/seed/fourtet2026/800/400"
+              alt="Four Tet 아티스트 사진"
+              width="800" height="400"
+              loading="lazy"
+              class="artist-img"
+            />
+            <div class="artist-img-noise" aria-hidden="true"></div>
+          </div>
+          <div class="artist-info">
+            <div class="artist-tags">
+              <span class="tag tag-nation">UK</span>
+              <span class="tag tag-genre">Electronic / Ambient</span>
+            </div>
+            <h3 class="artist-name">FOUR TET</h3>
+            <p class="artist-day">8월 14일 -- STUDIO</p>
+          </div>
+        </article>
+
+        <!-- Artist 5 -->
+        <article class="artist-card" data-reveal data-reveal-delay="1">
+          <div class="artist-img-wrap">
+            <img
+              src="https://picsum.photos/seed/bonobo2026/600/400"
+              alt="Bonobo 아티스트 사진"
+              width="600" height="400"
+              loading="lazy"
+              class="artist-img"
+            />
+            <div class="artist-img-noise" aria-hidden="true"></div>
+          </div>
+          <div class="artist-info">
+            <div class="artist-tags">
+              <span class="tag tag-nation">UK</span>
+              <span class="tag tag-genre">Downtempo</span>
+            </div>
+            <h3 class="artist-name">BONOBO</h3>
+            <p class="artist-day">8월 15일 -- STUDIO</p>
+          </div>
+        </article>
+
+        <!-- Artist 6 -->
+        <article class="artist-card" data-reveal data-reveal-delay="2">
+          <div class="artist-img-wrap">
+            <img
+              src="https://picsum.photos/seed/kode92026/600/400"
+              alt="KODE9 아티스트 사진"
+              width="600" height="400"
+              loading="lazy"
+              class="artist-img"
+            />
+            <div class="artist-img-noise" aria-hidden="true"></div>
+          </div>
+          <div class="artist-info">
+            <div class="artist-tags">
+              <span class="tag tag-nation">UK</span>
+              <span class="tag tag-genre">Grime / Bass</span>
+            </div>
+            <h3 class="artist-name">KODE9</h3>
+            <p class="artist-day">8월 16일 -- UNDERGROUND</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= TIMETABLE ======= -->
+  <section class="section-timetable" id="timetable" aria-labelledby="timetableTitle">
+    <div class="section-inner">
+      <div class="section-header" data-reveal>
+        <h2 class="section-title" id="timetableTitle">타임테이블</h2>
+        <p class="section-sub">3일간의 무대 일정</p>
+      </div>
+
+      <!-- Day tabs -->
+      <div class="tt-tabs" role="tablist" aria-label="날짜 선택">
+        <button class="tt-tab tt-tab--active" role="tab" aria-selected="true" aria-controls="tt-panel-1" id="tt-tab-1" data-day="1">
+          <span class="tt-tab-date">08.14</span>
+          <span class="tt-tab-label">DAY 1</span>
+        </button>
+        <button class="tt-tab" role="tab" aria-selected="false" aria-controls="tt-panel-2" id="tt-tab-2" data-day="2">
+          <span class="tt-tab-date">08.15</span>
+          <span class="tt-tab-label">DAY 2</span>
+        </button>
+        <button class="tt-tab" role="tab" aria-selected="false" aria-controls="tt-panel-3" id="tt-tab-3" data-day="3">
+          <span class="tt-tab-date">08.16</span>
+          <span class="tt-tab-label">DAY 3</span>
+        </button>
+      </div>
+
+      <!-- Day 1 -->
+      <div class="tt-panel tt-panel--active" id="tt-panel-1" role="tabpanel" aria-labelledby="tt-tab-1">
+        <div class="tt-grid">
+
+          <div class="tt-stage-col" data-col="0">
+            <div class="tt-stage-header">MAIN STAGE</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">18:00</span>
+                <span class="tt-act-name">Overmono</span>
+                <span class="tt-act-genre">Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">20:00</span>
+                <span class="tt-act-name">BICEP</span>
+                <span class="tt-act-genre">Melodic Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">22:30</span>
+                <span class="tt-act-name">Maceo Plex</span>
+                <span class="tt-act-genre">Deep Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">01:00</span>
+                <span class="tt-act-name">Recondite</span>
+                <span class="tt-act-genre">Ambient Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">03:00</span>
+                <span class="tt-act-name">Rrose</span>
+                <span class="tt-act-genre">Industrial Techno</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tt-stage-col" data-col="1">
+            <div class="tt-stage-header">STUDIO</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">19:00</span>
+                <span class="tt-act-name">Rival Consoles</span>
+                <span class="tt-act-genre">Modular</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">21:00</span>
+                <span class="tt-act-name">FOUR TET</span>
+                <span class="tt-act-genre">Electronic</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">23:30</span>
+                <span class="tt-act-name">Jon Hopkins</span>
+                <span class="tt-act-genre">Ambient</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">02:00</span>
+                <span class="tt-act-name">Max Cooper</span>
+                <span class="tt-act-genre">AV Live</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">04:00</span>
+                <span class="tt-act-name">Nils Frahm</span>
+                <span class="tt-act-genre">Neoclassical</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tt-stage-col" data-col="2">
+            <div class="tt-stage-header">UNDERGROUND</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">20:00</span>
+                <span class="tt-act-name">Paula Temple</span>
+                <span class="tt-act-genre">Noise</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">22:00</span>
+                <span class="tt-act-name">Surgeon</span>
+                <span class="tt-act-genre">Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">00:00</span>
+                <span class="tt-act-name">Ancient Methods</span>
+                <span class="tt-act-genre">Industrial</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">02:30</span>
+                <span class="tt-act-name">Blawan</span>
+                <span class="tt-act-genre">Bass Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">04:30</span>
+                <span class="tt-act-name">SPFDJ</span>
+                <span class="tt-act-genre">Hard Techno</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="tt-panel" id="tt-panel-2" role="tabpanel" aria-labelledby="tt-tab-2" hidden>
+        <div class="tt-grid">
+
+          <div class="tt-stage-col" data-col="0">
+            <div class="tt-stage-header">MAIN STAGE</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">18:30</span>
+                <span class="tt-act-name">Lone</span>
+                <span class="tt-act-genre">Rave</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">20:30</span>
+                <span class="tt-act-name">CHARLOTTE DE WITTE</span>
+                <span class="tt-act-genre">Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">23:00</span>
+                <span class="tt-act-name">Amelie Lens</span>
+                <span class="tt-act-genre">Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">01:30</span>
+                <span class="tt-act-name">Kobosil</span>
+                <span class="tt-act-genre">Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">03:30</span>
+                <span class="tt-act-name">Dax J</span>
+                <span class="tt-act-genre">Techno</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tt-stage-col" data-col="1">
+            <div class="tt-stage-header">STUDIO</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">19:00</span>
+                <span class="tt-act-name">Throwing Snow</span>
+                <span class="tt-act-genre">Electronic</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">21:00</span>
+                <span class="tt-act-name">BONOBO</span>
+                <span class="tt-act-genre">Downtempo</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">23:30</span>
+                <span class="tt-act-name">Floating Points</span>
+                <span class="tt-act-genre">Jazz Electronic</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">02:00</span>
+                <span class="tt-act-name">Actress</span>
+                <span class="tt-act-genre">Experimental</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">04:00</span>
+                <span class="tt-act-name">Burial</span>
+                <span class="tt-act-genre">UK Garage</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tt-stage-col" data-col="2">
+            <div class="tt-stage-header">UNDERGROUND</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">20:00</span>
+                <span class="tt-act-name">Phase Fatale</span>
+                <span class="tt-act-genre">Dark Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">22:00</span>
+                <span class="tt-act-name">I Hate Models</span>
+                <span class="tt-act-genre">Techno</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">00:30</span>
+                <span class="tt-act-name">Skream</span>
+                <span class="tt-act-genre">Dubstep</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">02:30</span>
+                <span class="tt-act-name">Headless Horseman</span>
+                <span class="tt-act-genre">Industrial</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">04:30</span>
+                <span class="tt-act-name">Alignment</span>
+                <span class="tt-act-genre">Hard Techno</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="tt-panel" id="tt-panel-3" role="tabpanel" aria-labelledby="tt-tab-3" hidden>
+        <div class="tt-grid">
+
+          <div class="tt-stage-col" data-col="0">
+            <div class="tt-stage-header">MAIN STAGE</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">18:00</span>
+                <span class="tt-act-name">Mall Grab</span>
+                <span class="tt-act-genre">House</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">20:00</span>
+                <span class="tt-act-name">PEGGY GOU</span>
+                <span class="tt-act-genre">House / DJ</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">22:30</span>
+                <span class="tt-act-name">Fatima Yamaha</span>
+                <span class="tt-act-genre">Electro</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">01:00</span>
+                <span class="tt-act-name">DJ Stingray</span>
+                <span class="tt-act-genre">Electro</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">03:00</span>
+                <span class="tt-act-name">Octo Octa</span>
+                <span class="tt-act-genre">Trance / House</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tt-stage-col" data-col="1">
+            <div class="tt-stage-header">STUDIO</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">19:00</span>
+                <span class="tt-act-name">Leon Vynehall</span>
+                <span class="tt-act-genre">Electronic</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">21:00</span>
+                <span class="tt-act-name">Arca</span>
+                <span class="tt-act-genre">Avant-garde</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">23:00</span>
+                <span class="tt-act-name">Objekt</span>
+                <span class="tt-act-genre">Techno / Bass</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">01:30</span>
+                <span class="tt-act-name">Kettama</span>
+                <span class="tt-act-genre">Melodic House</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">04:00</span>
+                <span class="tt-act-name">Special Guest</span>
+                <span class="tt-act-genre">TBA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tt-stage-col" data-col="2">
+            <div class="tt-stage-header">UNDERGROUND</div>
+            <div class="tt-acts">
+              <div class="tt-act">
+                <span class="tt-time">20:00</span>
+                <span class="tt-act-name">KODE9</span>
+                <span class="tt-act-genre">Grime / Bass</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">22:00</span>
+                <span class="tt-act-name">Shackleton</span>
+                <span class="tt-act-genre">Dubstep</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">00:00</span>
+                <span class="tt-act-name">The Bug</span>
+                <span class="tt-act-genre">Bass / Noise</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">02:30</span>
+                <span class="tt-act-name">Hyperdub Soundsystem</span>
+                <span class="tt-act-genre">Bass</span>
+              </div>
+              <div class="tt-act">
+                <span class="tt-time">04:30</span>
+                <span class="tt-act-name">Gtronic</span>
+                <span class="tt-act-genre">Electro</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======= TICKET ======= -->
+  <section class="section-ticket" id="ticket" aria-labelledby="ticketTitle">
+    <div class="section-inner">
+      <div class="section-header" data-reveal>
+        <h2 class="section-title" id="ticketTitle">티켓</h2>
+        <p class="section-sub">지금 예매하고 특별한 3일을 확보하세요</p>
+      </div>
+
+      <div class="ticket-grid">
+
+        <!-- Tier 1: Day Pass -->
+        <article class="ticket-card" data-reveal data-reveal-delay="0">
+          <div class="ticket-card-top">
+            <span class="ticket-tier-label">DAY PASS</span>
+            <h3 class="ticket-tier-name">1일권</h3>
+            <div class="ticket-price">
+              <span class="ticket-currency">&#8361;</span>
+              <span class="ticket-amount">89,000</span>
+            </div>
+          </div>
+          <ul class="ticket-includes" role="list">
+            <li>선택일 1일 입장권</li>
+            <li>3개 스테이지 자유 관람</li>
+            <li>공식 프로그램 북</li>
+            <li>무료 물품 보관 서비스</li>
+          </ul>
+          <a href="#" class="btn btn-outline ticket-btn">구매하기</a>
+        </article>
+
+        <!-- Tier 2: 3-Day Pass (Popular) -->
+        <article class="ticket-card ticket-card--featured" data-reveal data-reveal-delay="1">
+          <div class="ticket-card-top">
+            <span class="ticket-popular-badge">인기</span>
+            <span class="ticket-tier-label">3-DAY PASS</span>
+            <h3 class="ticket-tier-name">3일권</h3>
+            <div class="ticket-price">
+              <span class="ticket-currency">&#8361;</span>
+              <span class="ticket-amount">219,000</span>
+            </div>
+            <span class="ticket-saving">1일권 대비 18% 절약</span>
+          </div>
+          <ul class="ticket-includes" role="list">
+            <li>3일 전일 입장권</li>
+            <li>3개 스테이지 자유 관람</li>
+            <li>공식 프로그램 북</li>
+            <li>무료 물품 보관 서비스</li>
+            <li>공식 토트백 포함</li>
+            <li>라운지 이용 가능</li>
+          </ul>
+          <a href="#" class="btn btn-primary ticket-btn">구매하기</a>
+        </article>
+
+        <!-- Tier 3: VIP -->
+        <article class="ticket-card" data-reveal data-reveal-delay="2">
+          <div class="ticket-card-top">
+            <span class="ticket-tier-label">VIP</span>
+            <h3 class="ticket-tier-name">VIP 패스</h3>
+            <div class="ticket-price">
+              <span class="ticket-currency">&#8361;</span>
+              <span class="ticket-amount">380,000</span>
+            </div>
+          </div>
+          <ul class="ticket-includes" role="list">
+            <li>3일 전일 VIP 입장권</li>
+            <li>전용 VIP 라운지 이용</li>
+            <li>아티스트 미트업 초청</li>
+            <li>공식 굿즈 패키지</li>
+            <li>전용 캠핑 구역</li>
+            <li>프리미엄 케이터링</li>
+            <li>전담 컨시어지 서비스</li>
+          </ul>
+          <a href="#" class="btn btn-outline ticket-btn">구매하기</a>
+        </article>
+
+      </div>
+
+      <p class="ticket-notice" data-reveal>
+        * 티켓은 예매 후 취소 불가입니다. 입장 시 본인 확인 필요. 만 18세 이상만 구매 가능.
+      </p>
+    </div>
+  </section>
+
+  <!-- ======= VENUE + FOOTER ======= -->
+  <section class="section-venue" id="venue" aria-labelledby="venueTitle">
+    <div class="section-inner">
+      <div class="section-header" data-reveal>
+        <h2 class="section-title" id="venueTitle">장소</h2>
+        <p class="section-sub">서울의 심장에서 만나는 전자음악 축제</p>
+      </div>
+
+      <div class="venue-layout">
+        <div class="venue-map-wrap" data-reveal>
+          <div class="venue-map-placeholder" aria-label="서울 월드컵경기장 위치 지도">
+            <div class="map-grid-overlay" aria-hidden="true"></div>
+            <div class="map-pin" aria-hidden="true">
+              <svg width="32" height="40" viewBox="0 0 32 40" fill="none" aria-hidden="true">
+                <path d="M16 0C7.163 0 0 7.163 0 16c0 11 16 24 16 24S32 27 32 16C32 7.163 24.837 0 16 0z" fill="oklch(75% 0.22 320)"/>
+                <circle cx="16" cy="16" r="6" fill="oklch(8% 0.01 220)"/>
+              </svg>
+            </div>
+            <span class="map-label-text">서울 월드컵경기장</span>
+          </div>
+        </div>
+        <div class="venue-info" data-reveal>
+          <h3 class="venue-name">서울 월드컵경기장</h3>
+          <address class="venue-address">
+            서울특별시 마포구 월드컵로 240<br/>
+            Worldcup-ro 240, Mapo-gu, Seoul
+          </address>
+          <dl class="venue-details">
+            <dt>수용 인원</dt>
+            <dd>66,000명</dd>
+            <dt>교통</dt>
+            <dd>6호선 월드컵경기장역 1번 출구</dd>
+            <dt>주차</dt>
+            <dd>현장 주차 불가 -- 대중교통 이용 권장</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">PULSE 2026</span>
+        <p class="footer-tagline">The sound that moves you.</p>
+      </div>
+      <nav class="footer-nav" aria-label="푸터 네비게이션">
+        <a href="#lineup" class="footer-link">라인업</a>
+        <a href="#timetable" class="footer-link">타임테이블</a>
+        <a href="#ticket" class="footer-link">티켓</a>
+        <a href="#venue" class="footer-link">장소</a>
+      </nav>
+      <div class="footer-social">
+        <!-- Instagram -->
+        <a href="#" class="social-link" aria-label="인스타그램" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <!-- Twitter / X -->
+        <a href="#" class="social-link" aria-label="트위터 X" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <!-- YouTube -->
+        <a href="#" class="social-link" aria-label="유튜브" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="5" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 9l5 3-5 3V9z" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2026 PULSE Festival. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

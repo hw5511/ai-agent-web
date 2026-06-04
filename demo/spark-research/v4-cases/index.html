@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPARK.md v4 — 5 케이스 산출물</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<style>
+  :root{ --bg:#0b0b0c; --fg:#f4f4f5; --muted:#a1a1aa; --line:#26262b; --accent:#16a34a; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:clamp(3rem,8vw,6rem) 1.5rem}
+  .eyebrow{color:var(--accent);font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+  h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.6rem 0 1rem;letter-spacing:-.02em}
+  .lead{color:var(--muted);max-width:64ch;margin-bottom:2.4rem}
+  .lead b{color:var(--fg)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{display:block;border:1px solid var(--line);border-radius:14px;padding:1.4rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;background:#101013}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tag{font-size:.72rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  .card h2{font-size:1.15rem;font-weight:700;margin:.45rem 0 .35rem}
+  .card p{color:var(--muted);font-size:.88rem;margin-bottom:.7rem}
+  .meta{font-size:.74rem;color:#71717a;border-top:1px solid var(--line);padding-top:.6rem;font-variant-numeric:tabular-nums}
+  .go{color:var(--fg);font-weight:600;font-size:.86rem;margin-top:.7rem;display:inline-block}
+  .note{margin-top:2.6rem;font-size:.82rem;color:#71717a;border-top:1px solid var(--line);padding-top:1.1rem}
+  .prev{display:block;margin-top:1.4rem;font-size:.85rem;color:var(--accent)}
+  code{font-size:.85em;color:#d4d4d8}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">SPARK.md v4 · 5 케이스 (seed 수정본)</p>
+    <h1>한 시스템 프롬프트, 다섯 가지 톤</h1>
+    <p class="lead">SPARK.md <b>v4</b>(자기검수·정제 + LIGHTBULB 자가활성)로
+      서로 다른 다섯 주제를 <code>claude -p</code>(sonnet)에게 생성시킨 결과물입니다.
+      각 결과는 <b>LIGHTBULB에서 매번 다른 영감</b>을 받아오고, 생성 후 스스로 검수·정제를 거칩니다.</p>
+
+    <div class="grid">
+      <a class="card" href="./case1_bookstore/index.html">
+        <span class="tag">Case 1 · 차분</span>
+        <h2>독립서점 &ldquo;여백&rdquo;</h2>
+        <p>챕터(I~V) 구조 · 좌측정렬 세리프 · 사려 깊은 편집 톤.</p>
+        <div class="meta">LIGHTBULB lb-022 / 163 / 189</div>
+        <span class="go">결과물 열기 →</span>
+      </a>
+      <a class="card" href="./case2_festival/index.html">
+        <span class="tag">Case 2 · 강렬</span>
+        <h2>일렉트로닉 페스티벌 &ldquo;PULSE&rdquo;</h2>
+        <p>네온 그린 액센트 · 거대 산세리프 · 에너지 맥시멀.</p>
+        <div class="meta">LIGHTBULB lb-019 / 051 / 055 …</div>
+        <span class="go">결과물 열기 →</span>
+      </a>
+      <a class="card" href="./case3_ceramic/index.html">
+        <span class="tag">Case 3 · 질감</span>
+        <h2>도자기 공방 &ldquo;토림&rdquo;</h2>
+        <p>흙·손의 질감 · 따뜻하고 정적인 공예 톤.</p>
+        <div class="meta">LIGHTBULB lb-139 / 185 / 190</div>
+        <span class="go">결과물 열기 →</span>
+      </a>
+      <a class="card" href="./case4_dining/index.html">
+        <span class="tag">Case 4 · 절제</span>
+        <h2>파인다이닝 &ldquo;공명&rdquo;</h2>
+        <p>절제된 럭셔리 · 고요한 긴장감 · 코스 구성.</p>
+        <div class="meta">LIGHTBULB lb-160 / 181 / 194</div>
+        <span class="go">결과물 열기 →</span>
+      </a>
+      <a class="card" href="./case5_artshow/index.html">
+        <span class="tag">Case 5 · 실험</span>
+        <h2>디지털 아트전시 &ldquo;잔상&rdquo;</h2>
+        <p>시안 글로우 · 殘像 워터마크 · 아방가르드.</p>
+        <div class="meta">LIGHTBULB lb-103 / 175 / 182</div>
+        <span class="go">결과물 열기 →</span>
+      </a>
+    </div>
+
+    <a class="prev" href="../">← v2-final vs v3 비교도 보기</a>
+    <p class="note">각 케이스는 <code>index.html + styles.css + script.js</code> 멀티파일 구조.
+      LIGHTBULB id가 케이스마다 다른 것에 주목 — v4의 seed 결정론 버그 수정으로 영감이 매번 새로워졌습니다.
+      연구 기록: <code>research/spark-md/</code>.</p>
+  </main>
+</body>
+</html>

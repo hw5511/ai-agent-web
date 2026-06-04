@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>잔상(殘像) / 디지털 아트 전시 2026</title>
+  <meta name="description" content="사라진 것들이 남기는 빛의 흔적. 디지털 아트 그룹 전시 2026. 07. 04 &#8211; 08. 31">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <div class="progress-bar" aria-hidden="true">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <nav class="site-nav" role="navigation" aria-label="주 네비게이션">
+    <a href="#hero" class="nav-logo" aria-label="잔상 전시 홈으로 이동">
+      <span class="nav-logo-kr">잔상</span><span class="nav-logo-hanja">殘像</span>
+    </a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#works">작품</a></li>
+      <li><a href="#note">작가 노트</a></li>
+      <li><a href="#visit">관람 정보</a></li>
+    </ul>
+    <button class="nav-menu-btn" id="navMenuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks">
+      <span class="menu-line"></span>
+      <span class="menu-line"></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="전시 메인">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-noise" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow reveal" aria-label="전시 기간 2026년 7월 4일부터 8월 31일">2026.07.04 &#8211; 08.31</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="hero-title-main" aria-label="잔상">잔상</span>
+        <span class="hero-title-hanja" aria-hidden="true">殘像</span>
+      </h1>
+      <p class="hero-tagline reveal">사라진 것들이 남기는 빛의 흔적</p>
+      <a href="#about" class="hero-cta reveal" id="heroCta">
+        <span>전시 보기</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M9 2.5v13M2.5 9l6.5 6.5L15.5 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-scroll-indicator reveal" aria-hidden="true">
+      <div class="scroll-track"><div class="scroll-thumb"></div></div>
+    </div>
+  </section>
+
+  <!-- 전시 소개 -->
+  <section class="about" id="about" aria-labelledby="aboutHeading">
+    <div class="about-inner">
+      <div class="about-side">
+        <span class="section-label reveal" aria-label="전시 소개 섹션">전시 소개</span>
+        <div class="about-year reveal" aria-hidden="true">2026</div>
+      </div>
+      <div class="about-main">
+        <h2 class="about-heading reveal" id="aboutHeading">
+          빛이 사라진 자리,<br>그 너머에 남는 것
+        </h2>
+        <div class="about-body-wrap">
+          <p class="about-body reveal">
+            <em>잔상(殘像)</em>은 디지털 매체를 통해 기억, 소멸, 그리고 흔적의 존재론을 탐구하는 그룹 전시입니다. 여섯 명의 작가가 픽셀, 코드, 생성 알고리즘으로 빚어낸 17점의 작품이 모인 이번 전시는 스크린이라는 물성 없는 표면에서 인간의 감각이 어떻게 잔존하는지를 묻습니다.
+          </p>
+          <p class="about-body reveal">
+            디지털 이미지는 지워지는 순간에도 망막 위에 그 형태를 남깁니다. 우리는 이 물리적 현상, 즉 시각적 잔상을 메타포 삼아, 기술 문명 속에서 사라져가는 감각과 기억의 지층을 가시화합니다.
+          </p>
+        </div>
+        <div class="about-metrics reveal">
+          <div class="metric">
+            <span class="metric-n">17</span>
+            <span class="metric-l">점의 작품</span>
+          </div>
+          <div class="metric">
+            <span class="metric-n">6</span>
+            <span class="metric-l">명의 작가</span>
+          </div>
+          <div class="metric">
+            <span class="metric-n">59</span>
+            <span class="metric-l">일간의 전시</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 작품 미리보기 -->
+  <section class="works" id="works" aria-labelledby="worksHeading">
+    <div class="works-header">
+      <h2 class="works-heading reveal" id="worksHeading">선택된 작품들</h2>
+      <p class="works-sub reveal">17점 중 5점 선공개</p>
+    </div>
+    <div class="works-grid" role="list">
+
+      <article class="work-cell work-cell--a" role="listitem" tabindex="0" aria-label="작품 01: 빛의 잔상 연작, 김지은">
+        <div class="work-img-wrap">
+          <img src="https://picsum.photos/seed/remnant1/1000/600" alt="김지은 작가의 디지털 작품, 빛의 잔상 연작 01" width="1000" height="600" loading="lazy">
+          <div class="work-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="work-meta">
+          <span class="work-idx">01</span>
+          <h3 class="work-name">빛의 잔상 연작</h3>
+          <p class="work-author">김지은</p>
+        </div>
+      </article>
+
+      <article class="work-cell work-cell--b" role="listitem" tabindex="0" aria-label="작품 02: 해상도 너머, 박서준">
+        <div class="work-img-wrap">
+          <img src="https://picsum.photos/seed/remnant7/600/900" alt="박서준 작가의 디지털 작품, 해상도 너머" width="600" height="900" loading="lazy">
+          <div class="work-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="work-meta">
+          <span class="work-idx">02</span>
+          <h3 class="work-name">해상도 너머</h3>
+          <p class="work-author">박서준</p>
+        </div>
+      </article>
+
+      <article class="work-cell work-cell--c" role="listitem" tabindex="0" aria-label="작품 03: 픽셀 기억, 최아름">
+        <div class="work-img-wrap">
+          <img src="https://picsum.photos/seed/remnant3/700/500" alt="최아름 작가의 디지털 작품, 픽셀 기억" width="700" height="500" loading="lazy">
+          <div class="work-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="work-meta">
+          <span class="work-idx">03</span>
+          <h3 class="work-name">픽셀 기억</h3>
+          <p class="work-author">최아름</p>
+        </div>
+      </article>
+
+      <article class="work-cell work-cell--d" role="listitem" tabindex="0" aria-label="작품 04: 노이즈 속의 신호, 이형준">
+        <div class="work-img-wrap">
+          <img src="https://picsum.photos/seed/remnant22/900/600" alt="이형준 작가의 디지털 작품, 노이즈 속의 신호" width="900" height="600" loading="lazy">
+          <div class="work-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="work-meta">
+          <span class="work-idx">04</span>
+          <h3 class="work-name">노이즈 속의 신호</h3>
+          <p class="work-author">이형준</p>
+        </div>
+      </article>
+
+      <article class="work-cell work-cell--e" role="listitem" tabindex="0" aria-label="작품 05: 디지털 에코, 한소리">
+        <div class="work-img-wrap">
+          <img src="https://picsum.photos/seed/remnant55/700/700" alt="한소리 작가의 디지털 작품, 디지털 에코" width="700" height="700" loading="lazy">
+          <div class="work-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="work-meta">
+          <span class="work-idx">05</span>
+          <h3 class="work-name">디지털 에코</h3>
+          <p class="work-author">한소리</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 작가 노트 -->
+  <section class="note" id="note" aria-labelledby="noteHeading">
+    <div class="note-inner">
+      <p class="section-label reveal" id="noteHeading">작가 노트</p>
+      <figure class="note-figure">
+        <blockquote class="note-quote">
+          <p class="note-text reveal">화면을 끈 뒤에도 이미지는 남는다. 그것은 물리학의 법칙이지만, 나는 그것이 기억의 작동 방식과 닮았다고 생각한다. 우리가 잊었다고 믿는 것들은 사실 망막 어딘가에, 세포 어딘가에, 존재의 어딘가에 여전히 빛나고 있다.</p>
+        </blockquote>
+        <figcaption class="note-caption reveal">
+          <cite class="note-author">김지은</cite>
+          <span class="note-role">대표 작가, 잔상 연작 시리즈</span>
+        </figcaption>
+      </figure>
+      <div class="note-artists reveal">
+        <p class="note-artists-label">참여 작가</p>
+        <ul class="note-artists-list" role="list">
+          <li>김지은</li>
+          <li>박서준</li>
+          <li>최아름</li>
+          <li>이형준</li>
+          <li>한소리</li>
+          <li>오민재</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 관람 정보 + 푸터 -->
+  <section class="visit" id="visit" aria-labelledby="visitHeading">
+    <div class="visit-inner">
+      <h2 class="visit-heading reveal" id="visitHeading">관람 정보</h2>
+      <div class="visit-grid">
+        <div class="visit-item reveal">
+          <h3 class="visit-label">전시 기간</h3>
+          <p class="visit-value">2026. 07. 04<br>&#8211; 08. 31</p>
+        </div>
+        <div class="visit-item reveal">
+          <h3 class="visit-label">관람 시간</h3>
+          <p class="visit-value">화요일 &#8211; 일요일<br>오전&nbsp;10시 &#8211; 오후&nbsp;7시</p>
+          <p class="visit-note">매주 월요일 휴관</p>
+        </div>
+        <div class="visit-item reveal">
+          <h3 class="visit-label">장소</h3>
+          <p class="visit-value">서울시 성동구<br>아트선재센터&nbsp;B1</p>
+        </div>
+        <div class="visit-item reveal">
+          <h3 class="visit-label">입장료</h3>
+          <p class="visit-value">일반 8,000원<br>학생 5,000원</p>
+          <p class="visit-note">만&nbsp;6세 이하 무료</p>
+        </div>
+      </div>
+      <div class="visit-cta reveal">
+        <a href="#" class="btn-book" aria-label="온라인 예매 페이지로 이동">
+          온라인 예매
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">잔상<span>殘像</span></p>
+        <p class="footer-desc">디지털 아트 그룹 전시 2026</p>
+      </div>
+      <div class="footer-end">
+        <p class="footer-copy">&#169; 2026 잔상 전시 기획. All rights reserved.</p>
+        <nav aria-label="푸터 링크">
+          <ul class="footer-links" role="list">
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">문의</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

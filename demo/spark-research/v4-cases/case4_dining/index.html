@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공명 | 파인다이닝 레스토랑</title>
+  <meta name="description" content="공명(共鳴). 모든 미각은 기억과 공명한다. 서울 청담동 미슐랭 2스타 파인다이닝.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="gm_progressBar" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="site-nav" id="gm_nav" aria-label="주 메뉴">
+    <a href="#hero" class="nav-logo" aria-label="공명 홈으로">공명</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#philosophy">철학</a></li>
+      <li><a href="#course">코스</a></li>
+      <li><a href="#chef">셰프</a></li>
+      <li><a href="#reservation" class="nav-cta">예약</a></li>
+    </ul>
+    <button class="nav-toggle" id="gm_navToggle"
+      aria-label="메뉴 열기" aria-expanded="false" aria-controls="gm_mobileMenu">
+      <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
+        <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1"/>
+        <line x1="0" y1="11" x2="22" y2="11" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="gm_mobileMenu" aria-hidden="true" role="dialog" aria-label="사이트 메뉴">
+    <button class="mobile-close" id="gm_menuClose" aria-label="메뉴 닫기">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+    </button>
+    <nav aria-label="모바일 메뉴">
+      <ul role="list">
+        <li><a href="#philosophy">철학</a></li>
+        <li><a href="#course">코스</a></li>
+        <li><a href="#chef">셰프</a></li>
+        <li><a href="#reservation">예약</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ① Hero -->
+  <section class="hero" id="hero" aria-label="공명 소개">
+    <canvas class="hero-canvas" id="gm_heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <h1 class="hero-title reveal">
+        <span class="hero-kr">공명</span>
+        <span class="hero-hanja">共鳴</span>
+      </h1>
+      <p class="hero-tagline reveal">모든 미각은 기억과 공명한다</p>
+      <div class="hero-meta reveal" aria-label="레스토랑 개요">
+        <span>서울 청담</span>
+        <span class="hero-dot" aria-hidden="true"></span>
+        <span>오마카세 코스</span>
+        <span class="hero-dot" aria-hidden="true"></span>
+        <span>18석</span>
+      </div>
+      <a href="#reservation" class="hero-btn reveal">예약 문의</a>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ② Philosophy -->
+  <section class="philosophy" id="philosophy" aria-labelledby="gm_philoHead">
+    <div class="philosophy-inner">
+      <div class="section-eyebrow reveal">
+        <span>철학</span><span class="eyebrow-line" aria-hidden="true"></span>
+      </div>
+      <h2 class="philosophy-heading reveal" id="gm_philoHead">
+        음식은 단순한<br>배고픔의 해소가 아니다.<br>그것은 하나의 언어다.
+      </h2>
+      <div class="philosophy-body">
+        <p class="reveal">공명은 재료의 고유한 목소리를 듣는 것에서 시작합니다. 계절이 바뀌는 경계에서 채취한 산나물, 오랜 시간 숙성된 장, 파도가 만든 소금. 이 모든 것들이 하나의 접시 위에서 서로 울립니다.</p>
+        <p class="reveal">우리는 맛을 설계하지 않습니다. 공간을 비워 맛이 스스로 울릴 수 있도록 합니다.</p>
+      </div>
+      <figure class="philosophy-quote reveal">
+        <blockquote>
+          "자연이 이미 완성한 것에<br>우리가 더할 것은 오직 경청뿐이다."
+        </blockquote>
+        <figcaption>김재원, 헤드 셰프</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ③ Course -->
+  <section class="course" id="course" aria-labelledby="gm_courseHead">
+    <div class="course-inner">
+      <header class="course-header">
+        <p class="course-sub reveal">시그니처 코스</p>
+        <h2 class="reveal" id="gm_courseHead">
+          계절이 이끄는<br>열두 개의 움직임
+        </h2>
+      </header>
+      <div class="course-track" aria-hidden="true"><div class="course-track-fill" id="gm_trackFill"></div></div>
+      <ol class="course-list" aria-label="코스 구성">
+        <li class="course-item reveal">
+          <span class="course-num" aria-hidden="true">01</span>
+          <div class="course-content">
+            <h3>첫 공명</h3>
+            <p>봄 두릅과 백합조개. 계절의 첫 인사를 담은 일구(一口).</p>
+          </div>
+        </li>
+        <li class="course-item reveal">
+          <span class="course-num" aria-hidden="true">02</span>
+          <div class="course-content">
+            <h3>침묵</h3>
+            <p>우도 땅콩과 6년 묵은 간장으로 빚은 소스, 검은깨 거품.</p>
+          </div>
+        </li>
+        <li class="course-item reveal">
+          <span class="course-num" aria-hidden="true">03</span>
+          <div class="course-content">
+            <h3>조류(潮流)</h3>
+            <p>동해 성게와 제주 전복. 바다 깊숙한 곳의 온도를 접시에 담다.</p>
+          </div>
+        </li>
+        <li class="course-item reveal">
+          <span class="course-num" aria-hidden="true">04</span>
+          <div class="course-content">
+            <h3>뿌리</h3>
+            <p>오대산 산채와 된장. 대지의 기억을 더듬는 미각의 여정.</p>
+          </div>
+        </li>
+        <li class="course-item reveal">
+          <span class="course-num" aria-hidden="true">05</span>
+          <div class="course-content">
+            <h3>긴장</h3>
+            <p>한우 안심과 발효 흑마늘. 28일 건식 숙성, 마지막 열의 침묵.</p>
+          </div>
+        </li>
+        <li class="course-item reveal">
+          <span class="course-num" aria-hidden="true">06</span>
+          <div class="course-content">
+            <h3>잔향(殘響)</h3>
+            <p>배와 국화. 식사가 끝나도 입 안에 남는 마지막 울림.</p>
+          </div>
+        </li>
+      </ol>
+      <footer class="course-footer reveal">
+        <p>코스 구성은 계절과 식재료 수급에 따라 변경됩니다.<br>알레르기 및 기호는 예약 시 안내드립니다.</p>
+        <p class="course-price">코스 1인 <strong><span class="tabular">385,000</span>원</strong><span class="price-note"> (주류 별도)</span></p>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ④ Chef -->
+  <section class="chef" id="chef" aria-labelledby="gm_chefHead">
+    <div class="chef-inner">
+      <div class="chef-img-wrap reveal">
+        <img
+          src="https://picsum.photos/seed/chef42/600/750"
+          alt="헤드 셰프 김재원이 조리에 집중하는 모습"
+          width="600"
+          height="750"
+          loading="lazy"
+          class="chef-photo"
+        >
+        <div class="chef-img-veil" aria-hidden="true"></div>
+      </div>
+      <div class="chef-text">
+        <h2 class="reveal" id="gm_chefHead">김재원</h2>
+        <p class="chef-role reveal">헤드 셰프 &amp; 오너</p>
+        <div class="chef-bio">
+          <p class="reveal">도쿄 세이주칸, 코펜하겐 노마, 서울 정식당을 거쳐 2019년 공명을 열었습니다. 그에게 요리는 기술이 아닌 청취(聽取)입니다.</p>
+          <p class="reveal">매 시즌 직접 전국 생산자를 방문해 재료를 선별합니다. 그 여정에서 찾은 이야기가 코스의 뼈대가 됩니다.</p>
+        </div>
+        <ul class="chef-awards reveal" aria-label="수상 및 경력">
+          <li>미슐랭 2스타 (2022~현재)</li>
+          <li>아시아 50 베스트 레스토랑 18위 (2024)</li>
+          <li>JRE 한국 대표 셰프</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ Reservation + Footer -->
+  <section class="reservation" id="reservation" aria-labelledby="gm_resHead">
+    <div class="reservation-inner">
+      <div class="res-text">
+        <div class="section-eyebrow reveal">
+          <span>예약</span><span class="eyebrow-line" aria-hidden="true"></span>
+        </div>
+        <h2 class="reveal" id="gm_resHead">
+          공명의 테이블을<br>예약합니다
+        </h2>
+        <p class="res-intro reveal">공명은 총 18석으로 운영됩니다.<br>예약은 최소 2주 전, 최대 3개월 전까지 가능합니다.</p>
+        <dl class="res-info reveal">
+          <div class="res-info-item">
+            <dt>운영 시간</dt>
+            <dd>화~일요일<br>저녁 1회전 19:00</dd>
+          </div>
+          <div class="res-info-item">
+            <dt>위치</dt>
+            <dd>서울 강남구 청담동<br>도산대로 163</dd>
+          </div>
+          <div class="res-info-item">
+            <dt>문의</dt>
+            <dd>02-555-0163<br>hello@gongmyeong.kr</dd>
+          </div>
+        </dl>
+      </div>
+
+      <form class="res-form reveal" id="gm_resForm" novalidate aria-label="예약 신청 양식">
+        <div class="form-group">
+          <label for="gm_name">이름</label>
+          <input type="text" id="gm_name" name="name" autocomplete="name" required placeholder="홍길동">
+        </div>
+        <div class="form-group">
+          <label for="gm_phone">연락처</label>
+          <input type="tel" id="gm_phone" name="phone" autocomplete="tel" required placeholder="010-0000-0000">
+        </div>
+        <div class="form-group">
+          <label for="gm_email">이메일</label>
+          <input type="email" id="gm_email" name="email" autocomplete="email" required placeholder="name@email.com">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="gm_date">희망 날짜</label>
+            <input type="date" id="gm_date" name="date" required>
+          </div>
+          <div class="form-group">
+            <label for="gm_guests">인원</label>
+            <select id="gm_guests" name="guests" required>
+              <option value="" disabled selected>선택</option>
+              <option value="2">2명</option>
+              <option value="3">3명</option>
+              <option value="4">4명</option>
+              <option value="5">5명</option>
+              <option value="6">6명 이상</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gm_msg">특이사항 <span class="label-optional">(선택)</span></label>
+          <textarea id="gm_msg" name="message" rows="3" placeholder="알레르기, 기념일 등"></textarea>
+        </div>
+        <button type="submit" class="form-submit">예약 신청</button>
+        <p class="form-note">예약 확정은 영업일 기준 1~2일 내 이메일로 안내드립니다.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-kr">공명</span>
+        <span class="footer-hanja">共鳴</span>
+      </div>
+      <nav class="footer-nav" aria-label="푸터 링크">
+        <a href="#philosophy">철학</a>
+        <a href="#course">코스</a>
+        <a href="#chef">셰프</a>
+        <a href="#reservation">예약</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 공명. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
