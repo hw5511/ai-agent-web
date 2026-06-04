@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPARK.md 창의성 실험 — Ablation & 돌파축</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<style>
+  :root{ --bg:#0b0b0c; --fg:#f4f4f5; --muted:#a1a1aa; --line:#26262b; --accent:#16a34a; --warn:#f59e0b; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:clamp(3rem,8vw,5.5rem) 1.5rem}
+  .eyebrow{color:var(--accent);font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  h1{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:800;margin:.6rem 0 .8rem;letter-spacing:-.02em}
+  .lead{color:var(--muted);max-width:66ch;margin-bottom:2.6rem}
+  h2.sec{font-size:1.15rem;font-weight:800;margin:2.4rem 0 .4rem}
+  .sub{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+  .verdict{font-size:.86rem;color:var(--warn);margin-bottom:1.1rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{display:block;border:1px solid var(--line);border-radius:13px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;background:#101013}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .card h3{font-size:1.02rem;font-weight:700;margin:.4rem 0 .3rem}
+  .card p{color:var(--muted);font-size:.85rem;margin-bottom:.5rem}
+  .mark{font-size:.78rem;font-weight:700}
+  .win{color:var(--accent)} .mid{color:var(--warn)} .no{color:#71717a}
+  .go{color:var(--fg);font-weight:600;font-size:.84rem;margin-top:.5rem;display:inline-block}
+  .note{margin-top:2.8rem;font-size:.82rem;color:#71717a;border-top:1px solid var(--line);padding-top:1.1rem}
+  a.inline{color:var(--accent)}
+  code{font-size:.85em;color:#d4d4d8}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">SPARK.md 연구 · 창의성 실험</p>
+    <h1>영감은 동력인가, 전형성은 넘을 수 있나</h1>
+    <p class="lead">두 가지 실험의 실제 산출물입니다. <b>① Ablation</b> — LIGHTBULB(영감 주입)가 결과를 정말 바꾸는지(있음 vs 없음).
+      <b>② 돌파축</b> — "전형적 스크롤 웹사이트"를 넘기 위한 4가지 접근(A/B/C/D).</p>
+
+    <h2 class="sec">① LIGHTBULB Ablation</h2>
+    <p class="sub">같은 주제·같은 규칙, LIGHTBULB만 켜고/끈 비교. 거의 동일하면 영감은 "표면 장식".</p>
+    <p class="verdict">결과: 효과 낮음 — 레이아웃·타이포·구조·톤은 동일, LIGHTBULB는 표면 텍스처만 추가.</p>
+    <div class="grid">
+      <a class="card" href="./ablation/mokza_v4/index.html"><span class="tag">MOKZA · LIGHTBULB 있음</span><h3>v4</h3><p>떠다니는 입자·온기 그라데이션</p><span class="go">열기 →</span></a>
+      <a class="card" href="./ablation/mokza_noLB/index.html"><span class="tag">MOKZA · 없음</span><h3>v4-noLB</h3><p>거의 동일, 표면 텍스처만 빠짐</p><span class="go">열기 →</span></a>
+      <a class="card" href="./ablation/plain_v4/index.html"><span class="tag">PLAIN · LIGHTBULB 있음</span><h3>v4</h3><p>라이트 미니멀</p><span class="go">열기 →</span></a>
+      <a class="card" href="./ablation/plain_noLB/index.html"><span class="tag">PLAIN · 없음</span><h3>v4-noLB</h3><p>거의 동일</p><span class="go">열기 →</span></a>
+    </div>
+
+    <h2 class="sec">② 창의성 돌파축 (열린 주제: 천문대 &ldquo;이안&rdquo;)</h2>
+    <p class="sub">섹션을 지정하지 않은 열린 브리프. "스크롤 사이트"를 넘었는지가 관건.</p>
+    <div class="grid">
+      <a class="card" href="./breakthrough/A_genre/index.html"><span class="tag">A · 장르 발산</span><h3>포맷 택1 강제</h3><p>별자리 액센트 + 여전히 nav/hero/스크롤.</p><span class="mark no">전형성 탈피 ✗</span><br><span class="go">열기 →</span></a>
+      <a class="card" href="./breakthrough/B_structure/index.html"><span class="tag">B · 영감→구조</span><h3>LIGHTBULB가 골격</h3><p>표준 에디토리얼 히어로. 구조 변화 약함.</p><span class="mark no">전형성 탈피 ✗</span><br><span class="go">열기 →</span></a>
+      <a class="card" href="./breakthrough/C_metaphor/index.html"><span class="tag">C · 컨셉 우선</span><h3>중심 은유에서 파생</h3><p>별 필드 + 夷安 워터마크. 가장 몰입적(포맷은 스크롤).</p><span class="mark mid">부분 △</span><br><span class="go">열기 →</span></a>
+      <a class="card" href="./breakthrough/D_medium/index.html"><span class="tag">D · 인터랙션=매체</span><h3>페이지가 곧 경험</h3><p>전체화면 인터랙티브 별자리 캔버스. 스크롤 사이트 아님.</p><span class="mark win">전형성 탈피 ✓ (단 정적 폴백 빈약)</span><br><span class="go">열기 →</span></a>
+    </div>
+
+    <p class="note">결론: LIGHTBULB는 현재 "양념"(구조 미변경). 전형성 돌파의 최강 레버는 <b>D(인터랙션=매체) + C(중심 은유)</b>.
+      D는 콘텐츠가 행위 뒤에 숨어 접근성 공백이 있으므로 정적 폴백 보완이 과제. 전체 기록: <code>research/spark-md/</code>.<br>
+      <a class="inline" href="../">← v2/v3 비교</a> · <a class="inline" href="../v4-cases/">v4 5케이스 →</a></p>
+  </main>
+</body>
+</html>

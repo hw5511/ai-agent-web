@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ko" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLAIN: 쓰기를 위한 메모</title>
+  <meta name="description" content="산만한 기능 없이 쓰기에만 집중하는 메모 및 할 일 도구.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable.min.css">
+
+  <style>
+    /* ── LENIS CSS RESET ─────────────────────────────────────────────── */
+    html.lenis,
+    html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    /* ── TOKENS ──────────────────────────────────────────────────────── */
+    :root {
+      --bg:        oklch(97.5% 0.004 78);
+      --bg2:       oklch(93.5% 0.006 78);
+      --bg-dark:   oklch(11%   0.010 75);
+      --ink:       oklch(16%   0.012 75);
+      --ink2:      oklch(42%   0.010 75);
+      --ink3:      oklch(64%   0.007 75);
+      --accent:    oklch(43%   0.090 140);
+      --accent-lt: oklch(70%   0.070 140);
+      --border:    oklch(87%   0.005 78);
+      --bd-dark:   oklch(26%   0.008 75);
+
+      --f-disp: 'Space Grotesk', sans-serif;
+      --f-body: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ── RESET ───────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--f-body);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── PROGRESS BAR ────────────────────────────────────────────────── */
+    #prog {
+      position: fixed; top: 0; left: 0;
+      height: 2px; width: 0%;
+      background: var(--accent);
+      z-index: 1000;
+      will-change: width;
+      transition: width 0.08s linear;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.75rem;
+    }
+    nav.scrolled {
+      background: oklch(97.5% 0.004 78 / 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: var(--f-disp);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+
+    .nav-cta {
+      font-family: var(--f-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--ink);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { color: var(--accent); border-color: var(--accent); }
+    .nav-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+
+    /* ── HERO ────────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 56fr 44fr;
+      align-items: flex-end;
+      padding: 8rem 2.75rem 5.5rem;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: var(--f-disp);
+      font-size: clamp(5.5rem, 15vw, 12rem);
+      font-weight: 300;
+      line-height: 0.86;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      text-wrap: balance;
+      cursor: default;
+      user-select: none;
+    }
+
+    /* SURPRISE: staggered spring lift on hover (lb-138 + lb-164) */
+    .hero-title .ch {
+      display: inline-block;
+      will-change: transform;
+      transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hero-title:hover .ch:nth-child(1) { transform: translateY(-6px); transition-delay:   0ms; }
+    .hero-title:hover .ch:nth-child(2) { transform: translateY(-6px); transition-delay:  50ms; }
+    .hero-title:hover .ch:nth-child(3) { transform: translateY(-6px); transition-delay: 100ms; }
+    .hero-title:hover .ch:nth-child(4) { transform: translateY(-6px); transition-delay: 150ms; }
+    .hero-title:hover .ch:nth-child(5) { transform: translateY(-6px); transition-delay: 200ms; }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--ink2);
+      max-width: 25rem;
+      line-height: 1.68;
+      text-wrap: pretty;
+    }
+
+    /* Right column: cinematic breathing space (K-drama framing) */
+    .hero-right {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding-left: 3.5rem;
+      padding-bottom: 0.25rem;
+      height: 100%;
+    }
+    .hero-rule {
+      position: absolute;
+      left: 0; top: 25%; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .hero-vert {
+      font-family: var(--f-disp);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: var(--ink3);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .scroll-hint-bar {
+      width: 1px;
+      height: 3rem;
+      background: var(--ink3);
+      animation: bar-fall 1.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @keyframes bar-fall {
+      0%   { transform: scaleY(0); opacity: 0; transform-origin: top; }
+      45%  { transform: scaleY(1); opacity: 0.45; transform-origin: top; }
+      100% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
+    }
+
+    /* ── REVEAL ──────────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity  0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+    .reveal.vis { opacity: 1; transform: none; }
+    .reveal[data-d="1"] { transition-delay: 0.08s; }
+    .reveal[data-d="2"] { transition-delay: 0.18s; }
+    .reveal[data-d="3"] { transition-delay: 0.28s; }
+    .reveal[data-d="4"] { transition-delay: 0.38s; }
+
+    /* ── PHILOSOPHY (dark interlude) ─────────────────────────────────── */
+    .sec-philo {
+      background: var(--bg-dark);
+      padding: 9rem 2.75rem;
+    }
+    .philo-inner { max-width: 58rem; margin: 0 auto; }
+
+    .philo-text {
+      font-size: clamp(1.375rem, 3vw, 2.0625rem);
+      font-weight: 400;
+      color: oklch(76% 0.008 75);
+      line-height: 1.58;
+      letter-spacing: -0.01em;
+      text-wrap: pretty;
+    }
+    .philo-em { color: oklch(96% 0.004 78); }
+
+    .philo-foot {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--bd-dark);
+      font-family: var(--f-disp);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: oklch(36% 0.008 75);
+    }
+
+    /* ── SHARED SECTION LAYOUT ───────────────────────────────────────── */
+    .container { max-width: 70rem; margin: 0 auto; }
+
+    .eyebrow {
+      font-family: var(--f-disp);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+
+    /* ── VALUES ──────────────────────────────────────────────────────── */
+    .sec-values { padding: 9rem 2.75rem; }
+
+    .sec-head { margin-bottom: 4.5rem; }
+
+    .values-list { list-style: none; }
+
+    .val-row {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: 2.25rem;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .val-row:last-child { border-bottom: 1px solid var(--border); }
+
+    .val-idx {
+      font-family: var(--f-disp);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      color: var(--ink3);
+      font-variant-numeric: tabular-nums;
+      padding-top: 0.25rem;
+    }
+
+    .val-name {
+      font-size: 1.3125rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.625rem;
+      letter-spacing: -0.01em;
+    }
+    .val-desc {
+      font-size: 1rem;
+      color: var(--ink2);
+      line-height: 1.72;
+      max-width: 34rem;
+      text-wrap: pretty;
+    }
+
+    /* ── HOW ─────────────────────────────────────────────────────────── */
+    .sec-how {
+      background: var(--bg2);
+      padding: 9rem 2.75rem;
+    }
+
+    .steps-list { list-style: none; margin-top: 4.5rem; }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: 2.25rem;
+      padding: 3.25rem 0;
+      border-top: 1px solid oklch(85% 0.006 78);
+    }
+    .step-row:last-child { border-bottom: 1px solid oklch(85% 0.006 78); }
+
+    .step-num {
+      font-family: var(--f-disp);
+      font-size: 1.875rem;
+      font-weight: 300;
+      color: var(--ink3);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      padding-top: 0.2rem;
+    }
+
+    .step-name {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .step-desc {
+      font-size: 1rem;
+      color: var(--ink2);
+      line-height: 1.68;
+      text-wrap: pretty;
+      max-width: 33rem;
+    }
+
+    /* ── CTA ─────────────────────────────────────────────────────────── */
+    .sec-cta {
+      padding: 11rem 2.75rem;
+      text-align: center;
+    }
+
+    .cta-head {
+      font-family: var(--f-disp);
+      font-size: clamp(1.875rem, 5vw, 3.375rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.18;
+      max-width: 30rem;
+      margin: 0 auto 3.25rem;
+      text-wrap: balance;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: var(--f-body);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      padding: 0.9375rem 2.5rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+      text-decoration: none;
+      min-height: 52px;
+      touch-action: manipulation;
+      transition: background 0.28s ease, transform 0.15s ease;
+    }
+    .cta-btn:hover { background: var(--accent); }
+    .cta-btn:active { transform: translateY(1px); }
+    .cta-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+
+    /* Arrow SVG icon inside button */
+    .cta-btn svg { flex-shrink: 0; }
+
+    .cta-note {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--ink3);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.25rem 2.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-mark {
+      font-family: var(--f-disp);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--ink3);
+    }
+    .footer-copy {
+      font-size: 0.8125rem;
+      color: var(--ink3);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 7.5rem 1.5rem 5rem;
+      }
+      .hero-right { display: none; }
+
+      .sec-philo { padding: 6rem 1.5rem; }
+      .sec-values { padding: 6rem 1.5rem; }
+      .sec-how { padding: 6rem 1.5rem; }
+      .sec-cta { padding: 7.5rem 1.5rem; }
+
+      .val-row { grid-template-columns: 3.75rem 1fr; gap: 1.25rem; padding: 2.25rem 0; }
+      .step-row { grid-template-columns: 3.5rem 1fr; gap: 1.25rem; padding: 2.5rem 0; }
+
+      footer {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    /* ── REDUCED MOTION ──────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+      /* Restore all reveal targets to final visible state */
+      .reveal,
+      .philo-text, .philo-foot,
+      .sec-head,
+      .val-row,
+      .step-row,
+      .cta-head, .cta-btn, .cta-note {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .scroll-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div id="prog" role="progressbar" aria-label="페이지 스크롤 진행도" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <nav>
+    <a href="#" class="nav-logo" aria-label="PLAIN 홈으로">PLAIN</a>
+    <a href="#cta" class="nav-cta">무료로 시작</a>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="hero" aria-labelledby="hero-h1">
+      <div class="hero-left">
+        <!-- Text in DOM as complete string, JS only enhances -->
+        <h1 class="hero-title" id="hero-h1" aria-label="PLAIN">
+          <span class="ch">P</span><span class="ch">L</span><span class="ch">A</span><span class="ch">I</span><span class="ch">N</span>
+        </h1>
+        <p class="hero-sub">
+          쓰는 것 말고는 아무것도 없습니다.<br>
+          생각을 꺼내는 데 필요한 최소한의 도구.
+        </p>
+      </div>
+
+      <!-- Cinematic right column, K-drama golden framing (lb-138) -->
+      <div class="hero-right" aria-hidden="true">
+        <div class="hero-rule"></div>
+        <span class="hero-vert">Designed for writing. Nothing more.</span>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">
+        <div class="scroll-hint-bar"></div>
+      </div>
+    </section>
+
+    <!-- ── PHILOSOPHY, dark manifesto interlude (structural innovation) ── -->
+    <section class="sec-philo" aria-label="제품 철학">
+      <div class="philo-inner">
+        <p class="philo-text reveal">
+          대부분의 앱은 너무 많은 것을 합니다.<br>
+          캘린더, 태그, 하위 작업, 협업, 알림.<br>
+          하지만 생각을 꺼내는 데 필요한 건 단 하나뿐입니다.<br>
+          <span class="philo-em">빈 화면과 커서.</span>
+        </p>
+        <p class="philo-foot reveal" data-d="2">Plain · 2024</p>
+      </div>
+    </section>
+
+    <!-- ── VALUES ── -->
+    <section class="sec-values" aria-labelledby="values-label">
+      <div class="container">
+        <div class="sec-head reveal">
+          <h2 class="eyebrow" id="values-label">핵심 가치</h2>
+        </div>
+        <ul class="values-list">
+          <li class="val-row reveal" data-d="1">
+            <span class="val-idx">01</span>
+            <div>
+              <h3 class="val-name">집중</h3>
+              <p class="val-desc">받아쓰기 버튼도, 통계 대시보드도 없습니다. 화면을 열면 오직 텍스트 필드만 있습니다. 쓰기 시작하세요.</p>
+            </div>
+          </li>
+          <li class="val-row reveal" data-d="2">
+            <span class="val-idx">02</span>
+            <div>
+              <h3 class="val-name">속도</h3>
+              <p class="val-desc">앱을 켜는 순간 바로 입력 가능합니다. 프로젝트를 만들 필요도, 폴더를 고를 필요도 없습니다. 생각이 도착하면, 그냥 씁니다.</p>
+            </div>
+          </li>
+          <li class="val-row reveal" data-d="3">
+            <span class="val-idx">03</span>
+            <div>
+              <h3 class="val-name">흔적</h3>
+              <p class="val-desc">완료한 항목은 사라지지 않고 흐려집니다. 지워진 것이 아니라 끝낸 것임을 기록으로 남깁니다.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section class="sec-how" aria-labelledby="how-label">
+      <div class="container">
+        <div class="sec-head reveal">
+          <h2 class="eyebrow" id="how-label">사용 흐름</h2>
+        </div>
+        <ol class="steps-list">
+          <li class="step-row reveal" data-d="1">
+            <span class="step-num">01</span>
+            <div>
+              <h3 class="step-name">화면을 엽니다</h3>
+              <p class="step-desc">계정도, 온보딩 설문도 없습니다. 링크를 열면 즉시 편집 화면입니다.</p>
+            </div>
+          </li>
+          <li class="step-row reveal" data-d="2">
+            <span class="step-num">02</span>
+            <div>
+              <h3 class="step-name">씁니다</h3>
+              <p class="step-desc">메모든 할 일이든 형식 없이 자유롭게 씁니다. 구분은 나중에 생각해도 됩니다.</p>
+            </div>
+          </li>
+          <li class="step-row reveal" data-d="3">
+            <span class="step-num">03</span>
+            <div>
+              <h3 class="step-name">닫습니다</h3>
+              <p class="step-desc">저장 버튼이 없습니다. 쓰는 즉시 자동 저장되고, 다음에 열면 그대로 있습니다.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="sec-cta" id="cta" aria-label="시작하기">
+      <h2 class="cta-head reveal">지금 바로,<br>쓰기 시작하세요.</h2>
+      <a href="#" class="cta-btn reveal" data-d="2">
+        무료로 시작하기
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <p class="cta-note reveal" data-d="3">신용카드 불필요. 영원히 무료.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="footer-mark">PLAIN</span>
+    <span class="footer-copy">2024 Plain. 쓰기를 위한 도구.</span>
+  </footer>
+
+  <!-- Lenis -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── Reduced motion check ── */
+      const spark_noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ── Lenis smooth scroll ── */
+      let spark_lenis = null;
+      if (!spark_noMotion && typeof Lenis !== 'undefined') {
+        spark_lenis = new Lenis({
+          duration: 1.2,
+          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }
+        });
+
+        function spark_raf(time) {
+          spark_lenis.raf(time);
+          requestAnimationFrame(spark_raf);
+        }
+        requestAnimationFrame(spark_raf);
+      }
+
+      /* ── Scroll progress ── */
+      const spark_prog = document.getElementById('prog');
+
+      function spark_updateProgress() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+        spark_prog.style.width = pct + '%';
+        spark_prog.setAttribute('aria-valuenow', Math.round(pct));
+      }
+
+      if (spark_lenis) {
+        spark_lenis.on('scroll', spark_updateProgress);
+      } else {
+        window.addEventListener('scroll', spark_updateProgress, { passive: true });
+      }
+
+      /* ── Nav scroll state ── */
+      const spark_nav = document.querySelector('nav');
+
+      function spark_updateNav() {
+        spark_nav.classList.toggle('scrolled', (window.scrollY || document.documentElement.scrollTop) > 80);
+      }
+
+      if (spark_lenis) {
+        spark_lenis.on('scroll', spark_updateNav);
+      } else {
+        window.addEventListener('scroll', spark_updateNav, { passive: true });
+      }
+
+      /* ── Anchor links via Lenis ── */
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (href === '#') return;
+          const target = document.querySelector(href);
+          if (target && spark_lenis) {
+            e.preventDefault();
+            spark_lenis.scrollTo(target, { offset: -80 });
+          }
+        });
+      });
+
+      /* ── Reveal on scroll ── */
+      const spark_revealEls = document.querySelectorAll('.reveal');
+
+      if (spark_noMotion) {
+        spark_revealEls.forEach(function (el) { el.classList.add('vis'); });
+      } else {
+        const spark_io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('vis');
+                spark_io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -28px 0px' }
+        );
+        spark_revealEls.forEach(function (el) { spark_io.observe(el); });
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이안(夷安) 천문대 · 강원도 정선</title>
+  <meta name="description" content="도시의 빛을 두고 온 사람들을 위한 작은 천문대. 강원도 정선, 해발 1,047m.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <nav id="site-nav" aria-label="주 내비게이션">
+    <span class="nav-logo" aria-label="이안 천문대">夷安</span>
+    <ul class="nav-links">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#sky">밤하늘</a></li>
+      <li><a href="#visit">방문</a></li>
+      <li><a href="#reserve" class="nav-cta">예약 문의</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========================= HERO ========================= -->
+  <section id="hero" class="scene" aria-label="메인 헤드라인">
+    <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <p class="scene-label">강원도 정선 · 해발 1,047m</p>
+      <h1 class="hero-title">夷安</h1>
+      <p class="hero-phonetic">이안</p>
+      <p class="hero-desc">도시의 빛을 두고 온 사람들을 위한<br>작은 천문대</p>
+    </div>
+
+    <div class="hero-aside" aria-hidden="true">
+      <div class="hero-aside-line"></div>
+      <span class="hero-aside-text">scroll</span>
+    </div>
+  </section>
+
+  <!-- ========================= ABOUT ========================= -->
+  <section id="about" class="scene" aria-label="천문대 소개">
+    <div class="about-frame">
+      <div class="about-img-col">
+        <div class="about-img-wrap reveal">
+          <img
+            src="https://picsum.photos/seed/42/700/900"
+            alt="이안 천문대, 어두운 하늘 아래 돔이 열린 모습"
+            width="700"
+            height="900"
+            loading="lazy"
+          >
+          <div class="about-img-overlay" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="about-text-col">
+        <p class="scene-label reveal">이안(夷安)이란</p>
+        <h2 class="section-heading reveal">고요함이<br>도달하는 곳</h2>
+        <div class="section-body reveal">
+          <p>이안(夷安)은 "평온하고 안락하다"는 뜻입니다. 2009년, 도시를 떠나고 싶었던 한 천문학자가 정선의 산중에 작은 돔을 세웠습니다.</p>
+          <p>광해가 없는 하늘 아래서 사람들은 종종 처음 보는 것들을 발견합니다. 별이 아니라, 자신을 둘러싼 고요함을.</p>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat-item">
+            <span class="stat-num">1,047</span>
+            <span class="stat-unit">m</span>
+            <span class="stat-label">해발고도</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-num">21.8</span>
+            <span class="stat-unit">SQM</span>
+            <span class="stat-label">하늘 어둠 지수</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-num">15</span>
+            <span class="stat-unit">년</span>
+            <span class="stat-label">운영 역사</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= SKY ========================= -->
+  <section id="sky" class="scene" aria-label="별자리 지도">
+    <div class="sky-frame">
+      <div class="sky-header reveal">
+        <p class="scene-label">오늘 밤의 하늘</p>
+        <h2 class="section-heading">별자리를<br>찾아보세요</h2>
+        <p class="sky-hint">별 위에 마우스를 올리면 소리가 납니다</p>
+      </div>
+      <div class="sky-canvas-wrap reveal">
+        <canvas
+          id="constellation-canvas"
+          role="img"
+          aria-label="오리온, 큰곰자리, 카시오페이아, 거문고자리, 백조자리 등 별자리 지도"
+        ></canvas>
+        <div class="sky-caption" aria-hidden="true">
+          <span>별자리를 탐색하는 중&hellip;</span>
+          <span id="sky-const-name"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= VISIT ========================= -->
+  <section id="visit" class="scene" aria-label="방문 안내">
+    <div class="visit-frame">
+      <div class="visit-header">
+        <p class="scene-label reveal">방문 안내</p>
+        <h2 class="section-heading reveal">언제,<br>어떻게</h2>
+      </div>
+      <div class="visit-grid" role="list">
+        <article class="visit-card reveal" role="listitem">
+          <h3>관측 시간</h3>
+          <p>일몰 후 1시간부터 자정까지<br>매주 화요일 정기 휴관</p>
+        </article>
+        <article class="visit-card reveal" role="listitem">
+          <h3>오시는 길</h3>
+          <p>강원도 정선군 북평면<br>승용차 이용을 권장합니다</p>
+        </article>
+        <article class="visit-card reveal" role="listitem">
+          <h3>관측 장비</h3>
+          <p>주망원경 25cm 반사식 뉴턴<br>쌍안경 · 적도의식 가대 보유</p>
+        </article>
+        <article class="visit-card reveal" role="listitem">
+          <h3>주의 사항</h3>
+          <p>붉은 조명 외 광원 자제<br>어두운 색 의류 착용 권장</p>
+        </article>
+      </div>
+      <div class="visit-note reveal">
+        <p>기상 상황에 따라 관측이 취소될 수 있습니다. 방문 전 날씨를 꼭 확인해주세요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= RESERVE ========================= -->
+  <section id="reserve" class="scene" aria-label="예약 문의">
+    <canvas id="reserve-canvas" aria-hidden="true"></canvas>
+    <div class="reserve-content">
+      <p class="scene-label reveal">예약 문의</p>
+      <h2 class="reserve-heading reveal">하늘을<br>예약하세요</h2>
+      <p class="reserve-sub reveal">맑은 날 기준 최대 12인 소그룹<br>단체 · 교육 프로그램 별도 문의 가능</p>
+      <a
+        href="mailto:hello@ian-observatory.kr"
+        class="reserve-btn reveal"
+        aria-label="이안 천문대에 예약 문의 이메일 보내기"
+      >
+        <span>문의 보내기</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer id="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">夷安 천문대</span>
+        <p class="footer-addr">강원도 정선군 북평면 · 해발 1,047m</p>
+      </div>
+      <div class="footer-right">
+        <p class="footer-copy">2009&ndash; 이안(夷安)</p>
+        <p class="footer-tagline">모든 밤하늘은 무료입니다</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

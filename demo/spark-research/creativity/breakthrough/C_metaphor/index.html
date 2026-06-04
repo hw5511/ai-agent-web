@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이안 夷安 · 천문대</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+  <nav class="site-nav" aria-label="주 메뉴">
+    <a href="#top" class="nav-logo" aria-label="이안 천문대 홈으로">
+      <span class="nav-logo-kr">이안</span>
+      <span class="nav-logo-hanja">夷安</span>
+    </a>
+    <div class="nav-constellation" aria-hidden="true">
+      <svg width="48" height="16" viewBox="0 0 48 16" aria-hidden="true">
+        <circle cx="4" cy="8" r="1.5" fill="currentColor" opacity="0.4"/>
+        <circle cx="24" cy="4" r="2" fill="currentColor" opacity="0.8"/>
+        <circle cx="44" cy="10" r="1.5" fill="currentColor" opacity="0.4"/>
+        <line x1="4" y1="8" x2="24" y2="4" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+        <line x1="24" y1="4" x2="44" y2="10" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+      </svg>
+    </div>
+    <a href="#reservation" class="nav-cta">예약 문의</a>
+  </nav>
+
+  <canvas class="star-canvas" id="starCanvas" aria-hidden="true"></canvas>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-bg-hanja" aria-hidden="true">夷安</div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1 class="hero-title">이안 천문대</h1>
+        <p class="hero-sub">도시를 떠나, 밤하늘 아래로</p>
+      </div>
+      <p class="hero-vertical">도시의 빛이 닿지 않는 곳에 서면 하늘은 기억을 보여준다</p>
+    </div>
+    <div class="hero-coordinates">
+      <span>37°24'N</span>
+      <span class="coord-sep" aria-hidden="true">·</span>
+      <span>128°42'E</span>
+      <span class="coord-sep" aria-hidden="true">·</span>
+      <span>해발 1,280m</span>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ARRIVAL -->
+  <section class="section-arrival" id="arrival">
+    <div class="arrival-inner">
+      <div class="arrival-numbers" aria-hidden="true">
+        <span class="arrival-lat">37°</span>
+        <span class="arrival-lon">128°</span>
+      </div>
+      <div class="arrival-text reveal-item">
+        <p class="eyebrow-label">어떻게 오나</p>
+        <h2 class="section-heading">내비게이션으로는<br>도착할 수 없습니다</h2>
+        <p class="body-text">이안은 강원도 오지의 산중에 있습니다. 예약이 확정된 분에게만 상세한 경로와 안내를 보내드립니다. 포장도로가 끊기는 지점부터 약 15분을 더 올라갑니다.</p>
+        <p class="body-text">주차 공간은 세 대분. 대중교통은 없습니다. 가장 가까운 마을에서 6킬로미터.</p>
+      </div>
+      <p class="arrival-side-label" aria-hidden="true">강원 오지</p>
+    </div>
+  </section>
+
+  <!-- SKY GUIDE -->
+  <section class="section-sky" id="sky">
+    <div class="sky-header reveal-item">
+      <h2 class="section-heading">계절의 하늘</h2>
+      <p class="body-text sky-intro">이안에서는 맨눈으로, 쌍안경으로, 그리고 구경 25cm 반사망원경으로 하늘을 봅니다.</p>
+    </div>
+
+    <div class="sky-grid">
+      <!-- 봄: 사자자리 (main featured card) -->
+      <article class="sky-card sky-card-main">
+        <div class="sky-card-visual">
+          <svg class="constellation-svg" viewBox="0 0 200 220" aria-label="사자자리 별자리도" role="img">
+            <!-- Sickle of Leo -->
+            <line x1="80" y1="175" x2="75" y2="145" class="const-line"/>
+            <line x1="75" y1="145" x2="55" y2="120" class="const-line"/>
+            <line x1="55" y1="120" x2="60" y2="95" class="const-line"/>
+            <line x1="60" y1="95" x2="80" y2="80" class="const-line"/>
+            <line x1="80" y1="80" x2="100" y2="85" class="const-line"/>
+            <line x1="100" y1="85" x2="105" y2="105" class="const-line"/>
+            <line x1="105" y1="105" x2="75" y2="145" class="const-line"/>
+            <!-- Body to tail -->
+            <line x1="75" y1="145" x2="140" y2="130" class="const-line"/>
+            <line x1="140" y1="130" x2="165" y2="75" class="const-line"/>
+            <!-- Stars -->
+            <circle cx="80" cy="175" r="4.5" class="star-dot mag1"/>
+            <circle cx="75" cy="145" r="2.5" class="star-dot mag3"/>
+            <circle cx="55" cy="120" r="2" class="star-dot mag4"/>
+            <circle cx="60" cy="95" r="3" class="star-dot mag2"/>
+            <circle cx="80" cy="80" r="2" class="star-dot mag4"/>
+            <circle cx="100" cy="85" r="2" class="star-dot mag4"/>
+            <circle cx="105" cy="105" r="2" class="star-dot mag4"/>
+            <circle cx="140" cy="130" r="2.5" class="star-dot mag3"/>
+            <circle cx="165" cy="75" r="4" class="star-dot mag1"/>
+          </svg>
+        </div>
+        <div class="sky-card-info">
+          <span class="sky-season">봄</span>
+          <h3 class="sky-card-title">사자자리의 밤</h3>
+          <p class="sky-card-body">서쪽 하늘에서 레굴루스가 빛납니다. 사자의 낫 모양 별들이 선명하고, 망원경을 대면 레오 삼중성계와 수많은 은하들이 나타납니다. 처녀자리 은하단의 가장자리도 이안에서는 보입니다.</p>
+        </div>
+      </article>
+
+      <!-- 여름: 은하수 -->
+      <article class="sky-card sky-card-summer">
+        <div class="sky-card-visual">
+          <svg class="constellation-svg" viewBox="0 0 200 160" aria-label="여름 삼각형 별자리도" role="img">
+            <line x1="100" y1="30" x2="165" y2="125" class="const-line"/>
+            <line x1="165" y1="125" x2="40" y2="130" class="const-line"/>
+            <line x1="40" y1="130" x2="100" y2="30" class="const-line"/>
+            <circle cx="100" cy="30" r="4.5" class="star-dot mag1"/>
+            <circle cx="165" cy="125" r="3.5" class="star-dot mag2"/>
+            <circle cx="40" cy="130" r="4" class="star-dot mag1"/>
+          </svg>
+        </div>
+        <div class="sky-card-info">
+          <span class="sky-season">여름</span>
+          <h3 class="sky-card-title">은하수가 흐르는 밤</h3>
+          <p class="sky-card-body">베가, 데네브, 알타이르. 여름 삼각형 아래로 은하수 중심부가 흐릅니다. 이안의 어둠에서는 육안으로 선명하게 보입니다.</p>
+        </div>
+      </article>
+
+      <!-- 가을: 안드로메다 -->
+      <article class="sky-card sky-card-autumn">
+        <div class="sky-card-visual">
+          <svg class="constellation-svg" viewBox="0 0 200 160" aria-label="안드로메다 은하 별자리도" role="img">
+            <line x1="40" y1="90" x2="95" y2="80" class="const-line"/>
+            <line x1="95" y1="80" x2="155" y2="70" class="const-line"/>
+            <line x1="95" y1="80" x2="110" y2="125" class="const-line"/>
+            <line x1="95" y1="80" x2="85" y2="48" class="const-line"/>
+            <!-- M31 galaxy hint -->
+            <ellipse cx="72" cy="55" rx="14" ry="5" class="galaxy-hint" transform="rotate(-25 72 55)"/>
+            <circle cx="40" cy="90" r="3" class="star-dot mag2"/>
+            <circle cx="95" cy="80" r="4" class="star-dot mag1"/>
+            <circle cx="155" cy="70" r="2.5" class="star-dot mag3"/>
+            <circle cx="110" cy="125" r="2" class="star-dot mag4"/>
+            <circle cx="85" cy="48" r="2" class="star-dot mag4"/>
+          </svg>
+        </div>
+        <div class="sky-card-info">
+          <span class="sky-season">가을</span>
+          <h3 class="sky-card-title">안드로메다 은하</h3>
+          <p class="sky-card-body">250만 광년 너머의 은하를 맨눈으로 볼 수 있는 계절. 이안의 어둠이 그것을 가능하게 합니다.</p>
+        </div>
+      </article>
+
+      <!-- 겨울: 오리온 -->
+      <article class="sky-card sky-card-winter">
+        <div class="sky-card-visual">
+          <svg class="constellation-svg" viewBox="0 0 200 200" aria-label="오리온자리 별자리도" role="img">
+            <!-- Shoulders -->
+            <line x1="65" y1="60" x2="135" y2="55" class="const-line"/>
+            <!-- Belt -->
+            <line x1="80" y1="105" x2="100" y2="103" class="const-line"/>
+            <line x1="100" y1="103" x2="120" y2="101" class="const-line"/>
+            <!-- Left shoulder to belt -->
+            <line x1="65" y1="60" x2="80" y2="105" class="const-line"/>
+            <!-- Right shoulder to belt -->
+            <line x1="135" y1="55" x2="120" y2="101" class="const-line"/>
+            <!-- Belt to feet -->
+            <line x1="80" y1="105" x2="70" y2="155" class="const-line"/>
+            <line x1="120" y1="101" x2="132" y2="150" class="const-line"/>
+            <!-- Sword hint -->
+            <line x1="100" y1="103" x2="98" y2="130" class="const-line" opacity="0.3"/>
+            <!-- Stars -->
+            <circle cx="65" cy="60" r="4.5" class="star-dot mag1 star-red"/>
+            <circle cx="135" cy="55" r="2.5" class="star-dot mag3"/>
+            <circle cx="80" cy="105" r="2" class="star-dot mag4"/>
+            <circle cx="100" cy="103" r="2.5" class="star-dot mag3"/>
+            <circle cx="120" cy="101" r="2" class="star-dot mag4"/>
+            <circle cx="70" cy="155" r="2" class="star-dot mag4"/>
+            <circle cx="132" cy="150" r="4.5" class="star-dot mag1 star-blue"/>
+          </svg>
+        </div>
+        <div class="sky-card-info">
+          <span class="sky-season">겨울</span>
+          <h3 class="sky-card-title">오리온의 겨울</h3>
+          <p class="sky-card-body">베텔게우스의 붉은빛과 리겔의 푸른빛. 오리온대성운은 망원경 없이도 뿌연 빛덩어리로 보입니다.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- THE SPACE -->
+  <section class="section-space" id="space">
+    <div class="space-inner">
+      <figure class="space-image-wrap reveal-item">
+        <img
+          src="https://picsum.photos/seed/ian42/1200/800"
+          alt="이안 천문대 관측동 내부. 돔 천장이 열려 있고 망원경이 하늘을 향하고 있다."
+          width="1200" height="800"
+          loading="lazy"
+          class="space-image"
+        >
+      </figure>
+      <div class="space-text reveal-item">
+        <h2 class="section-heading">관측동에<br>대하여</h2>
+        <p class="body-text">관측동은 하나뿐입니다. 한 번에 여섯 명만 들어올 수 있습니다.</p>
+        <p class="body-text">천장이 열리고, 망원경이 자리를 잡고, 모두가 조용해집니다. 그것이 시작입니다.</p>
+        <p class="body-text">25cm 반사망원경 한 대. 보조 쌍안경 세 쌍. 천체지도와 적색 손전등. 그 외에는 아무것도 없습니다.</p>
+        <div class="space-specs">
+          <div class="spec-row">
+            <span class="spec-label">망원경</span>
+            <span class="spec-value">25cm 반사식</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">정원</span>
+            <span class="spec-value">최대 6인</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">해발</span>
+            <span class="spec-value">1,280m</span>
+          </div>
+        </div>
+      </div>
+      <p class="space-bg-text" aria-hidden="true">관측</p>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="section-programs" id="programs">
+    <div class="programs-header reveal-item">
+      <h2 class="section-heading">프로그램</h2>
+    </div>
+    <div class="programs-grid">
+      <article class="program-card program-main">
+        <span class="program-num" aria-hidden="true">01</span>
+        <h3 class="program-title">야간 관측</h3>
+        <p class="program-meta">저녁 8시~자정 &nbsp;·&nbsp; 최대 6인</p>
+        <p class="program-body">안내자와 함께 당일의 하늘을 읽습니다. 그날 뜨는 행성, 깊은 하늘 천체, 그리고 계절의 별들. 질문을 많이 해도 됩니다.</p>
+        <span class="program-price">180,000원 / 인</span>
+      </article>
+      <article class="program-card program-solo">
+        <span class="program-num" aria-hidden="true">02</span>
+        <h3 class="program-title">새벽 독점</h3>
+        <p class="program-meta">자정~새벽 4시 &nbsp;·&nbsp; 최대 2인</p>
+        <p class="program-body">혼자, 또는 둘이서만. 망원경과 의자와 침묵.</p>
+        <span class="program-price">120,000원 / 인</span>
+      </article>
+      <article class="program-card program-photo">
+        <span class="program-num" aria-hidden="true">03</span>
+        <h3 class="program-title">사진 노출</h3>
+        <p class="program-meta">저녁 7시~새벽 2시 &nbsp;·&nbsp; 최대 4인</p>
+        <p class="program-body">장노출 천체사진 촬영 워크숍. 카메라를 하늘에 맞추는 법, 별 궤적을 필름에 새기는 법을 배웁니다. 카메라 지참 필수.</p>
+        <span class="program-price">250,000원 / 인</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section class="section-reservation" id="reservation">
+    <div class="reservation-inner reveal-item">
+      <div class="reservation-left">
+        <h2 class="section-heading">예약은<br>이메일로만</h2>
+        <p class="body-text">최소 2주 전, 희망 날짜와 인원을 알려주세요. 날씨에 따라 일정이 바뀔 수 있으며, 대체 일정을 함께 안내드립니다.</p>
+        <a href="mailto:observatory.ian@proton.me" class="reservation-email">observatory.ian@proton.me</a>
+      </div>
+      <div class="reservation-right">
+        <ul class="reservation-notes" aria-label="안내 사항">
+          <li class="note-item">비가 오면, 취소합니다</li>
+          <li class="note-item">달이 밝은 날, 달을 봅니다</li>
+          <li class="note-item">도착은 해가 지기 전에</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-logo">夷安</span>
+      <span class="footer-info">강원도 · 해발 1,280m</span>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
