@@ -124,3 +124,33 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - v1(미감) → v2-final(접근성 floor·reduced-motion·정량게이트·다이얼·디자이너 우위) → v3(멀티파일·무제한·디자인 강화).
 - 라이브 `SPARK.md` 반영은 **CEO 확인 후**. 권장: 단일 페이지=v2-final, 규모 큰 사이트=v3.
 - 후속: 더 큰 사이트/다주제 반복, 인트로 과지연 가드, 비-시각축(성능예산·SEO·전환카피)은 별도 트랙.
+
+---
+
+## R5 후속 — Lenis 휠 먹통 버그 → v3 규칙화 (2026-06-03)
+- **증상**: 배포한 v3(NOCTURNE) 휠 스크롤이 끊겨 스크롤바 수동 드래그해야 함.
+- **원인**: `styles.css` `html { scroll-behavior: smooth }` ↔ Lenis(JS 부드러운 스크롤, 휠 preventDefault) **이중 부드러움 충돌**. 네이티브 smooth가 Lenis의 프레임별 scrollTo를 재애니메이션 → 먹통. 스크롤바 드래그는 Lenis 휠핸들러 우회라 동작.
+- **부차**: Lenis 권장 CSS 리셋 부재.
+- **조치(규칙화)**: v3에 `LENIS CSS 충돌 가드` 추가 — html `scroll-behavior:smooth` 금지 + Lenis CSS 리셋 강제 + Self-Audit `LENIS_GUARD`/`PERF_CHECK` 점검. (변경점 ⑬)
+- **교훈**: "라이브러리 강제(Lenis 필수)"는 그 라이브러리의 알려진 gotcha 가드까지 동봉해야 안전.
+
+---
+
+## Round 6 — v4 5케이스 (LIGHTBULB 자가활성 + 자기검수·정제)  [완료 2026-06-03]
+- 5케이스(서점/페스티벌/도자기/다이닝/아트전시), sonnet, stream-json 캡처. 상세: `experiments/R6_v4/scorecard.md`.
+- **LIGHTBULB 자가활성 ✅**: 5케이스 전부 모델이 STEP0에서 직접 curl(ideas+pinches) 실행·인용·적용. 자가 활성 강제 성공.
+- **❌ 결정론 버그**: 모델이 curl에 `random.seed(42)` 추가 → 5케이스 영감 전부 동일(lb-006/103/140/p-021). LIGHTBULB "매번 새 영감" 가치 상실. (다이얼+도메인이 톤은 차별화했으나 영감 다양성 0)
+  - **조치**: v4 STEP0에 "LIGHTBULB 픽 random.seed 고정 금지(seeded 생성배경과 구분)" NEVER 추가.
+- **PHASE 5 자기검수·정제 ✅**: case1에서 em-dash 7개 자가 수정. Lenis 가드 5케이스 전부 리셋 포함→R5 휠먹통 재발 안 함. reduced-motion 정상.
+  - 경미: 모델이 "scroll-behavior:smooth 없음" 보고했으나 실제론 존재(리셋이 무력화→런타임 안전). 점검 문구 정밀화 여지.
+- **판정**: v4 두 핵심(자가활성·자기검수) 작동. seed 금지 수정 후 재확인 필요(Round 7 후보).
+
+---
+
+## Round 7 — v4 seed 수정본 재검증  [완료 2026-06-03]
+- 5케이스 재실행(seed 금지 규칙 적용). 상세: `experiments/R7_v4_seedfix/`.
+- **★ seed 버그 해결 확인**:
+  - LIGHTBULB curl에 random.seed 없음 = 5/5 ✅ (case5의 'random.seed' 1회는 모델이 *규칙을 이해하고 언급한 추론 문장*이었음 — curl 2개 모두 seed 無).
+  - id가 케이스마다 전부 고유: case1 lb-022/163/189 · case2 lb-019/051/055… · case3 lb-139/185/190 · case4 lb-160/181/194 · case5 lb-103/175/182. (R6: 전부 lb-006/103/140 동일 → 해결)
+- **floor 유지**: Lenis 리셋 5/5, reduced-motion 5/5, 멀티파일 5/5.
+- **판정: v4 확정 가능.** LIGHTBULB 자가활성+다양성 ✅, 자기검수·정제 ✅, 멀티파일·Lenis가드·reduced-motion ✅.
