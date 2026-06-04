@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이안 천문대 · 夷安</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress-bar" aria-hidden="true" role="progressbar" aria-label="페이지 스크롤 진행"></div>
+
+  <nav class="site-nav" aria-label="주 메뉴">
+    <a href="#top" class="nav-logo" aria-label="이안 천문대 홈으로">夷安</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">천문대</a></li>
+      <li><a href="#programs">관측</a></li>
+      <li><a href="#visit">방문</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO: Experience Zone / cursor becomes telescope lens -->
+  <section class="hero" id="top" aria-label="이안 천문대 인터랙티브 별하늘">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-bg-hanja" aria-hidden="true">夷安</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">강원도 평창&nbsp;·&nbsp;해발 1,240m</p>
+      <h1 class="hero-title">이안 천문대</h1>
+      <p class="hero-sub">
+        도시의 빛이 닿지 않는 곳,<br>
+        밤하늘은 원래 이런 것이었다.
+      </p>
+      <a href="#about" class="hero-cta" aria-label="아래 내용 보기">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <line x1="10" y1="2" x2="10" y2="18" stroke="currentColor" stroke-width="1"/>
+          <polyline points="4,12 10,18 16,12" fill="none" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </a>
+    </div>
+    <p class="hero-hint" aria-hidden="true">커서를 움직여 별자리를 찾으세요</p>
+  </section>
+
+  <!-- Section 1: About -->
+  <section class="section-philosophy" id="about" aria-labelledby="about-heading">
+    <div class="philosophy-inner">
+      <div class="philosophy-text">
+        <h2 class="section-eyebrow" id="about-heading">이안(夷安)에 대하여</h2>
+        <blockquote class="philosophy-quote">
+          "고요함이 곧 선명함이다."
+        </blockquote>
+        <p class="philosophy-body">
+          이안은 광공해가 없는 지점을 찾아 2009년에 세워졌습니다. 해발 1,240미터, 인공 조명으로부터 46킬로미터 이상 떨어진 이곳에서는 맨눈으로도 은하수의 결을 느낄 수 있습니다.
+        </p>
+        <p class="philosophy-body">
+          우리는 천문학 지식을 전달하기 전에, 먼저 어둠에 눈이 익숙해지도록 기다립니다. 빛에 적응된 눈으로는 보이지 않는 것들이 있습니다.
+        </p>
+      </div>
+      <div class="philosophy-data">
+        <dl class="data-list" aria-label="이안 천문대 주요 수치">
+          <div class="data-item">
+            <dt>고도</dt>
+            <dd><span class="data-num">1,240</span><span class="data-unit">m</span></dd>
+          </div>
+          <div class="data-item">
+            <dt>최소 광공해 거리</dt>
+            <dd><span class="data-num">46</span><span class="data-unit">km</span></dd>
+          </div>
+          <div class="data-item">
+            <dt>연평균 맑은 밤</dt>
+            <dd><span class="data-num">186</span><span class="data-unit">일</span></dd>
+          </div>
+          <div class="data-item">
+            <dt>주 망원경 구경</dt>
+            <dd><span class="data-num">406</span><span class="data-unit">mm</span></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Programs -->
+  <section class="section-programs-wrap" id="programs" aria-labelledby="programs-heading">
+    <div class="section-programs">
+      <header class="programs-header">
+        <h2 id="programs-heading">관측 프로그램</h2>
+        <p>금&nbsp;·&nbsp;토&nbsp;·&nbsp;일, 일몰 이후</p>
+      </header>
+      <ol class="programs-list" role="list">
+        <li class="program-item">
+          <span class="program-num" aria-hidden="true">01</span>
+          <div class="program-content">
+            <h3 class="program-name">첫 어둠</h3>
+            <p class="program-desc">
+              망원경 없이 시작합니다. 맨눈으로 계절 별자리와 행성을 읽고, 눈이 어둠에 충분히 적응된 뒤에야 장비로 넘어갑니다. 가장 오래된 방식의 관측.
+            </p>
+            <ul class="program-meta" aria-label="프로그램 정보">
+              <li>2시간</li>
+              <li>최대 8인</li>
+              <li>전 연령</li>
+            </ul>
+          </div>
+        </li>
+        <li class="program-item">
+          <span class="program-num" aria-hidden="true">02</span>
+          <div class="program-content">
+            <h3 class="program-name">심야 관측</h3>
+            <p class="program-desc">
+              406mm 주경으로 행성의 띠, 성단의 밀도, 은하의 팔 구조를 직접 봅니다. 짧은 노출이 아니라 충분한 시간을 들여 하나의 천체를 깊이 들여다봅니다.
+            </p>
+            <ul class="program-meta" aria-label="프로그램 정보">
+              <li>4시간</li>
+              <li>최대 6인</li>
+              <li>12세 이상</li>
+            </ul>
+          </div>
+        </li>
+        <li class="program-item">
+          <span class="program-num" aria-hidden="true">03</span>
+          <div class="program-content">
+            <h3 class="program-name">일박 천체사진</h3>
+            <p class="program-desc">
+              해 질 녘부터 이른 새벽까지. 장노출 촬영 장비를 직접 조작하며 밤하늘의 시간을 한 장에 담습니다. 현장에서 RAW 파일을 함께 검토합니다.
+            </p>
+            <ul class="program-meta" aria-label="프로그램 정보">
+              <li>8시간</li>
+              <li>최대 4인</li>
+              <li>카메라 보유자</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Section 3: Visit -->
+  <section class="section-visit" id="visit" aria-labelledby="visit-heading">
+    <div class="visit-inner">
+      <div class="visit-info">
+        <h2 id="visit-heading">방문 안내</h2>
+        <address class="visit-address">
+          강원특별자치도 평창군 봉평면 흥정산길 41<br>
+          <a href="tel:+82-33-335-1240">033&nbsp;·&nbsp;335&nbsp;·&nbsp;1240</a>
+        </address>
+        <div class="visit-details">
+          <p>예약은 최소 3일 전, 전화 또는 이메일로 받습니다.</p>
+          <p>당일 예약 불가. 우천&#xB7;흐림 예보 시 일정 조정.</p>
+          <a href="mailto:hello@ian-obs.kr" class="visit-email">hello@ian-obs.kr</a>
+        </div>
+        <p class="visit-note">
+          이안에는 숙박 시설이 없습니다. 주변 펜션 이용 시 야간 외부 조명을 줄여주시면 함께 밤하늘을 지킬 수 있습니다.
+        </p>
+      </div>
+      <div class="visit-coords" aria-label="이안 천문대 좌표">
+        <p class="coords-label">좌표</p>
+        <p class="coord-line">
+          <span class="coord-dir">N</span>
+          <span class="coord-val">37&#176;&thinsp;33&#8242;&thinsp;14&#8243;</span>
+        </p>
+        <p class="coord-line">
+          <span class="coord-dir">E</span>
+          <span class="coord-val">128&#176;&thinsp;32&#8242;&thinsp;08&#8243;</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" aria-label="사이트 하단">
+    <div class="footer-inner">
+      <p class="footer-hanja" aria-label="이안 천문대">夷安</p>
+      <p class="footer-tagline">빛이 없는 곳에서 찾는 것들</p>
+      <p class="footer-copy">&#169; 2024 이안 천문대. 강원도 평창.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

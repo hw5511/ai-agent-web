@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOCTURNE &middot; 밤의 향수</title>
+  <meta name="description" content="녹턴은 밤의 가장 깊은 순간을 포착하는 독립 향수 브랜드입니다. 어둠이 깊어질수록 향은 깨어납니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Progress bar -->
+  <div class="progress-bar" role="progressbar" aria-label="페이지 스크롤 진행" aria-hidden="true">
+    <div class="progress-fill"></div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" role="banner">
+    <a href="#" class="nav-logo" aria-label="NOCTURNE 홈으로">NOCTURNE</a>
+    <nav aria-label="주 내비게이션">
+      <ul class="nav-links" role="list">
+        <li><a href="#philosophy">철학</a></li>
+        <li><a href="#collection">컬렉션</a></li>
+        <li><a href="#process">조향</a></li>
+        <li><a href="#reserve">예약</a></li>
+      </ul>
+    </nav>
+    <button class="nav-menu" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="모바일 내비게이션">
+    <nav aria-label="모바일 내비게이션">
+      <ul role="list">
+        <li><a href="#philosophy">철학</a></li>
+        <li><a href="#collection">컬렉션</a></li>
+        <li><a href="#process">조향</a></li>
+        <li><a href="#reserve">예약</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section id="hero" class="hero" aria-label="녹턴 브랜드 소개">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <p class="hero-year">Seoul &middot; Est. 2019</p>
+      <h1 class="hero-title">NOCTURNE</h1>
+      <p class="hero-sub">어둠이 깊어질수록<br>향은 깨어난다</p>
+      <a href="#collection" class="hero-cta">
+        <span>컬렉션 보기</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PHILOSOPHY ═══════════════ -->
+  <section id="philosophy" class="philosophy" aria-labelledby="philosophy-heading">
+    <div class="container">
+      <div class="philosophy-inner">
+        <div class="philosophy-left">
+          <p class="philosophy-number" aria-hidden="true">01</p>
+          <blockquote class="philosophy-quote">
+            <p>&#8220;우리는 낮을 위한 향수를<br>만들지 않는다&#8221;</p>
+          </blockquote>
+        </div>
+        <div class="philosophy-right">
+          <h2 id="philosophy-heading" class="philosophy-heading reveal-item">브랜드 철학</h2>
+          <p class="philosophy-body reveal-item">
+            녹턴은 밤의 가장 깊은 순간을 포착합니다. 인공 조명이 사라진 자리에서 비로소 드러나는 감각들, 낮 동안 억눌려 있던 기억의 냄새들. 우리는 그 어둠 속에서 태어나는 향기만을 다룹니다.
+          </p>
+          <p class="philosophy-body reveal-item">
+            독립 조향사 김태린이 2019년 서울에 설립한 녹턴은, 원료의 원산지부터 병입까지 모든 과정을 소규모로 직접 관리합니다. 각 향수는 한 번에 300병 이하로만 제작됩니다.
+          </p>
+          <div class="philosophy-stats reveal-item" aria-label="브랜드 수치">
+            <div class="stat">
+              <span class="stat-num" aria-label="최대 생산 수량 300">300</span>
+              <span class="stat-label">최대 생산 수량</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" aria-label="숙성 최소 개월 24">24</span>
+              <span class="stat-label">숙성 최소 개월</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" aria-label="시그니처 향수 4종">4</span>
+              <span class="stat-label">시그니처 향수</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ COLLECTION ═══════════════ -->
+  <section id="collection" class="collection" aria-labelledby="collection-heading">
+    <div class="container">
+      <div class="collection-header">
+        <p class="eyebrow-label reveal-item">시그니처 컬렉션</p>
+        <h2 id="collection-heading" class="collection-title reveal-item">밤의 네 개의 얼굴</h2>
+      </div>
+    </div>
+
+    <!-- 01 MINUIT -->
+    <article class="frag-item" id="frag-minuit" aria-labelledby="frag-minuit-name">
+      <div class="container">
+        <div class="frag-grid">
+          <div class="frag-left reveal-item">
+            <p class="frag-number-bg" aria-hidden="true">01</p>
+            <div class="frag-title-block">
+              <h3 id="frag-minuit-name" class="frag-name">MINUIT</h3>
+              <p class="frag-name-ko">자정</p>
+              <p class="frag-time" aria-label="밤 열두 시">00:00</p>
+            </div>
+          </div>
+          <div class="frag-right reveal-item">
+            <p class="frag-desc">자정의 정적이 내려앉는 순간. 도시의 소음이 완전히 가라앉고, 가죽과 나무의 무게가 공기를 채우는 시간. 오래된 서재와 문 닫힌 카페를 연상시키는, 묵직하고 침묵한 향.</p>
+            <div class="notes-grid" aria-label="향수 노트 구성">
+              <div class="note-tier">
+                <span class="note-label">탑 노트</span>
+                <span class="note-items">베르가못, 흑후추</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">미들 노트</span>
+                <span class="note-items">가죽, 베티버, 세이지</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">베이스 노트</span>
+                <span class="note-items">다크우드, 머스크, 앰버</span>
+              </div>
+            </div>
+            <div class="frag-meta">
+              <span>오드 퍼퓸 &middot; 50ml</span>
+              <span class="frag-price">&#8361;185,000</span>
+            </div>
+            <div class="frag-visual" aria-hidden="true">
+              <svg class="scent-orbs" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(201,168,108,0.10)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="42" fill="none" stroke="rgba(201,168,108,0.16)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(201,168,108,0.24)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="5" fill="rgba(201,168,108,0.65)"/>
+                <circle cx="148" cy="72" r="3.5" fill="rgba(201,168,108,0.40)"/>
+                <circle cx="62" cy="134" r="2.8" fill="rgba(201,168,108,0.32)"/>
+                <circle cx="133" cy="148" r="2.2" fill="rgba(201,168,108,0.26)"/>
+                <circle cx="58" cy="72" r="1.8" fill="rgba(201,168,108,0.20)"/>
+                <circle cx="162" cy="108" r="1.5" fill="rgba(201,168,108,0.16)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 OBSCUR -->
+    <article class="frag-item frag-item--alt" id="frag-obscur" aria-labelledby="frag-obscur-name">
+      <div class="container">
+        <div class="frag-grid">
+          <div class="frag-left reveal-item">
+            <p class="frag-number-bg" aria-hidden="true">02</p>
+            <div class="frag-title-block">
+              <h3 id="frag-obscur-name" class="frag-name">OBSCUR</h3>
+              <p class="frag-name-ko">심야</p>
+              <p class="frag-time" aria-label="새벽 두 시">02:00</p>
+            </div>
+          </div>
+          <div class="frag-right reveal-item">
+            <p class="frag-desc">가장 어두운 시간, 새벽 두 시. 불 꺼진 예배당의 인센스 연기와 비밀스러운 장미가 뒤섞이는 순간. 신성과 관능이 충돌하는, 이 브랜드에서 가장 도발적인 향.</p>
+            <div class="notes-grid" aria-label="향수 노트 구성">
+              <div class="note-tier">
+                <span class="note-label">탑 노트</span>
+                <span class="note-items">다크 로즈, 인센스</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">미들 노트</span>
+                <span class="note-items">우드 스모크, 오우드</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">베이스 노트</span>
+                <span class="note-items">패츌리, 시벳, 레진</span>
+              </div>
+            </div>
+            <div class="frag-meta">
+              <span>오드 퍼퓸 &middot; 50ml</span>
+              <span class="frag-price">&#8361;215,000</span>
+            </div>
+            <div class="frag-visual" aria-hidden="true">
+              <svg class="scent-orbs" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="100" rx="68" ry="52" fill="none" stroke="rgba(201,168,108,0.09)" stroke-width="1"/>
+                <ellipse cx="100" cy="100" rx="46" ry="34" fill="none" stroke="rgba(201,168,108,0.15)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="20" fill="none" stroke="rgba(201,168,108,0.24)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="5.5" fill="rgba(201,168,108,0.60)"/>
+                <circle cx="152" cy="86" r="4" fill="rgba(201,168,108,0.38)"/>
+                <circle cx="54" cy="118" r="3.2" fill="rgba(201,168,108,0.30)"/>
+                <circle cx="138" cy="148" r="2.5" fill="rgba(201,168,108,0.24)"/>
+                <circle cx="68" cy="58" r="2" fill="rgba(201,168,108,0.18)"/>
+                <circle cx="162" cy="132" r="1.5" fill="rgba(201,168,108,0.14)"/>
+                <circle cx="44" cy="92" r="1.8" fill="rgba(201,168,108,0.16)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 BRUME -->
+    <article class="frag-item" id="frag-brume" aria-labelledby="frag-brume-name">
+      <div class="container">
+        <div class="frag-grid">
+          <div class="frag-left reveal-item">
+            <p class="frag-number-bg" aria-hidden="true">03</p>
+            <div class="frag-title-block">
+              <h3 id="frag-brume-name" class="frag-name">BRUME</h3>
+              <p class="frag-name-ko">새벽 안개</p>
+              <p class="frag-time" aria-label="새벽 네 시">04:00</p>
+            </div>
+          </div>
+          <div class="frag-right reveal-item">
+            <p class="frag-desc">여명 직전, 한강변의 새벽 안개. 유자와 아이리스가 차가운 수분 속에 희석되는 이 향은 일출 전의 짧은 고요를 담고 있습니다. 유일하게 밝음을 예고하는 녹턴의 향수.</p>
+            <div class="notes-grid" aria-label="향수 노트 구성">
+              <div class="note-tier">
+                <span class="note-label">탑 노트</span>
+                <span class="note-items">유자, 청사과, 냉수</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">미들 노트</span>
+                <span class="note-items">아이리스, 바이올렛 리프</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">베이스 노트</span>
+                <span class="note-items">머스크, 시더우드, 앰버</span>
+              </div>
+            </div>
+            <div class="frag-meta">
+              <span>오드 퍼퓸 &middot; 50ml</span>
+              <span class="frag-price">&#8361;168,000</span>
+            </div>
+            <div class="frag-visual" aria-hidden="true">
+              <svg class="scent-orbs" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="74" fill="none" stroke="rgba(201,168,108,0.07)" stroke-width="0.8"/>
+                <circle cx="100" cy="100" r="52" fill="none" stroke="rgba(201,168,108,0.12)" stroke-width="0.8"/>
+                <circle cx="100" cy="100" r="32" fill="none" stroke="rgba(201,168,108,0.18)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="14" fill="none" stroke="rgba(201,168,108,0.28)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="4" fill="rgba(201,168,108,0.52)"/>
+                <circle cx="152" cy="82" r="2.8" fill="rgba(201,168,108,0.34)"/>
+                <circle cx="54" cy="62" r="2.2" fill="rgba(201,168,108,0.28)"/>
+                <circle cx="142" cy="152" r="2.5" fill="rgba(201,168,108,0.24)"/>
+                <circle cx="64" cy="150" r="2" fill="rgba(201,168,108,0.18)"/>
+                <circle cx="172" cy="118" r="1.5" fill="rgba(201,168,108,0.14)"/>
+                <circle cx="30" cy="114" r="1.8" fill="rgba(201,168,108,0.12)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 CENDRES -->
+    <article class="frag-item frag-item--alt" id="frag-cendres" aria-labelledby="frag-cendres-name">
+      <div class="container">
+        <div class="frag-grid">
+          <div class="frag-left reveal-item">
+            <p class="frag-number-bg" aria-hidden="true">04</p>
+            <div class="frag-title-block">
+              <h3 id="frag-cendres-name" class="frag-name">CENDRES</h3>
+              <p class="frag-name-ko">여명의 재</p>
+              <p class="frag-time" aria-label="새벽 다섯 시 삼십 분">05:30</p>
+            </div>
+          </div>
+          <div class="frag-right reveal-item">
+            <p class="frag-desc">모든 것이 타고 난 후. 촛불이 꺼지고 남는 따뜻한 재의 향기, 그 위로 바닐라와 카다몸이 겹친다. 밤이 끝나가는 마지막 온기를 담은 오리엔탈 향. 기억처럼 오래 머무른다.</p>
+            <div class="notes-grid" aria-label="향수 노트 구성">
+              <div class="note-tier">
+                <span class="note-label">탑 노트</span>
+                <span class="note-items">카다몸, 시나몬, 재</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">미들 노트</span>
+                <span class="note-items">재스민, 튜베로즈, 스모크</span>
+              </div>
+              <div class="note-tier">
+                <span class="note-label">베이스 노트</span>
+                <span class="note-items">바닐라, 샌달우드, 진한 앰버</span>
+              </div>
+            </div>
+            <div class="frag-meta">
+              <span>오드 퍼퓸 &middot; 50ml</span>
+              <span class="frag-price">&#8361;195,000</span>
+            </div>
+            <div class="frag-visual" aria-hidden="true">
+              <svg class="scent-orbs" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="108" r="58" fill="none" stroke="rgba(201,168,108,0.12)" stroke-width="1"/>
+                <circle cx="100" cy="104" r="38" fill="none" stroke="rgba(201,168,108,0.20)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="20" fill="none" stroke="rgba(201,168,108,0.30)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="6.5" fill="rgba(201,168,108,0.70)"/>
+                <circle cx="150" cy="90" r="4.5" fill="rgba(201,168,108,0.50)"/>
+                <circle cx="58" cy="120" r="3.5" fill="rgba(201,168,108,0.40)"/>
+                <circle cx="134" cy="152" r="2.8" fill="rgba(201,168,108,0.32)"/>
+                <circle cx="68" cy="70" r="2.2" fill="rgba(201,168,108,0.26)"/>
+                <circle cx="160" cy="140" r="2" fill="rgba(201,168,108,0.20)"/>
+                <circle cx="44" cy="86" r="1.5" fill="rgba(201,168,108,0.16)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ═══════════════ PROCESS ═══════════════ -->
+  <section id="process" class="process" aria-labelledby="process-heading">
+    <div class="container">
+      <div class="process-header">
+        <p class="eyebrow-label reveal-item">조향 과정</p>
+        <h2 id="process-heading" class="process-title reveal-item">어둠 속에서<br>태어나는 향기</h2>
+      </div>
+      <ol class="process-steps" role="list">
+        <li class="process-step reveal-item">
+          <span class="step-num">01</span>
+          <div class="step-content">
+            <h3>원료 수집</h3>
+            <p>조향사가 직접 산지를 방문하거나 신뢰할 수 있는 공급자를 통해 원료를 선별합니다. 유통되는 원료의 10% 미만만이 녹턴의 기준을 통과합니다.</p>
+          </div>
+        </li>
+        <li class="process-step reveal-item">
+          <span class="step-num">02</span>
+          <div class="step-content">
+            <h3>조향 설계</h3>
+            <p>하나의 향 컨셉이 확정되기까지 평균 18개월이 소요됩니다. 수백 번의 시향과 수정을 거쳐 밤의 한 순간을 정확히 포착하는 배합이 완성됩니다.</p>
+          </div>
+        </li>
+        <li class="process-step reveal-item">
+          <span class="step-num">03</span>
+          <div class="step-content">
+            <h3>오크통 숙성</h3>
+            <p>완성된 배합은 최소 24개월, 일부 라인은 36개월 이상 오크통에서 숙성됩니다. 이 과정이 각 향수에 복잡성과 깊이를 부여합니다.</p>
+          </div>
+        </li>
+        <li class="process-step reveal-item">
+          <span class="step-num">04</span>
+          <div class="step-content">
+            <h3>소량 수작업 병입</h3>
+            <p>모든 병입 작업은 수작업으로 진행됩니다. 각 향수는 최대 300병만 제작되며, 병마다 배치 번호와 일련번호가 각인됩니다.</p>
+          </div>
+        </li>
+        <li class="process-step reveal-item">
+          <span class="step-num">05</span>
+          <div class="step-content">
+            <h3>1:1 시향 상담</h3>
+            <p>녹턴에서는 향수를 처음 경험하거나 선물을 찾는 분들을 위한 개인 시향 상담을 운영합니다. 당신의 밤에 어울리는 향을 함께 찾아드립니다.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════════ RESERVE ═══════════════ -->
+  <section id="reserve" class="reserve" aria-labelledby="reserve-heading">
+    <div class="container">
+      <div class="reserve-inner">
+        <div class="reserve-info">
+          <h2 id="reserve-heading" class="reserve-title reveal-item">당신만의 밤을<br>찾아드립니다</h2>
+          <div class="store-details reveal-item">
+            <div class="store-item">
+              <h3>NOCTURNE SEOUL</h3>
+              <address>
+                서울시 성동구 서울숲2길 32&#45;14<br>
+                화요일&#45;일요일 13:00&#45;20:00<br>
+                월요일 휴무
+              </address>
+            </div>
+            <div class="store-item">
+              <h3>시향 프로그램</h3>
+              <p>전 라인 시향 및 1:1 조향 상담<br>1회 60분 &middot; 25,000원 (구매 시 환불)</p>
+            </div>
+          </div>
+          <div class="reserve-contact reveal-item">
+            <a href="mailto:hello@nocturne.kr" class="contact-link">hello@nocturne.kr</a>
+            <a href="tel:+82221234567" class="contact-link">02&#45;2123&#45;4567</a>
+          </div>
+        </div>
+
+        <div class="reserve-form-wrap reveal-item">
+          <form class="reserve-form" action="#" method="post" novalidate aria-label="시향 예약 신청 양식">
+            <h3 class="form-title">시향 예약 신청</h3>
+            <div class="form-row">
+              <label for="r-name" class="form-label">성함</label>
+              <input id="r-name" name="name" type="text" class="form-input" placeholder="홍길동" required autocomplete="name">
+            </div>
+            <div class="form-row">
+              <label for="r-email" class="form-label">이메일</label>
+              <input id="r-email" name="email" type="email" class="form-input" placeholder="hello@example.com" required autocomplete="email">
+            </div>
+            <div class="form-row">
+              <label for="r-date" class="form-label">방문 희망일</label>
+              <input id="r-date" name="date" type="date" class="form-input" required>
+            </div>
+            <div class="form-row">
+              <label for="r-purpose" class="form-label">방문 목적</label>
+              <select id="r-purpose" name="purpose" class="form-input form-select" required>
+                <option value="" disabled selected>선택해주세요</option>
+                <option value="consult">전 라인 시향 상담</option>
+                <option value="gift">선물 추천 상담</option>
+                <option value="custom">맞춤 향수 의뢰</option>
+                <option value="pickup">구매 픽업</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="r-message" class="form-label">
+                남기실 말씀
+                <span class="optional" aria-label="선택 사항">(선택)</span>
+              </label>
+              <textarea id="r-message" name="message" class="form-input form-textarea" placeholder="원하시는 향의 분위기나 궁금하신 점을 적어주세요." rows="4"></textarea>
+            </div>
+            <button type="submit" class="form-submit">예약 신청</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">NOCTURNE</p>
+          <p class="footer-tagline">어둠이 깊어질수록 향은 깨어난다</p>
+        </div>
+        <nav class="footer-nav" aria-label="푸터 내비게이션">
+          <ul role="list">
+            <li><a href="#collection">컬렉션</a></li>
+            <li><a href="#process">조향 과정</a></li>
+            <li><a href="#reserve">시향 예약</a></li>
+          </ul>
+          <ul role="list">
+            <li><a href="mailto:hello@nocturne.kr">hello@nocturne.kr</a></li>
+            <li><a href="tel:+82221234567">02&#45;2123&#45;4567</a></li>
+            <li>서울시 성동구 서울숲2길 32&#45;14</li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&#169; 2026 NOCTURNE. All rights reserved.</p>
+        <p>Designed by NOCTURNE Studio</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CDN Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js" defer></script>
+
+</body>
+</html>
