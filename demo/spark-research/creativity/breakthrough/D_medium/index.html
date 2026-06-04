@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이안(夷安) · 밤하늘 천문대</title>
+  <meta name="description" content="강원도 화천 깊은 산 속, 빛 공해가 닿지 않는 작은 천문대. 도시를 떠나 밤하늘을 보러 오는 곳.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 별 배경 캔버스 (seeded) -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <!-- 별자리 연결선 캔버스 -->
+  <canvas id="fg-canvas" aria-hidden="true"></canvas>
+
+  <!-- 헤더 -->
+  <header id="site-header" role="banner">
+    <div id="logo">
+      <span class="logo-ko">이안</span>
+      <span class="logo-ch">夷安</span>
+    </div>
+    <p id="site-tagline">밤하늘 천문대 · 강원도 화천</p>
+  </header>
+
+  <!-- 별자리 탐색 내비게이션 -->
+  <nav id="constellation-nav" aria-label="이안 탐색, 별을 클릭하여 이야기를 발견하세요">
+    <button class="star-node" data-panel="about" data-index="0" aria-label="α 이안, 이안에 대하여" aria-pressed="false">
+      <span class="star-glyph" aria-hidden="true"></span>
+      <span class="star-label">α&nbsp;이안</span>
+    </button>
+    <button class="star-node" data-panel="night" data-index="1" aria-label="β 고요, 이 밤의 시간" aria-pressed="false">
+      <span class="star-glyph" aria-hidden="true"></span>
+      <span class="star-label">β&nbsp;고요</span>
+    </button>
+    <button class="star-node" data-panel="program" data-index="2" aria-label="γ 탐색, 관측 프로그램" aria-pressed="false">
+      <span class="star-glyph" aria-hidden="true"></span>
+      <span class="star-label">γ&nbsp;탐색</span>
+    </button>
+    <button class="star-node" data-panel="access" data-index="3" aria-label="δ 여정, 오시는 길" aria-pressed="false">
+      <span class="star-glyph" aria-hidden="true"></span>
+      <span class="star-label">δ&nbsp;여정</span>
+    </button>
+    <button class="star-node" data-panel="reserve" data-index="4" aria-label="ε 예약, 예약하기" aria-pressed="false">
+      <span class="star-glyph" aria-hidden="true"></span>
+      <span class="star-label">ε&nbsp;예약</span>
+    </button>
+  </nav>
+
+  <!-- 안내 힌트 -->
+  <p id="hint-text" aria-live="polite">별을 클릭하여 이야기를 발견하세요</p>
+
+  <!-- 방문 추적 도트 -->
+  <div id="visit-tracker" aria-hidden="true">
+    <span class="visit-dot" data-star="0"></span>
+    <span class="visit-dot" data-star="1"></span>
+    <span class="visit-dot" data-star="2"></span>
+    <span class="visit-dot" data-star="3"></span>
+    <span class="visit-dot" data-star="4"></span>
+  </div>
+
+  <!-- 패널: 이안에 대하여 -->
+  <article id="panel-about" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="panel-about-title">
+    <div class="panel-backdrop" data-close></div>
+    <div class="panel-inner">
+      <button class="panel-close" aria-label="닫기">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="2" x2="16" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="16" y1="2" x2="2" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="panel-eyebrow">α 이안</p>
+      <h2 id="panel-about-title" class="panel-title">이안에 대하여</h2>
+      <div class="panel-body">
+        <p>이안(夷安)은 강원도 화천의 깊은 산 속에 있습니다. 빛 공해가 닿지 않는 해발 780m의 자리입니다.</p>
+        <p>이름은 "평안히 머무른다"는 뜻입니다. 우리는 방문자에게 무언가를 팔지 않습니다. 그냥 함께 올려다볼 뿐입니다.</p>
+        <p>이 천문대를 시작한 것은 도시에서 10년을 살다가 하늘이 그리워진 한 사람 때문이었습니다. 망원경 하나, 의자 하나. 처음엔 그게 전부였습니다.</p>
+        <p>망원경 앞에 서면, 도시에서 가져온 모든 것이 작아집니다. 그것이 이안의 목적입니다.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 패널: 이 밤의 시간 -->
+  <article id="panel-night" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="panel-night-title">
+    <div class="panel-backdrop" data-close></div>
+    <div class="panel-inner">
+      <button class="panel-close" aria-label="닫기">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="2" x2="16" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="16" y1="2" x2="2" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="panel-eyebrow">β 고요</p>
+      <h2 id="panel-night-title" class="panel-title">이 밤의 시간</h2>
+      <div class="panel-body">
+        <p>이안의 하늘은 계절마다 다른 이야기를 합니다.</p>
+        <div class="season-list">
+          <div class="season-item">
+            <span class="season-name">봄</span>
+            <p>처녀자리와 사자자리, 봄의 대삼각형. 은하수의 적도가 떠오르기 시작합니다.</p>
+          </div>
+          <div class="season-item">
+            <span class="season-name">여름</span>
+            <p>은하수가 정점에 오릅니다. 거문고·독수리·백조의 여름 대삼각형. 이 계절이 이안의 절정입니다.</p>
+          </div>
+          <div class="season-item">
+            <span class="season-name">가을</span>
+            <p>안드로메다 은하가 맨눈으로 보입니다. 250만&nbsp;광년 떨어진 빛이 당신의 눈에 닿습니다.</p>
+          </div>
+          <div class="season-item">
+            <span class="season-name">겨울</span>
+            <p>오리온, 큰개, 작은개의 겨울 삼각형. 공기가 맑아 별이 가장 선명합니다. 가장 춥고, 가장 아름다운 밤.</p>
+          </div>
+        </div>
+        <p class="night-note">관측 최적 시간은 자정을 전후한 2시간입니다. 새벽 하늘은 별도 예약하세요.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 패널: 관측 프로그램 -->
+  <article id="panel-program" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="panel-program-title">
+    <div class="panel-backdrop" data-close></div>
+    <div class="panel-inner">
+      <button class="panel-close" aria-label="닫기">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="2" x2="16" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="16" y1="2" x2="2" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="panel-eyebrow">γ 탐색</p>
+      <h2 id="panel-program-title" class="panel-title">관측 프로그램</h2>
+      <div class="panel-body">
+        <div class="program-list">
+          <div class="program-item">
+            <h3 class="program-name">맨눈 별자리</h3>
+            <p>빛을 끄고, 눈이 어둠에 익을 때까지 기다립니다. 약 20분. 그 후 하늘 전체가 달라집니다.</p>
+            <p class="program-meta">2시간 · 소규모 그룹</p>
+          </div>
+          <div class="program-item">
+            <h3 class="program-name">망원경 관측</h3>
+            <p>딥스카이 천체, 성단, 성운, 은하. 사진이 아닌 실제 빛. 설명이 아닌 침묵 속의 관찰.</p>
+            <p class="program-meta">3시간 · 12인 이하</p>
+          </div>
+          <div class="program-item">
+            <h3 class="program-name">새벽 관측</h3>
+            <p>일출 직전, 하늘이 가장 어두운 시간. 황도광을 볼 수 있는 계절에만 운영합니다.</p>
+            <p class="program-meta">새벽 3~5시 · 별도 예약</p>
+          </div>
+          <div class="program-item">
+            <h3 class="program-name">1박 패키지</h3>
+            <p>저녁부터 새벽까지. 밤의 전부를 경험합니다. 산장 숙박 포함.</p>
+            <p class="program-meta">금·토 운영 · 최대 6인</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 패널: 오시는 길 -->
+  <article id="panel-access" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="panel-access-title">
+    <div class="panel-backdrop" data-close></div>
+    <div class="panel-inner">
+      <button class="panel-close" aria-label="닫기">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="2" x2="16" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="16" y1="2" x2="2" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="panel-eyebrow">δ 여정</p>
+      <h2 id="panel-access-title" class="panel-title">오시는 길</h2>
+      <div class="panel-body">
+        <div class="access-block">
+          <p class="access-place">강원도 화천군 상서면 산 131</p>
+          <p>서울에서 약 2시간 30분. 춘천을 지나 화천 방면으로 오시면 됩니다.</p>
+          <p>대중교통이 없습니다. 직접 운전해 오셔야 합니다. 이 길을 선택하는 것이 이안의 첫 번째 조건입니다.</p>
+        </div>
+        <div class="access-block">
+          <h3>오실 때 부탁드립니다</h3>
+          <ul>
+            <li>도착 후 헤드라이트를 끄고 잠시 멈춰 주세요. 눈이 어둠에 익어야 합니다.</li>
+            <li>휴대폰 화면 밝기를 가장 낮추거나 붉은 필터를 켜 주세요.</li>
+            <li>향수나 강한 냄새는 자제해 주세요. 산의 냄새를 지키기 위해.</li>
+          </ul>
+        </div>
+        <div class="access-block access-block--last">
+          <p class="access-coords">N&nbsp;38.159°&nbsp;&nbsp;E&nbsp;127.568°</p>
+          <p class="access-note">네비게이션이 닿지 않는 마지막 2&nbsp;km는 예약 확인 후 별도 안내가 전송됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 패널: 예약하기 -->
+  <article id="panel-reserve" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="panel-reserve-title">
+    <div class="panel-backdrop" data-close></div>
+    <div class="panel-inner">
+      <button class="panel-close" aria-label="닫기">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="2" x2="16" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="16" y1="2" x2="2" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="panel-eyebrow">ε 예약</p>
+      <h2 id="panel-reserve-title" class="panel-title">예약하기</h2>
+      <div class="panel-body">
+        <div class="reserve-block">
+          <p>이안은 매주 금·토요일만 엽니다.</p>
+          <p>한 번에 최대 12인. 그 이상은 받지 않습니다. 하늘이 그만큼이기 때문이 아니라, 침묵이 그만큼이기 때문입니다.</p>
+        </div>
+        <div class="reserve-block">
+          <h3>예약 방법</h3>
+          <p>카카오 채널 <strong>@이안천문대</strong>로 문의해 주세요.</p>
+          <p>날씨 사정으로 취소될 경우, 관측 24시간 전에 연락드립니다.</p>
+        </div>
+        <div class="reserve-block reserve-block--last">
+          <h3>안내사항</h3>
+          <ul>
+            <li>월 조도에 따라 관측 일정이 변경될 수 있습니다.</li>
+            <li>음식 반입 가능합니다. 단 강한 냄새는 자제 부탁드립니다.</li>
+            <li>음주 후 방문은 정중히 거절합니다.</li>
+            <li>12세 이하 어린이는 보호자 동반 시 입장 가능합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 별자리 완성 오버레이 -->
+  <div id="completion-overlay" hidden aria-live="polite" role="status">
+    <div id="completion-inner">
+      <p class="completion-constellation">이안자리</p>
+      <p class="completion-text">모든 별을 찾으셨습니다.<br>하늘도 그렇습니다. 찾는 사람에게만 보입니다.</p>
+    </div>
+  </div>
+
+  <!-- 접근성 대체 내비게이션 (reduced-motion / 폴백) -->
+  <nav id="fallback-nav" aria-label="목차">
+    <ul>
+      <li><a href="#panel-about">이안에 대하여</a></li>
+      <li><a href="#panel-night">이 밤의 시간</a></li>
+      <li><a href="#panel-program">관측 프로그램</a></li>
+      <li><a href="#panel-access">오시는 길</a></li>
+      <li><a href="#panel-reserve">예약하기</a></li>
+    </ul>
+  </nav>
+
+  <!-- 푸터 -->
+  <footer id="site-footer" role="contentinfo">
+    <span>이안(夷安)</span>
+    <span class="footer-sep" aria-hidden="true"></span>
+    <span>강원도 화천 · 밤하늘 천문대</span>
+  </footer>
+
+  <!-- CDN 라이브러리 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

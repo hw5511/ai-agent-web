@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="이안(夷安) 천문대. 빛 공해에서 벗어나 진짜 밤하늘을 만나는 곳. 강원도 해발 920미터.">
+  <title>이안(夷安) 천문대</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+  <div class="progress-bar" role="progressbar" aria-label="페이지 스크롤 진행도" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <nav class="nav" role="navigation" aria-label="주 내비게이션">
+    <a href="#hero" class="nav-logo js-scroll-link" aria-label="이안 천문대 홈으로">
+      <span class="nav-logo-kr">이안</span>
+      <span class="nav-logo-en">夷安</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about" class="js-scroll-link">소개</a></li>
+      <li><a href="#sky" class="js-scroll-link">밤하늘</a></li>
+      <li><a href="#access" class="js-scroll-link">찾아오기</a></li>
+      <li><a href="#visit" class="js-scroll-link">방문 안내</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+        <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="0" y1="13" x2="22" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="모바일 내비게이션" aria-hidden="true">
+    <button class="mobile-close" aria-label="메뉴 닫기">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <ul role="list">
+      <li><a href="#about" class="mobile-link js-scroll-link">소개</a></li>
+      <li><a href="#sky" class="mobile-link js-scroll-link">밤하늘</a></li>
+      <li><a href="#access" class="mobile-link js-scroll-link">찾아오기</a></li>
+      <li><a href="#visit" class="mobile-link js-scroll-link">방문 안내</a></li>
+    </ul>
+  </div>
+
+  <main>
+
+    <!-- ======== HERO ======== -->
+    <section id="hero" class="section section-hero">
+
+      <div class="hero-badge">
+        <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="3" fill="#e8b84b"/></svg>
+        빛 공해 등급 0급 지역
+      </div>
+
+      <!-- Constellation SVG: Lyra 거문고자리 -->
+      <svg class="hero-constellation" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+        <circle class="c-star c-star--bright" cx="100" cy="28" r="3.5" fill="#e8b84b"/>
+        <circle class="c-star" cx="62"  cy="80" r="1.6" fill="#c8d4ff"/>
+        <circle class="c-star" cx="138" cy="74" r="1.8" fill="#c8d4ff"/>
+        <circle class="c-star" cx="52"  cy="124" r="1.5" fill="#c8d4ff"/>
+        <circle class="c-star" cx="148" cy="118" r="1.5" fill="#c8d4ff"/>
+        <circle class="c-star" cx="74"  cy="166" r="1.7" fill="#c8d4ff"/>
+        <circle class="c-star" cx="126" cy="162" r="1.4" fill="#c8d4ff"/>
+        <path class="c-line" d="M100 28 L62 80"   stroke="#e8b84b" stroke-width="0.7" opacity="0.45"/>
+        <path class="c-line" d="M100 28 L138 74"  stroke="#e8b84b" stroke-width="0.7" opacity="0.45"/>
+        <path class="c-line" d="M62 80 L52 124"   stroke="#e8b84b" stroke-width="0.7" opacity="0.45"/>
+        <path class="c-line" d="M138 74 L148 118" stroke="#e8b84b" stroke-width="0.7" opacity="0.45"/>
+        <path class="c-line" d="M52 124 L74 166"  stroke="#e8b84b" stroke-width="0.7" opacity="0.45"/>
+        <path class="c-line" d="M148 118 L126 162"stroke="#e8b84b" stroke-width="0.7" opacity="0.45"/>
+        <path class="c-line" d="M74 166 L126 162" stroke="#e8b84b" stroke-width="0.7" opacity="0.45"/>
+      </svg>
+
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="hero-line hero-line-1">빛을 버리면</span>
+          <span class="hero-line hero-line-2">별이 보인다</span>
+        </h1>
+        <p class="hero-sub">도시의 불빛에서 멀어질수록 하늘은 깊어집니다.<br>강원도 해발 920미터, 이안에서.</p>
+        <a href="#about" class="hero-cta js-scroll-link">
+          이안을 알아보다
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M7 2v10M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-coords" aria-label="천문대 좌표">
+        <span>37.4231<span class="coord-unit">°N</span></span>
+        <span class="coord-sep" aria-hidden="true">·</span>
+        <span>128.6742<span class="coord-unit">°E</span></span>
+        <span class="coord-sep" aria-hidden="true">·</span>
+        <span>920<span class="coord-unit">m</span></span>
+      </div>
+
+    </section>
+
+    <!-- ======== ABOUT ======== -->
+    <section id="about" class="section section-about reveal">
+      <div class="about-inner">
+        <div class="about-ghost" aria-hidden="true">고요</div>
+        <h2 class="about-heading">이안(夷安)이란</h2>
+        <div class="about-split">
+          <div class="about-body">
+            <p>이안(夷安)은 "평탄하고 편안한 곳"을 뜻합니다. 1987년 한 천문학자가 강원도 산속에 작은 돔 하나를 세운 것이 시작이었습니다.</p>
+            <p>지금도 그 자리입니다. 빛 공해 없음, 연간 맑은 날 230일. 망원경보다 먼저, 눈으로 보아야 할 하늘이 여기 있습니다.</p>
+          </div>
+          <div class="about-stats">
+            <div class="about-stat">
+              <div class="stat-value">1987</div>
+              <div class="stat-label">개관</div>
+            </div>
+            <div class="about-stat">
+              <div class="stat-value">230<span class="stat-unit">일</span></div>
+              <div class="stat-label">연간 관측 가능일</div>
+            </div>
+            <div class="about-stat">
+              <div class="stat-value">20<span class="stat-unit">인치</span></div>
+              <div class="stat-label">주 망원경 구경</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== SKY ======== -->
+    <section id="sky" class="section section-sky reveal">
+      <div class="sky-inner">
+        <h2 class="sky-heading">이 하늘에서<br>볼 수 있는 것</h2>
+        <div class="sky-list">
+          <article class="sky-item sky-reveal">
+            <div class="sky-num">01</div>
+            <div class="sky-body">
+              <h3>은하수</h3>
+              <p>여름밤, 맨눈으로 확인하는 우리 은하의 중심부. 도시에서는 평생 볼 수 없는 장면.</p>
+            </div>
+          </article>
+          <article class="sky-item sky-reveal">
+            <div class="sky-num">02</div>
+            <div class="sky-body">
+              <h3>행성</h3>
+              <p>20인치 반사 망원경으로 목성의 띠와 토성의 고리를 직접 눈으로 확인합니다.</p>
+            </div>
+          </article>
+          <article class="sky-item sky-reveal">
+            <div class="sky-num">03</div>
+            <div class="sky-body">
+              <h3>성운과 성단</h3>
+              <p>오리온 성운, 헤라클레스 성단, 안드로메다 은하. 교과서 밖에 존재하는 천체들.</p>
+            </div>
+          </article>
+          <article class="sky-item sky-reveal">
+            <div class="sky-num">04</div>
+            <div class="sky-body">
+              <h3>유성우</h3>
+              <p>페르세우스자리, 쌍둥이자리 극대기에 시간당 100개 이상의 유성을 관측합니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== ACCESS ======== -->
+    <section id="access" class="section section-access reveal">
+      <div class="access-inner">
+        <h2 class="section-heading">찾아오는 길</h2>
+        <div class="access-grid">
+          <div class="access-info">
+            <dl class="access-dl">
+              <div class="access-row">
+                <dt>위치</dt>
+                <dd>강원도 평창군 봉평면 산 12</dd>
+              </div>
+              <div class="access-row">
+                <dt>고도</dt>
+                <dd>해발 920&nbsp;m</dd>
+              </div>
+              <div class="access-row">
+                <dt>자가용</dt>
+                <dd>영동고속도로 진부 IC 경유, 약 2시간 30분 (서울 기준)</dd>
+              </div>
+              <div class="access-row">
+                <dt>대중교통</dt>
+                <dd>진부역 (KTX) 하차 후 예약 셔틀 운행 (사전 요청 필수)</dd>
+              </div>
+            </dl>
+            <p class="access-note">산악 도로 특성상 야간 운전에 주의하십시오. 도착 예정 시각을 사전에 알려주시면 셔틀을 준비합니다.</p>
+          </div>
+          <div class="access-visual" aria-hidden="true">
+            <svg class="topo-svg" viewBox="0 0 240 240" fill="none">
+              <ellipse cx="120" cy="120" rx="108" ry="92" stroke="currentColor" stroke-width="0.4" opacity="0.22"/>
+              <ellipse cx="120" cy="120" rx="83"  ry="70" stroke="currentColor" stroke-width="0.4" opacity="0.28"/>
+              <ellipse cx="120" cy="120" rx="58"  ry="49" stroke="currentColor" stroke-width="0.4" opacity="0.34"/>
+              <ellipse cx="120" cy="120" rx="34"  ry="29" stroke="currentColor" stroke-width="0.4" opacity="0.44"/>
+              <ellipse cx="120" cy="120" rx="14"  ry="12" stroke="currentColor" stroke-width="0.4" opacity="0.60"/>
+              <circle cx="120" cy="120" r="3.5" fill="#e8b84b"/>
+              <circle cx="120" cy="120" r="7.5" fill="none" stroke="#e8b84b" stroke-width="0.9" opacity="0.65"/>
+              <circle cx="120" cy="120" r="13"  fill="none" stroke="#e8b84b" stroke-width="0.4" opacity="0.30"/>
+              <!-- Dome silhouette -->
+              <path d="M112 118 Q120 108 128 118" stroke="#e8b84b" stroke-width="1.3" fill="none"/>
+              <line x1="112" y1="118" x2="128" y2="118" stroke="#e8b84b" stroke-width="1.3"/>
+            </svg>
+            <p class="topo-label">이안 천문대</p>
+            <p class="topo-coords">37.4231°N · 128.6742°E</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== VISIT ======== -->
+    <section id="visit" class="section section-visit reveal">
+      <div class="visit-inner">
+        <h2 class="section-heading">방문 안내</h2>
+        <div class="visit-cards">
+          <div class="visit-card visit-reveal">
+            <h3>운영 일정</h3>
+            <p>매주 금·토·일 및 공휴일 전날<br>일몰 후 30분부터 자정까지</p>
+            <p class="card-note">기상 악화 시 당일 취소될 수 있습니다</p>
+          </div>
+          <div class="visit-card visit-reveal">
+            <h3>인원 및 예약</h3>
+            <p>회당 최대 12인<br>사전 예약 필수 (당일 예약 불가)</p>
+            <p class="card-note">단체 및 학교 방문은 별도 문의</p>
+          </div>
+          <div class="visit-card visit-reveal">
+            <h3>지참 권장</h3>
+            <p>방한복 (산 정상은 여름에도 쌀쌀합니다)<br>적색 손전등 또는 헤드램프</p>
+            <p class="card-note">망원경 사용 지도는 이안 스태프가 담당합니다</p>
+          </div>
+        </div>
+        <div class="visit-cta-row">
+          <a href="mailto:ianobs@example.com" class="visit-cta-btn">예약 문의하기</a>
+          <span class="visit-email">ianobs@example.com</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-name">이안(夷安) 천문대</div>
+      <div class="footer-mid">
+        <span>강원도 평창군 봉평면 산 12</span>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <span>빛 공해 등급 0급 지역</span>
+      </div>
+      <p class="footer-quote">하늘은 모두에게 공평하다. 보러 가는 사람만 볼 수 있을 뿐.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

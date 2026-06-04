@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOKZA · 스페셜티 커피 로스터리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* === LENIS RESET === */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    /* === BASE RESET === */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:         #0b0906;
+      --surface:    #131009;
+      --surface-2:  #1c160d;
+      --text:       #f0e6d0;
+      --text-muted: #7a6d58;
+      --accent:     #c8913f;
+      --accent-dim: #7a5420;
+      --border:     #231d12;
+      --ff-serif:   'Noto Serif KR', serif;
+      --ff-display: 'Playfair Display', serif;
+    }
+
+    html {
+      /* NO scroll-behavior:smooth (Lenis handles it) */
+      font-size: 16px;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse 70% 45% at 8% 5%,  rgba(200,145,63,0.055) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 35% at 92% 95%, rgba(200,145,63,0.04)  0%, transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--ff-serif);
+      font-weight: 400;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* === PROGRESS BAR === */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      z-index: 200;
+      transform-origin: left;
+    }
+
+    /* === NAVIGATION === */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-nav::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(11,9,6,0.92) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      letter-spacing: 0.35em;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+    }
+
+    .nav-cta {
+      font-family: var(--ff-serif);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-dim);
+      padding-bottom: 2px;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .nav-cta:hover { color: var(--text); border-color: var(--text); }
+    .nav-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .nav-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    /* === HERO === */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 8rem;
+      overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 70%, rgba(20,14,6,0.25) 0%, transparent 70%),
+        linear-gradient(to top, rgba(11,9,6,0.95) 0%, rgba(11,9,6,0.4) 50%, rgba(11,9,6,0.7) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(4.5rem, 13vw, 11rem);
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      text-wrap: balance;
+      opacity: 0;
+      transform: translateY(32px);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-rule {
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--accent-dim);
+      margin: 2rem 0 1.75rem;
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.88rem, 1.4vw, 1.05rem);
+      color: var(--text-muted);
+      max-width: 38ch;
+      text-wrap: pretty;
+      line-height: 1.85;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 4rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      opacity: 0;
+    }
+
+    .hero-scroll-indicator span {
+      writing-mode: vertical-rl;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 0;
+      background: var(--text-muted);
+      animation: none;
+    }
+
+    /* === COMMON SECTION === */
+    .section-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .section-label {
+      display: block;
+      font-size: 0.62rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* === BRAND SECTION === */
+    .brand-section {
+      padding: 10rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: start;
+    }
+
+    .brand-label { margin-bottom: 2rem; }
+
+    .brand-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 3.8vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.18;
+      text-wrap: balance;
+      margin-bottom: 2.25rem;
+    }
+
+    .brand-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      text-wrap: pretty;
+    }
+
+    .brand-body + .brand-body { margin-top: 1.25rem; }
+
+    .brand-visual {
+      position: relative;
+      padding-top: 5rem;
+    }
+
+    .brand-figure {
+      position: relative;
+    }
+
+    .brand-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border);
+    }
+
+    .brand-caption {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 1rem;
+    }
+
+    .brand-year-badge {
+      position: absolute;
+      top: -2rem;
+      right: -1.5rem;
+      padding: 1.5rem 1.75rem;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+
+    .badge-num {
+      display: block;
+      font-family: var(--ff-display);
+      font-size: 2.25rem;
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .badge-label {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* === BEANS SECTION === */
+    .beans-section {
+      padding: 10rem 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .beans-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 5rem;
+    }
+
+    .section-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .beans-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr 1fr;
+      gap: 2px;
+    }
+
+    .bean-card {
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .bean-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .bean-img-wrap { overflow: hidden; }
+
+    .bean-img {
+      width: 100%;
+      display: block;
+      will-change: transform;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .bean-card:hover .bean-img { transform: scale(1.045); }
+
+    .bean-card--large .bean-img { aspect-ratio: 3/4; }
+    .bean-card--small .bean-img  { aspect-ratio: 4/5; }
+
+    .bean-info { padding: 1.5rem 0 2rem; }
+
+    .bean-origin {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .bean-name {
+      font-family: var(--ff-display);
+      font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    .bean-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+
+    .bean-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+
+    .bean-tag {
+      font-size: 0.57rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+    }
+
+    /* === PHILOSOPHY SECTION === */
+    .philosophy-section {
+      padding: 12rem 0;
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .philosophy-center {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .philosophy-quote {
+      font-family: var(--ff-display);
+      font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.45;
+      text-wrap: balance;
+      margin: 2rem 0 2.75rem;
+    }
+
+    .philosophy-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.95;
+      text-wrap: pretty;
+      max-width: 58ch;
+      margin: 0 auto;
+    }
+
+    /* Marquee band */
+    .philosophy-band {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+      margin: 7rem 0;
+    }
+
+    .philosophy-marquee {
+      display: flex;
+      gap: 3.5rem;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .marquee-word {
+      font-family: var(--ff-display);
+      font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+      font-style: italic;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .marquee-dot {
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+
+    /* Values grid */
+    .philosophy-values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+      padding-top: 4.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .value-num {
+      display: block;
+      font-family: var(--ff-display);
+      font-size: 0.7rem;
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      margin-bottom: 1.25rem;
+    }
+
+    .value-title {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .value-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      text-wrap: pretty;
+    }
+
+    /* === VISIT SECTION === */
+    .visit-section {
+      padding: 10rem 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: start;
+    }
+
+    .visit-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 3.8vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.2;
+      text-wrap: balance;
+      margin: 1.75rem 0 3rem;
+    }
+
+    .visit-detail { margin-bottom: 2.25rem; }
+
+    .detail-label {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .visit-btn {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--accent);
+      font-family: var(--ff-serif);
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .visit-btn:hover { background: var(--accent); color: var(--bg); }
+    .visit-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    /* SVG map */
+    .visit-map {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-label {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Location pulse */
+    .map-pulse {
+      animation: pulse-ring 2.4s ease-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes pulse-ring {
+      0%   { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.8); }
+    }
+
+    /* === FOOTER === */
+    .site-footer {
+      padding: 3rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--ff-display);
+      font-size: 0.95rem;
+      letter-spacing: 0.32em;
+      color: var(--text-muted);
+    }
+
+    .footer-copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* === REVEAL === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    /* === REDUCED MOTION === */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+      .reveal,
+      .hero-eyebrow,
+      .hero-title,
+      .hero-rule,
+      .hero-sub,
+      .hero-scroll-indicator,
+      .bean-img {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1100px) {
+      .section-wrap { padding: 0 2.5rem; }
+      .site-nav { padding: 1.25rem 2.5rem; }
+      .hero { padding: 0 2.5rem 6rem; }
+      .brand-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .brand-visual { padding-top: 0; }
+      .brand-year-badge { right: 0; }
+      .beans-grid { grid-template-columns: 1fr 1fr; }
+      .bean-card--large { grid-column: 1 / -1; }
+      .bean-card--large .bean-img { aspect-ratio: 16/9; }
+      .philosophy-values { grid-template-columns: 1fr; gap: 2.5rem; }
+      .visit-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .site-footer { padding: 2.5rem; }
+    }
+
+    @media (max-width: 640px) {
+      .section-wrap { padding: 0 1.5rem; }
+      .site-nav { padding: 1rem 1.5rem; }
+      .hero { padding: 0 1.5rem 5rem; }
+      .brand-section,
+      .beans-section,
+      .philosophy-section,
+      .visit-section { padding: 6rem 0; }
+      .beans-grid { grid-template-columns: 1fr; }
+      .bean-card--large .bean-img { aspect-ratio: 3/4; }
+      .bean-card--small .bean-img  { aspect-ratio: 3/4; }
+      .beans-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .hero-scroll-indicator { display: none; }
+      .site-footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar" role="progressbar" aria-label="페이지 스크롤 진행도" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <nav class="site-nav">
+    <a href="#top" class="nav-logo" aria-label="MOKZA 홈으로">MOKZA</a>
+    <a href="#visit" class="nav-cta">방문하기</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="top" class="hero" aria-label="히어로">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Specialty Coffee Roastery &nbsp;·&nbsp; Seoul, 2018</span>
+      <h1 class="hero-title">MOK<em>ZA</em></h1>
+      <span class="hero-rule" aria-hidden="true"></span>
+      <p class="hero-sub">원두 하나, 산지 하나, 로스터의 손길 하나.<br>목자는 커피를 양치듯 돌봅니다.</p>
+    </div>
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero-scroll-line" id="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- BRAND -->
+  <section class="brand-section">
+    <div class="section-wrap">
+      <div class="brand-grid">
+        <div>
+          <span class="section-label brand-label reveal">Our Story</span>
+          <h2 class="brand-heading reveal reveal-d1">커피 한 잔이<br>도달하기까지</h2>
+          <p class="brand-body reveal reveal-d2">목자(牧者)는 양치기를 뜻합니다. 우리는 에티오피아의 고원에서 콜롬비아의 골짜기까지, 원두가 태어난 자리를 직접 찾아가 농부들과 손을 맞잡습니다. 그 시작이 없다면 좋은 커피도 없습니다.</p>
+          <p class="brand-body reveal reveal-d3">서울 성수동의 작은 로스터리에서 우리는 매 배치마다 단 하나의 질문을 던집니다. 이 원두가 가진 본래의 맛을 온전히 전하고 있는가. 그 답이 나올 때까지 우리는 멈추지 않습니다.</p>
+        </div>
+        <div class="brand-visual reveal reveal-d2">
+          <div class="brand-figure">
+            <div class="brand-year-badge" aria-label="설립 연도 2018년">
+              <span class="badge-num">2018</span>
+              <span class="badge-label">Est. Seoul</span>
+            </div>
+            <img
+              class="brand-img"
+              src="https://picsum.photos/seed/mokza77/600/800"
+              alt="목자 로스터리 내부, 빈티지 로스팅 머신과 선반의 원두 자루"
+              width="600"
+              height="800"
+              loading="lazy"
+            >
+          </div>
+          <p class="brand-caption">Roastery &nbsp;·&nbsp; Seongsu-dong, Seoul</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEANS -->
+  <section class="beans-section" id="beans">
+    <div class="section-wrap">
+      <div class="beans-header">
+        <h2 class="section-heading reveal">시그니처 원두</h2>
+        <span class="section-label reveal reveal-d1" style="margin-bottom:0">Single Origin Collection</span>
+      </div>
+      <div class="beans-grid">
+
+        <article class="bean-card bean-card--large reveal">
+          <div class="bean-img-wrap">
+            <img
+              class="bean-img"
+              src="https://picsum.photos/seed/mokza-eth42/800/1067"
+              alt="에티오피아 예가체프 G1 원두 자루, 천일 건식 처리된 체리"
+              width="800"
+              height="1067"
+              loading="lazy"
+            >
+          </div>
+          <div class="bean-info">
+            <span class="bean-origin">Ethiopia &nbsp;·&nbsp; Yirgacheffe</span>
+            <h3 class="bean-name">예가체프 G1 내추럴</h3>
+            <p class="bean-desc">블루베리, 자스민, 다크 초콜릿. 에티오피아 남부 고원 1,800&nbsp;m에서 천천히 익은 체리를 햇볕 아래 건식 처리했습니다.</p>
+            <ul class="bean-tags" aria-label="가공 정보">
+              <li class="bean-tag">Natural</li>
+              <li class="bean-tag">1,800&nbsp;m</li>
+              <li class="bean-tag">Light Roast</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="bean-card bean-card--small reveal reveal-d1">
+          <div class="bean-img-wrap">
+            <img
+              class="bean-img"
+              src="https://picsum.photos/seed/mokza-col19/600/750"
+              alt="콜롬비아 후일라 워시드 원두, 안데스 화산토 재배"
+              width="600"
+              height="750"
+              loading="lazy"
+            >
+          </div>
+          <div class="bean-info">
+            <span class="bean-origin">Colombia &nbsp;·&nbsp; Huila</span>
+            <h3 class="bean-name">후일라 워시드</h3>
+            <p class="bean-desc">캐러멜, 붉은 사과, 헤이즐넛. 안데스 화산토의 무기질이 만들어낸 투명한 산미.</p>
+            <ul class="bean-tags" aria-label="가공 정보">
+              <li class="bean-tag">Washed</li>
+              <li class="bean-tag">1,600&nbsp;m</li>
+              <li class="bean-tag">Medium Roast</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="bean-card bean-card--small reveal reveal-d2">
+          <div class="bean-img-wrap">
+            <img
+              class="bean-img"
+              src="https://picsum.photos/seed/mokza-ken55/600/750"
+              alt="케냐 키리냐가 AA 원두, 와인 같은 복합성"
+              width="600"
+              height="750"
+              loading="lazy"
+            >
+          </div>
+          <div class="bean-info">
+            <span class="bean-origin">Kenya &nbsp;·&nbsp; Kirinyaga</span>
+            <h3 class="bean-name">키리냐가 AA</h3>
+            <p class="bean-desc">블랙커런트, 토마토, 밀크 초콜릿. 케냐 특유의 와인 같은 복합성과 묵직한 바디감.</p>
+            <ul class="bean-tags" aria-label="가공 정보">
+              <li class="bean-tag">Washed</li>
+              <li class="bean-tag">1,750&nbsp;m</li>
+              <li class="bean-tag">Light-Medium</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy-section" id="philosophy">
+    <div class="section-wrap">
+      <div class="philosophy-center">
+        <span class="section-label reveal" style="display:block;text-align:center;">Our Philosophy</span>
+        <blockquote class="philosophy-quote reveal reveal-d1">
+          &#8220;좋은 커피는 설명하지 않아도<br>스스로 말한다&#8221;
+        </blockquote>
+        <p class="philosophy-body reveal reveal-d2">우리는 마케팅 언어로 원두를 팔지 않습니다. 산지, 공정, 로스팅 날짜만 적힌 작은 봉투 하나가 스스로 증명하게 합니다. 목자의 역할은 원두가 가진 언어를 방해하지 않는 것입니다.</p>
+      </div>
+    </div>
+
+    <div class="philosophy-band" aria-hidden="true">
+      <div class="philosophy-marquee" id="philosophy-marquee">
+        <span class="marquee-word">Traceability</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Transparency</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Seasonality</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Precision</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Care</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Traceability</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Transparency</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Seasonality</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Precision</span><span class="marquee-dot">·</span>
+        <span class="marquee-word">Care</span><span class="marquee-dot">·</span>
+      </div>
+    </div>
+
+    <div class="section-wrap">
+      <div class="philosophy-values">
+        <div class="reveal">
+          <span class="value-num">01</span>
+          <h3 class="value-title">산지 직접 소싱</h3>
+          <p class="value-text">중간 유통 없이 농부들과 직접 계약합니다. 공정한 가격이 지속 가능한 품질을 만듭니다.</p>
+        </div>
+        <div class="reveal reveal-d1">
+          <span class="value-num">02</span>
+          <h3 class="value-title">소량 배치 로스팅</h3>
+          <p class="value-text">한 번에 소량씩, 원두마다 다른 온도와 시간으로. 균일함보다 최적을 추구합니다.</p>
+        </div>
+        <div class="reveal reveal-d2">
+          <span class="value-num">03</span>
+          <h3 class="value-title">투명한 정보 공개</h3>
+          <p class="value-text">모든 원두의 농장, 해발고도, 처리 방식, 로스팅 날짜를 공개합니다. 숨기지 않습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit-section" id="visit">
+    <div class="section-wrap">
+      <div class="visit-grid">
+        <div>
+          <span class="section-label reveal">Find Us</span>
+          <h2 class="visit-heading reveal reveal-d1">함께 커피<br>한 잔 합시다</h2>
+          <div class="visit-detail reveal reveal-d2">
+            <span class="detail-label">주소</span>
+            <p class="detail-value">서울특별시 성동구 성수일로 12길&nbsp;20<br>MOKZA 로스터리 1층</p>
+          </div>
+          <div class="visit-detail reveal reveal-d2">
+            <span class="detail-label">운영 시간</span>
+            <p class="detail-value">화요일&nbsp;&#8211;&nbsp;일요일 &nbsp;&nbsp;10:00&nbsp;&#8211;&nbsp;18:00<br>월요일 정기 휴무</p>
+          </div>
+          <div class="visit-detail reveal reveal-d3">
+            <span class="detail-label">연락처</span>
+            <p class="detail-value">hello@mokza.co.kr</p>
+          </div>
+          <a href="mailto:hello@mokza.co.kr" class="visit-btn reveal reveal-d4">이메일 보내기</a>
+        </div>
+        <div class="reveal reveal-d2">
+          <div class="visit-map" role="img" aria-label="목자 로스터리 위치 지도, 서울 성수동">
+            <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <pattern id="mkz-grid" width="36" height="36" patternUnits="userSpaceOnUse">
+                  <path d="M36 0L0 0 0 36" fill="none" stroke="#231d12" stroke-width="1"/>
+                </pattern>
+              </defs>
+              <rect width="400" height="300" fill="url(#mkz-grid)"/>
+              <!-- Main roads -->
+              <rect x="0" y="143" width="400" height="4" fill="#2a2218"/>
+              <rect x="197" y="0" width="4" height="300" fill="#2a2218"/>
+              <!-- Minor roads -->
+              <rect x="0" y="72" width="170" height="2" fill="#221b11"/>
+              <rect x="260" y="72" width="140" height="2" fill="#221b11"/>
+              <rect x="72" y="0" width="2" height="130" fill="#221b11"/>
+              <rect x="316" y="170" width="2" height="130" fill="#221b11"/>
+              <!-- Location marker -->
+              <circle cx="199" cy="145" r="5" fill="#c8913f"/>
+              <circle class="map-pulse" cx="199" cy="145" r="14" fill="none" stroke="#c8913f" stroke-width="1.5"/>
+              <circle cx="199" cy="145" r="22" fill="none" stroke="#c8913f" stroke-width="0.5" opacity="0.3"/>
+            </svg>
+            <span class="map-label">성수동, 서울</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span class="footer-logo">MOKZA</span>
+    <p class="footer-copy">&copy;&nbsp;2026 MOKZA Specialty Coffee Roastery. All rights reserved.</p>
+  </footer>
+
+  <!-- CDN Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const spark_reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ── CANVAS HERO GLOW PARTICLES ─────────────────────────────── */
+    (function spark_initCanvas() {
+      const spark_cvs = document.getElementById('hero-canvas');
+      if (!spark_cvs || spark_reduced) return;
+
+      const spark_ctx = spark_cvs.getContext('2d');
+      let spark_cw, spark_ch;
+      const spark_pool = [];
+
+      function spark_resize() {
+        spark_cw = spark_cvs.width  = spark_cvs.offsetWidth;
+        spark_ch = spark_cvs.height = spark_cvs.offsetHeight;
+      }
+
+      function spark_makeParticle() {
+        return {
+          x:          spark_cw * (0.1 + Math.random() * 0.5),
+          y:          spark_ch + 30,
+          vx:         (Math.random() - 0.5) * 0.35,
+          vy:         -(0.28 + Math.random() * 0.45),
+          r:          55 + Math.random() * 90,
+          opacity:    0,
+          maxOpacity: 0.045 + Math.random() * 0.055,
+          life:       0,
+          maxLife:    200 + Math.random() * 160,
+          wob:        Math.random() * Math.PI * 2,
+          wobS:       0.008 + Math.random() * 0.014,
+        };
+      }
+
+      spark_resize();
+      window.addEventListener('resize', spark_resize);
+
+      for (let i = 0; i < 9; i++) {
+        const p = spark_makeParticle();
+        p.life = Math.floor(Math.random() * p.maxLife);
+        p.y    = spark_ch - (p.life / p.maxLife) * spark_ch * 1.3;
+        spark_pool.push(p);
+      }
+
+      function spark_drawCanvas() {
+        spark_ctx.clearRect(0, 0, spark_cw, spark_ch);
+
+        for (let i = spark_pool.length - 1; i >= 0; i--) {
+          const p = spark_pool[i];
+          p.life++;
+          p.wob += p.wobS;
+          p.x   += p.vx + Math.sin(p.wob) * 0.28;
+          p.y   += p.vy;
+
+          const ratio = p.life / p.maxLife;
+          if      (ratio < 0.2) p.opacity = (ratio / 0.2) * p.maxOpacity;
+          else if (ratio > 0.72) p.opacity = ((1 - ratio) / 0.28) * p.maxOpacity;
+          else                   p.opacity = p.maxOpacity;
+
+          const grad = spark_ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+          grad.addColorStop(0, `rgba(200, 145, 63, ${p.opacity})`);
+          grad.addColorStop(1, `rgba(200, 145, 63, 0)`);
+          spark_ctx.fillStyle = grad;
+          spark_ctx.beginPath();
+          spark_ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          spark_ctx.fill();
+
+          if (p.life >= p.maxLife) {
+            spark_pool.splice(i, 1);
+            spark_pool.push(spark_makeParticle());
+          }
+        }
+
+        requestAnimationFrame(spark_drawCanvas);
+      }
+
+      spark_drawCanvas();
+    }());
+
+    /* ── LENIS SMOOTH SCROLL ─────────────────────────────────────── */
+    let spark_lenis = null;
+
+    if (!spark_reduced) {
+      spark_lenis = new Lenis({
+        duration: 1.2,
+        easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      });
+      spark_lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) { spark_lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    /* ── PROGRESS BAR ────────────────────────────────────────────── */
+    (function spark_initProgress() {
+      const spark_bar = document.getElementById('progress-bar');
+      if (!spark_bar) return;
+      function spark_update() {
+        const spark_scrolled = window.scrollY || document.documentElement.scrollTop;
+        const spark_total    = document.documentElement.scrollHeight - window.innerHeight;
+        const spark_pct      = spark_total > 0 ? (spark_scrolled / spark_total) * 100 : 0;
+        spark_bar.style.width = spark_pct + '%';
+        spark_bar.setAttribute('aria-valuenow', Math.round(spark_pct));
+      }
+      window.addEventListener('scroll', spark_update, { passive: true });
+    }());
+
+    /* ── HERO ENTRANCE ───────────────────────────────────────────── */
+    if (!spark_reduced) {
+      gsap.to('.hero-eyebrow',          { opacity: 1, y: 0,     duration: 0.8, delay: 0.35, ease: 'power2.out' });
+      gsap.to('.hero-title',            { opacity: 1, y: 0,     duration: 1.0, delay: 0.55, ease: 'power3.out' });
+      gsap.to('.hero-rule',             { opacity: 1, scaleX: 1, duration: 0.6, delay: 0.90, ease: 'power2.inOut' });
+      gsap.to('.hero-sub',              { opacity: 1, y: 0,     duration: 0.8, delay: 1.05, ease: 'power2.out' });
+      gsap.to('.hero-scroll-indicator', { opacity: 1,            duration: 0.8, delay: 1.6  });
+
+      /* Scroll line extend */
+      const spark_line = document.getElementById('hero-scroll-line');
+      if (spark_line) {
+        gsap.fromTo(spark_line,
+          { height: 0 },
+          { height: 48, duration: 1.2, delay: 1.8, ease: 'power2.inOut', repeat: -1, yoyo: true }
+        );
+      }
+    }
+
+    /* ── SCROLL REVEALS (IntersectionObserver) ───────────────────── */
+    if (!spark_reduced) {
+      const spark_revealEls = document.querySelectorAll('.reveal');
+      const spark_io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            spark_io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+      spark_revealEls.forEach(function (el) { spark_io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+    }
+
+    /* ── MARQUEE ─────────────────────────────────────────────────── */
+    (function spark_initMarquee() {
+      const spark_mq = document.getElementById('philosophy-marquee');
+      if (!spark_mq || spark_reduced) return;
+
+      let spark_mqX   = 0;
+      const spark_spd = 0.48;
+      let   spark_halfW = 0;
+
+      /* Wait one frame so scrollWidth is accurate */
+      requestAnimationFrame(function () {
+        spark_halfW = spark_mq.scrollWidth / 2;
+        (function spark_tick() {
+          spark_mqX -= spark_spd;
+          if (Math.abs(spark_mqX) >= spark_halfW) spark_mqX = 0;
+          spark_mq.style.transform = 'translateX(' + spark_mqX + 'px)';
+          requestAnimationFrame(spark_tick);
+        }());
+      });
+    }());
+
+    /* ── SMOOTH NAV ANCHOR SCROLL ────────────────────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        const spark_id = this.getAttribute('href').slice(1);
+        if (!spark_id) return;
+        const spark_target = document.getElementById(spark_id);
+        if (!spark_target) return;
+        e.preventDefault();
+        if (spark_lenis) {
+          spark_lenis.scrollTo(spark_target, { offset: -80 });
+        } else {
+          const spark_top = spark_target.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: spark_top });
+        }
+      });
+    });
+
+  }());
+  </script>
+
+</body>
+</html>

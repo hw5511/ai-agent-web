@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ko" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOKZA : 목자 스페셜티 로스터리</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+  <style>
+    /* === RESET === */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        oklch(9% 0.025 48);
+      --bg2:       oklch(13% 0.028 50);
+      --bg3:       oklch(18% 0.035 52);
+      --border:    oklch(24% 0.04 52);
+      --accent:    oklch(71% 0.17 74);
+      --accent-d:  oklch(52% 0.13 72);
+      --t1:        oklch(94% 0.01 78);
+      --t2:        oklch(64% 0.04 68);
+      --t3:        oklch(42% 0.03 62);
+      --eout:      cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Lenis reset */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    html { scroll-behavior: auto; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--t1);
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 400;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* === PROGRESS === */
+    #mk-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: var(--accent); width: 0%; z-index: 999;
+      transform-origin: left; will-change: width;
+      pointer-events: none;
+    }
+
+    /* === NAV === */
+    #mk-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      padding: 1.6rem 3.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 400ms var(--eout);
+    }
+    #mk-nav.scrolled {
+      background: oklch(9% 0.025 48 / 0.9);
+      backdrop-filter: blur(12px);
+    }
+    .mk-nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--t1); text-decoration: none;
+    }
+    .mk-nav-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .mk-nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .mk-nav-links a {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--t2); text-decoration: none;
+      transition: color 200ms var(--eout);
+    }
+    .mk-nav-links a:hover { color: var(--accent); }
+    .mk-nav-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+
+    /* === HERO === */
+    #mk-hero {
+      position: relative; height: 100vh; min-height: 640px;
+      display: flex; align-items: flex-end;
+      padding: 0 3.5rem 5.5rem;
+      overflow: hidden;
+    }
+    #mk-hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+    }
+    .mk-hero-content { position: relative; z-index: 2; }
+    .mk-eyebrow {
+      font-size: 0.66rem; letter-spacing: 0.36em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.4rem;
+      opacity: 0; transform: translateY(18px); will-change: transform, opacity;
+    }
+    .mk-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 11vw, 10rem);
+      font-weight: 700; line-height: 0.92;
+      letter-spacing: -0.02em; color: var(--t1);
+      opacity: 0; transform: translateY(44px); will-change: transform, opacity;
+    }
+    .mk-hero-title em { font-style: italic; color: var(--accent); }
+    .mk-hero-sub {
+      margin-top: 2rem;
+      font-size: 1rem; line-height: 1.7; color: var(--t2);
+      max-width: 360px; text-wrap: pretty;
+      opacity: 0; transform: translateY(20px); will-change: transform, opacity;
+    }
+    .mk-scroll-hint {
+      position: absolute; bottom: 2.2rem; right: 3.5rem;
+      font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--t3); writing-mode: vertical-rl;
+      opacity: 0; will-change: opacity;
+    }
+
+    /* === SECTION SHELL === */
+    .mk-sec { padding: 9rem 3.5rem; }
+    .mk-sec-inner { max-width: 1200px; margin: 0 auto; }
+    .mk-label {
+      font-size: 0.64rem; letter-spacing: 0.36em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.4rem; display: block;
+    }
+    .mk-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      line-height: 1.18; letter-spacing: -0.01em;
+      color: var(--t1); text-wrap: balance; margin-bottom: 2rem;
+    }
+    .mk-body { font-size: 0.97rem; line-height: 1.82; color: var(--t2); text-wrap: pretty; }
+    .mk-body + .mk-body { margin-top: 1.1rem; }
+
+    /* === BRAND === */
+    #mk-brand { background: var(--bg); }
+    .mk-brand-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 7rem; align-items: center;
+    }
+    .mk-brand-img {
+      position: relative; aspect-ratio: 4/5;
+      background: var(--bg3); border: 1px solid var(--border); overflow: hidden;
+      box-shadow:
+        inset 0 1px 0 oklch(38% 0.05 68 / 0.25),
+        inset 0 -1px 0 oklch(5% 0.01 40 / 0.7),
+        0 50px 90px oklch(5% 0.02 30 / 0.55);
+    }
+    .mk-brand-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.72; display: block;
+      transition: opacity 700ms var(--eout), transform 900ms var(--eout);
+    }
+    .mk-brand-img:hover img { opacity: 0.88; transform: scale(1.04); }
+    .mk-brand-img-caption {
+      position: absolute; bottom: 1.4rem; left: 1.4rem;
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .mk-brand-text {
+      opacity: 0; transform: translateX(28px); will-change: transform, opacity;
+    }
+
+    /* === BEANS === */
+    #mk-beans { background: var(--bg2); }
+    .mk-beans-hd {
+      margin-bottom: 3.5rem;
+      opacity: 0; transform: translateY(28px); will-change: transform, opacity;
+    }
+    .mk-beans-hd .mk-heading { margin-bottom: 0; }
+    .mk-beans-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1.5px;
+      background: var(--border);
+    }
+    .mk-bean {
+      background: var(--bg3);
+      opacity: 0; transform: translateY(28px); will-change: transform, opacity;
+      position: relative; overflow: hidden;
+      transition: background 280ms var(--eout);
+    }
+    .mk-bean:nth-child(1) { grid-row: span 2; }
+    .mk-bean-in {
+      padding: 2.8rem;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+    }
+    .mk-bean:nth-child(1) .mk-bean-in { min-height: 500px; }
+    .mk-bean-origin {
+      font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .mk-bean-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.25rem, 2.4vw, 1.9rem); font-weight: 700;
+      color: var(--t1); line-height: 1.2; margin-bottom: 0.9rem; text-wrap: balance;
+    }
+    .mk-bean-desc { font-size: 0.875rem; color: var(--t2); line-height: 1.65; text-wrap: pretty; }
+    .mk-bean-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.6rem; }
+    .mk-bean-tag {
+      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent-d); border: 1px solid var(--accent-d);
+      padding: 0.25rem 0.75rem; border-radius: 1px;
+    }
+    .mk-bean::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--accent); opacity: 0;
+      mix-blend-mode: overlay;
+      transition: opacity 280ms var(--eout);
+    }
+    .mk-bean:hover::before { opacity: 0.07; }
+    .mk-bean:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+    /* === PHILOSOPHY === */
+    #mk-phil { background: var(--bg); position: relative; overflow: hidden; }
+    .mk-phil-bg {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(7rem, 19vw, 21rem);
+      font-weight: 700; color: oklch(14% 0.022 50);
+      white-space: nowrap; pointer-events: none;
+      user-select: none; will-change: transform;
+    }
+    .mk-phil-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .mk-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.8vw, 3.2rem); font-weight: 400;
+      font-style: italic; color: var(--t1);
+      line-height: 1.45; max-width: 880px;
+      margin: 0 auto; text-wrap: balance;
+      opacity: 0; transform: translateY(38px); will-change: transform, opacity;
+    }
+    .mk-quote cite {
+      display: block; margin-top: 2rem;
+      font-family: 'Noto Serif KR', serif; font-size: 0.7rem;
+      font-style: normal; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .mk-pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; margin-top: 6rem;
+    }
+    .mk-pillar {
+      padding: 2.4rem 0 2.4rem;
+      border-top: 1px solid var(--border);
+      opacity: 0; transform: translateY(18px); will-change: transform, opacity;
+    }
+    .mk-pillar-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 700;
+      color: oklch(20% 0.03 52); line-height: 1; margin-bottom: 1.4rem;
+    }
+    .mk-pillar-title {
+      font-size: 0.97rem; font-weight: 700; color: var(--t1); margin-bottom: 0.7rem;
+    }
+    .mk-pillar-body { font-size: 0.875rem; color: var(--t2); line-height: 1.7; }
+
+    /* === VISIT === */
+    #mk-visit { background: var(--bg2); }
+    .mk-visit-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 7rem; align-items: start;
+    }
+    .mk-visit-info { opacity: 0; transform: translateY(28px); will-change: transform, opacity; }
+    .mk-details { margin-top: 3rem; display: grid; gap: 0; }
+    .mk-detail {
+      display: grid; grid-template-columns: 110px 1fr;
+      gap: 1rem; padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mk-detail:first-child { border-top: 1px solid var(--border); }
+    .mk-detail-lbl {
+      font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent); padding-top: 0.2rem;
+    }
+    .mk-detail-val { font-size: 0.88rem; color: var(--t2); line-height: 1.7; }
+    .mk-cta {
+      margin-top: 3rem; display: inline-flex; align-items: center; gap: 1rem;
+      font-size: 0.7rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--t1); text-decoration: none;
+      border: 1px solid var(--border); padding: 1.2rem 2.5rem;
+      transition: border-color 240ms var(--eout), color 240ms var(--eout);
+      touch-action: manipulation; min-height: 44px;
+    }
+    .mk-cta:hover { border-color: var(--accent); color: var(--accent); }
+    .mk-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .mk-map-wrap {
+      aspect-ratio: 1; background: var(--bg3);
+      border: 1px solid var(--border); overflow: hidden; position: relative;
+      box-shadow:
+        inset 0 1px 0 oklch(34% 0.04 62 / 0.2),
+        inset 0 -1px 0 oklch(5% 0.01 30 / 0.55);
+      opacity: 0; transform: translateY(28px); will-change: transform, opacity;
+    }
+    #mk-map-canvas { display: block; width: 100%; height: 100%; }
+
+    /* === FOOTER === */
+    footer {
+      padding: 2.5rem 3.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .mk-ft-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--t3);
+    }
+    .mk-ft-copy { font-size: 0.68rem; color: var(--t3); letter-spacing: 0.08em; }
+
+    /* === MOBILE === */
+    @media (max-width: 768px) {
+      #mk-nav { padding: 1.2rem 1.5rem; }
+      .mk-nav-links { display: none; }
+      #mk-hero { padding: 0 1.5rem 4rem; }
+      .mk-scroll-hint { display: none; }
+      .mk-sec { padding: 5.5rem 1.5rem; }
+      .mk-brand-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .mk-brand-img { aspect-ratio: 3/2; }
+      .mk-beans-grid { grid-template-columns: 1fr; gap: 1.5px; }
+      .mk-bean:nth-child(1) { grid-row: auto; }
+      .mk-bean:nth-child(1) .mk-bean-in { min-height: 280px; }
+      .mk-pillars { grid-template-columns: 1fr; gap: 0; }
+      .mk-visit-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .mk-map-wrap { aspect-ratio: 4/3; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+
+    /* === REDUCED MOTION === */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        transition-duration: .001ms !important;
+      }
+      .mk-eyebrow, .mk-hero-title, .mk-hero-sub, .mk-scroll-hint,
+      .mk-brand-text, .mk-beans-hd, .mk-bean,
+      .mk-quote, .mk-pillar,
+      .mk-visit-info, .mk-map-wrap {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="mk-progress" role="progressbar" aria-label="페이지 스크롤 진행도" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- NAV -->
+  <nav id="mk-nav" aria-label="주 내비게이션">
+    <a href="#mk-hero" class="mk-nav-logo">MOKZA</a>
+    <ul class="mk-nav-links" role="list">
+      <li><a href="#mk-brand">브랜드</a></li>
+      <li><a href="#mk-beans">원두</a></li>
+      <li><a href="#mk-phil">철학</a></li>
+      <li><a href="#mk-visit">방문</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="mk-hero" aria-label="히어로 섹션">
+    <canvas id="mk-hero-canvas" aria-hidden="true"></canvas>
+    <div class="mk-hero-content">
+      <p class="mk-eyebrow">Seoul Specialty Roastery</p>
+      <h1 class="mk-hero-title">MOK<em>ZA</em></h1>
+      <p class="mk-hero-sub">좋은 원두는 좋은 땅에서 시작됩니다. 목자는 그 여정을 끝까지 함께합니다.</p>
+    </div>
+    <span class="mk-scroll-hint" aria-hidden="true">Scroll</span>
+  </section>
+
+  <!-- BRAND -->
+  <section class="mk-sec" id="mk-brand">
+    <div class="mk-sec-inner mk-brand-grid">
+      <div class="mk-brand-img">
+        <img
+          src="https://picsum.photos/seed/mokza11/600/750"
+          alt="목자 로스터리 내부 공간, 로스팅 장비와 따뜻한 조명"
+          width="600" height="750" loading="lazy"
+        >
+        <span class="mk-brand-img-caption">Seoul, Seongsu-dong</span>
+      </div>
+      <div class="mk-brand-text">
+        <span class="mk-label">About MOKZA</span>
+        <h2 class="mk-heading">원두를 기르는 자의 손길</h2>
+        <p class="mk-body">
+          목자(牧者)는 양 떼를 돌보는 사람입니다. 우리는 그 이름처럼, 씨앗이 심기는 순간부터 당신의 잔에 닿는 순간까지 원두 한 알 한 알을 돌봅니다.
+        </p>
+        <p class="mk-body">
+          에티오피아 예르가체페의 농장주, 콜롬비아 안티오키아의 세척 스테이션, 그리고 서울 성수동의 로스팅 룸. 세 곳이 하나의 이야기로 이어집니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEANS -->
+  <section class="mk-sec" id="mk-beans">
+    <div class="mk-sec-inner">
+      <div class="mk-beans-hd">
+        <span class="mk-label">Signature Offerings</span>
+        <h2 class="mk-heading">시그니처 원두</h2>
+      </div>
+      <div class="mk-beans-grid" role="list">
+
+        <article class="mk-bean" role="listitem" tabindex="0" aria-label="에티오피아 예르가체페 원두 정보">
+          <div class="mk-bean-in">
+            <div>
+              <p class="mk-bean-origin">Ethiopia &middot; Yirgacheffe</p>
+              <h3 class="mk-bean-name">예르가의 빛</h3>
+              <p class="mk-bean-desc">내추럴 프로세스로 건조한 헤이룸 품종. 블루베리와 재스민의 복합적인 향미가 마치 아프리카의 여명처럼 펼쳐집니다. 클린컵과 와인 질감의 경계를 넘나듭니다.</p>
+            </div>
+            <div class="mk-bean-tags">
+              <span class="mk-bean-tag">Natural</span>
+              <span class="mk-bean-tag">Heirloom</span>
+              <span class="mk-bean-tag">Light Roast</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="mk-bean" role="listitem" tabindex="0" aria-label="콜롬비아 안티오키아 원두 정보">
+          <div class="mk-bean-in">
+            <p class="mk-bean-origin">Colombia &middot; Antioquia</p>
+            <h3 class="mk-bean-name">카투라 블랑코</h3>
+            <p class="mk-bean-desc">화이트 피치, 헤이즐넛. 깨끗하고 고요한 단맛.</p>
+            <div class="mk-bean-tags">
+              <span class="mk-bean-tag">Washed</span>
+              <span class="mk-bean-tag">Medium</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="mk-bean" role="listitem" tabindex="0" aria-label="과테말라 후에우에테낭고 원두 정보">
+          <div class="mk-bean-in">
+            <p class="mk-bean-origin">Guatemala &middot; Huehuetenango</p>
+            <h3 class="mk-bean-name">후에우에의 밤</h3>
+            <p class="mk-bean-desc">다크 초콜릿, 카라멜화된 자두. 고도의 밤처럼 묵직하고 깊다.</p>
+            <div class="mk-bean-tags">
+              <span class="mk-bean-tag">Honey</span>
+              <span class="mk-bean-tag">Medium Dark</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="mk-sec" id="mk-phil">
+    <div class="mk-phil-bg" aria-hidden="true">MOKZA</div>
+    <div class="mk-phil-inner">
+      <blockquote class="mk-quote">
+        "로스팅은 원두가 가진 목소리를 찾아주는 일입니다. 우리는 다만 그 소리를 잘 듣는 법을 배울 뿐입니다."
+        <cite>MOKZA, 2024</cite>
+      </blockquote>
+      <div class="mk-pillars">
+        <div class="mk-pillar">
+          <div class="mk-pillar-num">01</div>
+          <h3 class="mk-pillar-title">직접 무역 (Direct Trade)</h3>
+          <p class="mk-pillar-body">중간 단계를 최소화하고 농부와 직접 관계를 맺습니다. 공정한 가격이 더 좋은 커피를 만든다고 믿습니다.</p>
+        </div>
+        <div class="mk-pillar">
+          <div class="mk-pillar-num">02</div>
+          <h3 class="mk-pillar-title">소량 로스팅 (Small Batch)</h3>
+          <p class="mk-pillar-body">한 번에 5kg 이하로만 로스팅합니다. 양보다 집중, 집중이 품질을 만듭니다.</p>
+        </div>
+        <div class="mk-pillar">
+          <div class="mk-pillar-num">03</div>
+          <h3 class="mk-pillar-title">투명한 이력 (Traceability)</h3>
+          <p class="mk-pillar-body">모든 원두의 농장, 수확 연도, 가공 방식, 로스팅 날짜를 공개합니다. 숨길 것이 없는 커피만 팝니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="mk-sec" id="mk-visit">
+    <div class="mk-sec-inner mk-visit-grid">
+      <div class="mk-visit-info">
+        <span class="mk-label">Find Us</span>
+        <h2 class="mk-heading">목자를 찾아오세요</h2>
+        <p class="mk-body">성수동 골목 깊숙이, 낡은 철문 너머에 있습니다. 간판보다 향기가 먼저 안내합니다.</p>
+        <div class="mk-details">
+          <div class="mk-detail">
+            <span class="mk-detail-lbl">주소</span>
+            <span class="mk-detail-val">서울 성동구 성수이로 14길 14<br>1층 (지하 입구)</span>
+          </div>
+          <div class="mk-detail">
+            <span class="mk-detail-lbl">영업 시간</span>
+            <span class="mk-detail-val">화요일 ~ 일요일<br>10:00 ~ 18:00 (월요일 휴무)</span>
+          </div>
+          <div class="mk-detail">
+            <span class="mk-detail-lbl">연락</span>
+            <span class="mk-detail-val">hello@mokza.kr<br>@mokza.roastery</span>
+          </div>
+        </div>
+        <a href="mailto:hello@mokza.kr" class="mk-cta">문의하기</a>
+      </div>
+      <div class="mk-map-wrap" aria-label="목자 로스터리 위치 지도 (성수동)">
+        <canvas id="mk-map-canvas" aria-hidden="true"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="mk-ft-logo">MOKZA</span>
+    <span class="mk-ft-copy">&#169; 2024 MOKZA Specialty Roastery. All rights reserved.</span>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* =============================================
+       HERO CANVAS: sculpted bean particle field
+       VISUAL_SPARK lb-162: raymarch-style depth via
+       layered ellipse + inset-line bean silhouettes
+    ============================================= */
+    const mk_heroCanvas = document.getElementById('mk-hero-canvas');
+    const mk_hCtx = mk_heroCanvas.getContext('2d');
+    const mk_SEED = 42;
+    let mk_mouseX = 0.5;
+    let mk_mouseY = 0.5;
+    let mk_heroRaf = null;
+
+    function mk_resizeHero() {
+      mk_heroCanvas.width  = mk_heroCanvas.offsetWidth;
+      mk_heroCanvas.height = mk_heroCanvas.offsetHeight;
+    }
+
+    /* Deterministic pseudo-random from seed + input */
+    function mk_rng(a, b, s) {
+      const n = Math.sin(a * 127.1 + b * 311.7 + s * 74.3) * 43758.5453123;
+      return n - Math.floor(n);
+    }
+
+    const mk_beans = [];
+
+    function mk_initBeans() {
+      mk_beans.length = 0;
+      const count = 55;
+      for (let i = 0; i < count; i++) {
+        mk_beans.push({
+          bx:      mk_rng(i * 0.31, 0.11, mk_SEED),
+          by:      mk_rng(i * 0.31, 0.88, mk_SEED),
+          sz:      1.6 + mk_rng(i * 0.31, 0.55, mk_SEED) * 3.2,
+          spd:     0.00025 + mk_rng(i * 0.31, 0.44, mk_SEED) * 0.0004,
+          phase:   mk_rng(i * 0.31, 0.33, mk_SEED) * Math.PI * 2,
+          rot:     mk_rng(i * 0.31, 0.77, mk_SEED) * Math.PI,
+          alpha:   0.12 + mk_rng(i * 0.31, 0.22, mk_SEED) * 0.28,
+          layer:   Math.floor(mk_rng(i * 0.31, 0.99, mk_SEED) * 3)
+        });
+      }
+    }
+
+    let mk_hTime = 0;
+
+    function mk_drawHero(ts) {
+      mk_hTime = ts * 0.001;
+      const w = mk_heroCanvas.width;
+      const h = mk_heroCanvas.height;
+
+      mk_hCtx.clearRect(0, 0, w, h);
+
+      /* Radial gradient: warm amber glow top-right */
+      const mk_g = mk_hCtx.createRadialGradient(w * 0.72, h * 0.28, 0, w * 0.5, h * 0.5, w * 0.9);
+      mk_g.addColorStop(0,   'oklch(24% 0.07 58 / 0.85)');
+      mk_g.addColorStop(0.45,'oklch(13% 0.03 50 / 0.95)');
+      mk_g.addColorStop(1,   'oklch(8%  0.02 44 / 1)');
+      mk_hCtx.fillStyle = mk_g;
+      mk_hCtx.fillRect(0, 0, w, h);
+
+      /* Layer 0 (back): faint large beans */
+      /* Layer 1 (mid) */
+      /* Layer 2 (front): bright small beans */
+      const mk_layerAlphaScale = [0.4, 0.7, 1.0];
+
+      mk_beans.forEach(function (p) {
+        const t  = mk_hTime * p.spd * 1000;
+        const px = (p.bx + Math.sin(t + p.phase) * 0.022
+                         + (mk_mouseX - 0.5) * (0.015 + p.layer * 0.012)) * w;
+        const py = (p.by + Math.cos(t * 0.9 + p.phase) * 0.016
+                         + (mk_mouseY - 0.5) * (0.012 + p.layer * 0.010)) * h;
+        const sz = p.sz * (0.8 + p.layer * 0.2);
+        const al = p.alpha * mk_layerAlphaScale[p.layer];
+
+        mk_hCtx.save();
+        mk_hCtx.translate(px, py);
+        mk_hCtx.rotate(p.rot + mk_hTime * 0.03 * (p.layer - 1));
+        mk_hCtx.globalAlpha = al;
+        mk_hCtx.strokeStyle = p.layer === 2 ? 'oklch(71% 0.17 74)' : 'oklch(55% 0.10 70)';
+        mk_hCtx.lineWidth   = p.layer === 2 ? 1 : 0.7;
+
+        /* Bean ellipse */
+        mk_hCtx.beginPath();
+        mk_hCtx.ellipse(0, 0, sz, sz * 1.65, 0, 0, Math.PI * 2);
+        mk_hCtx.stroke();
+
+        /* Center crease */
+        mk_hCtx.beginPath();
+        mk_hCtx.moveTo(0, -sz * 1.35);
+        mk_hCtx.lineTo(0,  sz * 1.35);
+        mk_hCtx.stroke();
+
+        mk_hCtx.restore();
+      });
+
+      mk_heroRaf = requestAnimationFrame(mk_drawHero);
+    }
+
+    mk_resizeHero();
+    mk_initBeans();
+    mk_heroRaf = requestAnimationFrame(mk_drawHero);
+
+    window.addEventListener('resize', mk_resizeHero, { passive: true });
+
+    document.addEventListener('mousemove', function (e) {
+      mk_mouseX = e.clientX / window.innerWidth;
+      mk_mouseY = e.clientY / window.innerHeight;
+    }, { passive: true });
+
+    /* =============================================
+       MAP CANVAS: abstract city grid
+    ============================================= */
+    const mk_mapCanvas = document.getElementById('mk-map-canvas');
+
+    function mk_drawMap() {
+      if (!mk_mapCanvas) return;
+      const mk_mCtx = mk_mapCanvas.getContext('2d');
+      const w = mk_mapCanvas.offsetWidth;
+      const h = mk_mapCanvas.offsetHeight;
+      mk_mapCanvas.width  = w;
+      mk_mapCanvas.height = h;
+
+      mk_mCtx.fillStyle = 'oklch(17% 0.038 50)';
+      mk_mCtx.fillRect(0, 0, w, h);
+
+      const cols = 9, rows = 11;
+
+      /* Streets */
+      mk_mCtx.strokeStyle = 'oklch(26% 0.042 52)';
+      mk_mCtx.lineWidth = 1;
+      for (let i = 0; i <= cols; i++) {
+        const x = (i / cols) * w;
+        mk_mCtx.beginPath(); mk_mCtx.moveTo(x, 0); mk_mCtx.lineTo(x, h); mk_mCtx.stroke();
+      }
+      for (let i = 0; i <= rows; i++) {
+        const y = (i / rows) * h;
+        mk_mCtx.beginPath(); mk_mCtx.moveTo(0, y); mk_mCtx.lineTo(w, y); mk_mCtx.stroke();
+      }
+
+      /* Blocks */
+      const mk_blocks = [
+        [1,1,2,1],[4,1,1,2],[7,1,1,1],
+        [1,3,1,2],[3,3,2,1],[6,3,2,1],
+        [1,6,2,1],[4,5,1,2],[7,5,1,2],
+        [2,8,1,1],[4,8,2,1],[7,8,1,1],
+        [1,9,3,1],[5,9,1,1],[7,9,1,1],
+      ];
+      mk_blocks.forEach(function (b) {
+        const bx = (b[0] / cols) * w + 4;
+        const by = (b[1] / rows) * h + 4;
+        const bw = (b[2] / cols) * w - 8;
+        const bh = (b[3] / rows) * h - 8;
+        mk_mCtx.fillStyle = 'oklch(23% 0.04 52)';
+        mk_mCtx.fillRect(bx, by, bw, bh);
+        mk_mCtx.fillStyle = 'oklch(30% 0.044 56)';
+        mk_mCtx.fillRect(bx, by, bw, 2);
+      });
+
+      /* Pin */
+      const mk_px = w * 0.52, mk_py = h * 0.44;
+
+      mk_mCtx.beginPath();
+      mk_mCtx.arc(mk_px, mk_py, 14, 0, Math.PI * 2);
+      mk_mCtx.strokeStyle = 'oklch(71% 0.17 74 / 0.25)';
+      mk_mCtx.lineWidth = 1.5;
+      mk_mCtx.stroke();
+
+      mk_mCtx.beginPath();
+      mk_mCtx.arc(mk_px, mk_py, 8, 0, Math.PI * 2);
+      mk_mCtx.fillStyle = 'oklch(71% 0.17 74)';
+      mk_mCtx.fill();
+
+      mk_mCtx.beginPath();
+      mk_mCtx.arc(mk_px, mk_py, 3.5, 0, Math.PI * 2);
+      mk_mCtx.fillStyle = 'oklch(9% 0.025 48)';
+      mk_mCtx.fill();
+
+      mk_mCtx.font = '700 11px "Playfair Display", serif';
+      mk_mCtx.fillStyle = 'oklch(71% 0.17 74)';
+      mk_mCtx.fillText('MOKZA', mk_px + 14, mk_py + 4);
+
+      mk_mCtx.font = '400 10px "Noto Serif KR", serif';
+      mk_mCtx.fillStyle = 'oklch(42% 0.035 60)';
+      mk_mCtx.fillText('성수동', 14, h - 14);
+    }
+
+    mk_drawMap();
+    window.addEventListener('resize', mk_drawMap, { passive: true });
+
+    /* =============================================
+       PROGRESS BAR
+    ============================================= */
+    const mk_prog = document.getElementById('mk-progress');
+    window.addEventListener('scroll', function () {
+      const mk_scrolled = window.scrollY;
+      const mk_total    = document.documentElement.scrollHeight - window.innerHeight;
+      const mk_pct      = mk_total > 0 ? (mk_scrolled / mk_total) * 100 : 0;
+      mk_prog.style.width = mk_pct + '%';
+      mk_prog.setAttribute('aria-valuenow', Math.round(mk_pct));
+    }, { passive: true });
+
+    /* =============================================
+       NAV scroll state
+    ============================================= */
+    const mk_nav = document.getElementById('mk-nav');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 60) {
+        mk_nav.classList.add('scrolled');
+      } else {
+        mk_nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    /* =============================================
+       LENIS + GSAP: init after scripts load
+    ============================================= */
+    window.addEventListener('load', function () {
+      const mk_reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let mk_lenis = null;
+
+      if (!mk_reducedMotion && typeof Lenis !== 'undefined') {
+        mk_lenis = new Lenis({
+          duration: 1.2,
+          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }
+        });
+
+        if (typeof ScrollTrigger !== 'undefined') {
+          mk_lenis.on('scroll', ScrollTrigger.update);
+        }
+        gsap.ticker.add(function (time) { mk_lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      /* GSAP animations */
+      if (!mk_reducedMotion && typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* Hero entrance */
+        const mk_heroTl = gsap.timeline({ delay: 0.25 });
+        mk_heroTl
+          .to('.mk-eyebrow',    { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' })
+          .to('.mk-hero-title', { opacity: 1, y: 0, duration: 0.95, ease: 'power3.out' }, '-=0.4')
+          .to('.mk-hero-sub',   { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' }, '-=0.5')
+          .to('.mk-scroll-hint',{ opacity: 1,        duration: 0.55 },                    '-=0.2');
+
+        /* Brand text */
+        ScrollTrigger.create({
+          trigger: '#mk-brand', start: 'top 68%',
+          onEnter: function () {
+            gsap.to('.mk-brand-text', { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' });
+          }
+        });
+
+        /* Beans header */
+        ScrollTrigger.create({
+          trigger: '.mk-beans-hd', start: 'top 72%',
+          onEnter: function () {
+            gsap.to('.mk-beans-hd', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+          }
+        });
+
+        /* Bean cards stagger */
+        ScrollTrigger.create({
+          trigger: '.mk-beans-grid', start: 'top 70%',
+          onEnter: function () {
+            gsap.to('.mk-bean', { opacity: 1, y: 0, duration: 0.7, stagger: 0.09, ease: 'power3.out' });
+          }
+        });
+
+        /* Philosophy quote */
+        ScrollTrigger.create({
+          trigger: '.mk-quote', start: 'top 70%',
+          onEnter: function () {
+            gsap.to('.mk-quote', { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' });
+          }
+        });
+
+        /* Pillars stagger */
+        ScrollTrigger.create({
+          trigger: '.mk-pillars', start: 'top 70%',
+          onEnter: function () {
+            gsap.to('.mk-pillar', { opacity: 1, y: 0, duration: 0.65, stagger: 0.14, ease: 'power3.out' });
+          }
+        });
+
+        /* Philosophy BG parallax */
+        gsap.to('.mk-phil-bg', {
+          xPercent: -9, ease: 'none',
+          scrollTrigger: {
+            trigger: '#mk-phil',
+            start: 'top bottom', end: 'bottom top',
+            scrub: 1
+          }
+        });
+
+        /* Visit reveals */
+        ScrollTrigger.create({
+          trigger: '#mk-visit', start: 'top 66%',
+          onEnter: function () {
+            gsap.to('.mk-visit-info', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' });
+            gsap.to('.mk-map-wrap',   { opacity: 1, y: 0, duration: 0.9, delay: 0.14, ease: 'power3.out' });
+          }
+        });
+      }
+
+      /* Nav anchor smooth scroll */
+      document.querySelectorAll('a[href^="#"]').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          const mk_target = document.querySelector(el.getAttribute('href'));
+          if (!mk_target) return;
+          e.preventDefault();
+          if (mk_lenis) {
+            mk_lenis.scrollTo(mk_target, { offset: -90, duration: 1.4 });
+          } else {
+            window.scrollTo({ top: mk_target.getBoundingClientRect().top + window.scrollY - 90 });
+          }
+        });
+      });
+
+    }); /* end window load */
+
+  })();
+  </script>
+</body>
+</html>
