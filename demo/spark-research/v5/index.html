@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPARK.md v5 — 경험 히어로 + 콘텐츠 본문</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<style>
+  :root{ --bg:#0b0b0c; --fg:#f4f4f5; --muted:#a1a1aa; --line:#26262b; --accent:#16a34a; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(3rem,8vw,5.5rem) 1.5rem}
+  .eyebrow{color:var(--accent);font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  h1{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;margin:.6rem 0 .9rem;letter-spacing:-.02em}
+  .lead{color:var(--muted);max-width:64ch;margin-bottom:2.4rem}
+  .lead b{color:var(--fg)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{display:block;border:1px solid var(--line);border-radius:14px;padding:1.4rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;background:#101013}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tag{font-size:.72rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  .card h2{font-size:1.15rem;font-weight:700;margin:.45rem 0 .35rem}
+  .card p{color:var(--muted);font-size:.88rem;margin-bottom:.7rem}
+  .go{color:var(--fg);font-weight:600;font-size:.86rem;display:inline-block}
+  .feat{margin:2rem 0 .5rem;font-size:.86rem;color:var(--muted)}
+  .feat b{color:var(--fg)}
+  .note{margin-top:2.6rem;font-size:.82rem;color:#71717a;border-top:1px solid var(--line);padding-top:1.1rem}
+  a.inline{color:var(--accent)}
+  code{font-size:.85em;color:#d4d4d8}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">SPARK.md v5 · 경험 히어로 + 콘텐츠 본문</p>
+    <h1>전형성은 깨되, 읽히게</h1>
+    <p class="lead">v5는 <b>히어로 = 중심 은유를 행위로 경험하는 인터랙티브 구역</b>(마우스로 별자리 찾기 등),
+      <b>그 아래 = 그 은유로 엮인 읽을 수 있는 정상 콘텐츠</b>로 설계됩니다.
+      "스크롤 사이트"를 넘되 검색·키보드·스크린리더로 접근 가능 — 창의성과 접근성을 동시에.</p>
+
+    <p class="feat"><b>직접 해보세요:</b> 히어로에서 <b>마우스를 움직여</b> 별자리를 찾고, 스크롤을 내려 정상 콘텐츠를 읽어보세요.</p>
+    <div class="grid">
+      <a class="card" href="./observatory/index.html">
+        <span class="tag">천문대 · 이안</span>
+        <h2>밤하늘을 찾아오는 곳</h2>
+        <p>별자리 캔버스 히어로(커서 인터랙션) → "고요함이 곧 선명함이다" 본문 + 관측 데이터.</p>
+        <span class="go">열기 →</span>
+      </a>
+      <a class="card" href="./nocturne/index.html">
+        <span class="tag">향수 · NOCTURNE</span>
+        <h2>밤에 피어나는 향</h2>
+        <p>인터랙티브 히어로 → 브랜드 철학·컬렉션·조향 과정 본문(5섹션).</p>
+        <span class="go">열기 →</span>
+      </a>
+    </div>
+
+    <p class="note">D(인터랙션=매체)의 파격을 유지하면서 D의 약점(빈 정적 폴백·본문 부재)을 보완한 균형 버전.
+      reduced-motion/JS-off에서도 히어로 핵심 메시지와 본문이 보입니다. 기록: <code>research/spark-md/</code>.<br>
+      <a class="inline" href="../">← v2/v3</a> · <a class="inline" href="../v4-cases/">v4 5케이스</a> · <a class="inline" href="../creativity/">창의성 실험(A/B/C/D)</a></p>
+  </main>
+</body>
+</html>
