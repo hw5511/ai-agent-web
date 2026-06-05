@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPARK.md v6.2 — 기법 다양성 시도 (4주제 병렬)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<style>
+  :root{ --bg:#0b0b0c; --fg:#f4f4f5; --muted:#a1a1aa; --line:#26262b; --accent:#16a34a; --warn:#f59e0b; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:clamp(3rem,8vw,5.5rem) 1.5rem}
+  .eyebrow{color:var(--accent);font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  h1{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:800;margin:.6rem 0 .8rem;letter-spacing:-.02em}
+  .lead{color:var(--muted);max-width:66ch;margin-bottom:1.6rem}
+  .lead b{color:var(--fg)}
+  .finding{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:8px;padding:1rem 1.2rem;margin-bottom:2rem;font-size:.9rem;color:#d4d4d8;background:#101013}
+  .finding b{color:var(--warn)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{display:block;border:1px solid var(--line);border-radius:13px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;background:#101013;transition:border-color .2s,transform .2s}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .card h2{font-size:1.05rem;font-weight:700;margin:.35rem 0 .25rem}
+  .mech{font-size:.82rem;color:var(--muted);margin-bottom:.5rem}
+  .go{color:var(--fg);font-weight:600;font-size:.84rem}
+  .note{margin-top:2.4rem;font-size:.82rem;color:#71717a;border-top:1px solid var(--line);padding-top:1.1rem}
+  a.inline{color:var(--accent)}
+  code{font-size:.85em;color:#d4d4d8}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">SPARK.md v6.2 · 기법 다양성 (4주제 병렬)</p>
+    <h1>클리셰는 층층이다</h1>
+    <p class="lead">v6.2는 "줄 튕기는 파동선/파티클" 디폴트를 <b>금지</b>하고 기법 팔레트에서 고르게 했습니다.
+      4주제(천문대·향수·도자기·서점)를 <b>병렬로</b> 동시 생성한 결과입니다.</p>
+    <div class="finding">
+      <b>발견:</b> 파동선·파티클은 완전히 사라졌지만(4/4), 이번엔 3/4가 <b>"키네틱 타이포그래피"</b>로 다시 수렴했습니다.
+      → <b>금지만으로는 수렴을 못 막는다.</b> 한 디폴트를 막으면 모델은 그 다음으로 안전한 기법으로 이동합니다.
+      (진짜 해결 = 기법을 LIGHTBULB처럼 무작위 배정 → v6.3)
+    </div>
+
+    <div class="grid">
+      <a class="card" href="./ceramic/index.html"><span class="tag">도자기 · 토림</span><h2>"흙과 손"</h2><p class="mech">키네틱 타이포 — 거대 한글 볼드</p><span class="go">열기 →</span></a>
+      <a class="card" href="./bookstore/index.html"><span class="tag">서점 · 여백</span><h2>"여백"</h2><p class="mech">키네틱 타이포 — 한자 레이어 lerp</p><span class="go">열기 →</span></a>
+      <a class="card" href="./nocturne/index.html"><span class="tag">향수 · NOCTURNE</span><h2>글자 무게 변화</h2><p class="mech">키네틱 타이포 — 근접 시 font-weight 300→900</p><span class="go">열기 →</span></a>
+      <a class="card" href="./observatory/index.html"><span class="tag">천문대 · 이안</span><h2>스포트라이트 리빌</h2><p class="mech">다른 기법(어둠 속 빛) — 단 가독성 약함</p><span class="go">열기 →</span></a>
+    </div>
+
+    <p class="note">교훈: 창의성 수렴은 "금지"로 못 막는다 — 모델은 허용된 집합에서 늘 가장 안전한 1개로 간다.
+      v6.3에서 기법을 무작위 배정(외부 강제)으로 다양화할 예정. 기록: <code>research/spark-md/</code>(R13).<br>
+      <a class="inline" href="../">← 허브</a> · <a class="inline" href="../v6.1/">v6.1 비교</a></p>
+  </main>
+</body>
+</html>
