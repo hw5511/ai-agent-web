@@ -258,3 +258,22 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - ⚠️ **새 수렴**: 3/4(향수·도자기·서점)가 "키네틱 타이포(거대 한글+한자 레이어 lerp)"로 수렴. observatory만 다른 기법(어두운 스포트라이트, 가독성 약함).
 - **★ 메타 발견(이번 창의성 스레드의 결론)**: **금지로는 수렴을 못 막는다.** 컨셉(별자리)→기법(파동선)→다음 기법(키네틱 타이포)로 클리셰가 층층이 이동. 모델은 허용집합에서 항상 가장 안전한 1개로 감(+팔레트 1번 앵커링).
 - **v6.3 방향**: 기법을 **LIGHTBULB처럼 무작위 배정**(외부 강제)해 주제별 다양성 확보. 또는 키네틱 타이포를 house style로 수용.
+
+---
+
+## ★ v7 전면 전환 결정 (2026-06-04, CEO) — "금지 → 외부 강제배정 + lean"
+- sweep4 조사(학술+생태계 합치): 금지 누적=역효과(Pink Elephant), 외부 강제배정+락인이 1차 메커니즘(design-dna/hallmark/skills-slides), iterative differentiation 실험1위, LIGHTBULB 결함=모델선택(CHOSEN_SPARK).
+- **CEO: 전면 전환(v7-lean) 채택.**
+- **v7-lean(130줄, v6.2 698→1/5)**: ① 외부 SEED CARD(MACRO_STRUCTURE/VISUAL_MECHANISM/PERSONA/WILD_CONCEPT) 무작위 강제배정+락인(모델 선택 제거) ② Iterative Differentiation(자기 디폴트 자백→회피) ③ 금지목록/찬사 삭감, 구체 명세 ④ FLOOR 부록(실측 60fps·backdrop-filter 추종금지·Lenis·reduced-motion·텍스트DOM·이모지/em-dash 0) 분리.
+- **하네스 run-v7.sh**: 하네스가 SEED를 무작위로 뽑아 프롬프트에 prepend(외부 배정). 4주제 병렬.
+- 검증 포인트: 같은 v7으로 여러 주제가 *기법·구조 모두* 갈라지는가 + 품질·FPS.
+
+---
+
+## Round 14 — v7-lean 검증 (외부 SEED 강제배정 4주제 병렬)  [완료 2026-06-04]
+- 상세: `experiments/R14_v7/`. 하네스가 MACRO/VISUAL/PERSONA/WILD 무작위 배정→prepend, 모델 락인.
+- **성공**: wave/particle 4/4=0, 4주제가 macro·mechanism 모두 갈라짐(중앙대칭/모듈러그리드/중앙3D + 그리드디스토션/듀오톤마스크/3D원근). v6.2 "전부 좌측타이포" 탈출. bookstore 3D 떠있는책+보케위성이 특히 distinctive.
+- **성능 해결**: 4개 전부 FPS 59~61(v6.2 35→정상). FLOOR "backdrop-filter 추종 금지" 실효.
+- **lean**: 130줄(698→1/5)로 품질 유지. 모델이 SEED 락인(디폴트 회귀 안 함).
+- **메타 검증**: "금지→외부 강제배정+lean" 전환이 데이터로 입증. 이번 창의성 스레드 해결.
+- 잔여: SEED 무작위 충돌(주제간 dedup 필요), floor 자기검수 일부 누락(ceramic em-dash 3 → 하네스 floor 자동검증 추가).

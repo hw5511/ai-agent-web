@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOCTURNE : 야행 향수 하우스</title>
+  <meta name="description" content="밤의 문턱에서 태어난 향. 서울 성수동 독립 향수 브랜드 녹턴의 네 가지 시그니처 컬렉션.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Space+Grotesk:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="grain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="overlay" result="blended"/>
+      <feComposite in="blended" in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+
+<nav class="nav" id="nav" role="navigation" aria-label="주 내비게이션">
+  <a href="#hero" class="nav__logo" aria-label="NOCTURNE 홈으로">
+    <span class="nav__logo-text" aria-hidden="true">N</span>
+    <span class="nav__logo-full">NOCTURNE</span>
+  </a>
+  <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navMenu">
+    <span class="nav__toggle-bar"></span>
+    <span class="nav__toggle-bar"></span>
+  </button>
+  <ul class="nav__menu" id="navMenu" role="list">
+    <li><a href="#philosophy" class="nav__link">철학</a></li>
+    <li><a href="#collection" class="nav__link">컬렉션</a></li>
+    <li><a href="#process" class="nav__link">조향</a></li>
+    <li><a href="#atelier" class="nav__link">아뜰리에</a></li>
+    <li><a href="#reserve" class="nav__link nav__link--cta">예약</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero" aria-label="메인 히어로">
+  <div class="hero__mask" id="heroMask" aria-hidden="true"></div>
+  <div class="hero__grid" id="heroGrid">
+
+    <div class="hero__cell hero__cell--title" data-reveal>
+      <div class="hero__eyebrow">
+        <span class="lbl">SEOUL</span>
+        <span class="lbl hero__eyebrow-sep" aria-hidden="true">&#8231;</span>
+        <span class="lbl">EST. 2021</span>
+      </div>
+      <h1 class="hero__heading" aria-label="녹턴">
+        <span class="hero__h-line">NOC</span>
+        <span class="hero__h-line hero__h-line--it">TURNE</span>
+      </h1>
+      <p class="hero__sub-kr lbl">야행 향수 하우스</p>
+    </div>
+
+    <div class="hero__cell hero__cell--vis-a" data-duotone aria-hidden="true">
+      <div class="hero__vis">
+        <div class="hero__vis-img hero__vis-img--a"></div>
+        <div class="hero__vis-overlay"></div>
+      </div>
+    </div>
+
+    <div class="hero__cell hero__cell--tag" data-reveal>
+      <p class="lbl hero__tag-label">Signature</p>
+      <p class="hero__tag-num">01&#8211;04</p>
+    </div>
+
+    <div class="hero__cell hero__cell--vis-b" data-duotone aria-hidden="true">
+      <div class="hero__vis">
+        <div class="hero__vis-img hero__vis-img--b"></div>
+        <div class="hero__vis-overlay"></div>
+      </div>
+    </div>
+
+    <div class="hero__cell hero__cell--vis-c" data-duotone aria-hidden="true">
+      <div class="hero__vis">
+        <div class="hero__vis-img hero__vis-img--c"></div>
+        <div class="hero__vis-overlay"></div>
+      </div>
+    </div>
+
+    <div class="hero__cell hero__cell--copy" data-reveal>
+      <p class="hero__copy">밤의 문턱에서 태어난 향.<br>어둠을 배경 삼아 피어오르는 네 개의 서사.</p>
+      <a href="#collection" class="btn btn--primary">컬렉션 보기</a>
+    </div>
+
+    <div class="hero__cell hero__cell--year" data-reveal>
+      <span class="hero__year-mark">AW</span>
+      <span class="lbl hero__year-num">2024</span>
+    </div>
+
+  </div>
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-line"></span>
+    <span class="lbl">스크롤</span>
+  </div>
+</section>
+
+<section class="philosophy" id="philosophy" aria-labelledby="phil-h">
+  <div class="container">
+    <div class="philosophy__layout">
+
+      <div class="philosophy__left">
+        <span class="section-tag lbl">Brand Philosophy</span>
+        <h2 id="phil-h" class="philosophy__heading" data-reveal>
+          어둠은<br><em>부재가 아니다</em>
+        </h2>
+      </div>
+
+      <div class="philosophy__right">
+        <p class="philosophy__lead" data-reveal>
+          녹턴은 야경에서 출발했다. 대부분의 향수가 낮의 감각을 포착할 때,
+          우리는 밤이 가진 고유한 밀도를 묻는다.
+        </p>
+        <p class="philosophy__text" data-reveal>
+          빛이 없을 때 코는 더 예민해진다. 낮의 잡음이 사라진 자리에서 향은 비로소 본 모습을 드러낸다.
+          우리의 조향사들은 이 사실에서 출발했다. 밤의 차가운 공기, 창문 너머 스며드는 습기,
+          잠들기 직전 피부에 남은 온기. 이것이 녹턴이 포착하려는 순간들이다.
+        </p>
+        <p class="philosophy__text" data-reveal>
+          각 향수는 하나의 연속된 필름이다. 탑 노트가 셔터를 누르고,
+          미들 노트가 장면을 전개하며, 베이스 노트가 마지막 프레임에서 오래 머문다.
+          피부 위의 시간은 역방향으로 흐르지 않는다.
+        </p>
+        <div class="philosophy__stats" data-reveal>
+          <div class="philosophy__stat">
+            <span class="philosophy__stat-n" aria-label="47가지">47</span>
+            <span class="philosophy__stat-l lbl">사용 원료 수</span>
+          </div>
+          <div class="philosophy__stat">
+            <span class="philosophy__stat-n" aria-label="3명">3</span>
+            <span class="philosophy__stat-l lbl">조향사</span>
+          </div>
+          <div class="philosophy__stat">
+            <span class="philosophy__stat-n" aria-label="18개월">18</span>
+            <span class="philosophy__stat-l lbl">개월, 개발 기간</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="philosophy__visual" data-duotone aria-hidden="true">
+        <div class="philosophy__vis-img"></div>
+        <div class="philosophy__vis-layer"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="collection" id="collection" aria-labelledby="coll-h">
+  <div class="container">
+    <header class="collection__header" data-reveal>
+      <span class="section-tag lbl">Signature Collection</span>
+      <h2 id="coll-h" class="collection__heading">네 개의 서사</h2>
+      <p class="collection__sub">각 향수는 밤의 한 층위를 담는다. 어떤 어둠을 선택하겠는가.</p>
+    </header>
+
+    <div class="collection__grid">
+
+      <article class="ccard ccard--hero" data-reveal aria-labelledby="c1-name">
+        <div class="ccard__visual" data-duotone aria-hidden="true">
+          <div class="ccard__img ccard__img--1"></div>
+          <div class="ccard__mask-layer"></div>
+        </div>
+        <div class="ccard__body">
+          <div class="ccard__meta">
+            <span class="lbl ccard__num">No. 01</span>
+            <span class="lbl ccard__type">Eau de Parfum</span>
+          </div>
+          <h3 id="c1-name" class="ccard__name">
+            <span class="ccard__kr">야상</span>
+            <span class="ccard__en">Nocturne</span>
+          </h3>
+          <p class="ccard__desc">
+            황혼 직후 도시의 공기. 석양이 완전히 가시기 전, 가로등이 켜지기 전의
+            그 짧은 순간. 변화가 이미 시작됐지만 아직 아무것도 확정되지 않은 문턱.
+          </p>
+          <dl class="ccard__notes">
+            <div class="ccard__note-row">
+              <dt class="lbl">탑 노트</dt>
+              <dd>베르가못, 블랙 페퍼, 레몬 버베나</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">미들 노트</dt>
+              <dd>블랙 로즈, 다크 바이올렛, 제라늄</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">베이스 노트</dt>
+              <dd>파촐리, 오크모스, 드라이 앰버</dd>
+            </div>
+          </dl>
+          <div class="ccard__footer">
+            <span class="ccard__price">&#8361; 285,000</span>
+            <a href="#reserve" class="btn btn--outline btn--sm">향 경험 예약</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ccard" data-reveal aria-labelledby="c2-name">
+        <div class="ccard__visual" data-duotone aria-hidden="true">
+          <div class="ccard__img ccard__img--2"></div>
+          <div class="ccard__mask-layer"></div>
+        </div>
+        <div class="ccard__body">
+          <div class="ccard__meta">
+            <span class="lbl ccard__num">No. 02</span>
+            <span class="lbl ccard__type">Extrait de Parfum</span>
+          </div>
+          <h3 id="c2-name" class="ccard__name">
+            <span class="ccard__kr">심연</span>
+            <span class="ccard__en">Abyss</span>
+          </h3>
+          <p class="ccard__desc">
+            스크린 밖, 극장 뒤편의 어둠. 숨도 소리도 삼키는 완전한 흑.
+            그 무게 안에서 피부가 오히려 더 선명해진다.
+          </p>
+          <dl class="ccard__notes">
+            <div class="ccard__note-row">
+              <dt class="lbl">탑 노트</dt>
+              <dd>오우드 스모크, 블랙 수지</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">미들 노트</dt>
+              <dd>블랙 앰버, 샌달우드, 인센스</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">베이스 노트</dt>
+              <dd>화이트 머스크, 레더, 벤조인</dd>
+            </div>
+          </dl>
+          <div class="ccard__footer">
+            <span class="ccard__price">&#8361; 340,000</span>
+            <a href="#reserve" class="btn btn--outline btn--sm">향 경험 예약</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ccard" data-reveal aria-labelledby="c3-name">
+        <div class="ccard__visual" data-duotone aria-hidden="true">
+          <div class="ccard__img ccard__img--3"></div>
+          <div class="ccard__mask-layer"></div>
+        </div>
+        <div class="ccard__body">
+          <div class="ccard__meta">
+            <span class="lbl ccard__num">No. 03</span>
+            <span class="lbl ccard__type">Eau de Parfum</span>
+          </div>
+          <h3 id="c3-name" class="ccard__name">
+            <span class="ccard__kr">명암</span>
+            <span class="ccard__en">Chiaroscuro</span>
+          </h3>
+          <p class="ccard__desc">
+            카라바조가 캔버스에 새겼던 그것. 빛과 그림자의 경계,
+            경계 자체가 갖는 질감. 어느 쪽도 아닌 중간 지점의 온도.
+          </p>
+          <dl class="ccard__notes">
+            <div class="ccard__note-row">
+              <dt class="lbl">탑 노트</dt>
+              <dd>카다멈, 화이트 샌달우드</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">미들 노트</dt>
+              <dd>아이리스, 화이트 히아신스, 피오니</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">베이스 노트</dt>
+              <dd>그레이 앰버, 시더우드, 통카빈</dd>
+            </div>
+          </dl>
+          <div class="ccard__footer">
+            <span class="ccard__price">&#8361; 295,000</span>
+            <a href="#reserve" class="btn btn--outline btn--sm">향 경험 예약</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ccard" data-reveal aria-labelledby="c4-name">
+        <div class="ccard__visual" data-duotone aria-hidden="true">
+          <div class="ccard__img ccard__img--4"></div>
+          <div class="ccard__mask-layer"></div>
+        </div>
+        <div class="ccard__body">
+          <div class="ccard__meta">
+            <span class="lbl ccard__num">No. 04</span>
+            <span class="lbl ccard__type">Extrait de Parfum</span>
+          </div>
+          <h3 id="c4-name" class="ccard__name">
+            <span class="ccard__kr">유작</span>
+            <span class="ccard__en">Opus</span>
+          </h3>
+          <p class="ccard__desc">
+            마지막 필름 롤. 현상하기 전에는 아직 모르는 이미지들이 그 안에 감겨 있다.
+            녹턴의 가장 어둡고 가장 밀도 높은 향.
+          </p>
+          <dl class="ccard__notes">
+            <div class="ccard__note-row">
+              <dt class="lbl">탑 노트</dt>
+              <dd>튜베로즈, 다크 플럼</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">미들 노트</dt>
+              <dd>블랙 커런트, 베티베르, 로즈 앱솔루트</dd>
+            </div>
+            <div class="ccard__note-row">
+              <dt class="lbl">베이스 노트</dt>
+              <dd>시더우드, 다크 머스크, 앰버그리스</dd>
+            </div>
+          </dl>
+          <div class="ccard__footer">
+            <span class="ccard__price">&#8361; 380,000</span>
+            <a href="#reserve" class="btn btn--outline btn--sm">향 경험 예약</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process" aria-labelledby="proc-h">
+  <div class="container">
+    <header class="process__header" data-reveal>
+      <span class="section-tag lbl">Craft Process</span>
+      <h2 id="proc-h" class="process__heading">조향의 시간</h2>
+      <p class="process__sub">하나의 향수가 완성되기까지 평균 열여섯 달이 걸린다.</p>
+    </header>
+
+    <div class="process__timeline">
+
+      <div class="process__step" data-reveal>
+        <div class="process__step-left">
+          <span class="process__step-num lbl">01</span>
+          <div class="process__step-icon" aria-hidden="true">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <circle cx="22" cy="22" r="20" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+              <circle cx="22" cy="22" r="10" stroke="currentColor" stroke-width="0.75"/>
+              <circle cx="22" cy="22" r="3" fill="currentColor"/>
+              <line x1="22" y1="2" x2="22" y2="8" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+              <line x1="22" y1="36" x2="22" y2="42" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+              <line x1="2" y1="22" x2="8" y2="22" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+              <line x1="36" y1="22" x2="42" y2="22" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="process__step-body">
+          <h3 class="process__step-title">원료 탐색</h3>
+          <p class="process__step-desc">
+            세계 각지의 원료 생산지를 직접 방문한다. 그라스의 장미밭, 마다가스카르의 바닐라 농장,
+            소말리아의 유향 나무 군락. 원료의 생산 연도와 수확 방식이 향의 깊이를 결정하기 때문에
+            중간 유통을 최소화하고 생산자와 직접 관계를 맺는다.
+          </p>
+          <span class="process__step-dur lbl">소요 기간 3-4개월</span>
+        </div>
+      </div>
+
+      <div class="process__step" data-reveal>
+        <div class="process__step-left">
+          <span class="process__step-num lbl">02</span>
+          <div class="process__step-icon" aria-hidden="true">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <path d="M8 38 Q22 6 36 38" stroke="currentColor" stroke-width="0.75" fill="none"/>
+              <path d="M13 30 Q22 12 31 30" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.5"/>
+              <path d="M17 24 Q22 16 27 24" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.3"/>
+              <circle cx="22" cy="22" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <div class="process__step-body">
+          <h3 class="process__step-title">구조 설계</h3>
+          <p class="process__step-desc">
+            탑, 미들, 베이스 노트의 피라미드를 설계한다. 우리는 이것을 '시간의 건축'이라고 부른다.
+            처음 맡은 순간부터 피부에 오래 남는 잔향까지, 하나의 서사가 끊어지지 않고 흐르도록
+            구조를 설계하는 것이 이 단계의 목표다.
+          </p>
+          <span class="process__step-dur lbl">소요 기간 2-3개월</span>
+        </div>
+      </div>
+
+      <div class="process__step" data-reveal>
+        <div class="process__step-left">
+          <span class="process__step-num lbl">03</span>
+          <div class="process__step-icon" aria-hidden="true">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <rect x="10" y="12" width="7" height="22" stroke="currentColor" stroke-width="0.75"/>
+              <rect x="20" y="6" width="7" height="28" stroke="currentColor" stroke-width="0.75"/>
+              <rect x="30" y="16" width="7" height="18" stroke="currentColor" stroke-width="0.75"/>
+              <line x1="6" y1="34" x2="40" y2="34" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="process__step-body">
+          <h3 class="process__step-title">조합과 수정</h3>
+          <p class="process__step-desc">
+            첫 번째 시제품부터 최종 포뮬러까지 평균 여든 번의 수정이 이루어진다.
+            각 단계에서 최소 두 명의 조향사가 독립적으로 평가한다. 향은 시간이 지남에 따라 달라지기 때문에
+            24시간 후, 72시간 후, 일주일 후에도 동일한 평가를 반복한다.
+          </p>
+          <span class="process__step-dur lbl">소요 기간 6-8개월</span>
+        </div>
+      </div>
+
+      <div class="process__step" data-reveal>
+        <div class="process__step-left">
+          <span class="process__step-num lbl">04</span>
+          <div class="process__step-icon" aria-hidden="true">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <polygon points="22,6 26,17 38,17 29,24 32,35 22,28 12,35 15,24 6,17 18,17" stroke="currentColor" stroke-width="0.75" fill="none"/>
+              <polygon points="22,12 24.5,19 32,19 26,23 28,30.5 22,26.5 16,30.5 18,23 12,19 19.5,19" fill="currentColor" opacity="0.15"/>
+            </svg>
+          </div>
+        </div>
+        <div class="process__step-body">
+          <h3 class="process__step-title">최종 승인과 숙성</h3>
+          <p class="process__step-desc">
+            최종 포뮬러는 세 명의 조향사 전원이 동의해야 통과된다. 이 과정에서 포기된 향수들이
+            완성된 것보다 더 많다. 통과된 향수는 소량으로 소분 후 3개월간 숙성시킨다.
+            시간이 향을 완성시킨다.
+          </p>
+          <span class="process__step-dur lbl">소요 기간 3-4개월</span>
+        </div>
+      </div>
+
+    </div>
+
+    <figure class="process__quote-block" data-reveal>
+      <div class="process__quote-visual" data-duotone aria-hidden="true">
+        <div class="process__quote-vis-img"></div>
+      </div>
+      <blockquote class="process__quote">
+        <p>"향수는 시간을 담는 그릇이다. 우리가 만드는 것은 기억의 형태다."</p>
+        <figcaption>
+          <cite>이지수, 녹턴 수석 조향사</cite>
+        </figcaption>
+      </blockquote>
+    </figure>
+
+  </div>
+</section>
+
+<section class="atelier" id="atelier" aria-labelledby="atl-h">
+  <div class="container">
+    <div class="atelier__layout">
+
+      <div class="atelier__info">
+        <span class="section-tag lbl">Our Atelier</span>
+        <h2 id="atl-h" class="atelier__heading" data-reveal>서울,<br>성수</h2>
+        <p class="atelier__desc" data-reveal>
+          2021년 성수동에 문을 연 녹턴 아뜰리에는 향수 경험의 공간이다.
+          단순한 판매점이 아니라, 향수가 만들어지는 과정을 직접 경험할 수 있도록 설계됐다.
+          방문 예약 없이 워크인도 가능하다.
+        </p>
+        <div class="atelier__details" data-reveal>
+          <div class="atelier__det">
+            <span class="atelier__det-label lbl">주소</span>
+            <address class="atelier__det-val">서울특별시 성동구<br>성수이로 89, 2층</address>
+          </div>
+          <div class="atelier__det">
+            <span class="atelier__det-label lbl">운영 시간</span>
+            <p class="atelier__det-val">
+              화-토 12:00&#8211;20:00<br>
+              일 13:00&#8211;18:00<br>
+              <span class="lbl">월요일 휴무</span>
+            </p>
+          </div>
+          <div class="atelier__det">
+            <span class="atelier__det-label lbl">연락처</span>
+            <p class="atelier__det-val">
+              <a href="mailto:hello@nocturne.kr">hello@nocturne.kr</a><br>
+              <a href="tel:+820255550921">02-555-0921</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="atelier__visual-grid" data-reveal aria-hidden="true">
+        <div class="atelier__vcell atelier__vcell--1" data-duotone></div>
+        <div class="atelier__vcell atelier__vcell--2" data-duotone></div>
+        <div class="atelier__vcell atelier__vcell--3" data-duotone></div>
+        <div class="atelier__vcell atelier__vcell--4" data-duotone></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="reserve" id="reserve" aria-labelledby="res-h">
+  <div class="reserve__bg-layer" aria-hidden="true"></div>
+  <div class="container">
+    <div class="reserve__content">
+      <span class="section-tag lbl">Scent Experience</span>
+      <h2 id="res-h" class="reserve__heading" data-reveal>향 경험 예약</h2>
+      <p class="reserve__sub" data-reveal>
+        조향사와 함께 네 개의 향을 순서대로 경험합니다.<br>
+        예약은 2인 이상, 최대 6인까지 가능합니다. 소요 시간 약 90분.
+      </p>
+
+      <div class="reserve__options" data-reveal>
+
+        <div class="res-opt">
+          <div class="res-opt__top">
+            <h3 class="res-opt__name">단독 세션</h3>
+            <span class="res-opt__price">&#8361; 120,000</span>
+          </div>
+          <p class="res-opt__desc">1인 방문. 조향사의 밀도 있는 안내를 받습니다.</p>
+          <ul class="res-opt__list">
+            <li>시그니처 4종 전체 체험</li>
+            <li>15ml 선택 향수 1병 증정</li>
+            <li>조향 노트 제공</li>
+          </ul>
+        </div>
+
+        <div class="res-opt res-opt--featured">
+          <div class="res-opt__badge lbl">인기</div>
+          <div class="res-opt__top">
+            <h3 class="res-opt__name">그룹 세션</h3>
+            <span class="res-opt__price">&#8361; 80,000 / 인</span>
+          </div>
+          <p class="res-opt__desc">2&#8211;6인 방문. 함께 경험을 나눕니다.</p>
+          <ul class="res-opt__list">
+            <li>시그니처 4종 전체 체험</li>
+            <li>그룹 토론 시간 포함</li>
+            <li>10ml 선택 향수 1병 증정</li>
+            <li>조향 노트 제공</li>
+          </ul>
+        </div>
+
+        <div class="res-opt">
+          <div class="res-opt__top">
+            <h3 class="res-opt__name">마스터 클래스</h3>
+            <span class="res-opt__price">&#8361; 350,000 / 인</span>
+          </div>
+          <p class="res-opt__desc">조향사와 함께 나만의 향을 만드는 4시간 수업.</p>
+          <ul class="res-opt__list">
+            <li>기초 조향 이론 강의</li>
+            <li>원료 직접 조합 실습</li>
+            <li>30ml 개인 향수 완성본</li>
+            <li>녹턴 레시피 노트</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="reserve__cta" data-reveal>
+        <a href="mailto:hello@nocturne.kr?subject=%ED%96%A5%20%EA%B2%BD%ED%97%98%20%EC%98%88%EC%95%BD%20%EB%AC%B8%EC%9D%98" class="btn btn--primary btn--lg">예약 문의하기</a>
+        <p class="reserve__note lbl">이메일 또는 전화로 받습니다. 평균 1영업일 이내 답변드립니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <p class="footer__logo">NOCTURNE</p>
+        <p class="footer__tagline lbl">야행 향수 하우스, 서울 성수</p>
+      </div>
+      <nav class="footer__nav" aria-label="푸터 내비게이션">
+        <div class="footer__nc">
+          <p class="footer__nc-label lbl">컬렉션</p>
+          <ul role="list">
+            <li><a href="#collection">야상 Nocturne</a></li>
+            <li><a href="#collection">심연 Abyss</a></li>
+            <li><a href="#collection">명암 Chiaroscuro</a></li>
+            <li><a href="#collection">유작 Opus</a></li>
+          </ul>
+        </div>
+        <div class="footer__nc">
+          <p class="footer__nc-label lbl">브랜드</p>
+          <ul role="list">
+            <li><a href="#philosophy">철학</a></li>
+            <li><a href="#process">조향 과정</a></li>
+            <li><a href="#atelier">아뜰리에</a></li>
+            <li><a href="#reserve">예약</a></li>
+          </ul>
+        </div>
+        <div class="footer__nc">
+          <p class="footer__nc-label lbl">연락처</p>
+          <ul role="list">
+            <li><a href="mailto:hello@nocturne.kr">hello@nocturne.kr</a></li>
+            <li><a href="tel:+820255550921">02-555-0921</a></li>
+            <li>성동구 성수이로 89</li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy lbl">2024 NOCTURNE. All rights reserved.</p>
+      <p class="footer__reg lbl">사업자등록번호 123-45-67890</p>
+    </div>
+  </div>
+</footer>
+
+<script defer src="script.js"></script>
+</body>
+</html>

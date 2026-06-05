@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="토림 · 서울 성수동 수제 도자기 공방. 흙과 손이 만나는 자리.">
+  <title>토림 · 수제 도자기 공방</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="주 내비게이션">
+    <a href="#" class="nav__brand" aria-label="토림 홈으로">토림</a>
+    <button class="nav__toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <line x1="3" y1="7" x2="21" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="3" y1="17" x2="21" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <ul class="nav__menu" id="nav-menu" role="list">
+      <li><a href="#artist">작가 소개</a></li>
+      <li><a href="#gallery">작품</a></li>
+      <li><a href="#process">작업 과정</a></li>
+      <li><a href="#class">클래스</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO: 그리드 파편화 / 모듈러 셀 배치 / 핏츠 법칙 크기 인코딩 -->
+  <section id="hero" class="hero" aria-label="토림 공방 소개">
+    <canvas class="hero__bg-canvas" aria-hidden="true" focusable="false"></canvas>
+
+    <div class="hero__grid" role="presentation">
+
+      <!-- A: 메인 셀 — 가장 크다(Fitts primary target) -->
+      <div class="hero__cell hero__cell--main" data-cell="A">
+        <span class="cell__coord" aria-hidden="true">A · 01–07 / 01–04</span>
+        <div class="cell__main-inner">
+          <p class="cell__eyebrow">서울 성수동 · 수제 도자기 공방</p>
+          <h1 class="cell__brand">토림</h1>
+          <p class="cell__tagline">흙과 손이<br>만나는 자리</p>
+        </div>
+      </div>
+
+      <!-- B: 텍스처 셀 A -->
+      <div class="hero__cell hero__cell--tex-a" data-cell="B" aria-hidden="true">
+        <span class="cell__coord">B · 08–10 / 01–03</span>
+        <div class="clay-swatch clay-swatch--red"></div>
+        <svg class="vessel-ghost" viewBox="0 0 200 260" aria-hidden="true" focusable="false">
+          <path d="M65 230 Q35 185 32 130 Q28 75 100 28 Q172 75 168 130 Q165 185 135 230 Z"
+                fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.3"/>
+        </svg>
+      </div>
+
+      <!-- C: 통계 셀 — 연도 -->
+      <div class="hero__cell hero__cell--stat-a" data-cell="C">
+        <span class="cell__coord" aria-hidden="true">C · 11–13 / 01–03</span>
+        <div class="stat__wrap">
+          <span class="stat__num" aria-label="12년의 작업">12</span>
+          <span class="stat__label">년간의<br>작업</span>
+        </div>
+      </div>
+
+      <!-- D: 텍스처 셀 B -->
+      <div class="hero__cell hero__cell--tex-b" data-cell="D" aria-hidden="true">
+        <span class="cell__coord">D · 08–10 / 03–05</span>
+        <div class="clay-swatch clay-swatch--ash"></div>
+      </div>
+
+      <!-- E: 통계 셀 — 작품 수 -->
+      <div class="hero__cell hero__cell--stat-b" data-cell="E">
+        <span class="cell__coord" aria-hidden="true">E · 11–13 / 03–05</span>
+        <div class="stat__wrap">
+          <span class="stat__num" aria-label="340점 이상의 누적 작품">340+</span>
+          <span class="stat__label">누적<br>작품</span>
+        </div>
+      </div>
+
+      <!-- F: CTA 셀 -->
+      <div class="hero__cell hero__cell--cta" data-cell="F">
+        <span class="cell__coord" aria-hidden="true">F · 01–05 / 05–07</span>
+        <div class="cta__wrap">
+          <a href="#gallery" class="cta__primary" aria-label="작품 갤러리로 이동">
+            <span>작품 보기</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+              <line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <polyline points="10,4 15,9 10,14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#class" class="cta__secondary">클래스 안내</a>
+        </div>
+      </div>
+
+      <!-- G: 청자 텍스처 + 기물 실루엣 -->
+      <div class="hero__cell hero__cell--glaze" data-cell="G" aria-hidden="true">
+        <span class="cell__coord">G · 05–09 / 05–07</span>
+        <div class="clay-swatch clay-swatch--celadon"></div>
+        <svg class="vessel-ghost" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+          <ellipse cx="100" cy="110" rx="72" ry="85" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.28"/>
+          <ellipse cx="100" cy="110" rx="72" ry="85" fill="currentColor" opacity="0.06"/>
+          <line x1="40" y1="180" x2="160" y2="180" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
+        </svg>
+      </div>
+
+      <!-- H: 핏츠 거리 다이어그램 (data-viz) -->
+      <div class="hero__cell hero__cell--fitts" data-cell="H" aria-hidden="true">
+        <span class="cell__coord">H · 09–13 / 05–07</span>
+        <canvas class="fitts__canvas" aria-hidden="true" focusable="false"></canvas>
+        <p class="fitts__label">FITTS · DISTANCE</p>
+      </div>
+
+    </div><!-- /hero__grid -->
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="hero__scroll-text">아래로</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- 01: 작가 소개 -->
+  <section id="artist" class="artist section" aria-labelledby="artist-h2">
+    <div class="section__wrap">
+
+      <header class="section__hd">
+        <p class="section__idx" aria-hidden="true">01 · 작가 소개</p>
+        <h2 id="artist-h2" class="section__title">흙을 읽는 사람</h2>
+      </header>
+
+      <div class="artist__layout">
+
+        <div class="artist__portrait" aria-hidden="true">
+          <div class="clay-swatch clay-swatch--warm clay-swatch--cover"></div>
+          <svg class="portrait__fig" viewBox="0 0 240 320" aria-hidden="true" focusable="false">
+            <ellipse cx="120" cy="78" rx="34" ry="40" fill="currentColor" opacity="0.14"/>
+            <path d="M86 118 Q62 178 72 258 Q120 278 168 258 Q178 178 154 118 Z" fill="currentColor" opacity="0.11"/>
+            <ellipse cx="120" cy="242" rx="58" ry="18" fill="currentColor" opacity="0.18"/>
+            <path d="M72 202 Q52 222 42 242 Q80 248 120 242 Q160 248 198 242 Q188 222 168 202" fill="currentColor" opacity="0.09"/>
+          </svg>
+          <div class="portrait__grid-overlay" aria-hidden="true"></div>
+        </div>
+
+        <div class="artist__content">
+          <div class="artist__bio">
+            <p class="artist__name-ko">이 토 림</p>
+            <p class="artist__name-en">Lee Torim</p>
+            <p class="artist__desc">
+              홍익대학교 도예과를 졸업하고 일본 시가라키에서 3년간 장인 수련을 마쳤다.
+              흙의 기억, 불의 온도, 그리고 손의 거리감을 작품에 담는다.
+              도자기는 만드는 사람과 쓰는 사람 사이의 물리적 거리를 지운다.
+            </p>
+          </div>
+
+          <ol class="timeline" aria-label="작가 연혁">
+            <li class="timeline__item reveal">
+              <span class="timeline__yr">2012</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <span class="timeline__ev">홍익대학교 도예과 졸업</span>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__yr">2013–2015</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <span class="timeline__ev">일본 시가라키 도예촌 수련</span>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__yr">2016</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <span class="timeline__ev">서울 성수동 공방 토림 개설</span>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__yr">2019</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <span class="timeline__ev">공예주간 선정 작가</span>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__yr">2022</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <span class="timeline__ev">국립현대미술관 소장 작품 등재</span>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__yr">2024 –</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <span class="timeline__ev">클래스 프로그램 개설, 현재</span>
+            </li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 02: 작품 갤러리 -->
+  <section id="gallery" class="gallery section" aria-labelledby="gallery-h2">
+    <div class="section__wrap">
+
+      <header class="section__hd">
+        <p class="section__idx" aria-hidden="true">02 · 작품 갤러리</p>
+        <h2 id="gallery-h2" class="section__title">손이 기억하는 형태</h2>
+      </header>
+
+      <ul class="gallery__mosaic" role="list" aria-label="작품 목록">
+
+        <li class="gallery__item gallery__item--lg reveal" role="listitem" tabindex="0">
+          <div class="gallery__img">
+            <div class="clay-swatch clay-swatch--celadon clay-swatch--cover"></div>
+            <svg class="vessel-display" viewBox="0 0 300 380" aria-hidden="true" focusable="false">
+              <path d="M100 340 Q60 300 55 220 Q50 140 150 60 Q250 140 245 220 Q240 300 200 340 Z"
+                    fill="none" stroke="currentColor" stroke-width="1.8" opacity="0.45"/>
+              <path d="M100 340 Q60 300 55 220 Q50 140 150 60 Q250 140 245 220 Q240 300 200 340 Z"
+                    fill="currentColor" opacity="0.07"/>
+              <line x1="80" y1="310" x2="220" y2="310" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
+            </svg>
+          </div>
+          <div class="gallery__cap">
+            <span class="gallery__name">무유 달항아리</span>
+            <span class="gallery__meta">청자토 · 1280°C · 2024</span>
+          </div>
+        </li>
+
+        <li class="gallery__item gallery__item--sm reveal" role="listitem" tabindex="0">
+          <div class="gallery__img">
+            <div class="clay-swatch clay-swatch--red clay-swatch--cover"></div>
+            <svg class="vessel-display" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+              <path d="M62 200 Q42 160 46 110 Q52 68 100 42 Q148 68 154 110 Q158 160 138 200 Z"
+                    fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.45"/>
+            </svg>
+          </div>
+          <div class="gallery__cap">
+            <span class="gallery__name">분청 호</span>
+            <span class="gallery__meta">분청사기 · 2023</span>
+          </div>
+        </li>
+
+        <li class="gallery__item gallery__item--sm reveal" role="listitem" tabindex="0">
+          <div class="gallery__img">
+            <div class="clay-swatch clay-swatch--ash clay-swatch--cover"></div>
+            <svg class="vessel-display" viewBox="0 0 200 180" aria-hidden="true" focusable="false">
+              <ellipse cx="100" cy="78" rx="68" ry="48" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.4"/>
+              <ellipse cx="100" cy="78" rx="68" ry="48" fill="currentColor" opacity="0.06"/>
+              <rect x="68" y="118" width="64" height="38" rx="3" fill="currentColor" opacity="0.05" stroke="currentColor" stroke-width="0.8" opacity="0.25"/>
+            </svg>
+          </div>
+          <div class="gallery__cap">
+            <span class="gallery__name">백자 찻잔 세트</span>
+            <span class="gallery__meta">백자토 · 5점 1조 · 2024</span>
+          </div>
+        </li>
+
+        <li class="gallery__item gallery__item--md reveal" role="listitem" tabindex="0">
+          <div class="gallery__img">
+            <div class="clay-swatch clay-swatch--warm clay-swatch--cover"></div>
+            <svg class="vessel-display" viewBox="0 0 260 300" aria-hidden="true" focusable="false">
+              <path d="M72 260 Q42 210 46 150 Q52 98 130 50 Q208 98 214 150 Q218 210 188 260 Z"
+                    fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.42"/>
+            </svg>
+          </div>
+          <div class="gallery__cap">
+            <span class="gallery__name">철화 매병</span>
+            <span class="gallery__meta">고려청자 · 철화 기법 · 2023</span>
+          </div>
+        </li>
+
+        <li class="gallery__item gallery__item--md reveal" role="listitem" tabindex="0">
+          <div class="gallery__img">
+            <div class="clay-swatch clay-swatch--dark clay-swatch--cover"></div>
+            <svg class="vessel-display" viewBox="0 0 260 280" aria-hidden="true" focusable="false">
+              <path d="M82 242 Q56 200 60 140 Q66 88 130 50 Q194 88 200 140 Q204 200 178 242 Z"
+                    fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.38"/>
+              <line x1="78" y1="200" x2="182" y2="200" stroke="currentColor" stroke-width="0.8" opacity="0.22"/>
+            </svg>
+          </div>
+          <div class="gallery__cap">
+            <span class="gallery__name">흑유 화병</span>
+            <span class="gallery__meta">석기 · 무광 흑유 · 2022</span>
+          </div>
+        </li>
+
+        <li class="gallery__item gallery__item--sm reveal" role="listitem" tabindex="0">
+          <div class="gallery__img">
+            <div class="clay-swatch clay-swatch--celadon clay-swatch--cover"></div>
+            <svg class="vessel-display" viewBox="0 0 180 160" aria-hidden="true" focusable="false">
+              <ellipse cx="90" cy="68" rx="54" ry="40" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.4"/>
+              <ellipse cx="90" cy="68" rx="54" ry="40" fill="currentColor" opacity="0.06"/>
+            </svg>
+          </div>
+          <div class="gallery__cap">
+            <span class="gallery__name">청자 접시</span>
+            <span class="gallery__meta">청자토 · 2024</span>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- 03: 작업 과정 -->
+  <section id="process" class="process section" aria-labelledby="process-h2">
+    <div class="section__wrap">
+
+      <header class="section__hd">
+        <p class="section__idx" aria-hidden="true">03 · 작업 과정</p>
+        <h2 id="process-h2" class="section__title">흙에서 완성까지</h2>
+        <p class="section__sub">하나의 작품이 태어나기까지, 평균 21일의 기록</p>
+      </header>
+
+      <ol class="process__grid" aria-label="제작 단계">
+
+        <li class="process__step reveal" aria-label="1단계: 토련, 3일 소요">
+          <div class="step__num" aria-hidden="true">01</div>
+          <div class="step__bar-track" aria-hidden="true" title="전체 21일 중 3일">
+            <div class="step__bar" style="--ratio: 0.143;"></div>
+          </div>
+          <h3 class="step__name">토련</h3>
+          <p class="step__desc">흙 속 기포를 제거하고 점성을 균일하게 만드는 작업. 손의 무게와 리듬이 곧 완성품의 두께를 결정한다.</p>
+          <span class="step__days">3일</span>
+        </li>
+
+        <li class="process__step reveal" aria-label="2단계: 성형, 5일 소요">
+          <div class="step__num" aria-hidden="true">02</div>
+          <div class="step__bar-track" aria-hidden="true" title="전체 21일 중 5일">
+            <div class="step__bar" style="--ratio: 0.238;"></div>
+          </div>
+          <h3 class="step__name">성형</h3>
+          <p class="step__desc">물레 위에서 흙과 손이 맞닿는 순간. 핏츠의 법칙처럼, 손이 흙에 가까울수록 형태는 정확해진다.</p>
+          <span class="step__days">5일</span>
+        </li>
+
+        <li class="process__step reveal" aria-label="3단계: 건조, 7일 소요">
+          <div class="step__num" aria-hidden="true">03</div>
+          <div class="step__bar-track" aria-hidden="true" title="전체 21일 중 7일">
+            <div class="step__bar" style="--ratio: 0.333;"></div>
+          </div>
+          <h3 class="step__name">건조</h3>
+          <p class="step__desc">서두름 없이 천천히. 너무 빠른 건조는 균열을 낳는다. 흙이 스스로 수분을 내보내는 시간.</p>
+          <span class="step__days">7일</span>
+        </li>
+
+        <li class="process__step reveal" aria-label="4단계: 초벌, 2일 소요">
+          <div class="step__num" aria-hidden="true">04</div>
+          <div class="step__bar-track" aria-hidden="true" title="전체 21일 중 2일">
+            <div class="step__bar" style="--ratio: 0.095;"></div>
+          </div>
+          <h3 class="step__name">초벌</h3>
+          <p class="step__desc">900°C에서 첫 번째 불을 만난다. 흙은 비로소 토기가 된다.</p>
+          <span class="step__days">2일</span>
+        </li>
+
+        <li class="process__step reveal" aria-label="5단계: 시유 및 재벌, 4일 소요">
+          <div class="step__num" aria-hidden="true">05</div>
+          <div class="step__bar-track" aria-hidden="true" title="전체 21일 중 4일">
+            <div class="step__bar" style="--ratio: 0.190;"></div>
+          </div>
+          <h3 class="step__name">시유·재벌</h3>
+          <p class="step__desc">유약을 입히고 1280°C의 가마 속에서 완성된다. 불이 만드는 색과 질감은 예측할 수 없다.</p>
+          <span class="step__days">4일</span>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- 04: 클래스 안내 -->
+  <section id="class" class="class-section section" aria-labelledby="class-h2">
+    <div class="section__wrap">
+
+      <header class="section__hd">
+        <p class="section__idx" aria-hidden="true">04 · 클래스 안내</p>
+        <h2 id="class-h2" class="section__title">흙을 배우는 시간</h2>
+        <p class="section__sub">매달 소수 정원으로 진행되는 도자기 클래스</p>
+      </header>
+
+      <ul class="class__grid" role="list">
+
+        <li class="class__card reveal" role="listitem">
+          <div class="class__card-hd">
+            <span class="class__badge">인기</span>
+            <h3 class="class__name">원데이 클래스</h3>
+          </div>
+          <p class="class__desc">처음 흙을 만지는 분들을 위한 입문 과정. 물레 체험과 간단한 성형 작업을 함께합니다.</p>
+          <dl class="class__info">
+            <div class="class__info-row">
+              <dt>소요 시간</dt><dd>3시간</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>정원</dt><dd>4명</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>재료비 포함</dt><dd>65,000원</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>일정</dt><dd>매주 토·일요일</dd>
+            </div>
+          </dl>
+          <a href="mailto:yangheewoo5511@gmail.com?subject=원데이+클래스+문의" class="class__apply">신청 문의</a>
+        </li>
+
+        <li class="class__card reveal" role="listitem">
+          <div class="class__card-hd">
+            <h3 class="class__name">4주 정규 과정</h3>
+          </div>
+          <p class="class__desc">물레 성형부터 유약 시유까지 전 과정을 경험합니다. 자신만의 작품 2점을 가져갑니다.</p>
+          <dl class="class__info">
+            <div class="class__info-row">
+              <dt>소요 시간</dt><dd>매주 2시간 x 4회</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>정원</dt><dd>3명</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>재료비 포함</dt><dd>220,000원</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>일정</dt><dd>월 1회 개강</dd>
+            </div>
+          </dl>
+          <a href="mailto:yangheewoo5511@gmail.com?subject=4주+정규+과정+문의" class="class__apply">신청 문의</a>
+        </li>
+
+        <li class="class__card reveal" role="listitem">
+          <div class="class__card-hd">
+            <h3 class="class__name">작가 심화 과정</h3>
+          </div>
+          <p class="class__desc">도예를 깊이 있게 배우고 싶은 분을 위한 3개월 집중 과정. 개인 포트폴리오 제작 포함.</p>
+          <dl class="class__info">
+            <div class="class__info-row">
+              <dt>기간</dt><dd>3개월</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>정원</dt><dd>2명</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>수강료</dt><dd>별도 안내</dd>
+            </div>
+            <div class="class__info-row">
+              <dt>일정</dt><dd>협의 후 결정</dd>
+            </div>
+          </dl>
+          <a href="mailto:yangheewoo5511@gmail.com?subject=작가+심화+과정+문의" class="class__apply">신청 문의</a>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" aria-label="사이트 정보">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <p class="footer__name">토림</p>
+        <p class="footer__en">TORIM Ceramic Studio</p>
+      </div>
+      <address class="footer__addr">
+        <p>서울특별시 성동구 성수이로 14길</p>
+        <p><a href="mailto:yangheewoo5511@gmail.com">yangheewoo5511@gmail.com</a></p>
+        <p>화–일 11:00–18:00 · 월요일 휴무</p>
+      </address>
+      <div class="footer__copy">
+        <p>&#169; 2026 토림. All rights reserved.</p>
+        <p class="footer__note">흙과 손이 만나는 자리</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이안(夷安) 천문대</title>
+  <meta name="description" content="도시를 떠나 밤하늘을 보러 오는 사람들을 위한 작은 천문대. 해발 900미터, 빛 공해 없는 곳.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="주 탐색">
+    <a href="#hero" class="nav-brand">夷安</a>
+    <ul class="nav-links">
+      <li><a href="#about">이안</a></li>
+      <li><a href="#spaces">공간</a></li>
+      <li><a href="#schedule">밤의 순서</a></li>
+      <li><a href="#visit">방문</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <p class="hero-kanji" aria-hidden="true">夷安</p>
+      <h1 class="hero-title" id="hero-title">이안 천문대</h1>
+      <p class="hero-sub">도시의 격자에서 한 점으로</p>
+      <a href="#visit" class="hero-cta">예약 안내</a>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="scroll-label">scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <main>
+    <section class="about" id="about" aria-labelledby="about-heading">
+      <div class="about-inner">
+        <div class="section-index" aria-hidden="true">01</div>
+        <div class="about-body">
+          <h2 id="about-heading" class="reveal">이안에 대하여</h2>
+          <div class="about-prose reveal">
+            <p>낮에는 평범한 돌집이다.<br>망원경 하나, 텃밭 하나, 좁은 방 셋.</p>
+            <p>밤이 되면 달라진다. 도시에서 200킬로미터,<br>해발 900미터, 빛 공해 지수 1.2.</p>
+            <p>눈이 필요 없다. 고개를 들면 된다.</p>
+          </div>
+          <ul class="about-stats reveal" aria-label="주요 수치">
+            <li>
+              <span class="stat-num">2,400</span>
+              <span class="stat-label">m² 부지</span>
+            </li>
+            <li>
+              <span class="stat-num">900</span>
+              <span class="stat-label">m 해발</span>
+            </li>
+            <li>
+              <span class="stat-num">12</span>
+              <span class="stat-label">인 정원</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="spaces" id="spaces" aria-labelledby="spaces-heading">
+      <div class="spaces-header reveal">
+        <div class="section-index" aria-hidden="true">02</div>
+        <h2 id="spaces-heading">공간</h2>
+      </div>
+      <div class="spaces-grid">
+        <article class="space-cell reveal" data-cell="A">
+          <div class="cell-header">
+            <span class="cell-id" aria-hidden="true">A</span>
+            <h3>관측실</h3>
+          </div>
+          <p>구경 355mm 반사 망원경. 목성의 대적반, 토성의 고리, 안드로메다까지. 전문 해설사 동행.</p>
+          <span class="cell-tag">19:00 · 01:00</span>
+        </article>
+        <article class="space-cell reveal" data-cell="B">
+          <div class="cell-header">
+            <span class="cell-id" aria-hidden="true">B</span>
+            <h3>옥상 덱</h3>
+          </div>
+          <p>맨눈 관측 구역. 접이식 의자와 별자리 지도 제공. 도심에서는 잊었던 은하수 띠를 찾는 곳.</p>
+          <span class="cell-tag">일몰 후 개방</span>
+        </article>
+        <article class="space-cell reveal" data-cell="C">
+          <div class="cell-header">
+            <span class="cell-id" aria-hidden="true">C</span>
+            <h3>침묵의 방</h3>
+          </div>
+          <p>소형 독립 숙소 세 동. 천장 일부가 유리. 새벽 세 시의 하늘을 누워서 본다.</p>
+          <span class="cell-tag">1박 2일</span>
+        </article>
+        <article class="space-cell reveal" data-cell="D">
+          <div class="cell-header">
+            <span class="cell-id" aria-hidden="true">D</span>
+            <h3>기록실</h3>
+          </div>
+          <p>방명록, 천문 도서, 이전 방문자들의 별 스케치. 관측 기록을 남기고 갈 수 있다.</p>
+          <span class="cell-tag">상시 개방</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="schedule" id="schedule" aria-labelledby="schedule-heading">
+      <div class="schedule-inner">
+        <div class="section-index" aria-hidden="true">03</div>
+        <div class="schedule-content">
+          <h2 id="schedule-heading" class="reveal">밤의 순서</h2>
+          <ol class="schedule-list" aria-label="하루 일정">
+            <li class="reveal">
+              <span class="time">17:30</span>
+              <span class="event">도착. 짐을 풀고 주변 산책</span>
+            </li>
+            <li class="reveal">
+              <span class="time">19:00</span>
+              <span class="event">저녁 식사. 제철 반상, 옵션</span>
+            </li>
+            <li class="reveal">
+              <span class="time">20:00</span>
+              <span class="event">하늘 브리핑. 오늘 밤 볼 것들</span>
+            </li>
+            <li class="reveal">
+              <span class="time">21:00</span>
+              <span class="event">관측 시작. 망원경과 맨눈으로</span>
+            </li>
+            <li class="reveal">
+              <span class="time">24:00</span>
+              <span class="event">자유 관측 또는 취침</span>
+            </li>
+            <li class="reveal">
+              <span class="time">04:00</span>
+              <span class="event">새벽 하늘. 원하는 사람만</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit" aria-labelledby="visit-heading">
+      <div class="visit-inner">
+        <div class="section-index" aria-hidden="true">04</div>
+        <div class="visit-content">
+          <h2 id="visit-heading" class="reveal">방문 안내</h2>
+          <div class="visit-grid">
+            <div class="visit-block reveal">
+              <h3>예약</h3>
+              <p>매월 1일 다음 달 예약 오픈. 최소 2인, 최대 12인. 기상 취소 시 전액 환불.</p>
+              <a href="mailto:stay@ian-obs.kr" class="visit-link">stay@ian-obs.kr</a>
+            </div>
+            <div class="visit-block reveal">
+              <h3>찾아오는 길</h3>
+              <p>강원도 평창군 일대. 정확한 주소는 예약 확정 후 안내. 대중교통 픽업 협의 가능.</p>
+            </div>
+            <div class="visit-block reveal">
+              <h3>주의사항</h3>
+              <p>밤 10시 이후 흰색 조명 금지. 적색등 제공. 향수 자제. 반려동물 불가.</p>
+            </div>
+            <div class="visit-block reveal">
+              <h3>비용</h3>
+              <p>관측 단독 30,000원. 1박 숙박 포함 90,000원. 식사 별도 15,000원.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-kanji" aria-hidden="true">夷安</p>
+      <p class="footer-tagline">어둠이 선물이 되는 곳</p>
+      <p class="footer-contact">
+        <a href="mailto:stay@ian-obs.kr">stay@ian-obs.kr</a>
+        <span aria-hidden="true"> · </span>
+        <a href="https://instagram.com/ian.observatory" rel="noopener">@ian.observatory</a>
+      </p>
+      <p class="footer-copy">
+        <span class="tabnum">&#169; 2026</span> 이안(夷安) 천문대. 모든 밤은 단 한 번뿐이다.
+      </p>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
