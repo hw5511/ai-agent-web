@@ -42,3 +42,24 @@
 
 출처: arxiv 2510.01171 / 2602.20408 / 2601.18053 / 2503.22395 / 2404.15154 / 2502.14255 / 2505.17390 ·
 promptlayer·mlops 블로트 · cambridge multi-persona · gadlet positive prompting · github stop-slop · pxz.ai midjourney.
+
+---
+
+## 스킬 생태계 조사 (sweep 4-B) — 학술과 동일 처방으로 수렴
+skills.sh 상위엔 diversity/anti-slop 신규 없음. GitHub 신규 3종 모두 **"금지"가 아니라 "외부 배정+락인"**:
+
+- **design-dna (zanwei)** — 외부 레퍼런스를 정량 JSON("Design DNA")으로 추출→생성 구속. 명시 진단: "정량화가 학습분포 디폴트 회귀를 막는다". = 가설(a) 최강 근거. github.com/zanwei/design-dna
+- **hallmark (Nutlope)** — 레이아웃 매크로구조+20테마를 **브리프마다 강제 배정**(같은 입력도 다른 골격) + 57 slop게이트 + emit직전 self-critique. → "좌측 타이포+빈배경"을 N개 중 1개로 격하. github.com/Nutlope/hallmark
+- **skills-slides (nghiahsgs)** — 토큰 라이브러리(50k 조합), 생성 직전 "Lock in: aesthetic/palette/font/layout ID"로 **동결**. github.com/nghiahsgs/skills-slides
+- 순수 금지·검출형(stop-slop, anti-slop-skill 등)=우리가 한계 본 그 부류, 신규 메커니즘 없음.
+
+**생태계 결론**: 검증된 1차 메커니즘은 일관되게 **"외부 스펙 1세트를 생성 전 강제 배정 → 락인"**. 금지는 보조 게이트일 뿐.
+**빈 틈(SPARK 차별점)**: design-dna식 외부구속 + oblique식 *진짜 무작위* 배정을 합친 "무작위 기법카드 락인"은 아직 없음.
+
+## ★★ 최종 종합 (학술+생태계 합치)
+1. **금지 추가 = 역효과** (Pink Elephant + 생태계). BANNED_CLICHE 누적 중단.
+2. **외부 강제 배정 + 생성 전 락인** = 1차 메커니즘 (design-dna/hallmark/skills-slides + Random Concept Injection).
+3. **Iterative Differentiation**(자기 디폴트 먼저 묘사→회피) = 단일 최강 기법 (실험 1위).
+4. **Verbalized Sampling**(N개+흔함확률→꼬리) = 보조.
+5. **LIGHTBULB 치명결함 = CHOSEN_SPARK 모델선택** → 외부 강제배정으로 전환.
+6. **lean** = 금지 증식을 "외부배정 절차 1개"로 대체.

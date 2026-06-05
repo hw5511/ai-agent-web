@@ -82,3 +82,9 @@
 37. `[diversity]` **키워드 수프 역효과** — "Awwwards급/8k/masterpiece" = 평균(클리셰) 견인. 구체+예상밖 병치로 대체. (midjourney)
 
 > ★ 판정: 두 가설(외부 무작위 주입 / lean) 모두 학술 지지. **단일 최대 결함 = LIGHTBULB의 CHOSEN_SPARK '모델 선택' 단계**(무작위→전형 붕괴). 선택권을 외부 강제 배정으로.
+
+### sweep 4-B — 스킬 생태계(외부배정+락인)
+38. `[skill]` **design-dna(zanwei)** — 외부 레퍼런스 정량JSON 구속(디폴트 회귀 차단). 가설(a) 최강근거.
+39. `[skill]` **hallmark(Nutlope)** — 레이아웃 매크로구조+테마 브리프별 강제배정 → 디폴트 1/N 격하.
+40. `[skill]` **skills-slides(nghiahsgs)** — 생성 직전 토큰 ID "Lock in" 동결.
+> 종합: 금지 중단 + 외부 강제배정·락인(1차) + iterative differentiation + lean. LIGHTBULB 선택단계 제거가 단일 최대 액션.
