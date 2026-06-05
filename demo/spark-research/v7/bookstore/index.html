@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여백 – 독립서점</title>
+  <meta name="description" content="여백은 서울 마포구 연남동의 독립서점입니다. 사려 깊게 고른 책과 고요히 머물 수 있는 공간을 만납니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+KR:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header" id="top">
+    <nav class="nav-inner" aria-label="주 내비게이션">
+      <a href="#top" class="site-logo">여백</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#about">소개</a></li>
+        <li><a href="#curation">이달의 책</a></li>
+        <li><a href="#space">공간</a></li>
+        <li><a href="#visit">방문</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ① 히어로 -->
+    <section class="hero" aria-label="여백 서점 메인">
+
+      <!-- 정적 폴백: JS-off / reduced-motion 에서도 이 텍스트가 보임 -->
+      <div class="hero-copy">
+        <p class="hero-label">독립서점 · 서울 마포구 연남동</p>
+        <h1 class="hero-headline">
+          선명하게 남는<br>한 권을 위한<br>공간
+        </h1>
+        <p class="hero-sub">책 사이의 여백에서 당신의 이야기를 찾습니다</p>
+        <a href="#about" class="hero-cta">서점 들어가기</a>
+      </div>
+
+      <!-- 3D 심도 필드 – 장식 -->
+      <div class="hero-scene" aria-hidden="true">
+        <div class="depth-field">
+          <!-- 원거리 위성 (heavy blur) -->
+          <div class="book-sat bs-1"></div>
+          <div class="book-sat bs-2"></div>
+          <div class="book-sat bs-3"></div>
+          <!-- 중거리 위성 -->
+          <div class="book-sat bs-4"></div>
+          <div class="book-sat bs-5"></div>
+          <!-- 중앙 초점 도서 (sharp) -->
+          <div class="book-central">
+            <div class="book-spine"></div>
+            <div class="book-cover">
+              <span class="bc-glyph">여</span>
+              <span class="bc-subtitle">백</span>
+              <span class="bc-rule"></span>
+              <span class="bc-en">Yeobek Books</span>
+            </div>
+          </div>
+          <!-- 근거리 위성 (near-focus blur) -->
+          <div class="book-sat bs-6"></div>
+          <div class="book-sat bs-7"></div>
+        </div>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <span class="hs-line"></span>
+        <span class="hs-text">scroll</span>
+      </div>
+    </section>
+
+    <!-- ② 서점 소개 -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-label-col">
+            <span class="section-label">01 – 소개</span>
+          </div>
+          <div class="about-content">
+            <h2 class="about-headline reveal">
+              읽는 것보다<br>머무는 것에 대하여
+            </h2>
+            <div class="about-body reveal">
+              <p>
+                여백은 2019년 가을, 연남동 골목 한켠에 문을 열었습니다.
+                가장 많이 팔리는 책이 아니라, 지금 이 계절에 가장 필요한 책을 골라두는 서점입니다.
+              </p>
+              <p>
+                서점주 이소연은 매달 직접 읽고 선별한 30여 종의 책만을 서가에 둡니다.
+                많은 것보다 적은 것, 넓은 것보다 깊은 것. 그것이 여백의 방식입니다.
+              </p>
+            </div>
+            <dl class="about-stats reveal">
+              <div class="stat-item">
+                <dt>운영 시작</dt>
+                <dd class="stat-val">2019</dd>
+              </div>
+              <div class="stat-item">
+                <dt>월 큐레이션</dt>
+                <dd class="stat-val">30<span class="stat-unit">종</span></dd>
+              </div>
+              <div class="stat-item">
+                <dt>열람 좌석</dt>
+                <dd class="stat-val">12<span class="stat-unit">석</span></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 이달의 책 큐레이션 -->
+    <section class="curation" id="curation">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">02 – 이달의 책</span>
+          <h2 class="section-title">2026년 6월, 여백의 선택</h2>
+          <p class="section-desc">이 달의 주제는 <em>경계</em>입니다. 안과 밖, 나와 타인, 현실과 꿈 사이에 선 인물들의 이야기를 모았습니다.</p>
+        </div>
+
+        <div class="books-grid">
+
+          <article class="book-card reveal" data-index="01">
+            <div class="book-card-cover bc-1">
+              <div class="bc-inner">
+                <span class="bci-title">채식주의자</span>
+                <span class="bci-author">한강</span>
+              </div>
+            </div>
+            <div class="book-card-info">
+              <div class="book-meta">
+                <span class="bm-genre">소설</span>
+                <span class="bm-year">2007</span>
+              </div>
+              <h3 class="book-name">채식주의자</h3>
+              <p class="book-by">한강 지음 · 창비</p>
+              <p class="book-desc">먹지 않겠다는 결심 하나로 세계와 어긋나기 시작하는 한 여성의 이야기. 몸이라는 경계가 얼마나 정치적인지를 묻습니다.</p>
+              <div class="curator-note">
+                <span class="cn-tag">서점주 노트</span>
+                <p>"처음엔 당혹스러웠다. 읽고 나서 오래 머릿속을 맴돌았다. 그것으로 충분한 책."</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card reveal" data-index="02">
+            <div class="book-card-cover bc-2">
+              <div class="bc-inner">
+                <span class="bci-title">나는 나를<br>파괴할 권리가 있다</span>
+                <span class="bci-author">김영하</span>
+              </div>
+            </div>
+            <div class="book-card-info">
+              <div class="book-meta">
+                <span class="bm-genre">소설</span>
+                <span class="bm-year">1996</span>
+              </div>
+              <h3 class="book-name">나는 나를 파괴할 권리가 있다</h3>
+              <p class="book-by">김영하 지음 · 문학동네</p>
+              <p class="book-desc">죽음을 예술로 기획하는 남자와 두 형제의 이야기. 경계를 지우는 것이 자유인지 폭력인지, 오래도록 질문하게 합니다.</p>
+              <div class="curator-note">
+                <span class="cn-tag">서점주 노트</span>
+                <p>"한국 소설에서 이런 냉정함을 만나기 쉽지 않다. 불편하고, 그래서 진짜다."</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card reveal" data-index="03">
+            <div class="book-card-cover bc-3">
+              <div class="bc-inner bc-inner--dark">
+                <span class="bci-title">흰</span>
+                <span class="bci-author">한강</span>
+              </div>
+            </div>
+            <div class="book-card-info">
+              <div class="book-meta">
+                <span class="bm-genre">산문</span>
+                <span class="bm-year">2016</span>
+              </div>
+              <h3 class="book-name">흰</h3>
+              <p class="book-by">한강 지음 · 난다</p>
+              <p class="book-desc">흰 것들에 대한 65개의 단상. 언어와 침묵의 경계에서 쓴 책. 읽는다기보다 응시한다는 표현이 더 정확합니다.</p>
+              <div class="curator-note">
+                <span class="cn-tag">서점주 노트</span>
+                <p>"한 줄씩 읽다가 자꾸 멈추게 된다. 책이 나를 기다려주는 느낌."</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card reveal" data-index="04">
+            <div class="book-card-cover bc-4">
+              <div class="bc-inner">
+                <span class="bci-title">완전한 행복</span>
+                <span class="bci-author">정유정</span>
+              </div>
+            </div>
+            <div class="book-card-info">
+              <div class="book-meta">
+                <span class="bm-genre">소설</span>
+                <span class="bm-year">2021</span>
+              </div>
+              <h3 class="book-name">완전한 행복</h3>
+              <p class="book-by">정유정 지음 · 은행나무</p>
+              <p class="book-desc">행복을 완전히 통제하려는 여자. 욕망과 폭력의 경계가 허물어지는 과정을 정유정 특유의 밀도로 그립니다.</p>
+              <div class="curator-note">
+                <span class="cn-tag">서점주 노트</span>
+                <p>"읽는 내내 손이 식었다. 정유정은 역시 정유정."</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ④ 공간 안내 -->
+    <section class="space-section" id="space">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">03 – 공간</span>
+          <h2 class="section-title">머물기 위한 설계</h2>
+        </div>
+        <div class="space-grid">
+
+          <div class="space-feature reveal">
+            <div class="sf-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-hidden="true">
+                <rect x="8" y="6" width="24" height="30" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="13" y1="14" x2="27" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="13" y1="20" x2="27" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="13" y1="26" x2="21" y2="26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>열람석</h3>
+            <p>구입 전 마음껏 읽어볼 수 있습니다. 카운터에서 책을 빌려 창가 자리에 앉으세요.</p>
+          </div>
+
+          <div class="space-feature reveal">
+            <div class="sf-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-hidden="true">
+                <circle cx="20" cy="20" r="11" stroke="currentColor" stroke-width="1.5"/>
+                <polyline points="20,13 20,20 25,25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>느린 시간</h3>
+            <p>서점 안에서는 조용히 지내주세요. 전화 통화는 밖에서, 음악은 이어폰으로.</p>
+          </div>
+
+          <div class="space-feature reveal">
+            <div class="sf-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-hidden="true">
+                <path d="M12 30 C12 24 16 18 20 18 C24 18 28 24 28 30" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M16 18 C16 13.5 18 10 20 10 C22 10 24 13.5 24 18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <line x1="20" y1="30" x2="20" y2="33" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="16" y1="33" x2="24" y2="33" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>계절 허브차</h3>
+            <p>계절마다 바뀌는 허브차 한 종을 작게 운영합니다. 책을 고르는 동안 마시기 좋습니다.</p>
+          </div>
+
+          <div class="space-feature reveal">
+            <div class="sf-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-hidden="true">
+                <rect x="9" y="14" width="22" height="16" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="9" y1="20" x2="31" y2="20" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="20" y1="14" x2="20" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="15" y1="10" x2="25" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>독서 모임</h3>
+            <p>매달 마지막 주 토요일 오후, 이달의 책 한 권을 함께 읽는 소규모 모임이 열립니다.</p>
+          </div>
+
+        </div>
+
+        <!-- 공간 도해 (데이터 시각화 저널리스트 스타일) -->
+        <div class="space-diagram reveal" aria-label="서점 공간 도해">
+          <div class="sd-wrap">
+            <div class="sd-zone sd-zone--shelves">
+              <span class="sdz-label">서가</span>
+            </div>
+            <div class="sd-zone sd-zone--reading">
+              <span class="sdz-label">열람석</span>
+            </div>
+            <div class="sd-zone sd-zone--counter">
+              <span class="sdz-label">카운터</span>
+            </div>
+            <div class="sd-zone sd-zone--entry">
+              <span class="sdz-label">입구</span>
+            </div>
+          </div>
+          <p class="sd-note">단순화된 평면 도해 · 실제 배치와 다를 수 있습니다</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ 방문 정보 -->
+    <section class="visit" id="visit">
+      <div class="container">
+        <div class="visit-grid">
+          <div class="visit-info reveal">
+            <span class="section-label">04 – 방문</span>
+            <h2 class="visit-headline">오시는 길</h2>
+            <dl class="visit-details">
+              <div class="vd-row">
+                <dt>주소</dt>
+                <dd>서울시 마포구 연남동 239-14<br>
+                  <span class="vd-sub">홍대입구역 3번 출구 도보 8분</span></dd>
+              </div>
+              <div class="vd-row">
+                <dt>운영 시간</dt>
+                <dd>
+                  <span class="vd-hours">화 – 일</span>
+                  <span class="vd-time">13:00 – 21:00</span><br>
+                  <span class="vd-sub">매주 월요일 정기 휴무</span>
+                </dd>
+              </div>
+              <div class="vd-row">
+                <dt>문의</dt>
+                <dd>
+                  <a href="mailto:hello@yeobek.kr">hello@yeobek.kr</a><br>
+                  <a href="tel:0220001234">02-2000-1234</a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <div class="visit-map reveal" aria-label="서점 위치 약도 (추상 도해)">
+            <div class="map-inner">
+              <div class="map-streets" aria-hidden="true">
+                <div class="ms-h ms-h1"></div>
+                <div class="ms-h ms-h2"></div>
+                <div class="ms-v ms-v1"></div>
+                <div class="ms-v ms-v2"></div>
+                <div class="ms-label ms-label--1">연남로</div>
+                <div class="ms-label ms-label--2">경의선숲길</div>
+              </div>
+              <div class="map-pin" aria-hidden="true">
+                <svg viewBox="0 0 20 28" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="28">
+                  <path d="M10 0C4.48 0 0 4.48 0 10c0 7.5 10 18 10 18s10-10.5 10-18C20 4.48 15.52 0 10 0z" fill="currentColor"/>
+                  <circle cx="10" cy="10" r="3.5" fill="white"/>
+                </svg>
+                <span class="map-pin-label">여백</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">여백</span>
+          <p class="footer-tagline">선명하게 남는 한 권을 위한 공간</p>
+        </div>
+        <nav class="footer-nav" aria-label="푸터 내비게이션">
+          <a href="#about">소개</a>
+          <a href="#curation">이달의 책</a>
+          <a href="#space">공간</a>
+          <a href="#visit">방문</a>
+        </nav>
+        <p class="footer-copy">© 2026 여백. 서울시 마포구 연남동.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
