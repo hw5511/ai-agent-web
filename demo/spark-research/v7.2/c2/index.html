@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>토림 · 수제 도자기 공방</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav" aria-label="주 내비게이션">
+    <a href="#" class="nav-brand" aria-label="토림 홈으로">토림</a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <ul class="nav-links" id="nav-menu" role="list">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#gallery">작품</a></li>
+      <li><a href="#process">과정</a></li>
+      <li><a href="#class">클래스</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO: fullscreen interactive stage -->
+  <section class="hero" id="hero" aria-label="토림 공방 소개">
+    <div class="hero-bg" aria-hidden="true">
+      <img
+        src="https://picsum.photos/seed/torim-kiln-hero/1920/1080"
+        alt=""
+        width="1920"
+        height="1080"
+        class="hero-img"
+        fetchpriority="high"
+      >
+    </div>
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <p class="hero-eyebrow">수제 도자기 공방</p>
+      <h1 class="hero-title">토림</h1>
+      <p class="hero-sub">흙이 손을 만나<br>형태가 된다</p>
+      <a href="#gallery" class="hero-cta">작품 보기</a>
+    </div>
+    <p class="hero-hint" aria-hidden="true">마우스로 탐색</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="section-number" aria-hidden="true">01</div>
+      <header class="section-header">
+        <h2 class="section-title">작가 소개</h2>
+      </header>
+      <div class="about-grid reveal">
+        <figure class="about-portrait">
+          <img
+            src="https://picsum.photos/seed/torim-artist-portrait/600/800"
+            alt="도예가 이수현 초상"
+            width="600"
+            height="800"
+            loading="lazy"
+          >
+        </figure>
+        <div class="about-text">
+          <p class="about-name">이수현</p>
+          <blockquote class="about-quote">
+            "손가락 자국 하나도 지우지 않습니다.<br>그 자국이 곧 시간입니다."
+          </blockquote>
+          <p class="about-bio">열두 해 동안 흙과 손 사이에서 형태를 찾아왔습니다. 전통 청자 기법과 현대적 조형 감각을 잇는 일상 도기를 만듭니다. 도구보다 손을, 완벽함보다 흔적을 믿습니다.</p>
+          <ol class="about-timeline" role="list">
+            <li>
+              <time datetime="2013">2013</time>
+              <span>한국공예 대전 입선</span>
+            </li>
+            <li>
+              <time datetime="2017">2017</time>
+              <span>도쿄 크래프트 페어 참가</span>
+            </li>
+            <li>
+              <time datetime="2020">2020</time>
+              <span>공방 토림 개설</span>
+            </li>
+            <li>
+              <time datetime="2024">2024</time>
+              <span>서울공예박물관 기획전</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-inner">
+      <div class="section-number" aria-hidden="true">02</div>
+      <header class="section-header">
+        <h2 class="section-title">작품 갤러리</h2>
+        <p class="section-sub">2022 – 2024</p>
+      </header>
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="https://picsum.photos/seed/torim-g1/600/750" alt="백자 찻잔" width="600" height="750" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"></div>
+            <figcaption>백자 찻잔 · 2024</figcaption>
+          </div>
+        </figure>
+        <figure class="gallery-item" id="gitem2">
+          <div class="gallery-img-wrap">
+            <img src="https://picsum.photos/seed/torim-g2/600/900" alt="청자 화병" width="600" height="900" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"></div>
+            <figcaption>청자 화병 · 2024</figcaption>
+          </div>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="https://picsum.photos/seed/torim-g3/600/750" alt="분청 사발" width="600" height="750" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"></div>
+            <figcaption>분청 사발 · 2023</figcaption>
+          </div>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="https://picsum.photos/seed/torim-g4/600/750" alt="옹기 항아리" width="600" height="750" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"></div>
+            <figcaption>옹기 항아리 · 2023</figcaption>
+          </div>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="https://picsum.photos/seed/torim-g5/600/750" alt="흑유 접시" width="600" height="750" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"></div>
+            <figcaption>흑유 접시 · 2023</figcaption>
+          </div>
+        </figure>
+        <figure class="gallery-item" id="gitem6">
+          <div class="gallery-img-wrap">
+            <img src="https://picsum.photos/seed/torim-g6/1200/600" alt="재유 컵 시리즈" width="1200" height="600" loading="lazy">
+            <div class="gallery-overlay" aria-hidden="true"></div>
+            <figcaption>재유 컵 시리즈 · 2022</figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="process-inner">
+      <div class="section-number" aria-hidden="true">03</div>
+      <header class="section-header">
+        <h2 class="section-title">작업 과정</h2>
+      </header>
+      <ol class="process-list">
+        <li class="process-step reveal">
+          <span class="step-index" aria-hidden="true">01</span>
+          <div class="step-content">
+            <h3 class="step-title">흙 선정</h3>
+            <p class="step-desc">경남 하동산 백토와 옹기토를 작업마다 배합합니다. 흙의 성질이 기물의 성격을 결정합니다.</p>
+          </div>
+          <div class="step-img-wrap">
+            <img src="https://picsum.photos/seed/torim-p1/480/320" alt="흙 선정 과정" width="480" height="320" loading="lazy">
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="step-index" aria-hidden="true">02</span>
+          <div class="step-content">
+            <h3 class="step-title">성형</h3>
+            <p class="step-desc">물레 위에서 손이 흙을 밀어 올립니다. 한 번의 호흡이 기물의 두께가 됩니다.</p>
+          </div>
+          <div class="step-img-wrap">
+            <img src="https://picsum.photos/seed/torim-p2/480/320" alt="물레 성형 과정" width="480" height="320" loading="lazy">
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="step-index" aria-hidden="true">03</span>
+          <div class="step-content">
+            <h3 class="step-title">건조 · 초벌</h3>
+            <p class="step-desc">그늘에서 천천히 건조한 뒤 800°C에서 초벌합니다. 서두르면 깨집니다.</p>
+          </div>
+          <div class="step-img-wrap">
+            <img src="https://picsum.photos/seed/torim-p3/480/320" alt="건조 및 초벌 과정" width="480" height="320" loading="lazy">
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="step-index" aria-hidden="true">04</span>
+          <div class="step-content">
+            <h3 class="step-title">유약 · 재벌</h3>
+            <p class="step-desc">재유 · 청자유 · 백유를 바르고 1,260°C 환원 소성합니다. 가마 속에서 비로소 색이 결정됩니다.</p>
+          </div>
+          <div class="step-img-wrap">
+            <img src="https://picsum.photos/seed/torim-p4/480/320" alt="유약 및 재벌 과정" width="480" height="320" loading="lazy">
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CLASS -->
+  <section class="class-section" id="class">
+    <div class="class-inner">
+      <div class="section-number" aria-hidden="true">04</div>
+      <header class="section-header">
+        <h2 class="section-title">클래스 안내</h2>
+      </header>
+      <div class="class-grid reveal">
+        <article class="class-card">
+          <h3 class="class-name">입문 1일 클래스</h3>
+          <p class="class-price">60,000원</p>
+          <p class="class-desc">물레 또는 핸드빌딩 선택. 소성 후 완성품 수령.</p>
+          <p class="class-meta">매주 토 · 일 / 2인 이상</p>
+        </article>
+        <article class="class-card">
+          <h3 class="class-name">6주 정규 과정</h3>
+          <p class="class-price">360,000원</p>
+          <p class="class-desc">기초부터 유약까지. 매주 2시간, 나만의 기물 6점 완성.</p>
+          <p class="class-meta">평일반 / 주말반 선택</p>
+        </article>
+        <article class="class-card">
+          <h3 class="class-name">프라이빗 클래스</h3>
+          <p class="class-price">120,000원 / 시간</p>
+          <p class="class-desc">1:1 맞춤 지도. 원하는 기법과 기물 집중 작업.</p>
+          <p class="class-meta">일정 조율 가능</p>
+        </article>
+      </div>
+      <div class="class-contact reveal">
+        <p>문의 <a href="mailto:torim@example.com">torim@example.com</a></p>
+        <p>인스타그램 <a href="#">@torim_pottery</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">토림</span>
+      <address class="footer-addr">경기도 광주시 오포읍 도마리 · 작업 예약 후 방문</address>
+      <small class="footer-copy">© 2026 토림. 무단 복제 금지.</small>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPARK.md v7.2 — 성능 원리(THE LAW/TRAP) 검증</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<style>
+  :root{ --bg:#0b0b0c; --fg:#f4f4f5; --muted:#a1a1aa; --line:#26262b; --accent:#16a34a; --warn:#f59e0b; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--fg);
+       line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:clamp(3rem,8vw,6rem) 1.5rem}
+  .eyebrow{color:var(--accent);font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+  h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.6rem 0 1rem;letter-spacing:-.02em}
+  .lead{color:var(--muted);max-width:64ch;margin-bottom:2.4rem}
+  .law{border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.5rem;background:#101013;margin-bottom:2.4rem}
+  .law h3{font-size:.95rem;margin-bottom:.5rem}
+  .law p{color:var(--muted);font-size:.9rem;margin-bottom:.6rem}
+  .law code{color:var(--fg);background:#1c1c20;padding:.1rem .35rem;border-radius:5px;font-size:.85em}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{display:block;border:1px solid var(--line);border-radius:14px;padding:1.5rem;text-decoration:none;color:inherit;
+        transition:border-color .2s ease,transform .2s ease;background:#101013}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tag{font-size:.72rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+  .card h2{font-size:1.2rem;font-weight:700;margin:.5rem 0 .4rem}
+  .card .seed{color:var(--muted);font-size:.82rem;margin-bottom:.7rem;line-height:1.5}
+  .card .seed b{color:#d4d4d8;font-weight:600}
+  .pass{display:inline-block;font-size:.74rem;font-weight:700;color:var(--accent);border:1px solid var(--accent);
+        border-radius:999px;padding:.12rem .6rem;margin-bottom:.6rem}
+  .meta{font-size:.78rem;color:#71717a;border-top:1px solid var(--line);padding-top:.7rem;margin-top:.4rem}
+  .go{color:var(--fg);font-weight:600;font-size:.9rem}
+  .note{margin-top:2.6rem;font-size:.82rem;color:#71717a;border-top:1px solid var(--line);padding-top:1.2rem}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">SPARK.md 연구 · v7.2 성능 원리 검증</p>
+    <h1>렉을 만드는 코딩을 원천 차단</h1>
+    <p class="lead">캡(blur≤40px 같은 숫자 제한)이 아니라 <strong>단 하나의 법칙</strong>으로 성능 바닥을 잡았습니다.
+      v7 외부 SEED CARD 강제 배정은 그대로 두고, 같은 프롬프트(도자기 공방·관측소·향수)에 무작위 시드를 배정해 4개를 생성했습니다.
+      특히 <b>noc</b>은 과거 22fps 렉을 냈던 "컬러필드/그라디언트" 기법이 무작위로 배정됐는데도 CPU 6배 스로틀에서 60fps가 나왔습니다.</p>
+
+    <div class="law">
+      <h3>THE LAW — 매 프레임 변하는 값은 <code>transform</code>·<code>opacity</code>만</h3>
+      <p>CSS 애니메이션·rAF·scroll·mousemove가 바꾸는 모든 값이 이 둘이어야 한다. 나머지(top/left/width/filter/box-shadow/background…)를 매 프레임 바꾸면 Layout/Paint 재실행 = 렉.</p>
+      <h3>THE TRAP — <code>transform</code>만 써도 안전하지 않다</h3>
+      <p><code>filter:blur</code>·<code>backdrop-filter</code>·큰 그림자·<code>mix-blend</code>가 걸린 레이어는 옮길 때마다 텍스처를 다시 그린다(re-paint). 큰 흐림은 <b>정적</b>으로, 부드러운 색은 정적 <code>radial-gradient</code>로.</p>
+      <p style="margin-bottom:0">근거: <code>research/skills-sh/knowledge/perf-principle.md</code> (web.dev · Chrome · csstriggers). 정적 탐지기 <code>perfcheck.sh</code>로 4개 모두 0 FAIL 확인.</p>
+    </div>
+
+    <div class="grid">
+      <a class="card" href="./c1/index.html">
+        <span class="tag">c1 · 도자기</span>
+        <span class="pass">perfcheck 0 FAIL</span>
+        <h2>토림 — 풀블리드 + 실물 오브젝트</h2>
+        <p class="seed"><b>MACRO</b> 풀블리드 캔버스 위 최소 텍스트<br>
+          <b>VISUAL</b> 실물 오브젝트 메타포(다이얼·렌즈·계기판)<br>
+          <b>PERSONA</b> 건축 도면 제도사 · <b>WILD</b> 딥블루의 심리적 안정</p>
+        <div class="meta">index 393 + css 704 + js 189</div>
+        <p style="margin-top:.7rem"><span class="go">결과물 열기 →</span></p>
+      </a>
+      <a class="card" href="./c2/index.html">
+        <span class="tag">c2 · 도자기</span>
+        <span class="pass">perfcheck 0 FAIL</span>
+        <h2>토림 — 듀오톤 인터랙티브 마스크</h2>
+        <p class="seed"><b>MACRO</b> 전체화면 인터랙티브 무대(UI는 모서리)<br>
+          <b>VISUAL</b> 듀오톤 이미지 + 인터랙티브 마스크<br>
+          <b>PERSONA</b> 브루탈리즘 잡지 아트디렉터 · <b>WILD</b> 내비게이션의 몰입</p>
+        <div class="meta">index 247 + css 833 + js 159</div>
+        <p style="margin-top:.7rem"><span class="go">결과물 열기 →</span></p>
+      </a>
+      <a class="card" href="./obs/index.html">
+        <span class="tag">obs · 관측소</span>
+        <span class="pass">perfcheck 0 FAIL</span>
+        <h2>이안 관측소 — 타입/이미지 스크램블</h2>
+        <p class="seed"><b>MACRO</b> 전체화면 인터랙티브 무대(UI는 모서리)<br>
+          <b>VISUAL</b> 타입·이미지 스크램블 / 셔플<br>
+          <b>PERSONA</b> 데이터 시각화 저널리스트 · <b>WILD</b> 맥락적 동적 테마</p>
+        <div class="meta">index 321 + css 911 + js 287</div>
+        <p style="margin-top:.7rem"><span class="go">결과물 열기 →</span></p>
+      </a>
+      <a class="card" href="./noc/index.html">
+        <span class="tag">noc · 향수 (위험 시드)</span>
+        <span class="pass">컬러필드인데 60fps</span>
+        <h2>NOCTURNE — 컬러필드/그라디언트 전이</h2>
+        <p class="seed"><b>MACRO</b> 전체화면 인터랙티브 무대(UI는 모서리)<br>
+          <b>VISUAL</b> 컬러필드 / 그라디언트 상태 전이 <i>(과거 22fps 렉 유발 가문)</i><br>
+          <b>PERSONA</b> 보태니컬 세밀화가 · <b>WILD</b> 황금비의 디지털 변주</p>
+        <div class="meta">index 606 + css 885 + js 129 · blur≥40px = 0개(정적 radial-gradient)</div>
+        <p style="margin-top:.7rem"><span class="go">결과물 열기 →</span></p>
+      </a>
+    </div>
+
+    <p class="note">전체 기록: <code>research/spark-md/JOURNAL.md</code>(Round 17) · 버전 <code>research/spark-md/versions/v7-lean.md</code>.
+      <a href="../">← 연구 허브로</a></p>
+  </main>
+</body>
+</html>
