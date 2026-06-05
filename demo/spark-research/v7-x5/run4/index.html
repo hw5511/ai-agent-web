@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토림 — 수제 도자기 공방</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <noscript><style>.hero__cell{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+<div class="cur" id="cur" aria-hidden="true"></div>
+
+<header class="nav" id="siteNav">
+    <a href="#" class="nav__logo" aria-label="토림 홈">토림</a>
+    <nav aria-label="주 메뉴">
+        <ul class="nav__list" id="navList">
+            <li><a href="#about" class="nav__link">작가 소개</a></li>
+            <li><a href="#gallery" class="nav__link">작품</a></li>
+            <li><a href="#process" class="nav__link">작업 과정</a></li>
+            <li><a href="#classes" class="nav__link">클래스</a></li>
+        </ul>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navList">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+            <rect y="0" width="22" height="1.5" fill="currentColor"/>
+            <rect y="7.25" width="22" height="1.5" fill="currentColor"/>
+            <rect y="14.5" width="22" height="1.5" fill="currentColor"/>
+        </svg>
+    </button>
+</header>
+
+<section class="hero" id="hero" aria-labelledby="heroTitle">
+
+    <div class="hero__field" aria-hidden="true">
+        <div class="hero__blob hero__blob--a" id="blobA"></div>
+        <div class="hero__blob hero__blob--b" id="blobB"></div>
+        <div class="hero__blob hero__blob--c" id="blobC"></div>
+    </div>
+
+    <div class="hero__mosaic" id="heroMosaic">
+
+        <div class="hero__cell c-label" data-delay="0">
+            <span class="hero__eyebrow">수제 도자기 공방</span>
+        </div>
+
+        <div class="hero__cell c-meta" data-delay="600" aria-hidden="true">
+            <span class="hero__est">Est.&thinsp;2018</span>
+        </div>
+
+        <div class="hero__cell c-title" data-delay="200">
+            <h1 class="hero__title" id="heroTitle">토림</h1>
+        </div>
+
+        <div class="hero__cell c-swatch" aria-hidden="true"></div>
+
+        <div class="hero__cell c-image" data-delay="300">
+            <img
+                src="https://loremflickr.com/900/1100/pottery,ceramic,hands,wheel"
+                alt="물레 위에서 흙을 빚는 도공의 손"
+                width="900"
+                height="1100"
+                class="hero__img"
+            >
+        </div>
+
+        <div class="hero__cell c-sub" data-delay="500">
+            <p class="hero__tagline">흙과 손, 그리고 시간</p>
+            <div class="hero__actions">
+                <a href="#gallery" class="btn btn--primary">작품 보기</a>
+                <a href="#classes" class="btn btn--ghost">클래스 신청</a>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="hero__hint" id="heroHint" aria-hidden="true">손을 움직이면 빛이 바뀝니다</p>
+
+</section>
+
+<section class="about" id="about" aria-labelledby="aboutTitle">
+    <div class="about__wrap">
+        <div class="about__img-col" data-reveal="fade-right">
+            <figure class="about__figure">
+                <img
+                    src="https://loremflickr.com/700/875/artisan,craft,korean,woman,studio"
+                    alt="공방에서 작업 중인 도예가 김지혜"
+                    width="700"
+                    height="875"
+                    loading="lazy"
+                >
+            </figure>
+        </div>
+        <div class="about__text-col">
+            <span class="section-eyebrow" data-reveal="fade-up" data-delay="0">작가 소개</span>
+            <h2 class="section-heading" id="aboutTitle" data-reveal="fade-up" data-delay="100">흙과 함께한<br>열두 해</h2>
+            <p class="about__bio" data-reveal="fade-up" data-delay="200">
+                경기도 광주의 작은 공방 토림에서 도예가 김지혜는 매일 흙과 대화합니다.
+                물레 위에서 손이 흙을 만나는 순간, 재료와 사람이 하나가 됩니다.
+            </p>
+            <p class="about__bio" data-reveal="fade-up" data-delay="300">
+                일본 이마리야키의 정제된 선과 한국 백자의 여백을 배워,
+                그 사이 어딘가에 있는 자신만의 형태를 찾아가고 있습니다.
+                생활 속에 자리 잡는 그릇, 손에 쥐었을 때 편안한 무게.
+            </p>
+            <dl class="about__facts" data-reveal="fade-up" data-delay="400">
+                <div class="about__fact">
+                    <dt>수련</dt>
+                    <dd>이천도예학교, 교토 공방 연수</dd>
+                </div>
+                <div class="about__fact">
+                    <dt>수상</dt>
+                    <dd>경기도 공예대전 우수상 2021</dd>
+                </div>
+                <div class="about__fact">
+                    <dt>공방</dt>
+                    <dd>경기도 광주시 도척면</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</section>
+
+<section class="gallery" id="gallery" aria-labelledby="galleryTitle">
+    <div class="gallery__head" data-reveal="fade-up">
+        <span class="section-eyebrow">작품 갤러리</span>
+        <h2 class="section-heading" id="galleryTitle">흙이 형태를<br>갖는 순간들</h2>
+    </div>
+    <div class="gallery__grid">
+        <figure class="gal-item gal-item--tall" data-reveal="fade" data-delay="0">
+            <img src="https://picsum.photos/seed/torim01/700/900"
+                 alt="분청 대접 — 재유 시유 후 1250도 소성"
+                 width="700" height="900" loading="lazy">
+            <figcaption><span>분청 대접</span><time>2024</time></figcaption>
+        </figure>
+        <figure class="gal-item" data-reveal="fade" data-delay="100">
+            <img src="https://picsum.photos/seed/torim02/600/750"
+                 alt="백자 커피잔 세트"
+                 width="600" height="750" loading="lazy">
+            <figcaption><span>백자 커피잔</span><time>2024</time></figcaption>
+        </figure>
+        <figure class="gal-item" data-reveal="fade" data-delay="200">
+            <img src="https://picsum.photos/seed/torim03/600/750"
+                 alt="청유 화병"
+                 width="600" height="750" loading="lazy">
+            <figcaption><span>청유 화병</span><time>2023</time></figcaption>
+        </figure>
+        <figure class="gal-item gal-item--wide" data-reveal="fade" data-delay="150">
+            <img src="https://picsum.photos/seed/torim04/1200/600"
+                 alt="식기 일습 — 밥그릇, 국그릇, 반찬 접시"
+                 width="1200" height="600" loading="lazy">
+            <figcaption><span>밥상 일습</span><time>2023</time></figcaption>
+        </figure>
+        <figure class="gal-item" data-reveal="fade" data-delay="250">
+            <img src="https://picsum.photos/seed/torim05/600/750"
+                 alt="철화 찻잔 — 귀얄 문양"
+                 width="600" height="750" loading="lazy">
+            <figcaption><span>철화 찻잔</span><time>2023</time></figcaption>
+        </figure>
+        <figure class="gal-item" data-reveal="fade" data-delay="350">
+            <img src="https://picsum.photos/seed/torim06/600/750"
+                 alt="덤벙 접시 — 백토 분장 후 재벌"
+                 width="600" height="750" loading="lazy">
+            <figcaption><span>덤벙 접시</span><time>2022</time></figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="process" id="process" aria-labelledby="processTitle">
+    <div class="process__wrap">
+        <div class="process__head" data-reveal="fade-up">
+            <span class="section-eyebrow">작업 과정</span>
+            <h2 class="section-heading" id="processTitle">흙에서<br>식탁까지</h2>
+        </div>
+        <ol class="process__list" aria-label="도자기 제작 단계">
+            <li class="process__step" data-reveal="fade-up" data-delay="0">
+                <div class="process__num" aria-hidden="true">01</div>
+                <div class="process__img-wrap">
+                    <img src="https://loremflickr.com/560/420/clay,soil,texture,earth"
+                         alt="정제된 고령토 흙 덩어리"
+                         width="560" height="420" loading="lazy">
+                </div>
+                <div class="process__body">
+                    <h3>흙 고르기</h3>
+                    <p>국내산 고령토와 자사 혼합토를 직접 수비(水飛)해 사용합니다. 흙의 성질이 결국 형태의 성격을 결정합니다.</p>
+                </div>
+            </li>
+            <li class="process__step" data-reveal="fade-up" data-delay="100">
+                <div class="process__num" aria-hidden="true">02</div>
+                <div class="process__img-wrap">
+                    <img src="https://loremflickr.com/560/420/pottery,wheel,throwing,hands"
+                         alt="물레 성형 중인 모습"
+                         width="560" height="420" loading="lazy">
+                </div>
+                <div class="process__body">
+                    <h3>물레 성형</h3>
+                    <p>회전하는 흙 위에 손을 얹는 순간부터 그릇이 시작됩니다. 같은 형태도 그날의 습도와 손의 온도에 따라 달라집니다.</p>
+                </div>
+            </li>
+            <li class="process__step" data-reveal="fade-up" data-delay="200">
+                <div class="process__num" aria-hidden="true">03</div>
+                <div class="process__img-wrap">
+                    <img src="https://loremflickr.com/560/420/kiln,ceramics,drying,workshop"
+                         alt="초벌 전 그늘 건조 중인 그릇들"
+                         width="560" height="420" loading="lazy">
+                </div>
+                <div class="process__body">
+                    <h3>건조와 초벌</h3>
+                    <p>그늘에서 천천히 건조 후, 800도 초벌 가마에 넣습니다. 흙이 처음으로 단단한 형태를 가집니다.</p>
+                </div>
+            </li>
+            <li class="process__step" data-reveal="fade-up" data-delay="300">
+                <div class="process__num" aria-hidden="true">04</div>
+                <div class="process__img-wrap">
+                    <img src="https://loremflickr.com/560/420/glaze,pottery,firing,kiln"
+                         alt="시유 후 재벌 소성 완료된 작품들"
+                         width="560" height="420" loading="lazy">
+                </div>
+                <div class="process__body">
+                    <h3>시유와 재벌</h3>
+                    <p>직접 조합한 유약을 손으로 바른 뒤, 1250도 재벌 가마에서 12시간 소성합니다. 가마 문을 여는 순간까지 완성을 알 수 없습니다.</p>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="classes" id="classes" aria-labelledby="classesTitle">
+    <div class="classes__wrap">
+        <div class="classes__head" data-reveal="fade-up">
+            <span class="section-eyebrow">클래스 안내</span>
+            <h2 class="section-heading" id="classesTitle">흙을 빚는<br>시간을 함께</h2>
+        </div>
+        <div class="classes__grid">
+            <article class="class-card" data-reveal="fade-up" data-delay="0">
+                <span class="class-card__tag">체험</span>
+                <h3 class="class-card__name">원데이 클래스</h3>
+                <p class="class-card__desc">물레 또는 핀칭 기법으로 나만의 작품 하나를 완성합니다. 소성 후 약 3주 뒤에 수령합니다.</p>
+                <dl class="class-card__spec">
+                    <div><dt>일정</dt><dd>매주 토요일 오후 2시</dd></div>
+                    <div><dt>인원</dt><dd>최대 4인</dd></div>
+                    <div><dt>시간</dt><dd>약 2시간</dd></div>
+                    <div><dt>비용</dt><dd>65,000원 / 인</dd></div>
+                </dl>
+                <a href="mailto:torim@example.com" class="btn btn--outline">예약 문의</a>
+            </article>
+            <article class="class-card class-card--featured" data-reveal="fade-up" data-delay="120">
+                <span class="class-card__tag">정규</span>
+                <h3 class="class-card__name">월정기 클래스</h3>
+                <p class="class-card__desc">물레 성형의 기초부터 시유까지 체계적으로 배웁니다. 매월 주 2회, 5개월 과정으로 진행합니다.</p>
+                <dl class="class-card__spec">
+                    <div><dt>일정</dt><dd>협의 후 결정</dd></div>
+                    <div><dt>인원</dt><dd>최대 2인</dd></div>
+                    <div><dt>기간</dt><dd>5개월 (40회)</dd></div>
+                    <div><dt>비용</dt><dd>월 120,000원</dd></div>
+                </dl>
+                <a href="mailto:torim@example.com" class="btn btn--primary">상담 신청</a>
+            </article>
+            <article class="class-card" data-reveal="fade-up" data-delay="240">
+                <span class="class-card__tag">특별</span>
+                <h3 class="class-card__name">소규모 단체</h3>
+                <p class="class-card__desc">가족, 커플, 소규모 팀을 위한 프라이빗 클래스입니다. 날짜와 내용을 함께 조율해 진행합니다.</p>
+                <dl class="class-card__spec">
+                    <div><dt>인원</dt><dd>2&ndash;6인</dd></div>
+                    <div><dt>시간</dt><dd>약 3시간</dd></div>
+                    <div><dt>비용</dt><dd>별도 협의</dd></div>
+                </dl>
+                <a href="mailto:torim@example.com" class="btn btn--outline">문의하기</a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+    <div class="footer__wrap">
+        <div class="footer__brand">
+            <span class="footer__logo">토림</span>
+            <p>흙과 손, 그리고 시간</p>
+        </div>
+        <nav class="footer__nav" aria-label="푸터 메뉴">
+            <ul>
+                <li><a href="#about">작가 소개</a></li>
+                <li><a href="#gallery">작품 갤러리</a></li>
+                <li><a href="#process">작업 과정</a></li>
+                <li><a href="#classes">클래스 안내</a></li>
+            </ul>
+        </nav>
+        <address class="footer__contact">
+            <p>경기도 광주시 도척면 어떤로 123</p>
+            <p><a href="mailto:torim@example.com">torim@example.com</a></p>
+            <p><a href="tel:+82310000000">031-000-0000</a></p>
+        </address>
+    </div>
+    <div class="footer__bottom">
+        <small>&copy; 2026 토림 도자기 공방. All rights reserved.</small>
+    </div>
+</footer>
+
+<script defer src="script.js"></script>
+</body>
+</html>
