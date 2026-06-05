@@ -3,17 +3,19 @@
 # 분석(R17 stream usage): 벽시계 시간의 ~99.9%가 모델 추론(api_ms≈duration_ms).
 #   하네스/verbose 오버헤드는 무의미. 시간 ∝ output_tokens(사고토큰+코드+자기검증 반복).
 #   느린 run(noc 40분)은 thinking 1386청크 + Bash 9회 자가검증 + 13턴의 과잉작업이 원인.
-# 최적화 레버 2개:
-#   1) --effort medium : 사고(thinking) 예산 축소 → 숨은 output 토큰 절반↓
-#   2) --disallowedTools Bash : 모델이 쉘로 자기 결과를 검사/미리보기하는 에이전트 루프 차단
-#      (산출물은 Write/Edit로만. self_check는 머릿속 1패스.)
-# 로그도 stream-json/verbose 끄고 평문만 저장(1MB JSONL → 수KB).
+# 파이프라인(R18~R19): 생성 → 정적검사 → (FAIL이면) resume 교정.
+#   1) 생성: --effort low(사고 1패스) + --disallowedTools Bash(자가검증 에이전트 루프 차단).
+#      → R17 noc 39.8분→9.7분(-76%), thinking 1386→166, Bash 9→0, perfcheck 성능 0 FAIL.
+#   2) 검사: perfcheck.sh(공짜·ms) — 성능(THE LAW/TRAP) + 마감(em-dash/이모지/링크). 모델 grep 루프 대체.
+#   3) 교정: FAIL이면 같은 session_id를 --resume(effort 그대로)해 그 항목만 1턴 수정(~10초). 재생성 안 함.
+# 즉 비싼 모델 자가검증을 "공짜 정적검사 + 필요할 때만 짧은 targeted resume"으로 분해.
 set -u
 REPO="$(cd "$(dirname "$0")/../../.." && pwd)"
 V="$REPO/research/spark-md/versions/v7-lean.md"
 PDIR="$REPO/research/spark-md/prompts"
 IDEAS="$REPO/skills/lightbulb/ideas.json"
-MODEL="sonnet"; MAXPAR="${MAXPAR:-5}"; EFFORT="${EFFORT:-medium}"
+MODEL="sonnet"; MAXPAR="${MAXPAR:-5}"; EFFORT="${EFFORT:-low}"
+PERFCHECK="$(dirname "$0")/perfcheck.sh"
 
 MACRO=(
 "중앙 대칭 집중형 (한 점으로 시선 수렴)"
@@ -72,12 +74,32 @@ $(cat "$PDIR/$pf")
 
 [작업 규칙] index.html·styles.css·script.js를 Write로 작성하고 끝내라. 결과를 확인하려고 쉘 명령(미리보기·grep·테스트)을 돌리지 마라. self_check는 머릿속 1패스로 하고 필요한 1회 수정만 Edit하라."
   local t0=$(date +%s)
+  # 1) 생성: 사고 1패스(effort low) + Bash 자가검증 루프 차단. stream-json은 session_id 캡처용.
   ( cd "$dir" && unset CLAUDECODE && export IS_SANDBOX=1 && \
     claude -p --dangerously-skip-permissions --model "$MODEL" --effort "$EFFORT" \
-      --disallowedTools "Bash" "$prompt" \
-    > "$L/$name.out.txt" 2> "$L/$name.err" )
+      --disallowedTools "Bash" --output-format stream-json --verbose "$prompt" \
+    > "$L/$name.stream.jsonl" 2> "$L/$name.err" )
+  # 2) 정적 검사(공짜·ms): 성능(THE LAW/TRAP) + 마감(em-dash/이모지/링크). 모델 grep 루프 대체.
+  local pc; pc="$(bash "$PERFCHECK" "$dir" 2>/dev/null)"; local fixed=""
+  if echo "$pc" | grep -q 'FAIL=[1-9]'; then
+    # 3) FAIL이면 같은 세션 resume으로 그 항목만 교정(짧은 1턴, effort 그대로). 재생성 안 함.
+    local sid; sid="$(python3 -c "import json,sys
+for l in open('$L/$name.stream.jsonl'):
+    l=l.strip()
+    try: o=json.loads(l)
+    except: continue
+    if o.get('type')=='system' and o.get('subtype')=='init': print(o.get('session_id')); break" 2>/dev/null)"
+    if [ -n "$sid" ]; then
+      local fixprompt="자동 마감/성능 검사(perfcheck)가 FLOOR 위반을 잡았다. 아래만 적절히 고쳐라(새 설명·재검증·재생성 금지, 해당 Edit만):
+$pc"
+      ( cd "$dir" && unset CLAUDECODE && export IS_SANDBOX=1 && \
+        claude -p --resume "$sid" --dangerously-skip-permissions --model "$MODEL" --effort "$EFFORT" \
+          --disallowedTools "Bash" "$fixprompt" > "$L/$name.fix.txt" 2> "$L/$name.fix.err" )
+      pc="$(bash "$PERFCHECK" "$dir" 2>/dev/null)"; fixed=" +resume교정"
+    fi
+  fi
   local t1=$(date +%s)
-  echo "$name DONE ${EFFORT} $((t1-t0))s [$m | $v | $p | $w]" >> "$L/_seeds.log"
+  echo "$name DONE ${EFFORT}${fixed} $((t1-t0))s | $(echo "$pc" | tail -1) [$m | $v | $p | $w]" >> "$L/_seeds.log"
 }
 echo "=== v7-fast 병렬 (동시 $MAXPAR, effort=$EFFORT, Bash 차단) ==="
 run=0
