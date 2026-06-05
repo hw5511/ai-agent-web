@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>토림 — 수제 도자기 공방</title>
+  <meta name="description" content="토림은 흙과 손으로 빚는 수제 도자기 공방입니다. 일상에 깃드는 기물을 만듭니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="주 메뉴">
+    <a href="#" class="nav-logo" aria-label="토림 홈">토림<span class="nav-logo-en">TORIM</span></a>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-list">
+      <span></span><span></span>
+    </button>
+    <ul class="nav-list" id="nav-list" role="list">
+      <li><a href="#about">작가 소개</a></li>
+      <li><a href="#gallery">작품</a></li>
+      <li><a href="#process">작업 과정</a></li>
+      <li><a href="#class">클래스</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="히어로">
+    <div class="hero-stage" aria-hidden="true">
+      <!-- Central object -->
+      <div class="hero-center" id="hero-center">
+        <div class="hero-center-inner">
+          <img
+            src="https://loremflickr.com/640/800/pottery,ceramic,bowl"
+            alt="토림 대표 기물 — 분청 항아리"
+            width="640"
+            height="800"
+            class="hero-center-img"
+          >
+          <div class="hero-center-label">
+            <span class="label-axis">z — 0</span>
+            <span class="label-title">분청 편병</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Satellites -->
+      <div class="satellite sat-1" style="--dx:-38%;--dy:-22%;--dz:-120px;--scale:0.55;">
+        <img src="https://loremflickr.com/320/400/pottery,ceramic,cup/all" alt="작품 — 백자 찻잔" width="320" height="400" loading="lazy">
+        <span class="sat-label">백자 찻잔</span>
+      </div>
+      <div class="satellite sat-2" style="--dx:40%;--dy:-12%;--dz:-200px;--scale:0.42;">
+        <img src="https://loremflickr.com/280/360/stoneware,vase/all" alt="작품 — 석기 화병" width="280" height="360" loading="lazy">
+        <span class="sat-label">석기 화병</span>
+      </div>
+      <div class="satellite sat-3" style="--dx:-44%;--dy:28%;--dz:-160px;--scale:0.48;">
+        <img src="https://loremflickr.com/300/380/ceramic,plate/all" alt="작품 — 청자 접시" width="300" height="380" loading="lazy">
+        <span class="sat-label">청자 접시</span>
+      </div>
+      <div class="satellite sat-4" style="--dx:36%;--dy:30%;--dz:-240px;--scale:0.36;">
+        <img src="https://loremflickr.com/260/340/pottery,bowl/all" alt="작품 — 귀얄 발우" width="260" height="340" loading="lazy">
+        <span class="sat-label">귀얄 발우</span>
+      </div>
+      <div class="satellite sat-5" style="--dx:2%;--dy:-38%;--dz:-300px;--scale:0.30;">
+        <img src="https://loremflickr.com/240/320/handmade,ceramic/all" alt="작품 — 철화 항아리" width="240" height="320" loading="lazy">
+        <span class="sat-label">철화 항아리</span>
+      </div>
+    </div>
+
+    <!-- Hero text — always in DOM -->
+    <div class="hero-text">
+      <p class="hero-kicker">흙과 손의 기록</p>
+      <h1 class="hero-heading">토림<br><em>土林</em></h1>
+      <p class="hero-sub">질감이 기억되는 기물을 만듭니다</p>
+      <a href="#gallery" class="hero-cta">작품 보기</a>
+    </div>
+
+    <!-- Depth scale bar -->
+    <div class="depth-bar" aria-hidden="true">
+      <span class="depth-label">가까움</span>
+      <div class="depth-track"><div class="depth-fill"></div></div>
+      <span class="depth-label">멀음</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img
+          src="https://loremflickr.com/560/700/potter,artist,hands/all"
+          alt="작가 정토림이 물레를 돌리는 모습"
+          width="560"
+          height="700"
+          loading="lazy"
+        >
+        <div class="about-img-caption">서울 성수동 작업실, 2024</div>
+      </div>
+      <div class="about-copy">
+        <span class="section-kicker">작가 소개</span>
+        <h2 class="section-heading">정토림</h2>
+        <p class="about-bio">
+          열두 해째 흙을 만지고 있습니다. 손바닥에 전해지는 압력, 물의 온도, 회전의 저항 — 그 모든 것이 기물의 표면에 남습니다. 저는 그 흔적을 지우지 않습니다.
+        </p>
+        <p class="about-bio">
+          도예를 배운 곳은 경기도 이천입니다. 지금은 서울 성수동 작업실에서 매일 물레를 돌립니다. 일상에서 손이 닿는 기물 — 밥그릇, 찻잔, 화병 — 을 주로 만듭니다.
+        </p>
+        <dl class="about-stats">
+          <div class="stat-item">
+            <dt>활동</dt>
+            <dd>2013년 — 현재</dd>
+          </div>
+          <div class="stat-item">
+            <dt>작업실</dt>
+            <dd>서울 성수동</dd>
+          </div>
+          <div class="stat-item">
+            <dt>전공</dt>
+            <dd>도예·한국공예과</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-header">
+      <span class="section-kicker">작품 갤러리</span>
+      <h2 class="section-heading">기물들</h2>
+      <p class="gallery-desc">각 작품에는 흙의 종류, 유약, 소성 온도가 다릅니다.<br>손이 남긴 질감이 제각각입니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <figure class="gal-item gal-large">
+        <img src="https://picsum.photos/seed/torim-bowl1/720/900" alt="분청 편병 — 귀얄 기법, 1280도 환원 소성" width="720" height="900" loading="lazy">
+        <figcaption>
+          <span class="gal-name">분청 편병</span>
+          <span class="gal-meta">귀얄 기법 / 1280°C 환원</span>
+        </figcaption>
+      </figure>
+      <figure class="gal-item">
+        <img src="https://picsum.photos/seed/torim-cup1/480/600" alt="백자 찻잔 — 담청유, 전통 물레 성형" width="480" height="600" loading="lazy">
+        <figcaption>
+          <span class="gal-name">백자 찻잔</span>
+          <span class="gal-meta">담청유 / 물레 성형</span>
+        </figcaption>
+      </figure>
+      <figure class="gal-item">
+        <img src="https://picsum.photos/seed/torim-vase1/480/600" alt="석기 화병 — 자연유, 장작 소성" width="480" height="600" loading="lazy">
+        <figcaption>
+          <span class="gal-name">석기 화병</span>
+          <span class="gal-meta">자연유 / 장작 소성</span>
+        </figcaption>
+      </figure>
+      <figure class="gal-item">
+        <img src="https://picsum.photos/seed/torim-plate1/480/600" alt="청자 접시 — 비색 청자유, 코일 성형" width="480" height="600" loading="lazy">
+        <figcaption>
+          <span class="gal-name">청자 접시</span>
+          <span class="gal-meta">비색청자유 / 코일 성형</span>
+        </figcaption>
+      </figure>
+      <figure class="gal-item gal-wide">
+        <img src="https://picsum.photos/seed/torim-set1/900/560" alt="찻잔 세트 — 분청, 3점 1조" width="900" height="560" loading="lazy">
+        <figcaption>
+          <span class="gal-name">찻잔 세트 (3점)</span>
+          <span class="gal-meta">분청 / 귀얄</span>
+        </figcaption>
+      </figure>
+      <figure class="gal-item">
+        <img src="https://picsum.photos/seed/torim-jar1/480/600" alt="철화 항아리 — 철화 안료, 1250도 산화 소성" width="480" height="600" loading="lazy">
+        <figcaption>
+          <span class="gal-name">철화 항아리</span>
+          <span class="gal-meta">철화 안료 / 1250°C 산화</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="process-header">
+      <span class="section-kicker">작업 과정</span>
+      <h2 class="section-heading">흙에서 기물로</h2>
+    </div>
+    <ol class="process-steps" role="list">
+      <li class="process-step">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div class="step-content">
+          <h3 class="step-title">흙 고르기</h3>
+          <p class="step-desc">작품의 성격에 따라 태토를 고릅니다. 분청은 거친 숙성토, 백자는 정제 백토, 석기는 철분 함량이 높은 회색 점토를 씁니다.</p>
+          <img src="https://loremflickr.com/560/360/clay,soil,pottery/all" alt="다양한 흙 종류가 담긴 그릇들" width="560" height="360" loading="lazy">
+        </div>
+      </li>
+      <li class="process-step">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div class="step-content">
+          <h3 class="step-title">성형</h3>
+          <p class="step-desc">물레, 코일링, 판성형 중 형태에 맞는 방법을 씁니다. 물레에서는 손바닥과 손가락의 압력 분포가 그대로 기벽에 새겨집니다.</p>
+          <img src="https://loremflickr.com/560/360/wheel,throwing,potter/all" alt="물레 위에서 흙을 성형하는 손" width="560" height="360" loading="lazy">
+        </div>
+      </li>
+      <li class="process-step">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div class="step-content">
+          <h3 class="step-title">건조 & 굽깎기</h3>
+          <p class="step-desc">반건조 상태에서 굽을 깎습니다. 이때 기물의 무게 중심과 벽의 두께가 결정됩니다. 손에 쥐었을 때의 균형감은 여기서 만들어집니다.</p>
+          <img src="https://loremflickr.com/560/360/ceramic,drying,studio/all" alt="건조 중인 도자기들이 선반에 놓인 모습" width="560" height="360" loading="lazy">
+        </div>
+      </li>
+      <li class="process-step">
+        <div class="step-num" aria-hidden="true">04</div>
+        <div class="step-content">
+          <h3 class="step-title">초벌 & 유약</h3>
+          <p class="step-desc">800도에서 초벌 소성 후 유약을 입힙니다. 귀얄 기법은 붓자국이 표면의 굴곡에 따라 달리 앉아 예측 불가능한 무늬를 만듭니다.</p>
+          <img src="https://loremflickr.com/560/360/glaze,ceramic,kiln/all" alt="유약을 바르는 도자기" width="560" height="360" loading="lazy">
+        </div>
+      </li>
+      <li class="process-step">
+        <div class="step-num" aria-hidden="true">05</div>
+        <div class="step-content">
+          <h3 class="step-title">재벌 소성</h3>
+          <p class="step-desc">1250 — 1300도에서 12시간 이상 굽습니다. 가마 안의 온도 분포, 불꽃의 방향, 산소량이 색과 질감을 최종 결정합니다. 같은 유약도 매번 다릅니다.</p>
+          <img src="https://loremflickr.com/560/360/kiln,fire,ceramic,firing/all" alt="가마 소성 장면" width="560" height="360" loading="lazy">
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- CLASS -->
+  <section class="class" id="class">
+    <div class="class-inner">
+      <div class="class-header">
+        <span class="section-kicker">클래스 안내</span>
+        <h2 class="section-heading">직접 만져보세요</h2>
+        <p class="class-intro">작업실에서 소규모로 진행하는 도예 클래스입니다. 물레와 핀칭, 두 과정을 열고 있습니다.</p>
+      </div>
+      <div class="class-cards">
+        <article class="class-card">
+          <div class="class-card-top">
+            <span class="class-type">입문</span>
+            <h3 class="class-name">물레 체험 클래스</h3>
+          </div>
+          <ul class="class-details" role="list">
+            <li><span class="detail-label">시간</span><span>2시간</span></li>
+            <li><span class="detail-label">정원</span><span>최대 4명</span></li>
+            <li><span class="detail-label">일정</span><span>매주 토·일 14:00</span></li>
+            <li><span class="detail-label">비용</span><span>60,000원</span></li>
+          </ul>
+          <p class="class-note">물레 위에서 흙을 올리고 기본 원통형 기물을 만드는 체험입니다. 기물은 소성 후 4주 뒤 수령 가능합니다.</p>
+          <a href="mailto:yangheewoo5511@gmail.com?subject=물레 체험 클래스 문의" class="class-cta">문의하기</a>
+        </article>
+        <article class="class-card">
+          <div class="class-card-top">
+            <span class="class-type">정기</span>
+            <h3 class="class-name">핀칭 월간 클래스</h3>
+          </div>
+          <ul class="class-details" role="list">
+            <li><span class="detail-label">시간</span><span>3시간 × 4회</span></li>
+            <li><span class="detail-label">정원</span><span>최대 6명</span></li>
+            <li><span class="detail-label">일정</span><span>매월 셋째 주 평일</span></li>
+            <li><span class="detail-label">비용</span><span>180,000원</span></li>
+          </ul>
+          <p class="class-note">손으로 빚는 핀칭 기법으로 한 달 동안 나만의 기물 세트를 완성합니다. 성형부터 유약, 소성까지 전 과정을 함께합니다.</p>
+          <a href="mailto:yangheewoo5511@gmail.com?subject=핀칭 월간 클래스 문의" class="class-cta">문의하기</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">토림<em>土林</em></span>
+        <p class="footer-tagline">흙과 손이 만나는 자리</p>
+      </div>
+      <address class="footer-contact">
+        <p>서울특별시 성동구 성수동 1가<br>작업실 운영: 화 — 일, 10:00 — 18:00</p>
+        <p>
+          <a href="mailto:yangheewoo5511@gmail.com">yangheewoo5511@gmail.com</a>
+        </p>
+      </address>
+      <nav class="footer-nav" aria-label="푸터 메뉴">
+        <a href="#about">작가 소개</a>
+        <a href="#gallery">작품</a>
+        <a href="#process">작업 과정</a>
+        <a href="#class">클래스</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 토림. 모든 작품의 저작권은 작가에게 있습니다.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
