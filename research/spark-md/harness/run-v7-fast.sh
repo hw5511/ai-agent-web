@@ -4,7 +4,7 @@
 #   하네스/verbose 오버헤드는 무의미. 시간 ∝ output_tokens(사고토큰+코드+자기검증 반복).
 #   느린 run(noc 40분)은 thinking 1386청크 + Bash 9회 자가검증 + 13턴의 과잉작업이 원인.
 # 파이프라인(R18~R19): 생성 → 정적검사 → (FAIL이면) resume 교정. 핵심=비대칭 effort.
-#   1) 생성: --effort max(GEN_EFFORT, 사고를 몰아 1패스 위반 0개 목표) + --disallowedTools Bash(자가검증 루프 차단).
+#   1) 생성: --effort low(GEN_EFFORT, 사고 1패스) + --disallowedTools Bash(자가검증 루프 차단). max는 타임아웃이라 못 씀.
 #   2) 검사: perfcheck.sh(공짜·ms) — 성능(THE LAW/TRAP) + 마감(em-dash/이모지/링크). 모델 grep 루프 대체.
 #   3) 교정: FAIL이면 같은 session_id를 --resume하되 effort를 내려(FIX_EFFORT=low) 적발 항목만 1턴 수정(~10초). 재생성 안 함.
 # 즉 "창작엔 사고를 몰고, 수정엔 사고를 아낀다". 비싼 모델 자가검증을 공짜 정적검사+짧은 targeted resume으로 분해.
@@ -16,7 +16,9 @@ PDIR="$REPO/research/spark-md/prompts"
 IDEAS="$REPO/skills/lightbulb/ideas.json"
 MODEL="sonnet"; MAXPAR="${MAXPAR:-5}"
 # 비대칭 effort: 생성은 사고를 몰아 1패스 위반 0개를 노리고, 교정은 사고를 아껴 적발 항목만 빠르게.
-GEN_EFFORT="${GEN_EFFORT:-max}"   # 생성(창작)
+# ※ R18 실측: --effort max는 생성이 46.6분 단일 턴에서 "Request timed out"으로 죽어 코드 0줄(사고 예산 과대).
+#   사고량으로 마감 위반을 막는 접근은 비현실적 → low로 빠르게 생성하고 정적검사+resume으로 마감을 보장한다.
+GEN_EFFORT="${GEN_EFFORT:-low}"   # 생성(창작). high까지는 안전, max는 타임아웃.
 FIX_EFFORT="${FIX_EFFORT:-low}"   # resume 교정(기계적 수정)
 PERFCHECK="$(dirname "$0")/perfcheck.sh"
 
