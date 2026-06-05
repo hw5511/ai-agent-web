@@ -92,9 +92,11 @@ for l in open('$L/$name.stream.jsonl'):
     if [ -n "$sid" ]; then
       local fixprompt="자동 마감/성능 검사(perfcheck)가 FLOOR 위반을 잡았다. 아래만 적절히 고쳐라(새 설명·재검증·재생성 금지, 해당 Edit만):
 $pc"
+      # 주의: 이 환경의 deferred-tool 세션은 resume 시 stream-json 포맷을 요구함(평문이면 "deferred tool marker" 에러).
       ( cd "$dir" && unset CLAUDECODE && export IS_SANDBOX=1 && \
         claude -p --resume "$sid" --dangerously-skip-permissions --model "$MODEL" --effort "$EFFORT" \
-          --disallowedTools "Bash" "$fixprompt" > "$L/$name.fix.txt" 2> "$L/$name.fix.err" )
+          --disallowedTools "Bash" --output-format stream-json --verbose "$fixprompt" \
+          > "$L/$name.fix.jsonl" 2> "$L/$name.fix.err" )
       pc="$(bash "$PERFCHECK" "$dir" 2>/dev/null)"; fixed=" +resume교정"
     fi
   fi
