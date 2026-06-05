@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여백 · 독립서점</title>
+  <meta name="description" content="서울 마포구 합정의 독립서점 여백. 글이 숨 쉬는 공간.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <div id="spark_progress" aria-hidden="true"></div>
+
+  <nav id="spark_nav" aria-label="주 내비게이션">
+    <a href="#hero" class="nav-wordmark" aria-label="여백 홈으로">여백</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#books">이달의 책</a></li>
+      <li><a href="#space">공간</a></li>
+      <li><a href="#visit">방문</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+       HERO · 키네틱 타이포 히어로
+  ============================================================ -->
+  <section id="hero" class="hero" aria-labelledby="hero-h1">
+
+    <div class="hero-layer hero-layer-back" aria-hidden="true">
+      <span class="hc hc-a">餘</span>
+      <span class="hc hc-b">白</span>
+    </div>
+
+    <div class="hero-layer hero-layer-mid" aria-hidden="true">
+      <span class="hero-rule"></span>
+    </div>
+
+    <div class="hero-layer hero-layer-front">
+      <div class="hero-body">
+        <p class="hero-eyebrow">서울 마포구 합정 &nbsp;·&nbsp; 독립서점</p>
+        <h1 class="hero-h1" id="hero-h1">여백</h1>
+        <p class="hero-tagline">글이 숨 쉬는 공간</p>
+        <a href="#about" class="hero-cta">둘러보기</a>
+      </div>
+    </div>
+
+    <button class="hero-mouse-hint" aria-label="아래로 스크롤">
+      <svg width="20" height="32" viewBox="0 0 20 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0.75" y="0.75" width="18.5" height="30.5" rx="9.25" stroke="currentColor" stroke-width="1.5"/>
+        <rect class="mouse-dot" x="8.5" y="6" width="3" height="6" rx="1.5" fill="currentColor"/>
+      </svg>
+    </button>
+
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about" class="sec sec-about">
+    <div class="wrap">
+      <div class="about-grid">
+
+        <div class="about-text reveal-el">
+          <span class="lbl">소개</span>
+          <h2 class="hd">책이 머무는<br>자리를 만듭니다</h2>
+          <p class="body-p">2019년 합정동 골목에 문을 연 독립서점 여백은, 속도보다 깊이를 믿는 사람들을 위한 공간입니다. 잘 팔리는 책보다 오래 읽힐 책을, 유행보다 질문을 따릅니다.</p>
+          <p class="body-p">서가를 채우는 모든 책은 한 권 한 권 직접 읽고 골랐습니다. 그 선택 뒤에는 오랜 독서와 조용한 대화가 있습니다.</p>
+        </div>
+
+        <aside class="about-side reveal-el">
+          <blockquote class="pull-quote">
+            <p>&#8220;여백이 있어야<br>글이 읽힌다&#8221;</p>
+          </blockquote>
+          <dl class="fact-dl">
+            <div class="fact-row"><dt>개점</dt><dd>2019년 봄</dd></div>
+            <div class="fact-row"><dt>위치</dt><dd>합정동 골목</dd></div>
+            <div class="fact-row"><dt>큐레이터</dt><dd>이다은, 강민준</dd></div>
+          </dl>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BOOKS · 이달의 책 큐레이션
+  ============================================================ -->
+  <section id="books" class="sec sec-books">
+    <div class="wrap">
+
+      <header class="books-hd reveal-el">
+        <span class="lbl">이달의 책</span>
+        <h2 class="hd">6월이 고른<br>네 권</h2>
+      </header>
+
+      <ol class="book-list" role="list">
+
+        <li class="bk reveal-el">
+          <div class="bk-idx">
+            <span class="bk-num">01</span>
+            <span class="bk-genre">SF &middot; 단편</span>
+          </div>
+          <div class="bk-body">
+            <h3 class="bk-title">숨</h3>
+            <p class="bk-author">테드 창</p>
+            <p class="bk-desc">인간의 호흡처럼 유한하고 섬세한 세계를 그린다. 우주의 끝에서 발견하는 것은 언제나 내 자신의 한계다.</p>
+          </div>
+          <div class="bk-bar" aria-hidden="true"></div>
+        </li>
+
+        <li class="bk bk-alt reveal-el">
+          <div class="bk-idx">
+            <span class="bk-num">02</span>
+            <span class="bk-genre">자연 &middot; 과학</span>
+          </div>
+          <div class="bk-body">
+            <h3 class="bk-title">침묵의 봄</h3>
+            <p class="bk-author">레이첼 카슨</p>
+            <p class="bk-desc">자연의 언어에 귀 기울이는 법을 가르친다. 60년 전의 경고는 지금 이 계절에도 유효하다.</p>
+          </div>
+          <div class="bk-bar" aria-hidden="true"></div>
+        </li>
+
+        <li class="bk reveal-el">
+          <div class="bk-idx">
+            <span class="bk-num">03</span>
+            <span class="bk-genre">소설</span>
+          </div>
+          <div class="bk-body">
+            <h3 class="bk-title">슬픔이여 안녕</h3>
+            <p class="bk-author">프랑수아즈 사강</p>
+            <p class="bk-desc">젊음의 잔인한 가벼움을 이토록 아름답게 쓴 작가는 드물다. 읽고 나면 무언가를 잃은 기분이 든다.</p>
+          </div>
+          <div class="bk-bar" aria-hidden="true"></div>
+        </li>
+
+        <li class="bk bk-alt reveal-el">
+          <div class="bk-idx">
+            <span class="bk-num">04</span>
+            <span class="bk-genre">에세이</span>
+          </div>
+          <div class="bk-body">
+            <h3 class="bk-title">느리게 산다는 것의 의미</h3>
+            <p class="bk-author">피에르 상소</p>
+            <p class="bk-desc">서두르지 않아도 충분히 살 수 있다는 것. 느림은 게으름이 아니라 주의 깊음이다.</p>
+          </div>
+          <div class="bk-bar" aria-hidden="true"></div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SPACE · 공간 안내
+  ============================================================ -->
+  <section id="space" class="sec sec-space">
+    <div class="wrap">
+      <div class="space-grid">
+
+        <div class="space-text reveal-el">
+          <span class="lbl">공간 안내</span>
+          <h2 class="hd">세 개의<br>방</h2>
+          <ul class="room-list" role="list">
+            <li class="room">
+              <strong class="room-name">1층 서가</strong>
+              <p class="body-p">큐레이션된 800여 권의 책들이 주제별로 놓여 있습니다. 서점 직원에게 언제든 말을 걸어도 됩니다.</p>
+            </li>
+            <li class="room">
+              <strong class="room-name">2층 열람실</strong>
+              <p class="body-p">구입한 책을 바로 펼칠 수 있는 조용한 독서 공간입니다. 음료를 가져오셔도 됩니다.</p>
+            </li>
+            <li class="room">
+              <strong class="room-name">옥상 정원</strong>
+              <p class="body-p">날씨가 좋은 날에는 테라스가 열립니다. 하늘과 책과 커피가 함께 있습니다.</p>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="space-fig reveal-el">
+          <img
+            src="https://picsum.photos/seed/bookstore42/720/900"
+            alt="여백 서점 1층 서가 내부 풍경"
+            width="720"
+            height="900"
+            loading="lazy"
+          >
+          <figcaption>1층 서가 &nbsp;/&nbsp; 2024</figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       VISIT + FOOTER
+  ============================================================ -->
+  <footer id="visit" class="sec sec-visit" role="contentinfo">
+    <div class="wrap">
+      <div class="visit-grid">
+
+        <div class="visit-text reveal-el">
+          <span class="lbl">방문 정보</span>
+          <h2 class="hd">찾아오는 길</h2>
+          <dl class="visit-dl">
+            <div class="vrow">
+              <dt>주소</dt>
+              <dd>서울시 마포구 합정동 382-4<br><small>합정역 2번 출구에서 도보 7분</small></dd>
+            </div>
+            <div class="vrow">
+              <dt>운영시간</dt>
+              <dd>화요일 ~ 일요일&nbsp;&nbsp;12:00 ~ 20:00<br><small>매주 월요일 휴무</small></dd>
+            </div>
+            <div class="vrow">
+              <dt>문의</dt>
+              <dd>02-334-0000<br>yeobaek.books@gmail.com</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="visit-map reveal-el" aria-label="서점 위치 안내 (지도 앱에서 '여백 합정' 검색 권장)">
+          <div class="map-frame">
+            <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <g opacity="0.12" stroke="currentColor" stroke-width="0.5" fill="none">
+                <line x1="0" y1="56" x2="400" y2="56"/>
+                <line x1="0" y1="112" x2="400" y2="112"/>
+                <line x1="0" y1="168" x2="400" y2="168"/>
+                <line x1="0" y1="224" x2="400" y2="224"/>
+                <line x1="50" y1="0" x2="50" y2="280"/>
+                <line x1="100" y1="0" x2="100" y2="280"/>
+                <line x1="150" y1="0" x2="150" y2="280"/>
+                <line x1="200" y1="0" x2="200" y2="280"/>
+                <line x1="250" y1="0" x2="250" y2="280"/>
+                <line x1="300" y1="0" x2="300" y2="280"/>
+                <line x1="350" y1="0" x2="350" y2="280"/>
+              </g>
+              <g fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+                <line x1="0" y1="140" x2="170" y2="140"/>
+                <line x1="230" y1="140" x2="400" y2="140"/>
+                <line x1="200" y1="0" x2="200" y2="110"/>
+                <line x1="200" y1="170" x2="200" y2="280"/>
+              </g>
+              <circle cx="200" cy="140" r="28" fill="var(--accent)" opacity="0.10"/>
+              <circle cx="200" cy="140" r="5" fill="var(--accent)" opacity="0.85"/>
+              <text x="200" y="184" text-anchor="middle" fill="currentColor" font-size="10" opacity="0.5" font-family="'Noto Serif KR', serif" letter-spacing="0.1em">여백</text>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bar">
+        <p class="fnote">여백 &nbsp;·&nbsp; 독립서점 &nbsp;·&nbsp; 2019</p>
+        <p class="fnote">모든 책은 직접 읽고 고릅니다</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

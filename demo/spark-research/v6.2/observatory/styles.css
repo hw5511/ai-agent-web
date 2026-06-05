@@ -1,0 +1,760 @@
+/* ============================================================
+   이안 夷安 | 스타일시트
+   VISUAL_SPARK [lb-077]: 블러는 공기의 밀도 / 렌즈 메커니즘
+   AESTHETIC_PINCH [p-015]: 덜어냄의 침묵
+   ============================================================ */
+
+/* --- 리셋 & Lenis CSS 가드 ---------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* html에 scroll-behavior:smooth 절대 금지 (Lenis 충돌) */
+html {
+  font-size: 16px;
+  scroll-behavior: auto;
+}
+
+/* --- 디자인 토큰 ------------------------------------------- */
+:root {
+  --bg:         #09090e;
+  --surface:    #0e0e17;
+  --surface-2:  #141421;
+  --text:       #e3dbd0;
+  --text-2:     #7c7870;
+  --text-3:     #3e3c38;
+  --accent:     #c8a96e;
+  --accent-dim: rgba(200, 169, 110, 0.12);
+  --border:     #1b1b28;
+  --border-2:   #252535;
+
+  --fs-hero:    clamp(4.8rem, 13vw, 10rem);
+  --fs-hanja:   clamp(1.1rem, 2.8vw, 2rem);
+  --fs-display: clamp(2.4rem, 5.5vw, 4.2rem);
+  --fs-xl:      clamp(1.6rem, 3.5vw, 2.8rem);
+  --fs-lg:      clamp(1.1rem, 2vw, 1.5rem);
+  --fs-md:      1rem;
+  --fs-sm:      0.875rem;
+  --fs-xs:      0.72rem;
+
+  --pad-x: clamp(1.5rem, 8vw, 7rem);
+}
+
+/* --- 기본 타이포 -------------------------------------------- */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+h1, h2, h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 스크린 리더 전용 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- 진행 바 ----------------------------------------------- */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 1000;
+  will-change: width;
+  transform-origin: left;
+}
+
+/* --- 네비게이션 --------------------------------------------- */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem var(--pad-x);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.45s ease, border-color 0.45s ease;
+}
+
+.site-nav.nav--scrolled {
+  background: rgba(9, 9, 14, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: var(--border);
+}
+
+.nav-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.nav-logo-hanja {
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-link {
+  font-family: 'Syne', sans-serif;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-2);
+  transition: color 0.25s ease, letter-spacing 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--text);
+  letter-spacing: 0.18em;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --- 히어로 ------------------------------------------------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 히어로 텍스트 콘텐츠 (항상 DOM에 존재, 항상 가시) */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--pad-x) clamp(3rem, 8vh, 6rem);
+  will-change: transform;
+}
+
+.hero-title {
+  display: block;
+  margin-bottom: 1.4rem;
+}
+
+.hero-title-ko {
+  display: block;
+  font-size: var(--fs-hero);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.hero-title-hanja {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  font-size: var(--fs-hanja);
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  margin-top: 0.5rem;
+}
+
+.hero-tagline {
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  margin-bottom: 2.5rem;
+}
+
+.hero-cta {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--accent);
+  padding: 0.8rem 2.2rem;
+  font-family: 'Noto Serif KR', serif;
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.hero-cta span {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.hero-cta:hover::before,
+.hero-cta:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.hero-cta:hover span,
+.hero-cta:focus-visible span {
+  color: var(--bg);
+}
+
+.hero-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ★ 렌즈 오버레이 (backdrop-filter + mask) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  backdrop-filter: blur(22px) brightness(0.7);
+  -webkit-backdrop-filter: blur(22px) brightness(0.7);
+  background: rgba(9, 9, 14, 0.45);
+  /* 기본 CSS 초기값: 렌즈가 히어로 제목 위치에 열려 있음 */
+  -webkit-mask-image: radial-gradient(
+    circle 130px at 28% 75%,
+    transparent 0%,
+    transparent 128px,
+    black 130px,
+    black 100%
+  );
+  mask-image: radial-gradient(
+    circle 130px at 28% 75%,
+    transparent 0%,
+    transparent 128px,
+    black 130px,
+    black 100%
+  );
+}
+
+/* 스크롤 힌트 */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.2rem;
+  right: var(--pad-x);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  opacity: 0.4;
+}
+
+.scroll-line {
+  display: block;
+  width: 1px;
+  height: 52px;
+  background: var(--accent);
+  transform-origin: top;
+  animation: scrollDrop 2.4s ease-in-out infinite;
+}
+
+.scroll-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  writing-mode: vertical-rl;
+}
+
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); opacity: 0; }
+  35%  { transform: scaleY(1); opacity: 1; }
+  65%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0); opacity: 0; }
+}
+
+/* --- Reveal 애니메이션 (GSAP 초기 상태) -------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: transform, opacity;
+}
+
+/* --- 섹션 공통 --------------------------------------------- */
+.section-label {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.section-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(5rem, 12vh, 10rem) var(--pad-x);
+  position: relative;
+}
+
+/* --- 관측의 철학 섹션 --------------------------------------- */
+.section-about {
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.about-heading {
+  font-size: var(--fs-display);
+  font-weight: 400;
+  max-width: 72%;
+  margin-bottom: 3.5rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.about-body {
+  max-width: 44ch;
+  margin-left: clamp(0px, 28%, 340px);
+}
+
+.about-text {
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--text-2);
+  margin-bottom: 1.2rem;
+}
+
+/* 장식 원형: 이중 베젤 (망원경 조리개) */
+.about-figure {
+  position: absolute;
+  right: -8vw;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-circle {
+  width: clamp(280px, 38vw, 520px);
+  height: clamp(280px, 38vw, 520px);
+  border: 1px solid rgba(200, 169, 110, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-circle-inner {
+  width: 78%;
+  height: 78%;
+  border: 1px solid rgba(200, 169, 110, 0.05);
+  border-radius: 50%;
+}
+
+/* --- 프로그램 섹션 ------------------------------------------ */
+.section-programs {
+  background: var(--surface);
+}
+
+.program-entry {
+  display: grid;
+  grid-template-columns: clamp(3.5rem, 6vw, 5.5rem) 1fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(2.5rem, 5vh, 4rem) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.program-entry:first-of-type {
+  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+
+.program-entry--offset {
+  padding-left: clamp(0px, 15%, 160px);
+}
+
+.program-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--text-3);
+  line-height: 1;
+  padding-top: 0.15em;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.35s ease;
+}
+
+.program-entry:hover .program-num {
+  color: var(--accent);
+}
+
+.program-name {
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.program-time {
+  font-family: 'Syne', sans-serif;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.program-desc {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  color: var(--text-2);
+  max-width: 56ch;
+}
+
+/* --- 이안에 대하여 섹션 (2분할) ---------------------------- */
+.section-site {
+  background: var(--bg);
+}
+
+.section-inner--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 8vw, 7rem);
+  align-items: start;
+}
+
+.site-heading {
+  font-size: var(--fs-xl);
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+
+.site-text {
+  font-size: var(--fs-sm);
+  line-height: 2;
+  color: var(--text-2);
+  margin-bottom: 1.2rem;
+  max-width: 46ch;
+}
+
+.site-specs {
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.spec-item {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1.2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.spec-key {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-3);
+  text-transform: uppercase;
+  padding-top: 0.1em;
+}
+
+.spec-val {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  font-weight: 300;
+}
+
+/* --- 예약 섹션 ---------------------------------------------- */
+.section-reserve {
+  background: var(--surface);
+}
+
+.section-inner--center {
+  text-align: center;
+  max-width: 680px;
+}
+
+.reserve-heading {
+  font-size: var(--fs-display);
+  font-weight: 300;
+  color: var(--text);
+  margin-bottom: 1.8rem;
+  letter-spacing: -0.02em;
+}
+
+.reserve-desc {
+  font-size: var(--fs-sm);
+  line-height: 2;
+  color: var(--text-2);
+  margin-bottom: 2.5rem;
+  max-width: 46ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reserve-cta {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(0.85rem, 2.2vw, 1.25rem);
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 3px;
+  transition: border-color 0.25s ease;
+  word-break: break-all;
+  min-height: 44px;
+  line-height: 44px;
+}
+
+.reserve-cta:hover,
+.reserve-cta:focus-visible {
+  border-color: var(--accent);
+}
+
+.reserve-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.reserve-note {
+  margin-top: 1.6rem;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+
+/* --- 푸터 -------------------------------------------------- */
+.site-footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 3rem var(--pad-x);
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--text-2);
+  letter-spacing: 0.05em;
+}
+
+.footer-logo span {
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--text-3);
+  margin-left: 0.3rem;
+}
+
+.footer-location {
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+}
+
+.footer-copy {
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+  margin-left: auto;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   모바일 반응형
+   ============================================================ */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.4rem;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+  }
+
+  .about-heading {
+    max-width: 100%;
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .about-body {
+    margin-left: 0;
+  }
+
+  .about-figure {
+    display: none;
+  }
+
+  .program-entry--offset {
+    padding-left: 0;
+  }
+
+  .section-inner--split {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .site-text {
+    max-width: 100%;
+  }
+
+  .footer-copy {
+    margin-left: 0;
+  }
+
+  .hero-scroll-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-link:nth-child(2) {
+    display: none;
+  }
+
+  .spec-item {
+    grid-template-columns: 4.5rem 1fr;
+    gap: 0.8rem;
+  }
+}
+
+/* ============================================================
+   reduced-motion 가시 복원 (CRITICAL)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  /* 모든 reveal 요소를 즉시 최종 가시 상태로 */
+  .reveal,
+  .hero-title,
+  .hero-tagline,
+  .hero-cta,
+  .hero-title-ko,
+  .hero-title-hanja,
+  .about-heading,
+  .about-text,
+  .site-heading,
+  .reserve-heading,
+  .program-name {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* 렌즈 오버레이 제거: 모든 콘텐츠 즉시 선명하게 */
+  .hero-overlay {
+    display: none !important;
+  }
+
+  .scroll-line {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
