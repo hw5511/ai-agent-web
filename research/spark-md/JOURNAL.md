@@ -229,3 +229,12 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - BANNED_OBVIOUS 작동(향수: 별빛·밤하늘·어둠·촛불 금지 자가적발). 발산법 실사용(Bisociation/SIT).
 - 균형(v5) 유지: 경험 히어로+본문(4/5섹션), reduced-motion 정상.
 - **판정: v6 성공 — 컨셉 수렴 해결 + 균형 유지. 현재 최상위 후보.**
+
+---
+
+## Round 12 — v6.1 검증 (히어로 가독성/임팩트 회복)  [완료 2026-06-04]
+- R11 피드백 교정. 상세: `experiments/R12_v61/`.
+- **성공**: 천문대→**가시광 스펙트럼/파장**(VISUAL_IMPACT=9, 거대 볼드 "이안"+프리즘 커서), 향수→**밤을 향으로 증류**(거대 볼드 NOCTURNE+골드 CTA+노트 피라미드 내비). 둘 다 별/star 0.
+- VISUAL_IMPACT_SCORE 게이트 작동(저투명 색값 v6=2→v6.1=1, nocturne 0). 별자리 회귀 없음 + 히어로 또렷·강렬 회복.
+- **판정: v6.1 성공 — 비자명 컨셉 + v5급 시각 임팩트 양립. 현재 최상위 후보.**
+- (운영) 다음 라운드부터 run-par.sh 병렬 적용.

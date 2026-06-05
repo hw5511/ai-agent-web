@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이안 천문대 · 夷安</title>
+  <meta name="description" content="도시를 떠나 밤하늘 아래 고요히 머무는 곳. 해발 820m, 강원도 양구의 작은 사립 천문대.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar" role="progressbar" aria-label="페이지 스크롤 진행도" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <nav class="nav" role="navigation" aria-label="주 내비게이션">
+    <a href="#hero" class="nav__logo" aria-label="이안 천문대 홈">
+      <span class="nav__logo-ko">이안</span>
+      <span class="nav__logo-hanja">夷安</span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="#about">천문대</a></li>
+      <li><a href="#programs">프로그램</a></li>
+      <li><a href="#seasons">계절별 밤하늘</a></li>
+      <li><a href="#visit" class="nav__book">첫 밤을 예약하다</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="nav__bar"></span>
+      <span class="nav__bar"></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu__close" id="menuClose" aria-label="메뉴 닫기">닫기</button>
+    <nav aria-label="모바일 내비게이션">
+      <ul role="list">
+        <li><a href="#about">천문대</a></li>
+        <li><a href="#programs">프로그램</a></li>
+        <li><a href="#seasons">계절별 밤하늘</a></li>
+        <li><a href="#visit">첫 밤을 예약하다</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- HERO: 스펙트럼 경험 구역 -->
+  <section class="hero" id="hero" aria-label="이안 천문대 소개">
+    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="hero__content">
+      <div class="hero__title-block">
+        <p class="hero__eyebrow">해발 820m &nbsp;·&nbsp; 강원도 양구</p>
+        <h1 class="hero__title">
+          <span class="hero__title-ko">이안</span>
+          <span class="hero__title-hanja">夷安</span>
+        </h1>
+      </div>
+      <div class="hero__sub-block">
+        <p class="hero__sub">별빛이 파장으로 부서지는 곳.<br>도시에서 두 시간, 어둠 속으로 두 걸음.</p>
+        <a href="#visit" class="hero__cta">첫 밤을 예약하다</a>
+        <p class="hero__hint" aria-hidden="true">커서를 움직여 빛을 가르세요</p>
+      </div>
+    </div>
+    <div class="hero__scroll-cue" aria-hidden="true">
+      <span class="hero__scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about" aria-labelledby="aboutHeading">
+    <div class="about__inner">
+      <div class="about__text">
+        <h2 class="about__heading" id="aboutHeading" data-reveal>
+          밤이 이렇게<br>깊을 수 있다는 것을
+        </h2>
+        <div class="about__body" data-reveal data-reveal-delay="0.12">
+          <p>우리는 잊고 삽니다.</p>
+          <p>이안은 도시에서 두 시간 거리, 해발 820m에 자리한 작은 사립 천문대입니다. 빛 공해 등급 2등급. 맑은 날 밤에는 육안으로 3,000개 이상의 별을 셀 수 있습니다.</p>
+          <p>이곳에서 먼저 가르치는 것은 망원경 조작법이 아닙니다. 눈을 어둠에 익히는 법, 그리고 기다리는 법입니다.</p>
+        </div>
+      </div>
+      <div class="about__spectrum-wrap" data-reveal data-reveal-delay="0.25">
+        <p class="about__spectrum-label">가시광선 스펙트럼</p>
+        <div class="about__spectrum-bar" role="img" aria-label="380nm에서 700nm까지의 가시광선 스펙트럼과 수소 흡수선">
+          <span class="spec-line" style="--p: 9.4%" aria-hidden="true"></span>
+          <span class="spec-line" style="--p: 16.9%" aria-hidden="true"></span>
+          <span class="spec-line" style="--p: 33.1%" aria-hidden="true"></span>
+          <span class="spec-line" style="--p: 86.3%" aria-hidden="true"></span>
+        </div>
+        <div class="about__spectrum-ticks" aria-hidden="true">
+          <span>380<abbr title="나노미터">nm</abbr></span>
+          <span>450<abbr title="나노미터">nm</abbr></span>
+          <span>520<abbr title="나노미터">nm</abbr></span>
+          <span>590<abbr title="나노미터">nm</abbr></span>
+          <span>660<abbr title="나노미터">nm</abbr></span>
+          <span>700<abbr title="나노미터">nm</abbr></span>
+        </div>
+        <p class="about__spectrum-caption">수소 발머 계열 흡수선 · 별빛 속 원소의 지문</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="programs" id="programs" aria-labelledby="programsHeading">
+    <div class="programs__inner">
+      <header class="programs__header" data-reveal>
+        <h2 class="programs__heading" id="programsHeading">관측 프로그램</h2>
+        <p class="programs__meta">매주 금·토요일 &nbsp;·&nbsp; 소수 정예 운영</p>
+      </header>
+      <div class="programs__grid">
+        <article class="program program--a" data-reveal data-reveal-delay="0.05">
+          <div class="program__num" aria-hidden="true">01</div>
+          <div class="program__body">
+            <h3 class="program__name">어둠 적응 산책</h3>
+            <p class="program__time">30분 &nbsp;·&nbsp; 일몰 직후</p>
+            <p class="program__desc">조명 없이. 손전등 없이. 숲길을 천천히 걷는 동안 동공이 열리기 시작합니다. 간상세포가 완전히 활성화되는 데는 20분이 걸립니다.</p>
+            <p class="program__limit">정원 8명 &nbsp;·&nbsp; 운동화 착용 권장</p>
+          </div>
+        </article>
+        <article class="program program--b" data-reveal data-reveal-delay="0.15">
+          <div class="program__num" aria-hidden="true">02</div>
+          <div class="program__body">
+            <h3 class="program__name">분광 관측</h3>
+            <p class="program__time">90분 &nbsp;·&nbsp; 밤 9시</p>
+            <p class="program__desc">별빛을 프리즘으로 가릅니다. 보이지 않던 원소들의 지문이 드러납니다. 시리우스와 베텔게우스는 같은 하늘에 있지만 전혀 다른 빛을 품고 있습니다.</p>
+            <p class="program__limit">정원 6명 &nbsp;·&nbsp; 12세 이상</p>
+          </div>
+        </article>
+        <article class="program program--c" data-reveal data-reveal-delay="0.25">
+          <div class="program__num" aria-hidden="true">03</div>
+          <div class="program__body">
+            <h3 class="program__name">새벽 관측</h3>
+            <p class="program__time">2시간 &nbsp;·&nbsp; 새벽 3시</p>
+            <p class="program__desc">가장 깨끗한 하늘은 새벽에 있습니다. 대기가 가장 투명해지는 시간. 이 시간만을 위해 이안을 찾는 분들이 있습니다.</p>
+            <p class="program__limit">정원 4명 &nbsp;·&nbsp; 숙박 연계 권장</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASONS -->
+  <section class="seasons" id="seasons" aria-labelledby="seasonsHeading">
+    <div class="seasons__inner">
+      <header class="seasons__header" data-reveal>
+        <h2 class="seasons__heading" id="seasonsHeading">계절별 밤하늘</h2>
+        <p class="seasons__sub">이안에서 만나는 하늘은 계절마다 다른 이야기를 합니다.</p>
+      </header>
+      <div class="seasons__grid">
+        <div class="season" data-season="spring" data-reveal data-reveal-delay="0.04">
+          <div class="season__accent" aria-hidden="true"></div>
+          <h3 class="season__name">봄</h3>
+          <p class="season__period">3월~5월</p>
+          <p class="season__desc">사자자리와 처녀자리. 은하들이 가장 많이 보이는 계절. 한 화면에 수십 개의 은하를 담을 수 있습니다.</p>
+          <div class="season__meter">
+            <span class="season__meter-label">관측 적합도</span>
+            <div class="season__bar" role="img" aria-label="관측 적합도 70퍼센트">
+              <div class="season__fill" style="--pct: 70%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="season" data-season="summer" data-reveal data-reveal-delay="0.1">
+          <div class="season__accent" aria-hidden="true"></div>
+          <h3 class="season__name">여름</h3>
+          <p class="season__period">6월~8월</p>
+          <p class="season__desc">은하수의 중심부. 전갈자리와 궁수자리. 여름밤 이안의 하늘은 밀도가 다릅니다. 다만 장마와 구름을 피해야 합니다.</p>
+          <div class="season__meter">
+            <span class="season__meter-label">관측 적합도</span>
+            <div class="season__bar" role="img" aria-label="관측 적합도 55퍼센트">
+              <div class="season__fill" style="--pct: 55%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="season" data-season="autumn" data-reveal data-reveal-delay="0.16">
+          <div class="season__accent" aria-hidden="true"></div>
+          <h3 class="season__name">가을</h3>
+          <p class="season__period">9월~11월</p>
+          <p class="season__desc">페가수스 사각형과 안드로메다 은하. 이안이 가장 권하는 계절. 대기가 안정되고, 밤이 길어지며, 구름이 걷힙니다.</p>
+          <div class="season__meter">
+            <span class="season__meter-label">관측 적합도</span>
+            <div class="season__bar" role="img" aria-label="관측 적합도 90퍼센트">
+              <div class="season__fill" style="--pct: 90%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="season" data-season="winter" data-reveal data-reveal-delay="0.22">
+          <div class="season__accent" aria-hidden="true"></div>
+          <h3 class="season__name">겨울</h3>
+          <p class="season__period">12월~2월</p>
+          <p class="season__desc">오리온과 황소자리. 가장 투명한 대기. 추위가 공기를 조여 별이 바늘처럼 날카로워집니다. 이안의 가장 아름다운 계절.</p>
+          <div class="season__meter">
+            <span class="season__meter-label">관측 적합도</span>
+            <div class="season__bar" role="img" aria-label="관측 적합도 85퍼센트">
+              <div class="season__fill" style="--pct: 85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit" id="visit" aria-labelledby="visitHeading">
+    <div class="visit__inner">
+      <div class="visit__info" data-reveal>
+        <h2 class="visit__heading" id="visitHeading">찾아오시는 길</h2>
+        <dl class="visit__dl">
+          <dt>위치</dt>
+          <dd>강원도 양구군 동면<br>해발 820m</dd>
+          <dt>운영</dt>
+          <dd>매주 금·토요일<br>일몰 1시간 전~새벽 4시</dd>
+          <dt>인원</dt>
+          <dd>회당 최대 12명<br>프로그램별 별도 정원 제한</dd>
+          <dt>기상 취소</dt>
+          <dd>전날 오후 6시 문자 안내<br>100% 환불 또는 일정 변경</dd>
+        </dl>
+      </div>
+      <div class="visit__book" data-reveal data-reveal-delay="0.18">
+        <p class="visit__book-desc">예약은 이메일로만 받습니다.<br>맑은 밤이 오면, 우리가 먼저 연락드립니다.</p>
+        <a href="mailto:hello@ian-observatory.kr" class="visit__email">
+          hello@ian-observatory.kr
+        </a>
+        <p class="visit__note">답장이 늦더라도, 우리는 맑은 밤을 기다리는 중입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__name">이안 夷安</span>
+        <span class="footer__tagline">빛이 파장이 되는 곳</span>
+      </div>
+      <p class="footer__copy">맑은 밤을 기다리며 &copy;&nbsp;2026 이안 천문대</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
