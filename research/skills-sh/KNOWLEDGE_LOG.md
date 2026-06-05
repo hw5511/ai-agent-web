@@ -71,3 +71,14 @@
 30. `[skill]` **oblique-skill (jakedahn)** — Oblique Strategies 113카드 랜덤4→1택. SPARK의 CHOSEN_SPARK 4→1 패턴 검증. — github.com/jakedahn/oblique-skill
 
 > 결론: skills.sh 상위엔 발상 신규 없음(brainstorming 유일). GitHub creative-director-skill이 핵심 신규. → v6 PHASE 0.5(Concept Divergence)로 흡수.
+
+### sweep 4 (2026-06-04) — 안티-클리셰 / LLM 다양성 (웹·논문) [상세: knowledge/anti-cliche.md]
+31. `[diversity]` **Iterative Differentiation** — 자기 디폴트(뻔한 안) 먼저 명시→그것과 다르게. 개입 비교 실험 1위. (arxiv 2602.20408) — 우리 수렴연쇄 직격 — (최우선 후보)
+32. `[diversity]` **Verbalized Sampling** — N개 응답+흔함확률→꼬리 선택, 다양성 1.6~2.1배. (arxiv 2510.01171) — BANNED_CLICHE 대체
+33. `[diversity]` **Random Concept Injection** — 무관 단어 1회 주입(분포 이동). LIGHTBULB 직접 근거. 단 큐레이션 불필요. (arxiv 2601.18053)
+34. `[diversity]` **Pink Elephant** — 부정 지시 역효과(언급=증폭). 금지 누적이 클리셰를 박아넣음. (arxiv 2503.22395) — BANNED_CLICHE를 positive로 재작성
+35. `[diversity]` **프롬프트 블로트 역효과** — 길수록 추론저하·지시누락. 전역 200~800토큰. (promptlayer/mlops) — SPARK 700줄 lean화
+36. `[diversity]` **Ordinary Persona Randomization** — 무작위 평범 페르소나 > 큐레이션 창의 페르소나. (Cambridge design-science)
+37. `[diversity]` **키워드 수프 역효과** — "Awwwards급/8k/masterpiece" = 평균(클리셰) 견인. 구체+예상밖 병치로 대체. (midjourney)
+
+> ★ 판정: 두 가설(외부 무작위 주입 / lean) 모두 학술 지지. **단일 최대 결함 = LIGHTBULB의 CHOSEN_SPARK '모델 선택' 단계**(무작위→전형 붕괴). 선택권을 외부 강제 배정으로.
