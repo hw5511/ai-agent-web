@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPARK.md v5 → v6 → v6.1 — 히어로 진화 비교</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<style>
+  :root{ --bg:#0b0b0c; --fg:#f4f4f5; --muted:#a1a1aa; --line:#26262b; --accent:#16a34a; --warn:#f59e0b; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:clamp(3rem,8vw,5.5rem) 1.5rem}
+  .eyebrow{color:var(--accent);font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  h1{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;margin:.6rem 0 .9rem;letter-spacing:-.02em}
+  .lead{color:var(--muted);max-width:66ch;margin-bottom:2rem}
+  .lead b{color:var(--fg)}
+  h2.sub{font-size:1.15rem;font-weight:800;margin:2.2rem 0 .8rem}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;margin-bottom:1rem}
+  th,td{border-bottom:1px solid var(--line);padding:.6rem .5rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600}
+  .ver{font-weight:700}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;margin:.4rem 0 1.2rem}
+  @media(max-width:680px){.row3{grid-template-columns:1fr}}
+  .card{display:block;border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;text-decoration:none;color:inherit;background:#101013;transition:border-color .2s,transform .2s}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .t5{color:#a1a1aa}.t6{color:var(--warn)}.t61{color:var(--accent)}
+  .card h3{font-size:.98rem;font-weight:700;margin:.3rem 0 .25rem}
+  .card p{color:var(--muted);font-size:.82rem;margin-bottom:.4rem}
+  .go{color:var(--fg);font-weight:600;font-size:.82rem}
+  .note{margin-top:2.4rem;font-size:.82rem;color:#71717a;border-top:1px solid var(--line);padding-top:1.1rem}
+  a.inline{color:var(--accent)}
+  code{font-size:.85em;color:#d4d4d8}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">SPARK.md · 히어로 컨셉 진화</p>
+    <h1>v5 → v6 → v6.1</h1>
+    <p class="lead">같은 두 주제(천문대·향수)로 히어로 컨셉이 어떻게 진화했는지 직접 비교하세요.
+      <b>v5</b>: 경험 히어로(별자리). <b>v6</b>: 발상법으로 별자리 탈출(보케·파동) — 그런데 <b>너무 어두워짐</b>.
+      <b>v6.1</b>: "안 뻔하게 + 그래도 강렬하게" — 비자명 컨셉을 또렷하고 대담하게.</p>
+
+    <table>
+      <tr><th>버전</th><th>천문대 컨셉</th><th>향수 컨셉</th><th>문제/개선</th></tr>
+      <tr><td class="ver t5">v5</td><td>별자리 캔버스</td><td>별·밤</td><td>좋지만 둘 다 "별자리"로 수렴(컨셉 클리셰)</td></tr>
+      <tr><td class="ver t6">v6</td><td>보케/초점</td><td>공기 파동·부재</td><td>별자리 탈출 성공, 그러나 효과가 희미·어두워 평범</td></tr>
+      <tr><td class="ver t61">v6.1</td><td>가시광 스펙트럼/파장</td><td>밤을 향으로 증류(노트 피라미드)</td><td>비자명 + 거대 볼드 타이포·강렬(가독성 FLOOR)</td></tr>
+    </table>
+
+    <h2 class="sub">천문대 "이안" — 히어로 비교</h2>
+    <div class="row3">
+      <a class="card" href="../v5/observatory/index.html"><span class="tag t5">v5</span><h3>별자리</h3><p>커서로 별자리 찾기</p><span class="go">열기 →</span></a>
+      <a class="card" href="../v6/observatory/index.html"><span class="tag t6">v6</span><h3>보케/초점</h3><p>비자명 but 어두움</p><span class="go">열기 →</span></a>
+      <a class="card" href="./observatory/index.html"><span class="tag t61">v6.1</span><h3>스펙트럼</h3><p>커서로 빛 가르기(프리즘)</p><span class="go">열기 →</span></a>
+    </div>
+
+    <h2 class="sub">향수 "NOCTURNE" — 히어로 비교</h2>
+    <div class="row3">
+      <a class="card" href="../v5/nocturne/index.html"><span class="tag t5">v5</span><h3>밤·별</h3><p>인터랙티브 히어로</p><span class="go">열기 →</span></a>
+      <a class="card" href="../v6/nocturne/index.html"><span class="tag t6">v6</span><h3>공기 파동</h3><p>향의 부재(미세)</p><span class="go">열기 →</span></a>
+      <a class="card" href="./nocturne/index.html"><span class="tag t61">v6.1</span><h3>증류·노트</h3><p>볼드 타이포 + 노트 피라미드</p><span class="go">열기 →</span></a>
+    </div>
+
+    <p class="note">핵심 교훈: 발상법(v6)으로 뻔함은 깼지만, "안 뻔한 컨셉"이 하필 *희미한* 것이라 어두워졌다.
+      v6.1은 컨셉 발산에 <b>VISUAL_IMPACT 점수</b>와 <b>히어로 가독성 FLOOR</b>를 더해 비자명성과 강렬함을 동시에 강제한다.
+      기록: <code>research/spark-md/</code>(R11·R12).<br>
+      <a class="inline" href="../">← 허브</a> · <a class="inline" href="../v5/">v5</a> · <a class="inline" href="../v6/">v6</a></p>
+  </main>
+</body>
+</html>

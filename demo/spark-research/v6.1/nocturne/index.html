@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NOCTURNE 녹턴 · 밤의 감각을 향으로 증류하는 서울의 독립 향수 브랜드.">
+  <title>NOCTURNE · 녹턴 독립 향수</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar" role="progressbar" aria-hidden="true"></div>
+
+  <nav class="nav" id="mainNav" aria-label="주 내비게이션">
+    <a href="#" class="nav-logo" aria-label="NOCTURNE 홈으로">NOCTURNE</a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#philosophy">철학</a></li>
+      <li><a href="#collection">컬렉션</a></li>
+      <li><a href="#process">조향</a></li>
+      <li><a href="#visit">방문</a></li>
+    </ul>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks">
+      <span class="menu-line"></span>
+      <span class="menu-line"></span>
+    </button>
+  </nav>
+
+  <main>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="hero" aria-label="히어로 섹션">
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <p class="hero-eyebrow">야상곡 &nbsp;·&nbsp; Nocturne</p>
+        <h1 class="hero-title">
+          <span class="hero-title-en" aria-label="NOCTURNE">NOCTURNE</span>
+          <span class="hero-title-kr">녹&thinsp;턴</span>
+        </h1>
+        <p class="hero-sub">밤이 남기는 감각을 향으로 증류합니다.<br>서울에서 태어난 독립 향수 브랜드.</p>
+        <a href="#collection" class="hero-cta">컬렉션 탐색</a>
+      </div>
+      <div class="hero-score-label" aria-hidden="true">
+        <span>탑 노트</span>
+        <span>미들 노트</span>
+        <span>베이스 노트</span>
+      </div>
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span class="scroll-hint-line"></span>
+        <span class="scroll-hint-text">스크롤</span>
+      </div>
+    </section>
+
+    <!-- ==================== PHILOSOPHY ==================== -->
+    <section id="philosophy" class="philosophy" aria-labelledby="philosophy-heading">
+      <div class="philosophy-inner">
+        <div class="philosophy-left">
+          <span class="philosophy-num" aria-hidden="true">01</span>
+          <h2 class="philosophy-headline reveal" id="philosophy-heading">
+            향은<br>침묵의<br>언어다
+          </h2>
+        </div>
+        <div class="philosophy-right">
+          <div class="philosophy-text-block reveal">
+            <p>NOCTURNE은 말하지 않는 것을 향으로 말합니다. 쇼팽의 야상곡이 밤의 정서를 건반 위에 담듯, 우리는 밤의 감각을 분자 언어로 번역합니다.</p>
+            <p>2019년 서울 종로에서 시작된 NOCTURNE은 합성 향료를 거부하고 단 네 종류의 시그니처 향수만을 고집합니다. 대량 생산이 아닌 소량 정제. 추세가 아닌 본질.</p>
+          </div>
+          <blockquote class="philosophy-manifesto reveal">
+            <p>"우리는 향을 팔지 않습니다.<br>밤이 남긴 기억을 건넵니다."</p>
+            <cite>우정, 조향사</cite>
+          </blockquote>
+        </div>
+      </div>
+      <div class="philosophy-divider" aria-hidden="true"></div>
+    </section>
+
+    <!-- ==================== COLLECTION ==================== -->
+    <section id="collection" class="collection" aria-labelledby="collection-heading">
+      <header class="collection-header">
+        <span class="section-label reveal">시그니처 컬렉션</span>
+        <h2 class="reveal" id="collection-heading">네 가지 밤</h2>
+      </header>
+
+      <article class="perfume-item" data-index="01" aria-labelledby="perfume-1-name">
+        <span class="perfume-bg-num" aria-hidden="true">01</span>
+        <div class="perfume-image-wrap">
+          <img
+            src="https://picsum.photos/seed/noc01/600/800"
+            alt="녹턴 No.1 블랙 세더 향수 병"
+            width="600" height="800"
+            loading="lazy"
+          >
+        </div>
+        <div class="perfume-info">
+          <h3 class="perfume-name" id="perfume-1-name">
+            블랙 세더
+            <span class="perfume-name-en" lang="en">Black Cedar</span>
+          </h3>
+          <p class="perfume-desc">어두운 숲의 정적. 이끼와 나무껍질의 냉한 기억이 피부 위에 천천히 녹아든다.</p>
+          <div class="perfume-notes" aria-label="향 노트 구성">
+            <div class="note-col">
+              <span class="note-label">탑 노트</span>
+              <span class="note-items">베르가못, 블랙커런트</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">미들 노트</span>
+              <span class="note-items">세더우드, 패출리</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">베이스 노트</span>
+              <span class="note-items">오크모스, 앰버</span>
+            </div>
+          </div>
+          <p class="perfume-meta">Eau de Parfum &nbsp;·&nbsp; 50&nbsp;ml &nbsp;·&nbsp; 소량 배치</p>
+        </div>
+      </article>
+
+      <article class="perfume-item perfume-item--reverse" data-index="02" aria-labelledby="perfume-2-name">
+        <span class="perfume-bg-num" aria-hidden="true">02</span>
+        <div class="perfume-image-wrap">
+          <img
+            src="https://picsum.photos/seed/noc02/600/800"
+            alt="녹턴 No.2 벨벳 우드 향수 병"
+            width="600" height="800"
+            loading="lazy"
+          >
+        </div>
+        <div class="perfume-info">
+          <h3 class="perfume-name" id="perfume-2-name">
+            벨벳 우드
+            <span class="perfume-name-en" lang="en">Velvet Wood</span>
+          </h3>
+          <p class="perfume-desc">카다멈이 피어나는 새벽. 장미와 나무가 꿈을 꾸는 시간, 피부에 남는 온기.</p>
+          <div class="perfume-notes" aria-label="향 노트 구성">
+            <div class="note-col">
+              <span class="note-label">탑 노트</span>
+              <span class="note-items">카다멈, 핑크페퍼</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">미들 노트</span>
+              <span class="note-items">로즈, 제라늄</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">베이스 노트</span>
+              <span class="note-items">샌달우드, 머스크</span>
+            </div>
+          </div>
+          <p class="perfume-meta">Eau de Parfum &nbsp;·&nbsp; 50&nbsp;ml &nbsp;·&nbsp; 소량 배치</p>
+        </div>
+      </article>
+
+      <article class="perfume-item" data-index="03" aria-labelledby="perfume-3-name">
+        <span class="perfume-bg-num" aria-hidden="true">03</span>
+        <div class="perfume-image-wrap">
+          <img
+            src="https://picsum.photos/seed/noc03/600/800"
+            alt="녹턴 No.3 실크 루이나 향수 병"
+            width="600" height="800"
+            loading="lazy"
+          >
+        </div>
+        <div class="perfume-info">
+          <h3 class="perfume-name" id="perfume-3-name">
+            실크 루이나
+            <span class="perfume-name-en" lang="en">Silk Ruin</span>
+          </h3>
+          <p class="perfume-desc">유자의 찰나와 아이리스의 잔향. 붕괴와 아름다움이 같은 숨결로 교차한다.</p>
+          <div class="perfume-notes" aria-label="향 노트 구성">
+            <div class="note-col">
+              <span class="note-label">탑 노트</span>
+              <span class="note-items">유자, 네롤리</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">미들 노트</span>
+              <span class="note-items">아이리스, 재스민</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">베이스 노트</span>
+              <span class="note-items">화이트 머스크, 시프레</span>
+            </div>
+          </div>
+          <p class="perfume-meta">Eau de Parfum &nbsp;·&nbsp; 50&nbsp;ml &nbsp;·&nbsp; 소량 배치</p>
+        </div>
+      </article>
+
+      <article class="perfume-item perfume-item--reverse" data-index="04" aria-labelledby="perfume-4-name">
+        <span class="perfume-bg-num" aria-hidden="true">04</span>
+        <div class="perfume-image-wrap">
+          <img
+            src="https://picsum.photos/seed/noc04/600/800"
+            alt="녹턴 No.4 에테르 누아르 향수 병"
+            width="600" height="800"
+            loading="lazy"
+          >
+        </div>
+        <div class="perfume-info">
+          <h3 class="perfume-name" id="perfume-4-name">
+            에테르 누아르
+            <span class="perfume-name-en" lang="en">Ether Noir</span>
+          </h3>
+          <p class="perfume-desc">연기와 가죽. 소각된 기억의 냄새. 가장 어두운 밤을 위해 설계된 향.</p>
+          <div class="perfume-notes" aria-label="향 노트 구성">
+            <div class="note-col">
+              <span class="note-label">탑 노트</span>
+              <span class="note-items">스모크, 레더</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">미들 노트</span>
+              <span class="note-items">우드, 인센스</span>
+            </div>
+            <div class="note-col">
+              <span class="note-label">베이스 노트</span>
+              <span class="note-items">베티베르, 오포포낙스</span>
+            </div>
+          </div>
+          <p class="perfume-meta">Eau de Parfum &nbsp;·&nbsp; 50&nbsp;ml &nbsp;·&nbsp; 소량 배치</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ==================== PROCESS ==================== -->
+    <section id="process" class="process" aria-labelledby="process-heading">
+      <header class="process-header">
+        <span class="section-label reveal">조향 과정</span>
+        <h2 class="reveal" id="process-heading">향의 탄생</h2>
+        <p class="process-intro reveal">NOCTURNE의 모든 향수는 원료 채집부터 밀봉까지 하나의 철학 아래 만들어집니다.</p>
+      </header>
+      <div class="process-steps">
+        <div class="process-step reveal" data-step="I">
+          <div class="step-roman" aria-hidden="true">I</div>
+          <div class="step-body">
+            <h3>원료 채집</h3>
+            <p>프랑스 그라스, 인도 마이소르, 일본 야마구치에서 직접 소싱한 천연 원료만 사용합니다. 매년 수확 시기에 맞춰 산지 방문을 원칙으로 합니다.</p>
+          </div>
+        </div>
+        <div class="process-step reveal" data-step="II">
+          <div class="step-roman" aria-hidden="true">II</div>
+          <div class="step-body">
+            <h3>블렌딩 실험</h3>
+            <p>수백 번의 조합 테스트. 6개월에서 2년까지 숙성하며 향의 깊이를 탐구합니다. 하나의 시그니처가 완성되기까지 평균 340회의 조합 실험을 거칩니다.</p>
+          </div>
+        </div>
+        <div class="process-step reveal" data-step="III">
+          <div class="step-roman" aria-hidden="true">III</div>
+          <div class="step-body">
+            <h3>소량 정제</h3>
+            <p>한 배치당 최대 200병. 알코올 농도, 온도, 빛 차단 조건을 엄격히 통제한 암실에서 숙성합니다. 모든 병은 수작업으로 밀봉합니다.</p>
+          </div>
+        </div>
+        <div class="process-step reveal" data-step="IV">
+          <div class="step-roman" aria-hidden="true">IV</div>
+          <div class="step-body">
+            <h3>감각 검수</h3>
+            <p>출하 전 조향사 우정 씨가 모든 배치를 직접 시향합니다. 기준치에서 0.1%라도 벗어나면 전량 재조향합니다. 타협은 없습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VISIT ==================== -->
+    <section id="visit" class="visit" aria-labelledby="visit-heading">
+      <div class="visit-grid">
+        <div class="visit-info reveal">
+          <span class="section-label">방문 및 예약</span>
+          <h2 id="visit-heading">직접<br>만나십시오</h2>
+          <dl class="visit-detail">
+            <div class="visit-row">
+              <dt>위치</dt>
+              <dd>서울특별시 종로구 북촌로 12길 8<br>NOCTURNE 아틀리에 (2층)</dd>
+            </div>
+            <div class="visit-row">
+              <dt>운영 시간</dt>
+              <dd>화요일~토요일 &nbsp;12:00~19:00<br>일·월 정기 휴무</dd>
+            </div>
+            <div class="visit-row">
+              <dt>시향 예약</dt>
+              <dd>방문 1일 전 예약 권장<br>소규모 그룹 시향 가능 (최대 6인)</dd>
+            </div>
+            <div class="visit-row">
+              <dt>문의</dt>
+              <dd><a href="mailto:hello@nocturne-kr.com">hello@nocturne-kr.com</a></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="visit-form-wrap reveal">
+          <form class="visit-form" id="visitForm" novalidate aria-label="예약 문의 양식">
+            <h3>예약 문의</h3>
+            <div class="form-row">
+              <label for="visitName">이름 <span aria-hidden="true">*</span><span class="sr-only">(필수)</span></label>
+              <input type="text" id="visitName" name="name" placeholder="성함을 입력해 주세요" autocomplete="name" required>
+            </div>
+            <div class="form-row">
+              <label for="visitEmail">이메일 <span aria-hidden="true">*</span><span class="sr-only">(필수)</span></label>
+              <input type="email" id="visitEmail" name="email" placeholder="이메일 주소" autocomplete="email" required>
+            </div>
+            <div class="form-row">
+              <label for="visitDate">방문 희망일</label>
+              <input type="date" id="visitDate" name="date" autocomplete="off">
+            </div>
+            <div class="form-row">
+              <label for="visitMsg">메시지 (선택 사항)</label>
+              <textarea id="visitMsg" name="message" rows="4" placeholder="특별한 요청 사항이 있으시면 알려 주세요."></textarea>
+            </div>
+            <button type="submit" class="form-submit">문의 보내기</button>
+            <p class="form-notice" id="formNotice" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" aria-label="사이트 하단">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <a href="#" class="footer-logo" aria-label="NOCTURNE 홈으로">NOCTURNE</a>
+        <nav class="footer-nav" aria-label="하단 내비게이션">
+          <a href="#philosophy">철학</a>
+          <a href="#collection">컬렉션</a>
+          <a href="#process">조향</a>
+          <a href="#visit">방문</a>
+        </nav>
+      </div>
+      <div class="footer-mid">
+        <p class="footer-tagline">밤의 야상곡을 피부에 새기다.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>서울특별시 종로구 북촌로 12길 8 &nbsp;·&nbsp; <a href="mailto:hello@nocturne-kr.com">hello@nocturne-kr.com</a></p>
+        <p>&copy; 2026 NOCTURNE. 모든 권리 보유.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
