@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>토림 · 수제 도자기 공방</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo" aria-label="토림 홈">토림</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">작가</a></li>
+      <li><a href="#gallery">작품</a></li>
+      <li><a href="#process">과정</a></li>
+      <li><a href="#class">클래스</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       HERO — 풀블리드 캔버스 + 계기판 다이얼
+       ═══════════════════════════════════════════ -->
+  <section id="hero" aria-label="토림 소개">
+    <canvas id="blueprint-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-inner">
+      <!-- 실물 오브젝트: 가마 온도 계기판 -->
+      <div class="dial-wrap" aria-hidden="true">
+        <svg class="dial-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="가마 온도 계기판">
+          <!-- 외부 링 -->
+          <circle cx="160" cy="160" r="148" fill="none" stroke="rgba(200,168,130,0.35)" stroke-width="1"/>
+          <circle cx="160" cy="160" r="142" fill="none" stroke="rgba(200,168,130,0.12)" stroke-width="0.5"/>
+          <!-- 눈금 + 호는 JS로 채움 -->
+          <g id="dial-ticks"></g>
+          <path id="dial-arc" d="" fill="none" stroke="rgba(200,168,130,0.45)" stroke-width="1.5"/>
+          <!-- 현재값 강조 호 -->
+          <path id="dial-arc-active" d="" fill="none" stroke="rgba(200,168,130,0.9)" stroke-width="2" stroke-linecap="round"/>
+          <!-- 중심 -->
+          <circle cx="160" cy="160" r="10" fill="#1a2f4e"/>
+          <circle cx="160" cy="160" r="5" fill="#c8a882"/>
+          <!-- 바늘 — transform:rotate 만 애니메이션 -->
+          <g id="dial-needle">
+            <line x1="160" y1="42" x2="160" y2="160" stroke="#c8a882" stroke-width="2" stroke-linecap="round"/>
+            <line x1="160" y1="160" x2="160" y2="188" stroke="rgba(200,168,130,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <!-- 레이블 -->
+          <text x="160" y="236" text-anchor="middle" fill="rgba(240,232,220,0.4)" font-family="Space Mono,monospace" font-size="8" letter-spacing="3">KILN TEMP °C</text>
+          <text x="160" y="254" text-anchor="middle" fill="rgba(200,168,130,0.85)" font-family="Space Mono,monospace" font-size="13" font-weight="700" letter-spacing="2">1280</text>
+        </svg>
+      </div>
+
+      <!-- 히어로 텍스트 -->
+      <div class="hero-text">
+        <div class="hero-eyebrow" aria-hidden="true">
+          <span class="eyebrow-line"></span>
+          <span class="eyebrow-txt">TORIM STUDIO · EST. 2018</span>
+          <span class="eyebrow-line"></span>
+        </div>
+        <h1 class="hero-title">토림</h1>
+        <p class="hero-sub">흙과 손이 만드는<br>정직한 형태</p>
+        <a href="#gallery" class="hero-cta">작품 보기</a>
+      </div>
+    </div>
+
+    <!-- 건축 제도 측량 주석 -->
+    <div class="anno anno-v" aria-hidden="true">
+      <span class="anno-dash"></span>
+      <span class="anno-val">1280°C</span>
+      <span class="anno-dash"></span>
+    </div>
+    <div class="anno anno-h" aria-hidden="true">
+      <span class="anno-dash"></span>
+      <span class="anno-val">점토 · 유약 · 불</span>
+    </div>
+
+    <!-- 스크롤 유도 -->
+    <a href="#about" class="scroll-cue" aria-label="아래로 스크롤">
+      <span class="scroll-line"></span>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT — 작가 소개
+       ═══════════════════════════════════════════ -->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <header class="section-label">
+        <span class="lbl-num">01</span>
+        <span class="lbl-title">작가 소개</span>
+      </header>
+      <div class="about-grid">
+        <div class="about-img-wrap reveal">
+          <figure class="draft-frame">
+            <img
+              src="https://loremflickr.com/600/750/pottery,studio?lock=10"
+              alt="도예가 이토림이 작업실에서 작업하는 모습"
+              width="600" height="750"
+              loading="lazy"
+            />
+            <figcaption class="frame-rule">
+              <span>촬영 38 × 32 cm</span>
+              <span>성수동 공방</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="about-content reveal">
+          <p class="about-role">도예가 · 공방 대표</p>
+          <h2 class="about-name">이토림</h2>
+          <p class="about-bio">
+            흙이 손에 닿는 순간, 모든 것은 다시 시작됩니다. 홍익대학교 도예과를 졸업하고 경기도 이천에서 10년간 전통 도자를 연구했습니다. 2018년 서울 성수동에 토림 공방을 열어 일상 속 쓰임새 있는 도자기를 만들고 있습니다.
+          </p>
+          <p class="about-bio">
+            손으로 빚는 일은 측정과 오차 사이를 걷는 일입니다. 같은 흙, 같은 온도, 같은 손. 그러나 매번 다른 형태가 태어납니다.
+          </p>
+          <div class="about-stats" role="list">
+            <div class="stat" role="listitem">
+              <span class="stat-num" aria-label="제작 작품 240점 이상">240+</span>
+              <span class="stat-lbl">제작 작품</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat-num" aria-label="개인전 8회">8</span>
+              <span class="stat-lbl">개인전</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat-num" aria-label="설립 연도 2018년">2018</span>
+              <span class="stat-lbl">설립</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       GALLERY — 작품 갤러리 (필름 프레임)
+       ═══════════════════════════════════════════ -->
+  <section id="gallery" class="section gallery-section">
+    <div class="container">
+      <header class="section-label">
+        <span class="lbl-num">02</span>
+        <span class="lbl-title">작품 갤러리</span>
+      </header>
+      <div class="gallery-filter" role="group" aria-label="작품 카테고리 필터">
+        <button class="filter-btn active" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="tableware">식기</button>
+        <button class="filter-btn" data-filter="vase">화병</button>
+        <button class="filter-btn" data-filter="object">오브제</button>
+      </div>
+      <div class="gallery-grid">
+        <article class="gallery-card reveal" data-cat="tableware">
+          <div class="film-frame">
+            <img src="https://loremflickr.com/480/580/pottery,bowl?lock=1" alt="청자 밥그릇, 국화 문양, 정갈한 청색 유약" width="480" height="580" loading="lazy"/>
+            <div class="film-info">
+              <span class="film-num">001</span>
+              <h3 class="film-title">국화 밥그릇</h3>
+              <span class="film-meta">청자 · 800°C</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card gallery-card--large reveal" data-cat="vase">
+          <div class="film-frame">
+            <img src="https://loremflickr.com/600/780/ceramics,vase?lock=2" alt="달항아리 형태의 백자 화병, 풍만하고 고요한 형태" width="600" height="780" loading="lazy"/>
+            <div class="film-info">
+              <span class="film-num">002</span>
+              <h3 class="film-title">백자 달항아리</h3>
+              <span class="film-meta">백자 · 1280°C</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card reveal" data-cat="tableware">
+          <div class="film-frame">
+            <img src="https://loremflickr.com/480/480/teacup,clay?lock=3" alt="분청 찻잔 세트, 거친 표면과 부드러운 손잡이" width="480" height="480" loading="lazy"/>
+            <div class="film-info">
+              <span class="film-num">003</span>
+              <h3 class="film-title">분청 찻잔</h3>
+              <span class="film-meta">분청사기 · 1260°C</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card reveal" data-cat="object">
+          <div class="film-frame">
+            <img src="https://loremflickr.com/480/560/ceramic,sculpture?lock=4" alt="추상 오브제, 파도를 닮은 자유로운 형태" width="480" height="560" loading="lazy"/>
+            <div class="film-info">
+              <span class="film-num">004</span>
+              <h3 class="film-title">파도 오브제</h3>
+              <span class="film-meta">백자 · 수조각</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card reveal" data-cat="vase">
+          <div class="film-frame">
+            <img src="https://loremflickr.com/480/620/vase,clay?lock=5" alt="분청 장경호, 가늘고 긴 목의 우아한 화병" width="480" height="620" loading="lazy"/>
+            <div class="film-info">
+              <span class="film-num">005</span>
+              <h3 class="film-title">분청 장경호</h3>
+              <span class="film-meta">분청사기 · 1260°C</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PROCESS — 작업 과정
+       ═══════════════════════════════════════════ -->
+  <section id="process" class="section process-section">
+    <div class="container">
+      <header class="section-label">
+        <span class="lbl-num">03</span>
+        <span class="lbl-title">작업 과정</span>
+      </header>
+      <ol class="process-list" aria-label="도자기 제작 단계">
+        <li class="process-step reveal">
+          <div class="step-marker" aria-hidden="true">
+            <svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="36" cy="36" r="32" fill="none" stroke="rgba(200,168,130,0.35)" stroke-width="1"/>
+              <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(200,168,130,0.12)" stroke-width="0.5" stroke-dasharray="3 4"/>
+              <text x="36" y="41" text-anchor="middle" fill="rgba(200,168,130,0.9)" font-family="Space Mono,monospace" font-size="13">01</text>
+            </svg>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">토련</h3>
+            <p class="step-desc">손으로 흙을 반죽하며 기포를 제거합니다. 흙의 온도와 수분을 느끼는 첫 번째 대화.</p>
+          </div>
+          <figure class="step-img">
+            <img src="https://loremflickr.com/400/260/clay,hands?lock=21" alt="흙 반죽 과정, 두 손이 흙을 반죽하는 모습" width="400" height="260" loading="lazy"/>
+          </figure>
+        </li>
+
+        <li class="process-step reveal">
+          <div class="step-marker" aria-hidden="true">
+            <svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="36" cy="36" r="32" fill="none" stroke="rgba(200,168,130,0.35)" stroke-width="1"/>
+              <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(200,168,130,0.12)" stroke-width="0.5" stroke-dasharray="3 4"/>
+              <text x="36" y="41" text-anchor="middle" fill="rgba(200,168,130,0.9)" font-family="Space Mono,monospace" font-size="13">02</text>
+            </svg>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">물레 성형</h3>
+            <p class="step-desc">회전하는 흙 위에 형태가 피어납니다. 압력과 속도, 두 손의 균형으로 기물이 자랍니다.</p>
+          </div>
+          <figure class="step-img">
+            <img src="https://loremflickr.com/400/260/pottery,wheel?lock=22" alt="물레 성형, 손이 회전하는 흙을 빚어 올리는 모습" width="400" height="260" loading="lazy"/>
+          </figure>
+        </li>
+
+        <li class="process-step reveal">
+          <div class="step-marker" aria-hidden="true">
+            <svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="36" cy="36" r="32" fill="none" stroke="rgba(200,168,130,0.35)" stroke-width="1"/>
+              <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(200,168,130,0.12)" stroke-width="0.5" stroke-dasharray="3 4"/>
+              <text x="36" y="41" text-anchor="middle" fill="rgba(200,168,130,0.9)" font-family="Space Mono,monospace" font-size="13">03</text>
+            </svg>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">건조 · 초벌</h3>
+            <p class="step-desc">자연 건조 후 800도에서 초벌구이. 흙이 처음으로 불을 만나는 순간.</p>
+          </div>
+          <figure class="step-img">
+            <img src="https://loremflickr.com/400/260/kiln,ceramics?lock=23" alt="가마 초벌, 도자기가 가마 안에 놓인 모습" width="400" height="260" loading="lazy"/>
+          </figure>
+        </li>
+
+        <li class="process-step reveal">
+          <div class="step-marker" aria-hidden="true">
+            <svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="36" cy="36" r="32" fill="none" stroke="rgba(200,168,130,0.35)" stroke-width="1"/>
+              <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(200,168,130,0.12)" stroke-width="0.5" stroke-dasharray="3 4"/>
+              <text x="36" y="41" text-anchor="middle" fill="rgba(200,168,130,0.9)" font-family="Space Mono,monospace" font-size="13">04</text>
+            </svg>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">시유 · 재벌</h3>
+            <p class="step-desc">유약을 입힌 뒤 1280도 재벌. 유약이 녹아 흘러내리며 표면에 시간의 흔적을 새깁니다.</p>
+          </div>
+          <figure class="step-img">
+            <img src="https://loremflickr.com/400/260/glaze,pottery?lock=24" alt="유약 시유, 도자기 표면에 유약을 바르는 모습" width="400" height="260" loading="lazy"/>
+          </figure>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CLASS — 클래스 안내
+       ═══════════════════════════════════════════ -->
+  <section id="class" class="section class-section">
+    <div class="container">
+      <header class="section-label">
+        <span class="lbl-num">04</span>
+        <span class="lbl-title">클래스 안내</span>
+      </header>
+      <div class="class-grid">
+        <article class="class-card reveal">
+          <div class="class-badge" aria-hidden="true">
+            <svg viewBox="0 0 52 52" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="26" r="23" fill="none" stroke="rgba(200,168,130,0.5)" stroke-width="1"/>
+              <text x="26" y="31" text-anchor="middle" fill="#c8a882" font-family="Space Mono,monospace" font-size="11">A</text>
+            </svg>
+          </div>
+          <h3 class="class-title">원데이 클래스</h3>
+          <p class="class-desc">물레 체험부터 핀칭 기법까지. 3시간 동안 나만의 첫 기물을 만들어 봅니다.</p>
+          <ul class="class-info" aria-label="원데이 클래스 정보">
+            <li><span class="info-key">일정</span>매주 토·일 오전 10시</li>
+            <li><span class="info-key">인원</span>4인 이하 소규모</li>
+            <li><span class="info-key">비용</span>80,000원</li>
+          </ul>
+          <a href="mailto:torim@studio.kr" class="class-cta">신청하기</a>
+        </article>
+
+        <article class="class-card class-card--featured reveal">
+          <div class="class-badge" aria-hidden="true">
+            <svg viewBox="0 0 52 52" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="26" r="23" fill="none" stroke="rgba(200,168,130,0.8)" stroke-width="1"/>
+              <circle cx="26" cy="26" r="18" fill="none" stroke="rgba(200,168,130,0.2)" stroke-width="0.5"/>
+              <text x="26" y="31" text-anchor="middle" fill="#c8a882" font-family="Space Mono,monospace" font-size="11">B</text>
+            </svg>
+          </div>
+          <h3 class="class-title">정규 과정</h3>
+          <p class="class-desc">8주간 물레 성형, 조각, 시유까지 도예의 전 과정을 체계적으로 배웁니다.</p>
+          <ul class="class-info" aria-label="정규 과정 정보">
+            <li><span class="info-key">일정</span>매주 수요일 오후 7시</li>
+            <li><span class="info-key">인원</span>6인 이하</li>
+            <li><span class="info-key">비용</span>480,000원 (8회)</li>
+          </ul>
+          <a href="mailto:torim@studio.kr" class="class-cta">신청하기</a>
+        </article>
+
+        <article class="class-card reveal">
+          <div class="class-badge" aria-hidden="true">
+            <svg viewBox="0 0 52 52" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="26" r="23" fill="none" stroke="rgba(200,168,130,0.5)" stroke-width="1"/>
+              <text x="26" y="31" text-anchor="middle" fill="#c8a882" font-family="Space Mono,monospace" font-size="11">C</text>
+            </svg>
+          </div>
+          <h3 class="class-title">개인 작업</h3>
+          <p class="class-desc">기초 과정 수료 후 개인 작업 공간을 대여합니다. 가마 사용 포함.</p>
+          <ul class="class-info" aria-label="개인 작업 정보">
+            <li><span class="info-key">일정</span>협의 후 결정</li>
+            <li><span class="info-key">인원</span>1인</li>
+            <li><span class="info-key">비용</span>월 200,000원~</li>
+          </ul>
+          <a href="mailto:torim@studio.kr" class="class-cta">문의하기</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">토림</span>
+          <address>
+            서울시 성동구 성수동2가<br>
+            토림 도자기 공방
+          </address>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">연락처</h4>
+          <p>torim@studio.kr</p>
+          <p>02-123-4567</p>
+          <p>화–일 10:00–18:00</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">SNS</h4>
+          <p>@torim_studio</p>
+          <p>인스타그램</p>
+          <p>네이버 블로그</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 토림 도자기 공방. All rights reserved.</p>
+        <p class="footer-mark">TORIM · SEONGSU · SEOUL</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>

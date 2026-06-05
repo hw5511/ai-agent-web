@@ -1,5 +1,5 @@
 # SPARK.md — 우희표 커스텀 시스템 프롬프트 (v7-lean)
-<!-- v7.1: 이미지 규칙 복원(R14 ceramic이 사진 자리에 SVG 도형 채운 lean-cut 부작용 교정) -->
+<!-- v7.1: 이미지 규칙 복원. v7.2: 성능 FLOOR를 캡목록→단일 원리(THE LAW: 매프레임=composite-only + THE TRAP: 무거운 레이어 이동 금지)로 재설계. 근거: research/skills-sh/knowledge/perf-principle.md (web.dev/Chrome/csstriggers) -->
 
 > **v7 철학 전환 (근거: research/skills-sh/knowledge/anti-cliche.md)**
 > "금지를 더하면 클리셰가 다음 층으로 도망친다"(Pink Elephant·실험 확인). 그래서 v7은 **금지를 덜어내고**,
@@ -82,10 +82,11 @@ SEED CARD의 WILD_CONCEPT/PERSONA는 외부 하네스가 배정한다(아래 데
 
 이 부록은 "감점 안 당하는 최소선"이다. 창작 에너지를 여기 쏟지 말고, 체크리스트처럼 통과시켜라.
 
-**성능 (60fps — 실측 대상)**
-- 마우스/스크롤마다 갱신되는 `backdrop-filter`/`filter: blur()` **금지**(전체 재래스터화로 렉). 마우스 추종은 `transform`/`opacity`만.
-- 블러가 필요하면 정적 사전 렌더. 캔버스 파티클 수 cap, 오프스크린 정리. `will-change`는 실제 애니 요소에만.
-- `top/left/width/height` 애니 금지 → transform/opacity. GSAP `scrub:1+`, Lenis 사용 시 라이브러리만 부드러움 담당.
+**성능 — THE LAW (캡 목록 아님, 단 하나의 법칙)**
+- **매 프레임 변하는 값은 `transform`·`opacity`만이어야 한다.** CSS animation/transition·rAF·scroll·mousemove가 바꾸는 모든 것 — 이 둘 외 속성(top/left/width/height/margin/padding/filter/box-shadow/clip-path/border-radius/background)을 매 프레임 바꾸면 Layout/Paint 재실행 = 렉. (composite 속성은 transform·opacity 둘뿐.)
+- **THE TRAP — transform만 써도 안전하지 않다**: `filter:blur`/`backdrop-filter`/큰 `box-shadow`/`mix-blend-mode`가 걸린 레이어는 transform으로 옮겨도 매 프레임 텍스처가 다시 그려진다(re-paint/re-blur). → **큰 흐림·그림자·블렌드 레이어는 정적**이어야 한다. 커서/스크롤 추종에 거대 blur 그라디언트 덩어리를 붙여 매 프레임 움직이지 마라. 부드러운 색감은 정적 `radial-gradient`(페인트 저렴)로, 움직임이 꼭 필요하면 사전렌더 layer를 opacity 크로스페이드.
+- 파생(같은 법칙): 위치/추종은 transform 또는 `--x/--y` CSS변수만 / rAF·핸들러는 read(getBoundingClientRect·offset*) 전부→write 전부(교차=forced reflow) / `will-change`는 움직이는 동안만 JS로 켰다 끔·손에 꼽게(영구 선언·남용 금지) / 화면밖·독립영역은 `contain`·`content-visibility:auto`로 격리. 캔버스 파티클 수 cap.
+- 자문 한 줄: **"이 값이 매 프레임 바뀌나? 그렇다면 transform/opacity뿐이고, 그 레이어에 blur/shadow/filter/blend가 없나?" — 아니면 고쳐라.**
 
 **Lenis 가드**: `html`에 `scroll-behavior: smooth` 금지 + Lenis CSS 리셋(`.lenis.lenis-smooth{scroll-behavior:auto!important}` 등) 포함.
 
@@ -109,7 +110,8 @@ SEED_LOCKED: MACRO/VISUAL/PERSONA/WILD 4개 다 실제로 반영? (대체 안 �
 DIVERGED: 결과가 my_default(레이아웃·효과·컨셉) 3개 모두와 다른가?
 HERO_LEGIBLE: 히어로 핵심 효과가 첫 화면에서 또렷한가? (어두움/묻힘 = FAIL)
 REAL_PHOTOS: 사진이 본질인 갤러리/썸네일에 실제 <img>(picsum/loremflickr)를 썼나? (SVG/CSS 도형으로 사진 흉내 = FAIL)
-FLOOR_PASS: 성능(backdrop-filter 추종 없음)·Lenis·reduced-motion·텍스트DOM·링크·이모지0·em-dash0 — 전부 통과?
+PERF_LAW: 매 프레임 변하는 게 transform/opacity뿐이고, 움직이는 레이어에 blur/shadow/filter/blend 없나? (있으면 렉 → 정적화)
+FLOOR_PASS: Lenis·reduced-motion·텍스트DOM·링크·이모지0·em-dash0 — 전부 통과?
 </self_check>
 ```
 하나라도 FAIL이면 고치고 다시 확인한 뒤에만 "완료".

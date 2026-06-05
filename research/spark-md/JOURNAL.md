@@ -285,3 +285,12 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - **★ 목표1 달성**: MACRO 구조 5개 전부 다름 → 결과 시각적으로 확연히 다름(밝은 중앙형/분할 스위스/여백/그리드/콜라주). 동일 프롬프트 수렴 깸. wave/particle 0 + 진짜 사진(img 11~18, 이미지 수정 반영).
 - 잔여: 개별 축 충돌(VISUAL 콜라주·컬러필드 중복, PERSONA 영화타이틀 중복) — 카탈로그 각 10개 한계. → 카탈로그 확장(각 30+)+배치 dedup로 제거 가능.
 - 결론: **외부 SEED 무작위 배정이 run-to-run 다양성을 실제로 만든다(목표1 입증).**
+
+---
+
+## Round 17 — v7.2 성능 원리(THE LAW) 검증  [완료 2026-06-04]
+- 발견: run4 렉 원인 = 커서 추종 70vw `blur(90px)` 블롭(transform 이동이라도 매프레임 re-paint). CPU6x서 22fps. rAF FPS는 59로 못 잡음.
+- 조치: sweep5(web.dev/Chrome/csstriggers) → 성능 FLOOR를 캡목록→**단일 원리**로 재설계(THE LAW: 매프레임=composite-only / THE TRAP: 무거운 레이어 이동 금지). + 정적 탐지기 perfcheck.sh(하네스 통합).
+- **검증(R17, v7.2 4주제)**: perfcheck 4/4 FAIL=0. 특히 noc가 **컬러필드(run4와 동일 위험기법)** 배정받았으나 blur≥40px=0(정적 그라디언트로 구현) → **CPU6x 60fps**(run4 22→60). 원리가 위험 시드에서도 렉 코드를 차단.
+- perfcheck 자체검증: run4(렉) FAIL=2 적발, run5/run1(정상) 통과. rAF FPS 사각 보완.
+- 교훈: 성능도 클리셰처럼 "개별 캡"이 아니라 **단일 원리 + 정적 검증**이 본질. (캡은 다음 무거운 패턴으로 도망감)
