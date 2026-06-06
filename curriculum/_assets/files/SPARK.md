@@ -67,6 +67,8 @@ print(f'AESTHETIC_PINCH: [{p[\"title\"]}] {p[\"body\"]}')
 
 ## LIGHTBULB IGNITION (3-SPARK × AESTHETIC PINCH — CRITICAL)
 
+> **가장 먼저 할 일.** 다른 무엇보다 이 영감 로직을 먼저 실행/확정한 뒤 설계를 시작한다(아래 사고 프로세스 STEP 0).
+
 프롬프트 상단에 `[LIGHTBULB 3-SPARK]` 블록이 주입되어 있다.
 3개의 카테고리별 인사이트와 1개의 미감 한 스푼(AESTHETIC PINCH)이 포함된다.
 
@@ -131,7 +133,42 @@ FORBIDDEN_WEIGHT: [이 폰트에서 사용 금지인 weight 목록]
 
 ---
 
+## 한글 줄바꿈 (CRITICAL — 최우선 타이포 규칙)
+
+> 한글은 브라우저 기본값(`word-break: normal`)에서 **어절 중간 아무 글자에서나 줄이 끊긴다.**
+> ("안녕하세" / "요" 처럼). 결과물의 완성도를 가장 크게 좌우하는 디테일이므로 **반드시** 아래를 전역 적용한다.
+
+```css
+/* 모든 텍스트 요소에 전역 적용 (reset 바로 뒤) */
+:where(body, h1, h2, h3, h4, h5, h6, p, li, a, span,
+       button, label, blockquote, figcaption, td, th, dd, dt) {
+  word-break: keep-all;      /* 한글: 띄어쓰기(어절) 단위로만 줄바꿈, 단어 중간 끊김 금지 */
+  overflow-wrap: break-word; /* 예외: 띄어쓰기 없는 초장문(URL/영문 연속)만 넘침 방지로 분리 */
+}
+h1, h2, h3, .hero-title { text-wrap: balance; } /* 헤딩: 줄 길이 균형, 외톨이 글자 방지 */
+p, li { text-wrap: pretty; }                    /* 본문: 마지막 줄 orphan 방지 */
+```
+
+**규칙:**
+- `word-break: keep-all`을 텍스트가 들어가는 모든 요소에 적용한다. (헤딩·본문·버튼·캡션·표 셀 등 빠짐없이)
+- 좁은 폭(카드·모바일·2분할)에서 특히 한글이 단어 중간에서 깨지지 않는지 확인한다.
+- 의미 단위로 줄을 끊고 싶으면 `<wbr>` 또는 `<br>`을 의도적으로 넣는다(자동 끊김에 맡기지 말 것).
+- `text-wrap: balance`(헤딩)·`pretty`(본문)로 줄 분배까지 다듬는다.
+
+**NEVER:**
+- `word-break: break-all`을 한글 텍스트에 사용 (모든 글자에서 끊겨 가독성 파괴).
+- 줄바꿈 규칙 없이 한글을 좁은 컨테이너에 그대로 넣기.
+
+---
+
 ## 사고 프로세스 (CRITICAL - 반드시 이 순서)
+
+### STEP 0: 영감 주입 먼저 (CRITICAL — 무조건 가장 먼저)
+
+무슨 작업이든 **코드·설계를 시작하기 전에 LIGHTBULB 영감 로직을 가장 먼저 실행한다.** 이게 출발점이다.
+- 프롬프트 상단에 `<lightbulb_ignition>` 블록이 있는지 먼저 확인한다. 없으면 위 "LIGHTBULB 연동"의 curl로 직접 뽑아 채운 뒤 시작한다.
+- 4개(LAYOUT / INTERACTION / VISUAL / AESTHETIC) 중 `CHOSEN_SPARK` 1개를 **먼저 확정**하고, 이후 모든 PHASE가 이 영감을 축으로 전개되게 한다.
+- 영감 없이 곧장 디자인에 들어가면 평균값(클리셰)으로 수렴한다. **영감 주입이 1번이다.** (이 단계를 건너뛰면 FAIL)
 
 ### PHASE -1: Purpose Archaeology (목적 발굴)
 
@@ -288,6 +325,8 @@ SURPRISE_DELIVERED: TECH_SURPRISE가 실제로 구현됐는가?
 LIGHTBULB_APPLIED: CHOSEN_SPARK가 결과물에 반영됐는가?
 AESTHETIC_WOVEN: AESTHETIC_PINCH의 분위기가 전체에 스며들었는가?
 FONT_COMPLIANT: FONT JUDGMENT의 weight 규칙을 모든 한글 폰트에 적용했는가?
+KOREAN_LINEBREAK: 모든 텍스트에 word-break:keep-all 적용? 한글이 단어 중간에서 끊기지 않는가? (좁은 폭·모바일 포함)
+INSPIRATION_FIRST: LIGHTBULB 영감을 가장 먼저 정했고 CHOSEN_SPARK가 전체에 반영됐는가?
 JS_SCOPE_CLEAN: 변수 중복 선언 없음 / scrollIntoView 없음 / var 없음?
 AWWWARDS_READY: [YES/NO]
 PREDICTABILITY_SCORE: [1~10 — 4 초과 시 재설계]
@@ -372,6 +411,8 @@ VERDICT: FAIL 항목 있으면 수정 후 재검증
 - **LIGHTBULB CHOSEN_SPARK가 결과물에 반영될 것**
 - **AESTHETIC_PINCH 분위기가 전체에 스며들 것**
 - **모든 한글 폰트 weight 규칙 준수**
+- **모든 텍스트 `word-break: keep-all` (한글이 단어 중간에서 끊기지 않을 것)**
+- **시작 전 LIGHTBULB 영감을 가장 먼저 주입·반영**
 - **JS 변수 중복 선언 0개**
 
 ## 이미지
