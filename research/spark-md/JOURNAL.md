@@ -4,7 +4,8 @@
 
 ## 현재 상태 (TL;DR, ~R19 기준)
 - **현행 버전**: `versions/v7-lean.md` — ① 외부 SEED CARD(MACRO/VISUAL/PERSONA/WILD) 무작위 강제배정+락인 ② 자기 디폴트 회피 ③ 성능을 단일 원리(THE LAW: 매프레임=transform/opacity / THE TRAP: 무거운 레이어 이동 금지)로 ④ lean(금지목록 삭감).
-- **표준 생성 워크플로**: `harness/run-v7-fast.sh` = `--effort low`(사고 1패스) + `--disallowedTools Bash`(자가검증 루프 차단) → `perfcheck.sh` 정적검사 → FAIL이면 `--resume`(low)로 그 항목만 교정. **R17 39.8분 → ~10분(-75%), perfcheck 0 FAIL.** (effort max/high는 타임아웃/과부하 → 금지)
+- **표준 생성 워크플로**: `harness/run-v7-fast.sh` = `--effort low`(사고 1패스) + `--disallowedTools Bash`(자가검증 루프 차단) → `perfcheck.sh` 정적검사 → FAIL이면 `--resume`(low)로 그 항목만 교정. **R17 39.8분 → ~10분(-75%), perfcheck 0 FAIL.** (effort max/high는 타임아웃/과부하 → 금지). SEED는 **배치 내 축별 비복원추출**(R20).
+- **두 게이트**: ① perfcheck(성능·마감, 공짜) ② `aesthetic-gate.sh`(미감, VLM pairwise vs floor — 확실히 나쁜 것만 FAIL). 정적 linter가 못 보던 미감 사각을 R20에서 보강.
 - **검증된 목표**: 같은 프롬프트→매번 다른 산출(R16) · 다도메인 커버(R6/R19) · 클리셰 수렴 탈출(R14) · 렉 없는 코드(R17) · 빠른 생성(R18~19).
 - **라이브 데모**: `demo/spark-research/` (v2~v7.2, v7-fast). **라이브 SPARK.md(curriculum) 반영은 미정** — 연구 버전에만 적용 중.
 - **archive/**: 구 버전(v2~v6)·구 러너·구 리포트는 `archive/`로 이동(재현용). 신규 작업은 위 현행만 사용.
@@ -331,3 +332,18 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - **perfcheck 확장**: em-dash는 **주석 제외 렌더 텍스트만** 검사(comment의 — 오탐 제거 — v7.2 c1/noc 0 FAIL 유지, low의 title/alt 2건만 적발). 이모지 유니코드 블록, 끊긴 css/js 링크.
 - **검증**: 확인 런 자동 루프(생성→FAIL→resume 교정)가 최종 perfcheck **FAIL=0**으로 완결.
 - 결론: 비싼 모델 자가검증을 **"빠른 low 생성 + 공짜 정적검사 + 필요 시 짧은 targeted resume"** 으로 분해. R17 39.8분 → ~10분(-75%), 품질 결정론적 보장.
+
+---
+
+## Round 20 — deep research(외부 베스트프랙티스 대조) + 2개 개선  [완료 2026-06-06]
+- 질문(CEO): "여기서 더 개선이 필요한가?" → 5각도(A 다양성/모드붕괴 · B 안티클리셰/노벨티 · C 주관적 품질평가 · D 시드 카탈로그 · E 생성효율) 병렬 deep research로 외부 근거와 대조.
+- **종합 판정: v7-lean은 대부분 2026 베스트프랙티스와 정합. 실효 개선은 2건뿐.**
+  - **A ✅ 우리가 맞음**: RLHF typicality bias(α≈0.6, arxiv 2510.01171)로 모드붕괴 실재 → 외부주입이 정답. **Toubia 2026.2(2602.20408): 평범한 외부배정 페르소나 > 모델자율선택 > 유명인예시** — 우리 SEED 강제배정+락인과 정확히 일치. 보완 가능: CoT 병행(배치 내 fixation 차단), Verbalized Sampling(직교 레버).
+  - **B ⚠️ 방향 맞으나 냉정한 경고**: 가장 엄밀한 quality-gated 연구(2504.09389)는 추론시점 프롬프트 트릭이 **표면 다양성만 올리고 quality-gated 노벨티는 거의 못 옮긴다(=클리셰 재배치)**고 본다. 금지제거는 옳음(pink-elephant 백fire 75.5% 실증, 2404.15154). "confess-then-diverge" 정확한 2단계는 통제연구 없음(=informed folklore). 진짜 강수는 QD 루프(MAP-Elites)지만 **품질신호(C)가 선행돼야** 가능.
+  - **C ❌ 실제 빈틈**: 정적 linter(perfcheck)는 성능/마감만, **미감·창의성 0측정**. VLM 절대점수는 비신뢰(MLLM exact-match 35~38%, 2510.08783)나 **pairwise는 인간선호 90~94% 일치**(ArtifactsBench 2507.04952 = 94.4% vs WebDev Arena, UI-Bench 2508.20410). → coarse pairwise 게이트가 답.
+  - **D ❌ 확정 버그, 값싼 해**: 복원추출(RANDOM%len)은 N=10·k=5에서 단일축 충돌 70%, 4축 배치 99%. **N=30 확장도 75% 충돌 → 카탈로그 확장은 오답.** 비복원추출(LHS)이 k≤N에서 충돌 0 보장.
+  - **E ✅ 정합**: 외부검증>자기검증(ICLR'24 2310.01798, CRITIC, Weaver 2506.18203), max effort 역효과(TMLR'25 inverse scaling 2507.14417), trajectory reduction(AgentDiet 2509.23586) — 우리 실측과 전부 일치. (잠재 레버: low vs medium A/B, speculative decoding=무손실이나 인프라층.)
+- **구현 1 — SEED 배치 내 축별 비복원추출(D)**: `run-v7-fast.sh`의 `pick()` 복원추출을 축별 무작위 순열 배정으로 교체. k≤N이면 배치 내 같은 축 값 중복 0 보장(검증: k=5×N=10 5회 전부 dup=0, k>N 순환 안전, 실 ideas.json WILD 5/5 distinct). 카탈로그는 그대로(확장은 불필요).
+- **구현 2 — 미감 게이트(C)**: `harness/aesthetic-gate.sh` 신설. 첫 화면 스크린샷(playwright)→`baseline/floor.png`와 **VLM pairwise 양방향**(position bias 상쇄) 비교, *양방향 모두 floor에 짐 = 확실히 나쁨*만 FAIL(절대점수 안 씀). 검증: 스크린샷 파이프라인 실작동(obs/noc/bookstore 렌더 확인), 판정로직·JSON파싱 단위테스트 통과. 한계: 샌드박스 CDN 차단 → 정적 구성만(모션은 라이브). 심판 `claude -p`는 러너와 동일 패턴(스탠드얼론 실행).
+- **안 한 것(과투자)**: 카탈로그 30+ 확장(D가 반증) · constrained decoding(프리폼 HTML N/A) · QD 루프(미감 신호 성숙 후) · effort 재튜닝(현 정합).
+- 결론: **방법론은 견고하다.** 즉효는 비복원추출(거의 공짜), 전략 투자는 미감 게이트(이게 없으면 "개선"을 측정조차 못 함). 다음 단계로 QD 루프는 미감 게이트가 신뢰 데이터를 쌓은 뒤 검토.
