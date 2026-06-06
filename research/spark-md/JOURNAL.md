@@ -7,7 +7,8 @@
 - **표준 생성 워크플로**: `harness/run-v7-fast.sh` = `--effort low`(사고 1패스) + `--disallowedTools Bash`(자가검증 루프 차단) → `perfcheck.sh` 정적검사 → FAIL이면 `--resume`(low)로 그 항목만 교정. **R17 39.8분 → ~10분(-75%), perfcheck 0 FAIL.** (effort max/high는 타임아웃/과부하 → 금지). SEED는 **배치 내 축별 비복원추출**(R20).
 - **두 게이트**: ① perfcheck(성능·마감, 공짜) ② `aesthetic-gate.sh`(미감, VLM pairwise vs floor — 확실히 나쁜 것만 FAIL). 정적 linter가 못 보던 미감 사각을 R20에서 보강.
 - **검증된 목표**: 같은 프롬프트→매번 다른 산출(R16) · 다도메인 커버(R6/R19) · 클리셰 수렴 탈출(R14) · 렉 없는 코드(R17) · 빠른 생성(R18~19).
-- **라이브 데모**: `demo/spark-research/` (v2~v7.2, v7-fast). **라이브 SPARK.md(curriculum) 반영은 미정** — 연구 버전에만 적용 중.
+- **라이브 데모**: `demo/spark-research/` (v2~v7.2, v7-fast).
+- **라이브 SPARK.md(curriculum) 반영(부분 완료)**: 하네스 불필요한 연구 성과를 학생용 `curriculum/_assets/files/SPARK.md`에 이식 ... ① 멀티파일 출력 ② 성능 단일법칙 THE LAW/THE TRAP ③ reduced-motion 가시복원·텍스트 DOM ④ 자기 디폴트 회피(MY_DEFAULT). SEED CARD 외부배정은 하네스 의존이라 학생용은 LIGHTBULB로 대체(미이식). 다운로드: `demo/SPARK.md`.
 - **archive/**: 구 버전(v2~v6)·구 러너·구 리포트는 `archive/`로 이동(재현용). 신규 작업은 위 현행만 사용.
 
 ---
