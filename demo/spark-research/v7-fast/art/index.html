@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>잔상(殘像) · 디지털 아트 전시 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;900&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="site-nav" aria-label="주 메뉴">
+    <a href="#about" class="nav-link">소개</a>
+    <a href="#works" class="nav-link">작품</a>
+    <a href="#artist-note" class="nav-link">작가</a>
+    <a href="#visit" class="nav-link">관람</a>
+  </nav>
+
+  <!-- HERO: 전체화면 인터랙티브 무대 -->
+  <section id="hero" aria-label="잔상 전시 히어로">
+
+    <svg class="hero-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"
+         aria-hidden="true" focusable="false">
+
+      <!-- Static radial depth gradient -->
+      <defs>
+        <radialGradient id="bg-glow" cx="52%" cy="50%" r="45%">
+          <stop offset="0%"   stop-color="#12142a" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#06070f" stop-opacity="1"/>
+        </radialGradient>
+      </defs>
+      <rect width="100" height="100" fill="url(#bg-glow)"/>
+
+      <!-- Decorative drawing lines: one-time stroke-dashoffset animation -->
+      <g class="draw-lines" stroke-width="0.12" fill="none">
+        <line class="dl dl-h1" x1="0"  y1="22" x2="100" y2="22"/>
+        <line class="dl dl-h2" x1="0"  y1="78" x2="100" y2="78"/>
+        <line class="dl dl-v1" x1="22" y1="0"  x2="22"  y2="100"/>
+        <line class="dl dl-v2" x1="78" y1="0"  x2="78"  y2="100"/>
+        <line class="dl dl-d1" x1="30" y1="0"  x2="70"  y2="100"/>
+        <line class="dl dl-d2" x1="70" y1="0"  x2="30"  y2="100"/>
+      </g>
+
+      <!-- Refracted ghost copies — placed UNDER main shape -->
+      <!-- Ghost 3: violet, most refracted (furthest offset) -->
+      <g class="p-layer" data-parallax="-0.028">
+        <g class="ghost ghost-violet">
+          <path d="M 52 22 L 74 30 L 84 48 L 80 66 L 62 80 L 38 78 L 22 62 L 24 40 L 38 26 Z"/>
+        </g>
+      </g>
+
+      <!-- Ghost 2: amber, least refracted (smallest offset) -->
+      <g class="p-layer" data-parallax="0.016">
+        <g class="ghost ghost-amber">
+          <path d="M 52 22 L 74 30 L 84 48 L 80 66 L 62 80 L 38 78 L 22 62 L 24 40 L 38 26 Z"/>
+        </g>
+      </g>
+
+      <!-- Ghost 1: blue, medium refraction -->
+      <g class="p-layer" data-parallax="-0.012">
+        <g class="ghost ghost-blue">
+          <path d="M 52 22 L 74 30 L 84 48 L 80 66 L 62 80 L 38 78 L 22 62 L 24 40 L 38 26 Z"/>
+        </g>
+      </g>
+
+      <!-- Main shape: cream stroke, slow float animation -->
+      <g class="p-layer" data-parallax="0.005">
+        <g class="main-shape">
+          <path d="M 52 22 L 74 30 L 84 48 L 80 66 L 62 80 L 38 78 L 22 62 L 24 40 L 38 26 Z"/>
+        </g>
+      </g>
+
+      <!-- Accent shape: smaller secondary fragment -->
+      <g class="p-layer" data-parallax="-0.034">
+        <g class="accent-shape">
+          <path d="M 70 34 L 80 48 L 76 62 L 62 66 L 54 56 L 58 40 Z"/>
+        </g>
+      </g>
+
+    </svg>
+
+    <!-- DOM text: always visible, JS is enhancement only -->
+    <div class="hero-content">
+      <p class="hero-label">디지털 아트 전시 · 2026</p>
+      <h1 class="hero-title">
+        <span class="title-ko">잔상</span><span class="title-hanja">(殘像)</span>
+      </h1>
+      <p class="hero-sub">기억이 굴절되어 남긴 형상들</p>
+      <a href="#about" class="hero-cta">전시 보기</a>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <svg viewBox="0 0 20 34" width="20" height="34" fill="none">
+        <rect x="2" y="2" width="16" height="30" rx="8"
+              stroke="currentColor" stroke-width="1.2"/>
+        <circle class="scroll-dot" cx="10" cy="10" r="2.2" fill="currentColor"/>
+      </svg>
+    </div>
+
+  </section>
+
+  <!-- 전시 소개 -->
+  <section id="about" class="section section-about">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2>전시 소개</h2>
+      </header>
+      <div class="about-body">
+        <div class="about-text reveal">
+          <p class="large-text">우리가 바라본 것은 사라지지 않는다. 다만 굴절되어 다른 형태로 남을 뿐이다.</p>
+          <p>디지털 아트 전시 "잔상(殘像)"은 이미지와 기억의 교차점을 탐구한다. 스크린 위에서 발생하고 소멸하는 빛의 흔적들은 망막에 새겨진 잔상처럼 우리의 의식 속에 계속 머문다.</p>
+          <p>이 전시는 디지털 환경 안에서 '사라짐'의 의미를 되묻는다. 픽셀의 잔상, 알고리즘이 만들어낸 형상, 재생되고 또 재생되는 이미지들. 그것은 과연 기억인가, 아니면 데이터인가.</p>
+          <p>참여 작가 3인은 각자의 방식으로 '잔상'을 시각화한다. 회화적 제스처에서 연산 언어로, 다시 물질적 감각으로 이어지는 여정을 경험하라.</p>
+        </div>
+        <figure class="about-figure reveal" aria-hidden="true">
+          <svg viewBox="0 0 160 240" class="about-svg">
+            <line class="al-in"  x1="80" y1="10"  x2="80"  y2="110"/>
+            <ellipse cx="80" cy="115" rx="36" ry="10"
+                     fill="none" stroke-width="0.8" stroke-dasharray="4 3"
+                     class="al-surface"/>
+            <text x="80" y="130" class="al-label" text-anchor="middle">굴절면</text>
+            <line class="al-out al-out-l"  x1="80" y1="115" x2="24"  y2="228"/>
+            <line class="al-out al-out-m"  x1="80" y1="115" x2="80"  y2="235"/>
+            <line class="al-out al-out-r"  x1="80" y1="115" x2="136" y2="228"/>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 작품 미리보기 -->
+  <section id="works" class="section section-works">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2>작품 미리보기</h2>
+      </header>
+      <div class="works-grid">
+        <article class="work-card reveal">
+          <div class="work-img-wrap">
+            <img src="https://picsum.photos/seed/remnant-a/700/500"
+                 alt="잔상 No.1 기억의 레이어, 이수빈 작"
+                 width="700" height="500" loading="lazy">
+          </div>
+          <div class="work-info">
+            <span class="work-num">No.1</span>
+            <h3>기억의 레이어</h3>
+            <p>디지털 프린트 위 아크릴 채색, 120×90cm, 2025</p>
+          </div>
+        </article>
+        <article class="work-card reveal" style="--reveal-delay:0.1s">
+          <div class="work-img-wrap">
+            <img src="https://picsum.photos/seed/remnant-b/700/500"
+                 alt="잔상 No.2 굴절하는 시간, 최도윤 작"
+                 width="700" height="500" loading="lazy">
+          </div>
+          <div class="work-info">
+            <span class="work-num">No.2</span>
+            <h3>굴절하는 시간</h3>
+            <p>제너러티브 비디오, 싱글 채널, 7분 30초, 2026</p>
+          </div>
+        </article>
+        <article class="work-card reveal" style="--reveal-delay:0.2s">
+          <div class="work-img-wrap">
+            <img src="https://picsum.photos/seed/remnant-c/700/500"
+                 alt="잔상 No.3 투명한 기억, 정해나 작"
+                 width="700" height="500" loading="lazy">
+          </div>
+          <div class="work-info">
+            <span class="work-num">No.3</span>
+            <h3>투명한 기억</h3>
+            <p>인터랙티브 인스톨레이션, 가변 크기, 2026</p>
+          </div>
+        </article>
+        <article class="work-card reveal" style="--reveal-delay:0.3s">
+          <div class="work-img-wrap">
+            <img src="https://picsum.photos/seed/remnant-d/700/500"
+                 alt="잔상 No.4 증발하는 형상, 이수빈 작"
+                 width="700" height="500" loading="lazy">
+          </div>
+          <div class="work-info">
+            <span class="work-num">No.4</span>
+            <h3>증발하는 형상</h3>
+            <p>디지털 드로잉 시리즈, 12점, 2025~2026</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 작가 노트 -->
+  <section id="artist-note" class="section section-artist">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2>작가 노트</h2>
+      </header>
+      <div class="artist-grid">
+        <div class="artist-card reveal">
+          <div class="artist-img-wrap">
+            <img src="https://picsum.photos/seed/artist-sb/400/500"
+                 alt="작가 이수빈 사진" width="400" height="500" loading="lazy">
+          </div>
+          <div class="artist-text">
+            <h3>이수빈</h3>
+            <p class="artist-role">디지털 회화 / 설치</p>
+            <blockquote>"스크린은 기억의 또 다른 피부다. 나는 그 위에 새겨진 흔적을, 지워지지 않는 빛의 상처를 그린다."</blockquote>
+          </div>
+        </div>
+        <div class="artist-card reveal" style="--reveal-delay:0.15s">
+          <div class="artist-img-wrap">
+            <img src="https://picsum.photos/seed/artist-dy/400/500"
+                 alt="작가 최도윤 사진" width="400" height="500" loading="lazy">
+          </div>
+          <div class="artist-text">
+            <h3>최도윤</h3>
+            <p class="artist-role">제너러티브 아트 / 영상</p>
+            <blockquote>"코드가 만들어낸 형상은 작가의 의도를 벗어나 스스로 기억을 갖는다. 알고리즘의 잔상이 곧 예술의 출발점이다."</blockquote>
+          </div>
+        </div>
+        <div class="artist-card reveal" style="--reveal-delay:0.3s">
+          <div class="artist-img-wrap">
+            <img src="https://picsum.photos/seed/artist-hn/400/500"
+                 alt="작가 정해나 사진" width="400" height="500" loading="lazy">
+          </div>
+          <div class="artist-text">
+            <h3>정해나</h3>
+            <p class="artist-role">인터랙티브 미디어</p>
+            <blockquote>"관람객의 움직임이 작품의 형태를 바꾼다. 잔상은 보는 자와 보여지는 것 사이의 틈새에 산다."</blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 관람 정보 -->
+  <section id="visit" class="section section-visit">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2>관람 정보</h2>
+      </header>
+      <div class="visit-grid">
+        <dl class="visit-list reveal">
+          <div class="visit-item">
+            <dt>전시 기간</dt>
+            <dd>2026.06.15 ~ 2026.07.20</dd>
+          </div>
+          <div class="visit-item">
+            <dt>장소</dt>
+            <dd>아트센터 나우<br>서울 성동구 성수이로 14길 14, 3F</dd>
+          </div>
+          <div class="visit-item">
+            <dt>관람 시간</dt>
+            <dd>평일 11:00 ~ 20:00<br>주말 10:00 ~ 21:00<br>매주 월요일 휴관</dd>
+          </div>
+          <div class="visit-item">
+            <dt>입장료</dt>
+            <dd>무료 관람</dd>
+          </div>
+          <div class="visit-item">
+            <dt>문의</dt>
+            <dd>afterimage2026@artnow.kr</dd>
+          </div>
+        </dl>
+        <div class="visit-note reveal" style="--reveal-delay:0.2s">
+          <p>전시 관람은 별도 예약 없이 운영 시간 내 자유롭게 입장 가능합니다. 단체 관람(10인 이상)은 사전 예약을 권장합니다.</p>
+          <p>전시 기간 중 매주 토요일 오후 3시, 참여 작가와의 대화(Artist Talk)가 진행됩니다. 참가 신청은 이메일로 접수합니다.</p>
+          <a href="mailto:afterimage2026@artnow.kr" class="visit-cta">아티스트 토크 신청</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-title">잔상(殘像)</span>
+          <span class="footer-subtitle">디지털 아트 전시 · 2026</span>
+        </div>
+        <nav class="footer-nav" aria-label="푸터 메뉴">
+          <a href="#about">소개</a>
+          <a href="#works">작품</a>
+          <a href="#artist-note">작가</a>
+          <a href="#visit">관람</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>주관: 아트센터 나우 · 후원: 서울문화재단</p>
+        <p class="footer-copy">2026 잔상 전시 위원회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공명(共鳴) · Fine Dining Seoul</title>
+  <meta name="description" content="공명(共鳴) 파인다이닝. 고요 속에서 진동하는 열두 개의 코스. 서울 청담.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="주 내비게이션">
+    <a href="#hero" class="nav-logo" aria-label="공명 홈으로">
+      <span class="nav-logo-kr">공명</span><span class="nav-logo-sep">·</span><span class="nav-logo-en">共鳴</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#philosophy">철학</a></li>
+      <li><a href="#courses">코스</a></li>
+      <li><a href="#chef">셰프</a></li>
+      <li><a href="#reservation" class="nav-cta">예약</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-links">
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+
+    <!-- Static AR grid overlay (빈티지 측량도 + AR 좌표계) -->
+    <div class="hero-grid-wrap" aria-hidden="true">
+      <svg class="hero-grid-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"
+           xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <defs>
+          <!-- Primary diagonal grid at 14° -->
+          <pattern id="grid-primary" x="0" y="0" width="108" height="108"
+                   patternUnits="userSpaceOnUse" patternTransform="rotate(14 720 450)">
+            <line x1="0" y1="0" x2="0" y2="108" stroke="#B8963C" stroke-width="0.5" opacity="0.35"/>
+            <line x1="0" y1="0" x2="108" y2="0" stroke="#B8963C" stroke-width="0.5" opacity="0.35"/>
+          </pattern>
+          <!-- Secondary offset grid (distortion — half-cell shift) -->
+          <pattern id="grid-secondary" x="54" y="27" width="108" height="108"
+                   patternUnits="userSpaceOnUse" patternTransform="rotate(14 720 450)">
+            <line x1="0" y1="0" x2="0" y2="108" stroke="#B8963C" stroke-width="0.2" opacity="0.15"/>
+            <line x1="0" y1="0" x2="108" y2="0" stroke="#B8963C" stroke-width="0.2" opacity="0.15"/>
+          </pattern>
+        </defs>
+
+        <!-- Grid fills -->
+        <rect width="1440" height="900" fill="url(#grid-primary)"/>
+        <rect width="1440" height="900" fill="url(#grid-secondary)"/>
+
+        <!-- Main diagonal axis line (organizing spine) -->
+        <line x1="0" y1="620" x2="1440" y2="180" stroke="#B8963C" stroke-width="0.9" opacity="0.55"/>
+        <line x1="0" y1="660" x2="1440" y2="220" stroke="#B8963C" stroke-width="0.3" opacity="0.2"/>
+
+        <!-- AR corner brackets -->
+        <g stroke="#B8963C" stroke-width="1.2" fill="none" opacity="0.6">
+          <path d="M72 64 L72 90 M72 64 L98 64"/>
+          <path d="M1368 64 L1368 90 M1368 64 L1342 64"/>
+          <path d="M72 836 L72 810 M72 836 L98 836"/>
+          <path d="M1368 836 L1368 810 M1368 836 L1342 836"/>
+        </g>
+
+        <!-- Coordinate label — top left -->
+        <text x="80" y="56" fill="#B8963C" font-size="9.5" font-family="Playfair Display, serif"
+              opacity="0.65" letter-spacing="3">N 37°33'14"</text>
+
+        <!-- Coordinate label — bottom right -->
+        <text x="1180" y="860" fill="#B8963C" font-size="9.5" font-family="Playfair Display, serif"
+              opacity="0.65" letter-spacing="3">E 126°58'29"</text>
+
+        <!-- Scale bar -->
+        <g transform="translate(80, 844)" opacity="0.5">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#B8963C" stroke-width="0.8"/>
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="#B8963C" stroke-width="0.8"/>
+          <line x1="60" y1="-4" x2="60" y2="4" stroke="#B8963C" stroke-width="0.8"/>
+          <text x="30" y="-7" fill="#B8963C" font-size="7.5" font-family="Playfair Display, serif"
+                text-anchor="middle" letter-spacing="1">100m</text>
+        </g>
+
+        <!-- AR crosshair PT.01 (near title) -->
+        <g transform="translate(310, 580)" stroke="#B8963C" fill="none" opacity="0.8">
+          <line x1="-14" y1="0" x2="-5" y2="0" stroke-width="0.9"/>
+          <line x1="5"  y1="0" x2="14"  y2="0" stroke-width="0.9"/>
+          <line x1="0" y1="-14" x2="0" y2="-5" stroke-width="0.9"/>
+          <line x1="0" y1="5"  x2="0" y2="14"  stroke-width="0.9"/>
+          <circle cx="0" cy="0" r="3.5" stroke-width="0.7"/>
+        </g>
+        <text x="328" y="584" fill="#B8963C" font-size="7.5" font-family="Playfair Display, serif"
+              opacity="0.6" letter-spacing="1.5">PT.01</text>
+
+        <!-- AR crosshair PT.02 (upper right zone) -->
+        <g transform="translate(1100, 280)" stroke="#B8963C" fill="none" opacity="0.8">
+          <line x1="-14" y1="0" x2="-5" y2="0" stroke-width="0.9"/>
+          <line x1="5"  y1="0" x2="14"  y2="0" stroke-width="0.9"/>
+          <line x1="0" y1="-14" x2="0" y2="-5" stroke-width="0.9"/>
+          <line x1="0" y1="5"  x2="0" y2="14"  stroke-width="0.9"/>
+          <circle cx="0" cy="0" r="3.5" stroke-width="0.7"/>
+        </g>
+        <text x="1118" y="284" fill="#B8963C" font-size="7.5" font-family="Playfair Display, serif"
+              opacity="0.6" letter-spacing="1.5">PT.02</text>
+
+        <!-- Dashed scan line (static AR scan reference) -->
+        <line x1="0" y1="450" x2="1440" y2="450"
+              stroke="#B8963C" stroke-width="0.3" opacity="0.12"
+              stroke-dasharray="6 12"/>
+      </svg>
+    </div>
+
+    <!-- Hero content — diagonal composition: title lower-left, info upper-right -->
+    <div class="hero-content">
+      <div class="hero-eyebrow-row" aria-hidden="true">
+        <span class="hero-eyebrow">Fine Dining · Seoul</span>
+        <span class="hero-eyebrow-coord">Cheongdam · 2019–</span>
+      </div>
+
+      <div class="hero-title-block">
+        <h1 id="hero-heading" class="hero-heading">
+          <span class="hero-kr" lang="ko">공명</span>
+          <span class="hero-hanja">共鳴</span>
+        </h1>
+        <p class="hero-tagline">고요 속에서 진동하는 맛</p>
+      </div>
+
+      <div class="hero-info-block" aria-label="레스토랑 기본 정보">
+        <div class="info-row">
+          <span class="info-label">코스</span>
+          <span class="info-value">12 Courses · Omakase</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">런치</span>
+          <span class="info-value">12:00 PM</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">디너</span>
+          <span class="info-value">7:00 PM</span>
+        </div>
+        <a href="#reservation" class="hero-cta">예약하기</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="scroll-label">Scroll</span>
+      <div class="scroll-track"><div class="scroll-dot"></div></div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="section-philosophy" id="philosophy" aria-labelledby="phil-heading">
+    <div class="phil-inner">
+      <div class="phil-label reveal" aria-hidden="true">
+        <span class="section-num">I</span>· 철학
+      </div>
+
+      <h2 id="phil-heading" class="phil-heading">
+        <span class="text-row reveal">접시 위의 진동,</span>
+        <span class="text-row text-row--indent reveal" aria-hidden="true">···</span>
+        <span class="text-row reveal">공간 속의 공명.</span>
+      </h2>
+
+      <div class="phil-body reveal">
+        <p>
+          공명(共鳴)은 단순한 식사가 아닙니다. 셰프의 손에서 시작된 진동이 식재료를, 공간을, 그리고 당신을 관통합니다. 우리는 계절의 가장 조용한 목소리를 듣고, 그것을 열두 개의 언어로 옮깁니다.
+        </p>
+        <p>
+          정밀한 기법과 원초적 감각 사이의 긴장. 그 고요한 떨림이 공명의 본질입니다.
+        </p>
+      </div>
+
+      <div class="phil-values">
+        <div class="value-item reveal">
+          <span class="value-num" aria-hidden="true">01</span>
+          <div class="value-body">
+            <h3 class="value-title">제철 식재료의 정직함</h3>
+            <p class="value-desc">그 계절에만 울리는 주파수. 온실의 침묵을 거부합니다.</p>
+          </div>
+        </div>
+        <div class="value-item reveal">
+          <span class="value-num" aria-hidden="true">02</span>
+          <div class="value-body">
+            <h3 class="value-title">전통과 현재의 공명</h3>
+            <p class="value-desc">장독대의 발효와 현대 기법이 같은 주파수에서 만납니다.</p>
+          </div>
+        </div>
+        <div class="value-item reveal">
+          <span class="value-num" aria-hidden="true">03</span>
+          <div class="value-body">
+            <h3 class="value-title">침묵으로 말하는 미각</h3>
+            <p class="value-desc">설명하지 않습니다. 진동이 먼저 도달합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative diagonal band -->
+    <div class="phil-band" aria-hidden="true">
+      <svg viewBox="0 0 400 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="40" x2="400" y2="40" stroke="#B8963C" stroke-width="0.5" opacity="0.4"
+              stroke-dasharray="3 9"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="section-courses" id="courses" aria-labelledby="courses-heading">
+    <header class="courses-header">
+      <div class="section-label reveal" aria-hidden="true">
+        <span class="section-num">II</span>· 시그니처 코스
+      </div>
+      <h2 id="courses-heading" class="courses-heading reveal">Signature Course</h2>
+      <p class="courses-subhead reveal">열두 개의 좌표, 하나의 원정</p>
+    </header>
+
+    <div class="courses-grid">
+
+      <article class="course-card reveal" aria-label="코스: 서곡">
+        <div class="card-coord" aria-hidden="true">PT.01</div>
+        <div class="card-image-wrap">
+          <img src="https://loremflickr.com/640/420/amuse-bouche,fine-dining" alt="서곡: 아뮤즈 부슈 세 가지 한 입 요리" width="640" height="420" loading="lazy">
+          <div class="card-grid-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">서곡</h3>
+          <p class="card-subtitle">Amuse-Bouche · 3 Pieces</p>
+          <p class="card-desc">오늘의 원정을 예고하는 세 가지 한 입. 계절의 첫 진동.</p>
+        </div>
+      </article>
+
+      <article class="course-card reveal" aria-label="코스: 바다의 기억">
+        <div class="card-coord" aria-hidden="true">PT.04</div>
+        <div class="card-image-wrap">
+          <img src="https://loremflickr.com/640/420/seafood,sashimi,plating" alt="바다의 기억: 동해 생선 요리" width="640" height="420" loading="lazy">
+          <div class="card-grid-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">바다의 기억</h3>
+          <p class="card-subtitle">Fish Course · 동해</p>
+          <p class="card-desc">제철 생선의 발효와 신선함. 긴장과 화해의 화음.</p>
+        </div>
+      </article>
+
+      <article class="course-card reveal" aria-label="코스: 땅의 온기">
+        <div class="card-coord" aria-hidden="true">PT.08</div>
+        <div class="card-image-wrap">
+          <img src="https://loremflickr.com/640/420/wagyu,beef,gourmet" alt="땅의 온기: 한우 요리" width="640" height="420" loading="lazy">
+          <div class="card-grid-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">땅의 온기</h3>
+          <p class="card-subtitle">Meat Course · 한우</p>
+          <p class="card-desc">된장과 트러플의 조용한 대화. 한우의 깊은 진동.</p>
+        </div>
+      </article>
+
+      <article class="course-card reveal" aria-label="코스: 침묵의 끝">
+        <div class="card-coord" aria-hidden="true">PT.12</div>
+        <div class="card-image-wrap">
+          <img src="https://loremflickr.com/640/420/dessert,patisserie,chocolate" alt="침묵의 끝: 디저트" width="640" height="420" loading="lazy">
+          <div class="card-grid-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">침묵의 끝</h3>
+          <p class="card-subtitle">Dessert · 흑임자·유자</p>
+          <p class="card-desc">달콤함이 아닌 여운. 잔향이 당신 안에서 공명합니다.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="courses-footer reveal">
+      <div class="courses-price-block">
+        <span class="price-label">코스 요금</span>
+        <span class="price-value">₩380,000&#8211;₩480,000</span>
+      </div>
+      <p class="courses-note">메뉴는 제철에 따라 변경됩니다. 알레르기·식이 제한은 예약 시 알려주세요.</p>
+    </div>
+  </section>
+
+  <!-- CHEF -->
+  <section class="section-chef" id="chef" aria-labelledby="chef-heading">
+    <div class="chef-inner">
+
+      <div class="chef-image-col reveal">
+        <figure class="chef-figure">
+          <img src="https://loremflickr.com/560/720/chef,portrait,kitchen,professional" alt="셰프 이준형, 공명의 수석 셰프 겸 창업자" width="560" height="720" loading="lazy">
+          <div class="chef-coord-badge" aria-hidden="true">
+            <span class="badge-label">Chef</span>
+            <span class="badge-sep">·</span>
+            <span class="badge-pt">PT.03</span>
+          </div>
+        </figure>
+      </div>
+
+      <div class="chef-text-col reveal">
+        <div class="section-label" aria-hidden="true">
+          <span class="section-num">III</span>· 셰프
+        </div>
+        <h2 id="chef-heading" class="chef-heading">이준형</h2>
+        <p class="chef-title-en">Head Chef &amp; Founder</p>
+
+        <blockquote class="chef-quote">
+          <p>"요리는 진동입니다. 불이 재료를 바꾸고, 재료가 공간을 바꾸고, 공간이 당신을 바꿉니다. 그 파동의 끝에서 우리는 서로 공명합니다."</p>
+        </blockquote>
+
+        <div class="chef-bio">
+          <p>파리 페랑디에서 수학한 후 도쿄, 코펜하겐의 미슐랭 레스토랑에서 10년을 보냈습니다. 2019년 귀국, 한국의 발효 문화와 프렌치 테크닉의 교차점에서 공명의 언어를 발견했습니다.</p>
+        </div>
+
+        <ul class="chef-awards" role="list">
+          <li class="award-item">
+            <span class="award-year">2023</span>
+            <span class="award-name">미슐랭 가이드 서울 · 1 Star</span>
+          </li>
+          <li class="award-item">
+            <span class="award-year">2022</span>
+            <span class="award-name">Asia's 50 Best Restaurants · #28</span>
+          </li>
+          <li class="award-item">
+            <span class="award-year">2021</span>
+            <span class="award-name">한국 요리사 협회 · 올해의 셰프</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section class="section-reservation" id="reservation" aria-labelledby="res-heading">
+    <div class="res-inner">
+      <div class="section-label reveal" aria-hidden="true">
+        <span class="section-num">IV</span>· 예약
+      </div>
+      <h2 id="res-heading" class="res-heading reveal">
+        당신의 좌표를<br>설정하세요.
+      </h2>
+      <p class="res-subhead reveal">완전 착석제로 운영합니다. 최소 3일 전 예약을 권장합니다.</p>
+
+      <form class="res-form reveal" action="#" method="post" novalidate aria-label="예약 신청 양식">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="res-name">성함</label>
+            <input type="text" id="res-name" name="name" placeholder="홍길동"
+                   required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="res-phone">연락처</label>
+            <input type="tel" id="res-phone" name="phone" placeholder="010-0000-0000"
+                   required autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-row form-row--three">
+          <div class="form-group">
+            <label for="res-date">날짜</label>
+            <input type="date" id="res-date" name="date" required>
+          </div>
+          <div class="form-group">
+            <label for="res-session">세션</label>
+            <select id="res-session" name="session" required>
+              <option value="">선택</option>
+              <option value="lunch">런치 12:00</option>
+              <option value="dinner">디너 19:00</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="res-guests">인원</label>
+            <select id="res-guests" name="guests" required>
+              <option value="">인원</option>
+              <option value="1">1명</option>
+              <option value="2">2명</option>
+              <option value="3">3명</option>
+              <option value="4">4명</option>
+              <option value="5plus">5+ (문의)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-group--full">
+          <label for="res-note">요청사항 <span class="label-opt">(선택)</span></label>
+          <textarea id="res-note" name="note" rows="3"
+                    placeholder="알레르기, 기념일, 특별 요청 사항을 알려주세요."></textarea>
+        </div>
+        <button type="submit" class="res-submit">예약 신청</button>
+      </form>
+
+      <div class="res-contact reveal">
+        <div class="contact-item">
+          <span class="contact-label">전화</span>
+          <a href="tel:+82-2-000-0000" class="contact-value">02-000-0000</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">이메일</span>
+          <a href="mailto:reservation@gongmyung.kr" class="contact-value">reservation@gongmyung.kr</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">주소</span>
+          <span class="contact-value">서울특별시 강남구 청담동 000-0</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">영업일</span>
+          <span class="contact-value">화–일 · 월요일 휴무</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-kr">공명</span>
+        <span class="footer-sep">·</span>
+        <span class="footer-en">共鳴</span>
+        <p class="footer-tagline">고요 속에서 진동하는 맛</p>
+      </div>
+      <nav class="footer-nav" aria-label="푸터 내비게이션">
+        <a href="#philosophy">철학</a>
+        <a href="#courses">코스</a>
+        <a href="#chef">셰프</a>
+        <a href="#reservation">예약</a>
+      </nav>
+      <div class="footer-meta">
+        <p class="footer-copy">© 2026 공명(共鳴). All rights reserved.</p>
+        <p class="footer-coord" aria-hidden="true">N 37°33' / E 126°58'</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여백 &ndash; 독립서점</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a href="#" class="header-logo" aria-label="여백 서점 홈">여백</a>
+  <nav class="site-nav" aria-label="주요 메뉴">
+    <a href="#about">소개</a>
+    <a href="#curation">이달의 책</a>
+    <a href="#space">공간</a>
+    <a href="#visit">방문</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ─────────────────── HERO ─────────────────── -->
+  <section class="hero" id="hero" aria-labelledby="heroHeading">
+
+    <!-- 3D perspective stage (decoration, aria-hidden) -->
+    <div class="hero-stage" aria-hidden="true">
+      <div class="hero-scene" id="heroScene">
+
+        <div class="map-point mp--far"  style="--px:5%;  --py:9%;  --pz:-160px">
+          <span class="mp-label">철학</span>
+          <span class="mp-coord">37.8°N · 126.9°E</span>
+        </div>
+        <div class="map-point mp--far"  style="--px:75%; --py:13%; --pz:-130px">
+          <span class="mp-label">과학</span>
+          <span class="mp-coord">35.9°N · 128.6°E</span>
+        </div>
+        <div class="map-point mp--mid"  style="--px:3%;  --py:43%; --pz:-60px">
+          <span class="mp-label">문학</span>
+          <span class="mp-coord">36.3°N · 127.4°E</span>
+        </div>
+        <div class="map-point mp--mid"  style="--px:42%; --py:6%;  --pz:-25px">
+          <span class="mp-label">시집</span>
+          <span class="mp-coord">36.0°N · 129.3°E</span>
+        </div>
+        <div class="map-point mp--mid"  style="--px:80%; --py:40%; --pz:-45px">
+          <span class="mp-label">에세이</span>
+          <span class="mp-coord">37.5°N · 127.1°E</span>
+        </div>
+        <div class="map-point mp--near" style="--px:7%;  --py:71%; --pz:50px">
+          <span class="mp-label">여행</span>
+          <span class="mp-coord">38.1°N · 128.5°E</span>
+        </div>
+        <div class="map-point mp--near" style="--px:71%; --py:67%; --pz:70px">
+          <span class="mp-label">그림책</span>
+          <span class="mp-coord">35.5°N · 126.8°E</span>
+        </div>
+        <div class="map-point mp--far"  style="--px:86%; --py:77%; --pz:-95px">
+          <span class="mp-label">인문</span>
+          <span class="mp-coord">37.0°N · 128.0°E</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Flat overlays — anchored to 2D viewport, always visible -->
+    <div class="hero-brand">
+      <h1 id="heroHeading">여백</h1>
+      <p class="hero-brand-sub"><span class="mono">YEOBEAK</span>&nbsp;&ndash; 독립서점</p>
+    </div>
+
+    <div class="hero-tagline" aria-hidden="true">
+      <p>읽는 사람의<br>내면 지형을<br>함께 측정합니다</p>
+    </div>
+
+    <p class="hero-desc-visible">독자의 내면 지형을 함께 측정하는 서점입니다.</p>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="mono">↓ scroll</span>
+    </div>
+
+  </section>
+
+  <!-- ─────────────────── ABOUT ─────────────────── -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-label"><span class="mono">01 &ndash; 소개</span></div>
+      <div class="about-grid">
+
+        <div class="about-text reveal">
+          <h2 class="section-heading">책 사이의<br>고요한 좌표</h2>
+          <p>여백은 서울 연남동의 골목 안에 자리한 독립서점입니다. 2019년 문을 열어 다섯 해를 넘어오는 동안, 우리는 단 하나의 질문을 붙들어 왔습니다: <em>어떤 책이 이 사람의 지금에 필요한가.</em></p>
+          <p>큐레이터 한 명이 직접 읽고 고른 책들만 진열합니다. 베스트셀러 목록이 아니라 독자 개인의 좌표에서 출발하는 서가입니다.</p>
+        </div>
+
+        <div class="about-stats reveal">
+          <div class="stat">
+            <span class="stat-num mono">2,400<sup>+</sup></span>
+            <span class="stat-desc">보유 도서</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num mono">5</span>
+            <span class="stat-desc">운영 연수</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num mono">12</span>
+            <span class="stat-desc">월간 큐레이션 테마</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────── CURATION ─────────────────── -->
+  <section class="section curation" id="curation">
+    <div class="container">
+      <div class="section-label"><span class="mono">02 &ndash; 이달의 책</span></div>
+      <h2 class="section-heading reveal">6월의 지형: <em>경계에서 읽다</em></h2>
+      <p class="section-intro reveal">이 달의 테마는 '경계'. 안과 밖, 지금과 이전, 알고 있음과 모름 사이의 선을 탐색한 네 권입니다.</p>
+
+      <div class="books-grid">
+
+        <article class="book-card reveal">
+          <div class="book-cover">
+            <img src="https://picsum.photos/seed/yeopbaek-lit/300/420"
+                 alt="경계의 노래 &ndash; 시집 표지" width="300" height="420" loading="lazy">
+            <span class="book-tag mono">시집</span>
+          </div>
+          <div class="book-info">
+            <h3>경계의 노래</h3>
+            <p class="book-author">신유경 지음</p>
+            <p class="book-desc">선 위에 서있는 언어들. 어디에도 속하지 않는 순간의 아름다움을 포착한 시집.</p>
+            <p class="book-price mono">14,000원</p>
+          </div>
+        </article>
+
+        <article class="book-card reveal">
+          <div class="book-cover">
+            <img src="https://picsum.photos/seed/yeopbaek-env/300/420"
+                 alt="빙하가 녹기 전에 &ndash; 환경 논픽션 표지" width="300" height="420" loading="lazy">
+            <span class="book-tag mono">논픽션</span>
+          </div>
+          <div class="book-info">
+            <h3>빙하가 녹기 전에</h3>
+            <p class="book-author">에드 쿠네 지음&nbsp;· 오숙은 옮김</p>
+            <p class="book-desc">과학자가 현장에서 기록한 기후 지형의 변화. 데이터가 아닌 감각으로 읽는 환경 보고서.</p>
+            <p class="book-price mono">17,800원</p>
+          </div>
+        </article>
+
+        <article class="book-card reveal">
+          <div class="book-cover">
+            <img src="https://picsum.photos/seed/yeopbaek-travel/300/420"
+                 alt="지도 밖의 길 &ndash; 여행 에세이 표지" width="300" height="420" loading="lazy">
+            <span class="book-tag mono">에세이</span>
+          </div>
+          <div class="book-info">
+            <h3>지도 밖의 길</h3>
+            <p class="book-author">박지형 지음</p>
+            <p class="book-desc">표시되지 않은 경로로만 여행한 기록. 목적지 없이 걸으면 어떤 지형이 드러나는가.</p>
+            <p class="book-price mono">15,000원</p>
+          </div>
+        </article>
+
+        <article class="book-card reveal">
+          <div class="book-cover">
+            <img src="https://picsum.photos/seed/yeopbaek-mind/300/420"
+                 alt="어떤 마음의 지형 &ndash; 철학 에세이 표지" width="300" height="420" loading="lazy">
+            <span class="book-tag mono">철학</span>
+          </div>
+          <div class="book-info">
+            <h3>어떤 마음의 지형</h3>
+            <p class="book-author">가와이 하야오 지음&nbsp;· 조아라 옮김</p>
+            <p class="book-desc">심리학자가 그리는 인간 내면의 지도. 읽을수록 자기 자신의 윤곽이 선명해진다.</p>
+            <p class="book-price mono">16,500원</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────── SPACE ─────────────────── -->
+  <section class="section space-section" id="space">
+    <div class="container">
+      <div class="section-label"><span class="mono">03 &ndash; 공간</span></div>
+      <div class="space-grid">
+
+        <div class="space-image reveal">
+          <img src="https://loremflickr.com/900/600/bookstore,interior,minimal"
+               alt="여백 서점 내부 &ndash; 나무 서가와 자연광이 드는 공간" width="900" height="600" loading="lazy">
+        </div>
+
+        <div class="space-text reveal">
+          <h2 class="section-heading">책을 고르는<br>시간을 위한<br>설계</h2>
+          <p>28평 남짓한 공간에 서가 여섯 개. 창가 독서석 네 자리. 소음이 없고, 직원이 먼저 말을 건네지 않는 서점입니다.</p>
+          <p>원하실 때 도움을 청하시면, 독자의 취향 좌표에서 출발해 함께 책을 찾아드립니다.</p>
+          <ul class="space-features">
+            <li><span class="mono feat-label">서가</span>장르별&nbsp;· 국가별 혼합 배치</li>
+            <li><span class="mono feat-label">좌석</span>창가 독서석 4석, 무료</li>
+            <li><span class="mono feat-label">음료</span>인근 카페와 제휴 (음료 반입 가능)</li>
+            <li><span class="mono feat-label">반려동물</span>소형견 동반 입장 가능</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────── VISIT / FOOTER ─────────────────── -->
+  <footer class="visit-footer" id="visit">
+    <div class="container">
+      <div class="section-label"><span class="mono">04 &ndash; 방문 정보</span></div>
+      <div class="visit-grid">
+
+        <div class="visit-info reveal">
+          <h2 class="section-heading visit-heading">찾아오시는 길</h2>
+          <dl class="info-list">
+            <div class="info-row">
+              <dt class="mono">주소</dt>
+              <dd>서울특별시 마포구 연남동 239-14<br>
+                  <span class="mono addr-sub">Seoul, Mapo-gu, Yeonnam-dong 239-14</span></dd>
+            </div>
+            <div class="info-row">
+              <dt class="mono">운영 시간</dt>
+              <dd>화&ndash;금&nbsp;&nbsp;13:00&ndash;21:00<br>
+                  토&nbsp;·&nbsp;일&nbsp;&nbsp;12:00&ndash;20:00<br>
+                  <span class="mono closed">월요일 정기 휴무</span></dd>
+            </div>
+            <div class="info-row">
+              <dt class="mono">연락처</dt>
+              <dd>
+                <a href="mailto:hello@yeobeak.kr">hello@yeobeak.kr</a><br>
+                <a href="tel:+8220000000" class="mono">02-0000-0000</a>
+              </dd>
+            </div>
+            <div class="info-row">
+              <dt class="mono">교통</dt>
+              <dd>경의중앙선 연남역 2번 출구 도보 5분</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="visit-map reveal" aria-label="서점 위치 지도 영역">
+          <div class="map-placeholder">
+            <div class="map-grid-overlay" aria-hidden="true"></div>
+            <div class="map-pin" aria-hidden="true">
+              <span class="mono map-pin-label">여백&nbsp;· 연남동</span>
+              <span class="mono map-coords">37.5636°N&nbsp;&nbsp;126.9233°E</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy mono">&copy; 2026 여백 독립서점</p>
+        <p class="footer-philosophy">책과 독자 사이의 여백을 지킵니다.</p>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script defer src="script.js"></script>
+</body>
+</html>

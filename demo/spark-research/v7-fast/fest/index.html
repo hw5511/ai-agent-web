@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PULSE 2026 / 일렉트로닉 뮤직 페스티벌</title>
+  <meta name="description" content="PULSE 2026 일렉트로닉 뮤직 페스티벌. 2026년 6월 20-21일, 서울 올림픽 공원.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav" aria-label="메인 내비게이션">
+    <a href="#hero" class="nav-logo">PULSE<span class="nav-logo-yr">2026</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#lineup">라인업</a></li>
+      <li><a href="#timetable">타임테이블</a></li>
+      <li><a href="#tickets">티켓</a></li>
+      <li><a href="#venue">장소</a></li>
+    </ul>
+    <a href="#tickets" class="nav-cta">티켓 구매</a>
+    <button class="nav-hamburger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-mobile">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile" id="nav-mobile" hidden>
+    <ul role="list">
+      <li><a href="#lineup">라인업</a></li>
+      <li><a href="#timetable">타임테이블</a></li>
+      <li><a href="#tickets">티켓</a></li>
+      <li><a href="#venue">장소</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero" class="hero" aria-label="히어로">
+    <div class="hero-diagonal-stripe" aria-hidden="true"></div>
+    <div class="hero-inner">
+
+      <div class="hero-left">
+        <p class="hero-eyebrow" aria-hidden="true">ELECTRONIC MUSIC FESTIVAL</p>
+        <h1 class="hero-title">
+          <span class="hero-title-pulse">PULSE</span>
+          <span class="hero-title-year">2026</span>
+        </h1>
+        <div class="hero-meta">
+          <time class="hero-date" datetime="2026-06-20/2026-06-21">2026.06.20 &mdash; 21</time>
+          <p class="hero-loc">서울 올림픽 공원 88잔디마당</p>
+        </div>
+        <a href="#tickets" class="hero-cta">
+          <span>티켓 예매하기</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M3.5 9h11M9 3.5l5.5 5.5L9 14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <div class="instrument-cluster">
+
+          <figure class="gauge">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <path class="g-track" d="M 13.6 71 A 42 42 0 1 1 86.4 71" fill="none" stroke="#1E1E1E" stroke-width="5" stroke-linecap="butt"/>
+              <path class="g-active g-yellow" d="M 13.6 71 A 42 42 0 0 1 74.7 16" fill="none" stroke="#FFE600" stroke-width="5" stroke-linecap="butt"/>
+              <circle cx="50" cy="50" r="3.5" fill="#FFE600"/>
+            </svg>
+            <div class="needle-wrap" id="needle-bpm"><div class="needle needle-y"></div></div>
+            <figcaption class="gauge-lbl">BPM</figcaption>
+            <div class="gauge-val">138</div>
+          </figure>
+
+          <figure class="gauge">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <path class="g-track" d="M 13.6 71 A 42 42 0 1 1 86.4 71" fill="none" stroke="#1E1E1E" stroke-width="5" stroke-linecap="butt"/>
+              <path class="g-active g-red" d="M 13.6 71 A 42 42 0 0 1 32.9 11.6" fill="none" stroke="#F50023" stroke-width="5" stroke-linecap="butt"/>
+              <circle cx="50" cy="50" r="3.5" fill="#F50023"/>
+            </svg>
+            <div class="needle-wrap" id="needle-freq"><div class="needle needle-r"></div></div>
+            <figcaption class="gauge-lbl">FREQ</figcaption>
+            <div class="gauge-val">440Hz</div>
+          </figure>
+
+          <figure class="gauge">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <path class="g-track" d="M 13.6 71 A 42 42 0 1 1 86.4 71" fill="none" stroke="#1E1E1E" stroke-width="5" stroke-linecap="butt"/>
+              <path class="g-active g-yellow" d="M 13.6 71 A 42 42 0 1 1 91.8 45.6" fill="none" stroke="#FFE600" stroke-width="5" stroke-linecap="butt"/>
+              <circle cx="50" cy="50" r="3.5" fill="#FFE600"/>
+            </svg>
+            <div class="needle-wrap" id="needle-crowd"><div class="needle needle-y"></div></div>
+            <figcaption class="gauge-lbl">CROWD</figcaption>
+            <div class="gauge-val">MAX</div>
+          </figure>
+
+          <figure class="gauge">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <path class="g-track" d="M 13.6 71 A 42 42 0 1 1 86.4 71" fill="none" stroke="#1E1E1E" stroke-width="5" stroke-linecap="butt"/>
+              <path class="g-active g-red" d="M 13.6 71 A 42 42 0 0 1 58.7 8.9" fill="none" stroke="#F50023" stroke-width="5" stroke-linecap="butt"/>
+              <circle cx="50" cy="50" r="3.5" fill="#F50023"/>
+            </svg>
+            <div class="needle-wrap" id="needle-level"><div class="needle needle-r"></div></div>
+            <figcaption class="gauge-lbl">LEVEL</figcaption>
+            <div class="gauge-val">+12dB</div>
+          </figure>
+
+        </div>
+        <div class="env-status">
+          <span class="env-dot"></span>
+          <span class="env-label">ENV MAPPING ACTIVE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- LINEUP -->
+  <section id="lineup" class="section lineup-section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title">LINEUP</h2>
+        <span class="section-meta">08 ARTISTS · 3 STAGES</span>
+      </header>
+      <div class="film-strip">
+        <div class="film-holes film-holes-top" aria-hidden="true"></div>
+        <div class="lineup-grid">
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/underworld2026/400/400" alt="UNDERWORLD 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">UNDERWORLD</h3>
+              <span class="artist-origin">UK</span>
+            </div>
+          </article>
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/aphextwin2026/400/400" alt="APHEX TWIN 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">APHEX TWIN</h3>
+              <span class="artist-origin">UK</span>
+            </div>
+          </article>
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/bicep2026/400/400" alt="BICEP 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">BICEP</h3>
+              <span class="artist-origin">UK</span>
+            </div>
+          </article>
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/peggygou2026/400/400" alt="PEGGY GOU 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">PEGGY GOU</h3>
+              <span class="artist-origin">KR/DE</span>
+            </div>
+          </article>
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/fourtet2026/400/400" alt="FOUR TET 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">FOUR TET</h3>
+              <span class="artist-origin">UK</span>
+            </div>
+          </article>
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/sikk2026/400/400" alt="식케이 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">식케이</h3>
+              <span class="artist-origin">KR</span>
+            </div>
+          </article>
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/jamiexx2026/400/400" alt="JAMIE XX 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">JAMIE XX</h3>
+              <span class="artist-origin">UK</span>
+            </div>
+          </article>
+          <article class="artist-card reveal">
+            <div class="artist-img-wrap">
+              <img src="https://picsum.photos/seed/moderat2026/400/400" alt="MODERAT 공연 사진" width="400" height="400" loading="lazy">
+            </div>
+            <div class="artist-info">
+              <h3 class="artist-name">MODERAT</h3>
+              <span class="artist-origin">DE</span>
+            </div>
+          </article>
+        </div>
+        <div class="film-holes film-holes-bottom" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMETABLE -->
+  <section id="timetable" class="section timetable-section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title">TIMETABLE</h2>
+      </header>
+      <div class="tt-tabs" role="tablist" aria-label="공연 날짜 선택">
+        <button class="tt-tab active" role="tab" aria-selected="true" aria-controls="day1-panel" id="tab-day1">
+          DAY 1 <span class="tt-tab-date">06.20 SAT</span>
+        </button>
+        <button class="tt-tab" role="tab" aria-selected="false" aria-controls="day2-panel" id="tab-day2">
+          DAY 2 <span class="tt-tab-date">06.21 SUN</span>
+        </button>
+      </div>
+
+      <div id="day1-panel" role="tabpanel" aria-labelledby="tab-day1" class="tt-panel">
+        <div class="tt-grid">
+          <div class="tt-row tt-head-row">
+            <div class="tt-time-cell"></div>
+            <div class="tt-stage-head">STAGE A<br><small>MAIN ARENA</small></div>
+            <div class="tt-stage-head">STAGE B<br><small>WAREHOUSE</small></div>
+            <div class="tt-stage-head">STAGE C<br><small>CLUB</small></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">17:00</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-b">식케이</div></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">18:00</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-c">FOUR TET</div></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">19:00</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-b">MODERAT</div></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">20:00</div>
+            <div class="tt-cell"><div class="tt-act act-a">BICEP</div></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">21:30</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-c">JAMIE XX</div></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">22:00</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-b">PEGGY GOU</div></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">23:30</div>
+            <div class="tt-cell"><div class="tt-act act-a act-headliner">APHEX TWIN</div></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="day2-panel" role="tabpanel" aria-labelledby="tab-day2" class="tt-panel" hidden>
+        <div class="tt-grid">
+          <div class="tt-row tt-head-row">
+            <div class="tt-time-cell"></div>
+            <div class="tt-stage-head">STAGE A<br><small>MAIN ARENA</small></div>
+            <div class="tt-stage-head">STAGE B<br><small>WAREHOUSE</small></div>
+            <div class="tt-stage-head">STAGE C<br><small>CLUB</small></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">17:00</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-c">MODERAT</div></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">18:30</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-b">JAMIE XX</div></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">19:00</div>
+            <div class="tt-cell"><div class="tt-act act-a">식케이</div></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">20:30</div>
+            <div class="tt-cell"><div class="tt-act act-a">FOUR TET</div></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">21:00</div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"><div class="tt-act act-c">BICEP</div></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">22:30</div>
+            <div class="tt-cell"><div class="tt-act act-a">PEGGY GOU</div></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+          </div>
+          <div class="tt-row">
+            <div class="tt-time-cell">23:30</div>
+            <div class="tt-cell"><div class="tt-act act-a act-headliner">UNDERWORLD</div></div>
+            <div class="tt-cell"></div>
+            <div class="tt-cell"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKETS -->
+  <section id="tickets" class="section tickets-section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title">TICKETS</h2>
+        <span class="section-meta">2026.06.20 &mdash; 21 &middot; 2일 이용권</span>
+      </header>
+      <div class="tickets-grid">
+
+        <div class="ticket-card reveal">
+          <div class="ticket-body">
+            <div class="ticket-main">
+              <div class="ticket-type">GENERAL</div>
+              <div class="ticket-price">₩99,000</div>
+              <ul class="ticket-perks" role="list">
+                <li>2일 입장권</li>
+                <li>일반 관람 구역</li>
+                <li>전 스테이지 이용</li>
+              </ul>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-stub">
+              <div class="ticket-code">PULSE26-GEN</div>
+              <a href="#" class="ticket-btn">예매하기</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card ticket-vip reveal">
+          <div class="ticket-badge-label">BEST VALUE</div>
+          <div class="ticket-body">
+            <div class="ticket-main">
+              <div class="ticket-type">VIP</div>
+              <div class="ticket-price">₩199,000</div>
+              <ul class="ticket-perks" role="list">
+                <li>2일 입장권</li>
+                <li>VIP 전용 구역</li>
+                <li>공식 굿즈 세트</li>
+                <li>VIP 라운지 이용</li>
+              </ul>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-stub">
+              <div class="ticket-code">PULSE26-VIP</div>
+              <a href="#" class="ticket-btn">예매하기</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card reveal">
+          <div class="ticket-body">
+            <div class="ticket-main">
+              <div class="ticket-type">BACKSTAGE</div>
+              <div class="ticket-price">₩399,000</div>
+              <ul class="ticket-perks" role="list">
+                <li>2일 입장권</li>
+                <li>백스테이지 출입</li>
+                <li>아티스트 미팅</li>
+                <li>리미티드 굿즈</li>
+                <li>전용 케이터링</li>
+              </ul>
+            </div>
+            <div class="ticket-perf" aria-hidden="true"></div>
+            <div class="ticket-stub">
+              <div class="ticket-code">PULSE26-BST</div>
+              <a href="#" class="ticket-btn">예매하기</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <p class="tickets-note">* 수량 한정 판매. 구매 후 환불 불가. 신분증 지참 필수.</p>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section id="venue" class="section venue-section">
+    <div class="container">
+      <div class="venue-layout">
+        <div class="venue-info reveal">
+          <h2 class="section-title">VENUE</h2>
+          <p class="venue-name">서울 올림픽 공원</p>
+          <address class="venue-addr">
+            서울특별시 송파구 올림픽로 424<br>
+            88잔디마당 및 주변 야외 공간
+          </address>
+          <dl class="venue-dl">
+            <div class="venue-dl-row">
+              <dt>교통</dt>
+              <dd>5호선 올림픽공원역 3번 출구 (도보 3분)</dd>
+            </div>
+            <div class="venue-dl-row">
+              <dt>주차</dt>
+              <dd>현장 주차 불가. 대중교통 이용 권장.</dd>
+            </div>
+            <div class="venue-dl-row">
+              <dt>연령</dt>
+              <dd>만 19세 이상 입장 가능</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="venue-img reveal">
+          <img src="https://loremflickr.com/640/420/stadium,outdoor,concert" alt="서울 올림픽 공원 야외 공연장 전경" width="640" height="420" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">PULSE 2026</div>
+      <nav class="footer-nav" aria-label="푸터 내비게이션">
+        <a href="#">이용약관</a>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">문의하기</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 PULSE FESTIVAL. All rights reserved. 주최: PULSE KOREA</p>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
