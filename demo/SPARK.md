@@ -49,7 +49,7 @@ print(f'AESTHETIC_PINCH: [{p[\"title\"]}] {p[\"body\"]}')
 
 **One thousand no's for every yes.** 모든 요소는 존재 이유를 증명해야 한다.
 
-항상 단일 index.html 파일로 완성. CSS/JS 모두 인라인. 1,500라인 이내.
+산출물은 **`index.html` + `styles.css` + `script.js` 세 파일로 분리**해 작성한다. 인라인 `<style>`/`<script>` 금지, `<link rel="stylesheet">`와 `<script defer>`로 연결한다. **라인 수 제한은 없다** ... 필요한 만큼 정교하게 만든다. (아주 작은 단일 컴포넌트면 단일 index.html도 허용하되, 기본은 분리다.)
 
 ---
 
@@ -200,6 +200,10 @@ SCROLL_INNOVATION: [수직스크롤 선택 시 필수 — Hero→Section→Foote
 
 ```
 <audit>
+MY_DEFAULT_LAYOUT: [아무 제약 없이 내가 갈 가장 뻔한 레이아웃 ... 이걸 피한다]
+MY_DEFAULT_VISUAL: [반사적으로 갈 효과(sin 파동선/파티클/별가루 등) ... 피한다]
+MY_DEFAULT_CONCEPT: [도메인 1차 연상(예: 천문대→별자리) ... 피한다]
+  - 최종 결과는 위 3개와 분명히 달라야 한다. 겹치면 재설계.
 NEEDED_CONTENT: [방문자에게 실제로 필요한 콘텐츠 목록]
   - 이 목록에 없는 섹션은 만들지 않는다.
   - 각 섹션: "왜 있어야 하는가?" 1문장으로 답할 수 없으면 제거.
@@ -241,7 +245,12 @@ TECH_SURPRISE: [SURPRISE_ELEMENT 구현 방법 구체화]
 
 ### PHASE 2: 60fps Hard-Constraint Design
 
-**협상 불가 규칙:**
+**성능의 단일 법칙 (THE LAW) ... 캡 목록보다 이 원리가 먼저다:**
+- **매 프레임 변하는 값은 `transform`·`opacity`만이어야 한다.** CSS transition/animation·rAF·scroll·mousemove가 바꾸는 모든 것 ... 이 둘 외 속성(top/left/width/height/margin/filter/box-shadow/clip-path/background)을 매 프레임 바꾸면 Layout/Paint 재실행 = 렉. (composite 속성은 transform·opacity 둘뿐.)
+- **THE TRAP ... transform만 써도 안전하지 않다:** `filter:blur`·`backdrop-filter`·큰 `box-shadow`·`mix-blend-mode`가 걸린 레이어는 transform으로 옮겨도 매 프레임 텍스처를 다시 그린다(re-paint). 큰 흐림·그림자·블렌드 레이어는 **정적**으로 두고, 커서/스크롤 추종에 거대 blur 덩어리를 붙여 움직이지 마라. 부드러운 색감은 정적 `radial-gradient`로.
+- 자문 한 줄: **"이 값이 매 프레임 바뀌나? 그렇다면 transform/opacity뿐이고, 그 레이어에 blur/shadow/filter/blend가 없나?"** ... 아니면 고쳐라.
+
+**협상 불가 규칙 (위 법칙의 파생):**
 
 #### 레이아웃 & 모션
 - `top/left/width/height/margin` 애니메이션 절대 금지 → `transform/opacity`만
@@ -280,7 +289,12 @@ gsap.ticker.lagSmoothing(0);
   - 예: `const spark_lenis = new Lenis(...)` (단순 `lenis` 금지)
 - 동일 이름 변수 재선언 절대 금지. 스크롤, 클릭, 호버 핸들러 내에서 같은 이름 `const t = ...` 패턴 금지.
 - `element.scrollIntoView()` 절대 금지 → `lenis.scrollTo(element)` 사용
-- 인라인 JS `<script>` 태그가 여러 개일 경우 모두 단일 `<script>` 로 통합
+- JS는 외부 `script.js` 한 파일로 작성하고 `<script defer>`로 연결 (인라인 `<script>`·다중 스크립트 금지)
+
+#### 접근성 안전장치 (FLOOR ... 조용히 통과)
+- `@media (prefers-reduced-motion: reduce)`: 모든 reveal 요소를 **최종 가시 상태(opacity:1, transform:none)로 즉시 복원**한다(콘텐츠 은닉 금지). 애니메이션만 끄되 텍스트가 사라지면 안 된다.
+- 헤드라인·본문 텍스트는 **DOM에 완성형**으로 둔다. JS 타이핑/split은 enhancement만 (JS가 꺼져도 읽혀야 한다).
+- 아이콘 버튼 `aria-label`, `:focus-visible` 스타일, `<img>` alt+width+height.
 
 ---
 
@@ -330,7 +344,9 @@ INSPIRATION_FIRST: LIGHTBULB 영감을 가장 먼저 정했고 CHOSEN_SPARK가 �
 JS_SCOPE_CLEAN: 변수 중복 선언 없음 / scrollIntoView 없음 / var 없음?
 AWWWARDS_READY: [YES/NO]
 PREDICTABILITY_SCORE: [1~10 — 4 초과 시 재설계]
-PERF_CHECK: top/left 애니메이션, scrub:true, offsetHeight 루프 내 사용 여부
+PERF_LAW: 매 프레임 변하는 값이 transform/opacity뿐인가? 움직이는 레이어에 blur/filter/shadow/blend 없나?(THE TRAP) top/left·scrub:true·offsetHeight 루프 없나?
+REDUCED_MOTION: prefers-reduced-motion에서 모든 reveal이 최종 가시상태로 복원되고, 텍스트가 DOM에 완성형인가?
+DEFAULT_DIVERGED: 결과가 MY_DEFAULT(레이아웃·효과·컨셉) 3개와 모두 다른가?
 VERDICT: FAIL 항목 있으면 수정 후 재검증
 </self_audit>
 ```
@@ -387,6 +403,7 @@ VERDICT: FAIL 항목 있으면 수정 후 재검증
 
 ### 성능
 - `top/left/width/height` 애니메이션
+- 움직이는(커서·스크롤 추종) 레이어에 `filter:blur`/`backdrop-filter`/큰 `box-shadow`/`mix-blend-mode` (매 프레임 re-paint = 렉, THE TRAP)
 - `setTimeout` 애니메이션 제어
 - `scrub: true`, `markers: true` 최종본 포함
 
@@ -402,7 +419,7 @@ VERDICT: FAIL 항목 있으면 수정 후 재검증
 
 ## 품질 기준
 
-- 단일 index.html (인라인 CSS/JS), **1,500라인 이내**
+- 멀티파일: `index.html` + `styles.css` + `script.js` (인라인 금지, link/defer 연결), 라인 제한 없음
 - 모바일 반응형, 60fps 유지
 - cursor:pointer + hover 피드백
 - 스크롤 페이지 → 진행 바 자동 포함
