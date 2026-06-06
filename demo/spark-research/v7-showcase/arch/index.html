@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공간연구소 · 빛과 비움의 건축</title>
+  <meta name="description" content="공간연구소는 빛, 구조, 여백을 통해 인간의 경험을 설계하는 건축 스튜디오입니다." />
+
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+  />
+  <!-- DM Serif Display (영문 페어링) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Lenis -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css"
+  />
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ========== SITE HEADER ========== -->
+  <header class="site-header" role="banner">
+    <a href="#" class="logo" aria-label="공간연구소 홈">
+      <span class="logo-kr">공간연구소</span>
+      <span class="logo-en">Spatial Lab</span>
+    </a>
+    <nav class="main-nav" aria-label="주요 탐색">
+      <ul role="list">
+        <li><a href="#projects">프로젝트</a></li>
+        <li><a href="#philosophy">철학</a></li>
+        <li><a href="#studio">스튜디오</a></li>
+        <li><a href="#contact">연락</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="main-nav-mobile">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <line class="nav-line-top" x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line class="nav-line-mid" x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line class="nav-line-bot" x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile nav -->
+  <nav id="main-nav-mobile" class="mobile-nav" aria-label="모바일 탐색" hidden>
+    <ul role="list">
+      <li><a href="#projects">프로젝트</a></li>
+      <li><a href="#philosophy">철학</a></li>
+      <li><a href="#studio">스튜디오</a></li>
+      <li><a href="#contact">연락</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" aria-label="히어로 · 공간은 선에서 태어난다">
+
+    <!-- SVG drawing canvas (VISUAL_MECHANISM) -->
+    <div class="hero-svg-stage" aria-hidden="true">
+      <svg
+        class="arch-draw"
+        viewBox="0 0 900 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <!-- Arch outline · path drawn via stroke-dashoffset -->
+        <path
+          class="draw-path draw-arch"
+          d="M 80 580 L 80 280 Q 80 80 280 80 Q 480 80 480 280 L 480 580"
+          stroke="#C8B89A"
+          stroke-width="1.2"
+          stroke-linecap="round"
+          fill="none"
+        />
+        <!-- Horizontal ground line -->
+        <line
+          class="draw-path draw-ground"
+          x1="40" y1="580" x2="860" y2="580"
+          stroke="#C8B89A"
+          stroke-width="0.8"
+          stroke-linecap="round"
+        />
+        <!-- Interior light beam · vertical -->
+        <line
+          class="draw-path draw-beam"
+          x1="280" y1="100" x2="280" y2="580"
+          stroke="#E8DCC8"
+          stroke-width="0.6"
+          stroke-linecap="round"
+          stroke-dasharray="4 8"
+        />
+        <!-- Second arch · offset, lighter -->
+        <path
+          class="draw-path draw-arch2"
+          d="M 520 580 L 520 320 Q 520 180 660 180 Q 800 180 800 320 L 800 580"
+          stroke="#C8B89A"
+          stroke-width="0.7"
+          stroke-linecap="round"
+          fill="none"
+          opacity="0.45"
+        />
+        <!-- Morph circle · SVG morphing element -->
+        <circle
+          class="morph-circle"
+          cx="280" cy="200"
+          r="30"
+          stroke="#C8B89A"
+          stroke-width="0.8"
+          fill="none"
+          opacity="0"
+        />
+      </svg>
+    </div>
+
+    <!-- MACRO_STRUCTURE: 비대칭 좌측 정렬 거대 타이포 -->
+    <div class="hero-text-block">
+      <p class="hero-sequence-label">Act I · 출현</p>
+      <h1 class="hero-headline">
+        <span class="hero-line hero-line-1" aria-label="선이">선이</span>
+        <span class="hero-line hero-line-2" aria-label="공간을">공간을</span>
+        <span class="hero-line hero-line-3" aria-label="부른다">부른다</span>
+      </h1>
+      <p class="hero-sub">
+        비움은 결핍이 아니다.<br />
+        빛이 머무는 자리를 만드는 일,<br />
+        그것이 공간연구소의 설계다.
+      </p>
+      <a href="#projects" class="cta-primary">
+        프로젝트 보기
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <line x1="2" y1="8" x2="13" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <polyline points="9,4 13,8 9,12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Sequence counter (나이키 서사 구조 암시) -->
+    <div class="hero-acts" aria-hidden="true">
+      <span class="act act--active" data-label="출현">01</span>
+      <span class="act" data-label="긴장">02</span>
+      <span class="act" data-label="해소">03</span>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-hint-text">스크롤</span>
+      <span class="scroll-hint-line"></span>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section id="projects" class="section-projects" aria-label="대표 프로젝트">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <p class="act-label">Act II · 긴장과 해소</p>
+        <h2 class="section-title">공간은 충돌에서<br />태어난다</h2>
+        <p class="section-desc">
+          빛과 어둠, 열림과 닫힘, 무게와 여백의 대립.<br />
+          공간연구소는 그 긴장을 설계의 언어로 번역한다.
+        </p>
+      </header>
+
+      <div class="projects-grid">
+
+        <article class="project-card reveal" data-index="01">
+          <div class="project-img-wrap">
+            <img
+              src="https://picsum.photos/seed/gonggan01/800/600"
+              alt="판교 주택 · 경사 지붕과 빛의 통로"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <div class="project-img-overlay" aria-hidden="true">
+              <svg class="card-draw" viewBox="0 0 200 150" fill="none">
+                <path class="card-path" d="M10 140 L10 60 L100 10 L190 60 L190 140" stroke="#C8B89A" stroke-width="0.8" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-num tabular-nums">01</span>
+            <h3 class="project-name">판교 주택</h3>
+            <p class="project-type">단독 주택 · 2023</p>
+            <p class="project-detail">
+              경사 지붕이 만들어내는 정오의 빛 기둥.
+              침묵의 구조 안에서 거주가 시작된다.
+            </p>
+            <a href="#" class="project-link" aria-label="판교 주택 상세 보기">
+              자세히
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <line x1="1" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <polyline points="7,3 10,6 7,9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-index="02">
+          <div class="project-img-wrap">
+            <img
+              src="https://picsum.photos/seed/gonggan02/800/600"
+              alt="성수 갤러리 · 노출 콘크리트와 측창"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <div class="project-img-overlay" aria-hidden="true">
+              <svg class="card-draw" viewBox="0 0 200 150" fill="none">
+                <rect class="card-path" x="10" y="10" width="180" height="130" rx="0" stroke="#C8B89A" stroke-width="0.8" fill="none"/>
+                <line class="card-path" x1="10" y1="60" x2="190" y2="60" stroke="#C8B89A" stroke-width="0.5" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-num tabular-nums">02</span>
+            <h3 class="project-name">성수 갤러리</h3>
+            <p class="project-type">문화 시설 · 2022</p>
+            <p class="project-detail">
+              측창에서 흘러드는 빛이 콘크리트 면 위에
+              하루의 시간을 그린다.
+            </p>
+            <a href="#" class="project-link" aria-label="성수 갤러리 상세 보기">
+              자세히
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <line x1="1" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <polyline points="7,3 10,6 7,9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-index="03">
+          <div class="project-img-wrap">
+            <img
+              src="https://picsum.photos/seed/gonggan03/800/600"
+              alt="제주 명상 센터 · 수평선과 볼륨의 대화"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <div class="project-img-overlay" aria-hidden="true">
+              <svg class="card-draw" viewBox="0 0 200 150" fill="none">
+                <path class="card-path" d="M10 100 L10 40 L190 40 L190 100" stroke="#C8B89A" stroke-width="0.8" fill="none"/>
+                <line class="card-path" x1="10" y1="140" x2="190" y2="140" stroke="#C8B89A" stroke-width="0.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-num tabular-nums">03</span>
+            <h3 class="project-name">제주 명상 센터</h3>
+            <p class="project-type">종교·복지 시설 · 2021</p>
+            <p class="project-detail">
+              현무암 대지 위에 눕힌 수평 볼륨.
+              바다를 향한 침묵의 프레임.
+            </p>
+            <a href="#" class="project-link" aria-label="제주 명상 센터 상세 보기">
+              자세히
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <line x1="1" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <polyline points="7,3 10,6 7,9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-index="04">
+          <div class="project-img-wrap">
+            <img
+              src="https://picsum.photos/seed/gonggan04/800/600"
+              alt="용산 오피스 · 중정과 빛의 우물"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <div class="project-img-overlay" aria-hidden="true">
+              <svg class="card-draw" viewBox="0 0 200 150" fill="none">
+                <rect class="card-path" x="10" y="10" width="80" height="130" stroke="#C8B89A" stroke-width="0.8" fill="none"/>
+                <rect class="card-path" x="110" y="10" width="80" height="130" stroke="#C8B89A" stroke-width="0.8" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-num tabular-nums">04</span>
+            <h3 class="project-name">용산 오피스</h3>
+            <p class="project-type">업무 시설 · 2020</p>
+            <p class="project-detail">
+              두 매스 사이 비워낸 중정.
+              하늘이 내려오는 빛의 우물.
+            </p>
+            <a href="#" class="project-link" aria-label="용산 오피스 상세 보기">
+              자세히
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <line x1="1" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <polyline points="7,3 10,6 7,9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /projects-grid -->
+
+      <div class="projects-more reveal">
+        <a href="#" class="cta-secondary">전체 프로젝트</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS ========== -->
+  <section class="section-stats" aria-label="스튜디오 수치">
+    <div class="stats-inner">
+      <dl class="stats-list">
+        <div class="stat-item reveal">
+          <dt class="stat-label">완성 프로젝트</dt>
+          <dd class="stat-value tabular-nums">47<span class="stat-unit">개</span></dd>
+        </div>
+        <div class="stat-item reveal">
+          <dt class="stat-label">설립 연도</dt>
+          <dd class="stat-value tabular-nums">2011<span class="stat-unit">년</span></dd>
+        </div>
+        <div class="stat-item reveal">
+          <dt class="stat-label">수상 실적</dt>
+          <dd class="stat-value tabular-nums">12<span class="stat-unit">회</span></dd>
+        </div>
+        <div class="stat-item reveal">
+          <dt class="stat-label">협업 국가</dt>
+          <dd class="stat-value tabular-nums">6<span class="stat-unit">개국</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ========== PHILOSOPHY ========== -->
+  <section id="philosophy" class="section-philosophy" aria-label="설계 철학">
+    <div class="section-inner">
+      <div class="philosophy-layout">
+
+        <div class="philosophy-text">
+          <header class="section-header">
+            <p class="act-label reveal">Act III · 승화</p>
+            <h2 class="section-title reveal">비움이<br />형태를 만든다</h2>
+          </header>
+
+          <div class="philosophy-body reveal">
+            <p>
+              나이키가 '저항'을 통해 달리기의 의미를 재정의했듯,
+              공간연구소는 <em>빼는 행위</em>를 통해 건축의 본질에 다가간다.
+              벽을 세우기 전에 먼저 빛이 들어올 자리를 결정한다.
+            </p>
+            <p>
+              우리의 설계는 세 개의 질문에서 시작된다.
+              이 공간에서 빛은 어떻게 움직이는가.
+              구조는 얼마나 가볍게 느껴질 수 있는가.
+              여백은 어디에 숨쉬어야 하는가.
+            </p>
+            <p>
+              선 하나를 긋는 일은 나머지 모든 가능성을 포기하는 결정이다.
+              그 무게를 알기에, 우리는 천천히 그리고 단호하게 선을 긋는다.
+            </p>
+          </div>
+
+          <div class="philosophy-principles reveal">
+            <div class="principle">
+              <div class="principle-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <!-- Sun / light rays -->
+                  <circle cx="16" cy="16" r="5" stroke="#C8B89A" stroke-width="1"/>
+                  <line x1="16" y1="4" x2="16" y2="8" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="16" y1="24" x2="16" y2="28" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="4" y1="16" x2="8" y2="16" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="24" y1="16" x2="28" y2="16" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="7.5" y1="7.5" x2="10.3" y2="10.3" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="21.7" y1="21.7" x2="24.5" y2="24.5" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="24.5" y1="7.5" x2="21.7" y2="10.3" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="10.3" y1="21.7" x2="7.5" y2="24.5" stroke="#C8B89A" stroke-width="1" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 class="principle-title">빛</h3>
+              <p class="principle-desc">
+                자연광은 건축의 첫 번째 재료다.
+                시간에 따라 변하는 빛을 공간 안에 설계한다.
+              </p>
+            </div>
+            <div class="principle">
+              <div class="principle-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <!-- Structure grid -->
+                  <rect x="4" y="4" width="10" height="10" stroke="#C8B89A" stroke-width="1" fill="none"/>
+                  <rect x="18" y="4" width="10" height="10" stroke="#C8B89A" stroke-width="1" fill="none"/>
+                  <rect x="4" y="18" width="10" height="10" stroke="#C8B89A" stroke-width="1" fill="none"/>
+                  <rect x="18" y="18" width="10" height="10" stroke="#C8B89A" stroke-width="1" fill="none"/>
+                </svg>
+              </div>
+              <h3 class="principle-title">구조</h3>
+              <p class="principle-desc">
+                힘의 흐름이 드러날 때 구조는 아름답다.
+                숨기지 않고 솔직하게, 무게를 땅에 전달한다.
+              </p>
+            </div>
+            <div class="principle">
+              <div class="principle-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <!-- Void / bracket -->
+                  <path d="M12 6 L6 6 L6 26 L12 26" stroke="#C8B89A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  <path d="M20 6 L26 6 L26 26 L20 26" stroke="#C8B89A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+              </div>
+              <h3 class="principle-title">여백</h3>
+              <p class="principle-desc">
+                비워야 숨쉴 수 있다.
+                여백은 공간의 침묵이며, 거주의 시작이다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="philosophy-visual reveal" aria-hidden="true">
+          <!-- Large SVG drawing · morphing sequence -->
+          <svg
+            class="philosophy-svg"
+            viewBox="0 0 400 500"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Background grid -->
+            <line x1="0" y1="100" x2="400" y2="100" stroke="#C8B89A" stroke-width="0.3" opacity="0.3"/>
+            <line x1="0" y1="200" x2="400" y2="200" stroke="#C8B89A" stroke-width="0.3" opacity="0.3"/>
+            <line x1="0" y1="300" x2="400" y2="300" stroke="#C8B89A" stroke-width="0.3" opacity="0.3"/>
+            <line x1="0" y1="400" x2="400" y2="400" stroke="#C8B89A" stroke-width="0.3" opacity="0.3"/>
+            <line x1="100" y1="0" x2="100" y2="500" stroke="#C8B89A" stroke-width="0.3" opacity="0.3"/>
+            <line x1="200" y1="0" x2="200" y2="500" stroke="#C8B89A" stroke-width="0.3" opacity="0.3"/>
+            <line x1="300" y1="0" x2="300" y2="500" stroke="#C8B89A" stroke-width="0.3" opacity="0.3"/>
+            <!-- Main arch morph -->
+            <path
+              class="philo-path philo-arch-main"
+              d="M 60 480 L 60 220 Q 60 40 200 40 Q 340 40 340 220 L 340 480"
+              stroke="#C8B89A"
+              stroke-width="1.4"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <!-- Inner void -->
+            <path
+              class="philo-path philo-inner"
+              d="M 110 480 L 110 260 Q 110 120 200 120 Q 290 120 290 260 L 290 480"
+              stroke="#C8B89A"
+              stroke-width="0.7"
+              stroke-linecap="round"
+              fill="none"
+              opacity="0.5"
+            />
+            <!-- Light ray from apex -->
+            <line
+              class="philo-path philo-ray"
+              x1="200" y1="50" x2="200" y2="480"
+              stroke="#E8DCC8"
+              stroke-width="0.6"
+              stroke-dasharray="6 10"
+              stroke-linecap="round"
+            />
+            <!-- Annotation marks -->
+            <line x1="40" y1="220" x2="60" y2="220" stroke="#C8B89A" stroke-width="0.6" opacity="0.6"/>
+            <line x1="40" y1="40" x2="60" y2="40" stroke="#C8B89A" stroke-width="0.6" opacity="0.6"/>
+            <line x1="40" y1="480" x2="60" y2="480" stroke="#C8B89A" stroke-width="0.6" opacity="0.6"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STUDIO ========== -->
+  <section id="studio" class="section-studio" aria-label="스튜디오 소개">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <h2 class="section-title">스튜디오</h2>
+        <p class="section-desc">
+          공간연구소는 2011년 서울에서 시작했습니다.<br />
+          건축가, 구조 엔지니어, 빛 컨설턴트로 구성된
+          열두 명의 팀이 함께 일합니다.
+        </p>
+      </header>
+
+      <div class="team-grid">
+
+        <article class="team-card reveal">
+          <div class="team-photo-wrap">
+            <img
+              src="https://picsum.photos/seed/person_kim/400/500"
+              alt="김지수 대표 건축가"
+              width="400"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">김지수</h3>
+            <p class="team-role">대표 건축가</p>
+            <p class="team-bio">
+              서울대학교 건축학과, ETH Zurich 석사.
+              빛과 재료의 관계를 탐구하는 설계를 이어오고 있다.
+            </p>
+          </div>
+        </article>
+
+        <article class="team-card reveal">
+          <div class="team-photo-wrap">
+            <img
+              src="https://picsum.photos/seed/person_park/400/500"
+              alt="박민준 구조 디렉터"
+              width="400"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">박민준</h3>
+            <p class="team-role">구조 디렉터</p>
+            <p class="team-bio">
+              한양대학교 건축공학과.
+              구조의 솔직함을 미학의 근거로 삼는다.
+            </p>
+          </div>
+        </article>
+
+        <article class="team-card reveal">
+          <div class="team-photo-wrap">
+            <img
+              src="https://picsum.photos/seed/person_lee/400/500"
+              alt="이서현 인테리어 건축가"
+              width="400"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">이서현</h3>
+            <p class="team-role">인테리어 건축가</p>
+            <p class="team-bio">
+              홍익대학교 실내건축학과.
+              여백의 밀도를 손으로 느끼는 설계자.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="studio-photo-wide reveal">
+        <img
+          src="https://picsum.photos/seed/studio_interior/1400/700"
+          alt="공간연구소 작업실 내부 · 서울 성수동"
+          width="1400"
+          height="700"
+          loading="lazy"
+        />
+        <p class="studio-caption">공간연구소 스튜디오 · 서울 성수동, 2018</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="section-contact" aria-label="연락처">
+    <div class="section-inner">
+      <div class="contact-layout">
+
+        <div class="contact-text reveal">
+          <h2 class="section-title">함께<br />그려봅시다</h2>
+          <p class="contact-desc">
+            새 프로젝트, 협업 제안, 또는 단순한 질문.
+            어떤 이유든 환영합니다.
+          </p>
+        </div>
+
+        <div class="contact-details reveal">
+          <dl class="contact-list">
+            <div class="contact-item">
+              <dt>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="이메일">
+                  <rect x="1" y="3" width="14" height="10" rx="1" stroke="#C8B89A" stroke-width="1" fill="none"/>
+                  <polyline points="1,3 8,9 15,3" stroke="#C8B89A" stroke-width="1" stroke-linejoin="round" fill="none"/>
+                </svg>
+                이메일
+              </dt>
+              <dd><a href="mailto:hello@spatiallab.kr">hello@spatiallab.kr</a></dd>
+            </div>
+            <div class="contact-item">
+              <dt>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="전화">
+                  <path d="M3 2 C3 2 2 3 2 5 C2 11 11 14 13 14 C14 14 14 13 14 13 L12 10 L10.5 11 C10.5 11 8 9 7 7 L8 6 Z" stroke="#C8B89A" stroke-width="1" fill="none" stroke-linejoin="round"/>
+                </svg>
+                전화
+              </dt>
+              <dd><a href="tel:+82212345678">02-1234-5678</a></dd>
+            </div>
+            <div class="contact-item">
+              <dt>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="주소">
+                  <path d="M8 1 C5.2 1 3 3.2 3 6 C3 9.5 8 15 8 15 C8 15 13 9.5 13 6 C13 3.2 10.8 1 8 1 Z" stroke="#C8B89A" stroke-width="1" fill="none"/>
+                  <circle cx="8" cy="6" r="1.5" stroke="#C8B89A" stroke-width="1" fill="none"/>
+                </svg>
+                주소
+              </dt>
+              <dd>서울특별시 성동구 성수일로 89<br />공간연구소 빌딩 3층</dd>
+            </div>
+          </dl>
+
+          <div class="contact-svg-accent" aria-hidden="true">
+            <svg viewBox="0 0 300 80" fill="none">
+              <path
+                class="contact-draw-path"
+                d="M10 70 L10 30 Q10 10 50 10 L290 10"
+                stroke="#C8B89A"
+                stroke-width="0.8"
+                stroke-linecap="round"
+                fill="none"
+              />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-kr">공간연구소</span>
+        <span class="footer-copy">
+          &copy; <span id="footer-year">2024</span> 공간연구소. All rights reserved.
+        </span>
+      </div>
+      <nav class="footer-nav" aria-label="푸터 탐색">
+        <a href="#projects">프로젝트</a>
+        <a href="#philosophy">철학</a>
+        <a href="#studio">스튜디오</a>
+        <a href="#contact">연락</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <!-- Site JS -->
+  <script src="script.js" defer></script>
+</body>
+</html>

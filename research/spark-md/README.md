@@ -20,8 +20,18 @@ research/spark-md/harness/run-v7-fast.sh R20_<주제> \
 # 조절: GEN_EFFORT(기본 low, high까지 안전·max 금지) / FIX_EFFORT(기본 low) / MAXPAR(기본 5)
 ```
 - 결과물: `/tmp/spark-lab/<라운드ID>/<name>/{index.html,styles.css,script.js}`, 요약은 `_seeds.log`(시간·교정여부·perfcheck·배정시드).
+- SEED는 **배치 내 축별 비복원추출**(LHS)로 배정 → 한 배치 안에서 같은 축 값이 겹치지 않는다(R20).
 - 근거·실측: `JOURNAL.md` Round 18~19. 라이브 예시: `demo/spark-research/v7-fast/`.
 - (구버전 `run.sh`/`run-v4~v6` 등은 이력 보존용. 신규 라운드는 `run-v7-fast.sh` 사용.)
+
+### 두 게이트 (정적 무료 + 미감 선택)
+1. **perfcheck.sh**(러너 내장, 공짜·ms): 성능(THE LAW/TRAP)·마감(em-dash/이모지/링크). FAIL이면 resume 자동 교정.
+2. **aesthetic-gate.sh**(선택, VLM): 첫 화면을 스크린샷→`baseline/floor.png`와 **pairwise(양방향)** 비교해 *확실히 나쁜 것만* FAIL.
+   절대점수는 비신뢰라 안 쓴다(근거: R20 deep research). 미감/창의성은 perfcheck가 못 보는 사각.
+   ```bash
+   research/spark-md/harness/aesthetic-gate.sh /tmp/spark-lab/R20_x/book /tmp/spark-lab/R20_x/fest
+   ```
+   한계: 샌드박스 CDN 차단으로 *정적 구성*만 본다(모션은 라이브 확인). 의존: playwright+claude CLI.
 
 ---
 
@@ -55,8 +65,10 @@ research/spark-md/
 │   └── v7-lean.md       ★ 현행 (외부 SEED 강제배정 + 단일 성능원리 + lean)
 ├── prompts/             실험용 프롬프트 (주제별: case1~5, nocturne, observatory, mokza, plain)
 ├── harness/
-│   ├── run-v7-fast.sh   ★ 표준 러너 (low 생성 + perfcheck + resume 교정)
-│   └── perfcheck.sh     정적 검사기 (성능 THE LAW/TRAP + 마감 em-dash/이모지/링크)
+│   ├── run-v7-fast.sh   ★ 표준 러너 (low 생성 + perfcheck + resume 교정, SEED=축별 비복원배정)
+│   ├── perfcheck.sh     정적 검사기 (성능 THE LAW/TRAP + 마감 em-dash/이모지/링크)
+│   ├── aesthetic-gate.sh 미감 게이트 (VLM pairwise: 스크린샷을 floor와 비교, 확실히 나쁜 것만 FAIL)
+│   └── baseline/floor.png 미감 게이트의 고정 기준선(최소 합격선) — baseline/README.md 참고
 ├── experiments/         R{n}_<주제>/scorecard.md (라이브 링크 있는 라운드는 PNG 대신 링크)
 └── archive/             이력 보존 (구 버전·구 러너·구 리포트) — 재현용, 신규 작업엔 미사용
 ```

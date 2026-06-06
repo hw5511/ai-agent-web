@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>숨 · 요가와 명상 스튜디오</title>
+  <meta name="description" content="숨 스튜디오는 호흡과 균형, 고요를 통해 당신의 내면을 연결하는 요가와 명상 공간입니다." />
+
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  </noscript>
+
+  <!-- DM Serif Display (English pairing) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" />
+
+  <!-- Lenis smooth scroll -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header class="site-header" role="banner">
+    <nav class="nav-inner" aria-label="주 내비게이션">
+      <a class="logo" href="#hero" aria-label="숨 스튜디오 홈">
+        <span class="logo-ko" aria-hidden="true">숨</span>
+        <span class="logo-en">SUM</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#classes">클래스</a></li>
+        <li><a href="#schedule">스케줄</a></li>
+        <li><a href="#instructors">강사</a></li>
+        <li><a href="#membership">멤버십</a></li>
+      </ul>
+      <a href="#membership" class="nav-cta">무료 체험</a>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <rect x="2" y="6" width="20" height="1.5" fill="currentColor"/>
+          <rect x="2" y="12" width="20" height="1.5" fill="currentColor"/>
+          <rect x="2" y="18" width="14" height="1.5" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="모바일 메뉴">
+      <ul role="list">
+        <li><a href="#classes">클래스</a></li>
+        <li><a href="#schedule">스케줄</a></li>
+        <li><a href="#instructors">강사</a></li>
+        <li><a href="#membership">멤버십</a></li>
+        <li><a href="#membership" class="nav-cta">무료 체험</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <!--
+    MACRO_STRUCTURE: 좌우 2분할
+    VISUAL_MECHANISM: 듀오톤 이미지 + 인터랙티브 마스크
+    인터랙티브 마스크: 경계선(divider)이 마우스 X에 따라 translateX로만 이동 (THE LAW 준수)
+    듀오톤: 좌측 이미지는 정적 CSS 듀오톤 (움직이지 않으므로 filter OK)
+  -->
+  <section class="hero" id="hero" aria-label="히어로 섹션">
+
+    <!-- 좌측 패널: 듀오톤 이미지 -->
+    <div class="hero-left" aria-hidden="true">
+      <div class="hero-image-wrap">
+        <img
+          src="https://picsum.photos/seed/sumstudio/900/1100"
+          alt="숨 스튜디오 내부 전경 · 목조 바닥과 자연광"
+          width="900"
+          height="1100"
+          class="hero-img"
+        />
+        <!-- 듀오톤 오버레이: 정적, 색상 블렌드 레이어 -->
+        <div class="hero-duotone" aria-hidden="true"></div>
+      </div>
+      <!-- 마스크 오버레이: 우측 패널 색상이 좌측으로 침범하는 정적 경계 블리드 -->
+      <div class="hero-mask-bleed" aria-hidden="true"></div>
+    </div>
+
+    <!-- 인터랙티브 경계 분할선 -->
+    <div class="hero-divider" id="hero-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-grip">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 16 L14 12 L14 20 Z" fill="currentColor"/>
+          <path d="M22 16 L18 12 L18 20 Z" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 우측 패널: 타이포그래피 -->
+    <div class="hero-right">
+      <!-- 비정형 마스크 타이포그래피: SVG clipPath로 텍스트 마스킹 (정적) -->
+      <div class="hero-amorphous-bg" aria-hidden="true">
+        <svg class="amorphous-svg" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <clipPath id="amorphous-clip">
+              <path class="amorphous-path" d="
+                M 80 60
+                C 200 20, 420 0, 520 80
+                C 600 140, 580 280, 540 360
+                C 500 440, 420 500, 340 560
+                C 260 620, 100 640, 40 560
+                C -20 480, 20 340, 30 240
+                C 40 140, -40 100, 80 60 Z
+              "/>
+            </clipPath>
+          </defs>
+          <image
+            href="https://picsum.photos/seed/sumbreath/600/700"
+            width="600" height="700"
+            clip-path="url(#amorphous-clip)"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </svg>
+      </div>
+
+      <div class="hero-text">
+        <p class="hero-eyebrow">Seoul Wellness Studio</p>
+        <h1 class="hero-headline">
+          <span class="headline-ja" lang="ja" aria-hidden="true">呼吸</span>
+          <span class="headline-main">숨</span>
+          <span class="headline-sub">息을 찾는<br />공간</span>
+        </h1>
+        <p class="hero-body">
+          들숨과 날숨 사이 · 당신의 몸이 기억하는 균형.<br />
+          숨 스튜디오에서 호흡·균형·고요를 만납니다.
+        </p>
+        <div class="hero-actions">
+          <a href="#classes" class="btn-primary">클래스 살펴보기</a>
+          <a href="#schedule" class="btn-secondary">
+            이번 주 스케줄
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 호흡 리듬 인디케이터 (순수 CSS 애니메이션, transform/opacity only) -->
+      <div class="breath-indicator" aria-hidden="true">
+        <div class="breath-ring breath-ring--1"></div>
+        <div class="breath-ring breath-ring--2"></div>
+        <div class="breath-ring breath-ring--3"></div>
+        <span class="breath-label">숨 · 息 · Breath</span>
+      </div>
+    </div>
+
+    <!-- 정적 폴백용 히어로 요약 (JS off / reduced-motion에서도 보임) -->
+    <div class="hero-fallback-caption" aria-hidden="true">
+      <span>숨 스튜디오 · 서울 요가 · 명상</span>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO BAND ===================== -->
+  <section class="intro-band reveal" aria-label="스튜디오 소개">
+    <div class="intro-inner">
+      <p class="intro-serif">
+        "숨(息)은 한자로 스스로(自)의 마음(心).<br />
+        호흡은 단순한 기능이 아닌 · 자기 자신으로 돌아오는 행위입니다."
+      </p>
+      <div class="intro-stats" role="list" aria-label="스튜디오 현황">
+        <div class="stat" role="listitem">
+          <span class="stat-num tabular">08</span>
+          <span class="stat-label">클래스 종류</span>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-num tabular">04</span>
+          <span class="stat-label">전문 강사</span>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-num tabular">2019</span>
+          <span class="stat-label">개원 연도</span>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-num tabular">340+</span>
+          <span class="stat-label">현재 회원</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CLASSES ===================== -->
+  <section class="classes-section" id="classes" aria-label="클래스 소개">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <p class="section-eyebrow">프로그램</p>
+        <h2 class="section-title">클래스 종류</h2>
+        <p class="section-desc">
+          각 클래스는 호흡의 리듬에서 설계됩니다.<br />
+          들숨에서 시작해 날숨으로 완성되는 수련.
+        </p>
+      </header>
+
+      <div class="classes-grid">
+
+        <article class="class-card reveal" aria-label="하타 요가 클래스">
+          <div class="class-img-wrap">
+            <img
+              src="https://picsum.photos/seed/hatha01/600/400"
+              alt="하타 요가 수업 · 수련자들이 선 자세를 취하는 장면"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+            <div class="class-tag">기초</div>
+          </div>
+          <div class="class-body">
+            <h3 class="class-name">하타 요가</h3>
+            <p class="class-desc">
+              고전적 아사나와 프라나야마. 몸의 기초 언어를 배우고 호흡과 자세의 연결을 익힙니다. 초심자부터 중급자까지.
+            </p>
+            <dl class="class-meta">
+              <div>
+                <dt>난이도</dt>
+                <dd>초급 · 중급</dd>
+              </div>
+              <div>
+                <dt>시간</dt>
+                <dd class="tabular">60분</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="class-card reveal" aria-label="빈야사 플로우 클래스">
+          <div class="class-img-wrap">
+            <img
+              src="https://picsum.photos/seed/vinyasa02/600/400"
+              alt="빈야사 플로우 수업 · 역동적인 흐름 동작 시퀀스"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+            <div class="class-tag">흐름</div>
+          </div>
+          <div class="class-body">
+            <h3 class="class-name">빈야사 플로우</h3>
+            <p class="class-desc">
+              숨결처럼 이어지는 동작 시퀀스. 들숨과 날숨이 움직임을 이끄는 유동적 수련. 에너지와 집중력을 동시에.
+            </p>
+            <dl class="class-meta">
+              <div>
+                <dt>난이도</dt>
+                <dd>중급 · 상급</dd>
+              </div>
+              <div>
+                <dt>시간</dt>
+                <dd class="tabular">75분</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="class-card reveal" aria-label="음 요가 클래스">
+          <div class="class-img-wrap">
+            <img
+              src="https://picsum.photos/seed/yinyoga03/600/400"
+              alt="음 요가 수업 · 조용한 바닥 자세와 깊은 이완"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+            <div class="class-tag">이완</div>
+          </div>
+          <div class="class-body">
+            <h3 class="class-name">음 요가</h3>
+            <p class="class-desc">
+              3 ~ 5분간 자세를 유지하며 결합 조직 깊이 이완. 고요의 내면을 향한 수련. 명상의 입구.
+            </p>
+            <dl class="class-meta">
+              <div>
+                <dt>난이도</dt>
+                <dd>전 레벨</dd>
+              </div>
+              <div>
+                <dt>시간</dt>
+                <dd class="tabular">75분</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="class-card reveal" aria-label="명상 클래스">
+          <div class="class-img-wrap">
+            <img
+              src="https://picsum.photos/seed/meditation04/600/400"
+              alt="명상 수업 · 조용한 실내에서 앉아 눈을 감은 수련자"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+            <div class="class-tag">고요</div>
+          </div>
+          <div class="class-body">
+            <h3 class="class-name">호흡 명상</h3>
+            <p class="class-desc">
+              아나파나사티 · 숨결을 관찰하는 명상. 마음의 소음을 줄이고 현재 순간으로 돌아오는 연습.
+            </p>
+            <dl class="class-meta">
+              <div>
+                <dt>난이도</dt>
+                <dd>전 레벨</dd>
+              </div>
+              <div>
+                <dt>시간</dt>
+                <dd class="tabular">45분</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="class-card reveal" aria-label="아쉬탕가 요가 클래스">
+          <div class="class-img-wrap">
+            <img
+              src="https://picsum.photos/seed/ashtanga05/600/400"
+              alt="아쉬탕가 요가 · 강도 높은 시리즈 수련"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+            <div class="class-tag">심화</div>
+          </div>
+          <div class="class-body">
+            <h3 class="class-name">아쉬탕가</h3>
+            <p class="class-desc">
+              고정된 시리즈를 자신의 호흡 리듬으로. 강도 높은 수련을 통한 신체 단련과 집중력 계발.
+            </p>
+            <dl class="class-meta">
+              <div>
+                <dt>난이도</dt>
+                <dd>중급 · 상급</dd>
+              </div>
+              <div>
+                <dt>시간</dt>
+                <dd class="tabular">90분</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="class-card reveal" aria-label="리스토라티브 요가 클래스">
+          <div class="class-img-wrap">
+            <img
+              src="https://picsum.photos/seed/restorative06/600/400"
+              alt="리스토라티브 요가 · 소품을 이용한 완전한 이완 자세"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+            <div class="class-tag">회복</div>
+          </div>
+          <div class="class-body">
+            <h3 class="class-name">리스토라티브</h3>
+            <p class="class-desc">
+              볼스터·블록·담요로 몸을 받치고 완전한 이완. 부교감 신경 활성화. 깊은 회복과 치유의 수련.
+            </p>
+            <dl class="class-meta">
+              <div>
+                <dt>난이도</dt>
+                <dd>전 레벨</dd>
+              </div>
+              <div>
+                <dt>시간</dt>
+                <dd class="tabular">60분</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCHEDULE ===================== -->
+  <section class="schedule-section" id="schedule" aria-label="주간 스케줄">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <p class="section-eyebrow">이번 주</p>
+        <h2 class="section-title">클래스 스케줄</h2>
+        <p class="section-desc">매주 업데이트. 예약은 24시간 전까지.</p>
+      </header>
+
+      <div class="schedule-grid reveal">
+        <div class="schedule-days" role="rowgroup" aria-label="요일">
+          <div class="schedule-day-head" role="columnheader"></div>
+          <div class="schedule-day-head" role="columnheader">월</div>
+          <div class="schedule-day-head" role="columnheader">화</div>
+          <div class="schedule-day-head" role="columnheader">수</div>
+          <div class="schedule-day-head" role="columnheader">목</div>
+          <div class="schedule-day-head" role="columnheader">금</div>
+          <div class="schedule-day-head" role="columnheader">토</div>
+          <div class="schedule-day-head" role="columnheader">일</div>
+        </div>
+
+        <div class="schedule-table" role="table" aria-label="주간 클래스 시간표">
+          <div class="schedule-row" role="row">
+            <div class="schedule-time tabular" role="rowheader">06:30</div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-hatha">하타 요가<br/><span class="sched-who">지은</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-hatha">하타 요가<br/><span class="sched-who">지은</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-hatha">하타 요가<br/><span class="sched-who">지은</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-time tabular" role="rowheader">07:30</div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-vinyasa">빈야사 플로우<br/><span class="sched-who">세연</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-vinyasa">빈야사 플로우<br/><span class="sched-who">세연</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-vinyasa">빈야사 플로우<br/><span class="sched-who">세연</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-time tabular" role="rowheader">10:00</div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-yin">음 요가<br/><span class="sched-who">민준</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-yin">음 요가<br/><span class="sched-who">민준</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-meditation">호흡 명상<br/><span class="sched-who">하린</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-yin">음 요가<br/><span class="sched-who">민준</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-meditation">호흡 명상<br/><span class="sched-who">하린</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-hatha">하타 요가<br/><span class="sched-who">지은</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-restorative">리스토라티브<br/><span class="sched-who">하린</span></div>
+            </div>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-time tabular" role="rowheader">12:00</div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-ashtanga">아쉬탕가<br/><span class="sched-who">세연</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-ashtanga">아쉬탕가<br/><span class="sched-who">세연</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-ashtanga">아쉬탕가<br/><span class="sched-who">세연</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-time tabular" role="rowheader">18:30</div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-vinyasa">빈야사 플로우<br/><span class="sched-who">지은</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-meditation">호흡 명상<br/><span class="sched-who">하린</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-vinyasa">빈야사 플로우<br/><span class="sched-who">지은</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-meditation">호흡 명상<br/><span class="sched-who">하린</span></div>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-vinyasa">빈야사 플로우<br/><span class="sched-who">지은</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-time tabular" role="rowheader">20:00</div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-yin">음 요가<br/><span class="sched-who">민준</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-restorative">리스토라티브<br/><span class="sched-who">하린</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell" role="cell">
+              <div class="sched-item sched-yin">음 요가<br/><span class="sched-who">민준</span></div>
+            </div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+            <div class="schedule-cell empty" role="cell" aria-label="클래스 없음"></div>
+          </div>
+        </div>
+
+        <div class="schedule-legend" aria-label="클래스 색상 범례">
+          <span class="legend-item"><span class="legend-dot sched-hatha"></span>하타</span>
+          <span class="legend-item"><span class="legend-dot sched-vinyasa"></span>빈야사</span>
+          <span class="legend-item"><span class="legend-dot sched-yin"></span>음 요가</span>
+          <span class="legend-item"><span class="legend-dot sched-meditation"></span>명상</span>
+          <span class="legend-item"><span class="legend-dot sched-ashtanga"></span>아쉬탕가</span>
+          <span class="legend-item"><span class="legend-dot sched-restorative"></span>리스토라티브</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INSTRUCTORS ===================== -->
+  <section class="instructors-section" id="instructors" aria-label="강사 소개">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <p class="section-eyebrow">사람</p>
+        <h2 class="section-title">강사 소개</h2>
+        <p class="section-desc">각자의 호흡을 연구한 네 명의 수련자.</p>
+      </header>
+
+      <div class="instructors-grid">
+
+        <article class="instructor-card reveal" aria-label="강사 김지은">
+          <div class="instructor-img-wrap">
+            <img
+              src="https://picsum.photos/seed/instructor-jieun/500/600"
+              alt="강사 김지은 · 하타 요가 전문"
+              width="500"
+              height="600"
+              loading="lazy"
+            />
+            <!-- 듀오톤 오버레이 (정적) -->
+            <div class="instructor-duotone" aria-hidden="true"></div>
+            <div class="instructor-tag-wrap" aria-hidden="true">
+              <span class="instructor-tag-text">하타</span>
+            </div>
+          </div>
+          <div class="instructor-info">
+            <h3 class="instructor-name">김지은</h3>
+            <p class="instructor-title">하타 요가 · 빈야사</p>
+            <p class="instructor-bio">
+              인도 마이소르 6년 수련. B.K.S. 아이엔가 인증. 숨의 첫 강사. 자세의 정렬보다 호흡의 정직함을 가르칩니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="instructor-card reveal" aria-label="강사 박세연">
+          <div class="instructor-img-wrap">
+            <img
+              src="https://picsum.photos/seed/instructor-seyeon/500/600"
+              alt="강사 박세연 · 빈야사 플로우 및 아쉬탕가 전문"
+              width="500"
+              height="600"
+              loading="lazy"
+            />
+            <div class="instructor-duotone" aria-hidden="true"></div>
+            <div class="instructor-tag-wrap" aria-hidden="true">
+              <span class="instructor-tag-text">빈야사</span>
+            </div>
+          </div>
+          <div class="instructor-info">
+            <h3 class="instructor-name">박세연</h3>
+            <p class="instructor-title">빈야사 플로우 · 아쉬탕가</p>
+            <p class="instructor-bio">
+              전직 발레 무용수. 움직임의 언어로 요가를 번역합니다. 흐름이 끊기지 않는 시퀀스 설계가 특기.
+            </p>
+          </div>
+        </article>
+
+        <article class="instructor-card reveal" aria-label="강사 이민준">
+          <div class="instructor-img-wrap">
+            <img
+              src="https://picsum.photos/seed/instructor-minjun/500/600"
+              alt="강사 이민준 · 음 요가 전문"
+              width="500"
+              height="600"
+              loading="lazy"
+            />
+            <div class="instructor-duotone" aria-hidden="true"></div>
+            <div class="instructor-tag-wrap" aria-hidden="true">
+              <span class="instructor-tag-text">음 요가</span>
+            </div>
+          </div>
+          <div class="instructor-info">
+            <h3 class="instructor-name">이민준</h3>
+            <p class="instructor-title">음 요가 · 경락 이론</p>
+            <p class="instructor-bio">
+              한의학 배경의 요가 강사. 결합 조직과 에너지 채널의 관계를 탐구합니다. 5분 이상 자세 유지의 과학.
+            </p>
+          </div>
+        </article>
+
+        <article class="instructor-card reveal" aria-label="강사 최하린">
+          <div class="instructor-img-wrap">
+            <img
+              src="https://picsum.photos/seed/instructor-harin/500/600"
+              alt="강사 최하린 · 명상 및 호흡 전문"
+              width="500"
+              height="600"
+              loading="lazy"
+            />
+            <div class="instructor-duotone" aria-hidden="true"></div>
+            <div class="instructor-tag-wrap" aria-hidden="true">
+              <span class="instructor-tag-text">명상</span>
+            </div>
+          </div>
+          <div class="instructor-info">
+            <h3 class="instructor-name">최하린</h3>
+            <p class="instructor-title">호흡 명상 · 리스토라티브</p>
+            <p class="instructor-bio">
+              명상 심리학 석사. 숨을 들여다보는 것이 마음을 들여다보는 것임을 압니다. 첫 수련자에게 가장 친절한 강사.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MEMBERSHIP ===================== -->
+  <section class="membership-section" id="membership" aria-label="멤버십 안내">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <p class="section-eyebrow">함께</p>
+        <h2 class="section-title">멤버십</h2>
+        <p class="section-desc">
+          숨 스튜디오와 함께하는 방법.<br />
+          첫 방문은 언제나 무료 체험으로.
+        </p>
+      </header>
+
+      <div class="membership-grid">
+
+        <article class="membership-card reveal" aria-label="기본 멤버십">
+          <div class="membership-header">
+            <p class="membership-tier">기본</p>
+            <div class="membership-price">
+              <span class="price-num tabular">65,000</span>
+              <span class="price-unit">원 / 월</span>
+            </div>
+          </div>
+          <ul class="membership-perks" role="list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              월 8회 클래스 이용
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              매트 · 소품 대여
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              탈의실 이용
+            </li>
+          </ul>
+          <a href="#contact" class="btn-outline">시작하기</a>
+        </article>
+
+        <article class="membership-card membership-card--featured reveal" aria-label="정기 멤버십 (추천)">
+          <div class="membership-badge">추천</div>
+          <div class="membership-header">
+            <p class="membership-tier">정기</p>
+            <div class="membership-price">
+              <span class="price-num tabular">110,000</span>
+              <span class="price-unit">원 / 월</span>
+            </div>
+          </div>
+          <ul class="membership-perks" role="list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              무제한 클래스 이용
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              매트 · 소품 대여
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              라커 전용 배정
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              월 1회 개인 상담
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              특별 워크숍 20% 할인
+            </li>
+          </ul>
+          <a href="#contact" class="btn-primary">시작하기</a>
+        </article>
+
+        <article class="membership-card reveal" aria-label="10회 수강권">
+          <div class="membership-header">
+            <p class="membership-tier">횟수권</p>
+            <div class="membership-price">
+              <span class="price-num tabular">90,000</span>
+              <span class="price-unit">원 / 10회</span>
+            </div>
+          </div>
+          <ul class="membership-perks" role="list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              10회 자유 사용
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              매트 · 소품 대여
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              유효기간 3개월
+            </li>
+          </ul>
+          <a href="#contact" class="btn-outline">시작하기</a>
+        </article>
+
+      </div>
+
+      <div class="trial-band reveal">
+        <div class="trial-text">
+          <h3 class="trial-title">첫 방문 무료 체험</h3>
+          <p>어떤 클래스든 첫 수업을 무료로 경험해보세요.<br />사전 예약 후 방문해주시면 됩니다.</p>
+        </div>
+        <a href="#contact" class="btn-primary btn-large">무료 체험 예약</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT / VISIT ===================== -->
+  <section class="contact-section" id="contact" aria-label="방문 안내">
+    <div class="section-inner contact-inner">
+
+      <div class="contact-left reveal">
+        <p class="section-eyebrow">방문</p>
+        <h2 class="section-title">찾아오시는 길</h2>
+        <address class="contact-address">
+          <p>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 1C5.24 1 3 3.24 3 6c0 3.25 5 9 5 9s5-5.75 5-9c0-2.76-2.24-5-5-5Zm0 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" fill="currentColor"/>
+            </svg>
+            서울특별시 마포구 연남동 239-14, 3층
+          </p>
+          <p>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4Zm2 0 4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            sum@sumstudio.kr
+          </p>
+          <p>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v1C2 10.851 6.149 15 12.5 15h1A1.5 1.5 0 0 0 15 13.5v-1.118a1.5 1.5 0 0 0-.94-1.394l-2-.8a1.5 1.5 0 0 0-1.644.397l-.513.57A9.04 9.04 0 0 1 5.845 6.1l.571-.513a1.5 1.5 0 0 0 .397-1.644l-.8-2A1.5 1.5 0 0 0 4.618 1H3.5Z" fill="currentColor"/>
+            </svg>
+            02-1234-5678
+          </p>
+        </address>
+
+        <div class="contact-hours">
+          <h3 class="hours-title">운영시간</h3>
+          <dl class="hours-list">
+            <div>
+              <dt>월 · 수 · 금</dt>
+              <dd class="tabular">06:30 ~ 21:30</dd>
+            </div>
+            <div>
+              <dt>화 · 목</dt>
+              <dd class="tabular">07:30 ~ 21:30</dd>
+            </div>
+            <div>
+              <dt>토</dt>
+              <dd class="tabular">09:00 ~ 18:00</dd>
+            </div>
+            <div>
+              <dt>일</dt>
+              <dd class="tabular">09:00 ~ 14:00</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="contact-right reveal">
+        <div class="contact-map-wrap">
+          <img
+            src="https://picsum.photos/seed/sumstudiomap/700/500"
+            alt="숨 스튜디오 주변 연남동 거리 풍경"
+            width="700"
+            height="500"
+            loading="lazy"
+          />
+        </div>
+        <p class="contact-transit">
+          지하철 2호선 홍대입구역 3번 출구에서 도보 <span class="tabular">10</span>분.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-ko">숨</span>
+        <span class="logo-en">SUM Studio</span>
+        <p class="footer-tagline">호흡 · 균형 · 고요</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="푸터 내비게이션">
+        <ul role="list">
+          <li><a href="#classes">클래스</a></li>
+          <li><a href="#schedule">스케줄</a></li>
+          <li><a href="#instructors">강사</a></li>
+          <li><a href="#membership">멤버십</a></li>
+          <li><a href="#contact">방문</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-social" aria-label="소셜 미디어">
+        <a href="#" aria-label="인스타그램" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="유튜브" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10 9l5 3-5 3V9Z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="카카오톡 채널" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <ellipse cx="12" cy="11" rx="10" ry="8" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8 10l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        <span class="tabular">&#169; 2024</span> 숨 스튜디오. 서울특별시 마포구 연남동. 사업자등록번호 <span class="tabular">123-45-67890</span>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- CDN Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

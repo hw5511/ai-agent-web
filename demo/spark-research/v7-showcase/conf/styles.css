@@ -1,0 +1,1209 @@
+/* ============================================================
+   FORM 2026 — styles.css
+   PERSONA: 빈티지 여행 포스터 화가
+   MACRO_STRUCTURE: 대각선·회전축 구성 (기울어진 그리드)
+   VISUAL_MECHANISM: 컬러필드 / 그라디언트 상태 전이
+   GOVERNING_METAPHOR: 빈티지 철도 노선 여정
+   ============================================================ */
+
+/* ── Lenis guard ─────────────────────────────────────── */
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+/* ── Custom Properties ─────────────────────────────── */
+:root {
+  /* Vintage travel poster palette */
+  --col-ink:        #1a1510;     /* deep sepia ink */
+  --col-parchment:  #f5ede0;     /* aged paper */
+  --col-rust:       #c84b2f;     /* vermilion accent */
+  --col-mustard:    #e8a827;     /* golden yellow */
+  --col-slate:      #2e4a6b;     /* prussian blue */
+  --col-sage:       #4a7c5f;     /* forest station green */
+  --col-cream:      #faf4ea;     /* lightest paper */
+  --col-charcoal:   #2a2420;     /* soft black */
+
+  /* Colorfield gradient states (VISUAL_MECHANISM) */
+  --cf-warm-start:  #e8c5a0;
+  --cf-warm-mid:    #d4956a;
+  --cf-warm-end:    #b86b42;
+  --cf-cool-start:  #c8d8e8;
+  --cf-cool-mid:    #7aa8c8;
+  --cf-cool-end:    #3d6e8f;
+  --cf-sunset:      #e8d4a0;
+
+  /* Typography */
+  --font-serif:     'DM Serif Display', Georgia, serif;
+  --font-sans:      'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+
+  /* Spacing rhythm */
+  --sp-xs:  0.5rem;
+  --sp-sm:  1rem;
+  --sp-md:  2rem;
+  --sp-lg:  4rem;
+  --sp-xl:  7rem;
+  --sp-2xl: 11rem;
+
+  /* Diagonal angle — the core MACRO_STRUCTURE axis */
+  --diag-angle: -8deg;
+  --diag-skew:   8deg;
+}
+
+/* ── Reset + Base ────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  /* NO scroll-behavior: smooth — Lenis handles this */
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--col-parchment);
+  color: var(--col-ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2.5px solid var(--col-rust);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+/* ── NAV ─────────────────────────────────────────────── */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 0 var(--sp-md);
+  background: rgba(245, 237, 224, 0.88);
+  backdrop-filter: none; /* static — no moving blur layer */
+  border-bottom: 1px solid rgba(26, 21, 16, 0.1);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  height: 62px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  color: var(--col-ink);
+}
+
+.logo-year {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--col-rust);
+  font-variant-numeric: tabular-nums;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--sp-md);
+  margin-left: auto;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--col-charcoal);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover { color: var(--col-rust); }
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1.1rem;
+  background: var(--col-rust);
+  color: var(--col-cream);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  transition: background 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.nav-cta:hover {
+  background: var(--col-charcoal);
+  transform: translateY(-1px);
+}
+
+/* ── HERO ────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 62px;
+  overflow: hidden;
+  background: var(--col-parchment);
+}
+
+/* COLORFIELD layers (static background — VISUAL_MECHANISM static base) */
+.hero-colorfield {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cf-zone {
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Warm golden zone — upper left */
+.cf-zone--a {
+  top: -10%;
+  left: -5%;
+  width: 60%;
+  height: 70%;
+  background: radial-gradient(ellipse at 40% 40%, var(--cf-sunset) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+/* Cool prussian blue zone — lower right */
+.cf-zone--b {
+  bottom: -15%;
+  right: -10%;
+  width: 65%;
+  height: 75%;
+  background: radial-gradient(ellipse at 60% 60%, var(--cf-cool-mid) 0%, transparent 65%);
+  opacity: 0.45;
+}
+
+/* Rust accent zone — center-right */
+.cf-zone--c {
+  top: 20%;
+  right: 15%;
+  width: 35%;
+  height: 40%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(200, 75, 47, 0.18) 0%, transparent 70%);
+  opacity: 1;
+}
+
+/* DIAGONAL DIVIDER — the core MACRO_STRUCTURE element */
+.hero-diagonal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-diagonal::before {
+  content: '';
+  position: absolute;
+  /* Diagonal stripe: right half, angled */
+  top: -10%;
+  right: 0;
+  width: 45%;
+  height: 120%;
+  background: var(--col-slate);
+  opacity: 0.06;
+  transform: skewX(var(--diag-skew));
+  transform-origin: top right;
+}
+
+.hero-diagonal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Diagonal border line */
+  background: linear-gradient(
+    to bottom right,
+    transparent 0%,
+    transparent calc(50% - 0.5px),
+    rgba(26, 21, 16, 0.12) calc(50% - 0.5px),
+    rgba(26, 21, 16, 0.12) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px),
+    transparent 100%
+  );
+  transform: rotate(var(--diag-angle));
+  transform-origin: center center;
+}
+
+/* Route SVG (decorative, static) */
+.hero-route {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+  max-width: 800px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.route-svg {
+  width: 100%;
+  height: auto;
+}
+
+.route-path {
+  stroke: var(--col-slate);
+}
+
+.route-station {
+  fill: var(--col-parchment);
+  stroke: var(--col-slate);
+  stroke-width: 2;
+}
+
+.route-station--final {
+  fill: var(--col-rust);
+  stroke: var(--col-rust);
+}
+
+.route-label {
+  fill: var(--col-slate);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.route-label--final {
+  fill: var(--col-rust);
+  font-weight: 700;
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--sp-xl) var(--sp-md) var(--sp-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-md);
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.eyebrow-line {
+  display: block;
+  width: 2.5rem;
+  height: 1.5px;
+  background: var(--col-rust);
+  flex-shrink: 0;
+}
+
+.eyebrow-text {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--col-rust);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 720px;
+}
+
+.headline-en {
+  font-family: var(--font-serif);
+  font-size: clamp(5rem, 14vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--col-ink);
+  /* Skewed — echoing the MACRO_STRUCTURE diagonal */
+  display: inline-block;
+  transform: skewX(calc(var(--diag-skew) * -0.4));
+  transform-origin: bottom left;
+}
+
+.headline-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--col-charcoal);
+  letter-spacing: 0.02em;
+  padding-left: 0.25rem;
+}
+
+.hero-desc {
+  font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+  line-height: 1.75;
+  color: var(--col-charcoal);
+  max-width: 480px;
+  opacity: 0.85;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--sp-sm);
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  border: 2px solid transparent;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--col-rust);
+  color: var(--col-cream);
+  border-color: var(--col-rust);
+}
+
+.btn--primary:hover {
+  background: var(--col-charcoal);
+  border-color: var(--col-charcoal);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--col-ink);
+  border-color: var(--col-ink);
+}
+
+.btn--ghost:hover {
+  background: var(--col-ink);
+  color: var(--col-cream);
+  transform: translateY(-2px);
+}
+
+/* Hero meta */
+.hero-meta {
+  padding-top: var(--sp-sm);
+  border-top: 1px solid rgba(26, 21, 16, 0.12);
+  max-width: 620px;
+}
+
+.meta-list {
+  display: flex;
+  gap: var(--sp-lg);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.meta-item dt {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--col-rust);
+  opacity: 0.9;
+}
+
+.meta-item dd {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--col-charcoal);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── SECTION COMMON ──────────────────────────────────── */
+.section {
+  padding: var(--sp-2xl) 0;
+  position: relative;
+}
+
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+
+.section-header {
+  max-width: 680px;
+  margin-bottom: var(--sp-lg);
+}
+
+.section-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--col-rust);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-tag::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5px;
+  background: var(--col-rust);
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--col-ink);
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--col-charcoal);
+  opacity: 0.8;
+}
+
+/* ── SPEAKERS ─────────────────────────────────────────── */
+.speakers {
+  background: var(--col-cream);
+}
+
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.speaker-card {
+  /* Diagonal tilt on card — echoing MACRO_STRUCTURE */
+  position: relative;
+}
+
+.speaker-fig {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  /* Subtle diagonal top border in rust — vintage poster stamp */
+  border-top: 4px solid var(--col-mustard);
+}
+
+.speaker-fig img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.speaker-card:hover .speaker-fig img {
+  transform: scale(1.04);
+}
+
+.speaker-caption {
+  padding: 1rem 0.875rem 1rem;
+  background: var(--col-parchment);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.speaker-field {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--col-rust);
+}
+
+.speaker-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--col-ink);
+  font-weight: 400;
+}
+
+.speaker-org {
+  font-size: 0.8rem;
+  color: var(--col-charcoal);
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+
+.speakers-more {
+  margin-top: var(--sp-md);
+  font-size: 0.875rem;
+  color: var(--col-charcoal);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
+
+/* ── SCHEDULE ─────────────────────────────────────────── */
+.schedule {
+  background: var(--col-parchment);
+  position: relative;
+}
+
+.schedule::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  /* Vintage stripe divider */
+  background: repeating-linear-gradient(
+    90deg,
+    var(--col-rust) 0,
+    var(--col-rust) 24px,
+    transparent 24px,
+    transparent 32px
+  );
+}
+
+/* Tab controls */
+.schedule-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: var(--sp-md);
+  border-bottom: 1.5px solid rgba(26, 21, 16, 0.15);
+}
+
+.tab-btn {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  margin-bottom: -1.5px;
+  color: var(--col-charcoal);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  font-variant-numeric: tabular-nums;
+}
+
+.tab-btn:hover {
+  color: var(--col-rust);
+}
+
+.tab-btn--active {
+  color: var(--col-rust);
+  border-bottom-color: var(--col-rust);
+}
+
+.schedule-panel--hidden {
+  display: none;
+}
+
+/* Timetable */
+.timetable {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timetable-row {
+  display: grid;
+  grid-template-columns: 3.5rem 4rem 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(26, 21, 16, 0.08);
+  transition: background 0.15s ease;
+}
+
+.timetable-row:hover {
+  background: rgba(26, 21, 16, 0.03);
+  border-radius: 2px;
+}
+
+.timetable-row--break {
+  opacity: 0.55;
+  font-style: italic;
+}
+
+.tt-time {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--col-rust);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tt-track {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--col-slate);
+  background: rgba(46, 74, 107, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 1px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tt-title {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--col-ink);
+}
+
+.tt-speaker {
+  font-size: 0.8rem;
+  color: var(--col-charcoal);
+  opacity: 0.65;
+}
+
+.tt-venue {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--col-charcoal);
+  opacity: 0.5;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ── TICKETS ──────────────────────────────────────────── */
+.tickets {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: var(--sp-2xl);
+}
+
+/* Colorfield state transition in tickets — VISUAL_MECHANISM */
+.tickets-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ticket-colorfield {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.ticket-colorfield--warm {
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 90%;
+  background: radial-gradient(ellipse at 40% 30%, rgba(232, 168, 39, 0.22) 0%, transparent 65%);
+}
+
+.ticket-colorfield--cool {
+  bottom: -20%;
+  right: -10%;
+  width: 70%;
+  height: 90%;
+  background: radial-gradient(ellipse at 60% 70%, rgba(46, 74, 107, 0.18) 0%, transparent 60%);
+}
+
+/* Diagonal divider in tickets section */
+.ticket-diagonal {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    164deg,
+    var(--col-cream) 0%,
+    var(--col-cream) 50%,
+    var(--col-parchment) 50%,
+    var(--col-parchment) 100%
+  );
+  z-index: -1;
+}
+
+.tickets-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.tickets-title {
+  color: var(--col-ink);
+}
+
+/* Ticket cards grid */
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 960px;
+}
+
+.ticket-card {
+  background: var(--col-cream);
+  border: 1.5px solid rgba(26, 21, 16, 0.12);
+  border-radius: 3px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  /* Slight diagonal tilt — MACRO_STRUCTURE echo */
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ticket-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-top: 40px solid var(--col-mustard);
+  opacity: 0.35;
+}
+
+.ticket-card:hover {
+  transform: translateY(-4px);
+}
+
+.ticket-card--featured {
+  border-color: var(--col-rust);
+  background: var(--col-parchment);
+}
+
+.ticket-card--featured::before {
+  border-top-color: var(--col-rust);
+  opacity: 0.5;
+}
+
+.ticket-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ticket-type {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--col-ink);
+}
+
+.ticket-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  background: rgba(200, 75, 47, 0.12);
+  color: var(--col-rust);
+  border-radius: 1px;
+  white-space: nowrap;
+}
+
+.ticket-badge--neutral {
+  background: rgba(26, 21, 16, 0.08);
+  color: var(--col-charcoal);
+}
+
+.ticket-badge--vip {
+  background: rgba(74, 124, 95, 0.12);
+  color: var(--col-sage);
+}
+
+.ticket-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+}
+
+.price-num {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--col-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.price-unit {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--col-charcoal);
+  opacity: 0.7;
+}
+
+.ticket-includes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ticket-includes li {
+  font-size: 0.875rem;
+  color: var(--col-charcoal);
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.ticket-includes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--col-mustard);
+}
+
+.btn--ticket {
+  background: var(--col-slate);
+  color: var(--col-cream);
+  border-color: var(--col-slate);
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+}
+
+.btn--ticket:hover {
+  background: var(--col-ink);
+  border-color: var(--col-ink);
+  transform: translateY(-2px);
+}
+
+.btn--ticket-featured {
+  background: var(--col-rust);
+  border-color: var(--col-rust);
+}
+
+.btn--ticket-featured:hover {
+  background: var(--col-charcoal);
+  border-color: var(--col-charcoal);
+}
+
+.tickets-note {
+  margin-top: var(--sp-md);
+  font-size: 0.875rem;
+  color: var(--col-charcoal);
+  opacity: 0.7;
+}
+
+.tickets-note a {
+  color: var(--col-rust);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── FOOTER ───────────────────────────────────────────── */
+.site-footer {
+  background: var(--col-ink);
+  color: var(--col-parchment);
+  padding: var(--sp-lg) 0 var(--sp-md);
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: auto auto;
+  gap: 1.5rem var(--sp-lg);
+  align-items: start;
+}
+
+.footer-brand {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--col-cream);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.footer-tagline {
+  font-size: 0.8125rem;
+  color: var(--col-parchment);
+  opacity: 0.55;
+  letter-spacing: 0.04em;
+}
+
+.footer-nav {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-nav a {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--col-parchment);
+  opacity: 0.65;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+
+.footer-nav a:hover { opacity: 1; }
+
+.footer-social {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-social a {
+  color: var(--col-parchment);
+  opacity: 0.55;
+  transition: opacity 0.2s, transform 0.15s ease;
+  display: inline-flex;
+}
+
+.footer-social a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.footer-copy {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: 0.75rem;
+  color: var(--col-parchment);
+  opacity: 0.35;
+  border-top: 1px solid rgba(245, 237, 224, 0.1);
+  padding-top: 1rem;
+}
+
+/* ── REVEAL ELEMENTS (JS enhancement) ───────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  /* transition is handled by GSAP, this is the initial state */
+}
+
+/* ── REDUCED MOTION — restore all to final visible state ── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-colorfield,
+  .cf-zone {
+    /* No animation */
+  }
+
+  .speaker-card:hover .speaker-fig img {
+    transform: none;
+  }
+
+  .btn:hover,
+  .nav-cta:hover,
+  .footer-social a:hover,
+  .ticket-card:hover {
+    transform: none;
+  }
+
+  /* Remove animated path drawing */
+  .route-path {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root {
+    --sp-xl: 4.5rem;
+    --sp-2xl: 7rem;
+  }
+
+  .speakers-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .timetable-row {
+    grid-template-columns: 3rem 3.5rem 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .tt-venue {
+    display: none;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .footer-social {
+    grid-column: 2;
+    grid-row: 1;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .footer-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-content {
+    padding-top: calc(var(--sp-xl) + 1rem);
+  }
+
+  .hero-route {
+    width: 90%;
+    opacity: 0.3;
+    bottom: -5%;
+  }
+
+  .speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .speaker-fig img {
+    height: 260px;
+  }
+
+  .timetable-row {
+    grid-template-columns: 3rem 1fr;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .tt-track {
+    display: none;
+  }
+
+  .tickets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .meta-list {
+    gap: var(--sp-md);
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-social {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: row;
+  }
+
+  .footer-nav {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+/* ── COLORFIELD TRANSITION ANIMATION (JS-driven via GSAP) ──
+   Initial state for scroll-driven colorfield transition.
+   Actual animation: transform + opacity only (THE LAW). */
+.cf-zone--a,
+.cf-zone--b,
+.cf-zone--c {
+  will-change: auto; /* set by JS only when animating */
+}

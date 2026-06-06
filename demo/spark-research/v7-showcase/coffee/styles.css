@@ -1,0 +1,1070 @@
+/* ============================================================
+   정오 로스터리 — styles.css
+   Persona: 보태니컬 세밀화가
+   Governing metaphor: 일조계의 필름 — 정오의 빛이 원두 위에 타임라인을 새긴다
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Lenis scroll guard (FLOOR requirement)
+   ------------------------------------------------------------ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* No smooth scroll on html element (Lenis replaces it) */
+html {
+  /* scroll-behavior: smooth — FORBIDDEN with Lenis */
+  scroll-behavior: auto;
+}
+
+/* ------------------------------------------------------------
+   Design tokens
+   ------------------------------------------------------------ */
+:root {
+  /* Parchment palette — botanical illustration base */
+  --parchment:      #f5f0e8;
+  --parchment-mid:  #ede6d4;
+  --parchment-warm: #e8dfc8;
+  --ink:            #2a2118;
+  --ink-60:         #2a211899;
+  --ink-30:         #2a21184d;
+  --amber:          #c8893a;
+  --amber-light:    #e8b86a;
+  --green-bean:     #8aab6e;
+  --roast-brown:    #8b5a2b;
+  --cream:          #faf7f2;
+
+  /* Typography */
+  --font-kr:  'Pretendard Variable', 'Pretendard', sans-serif;
+  --font-en:  'IM Fell English', Georgia, serif;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  8rem;
+
+  /* Transitions */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* ------------------------------------------------------------
+   Base reset
+   ------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-kr);
+  background-color: var(--parchment);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 1rem;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   Focus visible (accessibility)
+   ------------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------
+   Typography helpers
+   ------------------------------------------------------------ */
+.en-italic {
+  font-family: var(--font-en);
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+/* ------------------------------------------------------------
+   Buttons
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  font-family: var(--font-kr);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  border: 1.5px solid transparent;
+}
+.btn:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background-color: var(--ink);
+  color: var(--parchment);
+  border-color: var(--ink);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn-nav {
+  background-color: var(--amber);
+  color: var(--parchment);
+  border-color: var(--amber);
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8125rem;
+}
+
+/* ------------------------------------------------------------
+   Site Header
+   ------------------------------------------------------------ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem var(--space-md);
+  background-color: var(--parchment);
+  border-bottom: 1px solid var(--ink-30);
+  /* NO backdrop-filter — static background only, per THE LAW */
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.logo-kr {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.logo-en {
+  font-family: var(--font-en);
+  font-size: 0.9375rem;
+  color: var(--ink-60);
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 2rem;
+}
+.main-nav a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-60);
+  transition: color 0.2s;
+}
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------
+   Hero Section
+   ------------------------------------------------------------ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding-top: 80px; /* header height */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-md);
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  background-color: var(--parchment);
+  overflow: hidden;
+}
+
+/* Parchment texture lines — botanical illustration paper feel (static, no animation) */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      var(--ink-30) 40px
+    );
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+}
+
+.hero-label {
+  font-size: 0.8125rem;
+  color: var(--amber);
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+}
+
+.hero-headline {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  margin-bottom: 1.25rem;
+}
+
+.hero-sub {
+  font-size: 1.0625rem;
+  color: var(--ink-60);
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+/* ------------------------------------------------------------
+   Hero Dial — central single object
+   ------------------------------------------------------------ */
+.hero-dial-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  /* Dial container — NO transform animation here, only the inner dial rotates */
+}
+
+.dial-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--ink-30);
+  pointer-events: none;
+}
+.dial-ring--outer {
+  width: 105%;
+  aspect-ratio: 1;
+  border-style: dashed;
+  border-width: 0.5px;
+  border-color: var(--ink-30);
+}
+.dial-ring--mid {
+  width: 85%;
+  aspect-ratio: 1;
+  border-width: 0.8px;
+  border-color: var(--ink-30);
+}
+
+.dial-svg {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  /* The SVG itself will be transform-rotated by JS via GSAP — composite-only */
+  will-change: transform;
+}
+
+/* Satellite annotation labels */
+.sat-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  pointer-events: none;
+}
+.sat-key {
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--amber);
+  letter-spacing: 0.06em;
+}
+.sat-val {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+/* Satellite positions around the dial */
+.sat-label--top    { top: 1%;  left: 50%; transform: translateX(-50%); text-align: center; }
+.sat-label--ne     { top: 16%; right: 2%; text-align: right; }
+.sat-label--se     { bottom: 18%; right: 2%; text-align: right; }
+.sat-label--bottom { bottom: 1%; left: 50%; transform: translateX(-50%); text-align: center; }
+.sat-label--sw     { bottom: 18%; left: 2%; text-align: left; }
+.sat-label--nw     { top: 16%; left: 2%; text-align: left; }
+
+/* Film strip — scroll timeline metaphor */
+.film-strip {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+.film-frame {
+  width: 28px;
+  height: 18px;
+  border: 1px solid var(--ink-60);
+  border-radius: 1px;
+  position: relative;
+}
+.film-frame::before,
+.film-frame::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 4px;
+  background: var(--parchment);
+  border: 0.5px solid var(--ink-30);
+  border-radius: 0.5px;
+}
+.film-frame::before { top: -3px; left: 50%; transform: translateX(-50%); }
+.film-frame::after  { bottom: -3px; left: 50%; transform: translateX(-50%); }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 3;
+}
+.scroll-cue span {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-60);
+  text-transform: uppercase;
+}
+.scroll-dot {
+  /* animate only transform + opacity — THE LAW */
+  transform-origin: 12px 20px;
+  animation: scrollDotDrop 2s var(--ease-in-out) infinite;
+}
+@keyframes scrollDotDrop {
+  0%, 100% { transform: translateY(0);   opacity: 1; }
+  60%       { transform: translateY(12px); opacity: 0.3; }
+}
+
+/* ------------------------------------------------------------
+   Timeline Section — 스크롤 = 로스팅 타임라인 (영화 필름)
+   ------------------------------------------------------------ */
+.timeline-section {
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--parchment-warm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Vertical timeline rule — the "film" strip */
+.timeline-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--ink-30) 0,
+    var(--ink-30) 20px,
+    transparent 20px,
+    transparent 32px
+  );
+}
+
+.timeline-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-chapter {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: var(--space-md);
+  background: var(--cream);
+  border: 1px solid var(--ink-30);
+  border-left: 3px solid var(--amber);
+  position: relative;
+  /* Reveal animation: starts invisible, JS will animate opacity+transform */
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Film-frame corner holes */
+.timeline-chapter::before,
+.timeline-chapter::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--parchment-warm);
+  border: 1px solid var(--ink-30);
+}
+.timeline-chapter::before { top: -7px; left: 20px; }
+.timeline-chapter::after  { top: -7px; right: 20px; }
+
+.chapter-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.chapter-time,
+.chapter-temp {
+  font-family: var(--font-en);
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--amber);
+}
+.chapter-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: 0.75rem;
+}
+.chapter-desc {
+  font-size: 0.9375rem;
+  color: var(--ink-60);
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   Single Origin Section
+   ------------------------------------------------------------ */
+.origin-section {
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--parchment);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-lg);
+}
+.section-eyebrow {
+  font-size: 0.8125rem;
+  color: var(--amber);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  margin-bottom: 0.75rem;
+}
+.section-sub {
+  font-size: 1rem;
+  color: var(--ink-60);
+}
+
+.origin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.origin-card {
+  border: 1px solid var(--ink-30);
+  background: var(--cream);
+  overflow: hidden;
+  /* Reveal state for JS */
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.origin-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.origin-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  /* NO transform animation on img — it has no animated overlay */
+}
+
+.origin-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--parchment);
+  border: 1px solid var(--ink-30);
+  padding: 0.25rem 0.75rem;
+}
+.badge-country {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-60);
+  letter-spacing: 0.06em;
+}
+
+.origin-body {
+  padding: 1.5rem;
+}
+.origin-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+.origin-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+.meta-row {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+}
+.meta-row dt {
+  color: var(--ink-60);
+  min-width: 3rem;
+  flex-shrink: 0;
+}
+.meta-row dd {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.tasting-label {
+  font-size: 0.75rem;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+.tasting-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+.tasting-notes li {
+  font-size: 0.8125rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--ink-30);
+  border-radius: 1px;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+/* ------------------------------------------------------------
+   Roasting Notes Section
+   ------------------------------------------------------------ */
+.roasting-section {
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--ink);
+  color: var(--parchment);
+}
+
+.roasting-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.roasting-section .section-eyebrow {
+  color: var(--amber-light);
+}
+.roasting-section .section-title {
+  color: var(--parchment);
+}
+
+.roasting-intro {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--parchment);
+  opacity: 0.78;
+  margin-bottom: var(--space-md);
+}
+
+.roast-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.stat-item {
+  border-top: 1px solid var(--parchment);
+  padding-top: 0.75rem;
+  opacity: 0.7;
+}
+.stat-item dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber-light);
+  margin-bottom: 0.25rem;
+}
+.stat-item dd {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--parchment);
+}
+
+.roasting-visual {
+  position: relative;
+  /* Reveal */
+  opacity: 0;
+  transform: translateY(24px);
+}
+.roasting-photo {
+  width: 100%;
+  height: 540px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Botanical annotation overlay — STATIC, no animation */
+.botanical-overlay {
+  position: absolute;
+  top: 1.5rem;
+  left: -2rem;
+  width: 220px;
+  pointer-events: none;
+}
+.botanical-svg {
+  width: 100%;
+  height: auto;
+}
+
+/* ------------------------------------------------------------
+   Subscribe Section
+   ------------------------------------------------------------ */
+.subscribe-section {
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--parchment-warm);
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.plan-card {
+  border: 1px solid var(--ink-30);
+  background: var(--cream);
+  padding: 2rem;
+  position: relative;
+  /* Reveal */
+  opacity: 0;
+  transform: translateY(24px);
+}
+.plan-card--featured {
+  background: var(--ink);
+  color: var(--parchment);
+  border-color: var(--ink);
+  /* Slightly taller via padding */
+  padding: 2.5rem 2rem;
+}
+
+.plan-head {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+.plan-tier {
+  font-size: 0.8125rem;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.plan-card--featured .plan-tier {
+  color: var(--amber-light);
+}
+.plan-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.plan-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--amber);
+  color: var(--parchment);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  text-transform: uppercase;
+}
+
+.plan-price {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ink-30);
+  padding-bottom: 1.25rem;
+}
+.plan-card--featured .plan-price {
+  border-color: var(--parchment);
+  opacity: 0.7;
+}
+.plan-price strong {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.plan-unit {
+  font-size: 0.8125rem;
+  opacity: 0.7;
+}
+
+.plan-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  font-size: 0.9375rem;
+}
+.plan-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.plan-features svg {
+  flex-shrink: 0;
+}
+
+.plan-card--featured .btn-primary {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--ink);
+}
+.plan-card--featured .btn-outline {
+  border-color: var(--parchment);
+  color: var(--parchment);
+}
+
+/* ------------------------------------------------------------
+   Visit Section
+   ------------------------------------------------------------ */
+.visit-section {
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--parchment);
+}
+
+.visit-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.visit-photo-wrap {
+  position: relative;
+  opacity: 0;
+  transform: translateY(24px);
+}
+.visit-photo {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Film frame decoration corners (static, decorative) */
+.film-frame-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ff-hole {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--parchment);
+  border: 1px solid var(--ink-30);
+}
+.ff-hole--tl { top: 12px; left: 12px; }
+.ff-hole--tr { top: 12px; right: 12px; }
+.ff-hole--bl { bottom: 12px; left: 12px; }
+.ff-hole--br { bottom: 12px; right: 12px; }
+
+.visit-text {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.visit-desc {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--ink-60);
+  margin-bottom: var(--space-md);
+}
+
+.visit-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: var(--space-md);
+}
+.info-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.info-row dt {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--ink-60);
+  min-width: 3rem;
+  flex-shrink: 0;
+  padding-top: 0.1em;
+}
+.info-row dd {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------ */
+.site-footer {
+  background: var(--ink);
+  color: var(--parchment);
+  padding: var(--space-md);
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+.footer-brand .logo-en {
+  color: var(--parchment);
+  opacity: 0.6;
+}
+.footer-tagline {
+  width: 100%;
+  font-size: 0.8125rem;
+  color: var(--parchment);
+  opacity: 0.5;
+  margin-top: -0.25rem;
+}
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-nav a {
+  font-size: 0.875rem;
+  color: var(--parchment);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  opacity: 1;
+}
+.footer-copy {
+  font-size: 0.8125rem;
+  color: var(--parchment);
+  opacity: 0.4;
+}
+
+/* ------------------------------------------------------------
+   Dial tick marks (drawn by JS, fallback hidden; container exists)
+   ------------------------------------------------------------ */
+.dial-ticks line {
+  stroke-linecap: round;
+}
+
+/* Roast arc segments — phase colors */
+.arc-green  { stroke: var(--green-bean); }
+.arc-yellow { stroke: var(--amber); }
+.arc-brown  { stroke: var(--roast-brown); }
+
+/* Satellite dots pulse (static amber glow — CSS, not animated blur) */
+.sat-dot {
+  transition: opacity 0.3s;
+}
+
+/* ============================================================
+   Reveal initial states
+   (JS will animate these; reduced-motion overrides below)
+   ============================================================ */
+.hero-copy,
+.hero-dial-wrap {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+  .hero-copy {
+    max-width: 100%;
+    order: 1;
+  }
+  .hero-dial-wrap {
+    order: 2;
+    max-width: 360px;
+  }
+  .sat-label {
+    display: none; /* hide satellite labels on small screens */
+  }
+  .roasting-inner,
+  .visit-inner {
+    grid-template-columns: 1fr;
+  }
+  .roasting-visual,
+  .visit-photo-wrap {
+    order: -1;
+  }
+  .botanical-overlay {
+    display: none;
+  }
+  .timeline-section::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --space-md: 1.25rem;
+    --space-lg: 2.5rem;
+    --space-xl: 5rem;
+  }
+  .main-nav,
+  .btn-nav {
+    display: none;
+  }
+  .plan-grid,
+  .origin-grid {
+    grid-template-columns: 1fr;
+  }
+  .roast-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION — restore all reveal elements to final visible state
+   (FLOOR requirement: opacity:1, transform:none immediately)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Kill scroll-triggered reveal states */
+  .hero-copy,
+  .hero-dial-wrap,
+  .timeline-chapter,
+  .origin-card,
+  .roasting-visual,
+  .visit-photo-wrap,
+  .visit-text,
+  .plan-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Kill the scroll dot bounce */
+  .scroll-dot {
+    animation: none !important;
+  }
+
+  /* Kill dial rotation */
+  .dial-svg {
+    animation: none !important;
+    will-change: auto;
+  }
+}

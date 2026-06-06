@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>절기(節氣) · 제철 한식 파인다이닝</title>
+  <meta name="description" content="24절기의 흐름에 따라 재료와 메뉴가 바뀌는 한식 파인다이닝. 셰프의 계절 코스를 예약제로 운영합니다." />
+
+  <!-- Pretendard (Korean) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <!-- DM Serif Display · English pairing (인디 레코드 커버 감각) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" />
+
+  <!-- Lenis CSS reset -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css" />
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ======================================================
+     SKIP LINK
+====================================================== -->
+<a href="#main-content" class="skip-link">본문 바로가기</a>
+
+<!-- ======================================================
+     HEADER
+====================================================== -->
+<header class="site-header" role="banner">
+  <a href="#" class="site-logo" aria-label="절기 홈으로">
+    <span class="site-logo__ko">절기</span>
+    <span class="site-logo__hanja" aria-hidden="true">節氣</span>
+  </a>
+  <nav class="site-nav" aria-label="주 메뉴">
+    <ul role="list">
+      <li><a href="#course">코스</a></li>
+      <li><a href="#dishes">요리</a></li>
+      <li><a href="#reservation">예약</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+    <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true" focusable="false">
+      <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="0" y1="7" x2="22" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="0" y1="13" x2="22" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+</header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-modal="true" aria-label="모바일 메뉴">
+  <button class="mobile-menu__close" aria-label="메뉴 닫기">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+      <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav aria-label="모바일 주 메뉴">
+    <ul role="list">
+      <li><a href="#course">코스</a></li>
+      <li><a href="#dishes">요리</a></li>
+      <li><a href="#reservation">예약</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
+<main id="main-content">
+
+  <!-- ===================================================
+       HERO
+       MACRO_STRUCTURE: 가장자리로 밀린 극단적 여백
+       VISUAL_MECHANISM: 타입·이미지 스크램블 / 셔플
+       PERSONA: 인디 음반 커버 일러스트레이터
+       WILD_CONCEPT: 미니멀리즘의 정수 → 달력 위의 타이포그래피
+       레이아웃: 좌상단 절기 번호 인덱스 + 우하단 헤드라인
+       중앙은 거대한 여백 · 스크램블 글자들의 빈 무대
+  =================================================== -->
+  <section class="hero" aria-label="히어로 섹션">
+
+    <!-- 왼쪽 가장자리 · 절기 인덱스 번호 컬럼 (vinyl track listing처럼) -->
+    <aside class="hero__track-index" aria-hidden="true">
+      <span class="hero__index-title">節氣</span>
+      <ol class="hero__index-list">
+        <li data-n="01">입춘</li>
+        <li data-n="02">우수</li>
+        <li data-n="03">경칩</li>
+        <li data-n="04">춘분</li>
+        <li data-n="05">청명</li>
+        <li data-n="06">곡우</li>
+        <li data-n="07">입하</li>
+        <li data-n="08">소만</li>
+        <li data-n="09" class="is-now">망종</li>
+        <li data-n="10">하지</li>
+        <li data-n="11">소서</li>
+        <li data-n="12">대서</li>
+        <li data-n="13">입추</li>
+        <li data-n="14">처서</li>
+        <li data-n="15">백로</li>
+        <li data-n="16">추분</li>
+        <li data-n="17">한로</li>
+        <li data-n="18">상강</li>
+        <li data-n="19">입동</li>
+        <li data-n="20">소설</li>
+        <li data-n="21">대설</li>
+        <li data-n="22">동지</li>
+        <li data-n="23">소한</li>
+        <li data-n="24">대한</li>
+      </ol>
+    </aside>
+
+    <!-- 중앙 여백 · 스크램블 글자 무대 (JS enhancement) -->
+    <div class="hero__center" aria-hidden="true">
+      <!-- 정적 폴백: JS없이도 보이는 한자 -->
+      <div class="hero__static-mark" id="heroStaticMark">節氣</div>
+      <!-- JS가 스크램블 캔버스 역할 -->
+      <div class="hero__scramble-stage" id="scrambleStage"></div>
+    </div>
+
+    <!-- 오른쪽 하단 · 헤드라인 블록 (DOM 완성형 텍스트) -->
+    <div class="hero__copy">
+      <div class="hero__copy-inner">
+        <p class="hero__eyebrow">
+          <span class="tabular-nums">24</span>절기 코스 · 예약제
+        </p>
+        <h1 class="hero__headline">
+          <span class="hero__headline-en">Jeolgi</span>
+          <span class="hero__headline-ko" id="heroHeadline">제철의 언어로<br />차려낸 한 상</span>
+        </h1>
+        <p class="hero__desc">
+          스물넷의 절기가 한 해를 이루듯,<br />
+          계절이 부르는 재료만이 상에 오릅니다.
+        </p>
+        <a href="#reservation" class="cta-primary">
+          예약 문의
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 현재 절기 표시 · 상단 오른쪽 작은 레이블 -->
+    <div class="hero__season-tag" aria-label="현재 절기 정보">
+      <span class="hero__season-num tabular-nums">09</span>
+      <span class="hero__season-name">망종 芒種</span>
+      <span class="hero__season-period tabular-nums">6.6 ~ 6.20</span>
+    </div>
+
+    <!-- 하단 스크롤 힌트 -->
+    <div class="hero__scroll" aria-hidden="true">
+      <svg width="1" height="48" viewBox="0 0 1 48" fill="none" aria-hidden="true" focusable="false">
+        <line x1="0.5" y1="0" x2="0.5" y2="48" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+      </svg>
+    </div>
+
+  </section>
+
+  <!-- ===================================================
+       SECTION: 코스 안내
+  =================================================== -->
+  <section class="section section--course" id="course" aria-labelledby="course-title">
+    <div class="section__inner">
+
+      <header class="section__head">
+        <p class="eyebrow">코스 안내</p>
+        <h2 class="section__title" id="course-title">24절기 셰프 코스</h2>
+      </header>
+
+      <div class="course__body">
+        <div class="course__lead reveal">
+          <p class="course__lead-text">
+            입춘부터 대한까지. 절기가 바뀔 때마다 셰프는 메뉴를 새로 씁니다. 그 땅, 그 계절의 재료만이 상에 오릅니다. 냉동·수입 재료는 쓰지 않습니다.
+          </p>
+        </div>
+
+        <ol class="course__tracks" aria-label="절기 코스 목록">
+          <li class="track reveal" data-track="01">
+            <span class="track__num tabular-nums">01</span>
+            <div class="track__body">
+              <strong class="track__name">입춘 立春 · 봄 냉채 Opening</strong>
+              <p class="track__desc">두릅·달래·씀바귀 삼합. 봄의 첫 숨결로 미각을 깨웁니다.</p>
+            </div>
+          </li>
+          <li class="track reveal" data-track="03">
+            <span class="track__num tabular-nums">03</span>
+            <div class="track__body">
+              <strong class="track__name">경칩 驚蟄 · 황태 구이</strong>
+              <p class="track__desc">땅이 깨어나는 날. 황태·더덕구이에 항아리 된장을 곁들입니다.</p>
+            </div>
+          </li>
+          <li class="track track--current reveal" data-track="09" aria-current="true">
+            <span class="track__num tabular-nums">09</span>
+            <div class="track__body">
+              <strong class="track__name">망종 芒種 · 지금 이 순간</strong>
+              <p class="track__desc">청보리 비빔밥, 매실 소스 돼지 수육, 풋고추 장아찌. 보리가 익고 씨를 심는 절기.</p>
+            </div>
+            <span class="track__badge">현재</span>
+          </li>
+          <li class="track reveal" data-track="16">
+            <span class="track__num tabular-nums">16</span>
+            <div class="track__body">
+              <strong class="track__name">추분 秋分 · 전어 Main</strong>
+              <p class="track__desc">가을 전어구이와 햅쌀. 한 해에서 가장 풍성한 상차림.</p>
+            </div>
+          </li>
+          <li class="track reveal" data-track="24">
+            <span class="track__num tabular-nums">24</span>
+            <div class="track__body">
+              <strong class="track__name">대한 大寒 · 식혜 Finale</strong>
+              <p class="track__desc">한 해의 끝. 전통 식혜와 한과로 마무리하며 다음 입춘을 기약합니다.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="course__specs reveal">
+          <dl class="spec-grid">
+            <div class="spec-item">
+              <dt>구성</dt>
+              <dd><span class="tabular-nums">8</span>~<span class="tabular-nums">10</span>가지 코스</dd>
+            </div>
+            <div class="spec-item">
+              <dt>좌석</dt>
+              <dd><span class="tabular-nums">12</span>석</dd>
+            </div>
+            <div class="spec-item">
+              <dt>가격</dt>
+              <dd><span class="tabular-nums">195,000</span>원/인</dd>
+            </div>
+            <div class="spec-item">
+              <dt>소요 시간</dt>
+              <dd>약 <span class="tabular-nums">2</span>시간 <span class="tabular-nums">30</span>분</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION: 시그니처 요리 갤러리
+  =================================================== -->
+  <section class="section section--dishes" id="dishes" aria-labelledby="dishes-title">
+    <div class="section__inner">
+
+      <header class="section__head">
+        <p class="eyebrow">시그니처 요리</p>
+        <h2 class="section__title" id="dishes-title">계절이 그린 접시들</h2>
+      </header>
+
+      <ul class="dishes-grid" role="list" aria-label="시그니처 요리 갤러리">
+
+        <li class="dish-item dish-item--feature reveal">
+          <figure>
+            <div class="dish-item__img-wrap">
+              <img
+                src="https://picsum.photos/seed/jeolgi-maincourse/900/600"
+                alt="망종 메인 코스 · 청보리 비빔밥과 매실 소스"
+                width="900"
+                height="600"
+                loading="eager"
+              />
+            </div>
+            <figcaption class="dish-item__cap">
+              <span class="dish-item__jeoigi">망종 芒種</span>
+              <span class="dish-item__name">청보리 비빔밥 · 매실 수육</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="dish-item reveal">
+          <figure>
+            <div class="dish-item__img-wrap">
+              <img
+                src="https://picsum.photos/seed/jeolgi-spring-herb/600/750"
+                alt="봄 나물 삼합 냉채 · 두릅, 달래, 씀바귀"
+                width="600"
+                height="750"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="dish-item__cap">
+              <span class="dish-item__jeoigi">입춘 立春</span>
+              <span class="dish-item__name">봄 나물 냉채</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="dish-item reveal">
+          <figure>
+            <div class="dish-item__img-wrap">
+              <img
+                src="https://picsum.photos/seed/jeolgi-bamboo-tea/600/750"
+                alt="죽순과 첫물 녹차를 활용한 곡우 코스"
+                width="600"
+                height="750"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="dish-item__cap">
+              <span class="dish-item__jeoigi">곡우 穀雨</span>
+              <span class="dish-item__name">죽순 · 첫물 녹차</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="dish-item reveal">
+          <figure>
+            <div class="dish-item__img-wrap">
+              <img
+                src="https://picsum.photos/seed/jeolgi-autumn-fish/600/750"
+                alt="가을 전어구이와 햅쌀 밥상"
+                width="600"
+                height="750"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="dish-item__cap">
+              <span class="dish-item__jeoigi">추분 秋分</span>
+              <span class="dish-item__name">전어구이 · 햅쌀</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="dish-item reveal">
+          <figure>
+            <div class="dish-item__img-wrap">
+              <img
+                src="https://picsum.photos/seed/jeolgi-winter-root/600/750"
+                alt="겨울 뿌리채소와 동치미 코스"
+                width="600"
+                height="750"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="dish-item__cap">
+              <span class="dish-item__jeoigi">동지 冬至</span>
+              <span class="dish-item__name">동치미 · 뿌리의 겨울</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="dish-item dish-item--wide reveal">
+          <figure>
+            <div class="dish-item__img-wrap">
+              <img
+                src="https://picsum.photos/seed/jeolgi-dining-room/1200/500"
+                alt="절기 다이닝룸 전경 · 12석 예약제 공간"
+                width="1200"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="dish-item__cap">
+              <span class="dish-item__jeoigi">공간</span>
+              <span class="dish-item__name">절기 다이닝룸 · 서울 북촌</span>
+            </figcaption>
+          </figure>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION: 철학 / 셰프 노트
+  =================================================== -->
+  <section class="section section--philosophy" aria-labelledby="philosophy-title">
+    <div class="section__inner philosophy__inner">
+
+      <div class="philosophy__quote reveal">
+        <blockquote>
+          <p class="philosophy__q-text">
+            "절제란 뺄 것을 아는 것.<br />
+            제철 재료 앞에서는 셰프도 조수(助手)입니다."
+          </p>
+          <cite class="philosophy__cite">셰프 이정원, 절기(節氣)</cite>
+        </blockquote>
+      </div>
+
+      <div class="philosophy__text reveal">
+        <h2 class="philosophy__heading" id="philosophy-title">절제와 정성</h2>
+        <p>
+          절기(節氣)의 한자 '절(節)'은 마디이자 절제입니다. 군더더기 없이 재료 본연에 집중하는 것이 우리의 철학입니다. 미니멀리즘의 정수는 없애는 것이 아니라, 꼭 있어야 할 것만 남기는 것입니다.
+        </p>
+        <p>
+          상에 오르는 재료는 대부분 이틀을 넘기지 않습니다. 셰프가 새벽 직접 산지를 다녀오거나, 농부에게 당일 배송을 요청합니다.
+        </p>
+      </div>
+
+      <!-- Abstract SVG · 비닐 레코드 홈 다이어그램 (사진이 아닌 다이어그램이므로 SVG OK) -->
+      <div class="philosophy__diagram" aria-hidden="true">
+        <svg class="groove-diagram" viewBox="0 0 300 300" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="150" cy="150" r="145" stroke="#2e2009" stroke-width="0.5" opacity="0.15"/>
+          <circle cx="150" cy="150" r="130" stroke="#2e2009" stroke-width="0.5" opacity="0.18"/>
+          <circle cx="150" cy="150" r="115" stroke="#2e2009" stroke-width="0.5" opacity="0.2"/>
+          <circle cx="150" cy="150" r="100" stroke="#2e2009" stroke-width="0.5" opacity="0.22"/>
+          <circle cx="150" cy="150" r="85" stroke="#2e2009" stroke-width="0.5" opacity="0.24"/>
+          <circle cx="150" cy="150" r="70" stroke="#2e2009" stroke-width="0.5" opacity="0.26"/>
+          <circle cx="150" cy="150" r="55" stroke="#2e2009" stroke-width="0.5" opacity="0.28"/>
+          <circle cx="150" cy="150" r="40" stroke="#2e2009" stroke-width="0.5" opacity="0.3"/>
+          <circle cx="150" cy="150" r="20" stroke="#2e2009" stroke-width="0.5" opacity="0.35"/>
+          <circle cx="150" cy="150" r="6" fill="#2e2009" opacity="0.3"/>
+          <!-- Cardinal markers -->
+          <circle cx="150" cy="5" r="3" fill="#8b6914" opacity="0.5"/>
+          <circle cx="295" cy="150" r="3" fill="#8b6914" opacity="0.5"/>
+          <circle cx="150" cy="295" r="3" fill="#8b6914" opacity="0.5"/>
+          <circle cx="5" cy="150" r="3" fill="#8b6914" opacity="0.5"/>
+          <text x="150" y="147" text-anchor="middle" font-size="8" fill="#2e2009" opacity="0.5" font-family="'Pretendard Variable', sans-serif" font-weight="400">절기</text>
+          <text x="150" y="158" text-anchor="middle" font-size="6.5" fill="#2e2009" opacity="0.4" font-family="'DM Serif Display', serif">24</text>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SECTION: 예약 안내
+  =================================================== -->
+  <section class="section section--reservation" id="reservation" aria-labelledby="reservation-title">
+    <div class="section__inner">
+
+      <header class="section__head">
+        <p class="eyebrow">예약 안내</p>
+        <h2 class="section__title" id="reservation-title">한 상을 예약합니다</h2>
+      </header>
+
+      <div class="reservation__body">
+
+        <div class="reservation__details reveal">
+          <dl class="res-dl">
+            <div class="res-dl__row">
+              <dt>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" focusable="false">
+                  <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M7.5 4v3.5l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                운영 시간
+              </dt>
+              <dd>화 ~ 토&nbsp;&nbsp;<span class="tabular-nums">18:00</span> · <span class="tabular-nums">22:00</span></dd>
+            </div>
+            <div class="res-dl__row">
+              <dt>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" focusable="false">
+                  <rect x="1.5" y="2.5" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M5 1v3M10 1v3M1.5 6.5h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                예약 방식
+              </dt>
+              <dd>완전 예약제 (방문 <span class="tabular-nums">2</span>주 전 오픈)</dd>
+            </div>
+            <div class="res-dl__row">
+              <dt>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M7.5 2C5.6 2 4 3.6 4 5.5c0 3 3.5 7.5 3.5 7.5S11 8.5 11 5.5C11 3.6 9.4 2 7.5 2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                  <circle cx="7.5" cy="5.5" r="1.5" stroke="currentColor" stroke-width="1.2"/>
+                </svg>
+                위치
+              </dt>
+              <dd>서울 종로구 북촌로 (예약 확정 후 상세 안내)</dd>
+            </div>
+            <div class="res-dl__row">
+              <dt>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" focusable="false">
+                  <rect x="1.5" y="3" width="12" height="9" rx="1.2" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M1.5 6l6 3.5L13.5 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                이메일
+              </dt>
+              <dd><a href="mailto:reserve@jeolgi.kr" class="res-link">reserve@jeolgi.kr</a></dd>
+            </div>
+            <div class="res-dl__row">
+              <dt>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M3 2.5C3 2.5 4.5 2 5 4.5L4 6.5c1 2 4 4.5 4.5 4.5L10.5 10c2.5.5 2.5 2 2.5 2L13 13a1 1 0 01-1 1C5.5 14 1 8.5 1 3a1 1 0 011-1l1-.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                </svg>
+                전화
+              </dt>
+              <dd><a href="tel:+82220000000" class="res-link tabular-nums">02-2000-0000</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="reservation__notice reveal">
+          <h3 class="res-notice__heading">알아두실 사항</h3>
+          <ul role="list" class="res-notice__list">
+            <li>메뉴는 절기가 바뀔 때마다 완전히 교체됩니다. 확정 메뉴는 예약 후 안내드립니다.</li>
+            <li>식이 알레르기 또는 채식 여부를 예약 시 반드시 알려주세요.</li>
+            <li>만 <span class="tabular-nums">12</span>세 미만 동반 시 사전 문의 부탁드립니다.</li>
+            <li>취소는 방문 <span class="tabular-nums">48</span>시간 전까지 가능합니다.</li>
+          </ul>
+          <a href="mailto:reserve@jeolgi.kr" class="cta-primary cta-primary--dark" aria-label="이메일로 예약 문의하기">
+            예약 문의하기
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <p class="footer-brand">절기 <span class="footer-brand__hanja" aria-hidden="true">節氣</span></p>
+    <p class="footer-tagline">제철의 언어로 차려낸 한 상 · 서울 북촌</p>
+    <nav class="footer-nav" aria-label="푸터 링크">
+      <a href="#course">코스</a>
+      <a href="#dishes">요리</a>
+      <a href="#reservation">예약</a>
+      <a href="mailto:hello@jeolgi.kr">문의</a>
+    </nav>
+    <p class="footer-copy">&copy; <span class="tabular-nums" id="footerYear">2025</span> 절기(節氣). All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ======================================================
+     SCRIPTS
+====================================================== -->
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<!-- Lenis -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<!-- Site JS -->
+<script src="script.js" defer></script>
+
+</body>
+</html>

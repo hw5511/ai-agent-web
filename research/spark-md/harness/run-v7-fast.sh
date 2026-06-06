@@ -58,13 +58,30 @@ PERSONA=(
 "데이터 시각화 저널리스트"
 "빈티지 여행 포스터 화가"
 )
-pick(){ local arr=("$@"); echo "${arr[$((RANDOM % ${#arr[@]}))]}"; }
-wild(){ python3 -c "import json,random;d=json.load(open('$IDEAS'))['ideas'];print(random.choice(d)['title'])" 2>/dev/null || echo "메아리"; }
+# 배치 내 축별 비복원추출(LHS/stratified). RANDOM%len 복원추출은 작은 배치에서 단일축 충돌이 잦다
+# (수학: N=10·k=5면 단일축 충돌 ~70%, 4축 배치 99%가 충돌. N=30으로 늘려도 ~75% — 카탈로그 확장은 오답).
+# 축마다 무작위 순열을 만들어 i번째 아이템에 i번째 값을 배정 → k<=N이면 배치 내 같은 축 값 중복 0 보장.
+# (k>N이면 순열을 이어붙여 순환. 배치 *사이*의 재등장은 의도대로 허용.)
+perm_idx(){ python3 -c "import random,sys
+n,k=int(sys.argv[1]),int(sys.argv[2]); out=[]
+while len(out)<k: p=list(range(n)); random.shuffle(p); out+=p
+print(' '.join(map(str,out[:k])))" "$1" "$2"; }
+wild_n(){ python3 -c "import json,random,sys
+try: t=[x['title'] for x in json.load(open('$IDEAS'))['ideas']]
+except Exception: t=['메아리']
+k=int(sys.argv[1]); out=[]
+while len(out)<k: random.shuffle(t); out+=t
+print('\n'.join(out[:k]))" "$1" 2>/dev/null || yes "메아리" | head -n "$1"; }
 
 L="/tmp/spark-lab/$1"; shift; rm -rf "$L"; mkdir -p "$L"
+NSPECS=$#
+read -r -a MIDX <<< "$(perm_idx ${#MACRO[@]} "$NSPECS")"
+read -r -a VIDX <<< "$(perm_idx ${#VISUAL[@]} "$NSPECS")"
+read -r -a PIDX <<< "$(perm_idx ${#PERSONA[@]} "$NSPECS")"
+mapfile -t WLIST < <(wild_n "$NSPECS")
 gen(){
-  local name="$1" pf="$2"; local dir="$L/$name"; mkdir -p "$dir"; cp "$V" "$dir/CLAUDE.md"
-  local m=$(pick "${MACRO[@]}") v=$(pick "${VISUAL[@]}") p=$(pick "${PERSONA[@]}") w=$(wild)
+  local name="$1" pf="$2" idx="$3"; local dir="$L/$name"; mkdir -p "$dir"; cp "$V" "$dir/CLAUDE.md"
+  local m="${MACRO[${MIDX[$idx]}]}" v="${VISUAL[${VIDX[$idx]}]}" p="${PERSONA[${PIDX[$idx]}]}" w="${WLIST[$idx]:-메아리}"
   cat > "$L/$name.seed.txt" <<EOF
 <seed_card>
 MACRO_STRUCTURE: $m
@@ -108,9 +125,9 @@ $pc"
   local t1=$(date +%s)
   echo "$name DONE gen:${GEN_EFFORT}${fixed:+ fix:$FIX_EFFORT}${fixed} $((t1-t0))s | $(echo "$pc" | tail -1) [$m | $v | $p | $w]" >> "$L/_seeds.log"
 }
-echo "=== v7-fast 병렬 (동시 $MAXPAR, 생성 effort=$GEN_EFFORT / 교정 effort=$FIX_EFFORT, Bash 차단) ==="
-run=0
-for spec in "$@"; do IFS=':' read -r name pf <<< "$spec"; echo "  launch $name"; gen "$name" "$pf" & run=$((run+1)); [ "$run" -ge "$MAXPAR" ] && { wait -n 2>/dev/null||wait; run=$((run-1)); }; done
+echo "=== v7-fast 병렬 (동시 $MAXPAR, 생성 effort=$GEN_EFFORT / 교정 effort=$FIX_EFFORT, Bash 차단, SEED=축별 비복원배정) ==="
+run=0; idx=0
+for spec in "$@"; do IFS=':' read -r name pf <<< "$spec"; echo "  launch $name"; gen "$name" "$pf" "$idx" & run=$((run+1)); idx=$((idx+1)); [ "$run" -ge "$MAXPAR" ] && { wait -n 2>/dev/null||wait; run=$((run-1)); }; done
 wait
 echo "=== 결과(시간 포함) ==="; cat "$L/_seeds.log"
 for spec in "$@"; do IFS=':' read -r name pf <<< "$spec"; d="$L/$name"; f=""; for ef in index.html styles.css script.js; do [ -f "$d/$ef" ]&&f="$f $ef"; done; echo "  [$name]${f:- 없음}"; done
