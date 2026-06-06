@@ -25,3 +25,5 @@
 - **v4 핵심 기능 둘 다 작동**: LIGHTBULB 자가활성 ✅, 자기검수·정제 ✅(실제 버그 자가 수정).
 - **수정 필요 1건**: LIGHTBULB 픽의 `random.seed` 고정 금지 → 영감이 매번 새롭도록. (v4 STEP 0에 NEVER 추가)
 - 후속: self-critique의 scroll-behavior 점검 문구 정밀화.
+
+> 스크린샷은 라이브로 대체(샌드박스 CDN 차단으로 모션 미표시). 라이브: https://hw5511.github.io/ai-agent-web/demo/spark-research/v4-cases/

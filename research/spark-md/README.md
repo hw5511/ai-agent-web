@@ -36,7 +36,7 @@ research/spark-md/harness/run-v7-fast.sh R20_<주제> \
 - 생성된 원본 HTML 자체는 커밋하지 않는다(용량/노이즈). 필요한 경우 스크린샷과 요약으로 대체한다.
 
 ## ★ 실행 방침 — 병렬 격리 생성
-- 한 라운드의 variant/케이스는 **격리 폴더가 독립**이므로 **병렬로 동시 생성**한다(`harness/run-par.sh`, 동시상한 MAXPAR 기본 5).
+- 한 라운드의 variant/케이스는 **격리 폴더가 독립**이므로 **병렬로 동시 생성**한다(`run-v7-fast.sh`가 내장, 동시상한 `MAXPAR` 기본 5).
 - 순차 실행 금지(시간 낭비). 2개면 ~절반, 5개면 ~1/5로 단축.
 
 ## ★ 산출물 공유 방침 (항상 라이브 링크)
@@ -49,28 +49,27 @@ research/spark-md/harness/run-v7-fast.sh R20_<주제> \
 ```
 research/spark-md/
 ├── README.md            이 문서
-├── JOURNAL.md           연구일지 (라운드별 기록 — 최신이 위로)
-├── versions/            SPARK.md 후보 버전들
-│   ├── v1.md            (현행 SPARK.md 스냅샷)
-│   ├── v2-core.md       (핵심 3~4개 개선본)
-│   └── v2-full.md       (매트릭스 전체 반영본)
-├── prompts/             실험용 프롬프트 (주제별)
+├── JOURNAL.md           연구일지 (라운드별 기록 — 상단에 현재상태 TL;DR)
+├── versions/            현역 SPARK.md 버전
+│   ├── v1.md            베이스라인 스냅샷 (최초 SPARK.md)
+│   └── v7-lean.md       ★ 현행 (외부 SEED 강제배정 + 단일 성능원리 + lean)
+├── prompts/             실험용 프롬프트 (주제별: case1~5, nocturne, observatory, mokza, plain)
 ├── harness/
-│   └── run.sh           격리 러너 (레포 버전 → /tmp 랩 구성 → claude -p)
-└── experiments/
-    └── R{n}_<주제>/     라운드별 결과 (scorecard.md, *.png)
+│   ├── run-v7-fast.sh   ★ 표준 러너 (low 생성 + perfcheck + resume 교정)
+│   └── perfcheck.sh     정적 검사기 (성능 THE LAW/TRAP + 마감 em-dash/이모지/링크)
+├── experiments/         R{n}_<주제>/scorecard.md (라이브 링크 있는 라운드는 PNG 대신 링크)
+└── archive/             이력 보존 (구 버전·구 러너·구 리포트) — 재현용, 신규 작업엔 미사용
 ```
 
 ## 실험 실행
+표준 워크플로(상단 "★ 표준 생성 워크플로" 참조)로 실행한다:
 ```bash
-research/spark-md/harness/run.sh R1_mokza research/spark-md/prompts/mokza.txt \
-  base:none \
-  v1:curriculum/_assets/files/SPARK.md \
-  v2-core:research/spark-md/versions/v2-core.md
+research/spark-md/harness/run-v7-fast.sh R20_<주제> \
+  book:case1_bookstore.txt  fest:case2_festival.txt
 ```
-- 인자: `<라운드ID> <프롬프트파일> <variant>:<CLAUDE.md경로|none> ...`
-- 결과물은 `/tmp/spark-lab/<라운드ID>/<variant>/index.html` 에 생성된다.
-- 채점/스크린샷은 `experiments/<라운드ID>/` 에 정리한다.
+- 인자: `<라운드ID> <name>:<prompts/파일명> ...` (하네스가 SEED CARD 무작위 강제배정)
+- 결과물: `/tmp/spark-lab/<라운드ID>/<name>/{index.html,styles.css,script.js}` + `_seeds.log`.
+- 채점 요약은 `experiments/<라운드ID>/scorecard.md`, 결과물은 `demo/spark-research/`에 라이브 배포.
 
 ## 채점 기준 (SPARK 준수도 + 품질)
 | 항목 | 설명 |
