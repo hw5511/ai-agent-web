@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>정오 로스터리 · 빛이 닿는 시각의 커피</title>
+  <meta name="description" content="정오(正午)는 매일 낮 열두 시, 태양이 가장 높이 오르는 순간에 로스팅하는 스페셜티 커피 로스터리입니다. 싱글 오리진, 정기 구독, 로스팅 노트." />
+
+  <!-- Pretendard (Korean) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <!-- IM Fell English (botanical / scientific serif pairing) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Lenis smooth scroll -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER / NAV
+     ============================================================ -->
+<header class="site-header" role="banner">
+  <a href="#hero" class="logo" aria-label="정오 로스터리 홈으로 이동">
+    <span class="logo-kr">정오</span>
+    <span class="logo-en">正午</span>
+  </a>
+  <nav class="main-nav" aria-label="주 메뉴">
+    <ul>
+      <li><a href="#origin">싱글 오리진</a></li>
+      <li><a href="#roasting">로스팅 노트</a></li>
+      <li><a href="#subscribe">구독 플랜</a></li>
+      <li><a href="#visit">방문</a></li>
+    </ul>
+  </nav>
+  <a href="#subscribe" class="btn btn-nav">구독 시작</a>
+</header>
+
+<!-- ============================================================
+     HERO · 중앙 거대 일조계 다이얼 + 위성 annotation 배치
+     MACRO_STRUCTURE: central single object + surrounding satellites
+     VISUAL_MECHANISM: 실물 오브젝트 메타포 (다이얼/계기판)
+     GOVERNING_METAPHOR: 정오의 빛이 원두 위에 타임라인을 새긴다
+     ============================================================ -->
+<section id="hero" class="hero" aria-label="히어로 섹션">
+
+  <!-- Static fallback text · always visible -->
+  <div class="hero-copy">
+    <p class="hero-label en-italic">Specialty Roastery</p>
+    <h1 class="hero-headline">
+      빛이 닿는<br />정확한 순간
+    </h1>
+    <p class="hero-sub">
+      매일 정오, 태양이 정점에 오를 때<br />
+      우리는 원두를 드럼에 넣습니다.
+    </p>
+    <a href="#origin" class="btn btn-primary">이달의 원두 보기</a>
+  </div>
+
+  <!-- Central dial object (SVG heliograph / sun-dial) -->
+  <div class="hero-dial-wrap" aria-hidden="true">
+    <div class="dial-ring dial-ring--outer"></div>
+    <div class="dial-ring dial-ring--mid"></div>
+    <svg class="dial-svg" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Degree marks · botanical-illustration tick marks -->
+      <g class="dial-ticks" stroke="var(--ink)" stroke-width="1">
+        <!-- Generated 72 ticks (every 5°) via script.js; static fallback circles shown here -->
+      </g>
+      <!-- Outer annotation ring -->
+      <circle cx="240" cy="240" r="220" fill="none" stroke="var(--ink)" stroke-width="0.6" stroke-dasharray="2 6"/>
+      <circle cx="240" cy="240" r="190" fill="none" stroke="var(--ink)" stroke-width="0.4"/>
+      <circle cx="240" cy="240" r="140" fill="none" stroke="var(--ink)" stroke-width="0.8"/>
+      <!-- Temperature arc label positions -->
+      <circle cx="240" cy="240" r="100" fill="var(--parchment-mid)" stroke="var(--ink)" stroke-width="1.2"/>
+      <!-- Center dot -->
+      <circle cx="240" cy="240" r="6" fill="var(--ink)"/>
+      <circle cx="240" cy="240" r="3" fill="var(--parchment)"/>
+      <!-- Noon meridian line -->
+      <line x1="240" y1="50" x2="240" y2="140" stroke="var(--amber)" stroke-width="2" stroke-linecap="round"/>
+      <!-- Pointer / gnomon -->
+      <polygon points="240,60 235,80 245,80" fill="var(--amber)"/>
+      <!-- Roast phase arc segments (JS will animate rotate) -->
+      <g class="roast-arc" id="roastArc">
+        <path class="arc-green"  d="M 240 140 A 100 100 0 0 1 340 240" fill="none" stroke="#8aab6e" stroke-width="6" stroke-linecap="round"/>
+        <path class="arc-yellow" d="M 340 240 A 100 100 0 0 1 290 326" fill="none" stroke="#d4a843" stroke-width="6" stroke-linecap="round"/>
+        <path class="arc-brown"  d="M 290 326 A 100 100 0 0 1 140 240" fill="none" stroke="#8b5a2b" stroke-width="6" stroke-linecap="round"/>
+      </g>
+      <!-- Satellite annotation dots (JS places labels) -->
+      <g id="satDots">
+        <circle class="sat-dot" cx="240" cy="50"  r="4" fill="var(--amber)"/>
+        <circle class="sat-dot" cx="416" cy="143" r="4" fill="var(--ink)" opacity="0.5"/>
+        <circle class="sat-dot" cx="416" cy="337" r="4" fill="var(--ink)" opacity="0.5"/>
+        <circle class="sat-dot" cx="240" cy="430" r="4" fill="var(--ink)" opacity="0.5"/>
+        <circle class="sat-dot" cx="64"  cy="337" r="4" fill="var(--ink)" opacity="0.5"/>
+        <circle class="sat-dot" cx="64"  cy="143" r="4" fill="var(--ink)" opacity="0.5"/>
+      </g>
+    </svg>
+
+    <!-- Satellite labels · botanical annotation style -->
+    <div class="sat-label sat-label--top">
+      <span class="sat-key">12:00</span>
+      <span class="sat-val">정오 로스팅</span>
+    </div>
+    <div class="sat-label sat-label--ne">
+      <span class="sat-key">Green</span>
+      <span class="sat-val">생두 투입</span>
+    </div>
+    <div class="sat-label sat-label--se">
+      <span class="sat-key">1st Crack</span>
+      <span class="sat-val">1차 크랙</span>
+    </div>
+    <div class="sat-label sat-label--bottom">
+      <span class="sat-key">Drop</span>
+      <span class="sat-val">배출 · 냉각</span>
+    </div>
+    <div class="sat-label sat-label--sw">
+      <span class="sat-key">200°C</span>
+      <span class="sat-val">피크 온도</span>
+    </div>
+    <div class="sat-label sat-label--nw">
+      <span class="sat-key">12min</span>
+      <span class="sat-val">총 로스팅</span>
+    </div>
+
+    <!-- Film-strip scroll timeline indicator -->
+    <div class="film-strip" aria-hidden="true">
+      <div class="film-frame"></div>
+      <div class="film-frame"></div>
+      <div class="film-frame"></div>
+      <div class="film-frame"></div>
+      <div class="film-frame"></div>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="scroll-cue" aria-hidden="true">
+    <svg width="24" height="40" viewBox="0 0 24 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="22" height="38" rx="11" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+      <circle class="scroll-dot" cx="12" cy="12" r="4" fill="var(--ink)"/>
+    </svg>
+    <span>스크롤</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCROLL TIMELINE · 스크롤 = 로스팅 타임라인 (영화 필름)
+     ============================================================ -->
+<section class="timeline-section" aria-label="로스팅 타임라인">
+  <div class="timeline-track" id="timelineTrack">
+
+    <div class="timeline-chapter" data-chapter="1">
+      <div class="chapter-meta">
+        <span class="chapter-time tabular-nums">00:00</span>
+        <span class="chapter-temp tabular-nums">180°C</span>
+      </div>
+      <h2 class="chapter-title">생두 투입</h2>
+      <p class="chapter-desc">
+        선별된 싱글 오리진 생두가 예열된 드럼 안으로 들어갑니다.
+        표면은 아직 초록빛, 수분이 빠져나가며 온도가 오릅니다.
+      </p>
+    </div>
+
+    <div class="timeline-chapter" data-chapter="2">
+      <div class="chapter-meta">
+        <span class="chapter-time tabular-nums">04:30</span>
+        <span class="chapter-temp tabular-nums">160°C</span>
+      </div>
+      <h2 class="chapter-title">옐로우 포인트</h2>
+      <p class="chapter-desc">
+        수분이 증발하며 생두가 노란 빛을 띱니다.
+        마이야르 반응이 시작되고, 달콤한 곡물 향이 피어오릅니다.
+      </p>
+    </div>
+
+    <div class="timeline-chapter" data-chapter="3">
+      <div class="chapter-meta">
+        <span class="chapter-time tabular-nums">08:00</span>
+        <span class="chapter-temp tabular-nums">195°C</span>
+      </div>
+      <h2 class="chapter-title">1차 크랙</h2>
+      <p class="chapter-desc">
+        세포 조직이 팽창하며 '팍'하는 소리와 함께 1차 크랙.
+        산미와 단맛의 균형이 잡히기 시작하는 결정적 순간입니다.
+      </p>
+    </div>
+
+    <div class="timeline-chapter" data-chapter="4">
+      <div class="chapter-meta">
+        <span class="chapter-time tabular-nums">12:00</span>
+        <span class="chapter-temp tabular-nums">205°C</span>
+      </div>
+      <h2 class="chapter-title">배출 · 냉각</h2>
+      <p class="chapter-desc">
+        정확한 타이밍에 드럼에서 꺼내 냉각 트레이로 이동합니다.
+        빠른 냉각이 최적의 풍미를 고정하고 산화를 막습니다.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SINGLE ORIGIN · 이달의 원두
+     ============================================================ -->
+<section id="origin" class="origin-section" aria-label="이달의 싱글 오리진">
+  <div class="section-header">
+    <p class="section-eyebrow en-italic">Single Origin</p>
+    <h2 class="section-title">이달의 원두</h2>
+    <p class="section-sub">정오의 빛 아래 선별한 산지별 스페셜티 원두입니다.</p>
+  </div>
+
+  <div class="origin-grid">
+
+    <article class="origin-card" aria-label="에티오피아 예가체프">
+      <div class="origin-img-wrap">
+        <img
+          src="https://picsum.photos/seed/yirgacheffe/600/400"
+          alt="에티오피아 예가체프 생두 클로즈업"
+          width="600" height="400"
+          loading="lazy"
+          class="origin-img"
+        />
+        <div class="origin-badge">
+          <span class="badge-country">Ethiopia</span>
+        </div>
+      </div>
+      <div class="origin-body">
+        <h3 class="origin-name">예가체프 G1 와시드</h3>
+        <dl class="origin-meta tabular-nums">
+          <div class="meta-row">
+            <dt>산지</dt><dd>에티오피아 · 예가체프</dd>
+          </div>
+          <div class="meta-row">
+            <dt>고도</dt><dd>1,800 – 2,200 m</dd>
+          </div>
+          <div class="meta-row">
+            <dt>가공</dt><dd>워시드</dd>
+          </div>
+          <div class="meta-row">
+            <dt>로스팅</dt><dd>라이트</dd>
+          </div>
+        </dl>
+        <p class="tasting-label en-italic">Tasting Notes</p>
+        <ul class="tasting-notes" aria-label="테이스팅 노트">
+          <li>자스민</li>
+          <li>베르가못</li>
+          <li>복숭아</li>
+          <li>라임 산미</li>
+        </ul>
+        <a href="#subscribe" class="btn btn-outline">이 원두 구독</a>
+      </div>
+    </article>
+
+    <article class="origin-card" aria-label="콜롬비아 후일라">
+      <div class="origin-img-wrap">
+        <img
+          src="https://picsum.photos/seed/huila/600/400"
+          alt="콜롬비아 후일라 커피 체리와 원두"
+          width="600" height="400"
+          loading="lazy"
+          class="origin-img"
+        />
+        <div class="origin-badge">
+          <span class="badge-country">Colombia</span>
+        </div>
+      </div>
+      <div class="origin-body">
+        <h3 class="origin-name">후일라 에스메랄다 카투라</h3>
+        <dl class="origin-meta tabular-nums">
+          <div class="meta-row">
+            <dt>산지</dt><dd>콜롬비아 · 후일라</dd>
+          </div>
+          <div class="meta-row">
+            <dt>고도</dt><dd>1,600 – 1,900 m</dd>
+          </div>
+          <div class="meta-row">
+            <dt>가공</dt><dd>내추럴</dd>
+          </div>
+          <div class="meta-row">
+            <dt>로스팅</dt><dd>미디엄 라이트</dd>
+          </div>
+        </dl>
+        <p class="tasting-label en-italic">Tasting Notes</p>
+        <ul class="tasting-notes" aria-label="테이스팅 노트">
+          <li>카카오 닙</li>
+          <li>황도</li>
+          <li>흑설탕</li>
+          <li>부드러운 바디</li>
+        </ul>
+        <a href="#subscribe" class="btn btn-outline">이 원두 구독</a>
+      </div>
+    </article>
+
+    <article class="origin-card" aria-label="케냐 키암부">
+      <div class="origin-img-wrap">
+        <img
+          src="https://picsum.photos/seed/kenyaAA/600/400"
+          alt="케냐 키암부 AA 원두 로스팅"
+          width="600" height="400"
+          loading="lazy"
+          class="origin-img"
+        />
+        <div class="origin-badge">
+          <span class="badge-country">Kenya</span>
+        </div>
+      </div>
+      <div class="origin-body">
+        <h3 class="origin-name">키암부 AA 더블 워시드</h3>
+        <dl class="origin-meta tabular-nums">
+          <div class="meta-row">
+            <dt>산지</dt><dd>케냐 · 키암부</dd>
+          </div>
+          <div class="meta-row">
+            <dt>고도</dt><dd>1,700 – 2,100 m</dd>
+          </div>
+          <div class="meta-row">
+            <dt>가공</dt><dd>더블 워시드</dd>
+          </div>
+          <div class="meta-row">
+            <dt>로스팅</dt><dd>미디엄</dd>
+          </div>
+        </dl>
+        <p class="tasting-label en-italic">Tasting Notes</p>
+        <ul class="tasting-notes" aria-label="테이스팅 노트">
+          <li>블랙커런트</li>
+          <li>토마토</li>
+          <li>적포도주</li>
+          <li>밝은 산미</li>
+        </ul>
+        <a href="#subscribe" class="btn btn-outline">이 원두 구독</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     ROASTING NOTES · 보태니컬 도감 스타일 상세 노트
+     ============================================================ -->
+<section id="roasting" class="roasting-section" aria-label="로스팅 노트">
+  <div class="roasting-inner">
+    <div class="roasting-text">
+      <p class="section-eyebrow en-italic">Roasting Notes</p>
+      <h2 class="section-title">로스터의 기록</h2>
+      <p class="roasting-intro">
+        정오 로스터리의 로스팅 노트는 식물학 도감의 방식을 따릅니다.
+        온도, 시간, 냄새, 색상 변화를 정밀하게 기록하고
+        매 배치를 하나의 표본으로 보존합니다.
+      </p>
+      <dl class="roast-stats tabular-nums">
+        <div class="stat-item">
+          <dt>배치 크기</dt>
+          <dd>3 kg</dd>
+        </div>
+        <div class="stat-item">
+          <dt>드럼 예열</dt>
+          <dd>30 min</dd>
+        </div>
+        <div class="stat-item">
+          <dt>투입 온도</dt>
+          <dd>185°C</dd>
+        </div>
+        <div class="stat-item">
+          <dt>배출 온도</dt>
+          <dd>200 – 210°C</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="roasting-visual">
+      <img
+        src="https://picsum.photos/seed/roastnotes/540/680"
+        alt="로스터가 로스팅 노트를 기록하는 장면"
+        width="540" height="680"
+        loading="lazy"
+        class="roasting-photo"
+      />
+      <!-- Botanical annotation overlay (static decorative) -->
+      <div class="botanical-overlay" aria-hidden="true">
+        <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg" class="botanical-svg">
+          <line x1="10" y1="20" x2="80" y2="20" stroke="var(--ink)" stroke-width="0.8"/>
+          <text x="85" y="24" font-size="9" fill="var(--ink)" font-family="'IM Fell English', serif" font-style="italic">Coffea arabica</text>
+          <line x1="10" y1="60" x2="70" y2="60" stroke="var(--ink)" stroke-width="0.8"/>
+          <text x="75" y="64" font-size="8" fill="var(--ink)" font-family="'IM Fell English', serif">var. Yirgacheffe</text>
+          <line x1="10" y1="100" x2="60" y2="100" stroke="var(--ink)" stroke-width="0.8"/>
+          <text x="65" y="104" font-size="8" fill="var(--ink)" font-family="'IM Fell English', serif">Alt. 1,800 m</text>
+          <circle cx="8" cy="20"  r="2.5" fill="none" stroke="var(--ink)" stroke-width="0.8"/>
+          <circle cx="8" cy="60"  r="2.5" fill="none" stroke="var(--ink)" stroke-width="0.8"/>
+          <circle cx="8" cy="100" r="2.5" fill="none" stroke="var(--ink)" stroke-width="0.8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SUBSCRIBE · 구독 플랜
+     ============================================================ -->
+<section id="subscribe" class="subscribe-section" aria-label="구독 플랜">
+  <div class="section-header">
+    <p class="section-eyebrow en-italic">Subscription</p>
+    <h2 class="section-title">정기 구독 플랜</h2>
+    <p class="section-sub">매달 정오가 고른 싱글 오리진을 문 앞까지 배송합니다.</p>
+  </div>
+
+  <div class="plan-grid">
+
+    <article class="plan-card" aria-label="라이트 플랜">
+      <div class="plan-head">
+        <p class="plan-tier en-italic">Light</p>
+        <h3 class="plan-name">빛의 시작</h3>
+      </div>
+      <p class="plan-price tabular-nums"><strong>19,000</strong> <span class="plan-unit">원 / 월</span></p>
+      <ul class="plan-features" aria-label="플랜 혜택">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--amber)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--amber)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          200g 싱글 오리진 원두
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--amber)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--amber)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          월 1회 배송
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--amber)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--amber)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          로스팅 노트 카드 동봉
+        </li>
+      </ul>
+      <a href="#visit" class="btn btn-outline">플랜 선택</a>
+    </article>
+
+    <article class="plan-card plan-card--featured" aria-label="정오 플랜 (추천)">
+      <div class="plan-head">
+        <p class="plan-tier en-italic">Noon</p>
+        <h3 class="plan-name">정오의 햇살</h3>
+        <span class="plan-badge">추천</span>
+      </div>
+      <p class="plan-price tabular-nums"><strong>34,000</strong> <span class="plan-unit">원 / 월</span></p>
+      <ul class="plan-features" aria-label="플랜 혜택">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--parchment)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--parchment)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          200g x 2종 싱글 오리진
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--parchment)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--parchment)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          월 2회 배송
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--parchment)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--parchment)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          세밀화 로스팅 노트 A5 북릿
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--parchment)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--parchment)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          로스터리 방문 우선 예약
+        </li>
+      </ul>
+      <a href="#visit" class="btn btn-primary">플랜 선택</a>
+    </article>
+
+    <article class="plan-card" aria-label="시즌 플랜">
+      <div class="plan-head">
+        <p class="plan-tier en-italic">Season</p>
+        <h3 class="plan-name">계절의 궤도</h3>
+      </div>
+      <p class="plan-price tabular-nums"><strong>58,000</strong> <span class="plan-unit">원 / 월</span></p>
+      <ul class="plan-features" aria-label="플랜 혜택">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--amber)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--amber)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          200g x 4종 큐레이션
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--amber)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--amber)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          월 2회 배송
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--amber)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--amber)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          로스터 1:1 큐핑 세션
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--amber)" stroke-width="1.4"/><path d="M5 8l2 2 4-4" stroke="var(--amber)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          세밀화 오리진 포스터 (분기 1회)
+        </li>
+      </ul>
+      <a href="#visit" class="btn btn-outline">플랜 선택</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     VISIT · 로스터리 방문
+     ============================================================ -->
+<section id="visit" class="visit-section" aria-label="로스터리 방문">
+  <div class="visit-inner">
+    <div class="visit-photo-wrap">
+      <img
+        src="https://picsum.photos/seed/roasteryspace/800/600"
+        alt="정오 로스터리 내부 공간 · 드럼 로스터와 창을 통해 들어오는 정오의 햇살"
+        width="800" height="600"
+        loading="lazy"
+        class="visit-photo"
+      />
+      <!-- Film strip frame decoration (static) -->
+      <div class="film-frame-deco" aria-hidden="true">
+        <div class="ff-hole ff-hole--tl"></div>
+        <div class="ff-hole ff-hole--tr"></div>
+        <div class="ff-hole ff-hole--bl"></div>
+        <div class="ff-hole ff-hole--br"></div>
+      </div>
+    </div>
+    <div class="visit-text">
+      <p class="section-eyebrow en-italic">Visit Us</p>
+      <h2 class="section-title">로스터리 방문</h2>
+      <p class="visit-desc">
+        서울 성수동에 위치한 정오 로스터리는
+        매일 정오 로스팅 시간에 맞춰 방문 예약을 받습니다.
+        드럼이 돌아가는 소리, 원두가 크랙하는 순간, 갓 볶은 커피 향을
+        직접 경험하실 수 있습니다.
+      </p>
+      <dl class="visit-info tabular-nums">
+        <div class="info-row">
+          <dt>
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a5 5 0 0 1 5 5c0 3.5-5 9-5 9S3 9.5 3 6a5 5 0 0 1 5-5z" fill="none" stroke="var(--ink)" stroke-width="1.2"/><circle cx="8" cy="6" r="1.8" fill="none" stroke="var(--ink)" stroke-width="1.2"/></svg>
+            위치
+          </dt>
+          <dd>서울시 성동구 성수이로 20길 16</dd>
+        </div>
+        <div class="info-row">
+          <dt>
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--ink)" stroke-width="1.2"/><path d="M8 4v4l3 2" stroke="var(--ink)" stroke-width="1.2" stroke-linecap="round"/></svg>
+            운영
+          </dt>
+          <dd>화 – 일 11:00 – 19:00</dd>
+        </div>
+        <div class="info-row">
+          <dt>
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v10H3z" fill="none" stroke="var(--ink)" stroke-width="1.2"/><path d="M3 6h10M6 3v10" stroke="var(--ink)" stroke-width="0.8"/></svg>
+            예약
+          </dt>
+          <dd>카카오채널 @정오로스터리</dd>
+        </div>
+      </dl>
+      <a href="https://pf.kakao.com/" class="btn btn-primary" target="_blank" rel="noopener noreferrer" aria-label="카카오채널에서 로스터리 방문 예약하기">방문 예약</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-kr">정오</span>
+      <span class="logo-en">正午</span>
+      <p class="footer-tagline en-italic">Roasted at the apex of light.</p>
+    </div>
+    <nav class="footer-nav" aria-label="푸터 메뉴">
+      <a href="#origin">싱글 오리진</a>
+      <a href="#roasting">로스팅 노트</a>
+      <a href="#subscribe">구독 플랜</a>
+      <a href="#visit">방문</a>
+    </nav>
+    <p class="footer-copy tabular-nums">
+      &copy; <span id="year">2024</span> 정오 로스터리. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<!-- CDN Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="script.js" defer></script>
+</body>
+</html>

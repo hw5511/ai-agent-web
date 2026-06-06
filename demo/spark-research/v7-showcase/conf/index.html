@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORM 2026 · 디자인 컨퍼런스</title>
+  <meta name="description" content="FORM 2026은 형태와 의미, 만드는 사람들이 모이는 디자인 컨퍼런스입니다. 2026년 9월 12–13일, 서울." />
+
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+
+  <!-- DM Serif Display (English pairing · vintage poster editorial feel) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" />
+
+  <!-- Lenis smooth scroll CSS reset -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <nav class="nav-inner" aria-label="주요 메뉴">
+      <a class="nav-logo" href="#hero" aria-label="FORM 2026 홈으로">
+        <span class="logo-text" aria-hidden="true">FORM</span>
+        <span class="logo-year">2026</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#speakers">연사</a></li>
+        <li><a href="#schedule">일정</a></li>
+        <li><a href="#tickets">티켓</a></li>
+      </ul>
+      <a class="nav-cta" href="#tickets">티켓 구매</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       HERO · 대각선 분할 + 컬러필드 그라디언트 상태 전이
+       MACRO_STRUCTURE: 기울어진 그리드 (대각선 회전축 구성)
+       VISUAL_MECHANISM: 컬러필드 / 그라디언트 상태 전이
+       GOVERNING_METAPHOR: 빈티지 여행 포스터의 철도 노선 여정
+  ============================================================ -->
+  <section class="hero" id="hero" aria-label="FORM 2026 히어로">
+
+    <!-- 정적 배경 컬러필드 레이어 (JS 없어도 보임) -->
+    <div class="hero-colorfield" aria-hidden="true">
+      <div class="cf-zone cf-zone--a"></div>
+      <div class="cf-zone cf-zone--b"></div>
+      <div class="cf-zone cf-zone--c"></div>
+    </div>
+
+    <!-- 대각선 분할선 (빈티지 포스터의 사선 인쇄 구획) -->
+    <div class="hero-diagonal" aria-hidden="true"></div>
+
+    <!-- 노선도 SVG 장식 (정적, GOVERNING_METAPHOR 시각화) -->
+    <div class="hero-route" aria-hidden="true">
+      <svg class="route-svg" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- 노선 경로 -->
+        <path class="route-path" d="M 80 420 L 200 300 L 380 200 L 560 140 L 720 80" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 10"/>
+        <!-- 역(驛) 원형 마커들 -->
+        <circle class="route-station" cx="80" cy="420" r="7"/>
+        <circle class="route-station" cx="200" cy="300" r="7"/>
+        <circle class="route-station" cx="380" cy="200" r="7"/>
+        <circle class="route-station" cx="560" cy="140" r="7"/>
+        <circle class="route-station route-station--final" cx="720" cy="80" r="11"/>
+        <!-- 역 라벨 -->
+        <text class="route-label" x="90" y="438" font-size="11">출발</text>
+        <text class="route-label" x="210" y="318" font-size="11">GRAPHIC</text>
+        <text class="route-label" x="390" y="218" font-size="11">SPATIAL</text>
+        <text class="route-label" x="570" y="158" font-size="11">MOTION</text>
+        <text class="route-label route-label--final" x="680" y="72" font-size="12">FORM</text>
+      </svg>
+    </div>
+
+    <!-- 헤드라인 콘텐츠 -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line" aria-hidden="true"></span>
+        <span class="eyebrow-text">서울 · 2026년 9월 12·13일</span>
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="headline-en">FORM</span>
+        <span class="headline-sub">형태와 의미<br />만드는 사람들</span>
+      </h1>
+
+      <p class="hero-desc">
+        디자인의 언어가 다시 쓰이는 이틀.<br />
+        낯선 역을 지나 새로운 형태의 도시로.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn--primary" href="#tickets">지금 등록하기</a>
+        <a class="btn btn--ghost" href="#speakers">연사 보기</a>
+      </div>
+
+      <div class="hero-meta" aria-label="행사 개요">
+        <dl class="meta-list">
+          <div class="meta-item">
+            <dt>일시</dt>
+            <dd><time datetime="2026-09-12">2026.09.12</time> – <time datetime="2026-09-13">13</time></dd>
+          </div>
+          <div class="meta-item">
+            <dt>장소</dt>
+            <dd>동대문디자인플라자 (DDP)</dd>
+          </div>
+          <div class="meta-item">
+            <dt>연사</dt>
+            <dd>18인</dd>
+          </div>
+          <div class="meta-item">
+            <dt>세션</dt>
+            <dd>24개</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       SPEAKERS
+  ============================================================ -->
+  <section class="section speakers" id="speakers" aria-labelledby="speakers-title">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <p class="section-tag reveal">연사 라인업</p>
+        <h2 class="section-title reveal" id="speakers-title">
+          이 여정을 함께할<br />18인의 항해사
+        </h2>
+        <p class="section-desc reveal">
+          그래픽, 공간, 모션, 타이포그래피 ... 다른 역에서 출발했지만 같은 목적지를 향한 실천가들.
+        </p>
+      </div>
+
+      <!-- Featured speakers -->
+      <ul class="speakers-grid" role="list" aria-label="주요 연사">
+
+        <li class="speaker-card reveal">
+          <figure class="speaker-fig">
+            <img
+              src="https://picsum.photos/seed/formspk01/480/600"
+              alt="김나리 · 그래픽 디자이너, STUDIO N"
+              width="480"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="speaker-caption">
+              <span class="speaker-field">그래픽 디자인</span>
+              <strong class="speaker-name">김나리</strong>
+              <span class="speaker-org">STUDIO N</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="speaker-card reveal">
+          <figure class="speaker-fig">
+            <img
+              src="https://picsum.photos/seed/formspk02/480/600"
+              alt="박준서 · 공간 디자이너, OBJECT ROOM"
+              width="480"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="speaker-caption">
+              <span class="speaker-field">공간 디자인</span>
+              <strong class="speaker-name">박준서</strong>
+              <span class="speaker-org">OBJECT ROOM</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="speaker-card reveal">
+          <figure class="speaker-fig">
+            <img
+              src="https://picsum.photos/seed/formspk03/480/600"
+              alt="이유진 · 모션 그래픽 아티스트, FLUID LAB"
+              width="480"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="speaker-caption">
+              <span class="speaker-field">모션 그래픽</span>
+              <strong class="speaker-name">이유진</strong>
+              <span class="speaker-org">FLUID LAB</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="speaker-card reveal">
+          <figure class="speaker-fig">
+            <img
+              src="https://picsum.photos/seed/formspk04/480/600"
+              alt="최민준 · 타이포그래퍼, LETTERFORM"
+              width="480"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="speaker-caption">
+              <span class="speaker-field">타이포그래피</span>
+              <strong class="speaker-name">최민준</strong>
+              <span class="speaker-org">LETTERFORM</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="speaker-card reveal">
+          <figure class="speaker-fig">
+            <img
+              src="https://picsum.photos/seed/formspk05/480/600"
+              alt="Sarah Oh · UX 리서처, FIELD STUDIO"
+              width="480"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="speaker-caption">
+              <span class="speaker-field">UX 리서치</span>
+              <strong class="speaker-name">Sarah Oh</strong>
+              <span class="speaker-org">FIELD STUDIO</span>
+            </figcaption>
+          </figure>
+        </li>
+
+        <li class="speaker-card reveal">
+          <figure class="speaker-fig">
+            <img
+              src="https://picsum.photos/seed/formspk06/480/600"
+              alt="정하윤 · 브랜드 디자이너, MARK&amp;CO"
+              width="480"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="speaker-caption">
+              <span class="speaker-field">브랜드 디자인</span>
+              <strong class="speaker-name">정하윤</strong>
+              <span class="speaker-org">MARK&amp;CO</span>
+            </figcaption>
+          </figure>
+        </li>
+
+      </ul>
+
+      <p class="speakers-more reveal">
+        + 12인의 연사 라인업은 순차 공개됩니다.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCHEDULE · 타임테이블 (역 정류 구조)
+  ============================================================ -->
+  <section class="section schedule" id="schedule" aria-labelledby="schedule-title">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <p class="section-tag reveal">세션 일정</p>
+        <h2 class="section-title reveal" id="schedule-title">
+          두 개의 날,<br />스물네 개의 역
+        </h2>
+      </div>
+
+      <!-- Day tabs -->
+      <div class="schedule-tabs" role="tablist" aria-label="일정 날짜 선택">
+        <button
+          class="tab-btn tab-btn--active"
+          role="tab"
+          aria-selected="true"
+          aria-controls="day1-panel"
+          id="tab-day1"
+          data-day="1"
+        >
+          DAY 1 ~ 09.12
+        </button>
+        <button
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          aria-controls="day2-panel"
+          id="tab-day2"
+          data-day="2"
+        >
+          DAY 2 ~ 09.13
+        </button>
+      </div>
+
+      <!-- Day 1 -->
+      <div class="schedule-panel" id="day1-panel" role="tabpanel" aria-labelledby="tab-day1">
+        <ol class="timetable" aria-label="DAY 1 세션 목록">
+
+          <li class="timetable-row reveal" data-track="전체">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T09:30">09:30</time></span>
+            <span class="tt-track">전체</span>
+            <div class="tt-info">
+              <strong class="tt-title">오프닝 퍼포먼스 · 형태가 언어가 될 때</strong>
+              <span class="tt-speaker">FORM 2026 크리에이티브 팀</span>
+            </div>
+            <span class="tt-venue">메인홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="그래픽">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T10:15">10:15</time></span>
+            <span class="tt-track">그래픽</span>
+            <div class="tt-info">
+              <strong class="tt-title">포스터 이후의 포스터</strong>
+              <span class="tt-speaker">김나리 · STUDIO N</span>
+            </div>
+            <span class="tt-venue">A홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="공간">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T10:15">10:15</time></span>
+            <span class="tt-track">공간</span>
+            <div class="tt-info">
+              <strong class="tt-title">전시 공간을 설계하는 세 가지 질문</strong>
+              <span class="tt-speaker">박준서 · OBJECT ROOM</span>
+            </div>
+            <span class="tt-venue">B홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="모션">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T11:30">11:30</time></span>
+            <span class="tt-track">모션</span>
+            <div class="tt-info">
+              <strong class="tt-title">시간을 형태로 · 움직임의 문법</strong>
+              <span class="tt-speaker">이유진 · FLUID LAB</span>
+            </div>
+            <span class="tt-venue">A홀</span>
+          </li>
+
+          <li class="timetable-row timetable-row--break reveal" data-track="전체">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T12:30">12:30</time></span>
+            <span class="tt-track">휴식</span>
+            <div class="tt-info">
+              <strong class="tt-title">점심 & 네트워킹 라운지</strong>
+              <span class="tt-speaker"></span>
+            </div>
+            <span class="tt-venue">로비</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="타이포">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T14:00">14:00</time></span>
+            <span class="tt-track">타이포</span>
+            <div class="tt-info">
+              <strong class="tt-title">한글 서체가 세계를 여행하는 방법</strong>
+              <span class="tt-speaker">최민준 · LETTERFORM</span>
+            </div>
+            <span class="tt-venue">A홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="UX">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T14:00">14:00</time></span>
+            <span class="tt-track">UX</span>
+            <div class="tt-info">
+              <strong class="tt-title">보이지 않는 디자인의 지도</strong>
+              <span class="tt-speaker">Sarah Oh · FIELD STUDIO</span>
+            </div>
+            <span class="tt-venue">B홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="브랜드">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T15:30">15:30</time></span>
+            <span class="tt-track">브랜드</span>
+            <div class="tt-info">
+              <strong class="tt-title">아이덴티티는 어디서 시작되는가</strong>
+              <span class="tt-speaker">정하윤 · MARK&amp;CO</span>
+            </div>
+            <span class="tt-venue">A홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="전체">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-12T17:00">17:00</time></span>
+            <span class="tt-track">전체</span>
+            <div class="tt-info">
+              <strong class="tt-title">1일차 클로징 토크 · 경로를 바꾸는 질문</strong>
+              <span class="tt-speaker">패널 토크</span>
+            </div>
+            <span class="tt-venue">메인홀</span>
+          </li>
+
+        </ol>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="schedule-panel schedule-panel--hidden" id="day2-panel" role="tabpanel" aria-labelledby="tab-day2">
+        <ol class="timetable" aria-label="DAY 2 세션 목록">
+
+          <li class="timetable-row reveal" data-track="전체">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-13T10:00">10:00</time></span>
+            <span class="tt-track">전체</span>
+            <div class="tt-info">
+              <strong class="tt-title">키노트 · 형태 이후의 의미</strong>
+              <span class="tt-speaker">FORM 2026 디렉터</span>
+            </div>
+            <span class="tt-venue">메인홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="그래픽">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-13T11:00">11:00</time></span>
+            <span class="tt-track">그래픽</span>
+            <div class="tt-info">
+              <strong class="tt-title">인쇄물의 귀환 · 디지털 시대의 종이</strong>
+              <span class="tt-speaker">김나리 · STUDIO N</span>
+            </div>
+            <span class="tt-venue">A홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="워크숍">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-13T11:00">11:00</time></span>
+            <span class="tt-track">워크숍</span>
+            <div class="tt-info">
+              <strong class="tt-title">손으로 긋는 노선 · 드로잉 워크숍</strong>
+              <span class="tt-speaker">오픈 참여</span>
+            </div>
+            <span class="tt-venue">C홀</span>
+          </li>
+
+          <li class="timetable-row timetable-row--break reveal" data-track="전체">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-13T12:30">12:30</time></span>
+            <span class="tt-track">휴식</span>
+            <div class="tt-info">
+              <strong class="tt-title">점심 & 전시 투어</strong>
+              <span class="tt-speaker"></span>
+            </div>
+            <span class="tt-venue">로비 + 전시장</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="모션">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-13T14:00">14:00</time></span>
+            <span class="tt-track">모션</span>
+            <div class="tt-info">
+              <strong class="tt-title">브랜드 필름의 새로운 문법</strong>
+              <span class="tt-speaker">이유진 · FLUID LAB</span>
+            </div>
+            <span class="tt-venue">A홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="타이포">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-13T15:00">15:00</time></span>
+            <span class="tt-track">타이포</span>
+            <div class="tt-info">
+              <strong class="tt-title">가변 폰트와 디자인 시스템</strong>
+              <span class="tt-speaker">최민준 · LETTERFORM</span>
+            </div>
+            <span class="tt-venue">B홀</span>
+          </li>
+
+          <li class="timetable-row reveal" data-track="전체">
+            <span class="tt-time tabular-nums"><time datetime="2026-09-13T16:30">16:30</time></span>
+            <span class="tt-track">전체</span>
+            <div class="tt-info">
+              <strong class="tt-title">파이널 클로징 · 다음 역으로</strong>
+              <span class="tt-speaker">FORM 2026 전체 연사</span>
+            </div>
+            <span class="tt-venue">메인홀</span>
+          </li>
+
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TICKETS
+  ============================================================ -->
+  <section class="section tickets" id="tickets" aria-labelledby="tickets-title">
+    <div class="tickets-bg" aria-hidden="true">
+      <div class="ticket-colorfield ticket-colorfield--warm"></div>
+      <div class="ticket-colorfield ticket-colorfield--cool"></div>
+      <div class="ticket-diagonal" aria-hidden="true"></div>
+    </div>
+
+    <div class="section-inner tickets-inner">
+
+      <div class="section-header">
+        <p class="section-tag reveal">티켓</p>
+        <h2 class="section-title tickets-title reveal" id="tickets-title">
+          탑승 준비를<br />마치세요
+        </h2>
+        <p class="section-desc reveal">
+          얼리버드 마감: <time datetime="2026-07-31">2026년 7월 31일</time>
+        </p>
+      </div>
+
+      <ul class="tickets-grid" role="list" aria-label="티켓 종류">
+
+        <li class="ticket-card reveal">
+          <div class="ticket-header">
+            <span class="ticket-type">얼리버드</span>
+            <span class="ticket-badge">마감 임박</span>
+          </div>
+          <div class="ticket-price">
+            <span class="price-num tabular-nums">149,000</span>
+            <span class="price-unit">원</span>
+          </div>
+          <ul class="ticket-includes" role="list" aria-label="얼리버드 포함 사항">
+            <li>2일 전일 입장</li>
+            <li>모든 세션 자유 참여</li>
+            <li>네트워킹 라운지</li>
+            <li>FORM 2026 프로그램북</li>
+          </ul>
+          <a class="btn btn--ticket" href="#" aria-label="얼리버드 티켓 구매하기">구매하기</a>
+        </li>
+
+        <li class="ticket-card ticket-card--featured reveal">
+          <div class="ticket-header">
+            <span class="ticket-type">일반</span>
+            <span class="ticket-badge ticket-badge--neutral">정가</span>
+          </div>
+          <div class="ticket-price">
+            <span class="price-num tabular-nums">199,000</span>
+            <span class="price-unit">원</span>
+          </div>
+          <ul class="ticket-includes" role="list" aria-label="일반 티켓 포함 사항">
+            <li>2일 전일 입장</li>
+            <li>모든 세션 자유 참여</li>
+            <li>네트워킹 라운지</li>
+            <li>FORM 2026 프로그램북</li>
+          </ul>
+          <a class="btn btn--ticket btn--ticket-featured" href="#" aria-label="일반 티켓 구매하기">구매하기</a>
+        </li>
+
+        <li class="ticket-card reveal">
+          <div class="ticket-header">
+            <span class="ticket-type">VIP 패스</span>
+            <span class="ticket-badge ticket-badge--vip">한정 50석</span>
+          </div>
+          <div class="ticket-price">
+            <span class="price-num tabular-nums">390,000</span>
+            <span class="price-unit">원</span>
+          </div>
+          <ul class="ticket-includes" role="list" aria-label="VIP 패스 포함 사항">
+            <li>2일 전일 입장</li>
+            <li>연사 디너 초대</li>
+            <li>워크숍 우선 등록</li>
+            <li>아트 프린트 에디션</li>
+            <li>VIP 라운지 이용</li>
+          </ul>
+          <a class="btn btn--ticket" href="#" aria-label="VIP 패스 구매하기">구매하기</a>
+        </li>
+
+      </ul>
+
+      <p class="tickets-note reveal">
+        단체 할인(5인 이상) 및 학생 할인은
+        <a href="mailto:ticket@form2026.kr">ticket@form2026.kr</a>로 문의하세요.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">FORM 2026</span>
+        <p class="footer-tagline">형태와 의미, 만드는 사람들.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="푸터 메뉴">
+        <ul role="list">
+          <li><a href="#speakers">연사</a></li>
+          <li><a href="#schedule">일정</a></li>
+          <li><a href="#tickets">티켓</a></li>
+          <li><a href="mailto:hello@form2026.kr">문의</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-social" aria-label="소셜 미디어">
+        <a href="https://instagram.com" aria-label="인스타그램" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="https://twitter.com" aria-label="X (트위터)" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M4 4 L20 20 M20 4 L4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <p class="footer-copy">
+        <small>&copy; <span class="tabular-nums">2026</span> FORM Conference. All rights reserved.</small>
+      </p>
+    </div>
+  </footer>
+
+  <!-- CDN Libraries -->
+  <!-- Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

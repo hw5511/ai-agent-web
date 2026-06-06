@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>메아리 2024 · 강원도 인디 음악 페스티벌</title>
+  <meta name="description" content="강원도 산속에서 열리는 2박 3일 인디 음악 페스티벌 메아리. 2024년 10월 4일~6일. 라인업, 타임테이블, 캠핑, 티켓 안내." />
+
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <!-- Space Grotesk (English pairing) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" />
+
+  <!-- Lenis CSS reset (FLOOR: Lenis guard) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       SKIP NAV
+  ============================================================ -->
+  <a class="skip-link" href="#main-content">본문으로 바로가기</a>
+
+  <!-- ============================================================
+       SITE HEADER / NAV
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="#hero" class="logo" aria-label="메아리 페스티벌 홈">
+        <span class="logo-ko">메아리</span>
+        <span class="logo-en">MEARI</span>
+      </a>
+      <nav aria-label="주 내비게이션">
+        <ul class="nav-list">
+          <li><a href="#lineup">라인업</a></li>
+          <li><a href="#timetable">타임테이블</a></li>
+          <li><a href="#venue">현장 안내</a></li>
+          <li><a href="#tickets" class="nav-cta">티켓 구매</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-nav">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="6" width="18" height="2" fill="currentColor"/>
+          <rect x="3" y="11" width="18" height="2" fill="currentColor"/>
+          <rect x="3" y="16" width="18" height="2" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="모바일 내비게이션" hidden>
+      <ul class="mobile-nav-list">
+        <li><a href="#lineup">라인업</a></li>
+        <li><a href="#timetable">타임테이블</a></li>
+        <li><a href="#venue">현장 안내</a></li>
+        <li><a href="#tickets">티켓 구매</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main id="main-content">
+
+    <!-- ==========================================================
+         HERO · 키네틱 타이포 + 가로 패럴랙스 띠 (SEED CARD 구현)
+         GOVERNING METAPHOR: 소리는 숲 속에서 층층이 쌓여 공명한다
+         리소그래프 2도 인쇄 오프셋처럼 글자 레이어가 어긋나며 울린다
+    ========================================================== -->
+    <section id="hero" class="hero" aria-label="메아리 페스티벌 소개">
+
+      <!-- 정적 폴백 메시지 (JS-off / reduced-motion 대비) -->
+      <div class="hero-static-fallback">
+        <p class="hero-date">2024. 10. 04 ~ 10. 06</p>
+        <h1 class="hero-title-static">메아리<br/>음악 페스티벌</h1>
+        <p class="hero-sub">강원도 인제 자작나무 숲 &nbsp;·&nbsp; 2박 3일 인디 뮤직 캠프</p>
+        <a href="#tickets" class="btn btn-primary">티켓 예매하기</a>
+      </div>
+
+      <!-- 키네틱 타이포 트랙 (가로 패럴랙스 띠) · JS가 활성화할 때 보임 -->
+      <div class="hero-kinetic" aria-hidden="true">
+        <!-- Layer 1: 배경 띠 (네이비) -->
+        <div class="kinetic-band band-1">
+          <div class="band-track track-right">
+            <span>메아리</span><span>메아리</span><span>메아리</span><span>메아리</span><span>메아리</span><span>메아리</span>
+          </div>
+        </div>
+        <!-- Layer 2: 오프셋 띠 (주황) -->
+        <div class="kinetic-band band-2">
+          <div class="band-track track-left">
+            <span>MEARI FESTIVAL</span><span>2024</span><span>MEARI FESTIVAL</span><span>2024</span><span>MEARI FESTIVAL</span><span>2024</span>
+          </div>
+        </div>
+        <!-- Layer 3: 핵심 헤드라인 (리소 오프셋 효과) -->
+        <div class="hero-center-type">
+          <div class="hero-type-ghost">메아리</div>
+          <div class="hero-type-main">메아리</div>
+        </div>
+        <!-- Layer 4: 하단 정보 띠 -->
+        <div class="kinetic-band band-3">
+          <div class="band-track track-right">
+            <span>강원도 인제</span><span>OCT 4–6</span><span>인디 뮤직</span><span>캠핑</span><span>모닥불</span><span>강원도 인제</span><span>OCT 4–6</span><span>인디 뮤직</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 히어로 하단 CTA (항상 보임) -->
+      <div class="hero-footer">
+        <div class="hero-meta">
+          <span class="hero-date-badge">
+            <time datetime="2024-10-04">2024.10.04</time> ~ <time datetime="2024-10-06">10.06</time>
+          </span>
+          <span class="hero-location">강원도 인제 자작나무 캠핑숲</span>
+        </div>
+        <a href="#tickets" class="btn btn-primary">티켓 예매하기</a>
+        <a href="#lineup" class="scroll-hint" aria-label="라인업 섹션으로 스크롤">
+          <svg width="20" height="32" viewBox="0 0 20 32" fill="none" aria-hidden="true">
+            <rect x="9" y="0" width="2" height="20" fill="currentColor" opacity="0.4"/>
+            <path d="M3 20 L10 28 L17 20" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         LINEUP
+    ========================================================== -->
+    <section id="lineup" class="section lineup-section" aria-labelledby="lineup-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <p class="section-eyebrow">라인업 / LINEUP</p>
+          <h2 id="lineup-heading" class="section-heading">숲이 품은<br/>목소리들</h2>
+          <p class="section-desc">산에 울려 퍼질 26팀의 아티스트. 각자의 소리가 겹쳐 하나의 메아리가 됩니다.</p>
+        </header>
+
+        <!-- 헤드라이너 -->
+        <div class="lineup-tier">
+          <h3 class="lineup-tier-label">헤드라이너</h3>
+          <ul class="lineup-grid headliner-grid">
+            <li class="artist-card" data-tier="headliner">
+              <figure class="artist-figure">
+                <img
+                  src="https://picsum.photos/seed/meariband1/600/400"
+                  alt="헤드라이너 아티스트 공연 모습"
+                  width="600" height="400"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong class="artist-name">달의 뒷면</strong>
+                  <span class="artist-genre">포스트 록 / 앰비언트</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="artist-card" data-tier="headliner">
+              <figure class="artist-figure">
+                <img
+                  src="https://picsum.photos/seed/meariband2/600/400"
+                  alt="헤드라이너 아티스트 공연 모습"
+                  width="600" height="400"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong class="artist-name">서울의 새벽</strong>
+                  <span class="artist-genre">인디 팝 / 드림팝</span>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="artist-card" data-tier="headliner">
+              <figure class="artist-figure">
+                <img
+                  src="https://picsum.photos/seed/meariband3/600/400"
+                  alt="헤드라이너 아티스트 공연 모습"
+                  width="600" height="400"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong class="artist-name">Birch Signal</strong>
+                  <span class="artist-genre">포크 / 네오 소울</span>
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 스테이지 아티스트 -->
+        <div class="lineup-tier">
+          <h3 class="lineup-tier-label">스테이지 아티스트</h3>
+          <ul class="lineup-grid stage-grid">
+            <li class="artist-row"><strong>초록 잎 오케스트라</strong><span>포스트 클래식</span></li>
+            <li class="artist-row"><strong>Mountain Echo</strong><span>슈게이징</span></li>
+            <li class="artist-row"><strong>노래하는 돌멩이</strong><span>포크 팝</span></li>
+            <li class="artist-row"><strong>Quiet Riot Quartet</strong><span>재즈 퓨전</span></li>
+            <li class="artist-row"><strong>숲의 선율</strong><span>어쿠스틱 소울</span></li>
+            <li class="artist-row"><strong>Pine Needle Radio</strong><span>인디 록</span></li>
+            <li class="artist-row"><strong>새벽 세 시</strong><span>싱어송라이터</span></li>
+            <li class="artist-row"><strong>Fog Signal</strong><span>일렉트로닉 포크</span></li>
+            <li class="artist-row"><strong>강가의 목격자</strong><span>블루스 록</span></li>
+            <li class="artist-row"><strong>Campfire Chorus</strong><span>인디 팝</span></li>
+            <li class="artist-row"><strong>안개 속 서정시</strong><span>챔버 팝</span></li>
+            <li class="artist-row"><strong>The Hollow Wood</strong><span>포크 록</span></li>
+          </ul>
+        </div>
+
+        <!-- 라인업 무대 사진 -->
+        <div class="lineup-stage-photo">
+          <img
+            src="https://picsum.photos/seed/mearistage/1400/600"
+            alt="야외 무대에서 공연하는 인디 밴드, 숲을 배경으로"
+            width="1400" height="600"
+            loading="lazy"
+          />
+          <p class="stage-photo-caption">자작나무 스테이지 · 메인 공연장</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         TIMETABLE
+    ========================================================== -->
+    <section id="timetable" class="section timetable-section" aria-labelledby="timetable-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <p class="section-eyebrow">타임테이블 / TIMETABLE</p>
+          <h2 id="timetable-heading" class="section-heading">소리가<br/>쌓이는 시간</h2>
+        </header>
+
+        <!-- 탭 컨트롤 -->
+        <div class="tt-tabs" role="tablist" aria-label="공연 날짜 선택">
+          <button class="tt-tab active" role="tab" aria-selected="true" aria-controls="tt-day1" id="tab-day1" data-day="1">
+            <span class="tt-tab-date tabular-nums">10.04</span>
+            <span class="tt-tab-label">DAY 1 (금)</span>
+          </button>
+          <button class="tt-tab" role="tab" aria-selected="false" aria-controls="tt-day2" id="tab-day2" data-day="2">
+            <span class="tt-tab-date tabular-nums">10.05</span>
+            <span class="tt-tab-label">DAY 2 (토)</span>
+          </button>
+          <button class="tt-tab" role="tab" aria-selected="false" aria-controls="tt-day3" id="tab-day3" data-day="3">
+            <span class="tt-tab-date tabular-nums">10.06</span>
+            <span class="tt-tab-label">DAY 3 (일)</span>
+          </button>
+        </div>
+
+        <!-- DAY 1 -->
+        <div class="tt-panel" id="tt-day1" role="tabpanel" aria-labelledby="tab-day1">
+          <div class="tt-stages">
+            <!-- 자작나무 스테이지 -->
+            <div class="tt-stage-col">
+              <h3 class="tt-stage-name">자작나무 스테이지</h3>
+              <ul class="tt-schedule">
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">16:00</span>
+                  <span class="tt-artist">노래하는 돌멩이</span>
+                  <span class="tt-genre">포크 팝</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">17:30</span>
+                  <span class="tt-artist">Pine Needle Radio</span>
+                  <span class="tt-genre">인디 록</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">19:00</span>
+                  <span class="tt-artist">Mountain Echo</span>
+                  <span class="tt-genre">슈게이징</span>
+                </li>
+                <li class="tt-slot tt-slot-headliner">
+                  <span class="tt-time tabular-nums">21:00</span>
+                  <span class="tt-artist">달의 뒷면</span>
+                  <span class="tt-genre">헤드라이너</span>
+                </li>
+              </ul>
+            </div>
+            <!-- 모닥불 스테이지 -->
+            <div class="tt-stage-col">
+              <h3 class="tt-stage-name">모닥불 스테이지</h3>
+              <ul class="tt-schedule">
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">15:00</span>
+                  <span class="tt-artist">안개 속 서정시</span>
+                  <span class="tt-genre">챔버 팝</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">16:30</span>
+                  <span class="tt-artist">새벽 세 시</span>
+                  <span class="tt-genre">싱어송라이터</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">18:00</span>
+                  <span class="tt-artist">Campfire Chorus</span>
+                  <span class="tt-genre">인디 팝</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">20:00</span>
+                  <span class="tt-artist">강가의 목격자</span>
+                  <span class="tt-genre">블루스 록</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="tt-panel" id="tt-day2" role="tabpanel" aria-labelledby="tab-day2" hidden>
+          <div class="tt-stages">
+            <div class="tt-stage-col">
+              <h3 class="tt-stage-name">자작나무 스테이지</h3>
+              <ul class="tt-schedule">
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">14:00</span>
+                  <span class="tt-artist">The Hollow Wood</span>
+                  <span class="tt-genre">포크 록</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">15:30</span>
+                  <span class="tt-artist">Quiet Riot Quartet</span>
+                  <span class="tt-genre">재즈 퓨전</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">17:30</span>
+                  <span class="tt-artist">초록 잎 오케스트라</span>
+                  <span class="tt-genre">포스트 클래식</span>
+                </li>
+                <li class="tt-slot tt-slot-headliner">
+                  <span class="tt-time tabular-nums">20:30</span>
+                  <span class="tt-artist">서울의 새벽</span>
+                  <span class="tt-genre">헤드라이너</span>
+                </li>
+              </ul>
+            </div>
+            <div class="tt-stage-col">
+              <h3 class="tt-stage-name">모닥불 스테이지</h3>
+              <ul class="tt-schedule">
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">13:00</span>
+                  <span class="tt-artist">Fog Signal</span>
+                  <span class="tt-genre">일렉트로닉 포크</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">14:30</span>
+                  <span class="tt-artist">숲의 선율</span>
+                  <span class="tt-genre">어쿠스틱 소울</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">16:00</span>
+                  <span class="tt-artist">Pine Needle Radio</span>
+                  <span class="tt-genre">인디 록</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">19:00</span>
+                  <span class="tt-artist">Mountain Echo</span>
+                  <span class="tt-genre">슈게이징</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="tt-panel" id="tt-day3" role="tabpanel" aria-labelledby="tab-day3" hidden>
+          <div class="tt-stages">
+            <div class="tt-stage-col">
+              <h3 class="tt-stage-name">자작나무 스테이지</h3>
+              <ul class="tt-schedule">
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">13:00</span>
+                  <span class="tt-artist">새벽 세 시</span>
+                  <span class="tt-genre">싱어송라이터</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">14:30</span>
+                  <span class="tt-artist">Campfire Chorus</span>
+                  <span class="tt-genre">인디 팝</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">16:00</span>
+                  <span class="tt-artist">초록 잎 오케스트라</span>
+                  <span class="tt-genre">포스트 클래식</span>
+                </li>
+                <li class="tt-slot tt-slot-headliner">
+                  <span class="tt-time tabular-nums">18:30</span>
+                  <span class="tt-artist">Birch Signal</span>
+                  <span class="tt-genre">헤드라이너</span>
+                </li>
+              </ul>
+            </div>
+            <div class="tt-stage-col">
+              <h3 class="tt-stage-name">모닥불 스테이지</h3>
+              <ul class="tt-schedule">
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">12:00</span>
+                  <span class="tt-artist">안개 속 서정시</span>
+                  <span class="tt-genre">챔버 팝</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">13:30</span>
+                  <span class="tt-artist">The Hollow Wood</span>
+                  <span class="tt-genre">포크 록</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">15:00</span>
+                  <span class="tt-artist">강가의 목격자</span>
+                  <span class="tt-genre">블루스 록</span>
+                </li>
+                <li class="tt-slot">
+                  <span class="tt-time tabular-nums">17:00</span>
+                  <span class="tt-artist">달의 뒷면</span>
+                  <span class="tt-genre">포스트 록</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         VENUE · 현장 안내
+    ========================================================== -->
+    <section id="venue" class="section venue-section" aria-labelledby="venue-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <p class="section-eyebrow">현장 안내 / VENUE</p>
+          <h2 id="venue-heading" class="section-heading">서로를 품는<br/>공간</h2>
+          <p class="section-desc">나무는 소리를 흡수하고 다시 내보냅니다. 이 숲은 우리가 서로의 메아리가 되는 곳.</p>
+        </header>
+
+        <div class="venue-grid">
+          <!-- 사진 + 위치 -->
+          <div class="venue-photo-block">
+            <img
+              src="https://picsum.photos/seed/mearivenue/800/600"
+              alt="가을 자작나무 숲 속 캠핑 텐트와 조명"
+              width="800" height="600"
+              loading="lazy"
+            />
+            <div class="venue-address">
+              <p class="venue-address-label">오시는 길</p>
+              <address>
+                강원도 인제군 인제읍 자작나무숲길 42<br/>
+                <a href="https://map.kakao.com" target="_blank" rel="noopener noreferrer">카카오맵으로 보기</a>
+              </address>
+            </div>
+          </div>
+
+          <!-- 정보 카드들 -->
+          <ul class="venue-info-list">
+            <li class="venue-info-card">
+              <div class="venue-info-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M16 4 C10 4 6 8 6 14 C6 22 16 28 16 28 C16 28 26 22 26 14 C26 8 22 4 16 4Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <circle cx="16" cy="14" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <strong class="venue-info-title">캠핑 구역</strong>
+                <p>텐트 지참 or 글램핑 패키지. 샤워시설·화장실 완비. 야간 안전요원 상주.</p>
+              </div>
+            </li>
+            <li class="venue-info-card">
+              <div class="venue-info-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M8 26 C8 20 12 16 16 14 C20 16 24 20 24 26" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M16 14 L16 6" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="16" cy="6" r="2" fill="currentColor"/>
+                  <path d="M10 20 L16 14 L22 20" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+                </svg>
+              </div>
+              <div>
+                <strong class="venue-info-title">모닥불 광장</strong>
+                <p>메인 스테이지 옆 공동 화톳불. 매일 밤 22:00~01:00. 마시멜로 제공.</p>
+              </div>
+            </li>
+            <li class="venue-info-card">
+              <div class="venue-info-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <rect x="6" y="12" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M10 12 V8 A6 6 0 0 1 22 8 V12" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <circle cx="16" cy="19" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <strong class="venue-info-title">먹거리 마켓</strong>
+                <p>로컬 강원도 식재료 요리. 비건 메뉴 상시 운영. 수제 맥주 Bar 및 무알코올 음료.</p>
+              </div>
+            </li>
+            <li class="venue-info-card">
+              <div class="venue-info-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M16 10 L16 16 L21 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <strong class="venue-info-title">입장 안내</strong>
+                <p>매일 <time class="tabular-nums">10:00</time> 오픈. 반려동물 동반 가능 (리드줄 필수). 우천 시 일부 진행.</p>
+              </div>
+            </li>
+            <li class="venue-info-card">
+              <div class="venue-info-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M4 14 H28" stroke="currentColor" stroke-width="2"/>
+                  <path d="M10 4 V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M22 4 V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <strong class="venue-info-title">셔틀버스</strong>
+                <p>서울 동서울터미널 출발. 1일 2회 왕복. 티켓 구매 시 셔틀 추가 예약 가능.</p>
+              </div>
+            </li>
+            <li class="venue-info-card">
+              <div class="venue-info-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M6 10 Q16 4 26 10 Q16 16 6 10Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M6 16 Q16 10 26 16 Q16 22 6 16Z" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+                  <path d="M6 22 Q16 16 26 22 Q16 28 6 22Z" stroke="currentColor" stroke-width="2" fill="none" opacity="0.25"/>
+                </svg>
+              </div>
+              <div>
+                <strong class="venue-info-title">공명 구역</strong>
+                <p>핸드폰 전파 약합니다. 오프라인 맵 미리 다운로드 권장. 현장 WiFi 무료 제공.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 포레스트 포토 갤러리 -->
+        <div class="venue-gallery" aria-label="현장 분위기 사진">
+          <figure class="venue-gallery-item">
+            <img
+              src="https://picsum.photos/seed/mearicampfire/500/400"
+              alt="밤 모닥불 주변에 앉아 대화하는 페스티벌 참가자들"
+              width="500" height="400"
+              loading="lazy"
+            />
+          </figure>
+          <figure class="venue-gallery-item venue-gallery-item--tall">
+            <img
+              src="https://picsum.photos/seed/meariforest/400/700"
+              alt="가을 자작나무 숲 사이로 비치는 햇빛"
+              width="400" height="700"
+              loading="lazy"
+            />
+          </figure>
+          <figure class="venue-gallery-item">
+            <img
+              src="https://picsum.photos/seed/mearicrowd/500/400"
+              alt="야외 공연장에서 음악을 즐기는 관중"
+              width="500" height="400"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         TICKETS
+    ========================================================== -->
+    <section id="tickets" class="section tickets-section" aria-labelledby="tickets-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <p class="section-eyebrow">티켓 / TICKETS</p>
+          <h2 id="tickets-heading" class="section-heading">당신의 자리를<br/>예약하세요</h2>
+          <p class="section-desc">2024년 8월 30일까지 얼리버드 가격이 적용됩니다.<br/>각 티켓 유형은 수량이 한정됩니다.</p>
+        </header>
+
+        <ul class="ticket-cards">
+          <li class="ticket-card" data-tier="earlybird">
+            <div class="ticket-card-header">
+              <span class="ticket-badge">얼리버드 마감</span>
+              <strong class="ticket-type">1일권</strong>
+            </div>
+            <div class="ticket-price">
+              <span class="price-amount tabular-nums">49,000</span>
+              <span class="price-unit">원</span>
+            </div>
+            <ul class="ticket-perks">
+              <li>선택 날짜 입장</li>
+              <li>공연 전 구역 자유석</li>
+            </ul>
+            <a href="#" class="btn btn-outline" aria-label="1일권 예매하기">예매하기</a>
+          </li>
+
+          <li class="ticket-card ticket-card--featured" data-tier="fullpass">
+            <div class="ticket-card-header">
+              <span class="ticket-badge ticket-badge--hot">추천</span>
+              <strong class="ticket-type">풀 패스 (2박 3일)</strong>
+            </div>
+            <div class="ticket-price">
+              <span class="price-amount tabular-nums">129,000</span>
+              <span class="price-unit">원</span>
+            </div>
+            <ul class="ticket-perks">
+              <li>3일 전 일정 무제한 입장</li>
+              <li>캠핑 텐트 사이트 포함</li>
+              <li>모닥불 광장 우선 입장</li>
+              <li>기념 리소그래프 포스터</li>
+            </ul>
+            <a href="#" class="btn btn-primary" aria-label="풀 패스 예매하기">예매하기</a>
+          </li>
+
+          <li class="ticket-card" data-tier="glamping">
+            <div class="ticket-card-header">
+              <span class="ticket-badge">글램핑 패키지</span>
+              <strong class="ticket-type">글램핑 + 풀 패스</strong>
+            </div>
+            <div class="ticket-price">
+              <span class="price-amount tabular-nums">229,000</span>
+              <span class="price-unit">원</span>
+            </div>
+            <ul class="ticket-perks">
+              <li>풀 패스 모든 혜택</li>
+              <li>글램핑 텐트 (최대 2인)</li>
+              <li>조식 2회 포함</li>
+              <li>셔틀버스 왕복 포함</li>
+            </ul>
+            <a href="#" class="btn btn-outline" aria-label="글램핑 패키지 예매하기">예매하기</a>
+          </li>
+        </ul>
+
+        <p class="ticket-note">* 티켓 환불: 공연 7일 전까지 전액 환불 가능. 이후 취소 수수료 발생.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo-text">메아리</p>
+        <p class="footer-tagline">소리가 공명하는 곳에서, 우리는 서로의 메아리가 됩니다.</p>
+      </div>
+      <nav aria-label="푸터 내비게이션">
+        <ul class="footer-links">
+          <li><a href="mailto:hello@meari-fest.kr">hello@meari-fest.kr</a></li>
+          <li><a href="#" aria-label="인스타그램 메아리 페스티벌" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="#" aria-label="유튜브 메아리 페스티벌" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copy">
+        <small>&copy; <span class="tabular-nums">2024</span> Meari Festival. All rights reserved.</small>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       CDN LIBRARIES
+  ============================================================ -->
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <!-- Main script -->
+  <script src="script.js" defer></script>
+</body>
+</html>

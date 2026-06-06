@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>흙손 : 분청사기 공방</title>
+  <meta name="description" content="흙손 공방. 분청사기를 빚는 작가의 작업실. 작품 갤러리, 도예 클래스, 전시 일정." />
+
+  <!-- Lenis CSS reset (FLOOR requirement) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.css" />
+
+  <!-- Pretendard Variable (한글) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+
+  <!-- DM Mono (영문 페어링 — 데이터 저널리스트 미학) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- SKIP NAV -->
+  <a class="skip-link" href="#main-content">본문으로 바로가기</a>
+
+  <!-- HEADER / NAV -->
+  <header class="site-header" role="banner">
+    <nav class="nav-inner" aria-label="주요 메뉴">
+      <a class="nav-logo" href="#hero" aria-label="흙손 홈으로">
+        <span class="logo-ko">흙손</span>
+        <span class="logo-en" aria-hidden="true">HEUKSOHN</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#gallery">작품</a></li>
+        <li><a href="#classes">클래스</a></li>
+        <li><a href="#about">작가</a></li>
+        <li><a href="#exhibition">전시</a></li>
+        <li><a href="#contact">연락</a></li>
+      </ul>
+      <button class="nav-menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <rect x="3" y="6" width="18" height="1.5" fill="currentColor"/>
+          <rect x="3" y="11.25" width="18" height="1.5" fill="currentColor"/>
+          <rect x="3" y="16.5" width="18" height="1.5" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <ul role="list">
+        <li><a href="#gallery">작품</a></li>
+        <li><a href="#classes">클래스</a></li>
+        <li><a href="#about">작가</a></li>
+        <li><a href="#exhibition">전시</a></li>
+        <li><a href="#contact">연락</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         HERO
+         MACRO_STRUCTURE: 그리드 파편화 / 모듈러 셀 배치
+         VISUAL_MECHANISM: 그리드 셀 디스토션 / 픽셀 정렬
+         GOVERNING_METAPHOR: 게슈탈트 폐쇄성 x 분청사기
+         — 파편화된 셀들이 인식 안에서 항아리로 수렴한다
+    ============================================================ -->
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+
+      <!-- 셀 그리드 파편 — JS로 애니메이션, JS 없으면 정적 이미지 폴백 표시 -->
+      <div class="hero-grid-stage" aria-hidden="true">
+        <canvas class="hero-canvas" id="heroCanvas" role="img" aria-label="항아리 형태로 수렴하는 분청사기 셀 그리드"></canvas>
+        <img
+          class="hero-fallback-img"
+          src="https://picsum.photos/seed/buncheong-hero-vessel/900/700"
+          alt="분청사기 항아리"
+          width="900"
+          height="700"
+        />
+      </div>
+
+      <!-- 텍스트 블록 — DOM 완성형, JS 없어도 표시 -->
+      <div class="hero-text-block">
+        <p class="hero-label mono">STUDIO / 흙과 불 / BUNCHEONG</p>
+        <h1 id="hero-heading" class="hero-heading">
+          <span class="hero-heading-line">불완전한</span>
+          <span class="hero-heading-line">조각들이</span>
+          <span class="hero-heading-line hero-heading-accent">하나가 된다</span>
+        </h1>
+        <p class="hero-sub">
+          손의 흔적이 남는 분청사기. 흙손 공방은 완벽하지 않아서 아름다운
+          기물을 빚습니다. 이천 작업실에서 계절마다 클래스를 엽니다.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#gallery" class="btn btn--primary">작품 보기</a>
+          <a href="#classes" class="btn btn--ghost">클래스 신청</a>
+        </div>
+      </div>
+
+      <!-- 스크롤 힌트 -->
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <div class="scroll-hint-track">
+          <div class="scroll-hint-dot"></div>
+        </div>
+        <span class="mono">SCROLL</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STAT BAR — 데이터 저널리스트 미학: 수치를 정보 그래픽처럼
+    ============================================================ -->
+    <section class="stat-bar" aria-label="공방 현황 수치">
+      <div class="stat-bar-inner">
+        <div class="stat-item">
+          <span class="stat-num mono tabular-nums" data-target="2009">2009</span>
+          <span class="stat-label">설립 연도</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-num mono tabular-nums" data-target="847">847</span>
+          <span class="stat-label">완성된 기물</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-num mono tabular-nums" data-target="1300">1300</span>
+          <span class="stat-label">소성 온도 &deg;C</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-num mono tabular-nums" data-target="12">12</span>
+          <span class="stat-label">연간 클래스</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         GALLERY — 모듈러 셀 배치 그리드
+    ============================================================ -->
+    <section class="gallery-section section" id="gallery" aria-labelledby="gallery-heading">
+      <div class="section-header">
+        <p class="section-label mono">WORKS / 작품</p>
+        <h2 id="gallery-heading" class="section-heading">손이 남긴 기록</h2>
+        <p class="section-desc">
+          분청사기는 작가의 손 흔적이 그대로 표면에 새겨집니다.
+          긁힘, 눌림, 뒤틀림 … 모든 불완전함이 작품의 서명입니다.
+        </p>
+      </div>
+
+      <div class="gallery-grid" role="list">
+        <article class="gallery-cell gallery-cell--wide reveal-up" role="listitem">
+          <div class="gallery-cell-img-wrap">
+            <img
+              src="https://picsum.photos/seed/pottery-wide-vessel01/800/500"
+              alt="분청사기 대형 항아리, 귀얄 기법으로 백토를 바른 넓은 어깨선"
+              width="800"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-cell-info">
+            <span class="gallery-cell-index mono">001</span>
+            <h3 class="gallery-cell-title">귀얄 달항아리</h3>
+            <p class="gallery-cell-meta mono">분청사기 / 2024 / H 38cm</p>
+          </div>
+        </article>
+
+        <article class="gallery-cell gallery-cell--tall reveal-up" role="listitem">
+          <div class="gallery-cell-img-wrap">
+            <img
+              src="https://picsum.photos/seed/pottery-tall-bottle02/400/600"
+              alt="분청사기 세장한 병, 인화 문양이 띠처럼 둘러진 목이 긴 병"
+              width="400"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-cell-info">
+            <span class="gallery-cell-index mono">002</span>
+            <h3 class="gallery-cell-title">인화 세병</h3>
+            <p class="gallery-cell-meta mono">분청사기 / 2024 / H 29cm</p>
+          </div>
+        </article>
+
+        <article class="gallery-cell gallery-cell--sq reveal-up" role="listitem">
+          <div class="gallery-cell-img-wrap">
+            <img
+              src="https://picsum.photos/seed/pottery-sq-bowl03/400/400"
+              alt="분청사기 다완, 손 자국이 남은 거친 표면의 차 사발"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-cell-info">
+            <span class="gallery-cell-index mono">003</span>
+            <h3 class="gallery-cell-title">분장 다완</h3>
+            <p class="gallery-cell-meta mono">분청사기 / 2023 / H 8cm</p>
+          </div>
+        </article>
+
+        <article class="gallery-cell gallery-cell--sq reveal-up" role="listitem">
+          <div class="gallery-cell-img-wrap">
+            <img
+              src="https://picsum.photos/seed/pottery-sq-plate04/400/400"
+              alt="분청사기 접시, 박지 기법으로 선을 새긴 납작한 접시"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-cell-info">
+            <span class="gallery-cell-index mono">004</span>
+            <h3 class="gallery-cell-title">박지 접시</h3>
+            <p class="gallery-cell-meta mono">분청사기 / 2023 / D 24cm</p>
+          </div>
+        </article>
+
+        <article class="gallery-cell gallery-cell--wide reveal-up" role="listitem">
+          <div class="gallery-cell-img-wrap">
+            <img
+              src="https://picsum.photos/seed/pottery-studio-shelf05/800/480"
+              alt="가마에서 나온 분청사기 기물들이 작업실 선반 위에 늘어선 풍경"
+              width="800"
+              height="480"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-cell-info">
+            <span class="gallery-cell-index mono">005</span>
+            <h3 class="gallery-cell-title">가마 연작 2024</h3>
+            <p class="gallery-cell-meta mono">분청사기 7점 / 2024 / 가변 크기</p>
+          </div>
+        </article>
+
+        <article class="gallery-cell gallery-cell--tall reveal-up" role="listitem">
+          <div class="gallery-cell-img-wrap">
+            <img
+              src="https://picsum.photos/seed/pottery-tall-maebyeong06/400/560"
+              alt="분청사기 매병, 어깨가 넓고 아래로 좁아지는 전통 매병 형태"
+              width="400"
+              height="560"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-cell-info">
+            <span class="gallery-cell-index mono">006</span>
+            <h3 class="gallery-cell-title">철화 매병</h3>
+            <p class="gallery-cell-meta mono">분청사기 / 2024 / H 34cm</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="gallery-more">
+        <a href="#contact" class="btn btn--outline">전체 작품 문의</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROCESS — 흙에서 불까지 (데이터 흐름 시각화)
+    ============================================================ -->
+    <section class="process-section section" id="process" aria-labelledby="process-heading">
+      <div class="section-header">
+        <p class="section-label mono">PROCESS / 과정</p>
+        <h2 id="process-heading" class="section-heading">흙에서 불까지</h2>
+      </div>
+
+      <ol class="process-grid" aria-label="도자 제작 과정">
+        <li class="process-step reveal-up">
+          <div class="process-step-num mono" aria-hidden="true">01</div>
+          <div class="process-step-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" focusable="false">
+              <rect x="4" y="28" width="32" height="4" rx="1" fill="currentColor" opacity="0.25"/>
+              <rect x="8" y="23" width="24" height="5" rx="1" fill="currentColor" opacity="0.45"/>
+              <ellipse cx="20" cy="20" rx="10" ry="5" fill="currentColor" opacity="0.75"/>
+            </svg>
+          </div>
+          <h3 class="process-step-title">흙 선별</h3>
+          <p class="process-step-desc">전라도 태토와 경기 점토를 배합합니다. 흙의 질감이 분청의 첫 언어입니다.</p>
+        </li>
+
+        <li class="process-connector" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" focusable="false">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </li>
+
+        <li class="process-step reveal-up">
+          <div class="process-step-num mono" aria-hidden="true">02</div>
+          <div class="process-step-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" focusable="false">
+              <circle cx="20" cy="22" r="10" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+              <ellipse cx="20" cy="22" rx="5" ry="3" fill="currentColor" opacity="0.75"/>
+              <path d="M20 12V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="process-step-title">물레 성형</h3>
+          <p class="process-step-desc">돌아가는 물레 위에서 손이 흙을 만납니다. 압력과 속도가 형태를 결정합니다.</p>
+        </li>
+
+        <li class="process-connector" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" focusable="false">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </li>
+
+        <li class="process-step reveal-up">
+          <div class="process-step-num mono" aria-hidden="true">03</div>
+          <div class="process-step-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" focusable="false">
+              <rect x="10" y="8" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+              <path d="M14 22v8M26 22v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="10" y="30" width="20" height="3" rx="1" fill="currentColor" opacity="0.35"/>
+            </svg>
+          </div>
+          <h3 class="process-step-title">분장 / 문양</h3>
+          <p class="process-step-desc">백토 물에 담그거나 귀얄로 바릅니다. 긁고 새기는 손끝이 무늬를 만듭니다.</p>
+        </li>
+
+        <li class="process-connector" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" focusable="false">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </li>
+
+        <li class="process-step reveal-up">
+          <div class="process-step-num mono" aria-hidden="true">04</div>
+          <div class="process-step-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" focusable="false">
+              <path d="M8 34 C8 22 12 10 20 8 C28 10 32 22 32 34Z" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55"/>
+              <path d="M14 30 C14 24 17 16 20 14 C23 16 26 24 26 30" fill="currentColor" opacity="0.2"/>
+              <path d="M18 10 C18 8 20 5 20 5 C20 5 22 8 22 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+            </svg>
+          </div>
+          <h3 class="process-step-title">소성 1300&deg;C</h3>
+          <p class="process-step-desc">가마 안에서 36시간. 불이 흙을 돌로 바꾸고, 예측 불가능한 색이 탄생합니다.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============================================================
+         CLASSES
+    ============================================================ -->
+    <section class="classes-section section" id="classes" aria-labelledby="classes-heading">
+      <div class="section-header">
+        <p class="section-label mono">CLASSES / 클래스</p>
+        <h2 id="classes-heading" class="section-heading">흙을 처음 만나는 시간</h2>
+        <p class="section-desc">
+          초보자부터 심화 과정까지. 분청사기의 기법과 정신을 직접 손으로 배웁니다.
+        </p>
+      </div>
+
+      <div class="classes-grid">
+        <article class="class-card reveal-up">
+          <div class="class-card-img-wrap">
+            <img
+              src="https://picsum.photos/seed/class-intro-pinching/600/380"
+              alt="도예 입문 클래스, 물레 앞에 앉아 흙을 올리는 수강생의 손"
+              width="600"
+              height="380"
+              loading="lazy"
+            />
+          </div>
+          <div class="class-card-body">
+            <div class="class-card-badge mono">INTRO</div>
+            <h3 class="class-card-title">분청 입문</h3>
+            <p class="class-card-desc">
+              물레 없이 손으로 빚는 핀칭 기법부터. 분청의 분장 기법을 체험하고
+              나만의 다완 하나를 완성합니다.
+            </p>
+            <dl class="class-card-meta">
+              <div class="class-meta-row">
+                <dt class="mono">일정</dt>
+                <dd>매월 둘째 주 토요일</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">시간</dt>
+                <dd class="tabular-nums">10:00 … 14:00</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">정원</dt>
+                <dd class="tabular-nums">6명</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">수강료</dt>
+                <dd class="tabular-nums">85,000원</dd>
+              </div>
+            </dl>
+            <a href="#contact" class="btn btn--primary btn--sm">신청하기</a>
+          </div>
+        </article>
+
+        <article class="class-card reveal-up">
+          <div class="class-card-img-wrap">
+            <img
+              src="https://picsum.photos/seed/class-wheel-throwing/600/380"
+              alt="물레 클래스, 물레 위 올라가는 흙 기둥과 집중하는 작가의 손"
+              width="600"
+              height="380"
+              loading="lazy"
+            />
+          </div>
+          <div class="class-card-body">
+            <div class="class-card-badge mono">WHEEL</div>
+            <h3 class="class-card-title">물레 집중반</h3>
+            <p class="class-card-desc">
+              4주 과정. 물레 성형의 기초부터 분청 분장, 가마 소성까지
+              전 과정을 경험합니다. 완성된 기물은 가져갑니다.
+            </p>
+            <dl class="class-card-meta">
+              <div class="class-meta-row">
+                <dt class="mono">일정</dt>
+                <dd>분기별 4회 (화요일)</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">시간</dt>
+                <dd class="tabular-nums">14:00 … 17:00</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">정원</dt>
+                <dd class="tabular-nums">4명</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">수강료</dt>
+                <dd class="tabular-nums">280,000원</dd>
+              </div>
+            </dl>
+            <a href="#contact" class="btn btn--primary btn--sm">신청하기</a>
+          </div>
+        </article>
+
+        <article class="class-card reveal-up">
+          <div class="class-card-img-wrap">
+            <img
+              src="https://picsum.photos/seed/class-advanced-buncheong/600/380"
+              alt="심화 분청 클래스, 박지 기법으로 문양을 새기는 작가의 손과 도구"
+              width="600"
+              height="380"
+              loading="lazy"
+            />
+          </div>
+          <div class="class-card-body">
+            <div class="class-card-badge mono">ADVANCED</div>
+            <h3 class="class-card-title">분청 심화</h3>
+            <p class="class-card-desc">
+              인화, 박지, 철화 등 분청 고유 기법을 깊이 배웁니다.
+              이미 물레를 다룰 수 있는 분을 위한 전문가 과정입니다.
+            </p>
+            <dl class="class-card-meta">
+              <div class="class-meta-row">
+                <dt class="mono">일정</dt>
+                <dd>격주 토요일 (6개월)</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">시간</dt>
+                <dd class="tabular-nums">10:00 … 16:00</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">정원</dt>
+                <dd class="tabular-nums">3명</dd>
+              </div>
+              <div class="class-meta-row">
+                <dt class="mono">수강료</dt>
+                <dd>상담 후 결정</dd>
+              </div>
+            </dl>
+            <a href="#contact" class="btn btn--primary btn--sm">문의하기</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT — 작가 소개
+    ============================================================ -->
+    <section class="about-section section" id="about" aria-labelledby="about-heading">
+      <div class="about-inner">
+        <div class="about-img-col reveal-left">
+          <div class="about-img-frame">
+            <img
+              src="https://picsum.photos/seed/artist-studio-heuksohn/560/680"
+              alt="흙손 공방 작가 이정현, 작업실에서 기물을 다듬는 모습"
+              width="560"
+              height="680"
+              loading="lazy"
+            />
+            <!-- 게슈탈트 장식 셀 그리드 -->
+            <div class="about-grid-deco" aria-hidden="true">
+              <div class="deco-cell"></div>
+              <div class="deco-cell deco-cell--a"></div>
+              <div class="deco-cell"></div>
+              <div class="deco-cell deco-cell--a"></div>
+              <div class="deco-cell deco-cell--b"></div>
+              <div class="deco-cell deco-cell--a"></div>
+              <div class="deco-cell"></div>
+              <div class="deco-cell deco-cell--a"></div>
+              <div class="deco-cell"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-text-col reveal-right">
+          <p class="section-label mono">ARTIST / 작가</p>
+          <h2 id="about-heading" class="section-heading">이정현</h2>
+          <p class="about-bio">
+            1978년생. 서울대학교 도예과를 졸업하고 전남 강진에서 3년간
+            전통 분청사기를 수련했습니다. 2009년 경기도 이천에 흙손 공방을 열었습니다.
+          </p>
+          <p class="about-bio">
+            분청사기는 불완전합니다. 비대칭이고, 흙 자국이 남고, 가마에서
+            예상 밖의 색이 나옵니다. 작가는 그 불완전함을 교정하지 않습니다.
+            게슈탈트 심리학이 말하듯, 우리 눈은 빠진 부분을 스스로 완성합니다.
+            보는 사람이 완성하는 그릇 … 그것이 흙손의 미학입니다.
+          </p>
+          <div class="about-awards">
+            <dl class="award-list">
+              <div class="award-item">
+                <dt class="mono tabular-nums">2024</dt>
+                <dd>경기 공예 페어 초대작가</dd>
+              </div>
+              <div class="award-item">
+                <dt class="mono tabular-nums">2022</dt>
+                <dd>광주 국제 도자 비엔날레 특별상</dd>
+              </div>
+              <div class="award-item">
+                <dt class="mono tabular-nums">2019</dt>
+                <dd>대한민국 공예품 대전 우수상</dd>
+              </div>
+              <div class="award-item">
+                <dt class="mono tabular-nums">2015</dt>
+                <dd>이천 도자 축제 작가 선정</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EXHIBITION — 전시 일정
+    ============================================================ -->
+    <section class="exhibition-section section" id="exhibition" aria-labelledby="exhibition-heading">
+      <div class="section-header">
+        <p class="section-label mono">EXHIBITION / 전시</p>
+        <h2 id="exhibition-heading" class="section-heading">전시 일정</h2>
+      </div>
+
+      <div class="exhibition-list" role="list">
+        <article class="exhibition-item exhibition-item--upcoming reveal-up" role="listitem">
+          <div class="exhibition-item-date" aria-label="2026년 7월 5일">
+            <span class="ex-month mono">JUL</span>
+            <span class="ex-day mono tabular-nums">05</span>
+            <span class="ex-year mono tabular-nums">2026</span>
+          </div>
+          <div class="exhibition-item-info">
+            <div class="ex-badge mono">UPCOMING</div>
+            <h3 class="exhibition-item-title">흙과 불 사이 개인전</h3>
+            <p class="exhibition-item-place">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="7" cy="6" r="2" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M7 1.5C4.51 1.5 2.5 3.51 2.5 6c0 3.25 4.5 7 4.5 7s4.5-3.75 4.5-7c0-2.49-2.01-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+              </svg>
+              갤러리 사간, 서울 종로구
+            </p>
+            <p class="exhibition-item-desc">
+              분청사기 신작 40점. 게슈탈트 폐쇄성을 주제로 한 공간 설치 포함.
+              화 … 일 10:00 … 18:00.
+            </p>
+          </div>
+          <div class="exhibition-item-period mono tabular-nums">
+            2026.07.05 … 07.27
+          </div>
+        </article>
+
+        <article class="exhibition-item reveal-up" role="listitem">
+          <div class="exhibition-item-date" aria-label="2026년 9월 12일">
+            <span class="ex-month mono">SEP</span>
+            <span class="ex-day mono tabular-nums">12</span>
+            <span class="ex-year mono tabular-nums">2026</span>
+          </div>
+          <div class="exhibition-item-info">
+            <div class="ex-badge mono">UPCOMING</div>
+            <h3 class="exhibition-item-title">이천 도자 축제 2026 참여작가</h3>
+            <p class="exhibition-item-place">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="7" cy="6" r="2" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M7 1.5C4.51 1.5 2.5 3.51 2.5 6c0 3.25 4.5 7 4.5 7s4.5-3.75 4.5-7c0-2.49-2.01-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+              </svg>
+              경기도 이천 도자예술마을
+            </p>
+            <p class="exhibition-item-desc">
+              흙손 공방 오픈 스튜디오 포함. 클래스 체험 및 기물 판매.
+            </p>
+          </div>
+          <div class="exhibition-item-period mono tabular-nums">
+            2026.09.12 … 09.28
+          </div>
+        </article>
+
+        <article class="exhibition-item exhibition-item--past reveal-up" role="listitem">
+          <div class="exhibition-item-date" aria-label="2025년 11월 8일">
+            <span class="ex-month mono">NOV</span>
+            <span class="ex-day mono tabular-nums">08</span>
+            <span class="ex-year mono tabular-nums">2025</span>
+          </div>
+          <div class="exhibition-item-info">
+            <div class="ex-badge mono">PAST</div>
+            <h3 class="exhibition-item-title">광주 국제 도자 비엔날레</h3>
+            <p class="exhibition-item-place">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="7" cy="6" r="2" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M7 1.5C4.51 1.5 2.5 3.51 2.5 6c0 3.25 4.5 7 4.5 7s4.5-3.75 4.5-7c0-2.49-2.01-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+              </svg>
+              광주 비엔날레 전시관
+            </p>
+            <p class="exhibition-item-desc">
+              분청 연작 12점 출품. 한국, 일본, 영국 도예 작가 25인 그룹전.
+            </p>
+          </div>
+          <div class="exhibition-item-period mono tabular-nums">
+            2025.11.08 … 12.01
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT
+    ============================================================ -->
+    <section class="contact-section section" id="contact" aria-labelledby="contact-heading">
+      <div class="contact-inner">
+        <div class="contact-text">
+          <p class="section-label mono">CONTACT / 연락처</p>
+          <h2 id="contact-heading" class="section-heading">흙손 공방에 연락하세요</h2>
+          <p class="contact-desc">
+            클래스 신청, 작품 구입, 전시 협업 문의는 아래 이메일 또는 전화로
+            연락 주세요. 답변은 영업일 기준 1 … 2일 내에 드립니다.
+          </p>
+          <address class="contact-details">
+            <a href="mailto:studio@heuksohn.kr" class="contact-link">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <rect x="2" y="4" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M2 6.5l7 4.5 7-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+              studio@heuksohn.kr
+            </a>
+            <a href="tel:+82316370000" class="contact-link">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <path d="M4.5 3.5h2.8l1.4 3.2-1.8 1.4a9 9 0 004 4l1.4-1.8 3.2 1.4V14a1 1 0 01-1 1C6.5 15 3 11.5 3 4.5a1 1 0 011-1h.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              031-637-0000
+            </a>
+            <span class="contact-addr">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="9" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+                <path d="M9 2C5.97 2 3.5 4.47 3.5 7.5 3.5 11.63 9 16.5 9 16.5S14.5 11.63 14.5 7.5C14.5 4.47 12.03 2 9 2z" stroke="currentColor" stroke-width="1.3" fill="none"/>
+              </svg>
+              경기도 이천시 신둔면 도자예술로 000
+            </span>
+          </address>
+        </div>
+
+        <!-- 게슈탈트 폐쇄 장식 — 셀들이 모여 항아리 실루엣 암시 -->
+        <div class="contact-grid-deco reveal-right" aria-hidden="true">
+          <div class="closure-grid">
+            <div class="cg-cell"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell"></div>
+            <div class="cg-cell"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell cg-f"></div>
+            <div class="cg-cell"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-ko">흙손</span>
+        <span class="logo-en mono">HEUKSOHN STUDIO</span>
+      </div>
+      <p class="footer-copy mono">
+        &copy; <span class="tabular-nums">2026</span> 흙손 공방. 이천, 경기도.
+      </p>
+      <div class="footer-social">
+        <a href="https://instagram.com" class="footer-social-link" aria-label="인스타그램 흙손 공방" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+            <rect x="3" y="3" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="10" cy="10" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="14.2" cy="5.8" r="0.9" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="https://youtube.com" class="footer-social-link" aria-label="유튜브 흙손 공방" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+            <rect x="2" y="5" width="16" height="11" rx="3" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8.5 8l4 2.5-4 2.5V8z" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

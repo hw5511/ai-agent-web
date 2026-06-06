@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>백색소음 · 현대미술 갤러리</title>
+  <meta name="description" content="현대미술 갤러리 백색소음. 침묵 속의 소음, 보는 행위. 현재 전시, 참여 작가, 관람 안내." />
+
+  <!-- Pretendard (Korean) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+  />
+
+  <!-- Cormorant Garamond (English pairing · architectural, measured) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+  />
+
+  <!-- Lenis smooth scroll -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css"
+  />
+
+  <!-- Page stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER / NAV
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <a href="#main" class="skip-link">본문 바로가기</a>
+    <nav class="nav" aria-label="주 내비게이션">
+      <a href="/" class="nav__logo" aria-label="백색소음 홈">
+        <span class="nav__logo-kr" aria-hidden="true">백색소음</span>
+        <span class="nav__logo-en">WHITE NOISE</span>
+      </a>
+      <ul class="nav__list" role="list">
+        <li><a href="#exhibition" class="nav__link">현재 전시</a></li>
+        <li><a href="#artists" class="nav__link">작가</a></li>
+        <li><a href="#visit" class="nav__link">관람 안내</a></li>
+      </ul>
+      <button class="nav__menu-btn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="6" width="18" height="1.5" fill="currentColor"/>
+          <rect x="3" y="11.25" width="18" height="1.5" fill="currentColor"/>
+          <rect x="3" y="16.5" width="18" height="1.5" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul class="nav__mobile-list" role="list">
+        <li><a href="#exhibition" class="nav__mobile-link">현재 전시</a></li>
+        <li><a href="#artists" class="nav__mobile-link">작가</a></li>
+        <li><a href="#visit" class="nav__mobile-link">관람 안내</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main id="main">
+
+    <!-- ----------------------------------------------------------
+         HERO · 중앙 대칭 집중형 + 이미지 콜라주/마스킹
+         건축 도면 제도사의 눈: 엄지 도달 반경을 원형 도면으로 그리다
+         중앙 원형 마스크 안으로 작품 이미지 콜라주가 수렴한다
+    ---------------------------------------------------------- -->
+    <section class="hero" aria-label="메인 히어로">
+
+      <!-- 도면 격자 · 정적 SVG 배경 -->
+      <div class="hero__blueprint" aria-hidden="true">
+        <svg class="hero__blueprint-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- 수직 격자선 -->
+          <line x1="100" y1="0" x2="100" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="200" y1="0" x2="200" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="300" y1="0" x2="300" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="400" y1="0" x2="400" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="500" y1="0" x2="500" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="600" y1="0" x2="600" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.25"/>
+          <line x1="700" y1="0" x2="700" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="800" y1="0" x2="800" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="900" y1="0" x2="900" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="1000" y1="0" x2="1000" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="1100" y1="0" x2="1100" y2="800" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <!-- 수평 격자선 -->
+          <line x1="0" y1="100" x2="1200" y2="100" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="0" y1="200" x2="1200" y2="200" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="0" y1="300" x2="1200" y2="300" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="0" y1="400" x2="1200" y2="400" stroke="currentColor" stroke-width="0.5" opacity="0.25"/>
+          <line x1="0" y1="500" x2="1200" y2="500" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="0" y1="600" x2="1200" y2="600" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <line x1="0" y1="700" x2="1200" y2="700" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+          <!-- 중심 수렴 반경선 · 엄지 도달 영역 다이어그램 -->
+          <circle cx="600" cy="400" r="50"  stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.35"/>
+          <circle cx="600" cy="400" r="120" stroke="currentColor" stroke-width="0.5"  fill="none" opacity="0.25"/>
+          <circle cx="600" cy="400" r="200" stroke="currentColor" stroke-width="0.5"  fill="none" opacity="0.20"/>
+          <circle cx="600" cy="400" r="290" stroke="currentColor" stroke-width="0.4"  fill="none" opacity="0.15"/>
+          <circle cx="600" cy="400" r="390" stroke="currentColor" stroke-width="0.4"  fill="none" opacity="0.10"/>
+          <!-- 도면 치수선 -->
+          <line x1="310" y1="400" x2="490" y2="400" stroke="currentColor" stroke-width="0.6" opacity="0.30"/>
+          <line x1="710" y1="400" x2="890" y2="400" stroke="currentColor" stroke-width="0.6" opacity="0.30"/>
+          <line x1="600" y1="210" x2="600" y2="310" stroke="currentColor" stroke-width="0.6" opacity="0.30"/>
+          <line x1="600" y1="490" x2="600" y2="590" stroke="currentColor" stroke-width="0.6" opacity="0.30"/>
+          <!-- 치수 화살표 머리 -->
+          <polygon points="490,397 505,400 490,403" fill="currentColor" opacity="0.30"/>
+          <polygon points="710,397 695,400 710,403" fill="currentColor" opacity="0.30"/>
+          <!-- 중심점 -->
+          <circle cx="600" cy="400" r="4" fill="currentColor" opacity="0.45"/>
+          <line x1="594" y1="400" x2="606" y2="400" stroke="currentColor" stroke-width="0.8" opacity="0.45"/>
+          <line x1="600" y1="394" x2="600" y2="406" stroke="currentColor" stroke-width="0.8" opacity="0.45"/>
+        </svg>
+      </div>
+
+      <!-- 콜라주 이미지 레이어 · 원형 마스크로 중앙 수렴 -->
+      <div class="hero__collage" aria-hidden="true">
+        <!-- 중앙 원형 마스크 내부 이미지들 -->
+        <div class="hero__collage-mask">
+          <div class="hero__collage-inner">
+            <img class="hero__collage-img hero__collage-img--a" src="https://picsum.photos/seed/whitenoise-art-a/600/600" alt="" width="600" height="600" />
+            <img class="hero__collage-img hero__collage-img--b" src="https://picsum.photos/seed/whitenoise-art-b/600/600" alt="" width="600" height="600" />
+            <img class="hero__collage-img hero__collage-img--c" src="https://picsum.photos/seed/whitenoise-art-c/600/600" alt="" width="600" height="600" />
+          </div>
+        </div>
+        <!-- 외곽 파편 이미지 (도달 반경 바깥, 마스킹으로 부분 노출) -->
+        <div class="hero__fragment hero__fragment--nw">
+          <img src="https://picsum.photos/seed/whitenoise-frag-nw/280/280" alt="" width="280" height="280" />
+        </div>
+        <div class="hero__fragment hero__fragment--ne">
+          <img src="https://picsum.photos/seed/whitenoise-frag-ne/200/220" alt="" width="200" height="220" />
+        </div>
+        <div class="hero__fragment hero__fragment--sw">
+          <img src="https://picsum.photos/seed/whitenoise-frag-sw/220/180" alt="" width="220" height="180" />
+        </div>
+        <div class="hero__fragment hero__fragment--se">
+          <img src="https://picsum.photos/seed/whitenoise-frag-se/260/200" alt="" width="260" height="200" />
+        </div>
+      </div>
+
+      <!-- 히어로 텍스트 · DOM에 완성형 -->
+      <div class="hero__text">
+        <p class="hero__overline">2025 봄 / 여름 · 현재 전시</p>
+        <h1 class="hero__title">
+          <span class="hero__title-line hero__title-line--kr">침묵이</span>
+          <span class="hero__title-line hero__title-line--en">보는</span>
+          <span class="hero__title-line hero__title-line--kr">소리</span>
+        </h1>
+        <p class="hero__sub">
+          백색소음은 언제나 그 자리에 있었다.<br />
+          당신이 지금 서 있는 그 반경 안에서.
+        </p>
+        <a href="#exhibition" class="hero__cta" aria-label="현재 전시 보기">
+          전시 보기
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- 스크롤 힌트 -->
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span class="hero__scroll-label">SCROLL</span>
+      </div>
+
+    </section>
+
+    <!-- ----------------------------------------------------------
+         CURRENT EXHIBITION 현재 전시
+    ---------------------------------------------------------- -->
+    <section class="section exhibition" id="exhibition" aria-labelledby="exhibition-title">
+      <div class="section__inner">
+
+        <header class="section__header">
+          <p class="section__overline">현재 전시</p>
+          <h2 class="section__title" id="exhibition-title">
+            소음의 해부도
+            <span class="section__title-en">Anatomy of Noise</span>
+          </h2>
+          <p class="section__desc">
+            2025년 3월 8일 · 7월 27일.<br />
+            여섯 명의 작가가 침묵과 소음의 경계를 묻는다.<br />
+            보는 행위는 언제나 들음과 함께 일어난다.
+          </p>
+        </header>
+
+        <!-- 작품 사진 갤러리 -->
+        <div class="exhibition__grid" role="list">
+
+          <figure class="work-card" role="listitem">
+            <div class="work-card__img-wrap">
+              <img
+                class="work-card__img"
+                src="https://picsum.photos/seed/work-resonance/800/1000"
+                alt="공명 #1 · 이정아, 2024, 혼합매체, 180 x 240cm"
+                width="800"
+                height="1000"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-card__caption">
+              <span class="work-card__num tabular-nums">01</span>
+              <div>
+                <p class="work-card__title">공명 #1</p>
+                <p class="work-card__meta">이정아 · 혼합매체 · 2024</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="work-card work-card--wide" role="listitem">
+            <div class="work-card__img-wrap">
+              <img
+                class="work-card__img"
+                src="https://picsum.photos/seed/work-threshold/1200/800"
+                alt="문턱 · 박수현, 2025, 영상 설치, 가변 크기"
+                width="1200"
+                height="800"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-card__caption">
+              <span class="work-card__num tabular-nums">02</span>
+              <div>
+                <p class="work-card__title">문턱</p>
+                <p class="work-card__meta">박수현 · 영상 설치 · 2025</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="work-card" role="listitem">
+            <div class="work-card__img-wrap">
+              <img
+                class="work-card__img"
+                src="https://picsum.photos/seed/work-interval/800/1000"
+                alt="간격 · 최민서, 2024, 캔버스에 유화, 150 x 200cm"
+                width="800"
+                height="1000"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-card__caption">
+              <span class="work-card__num tabular-nums">03</span>
+              <div>
+                <p class="work-card__title">간격</p>
+                <p class="work-card__meta">최민서 · 유화 · 2024</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="work-card" role="listitem">
+            <div class="work-card__img-wrap">
+              <img
+                class="work-card__img"
+                src="https://picsum.photos/seed/work-radius/800/1000"
+                alt="반경 · 김도훈, 2025, 조각, 알루미늄, 가변 크기"
+                width="800"
+                height="1000"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-card__caption">
+              <span class="work-card__num tabular-nums">04</span>
+              <div>
+                <p class="work-card__title">반경</p>
+                <p class="work-card__meta">김도훈 · 조각 · 2025</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="work-card work-card--tall" role="listitem">
+            <div class="work-card__img-wrap">
+              <img
+                class="work-card__img"
+                src="https://picsum.photos/seed/work-frequency/800/1200"
+                alt="주파수 · 오세영, 2024, 사진, 100 x 150cm x 12"
+                width="800"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-card__caption">
+              <span class="work-card__num tabular-nums">05</span>
+              <div>
+                <p class="work-card__title">주파수</p>
+                <p class="work-card__meta">오세영 · 사진 · 2024</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="work-card" role="listitem">
+            <div class="work-card__img-wrap">
+              <img
+                class="work-card__img"
+                src="https://picsum.photos/seed/work-static/800/1000"
+                alt="정적 · 정하은, 2025, 드로잉, 잉크 on 종이, 가변 크기"
+                width="800"
+                height="1000"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-card__caption">
+              <span class="work-card__num tabular-nums">06</span>
+              <div>
+                <p class="work-card__title">정적</p>
+                <p class="work-card__meta">정하은 · 드로잉 · 2025</p>
+              </div>
+            </figcaption>
+          </figure>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------
+         ARTISTS 작가 소개
+    ---------------------------------------------------------- -->
+    <section class="section artists" id="artists" aria-labelledby="artists-title">
+      <div class="section__inner">
+
+        <header class="section__header">
+          <p class="section__overline">참여 작가</p>
+          <h2 class="section__title" id="artists-title">
+            여섯 개의 반경
+            <span class="section__title-en">Six Radii</span>
+          </h2>
+          <p class="section__desc">
+            각자의 도달 가능한 거리 안에서,<br />
+            저마다의 소음으로 작업하는 작가들.
+          </p>
+        </header>
+
+        <ul class="artists__list" role="list">
+
+          <li class="artist-card reveal">
+            <div class="artist-card__img-wrap">
+              <img
+                src="https://picsum.photos/seed/artist-jungah/400/500"
+                alt="이정아 작가 포트레이트"
+                width="400"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="artist-card__info">
+              <p class="artist-card__num tabular-nums">01</p>
+              <h3 class="artist-card__name">이정아</h3>
+              <p class="artist-card__name-en">Lee Jeong-ah</p>
+              <p class="artist-card__bio">
+                혼합매체와 설치를 통해 청각적 기억을 시각화한다.
+                소음이 공간을 점유하는 방식을 연구해 왔다.
+              </p>
+            </div>
+          </li>
+
+          <li class="artist-card reveal">
+            <div class="artist-card__img-wrap">
+              <img
+                src="https://picsum.photos/seed/artist-suhyun/400/500"
+                alt="박수현 작가 포트레이트"
+                width="400"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="artist-card__info">
+              <p class="artist-card__num tabular-nums">02</p>
+              <h3 class="artist-card__name">박수현</h3>
+              <p class="artist-card__name-en">Park Su-hyun</p>
+              <p class="artist-card__bio">
+                영상과 퍼포먼스로 경계를 탐색한다.
+                보는 자와 보이는 것의 임계점을 다룬다.
+              </p>
+            </div>
+          </li>
+
+          <li class="artist-card reveal">
+            <div class="artist-card__img-wrap">
+              <img
+                src="https://picsum.photos/seed/artist-minseo/400/500"
+                alt="최민서 작가 포트레이트"
+                width="400"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="artist-card__info">
+              <p class="artist-card__num tabular-nums">03</p>
+              <h3 class="artist-card__name">최민서</h3>
+              <p class="artist-card__name-en">Choi Min-seo</p>
+              <p class="artist-card__bio">
+                회화에서 여백의 물리적 밀도를 탐구한다.
+                침묵이 캔버스 위에서 색채가 되는 순간을 포착한다.
+              </p>
+            </div>
+          </li>
+
+          <li class="artist-card reveal">
+            <div class="artist-card__img-wrap">
+              <img
+                src="https://picsum.photos/seed/artist-dohun/400/500"
+                alt="김도훈 작가 포트레이트"
+                width="400"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="artist-card__info">
+              <p class="artist-card__num tabular-nums">04</p>
+              <h3 class="artist-card__name">김도훈</h3>
+              <p class="artist-card__name-en">Kim Do-hun</p>
+              <p class="artist-card__bio">
+                금속 조각으로 청각적 파동을 물질화한다.
+                손이 닿을 수 있는 반경을 조각의 언어로 번역한다.
+              </p>
+            </div>
+          </li>
+
+          <li class="artist-card reveal">
+            <div class="artist-card__img-wrap">
+              <img
+                src="https://picsum.photos/seed/artist-seyoung/400/500"
+                alt="오세영 작가 포트레이트"
+                width="400"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="artist-card__info">
+              <p class="artist-card__num tabular-nums">05</p>
+              <h3 class="artist-card__name">오세영</h3>
+              <p class="artist-card__name-en">Oh Se-young</p>
+              <p class="artist-card__bio">
+                사진 연작으로 일상의 주파수를 기록한다.
+                도시의 백색소음이 이미지로 정착하는 과정을 담는다.
+              </p>
+            </div>
+          </li>
+
+          <li class="artist-card reveal">
+            <div class="artist-card__img-wrap">
+              <img
+                src="https://picsum.photos/seed/artist-haeun/400/500"
+                alt="정하은 작가 포트레이트"
+                width="400"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="artist-card__info">
+              <p class="artist-card__num tabular-nums">06</p>
+              <h3 class="artist-card__name">정하은</h3>
+              <p class="artist-card__name-en">Jeong Ha-eun</p>
+              <p class="artist-card__bio">
+                잉크 드로잉으로 소음의 궤적을 지도화한다.
+                선이 쌓여 소리가 되는 도면을 그린다.
+              </p>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------
+         VISIT 관람 안내
+    ---------------------------------------------------------- -->
+    <section class="section visit" id="visit" aria-labelledby="visit-title">
+      <div class="section__inner visit__inner">
+
+        <div class="visit__info">
+          <header class="section__header section__header--left">
+            <p class="section__overline">관람 안내</p>
+            <h2 class="section__title" id="visit-title">
+              당신의 반경 안으로
+              <span class="section__title-en">Enter the Radius</span>
+            </h2>
+          </header>
+
+          <dl class="visit__details">
+            <div class="visit__row">
+              <dt class="visit__label">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M8 4.5V8.5l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                관람 시간
+              </dt>
+              <dd class="visit__value">
+                <span class="tabular-nums">화~일</span><br />
+                <span class="tabular-nums">10:00 ~ 19:00</span><br />
+                <span class="visit__note">월요일 휴관 / 입장 마감 18:30</span>
+              </dd>
+            </div>
+
+            <div class="visit__row">
+              <dt class="visit__label">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 1.5C5.51 1.5 3.5 3.51 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.49-2.01-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2"/>
+                  <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.1"/>
+                </svg>
+                위치
+              </dt>
+              <dd class="visit__value">
+                서울특별시 종로구<br />
+                북촌로 12-8, 3층<br />
+                <span class="visit__note">경복궁역 3번 출구 도보 8분</span>
+              </dd>
+            </div>
+
+            <div class="visit__row">
+              <dt class="visit__label">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <rect x="1.5" y="3.5" width="13" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M1.5 7h13" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M5 1.5v2M11 1.5v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                입장료
+              </dt>
+              <dd class="visit__value">
+                <span class="tabular-nums">일반 8,000원</span><br />
+                <span class="tabular-nums">학생 5,000원</span><br />
+                <span class="visit__note">65세 이상 · 장애인 무료</span>
+              </dd>
+            </div>
+
+            <div class="visit__row">
+              <dt class="visit__label">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M2 11.5l3.5-7 3 5 2-3 3 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                문의
+              </dt>
+              <dd class="visit__value">
+                <a href="tel:+8227302910" class="visit__link">02-730-2910</a><br />
+                <a href="mailto:hello@whitenoise.kr" class="visit__link">hello@whitenoise.kr</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- 도면 다이어그램 · 갤러리 위치를 도면 감각으로 -->
+        <div class="visit__diagram" aria-hidden="true">
+          <svg class="visit__map-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- 격자 -->
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.25"/>
+              </pattern>
+            </defs>
+            <rect width="400" height="400" fill="url(#grid)"/>
+            <!-- 갤러리 건물 윤곽 -->
+            <rect x="140" y="140" width="120" height="120" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"/>
+            <rect x="155" y="155" width="90" height="90" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.35"/>
+            <!-- 중심점 -->
+            <circle cx="200" cy="200" r="4" fill="currentColor" opacity="0.8"/>
+            <circle cx="200" cy="200" r="60" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.4" stroke-dasharray="4 4"/>
+            <circle cx="200" cy="200" r="110" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.25" stroke-dasharray="3 6"/>
+            <!-- 방향 표시 -->
+            <text x="200" y="118" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.5" font-family="'Cormorant Garamond', serif">N</text>
+            <line x1="200" y1="125" x2="200" y2="138" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+            <!-- 치수 라벨 -->
+            <text x="200" y="275" text-anchor="middle" font-size="8" fill="currentColor" opacity="0.5" font-family="'Cormorant Garamond', serif">GALLERY WHITE NOISE</text>
+            <text x="200" y="287" text-anchor="middle" font-size="7" fill="currentColor" opacity="0.4" font-family="'Cormorant Garamond', serif">종로구 북촌로 12-8</text>
+            <!-- 도달 반경 레이블 -->
+            <text x="262" y="200" font-size="7" fill="currentColor" opacity="0.4" font-family="'Cormorant Garamond', serif">r = 도달가능</text>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <p class="footer__logo-kr">백색소음</p>
+        <p class="footer__logo-en">WHITE NOISE GALLERY</p>
+        <p class="footer__tagline">침묵 속의 소음, 보는 행위</p>
+      </div>
+      <nav class="footer__nav" aria-label="푸터 내비게이션">
+        <ul role="list">
+          <li><a href="#exhibition">현재 전시</a></li>
+          <li><a href="#artists">작가</a></li>
+          <li><a href="#visit">관람 안내</a></li>
+        </ul>
+      </nav>
+      <p class="footer__copy">
+        <span class="tabular-nums">&copy; 2025</span> 백색소음 갤러리. 모든 권리 보유.
+      </p>
+    </div>
+  </footer>
+
+  <!-- CDN Libraries -->
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <!-- Page script -->
+  <script src="script.js" defer></script>
+
+</body>
+</html>

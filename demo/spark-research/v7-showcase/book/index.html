@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>여백 · 연남동 독립서점</title>
+  <meta name="description" content="서울 연남동의 독립서점 여백. 한 권 한 권 손으로 고른 큐레이션, 북클럽과 낭독회, 책 사이의 고요한 공간." />
+
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <!-- English pairing: DM Mono (Swiss grid / tabular feel) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" />
+
+  <!-- Lenis CSS reset guard -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== HERO: Full-screen interactive stage ===== -->
+  <section class="hero" id="hero" aria-label="여백 서점 메인 무대">
+
+    <!-- Registration / AR HUD overlay (static decorative) -->
+    <div class="hud" aria-hidden="true">
+      <div class="hud__corner hud__corner--tl">
+        <span class="hud__mark hud__mark--h"></span>
+        <span class="hud__mark hud__mark--v"></span>
+        <span class="hud__label">REG A</span>
+      </div>
+      <div class="hud__corner hud__corner--tr">
+        <span class="hud__mark hud__mark--h"></span>
+        <span class="hud__mark hud__mark--v"></span>
+        <span class="hud__label">REG B</span>
+      </div>
+      <div class="hud__corner hud__corner--bl">
+        <span class="hud__mark hud__mark--h"></span>
+        <span class="hud__mark hud__mark--v"></span>
+        <span class="hud__label">37.559 N / 126.924 E</span>
+      </div>
+      <div class="hud__corner hud__corner--br">
+        <span class="hud__mark hud__mark--h"></span>
+        <span class="hud__mark hud__mark--v"></span>
+        <span class="hud__label">YEONAM-DONG SEOUL</span>
+      </div>
+      <!-- Grid ruler ticks -->
+      <div class="hud__ruler hud__ruler--top" aria-hidden="true"></div>
+      <div class="hud__ruler hud__ruler--left" aria-hidden="true"></div>
+    </div>
+
+    <!-- Cutout parallax layers: depth stack -->
+    <div class="parallax-stage" id="parallaxStage">
+      <!-- Layer 0: background photo · bookshelf interior -->
+      <div class="layer layer--0" data-depth="0.1">
+        <img
+          src="https://picsum.photos/seed/yeobag-shelf/1600/900"
+          alt="책장이 가득한 서점 내부"
+          width="1600"
+          height="900"
+        />
+      </div>
+
+      <!-- Layer 1: mid paper texture strip -->
+      <div class="layer layer--1" data-depth="0.3" aria-hidden="true">
+        <div class="layer__paper-strip"></div>
+      </div>
+
+      <!-- Layer 2: cutout window with main headline -->
+      <div class="layer layer--2" data-depth="0.55">
+        <div class="hero__cutout">
+          <div class="hero__cutout-inner">
+            <p class="hero__eyebrow">서울 연남동 독립서점</p>
+            <h1 class="hero__title">
+              <span class="hero__title-line">여</span>
+              <span class="hero__title-line">백</span>
+            </h1>
+            <p class="hero__subtitle">책 사이의 고요</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 3: foreground frame bars (cutout corners) -->
+      <div class="layer layer--3" data-depth="0.8" aria-hidden="true">
+        <div class="frame-bar frame-bar--top"></div>
+        <div class="frame-bar frame-bar--bottom"></div>
+      </div>
+    </div>
+
+    <!-- Hero CTA (corner-anchored, Swiss style) -->
+    <div class="hero__cta-block">
+      <a href="#curation" class="hero__cta">
+        이달의 큐레이션 보기
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 2v12M2 8l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Hero scroll indicator -->
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <span class="hero__scroll-line"></span>
+      <span class="hero__scroll-text">SCROLL</span>
+    </div>
+  </section>
+
+  <!-- ===== NAV (minimal, corner-anchored) ===== -->
+  <header class="site-header" role="banner">
+    <a href="#hero" class="site-logo" aria-label="여백 홈으로">여백</a>
+    <nav class="site-nav" aria-label="주요 내비게이션">
+      <ul role="list">
+        <li><a href="#curation">큐레이션</a></li>
+        <li><a href="#programs">프로그램</a></li>
+        <li><a href="#visit">방문</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="main-content">
+
+    <!-- ===== SECTION: 이달의 큐레이션 ===== -->
+    <section class="section curation" id="curation" aria-labelledby="curation-heading">
+      <div class="section__header">
+        <div class="section__number" aria-hidden="true">01</div>
+        <h2 class="section__title" id="curation-heading">이달의 큐레이션</h2>
+        <p class="section__desc">
+          2026년 6월. 주제: <strong>침묵이 말하는 것들.</strong><br />
+          손으로 고르고, 이유를 적고, 직접 쌓는다.
+        </p>
+      </div>
+
+      <div class="gallery" role="list" aria-label="이달의 추천 도서">
+
+        <article class="book-card" role="listitem">
+          <div class="book-card__image-wrap">
+            <img
+              src="https://picsum.photos/seed/yeobag-book1/480/640"
+              alt="추천 도서 1: 흰 표지의 시집"
+              width="480"
+              height="640"
+              loading="lazy"
+            />
+            <div class="book-card__reg-mark" aria-hidden="true">
+              <span class="reg-mark-svg">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <line x1="9" y1="0" x2="9" y2="18" stroke="currentColor" stroke-width="0.75"/>
+                  <line x1="0" y1="9" x2="18" y2="9" stroke="currentColor" stroke-width="0.75"/>
+                  <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="0.75" fill="none"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="book-card__info">
+            <p class="book-card__label">JUNE / KR</p>
+            <h3 class="book-card__title">흰</h3>
+            <p class="book-card__author">한강</p>
+            <p class="book-card__note">
+              흰색의 목록으로 써 내려간 애도. 언어가 최소화될 때 비로소 가득 찬다.
+            </p>
+          </div>
+        </article>
+
+        <article class="book-card" role="listitem">
+          <div class="book-card__image-wrap">
+            <img
+              src="https://picsum.photos/seed/yeobag-book2/480/640"
+              alt="추천 도서 2: 어두운 배경의 소설"
+              width="480"
+              height="640"
+              loading="lazy"
+            />
+            <div class="book-card__reg-mark" aria-hidden="true">
+              <span class="reg-mark-svg">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <line x1="9" y1="0" x2="9" y2="18" stroke="currentColor" stroke-width="0.75"/>
+                  <line x1="0" y1="9" x2="18" y2="9" stroke="currentColor" stroke-width="0.75"/>
+                  <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="0.75" fill="none"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="book-card__info">
+            <p class="book-card__label">JUNE / JP</p>
+            <h3 class="book-card__title">노르웨이의 숲</h3>
+            <p class="book-card__author">무라카미 하루키</p>
+            <p class="book-card__note">
+              상실 이후에도 삶은 계속된다. 조용한 통증의 연대기.
+            </p>
+          </div>
+        </article>
+
+        <article class="book-card" role="listitem">
+          <div class="book-card__image-wrap">
+            <img
+              src="https://picsum.photos/seed/yeobag-book3/480/640"
+              alt="추천 도서 3: 낡은 천 표지의 에세이"
+              width="480"
+              height="640"
+              loading="lazy"
+            />
+            <div class="book-card__reg-mark" aria-hidden="true">
+              <span class="reg-mark-svg">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <line x1="9" y1="0" x2="9" y2="18" stroke="currentColor" stroke-width="0.75"/>
+                  <line x1="0" y1="9" x2="18" y2="9" stroke="currentColor" stroke-width="0.75"/>
+                  <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="0.75" fill="none"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="book-card__info">
+            <p class="book-card__label">JUNE / DE</p>
+            <h3 class="book-card__title">고독의 철학</h3>
+            <p class="book-card__author">라르스 스벤센</p>
+            <p class="book-card__note">
+              고독을 피하지 않고 직면할 때, 그것은 공간이 된다.
+            </p>
+          </div>
+        </article>
+
+        <article class="book-card" role="listitem">
+          <div class="book-card__image-wrap">
+            <img
+              src="https://picsum.photos/seed/yeobag-book4/480/640"
+              alt="추천 도서 4: 작은 판형의 시집"
+              width="480"
+              height="640"
+              loading="lazy"
+            />
+            <div class="book-card__reg-mark" aria-hidden="true">
+              <span class="reg-mark-svg">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <line x1="9" y1="0" x2="9" y2="18" stroke="currentColor" stroke-width="0.75"/>
+                  <line x1="0" y1="9" x2="18" y2="9" stroke="currentColor" stroke-width="0.75"/>
+                  <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="0.75" fill="none"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="book-card__info">
+            <p class="book-card__label">JUNE / US</p>
+            <h3 class="book-card__title">The Collected Poems</h3>
+            <p class="book-card__author">Mary Oliver</p>
+            <p class="book-card__note">
+              풀밭에 엎드려 세상을 관찰하는 시. 여백처럼 넓고 조용한 주의.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION: 공간 + 프로그램 ===== -->
+    <section class="section programs" id="programs" aria-labelledby="programs-heading">
+      <div class="section__header">
+        <div class="section__number" aria-hidden="true">02</div>
+        <h2 class="section__title" id="programs-heading">공간과 프로그램</h2>
+        <p class="section__desc">
+          책을 읽는 것은 홀로이지만, 함께 읽는 것은 다르다.
+        </p>
+      </div>
+
+      <div class="programs__grid">
+
+        <article class="program-card reveal">
+          <div class="program-card__media">
+            <img
+              src="https://picsum.photos/seed/yeobag-space1/800/600"
+              alt="북클럽 모임 공간 · 둥근 테이블과 의자들"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+          <div class="program-card__body">
+            <p class="program-card__tag">BOOK CLUB</p>
+            <h3 class="program-card__title">월례 북클럽</h3>
+            <p class="program-card__time">매월 셋째 토요일 오후 <span class="tabnum">3:00</span></p>
+            <p class="program-card__desc">
+              한 달에 한 권. 각자의 독서를 가져와 교차시키는 두 시간. 정해진 결론 없이, 열린 문장들로 끝낸다.
+              참가비 없음, 선착순 <span class="tabnum">12</span>명.
+            </p>
+            <a href="#visit" class="program-card__link">
+              참가 신청 안내
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="program-card reveal">
+          <div class="program-card__media">
+            <img
+              src="https://picsum.photos/seed/yeobag-space2/800/600"
+              alt="낭독회 공간 -- 조명 아래 의자가 줄지어 있는 모습"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+          <div class="program-card__body">
+            <p class="program-card__tag">READING ALOUD</p>
+            <h3 class="program-card__title">낭독회</h3>
+            <p class="program-card__time">격주 금요일 저녁 <span class="tabnum">7:30</span></p>
+            <p class="program-card__desc">
+              누군가의 목소리가 페이지를 열어젖히는 밤. 독자와 청자가 같은 공간에서 같은 문장을 만난다.
+              참가비 <span class="tabnum">5,000</span>원.
+            </p>
+            <a href="#visit" class="program-card__link">
+              일정 확인
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="program-card reveal">
+          <div class="program-card__media">
+            <img
+              src="https://picsum.photos/seed/yeobag-space3/800/600"
+              alt="서점 내부 창가 자리와 책들"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+          <div class="program-card__body">
+            <p class="program-card__tag">THE SPACE</p>
+            <h3 class="program-card__title">여백의 공간</h3>
+            <p class="program-card__time">화 -- 일 오전 <span class="tabnum">11:00</span> -- 오후 <span class="tabnum">8:00</span></p>
+            <p class="program-card__desc">
+              약 <span class="tabnum">30</span>평 규모의 단층 공간. 책상 <span class="tabnum">6</span>개, 소파 <span class="tabnum">2</span>석.
+              음료는 없지만 조용히 앉아 읽는 것은 언제나 환영한다.
+            </p>
+            <a href="#visit" class="program-card__link">
+              오시는 길
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION: 방문 안내 ===== -->
+    <section class="section visit" id="visit" aria-labelledby="visit-heading">
+      <div class="section__header">
+        <div class="section__number" aria-hidden="true">03</div>
+        <h2 class="section__title" id="visit-heading">방문 안내</h2>
+      </div>
+
+      <div class="visit__grid">
+        <div class="visit__map-wrap reveal">
+          <img
+            src="https://picsum.photos/seed/yeobag-map/800/600"
+            alt="연남동 서점 주변 골목 풍경"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="visit__info reveal">
+          <dl class="visit__dl">
+            <div class="visit__dl-row">
+              <dt>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="주소">
+                  <path d="M8 1a5 5 0 0 1 5 5c0 3.5-5 9-5 9S3 9.5 3 6a5 5 0 0 1 5-5z" stroke="currentColor" stroke-width="1.25" fill="none"/>
+                  <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.25" fill="none"/>
+                </svg>
+                주소
+              </dt>
+              <dd>서울특별시 마포구 연남로 <span class="tabnum">12</span>길 <span class="tabnum">7</span>, <span class="tabnum">1</span>층</dd>
+            </div>
+            <div class="visit__dl-row">
+              <dt>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="영업시간">
+                  <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.25" fill="none"/>
+                  <path d="M8 4.5v4l2.5 2" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                </svg>
+                영업시간
+              </dt>
+              <dd>
+                화 -- 일 <span class="tabnum">11:00</span> -- <span class="tabnum">20:00</span><br />
+                월요일 휴무
+              </dd>
+            </div>
+            <div class="visit__dl-row">
+              <dt>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="교통">
+                  <rect x="2" y="4" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.25" fill="none"/>
+                  <path d="M5 12v2M11 12v2" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                  <path d="M2 8h12" stroke="currentColor" stroke-width="1.25"/>
+                </svg>
+                교통
+              </dt>
+              <dd>홍대입구역 <span class="tabnum">3</span>번 출구 도보 <span class="tabnum">10</span>분</dd>
+            </div>
+            <div class="visit__dl-row">
+              <dt>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="연락처">
+                  <path d="M3 3h3l1.5 3.5-1.5 1c.7 1.5 2 2.8 3.5 3.5l1-1.5L14 11v3c0 .5-.5 1-1 1C5 14.5 1.5 8 1 4c0-.5.5-1 1-1h1z" stroke="currentColor" stroke-width="1.25" fill="none" stroke-linejoin="round"/>
+                </svg>
+                연락처
+              </dt>
+              <dd>
+                <a href="mailto:hello@yeobag.kr">hello@yeobag.kr</a><br />
+                <a href="tel:+82-2-1234-5678"><span class="tabnum">02-1234-5678</span></a>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="visit__sns" aria-label="SNS 링크">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="visit__sns-link" aria-label="여백 인스타그램 (새 탭에서 열림)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+              </svg>
+              @yeobag_books
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <p class="site-footer__name">여백 YEOBAG</p>
+      <p class="site-footer__copy">
+        &copy; <span class="tabnum">2026</span> 여백. 서울 연남동.
+      </p>
+      <p class="site-footer__byline">
+        손으로 고른 책, 몸으로 만드는 공간.
+      </p>
+    </div>
+  </footer>
+
+  <!-- CDN Libraries -->
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <!-- Main script -->
+  <script src="script.js" defer></script>
+</body>
+</html>

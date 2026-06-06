@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>무명(無名) : 이름 없는 향의 집</title>
+  <meta name="description" content="이름을 붙이지 않는 니치 향수 하우스 무명(無名). 기억과 시간, 보이지 않는 것을 담는 향." />
+
+  <!-- Pretendard -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <!-- DM Serif Display: 브루탈리즘 잡지 아트디렉터의 세리프 영문 페어링 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" />
+
+  <!-- Lenis CSS reset (FLOOR 필수) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css" />
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- SKIP LINK -->
+<a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+
+<!-- SITE HEADER -->
+<header class="site-header" role="banner">
+  <a href="/" class="site-logo" aria-label="무명 홈으로">
+    <span class="logo-kr">無名</span>
+    <span class="logo-en">MUMYEONG</span>
+  </a>
+  <nav class="site-nav" aria-label="주요 메뉴">
+    <ul>
+      <li><a href="#collection">컬렉션</a></li>
+      <li><a href="#philosophy">조향 철학</a></li>
+      <li><a href="#atelier">아틀리에</a></li>
+      <li><a href="#visit" class="nav-cta">방문 예약</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-nav">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="6" width="18" height="2" fill="currentColor"/>
+      <rect x="3" y="11" width="18" height="2" fill="currentColor"/>
+      <rect x="3" y="16" width="18" height="2" fill="currentColor"/>
+    </svg>
+  </button>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <nav aria-label="모바일 메뉴">
+    <ul>
+      <li><a href="#collection">컬렉션</a></li>
+      <li><a href="#philosophy">조향 철학</a></li>
+      <li><a href="#atelier">아틀리에</a></li>
+      <li><a href="#visit">방문 예약</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- ================================================================
+     HERO
+     GOVERNING METAPHOR: 체크되지 않은 목록(Zeigarnik) x 이름 없는 향.
+     이름 없는 향은 완성되지 않은 과업처럼 기억에 머문다.
+     MACRO_STRUCTURE: 풀블리드 배경 위 최소 텍스트.
+     VISUAL_MECHANISM: 3D perspective CSS transform 카드 배열.
+     브루탈리즘: 두꺼운 선, 분절 타이포, 비대칭 배치.
+     ================================================================ -->
+<section class="hero" aria-labelledby="hero-heading" id="hero">
+
+  <!-- 풀블리드 정적 배경 사진 -->
+  <div class="hero-bg" aria-hidden="true">
+    <img
+      src="https://picsum.photos/seed/mumyeong-hero/1920/1080"
+      alt=""
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+    />
+    <div class="hero-bg-overlay"></div>
+  </div>
+
+  <!-- 3D perspective 스테이지: 체크리스트 카드들이 공간에 배열됨 -->
+  <div class="hero-stage" aria-hidden="true" id="hero-stage">
+    <div class="hero-cards" id="hero-cards">
+      <div class="h-card h-card--01" data-depth="0.6">
+        <span class="h-card__num">001</span>
+        <svg class="h-card__box" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="0.75" y="0.75" width="16.5" height="16.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="h-card__name">첫 비</span>
+      </div>
+      <div class="h-card h-card--02" data-depth="0.3">
+        <span class="h-card__num">002</span>
+        <svg class="h-card__box" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="0.75" y="0.75" width="16.5" height="16.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="h-card__name">오래된 종이</span>
+      </div>
+      <div class="h-card h-card--03" data-depth="0.9">
+        <span class="h-card__num">003</span>
+        <svg class="h-card__box" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="0.75" y="0.75" width="16.5" height="16.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="h-card__name">낮의 끝</span>
+      </div>
+      <div class="h-card h-card--04" data-depth="0.5">
+        <span class="h-card__num">004</span>
+        <svg class="h-card__box" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="0.75" y="0.75" width="16.5" height="16.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="h-card__name">빈 방</span>
+      </div>
+      <div class="h-card h-card--05" data-depth="0.2">
+        <span class="h-card__num">005</span>
+        <svg class="h-card__box" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="0.75" y="0.75" width="16.5" height="16.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="h-card__name">이름 없음</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 히어로 텍스트 — DOM에 완성형, JS 없어도 보임 -->
+  <div class="hero-text">
+    <p class="hero-eyebrow">서울 을지로 / 니치 퍼퓸 / 2019</p>
+    <h1 class="hero-heading" id="hero-heading">
+      이름이 없어야<br />비로소 기억된다
+    </h1>
+    <p class="hero-sub">
+      무명(無名)은 향에 이름을 붙이지 않는다.<br />
+      완성되지 않은 것만이 마음속에 계속 머문다.
+    </p>
+    <a href="#collection" class="hero-cta">컬렉션 보기</a>
+  </div>
+
+  <!-- 스크롤 인디케이터 -->
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span class="scroll-line"></span>
+    <span class="scroll-label">SCROLL</span>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     MAIN
+     ================================================================ -->
+<main id="main-content">
+
+  <!-- INTRO -->
+  <section class="intro-section" aria-labelledby="intro-heading">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-left">
+          <h2 class="section-eyebrow" id="intro-heading">無名에 대하여</h2>
+          <p class="intro-statement">
+            우리는 향에<br />완성된 이름을<br />주지 않는다.
+          </p>
+        </div>
+        <div class="intro-right">
+          <p class="intro-copy">
+            조향사 김무현은 2019년 서울 을지로에서 무명(無名)을 시작했다.
+            이름 없는 향은 체크리스트에서 지워지지 않는 항목처럼,
+            맡은 사람의 기억 속에 완성을 요구하며 남는다.
+            그것이 우리가 원하는 향의 작동 방식이다.
+          </p>
+          <p class="intro-copy">
+            각 향은 번호로만 존재한다. 구매자는 자신만의 이름을 부여하거나,
+            부여하지 않을 수 있다. 두 선택 모두 옳다.
+          </p>
+          <span class="intro-year tabular-nums" aria-hidden="true">2019</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="collection-section" id="collection" aria-labelledby="collection-heading">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-heading" id="collection-heading">컬렉션</h2>
+        <p class="section-sub">다섯 개의 번호. 다섯 개의 미완성.</p>
+      </header>
+
+      <div class="collection-grid">
+
+        <!-- 001 -->
+        <article class="scent-card reveal" aria-labelledby="sc-001">
+          <div class="scent-img">
+            <img
+              src="https://picsum.photos/seed/mumyeong001/600/750"
+              alt="향수 001 첫 비, 유리 향수병"
+              width="600"
+              height="750"
+              loading="lazy"
+            />
+            <span class="scent-num tabular-nums" aria-hidden="true">001</span>
+          </div>
+          <div class="scent-body">
+            <h3 class="scent-name" id="sc-001">첫 비</h3>
+            <div class="pyramid" aria-label="향 노트 피라미드">
+              <div class="pyr-tier pyr-top">
+                <span class="pyr-label">탑</span>
+                <span class="pyr-notes">페트리코르, 그린 카다멈</span>
+              </div>
+              <div class="pyr-tier pyr-mid">
+                <span class="pyr-label">미들</span>
+                <span class="pyr-notes">젖은 흙, 세이지, 이끼</span>
+              </div>
+              <div class="pyr-tier pyr-base">
+                <span class="pyr-label">베이스</span>
+                <span class="pyr-notes">시더우드, 회색 앰버</span>
+              </div>
+            </div>
+            <p class="scent-desc">
+              창문 밖 아스팔트, 처음 빗방울이 닿는 순간.
+              아직 비라고 부를 수 없는, 그 직전.
+            </p>
+            <div class="scent-meta">
+              <span class="tabular-nums">50ml &middot; 125,000원</span>
+              <a href="#visit" class="scent-link" aria-label="001 첫 비 구매 문의">문의</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 002 -->
+        <article class="scent-card reveal" aria-labelledby="sc-002">
+          <div class="scent-img">
+            <img
+              src="https://picsum.photos/seed/mumyeong002/600/750"
+              alt="향수 002 오래된 종이, 유리 향수병"
+              width="600"
+              height="750"
+              loading="lazy"
+            />
+            <span class="scent-num tabular-nums" aria-hidden="true">002</span>
+          </div>
+          <div class="scent-body">
+            <h3 class="scent-name" id="sc-002">오래된 종이</h3>
+            <div class="pyramid" aria-label="향 노트 피라미드">
+              <div class="pyr-tier pyr-top">
+                <span class="pyr-label">탑</span>
+                <span class="pyr-notes">라이트 무스크, 화이트 티</span>
+              </div>
+              <div class="pyr-tier pyr-mid">
+                <span class="pyr-label">미들</span>
+                <span class="pyr-notes">바닐라 빈, 샌달우드, 인센스</span>
+              </div>
+              <div class="pyr-tier pyr-base">
+                <span class="pyr-label">베이스</span>
+                <span class="pyr-notes">올드 북 앰버, 벤조인</span>
+              </div>
+            </div>
+            <p class="scent-desc">
+              읽다 멈춘 책. 페이지 사이에 끼워진 기억.
+              언제 다시 펼칠지 모르는 것들.
+            </p>
+            <div class="scent-meta">
+              <span class="tabular-nums">50ml &middot; 130,000원</span>
+              <a href="#visit" class="scent-link" aria-label="002 오래된 종이 구매 문의">문의</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 003 -->
+        <article class="scent-card reveal" aria-labelledby="sc-003">
+          <div class="scent-img">
+            <img
+              src="https://picsum.photos/seed/mumyeong003/600/750"
+              alt="향수 003 낮의 끝, 유리 향수병"
+              width="600"
+              height="750"
+              loading="lazy"
+            />
+            <span class="scent-num tabular-nums" aria-hidden="true">003</span>
+          </div>
+          <div class="scent-body">
+            <h3 class="scent-name" id="sc-003">낮의 끝</h3>
+            <div class="pyramid" aria-label="향 노트 피라미드">
+              <div class="pyr-tier pyr-top">
+                <span class="pyr-label">탑</span>
+                <span class="pyr-notes">갈바눔, 버가못</span>
+              </div>
+              <div class="pyr-tier pyr-mid">
+                <span class="pyr-label">미들</span>
+                <span class="pyr-notes">더운 린넨, 세드러스, 건초</span>
+              </div>
+              <div class="pyr-tier pyr-base">
+                <span class="pyr-label">베이스</span>
+                <span class="pyr-notes">카스토리움, 팔로산토</span>
+              </div>
+            </div>
+            <p class="scent-desc">
+              하루가 아직 끝나지 않았지만 더 이상 낮도 아닌 시간.
+              일광이 옷감에 남긴 온기.
+            </p>
+            <div class="scent-meta">
+              <span class="tabular-nums">50ml &middot; 128,000원</span>
+              <a href="#visit" class="scent-link" aria-label="003 낮의 끝 구매 문의">문의</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 004 -->
+        <article class="scent-card reveal" aria-labelledby="sc-004">
+          <div class="scent-img">
+            <img
+              src="https://picsum.photos/seed/mumyeong004/600/750"
+              alt="향수 004 빈 방, 유리 향수병"
+              width="600"
+              height="750"
+              loading="lazy"
+            />
+            <span class="scent-num tabular-nums" aria-hidden="true">004</span>
+          </div>
+          <div class="scent-body">
+            <h3 class="scent-name" id="sc-004">빈 방</h3>
+            <div class="pyramid" aria-label="향 노트 피라미드">
+              <div class="pyr-tier pyr-top">
+                <span class="pyr-label">탑</span>
+                <span class="pyr-notes">콘크리트, 오존</span>
+              </div>
+              <div class="pyr-tier pyr-mid">
+                <span class="pyr-label">미들</span>
+                <span class="pyr-notes">화이트 시더, 마른 나무, 라벤더</span>
+              </div>
+              <div class="pyr-tier pyr-base">
+                <span class="pyr-label">베이스</span>
+                <span class="pyr-notes">앰브록산, 베티버</span>
+              </div>
+            </div>
+            <p class="scent-desc">
+              누군가 막 떠난 자리. 사람은 없고 공기만 남은 공간.
+              아직 문이 닫히지 않은 기억.
+            </p>
+            <div class="scent-meta">
+              <span class="tabular-nums">50ml &middot; 135,000원</span>
+              <a href="#visit" class="scent-link" aria-label="004 빈 방 구매 문의">문의</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 005 -->
+        <article class="scent-card reveal" aria-labelledby="sc-005">
+          <div class="scent-img">
+            <img
+              src="https://picsum.photos/seed/mumyeong005/600/750"
+              alt="향수 005 이름 없음, 유리 향수병"
+              width="600"
+              height="750"
+              loading="lazy"
+            />
+            <span class="scent-num tabular-nums" aria-hidden="true">005</span>
+          </div>
+          <div class="scent-body">
+            <h3 class="scent-name" id="sc-005">이름 없음</h3>
+            <div class="pyramid" aria-label="향 노트 피라미드">
+              <div class="pyr-tier pyr-top">
+                <span class="pyr-label">탑</span>
+                <span class="pyr-notes">소금기, 자몽 껍질</span>
+              </div>
+              <div class="pyr-tier pyr-mid">
+                <span class="pyr-label">미들</span>
+                <span class="pyr-notes">앱솔루트 로즈, 자작나무, 차가운 금속</span>
+              </div>
+              <div class="pyr-tier pyr-base">
+                <span class="pyr-label">베이스</span>
+                <span class="pyr-notes">오크모스, 레더</span>
+              </div>
+            </div>
+            <p class="scent-desc">
+              이름을 끝내 붙이지 못한 향.
+              당신이 이름이다.
+            </p>
+            <div class="scent-meta">
+              <span class="tabular-nums">50ml &middot; 140,000원</span>
+              <a href="#visit" class="scent-link" aria-label="005 이름 없음 구매 문의">문의</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy-section" id="philosophy" aria-labelledby="philosophy-heading">
+    <div class="philosophy-img-wrap">
+      <img
+        src="https://picsum.photos/seed/mumyeong-lab/1200/900"
+        alt="조향 아틀리에 작업대, 원료 병들이 늘어선 선반"
+        width="1200"
+        height="900"
+        loading="lazy"
+      />
+    </div>
+    <div class="philosophy-content">
+      <h2 class="section-eyebrow" id="philosophy-heading">조향 철학</h2>
+      <h3 class="philosophy-title">
+        완성은<br />망각의 시작이다
+      </h3>
+      <div class="philosophy-body">
+        <p>
+          심리학자 블루마 자이가르닉이 발견한 것처럼,
+          우리의 뇌는 완성된 과업보다 미완성된 것을 더 오래 기억한다.
+          끝난 일은 내려놓지만, 끝나지 않은 일은 계속 곱씹는다.
+        </p>
+        <p>
+          무명의 향은 이 원리로 설계된다.
+          이름 없는 향은 뇌에서 분류되지 않고 미결 파일로 남는다.
+          그것이 향이 몇 년 뒤에도 불현듯 떠오르는 이유다.
+        </p>
+        <p>
+          우리는 향에 스토리를 주지 않는다.
+          스토리는 맡는 사람이 쓴다.
+        </p>
+      </div>
+      <div class="philosophy-stats">
+        <div class="stat">
+          <span class="stat-n tabular-nums">5</span>
+          <span class="stat-l">현재 에디션</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n tabular-nums">300</span>
+          <span class="stat-l">한정 병 / 에디션</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n tabular-nums">48</span>
+          <span class="stat-l">조향 시간 / 에디션</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section" aria-labelledby="process-heading">
+    <div class="container">
+      <h2 class="section-heading" id="process-heading">만들어지는 방식</h2>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <span class="step-num tabular-nums">01</span>
+          <h3 class="step-title">원료 선정</h3>
+          <p class="step-desc">
+            프랑스 그라스와 국내 자연에서 수집한 원료.
+            매 에디션마다 다른 조합, 고정된 포뮬러 없음.
+          </p>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num tabular-nums">02</span>
+          <h3 class="step-title">48시간 침잠</h3>
+          <p class="step-desc">
+            첫 블렌딩 이후 48시간 동안 아무것도 하지 않는다.
+            향이 스스로 균형을 찾는 시간.
+          </p>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num tabular-nums">03</span>
+          <h3 class="step-title">비명명(非命名)</h3>
+          <p class="step-desc">
+            이름을 붙이지 않기로 결정하는 단계.
+            가장 오래 걸리는 과정 ... 이름을 지우는 일.
+          </p>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num tabular-nums">04</span>
+          <h3 class="step-title">한정 분병</h3>
+          <p class="step-desc">
+            에디션당 300병. 손으로 번호를 각인.
+            병마다 고유 번호와 조향 날짜만 새긴다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATELIER -->
+  <section class="atelier-section" id="atelier" aria-labelledby="atelier-heading">
+    <div class="container">
+      <div class="atelier-grid">
+        <div class="atelier-images">
+          <div class="atelier-img-main reveal">
+            <img
+              src="https://picsum.photos/seed/mumyeong-space1/800/1000"
+              alt="무명 아틀리에 내부, 을지로 작업 공간"
+              width="800"
+              height="1000"
+              loading="lazy"
+            />
+          </div>
+          <div class="atelier-img-sub reveal">
+            <img
+              src="https://picsum.photos/seed/mumyeong-space2/600/400"
+              alt="조향사 작업 장면, 원료 계량"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="atelier-info">
+          <h2 class="section-eyebrow" id="atelier-heading">아틀리에</h2>
+          <h3 class="atelier-title">을지로 4가</h3>
+          <p class="atelier-desc">
+            무명의 아틀리에는 서울 을지로 4가 구도심 건물 3층에 있다.
+            예약제로만 운영되며, 방문자는 다섯 향 모두를 맡아볼 수 있다.
+            조향사와의 30분 대화가 포함된다.
+          </p>
+          <div class="atelier-details">
+            <div class="detail-row">
+              <span class="detail-label">운영</span>
+              <span class="detail-value">화 - 토 / 11:00 - 18:00</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">방문</span>
+              <span class="detail-value">예약제 전용</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">위치</span>
+              <span class="detail-value">서울특별시 중구 을지로 148-12, 3층</span>
+            </div>
+          </div>
+          <a href="#contact" class="btn-primary">방문 예약하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / PURCHASE -->
+  <section class="contact-section" id="visit" aria-labelledby="contact-heading">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-heading" id="contact-heading">방문 예약 / 구매 문의</h2>
+        <p class="section-sub">
+          모든 구매는 아틀리에 방문 또는 직접 연락을 통해 이루어집니다.<br />
+          온라인 장바구니는 존재하지 않습니다.
+        </p>
+      </header>
+      <form class="contact-form" id="contact" action="#" method="post" novalidate aria-label="방문 예약 및 구매 문의 양식">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">이름</label>
+            <input type="text" id="f-name" name="name" autocomplete="name" required placeholder="홍길동" />
+          </div>
+          <div class="form-group">
+            <label for="f-email">이메일</label>
+            <input type="email" id="f-email" name="email" autocomplete="email" required placeholder="hello@example.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="f-interest">관심 향</label>
+          <select id="f-interest" name="interest">
+            <option value="">-- 선택해주세요 --</option>
+            <option value="001">001 첫 비</option>
+            <option value="002">002 오래된 종이</option>
+            <option value="003">003 낮의 끝</option>
+            <option value="004">004 빈 방</option>
+            <option value="005">005 이름 없음</option>
+            <option value="all">전체 체험 방문</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="f-message">메시지 (선택)</label>
+          <textarea id="f-message" name="message" rows="4" placeholder="원하시는 방문 날짜나 구매 수량을 알려주세요."></textarea>
+        </div>
+        <button type="submit" class="btn-primary btn-submit">문의 보내기</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo-kr">無名</p>
+        <p class="footer-logo-en">MUMYEONG</p>
+        <p class="footer-tagline">이름 없는 향의 집</p>
+      </div>
+      <nav class="footer-nav" aria-label="푸터 메뉴">
+        <h4>메뉴</h4>
+        <ul>
+          <li><a href="#collection">컬렉션</a></li>
+          <li><a href="#philosophy">조향 철학</a></li>
+          <li><a href="#atelier">아틀리에</a></li>
+          <li><a href="#visit">방문 예약</a></li>
+        </ul>
+      </nav>
+      <div class="footer-contact">
+        <h4>연락</h4>
+        <p>hello@mumyeong.kr</p>
+        <p>서울특별시 중구 을지로 148-12, 3층</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" aria-label="인스타그램" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>&copy; <span class="tabular-nums">2019</span>&ndash;<span class="tabular-nums">2026</span> 무명(無名). 판권 소유.</p>
+        <p>모든 향은 한정 생산입니다.</p>
+        <p class="footer-motto">이름을 붙이지 않는 것은 권리다.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CDN LIBS -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<!-- Site JS -->
+<script src="script.js" defer></script>
+
+</body>
+</html>

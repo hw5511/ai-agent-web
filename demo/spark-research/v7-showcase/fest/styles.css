@@ -1,0 +1,1424 @@
+/* ================================================================
+   MEARI FESTIVAL — styles.css
+   PERSONA: 리소그래프 인쇄 장인
+   VISUAL: 키네틱 타이포그래피 (글자가 주인공)
+   STRUCTURE: 가로 스크롤 / 패럴랙스 띠 (히어로)
+   CONCEPT: 소리는 층층이 쌓여 공명 — 리소 인쇄 2도 오프셋 은유
+================================================================ */
+
+/* ----------------------------------------------------------------
+   LENIS GUARD (FLOOR 필수)
+   no html{scroll-behavior:smooth}
+---------------------------------------------------------------- */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------------------
+   CUSTOM PROPERTIES
+   리소그래프 팔레트: 형광 주황 + 딥 네이비 + 버터 아이보리 + 모스 그린
+---------------------------------------------------------------- */
+:root {
+  /* Colors */
+  --clr-navy:     #0d1b2a;      /* 1도 인쇄 — 딥 네이비 (진한 배경) */
+  --clr-orange:   #e8490f;      /* 2도 인쇄 — 리소 형광 레드-오렌지 */
+  --clr-orange-lt:#f2733a;      /* 오렌지 라이트 */
+  --clr-ivory:    #f5f0e8;      /* 인쇄용지 색 */
+  --clr-moss:     #4a5c3f;      /* 숲 모스 그린 */
+  --clr-moss-lt:  #7a8f6e;
+  --clr-cream:    #faf7f2;      /* 섹션 배경 */
+  --clr-ink:      #1a1a1a;      /* 바디 텍스트 */
+  --clr-ink-mid:  #444;
+  --clr-rule:     #d4ccbf;      /* 구분선 */
+
+  /* Typography */
+  --font-ko:  'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  --font-en:  'Space Grotesk', sans-serif;
+
+  /* Spacing */
+  --gap-xs:   0.5rem;
+  --gap-sm:   1rem;
+  --gap-md:   2rem;
+  --gap-lg:   4rem;
+  --gap-xl:   7rem;
+
+  /* Hero kinetic */
+  --band-speed-1: 28s;
+  --band-speed-2: 22s;
+  --band-speed-3: 35s;
+}
+
+/* ----------------------------------------------------------------
+   RESET
+---------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* NO scroll-behavior: smooth — Lenis handles it */
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-ko);
+  background-color: var(--clr-cream);
+  color: var(--clr-ink);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+address {
+  font-style: normal;
+}
+
+/* ----------------------------------------------------------------
+   UTILITY
+---------------------------------------------------------------- */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ----------------------------------------------------------------
+   SKIP LINK
+---------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--clr-orange);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  z-index: 9999;
+  border-radius: 0 0 4px 4px;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+.skip-link:focus-visible {
+  outline: 3px solid var(--clr-navy);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------------
+   SITE HEADER
+---------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--clr-navy);
+  border-bottom: 2px solid var(--clr-orange);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  color: var(--clr-ivory);
+}
+
+.logo-ko {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.logo-en {
+  font-family: var(--font-en);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--clr-orange-lt);
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-list a {
+  font-family: var(--font-en);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-ivory);
+  opacity: 0.75;
+  transition: opacity 0.18s;
+}
+
+.nav-list a:hover {
+  opacity: 1;
+}
+
+.nav-list a:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.nav-cta {
+  color: var(--clr-orange) !important;
+  opacity: 1 !important;
+  border: 1px solid var(--clr-orange);
+  padding: 0.35rem 0.9rem;
+  border-radius: 2px;
+  transition: background-color 0.18s !important;
+}
+
+.nav-cta:hover {
+  background-color: var(--clr-orange);
+  color: #fff !important;
+}
+
+.nav-toggle {
+  display: none;
+  color: var(--clr-ivory);
+  padding: 0.25rem;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 4px;
+}
+
+/* Mobile nav */
+.mobile-nav {
+  background-color: var(--clr-navy);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 1rem 2rem 1.5rem;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-nav-list a {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-ivory);
+  display: block;
+  padding: 0.25rem 0;
+}
+
+.mobile-nav-list a:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 4px;
+}
+
+/* ----------------------------------------------------------------
+   BUTTONS
+---------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-ko);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+  transition: background-color 0.18s, color 0.18s, border-color 0.18s;
+  cursor: pointer;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--clr-orange);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background-color: var(--clr-orange);
+  color: #fff;
+  border: 2px solid var(--clr-orange);
+}
+
+.btn-primary:hover {
+  background-color: #c73a08;
+  border-color: #c73a08;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--clr-navy);
+  border: 2px solid var(--clr-navy);
+}
+
+.btn-outline:hover {
+  background-color: var(--clr-navy);
+  color: var(--clr-ivory);
+}
+
+/* ----------------------------------------------------------------
+   HERO
+   MACRO_STRUCTURE: 가로 스크롤 / 패럴랙스 띠
+   VISUAL_MECHANISM: 키네틱 타이포그래피
+   리소그래프 2도 인쇄 레이어 오프셋 효과
+---------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  background-color: var(--clr-navy);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 60px; /* header height */
+}
+
+/* 정적 폴백: JS 없을 때 / reduced-motion 때 보임 */
+.hero-static-fallback {
+  display: none; /* JS on: hidden; 접근성 처리는 JS가 제거 */
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background-color: var(--clr-navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* 기본(no-JS)에서는 폴백을 보여주고, kinetic을 숨김 */
+.hero-kinetic {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: none; /* JS로 활성화 */
+}
+
+.no-js .hero-static-fallback {
+  display: flex;
+}
+.no-js .hero-kinetic {
+  display: none;
+}
+
+/* JS가 활성화 후 클래스 교체 */
+.js-ready .hero-static-fallback {
+  display: none;
+}
+.js-ready .hero-kinetic {
+  display: block;
+}
+
+/* 폴백 스타일 */
+.hero-date {
+  font-family: var(--font-en);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--clr-orange-lt);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-title-static {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  color: var(--clr-ivory);
+  line-height: 1.05;
+  text-wrap: balance;
+  letter-spacing: -0.03em;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: rgba(245, 240, 232, 0.7);
+  letter-spacing: 0.03em;
+}
+
+/* ----------------------------------------------------------------
+   KINETIC BANDS — 가로 무한 스크롤 타이포 띠
+   THE LAW 준수: animation은 transform만 변경
+---------------------------------------------------------------- */
+.kinetic-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.band-1 {
+  top: 15%;
+  /* 리소 1도: 네이비 위 크림 텍스트 */
+  color: rgba(245, 240, 232, 0.06);
+  font-size: clamp(6rem, 14vw, 13rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  font-family: var(--font-ko);
+}
+
+.band-2 {
+  top: 42%;
+  /* 리소 2도: 오렌지 오프셋 텍스트 */
+  color: rgba(232, 73, 15, 0.12);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-family: var(--font-en);
+  text-transform: uppercase;
+}
+
+.band-3 {
+  bottom: 22%;
+  color: rgba(245, 240, 232, 0.05);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  font-family: var(--font-en);
+  text-transform: uppercase;
+}
+
+.band-track {
+  display: inline-flex;
+  gap: 3rem;
+  /* THE LAW: transform만 — CSS keyframe */
+  will-change: transform;
+}
+
+.band-track span {
+  flex-shrink: 0;
+}
+
+/* 오른쪽으로 흐름 */
+@keyframes scroll-right {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* 왼쪽으로 흐름 */
+@keyframes scroll-left {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.track-right {
+  animation: scroll-right var(--band-speed-1) linear infinite;
+}
+
+.track-left {
+  animation: scroll-left var(--band-speed-2) linear infinite;
+}
+
+.band-3 .band-track {
+  animation: scroll-right var(--band-speed-3) linear infinite;
+}
+
+/* ----------------------------------------------------------------
+   HERO CENTER TYPE — 리소 오프셋 메인 헤드라인
+   (두 레이어가 약간 어긋나 리소그래프 인쇄 오프셋처럼 보임)
+---------------------------------------------------------------- */
+.hero-center-type {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  text-align: center;
+  pointer-events: none;
+  /* THE LAW 준수: 이 요소는 정적 위치 — JS가 transform으로만 움직임 */
+}
+
+/* 유령 레이어: 오렌지, 살짝 오프셋 */
+.hero-type-ghost {
+  font-size: clamp(5rem, 16vw, 16rem);
+  font-weight: 900;
+  font-family: var(--font-ko);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--clr-orange);
+  opacity: 0.22;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  /* 리소 레지스터 오프셋 시뮬레이션 */
+  transform: translate(6px, 8px);
+  text-wrap: balance;
+}
+
+/* 메인 레이어: 아이보리 */
+.hero-type-main {
+  font-size: clamp(5rem, 16vw, 16rem);
+  font-weight: 900;
+  font-family: var(--font-ko);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--clr-ivory);
+  position: relative;
+  white-space: nowrap;
+  text-wrap: balance;
+}
+
+/* ----------------------------------------------------------------
+   HERO FOOTER (항상 보임)
+---------------------------------------------------------------- */
+.hero-footer {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 2.5rem;
+  background: linear-gradient(to top, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0) 100%);
+  padding-top: 5rem;
+  flex-wrap: wrap;
+}
+
+.hero-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hero-date-badge {
+  font-family: var(--font-en);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--clr-orange-lt);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-location {
+  font-size: 0.85rem;
+  color: rgba(245, 240, 232, 0.65);
+  letter-spacing: 0.03em;
+}
+
+.scroll-hint {
+  color: rgba(245, 240, 232, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.scroll-hint:hover {
+  opacity: 0.8;
+}
+
+.scroll-hint:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 4px;
+}
+
+/* ----------------------------------------------------------------
+   SECTION COMMONS
+---------------------------------------------------------------- */
+.section {
+  padding: var(--gap-xl) 0;
+}
+
+.section-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-header {
+  margin-bottom: var(--gap-lg);
+  max-width: 700px;
+}
+
+.section-eyebrow {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--clr-orange);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-heading {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--clr-navy);
+  text-wrap: balance;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--clr-ink-mid);
+  line-height: 1.8;
+  max-width: 540px;
+}
+
+/* Reveal animation base state */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* ----------------------------------------------------------------
+   LINEUP SECTION
+---------------------------------------------------------------- */
+.lineup-section {
+  background-color: var(--clr-ivory);
+}
+
+.lineup-tier {
+  margin-bottom: 4rem;
+}
+
+.lineup-tier-label {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--clr-moss);
+  border-bottom: 1px solid var(--clr-rule);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Headliner grid */
+.headliner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.artist-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.artist-figure {
+  position: relative;
+}
+
+.artist-figure img {
+  width: 100%;
+  object-fit: cover;
+  /* 리소그래프 인쇄 감성: 이미지 위에 색 오버레이 (정적, THE LAW 준수) */
+  filter: saturate(0.7) contrast(1.1);
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.artist-card:hover .artist-figure img {
+  transform: scale(1.04);
+}
+
+.artist-figure figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0) 100%);
+  padding: 2rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.artist-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--clr-ivory);
+  display: block;
+}
+
+.artist-genre {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--clr-orange-lt);
+  text-transform: uppercase;
+}
+
+/* Stage artist list */
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+.artist-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--clr-rule);
+}
+
+.artist-row strong {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-navy);
+}
+
+.artist-row span {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--clr-moss-lt);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Lineup stage photo */
+.lineup-stage-photo {
+  margin-top: 4rem;
+  position: relative;
+}
+
+.lineup-stage-photo img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  /* 정적 리소 오버레이 */
+  filter: saturate(0.6) contrast(1.15);
+}
+
+.stage-photo-caption {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--clr-moss-lt);
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+}
+
+/* ----------------------------------------------------------------
+   TIMETABLE SECTION
+---------------------------------------------------------------- */
+.timetable-section {
+  background-color: var(--clr-navy);
+  color: var(--clr-ivory);
+}
+
+.timetable-section .section-heading {
+  color: var(--clr-ivory);
+}
+
+.timetable-section .section-desc {
+  color: rgba(245, 240, 232, 0.65);
+}
+
+/* Tabs */
+.tt-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid rgba(245, 240, 232, 0.1);
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+}
+
+.tt-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 1rem 2rem;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  color: rgba(245, 240, 232, 0.45);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.18s, border-color 0.18s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.tt-tab:hover {
+  color: rgba(245, 240, 232, 0.85);
+}
+
+.tt-tab.active,
+.tt-tab[aria-selected="true"] {
+  color: var(--clr-ivory);
+  border-bottom-color: var(--clr-orange);
+}
+
+.tt-tab:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 4px;
+}
+
+.tt-tab-date {
+  font-family: var(--font-en);
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.tt-tab-label {
+  font-family: var(--font-en);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Panel */
+.tt-panel {
+  animation: fade-in 0.25s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.tt-stages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.tt-stage-name {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-orange-lt);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(245, 240, 232, 0.12);
+}
+
+.tt-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tt-slot {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(245, 240, 232, 0.07);
+}
+
+.tt-time {
+  font-family: var(--font-en);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--clr-orange-lt);
+  font-variant-numeric: tabular-nums;
+}
+
+.tt-artist {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--clr-ivory);
+}
+
+.tt-genre {
+  font-family: var(--font-en);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(245, 240, 232, 0.4);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tt-slot-headliner {
+  background: linear-gradient(90deg, rgba(232, 73, 15, 0.08) 0%, transparent 100%);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--clr-orange);
+  margin-left: -0.5rem;
+}
+
+.tt-slot-headliner .tt-artist {
+  color: var(--clr-orange-lt);
+  font-size: 1.05rem;
+}
+
+.tt-slot-headliner .tt-genre {
+  color: var(--clr-orange);
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------------------
+   VENUE SECTION
+---------------------------------------------------------------- */
+.venue-section {
+  background-color: var(--clr-cream);
+}
+
+.venue-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.venue-photo-block img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  /* 정적 필터 — 리소 감성 */
+  filter: saturate(0.65) contrast(1.1);
+}
+
+.venue-address {
+  margin-top: 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--clr-rule);
+}
+
+.venue-address-label {
+  font-family: var(--font-en);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-moss);
+  margin-bottom: 0.4rem;
+}
+
+.venue-address address {
+  font-size: 0.9rem;
+  color: var(--clr-ink-mid);
+  line-height: 1.7;
+}
+
+.venue-address a {
+  color: var(--clr-orange);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.venue-address a:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 2px;
+}
+
+.venue-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.venue-info-card {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--clr-rule);
+}
+
+.venue-info-icon {
+  color: var(--clr-moss);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.venue-info-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--clr-navy);
+  margin-bottom: 0.25rem;
+}
+
+.venue-info-card p {
+  font-size: 0.875rem;
+  color: var(--clr-ink-mid);
+  line-height: 1.65;
+}
+
+/* Gallery */
+.venue-gallery {
+  display: grid;
+  grid-template-columns: 5fr 4fr 5fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.venue-gallery-item {
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.venue-gallery-item img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.65) contrast(1.1);
+  transition: transform 0.5s ease;
+}
+
+.venue-gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+/* ----------------------------------------------------------------
+   TICKETS SECTION
+---------------------------------------------------------------- */
+.tickets-section {
+  background-color: var(--clr-ivory);
+  position: relative;
+}
+
+/* 리소 배경 무늬 — 정적 SVG 패턴 (no animation, no blur) */
+.tickets-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--clr-orange) 0px,
+    var(--clr-orange) 40px,
+    transparent 40px,
+    transparent 80px,
+    var(--clr-navy) 80px,
+    var(--clr-navy) 120px,
+    transparent 120px,
+    transparent 160px
+  );
+}
+
+.ticket-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ticket-card {
+  background-color: var(--clr-cream);
+  border: 2px solid var(--clr-rule);
+  border-radius: 4px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.ticket-card:hover {
+  border-color: var(--clr-navy);
+  transform: translateY(-4px);
+}
+
+.ticket-card--featured {
+  border-color: var(--clr-orange);
+  background-color: var(--clr-navy);
+  color: var(--clr-ivory);
+  box-shadow: 0 8px 32px rgba(232, 73, 15, 0.15);
+}
+
+.ticket-card--featured:hover {
+  border-color: var(--clr-orange-lt);
+}
+
+.ticket-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ticket-badge {
+  font-family: var(--font-en);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-moss);
+  display: inline-block;
+}
+
+.ticket-badge--hot {
+  color: var(--clr-orange);
+}
+
+.ticket-type {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: inherit;
+  display: block;
+}
+
+.ticket-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.ticket-card--featured .ticket-price {
+  border-color: rgba(255,255,255,0.1);
+}
+
+.price-amount {
+  font-family: var(--font-en);
+  font-size: 2.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+}
+
+.price-unit {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--clr-ink-mid);
+}
+
+.ticket-card--featured .price-unit {
+  color: rgba(245, 240, 232, 0.6);
+}
+
+.ticket-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.ticket-perks li {
+  font-size: 0.875rem;
+  color: var(--clr-ink-mid);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.ticket-card--featured .ticket-perks li {
+  color: rgba(245, 240, 232, 0.75);
+}
+
+.ticket-perks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--clr-moss);
+}
+
+.ticket-card--featured .ticket-perks li::before {
+  background: var(--clr-orange);
+}
+
+.ticket-card .btn {
+  margin-top: auto;
+  text-align: center;
+}
+
+.ticket-card--featured .btn-primary {
+  background-color: var(--clr-orange);
+  border-color: var(--clr-orange);
+}
+
+.ticket-note {
+  font-size: 0.8rem;
+  color: var(--clr-ink-mid);
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+/* ----------------------------------------------------------------
+   FOOTER
+---------------------------------------------------------------- */
+.site-footer {
+  background-color: var(--clr-navy);
+  color: var(--clr-ivory);
+  padding: 4rem 0 2rem;
+  /* 리소 구분선 */
+  border-top: 4px solid var(--clr-orange);
+}
+
+.footer-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem 4rem;
+  align-items: start;
+}
+
+.footer-logo-text {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--clr-ivory);
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: rgba(245, 240, 232, 0.5);
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: right;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: rgba(245, 240, 232, 0.6);
+  transition: color 0.18s;
+}
+
+.footer-links a:hover {
+  color: var(--clr-orange-lt);
+}
+
+.footer-links a:focus-visible {
+  outline: 2px solid var(--clr-orange);
+  outline-offset: 4px;
+}
+
+.footer-copy {
+  grid-column: 1 / -1;
+  font-size: 0.75rem;
+  color: rgba(245, 240, 232, 0.3);
+  border-top: 1px solid rgba(245, 240, 232, 0.08);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------------
+   REDUCED MOTION (FLOOR 필수)
+   모든 reveal + 애니메이션 즉시 최종 가시 상태
+---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* 키네틱 띠 정지 */
+  .band-track {
+    animation: none !important;
+  }
+
+  /* Reveal 요소 즉시 보임 */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* 모든 transition 제거 */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* 이미지 hover 스케일 제거 */
+  .artist-card:hover .artist-figure img,
+  .venue-gallery-item:hover img {
+    transform: none;
+  }
+
+  /* 티켓 카드 hover 제거 */
+  .ticket-card:hover {
+    transform: none;
+  }
+
+  /* JS 폴백 강제 보임 */
+  .hero-static-fallback {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-kinetic {
+    display: none !important;
+  }
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE
+---------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .headliner-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .venue-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .ticket-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-list {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .headliner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tt-stages {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .venue-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .venue-gallery-item--tall {
+    display: none;
+  }
+
+  .ticket-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    text-align: left;
+  }
+
+  .hero-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
+
+  .hero-type-ghost,
+  .hero-type-main {
+    font-size: clamp(3.5rem, 18vw, 8rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .section-inner {
+    padding: 0 1.25rem;
+  }
+
+  .header-inner {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .tt-slot {
+    grid-template-columns: 3rem 1fr;
+  }
+
+  .tt-genre {
+    display: none;
+  }
+
+  .venue-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .venue-gallery-item--tall {
+    display: none;
+  }
+}
