@@ -1,6 +1,13 @@
 # SPARK.md 개선 연구일지
 
-> 최신 라운드가 위로 온다. 각 라운드는 가설 → 실험 → 결과 → 결론 순으로 기록한다.
+> 라운드는 아래로 누적된다(최신이 맨 끝). 각 라운드는 가설 → 실험 → 결과 → 결론 순.
+
+## 현재 상태 (TL;DR, ~R19 기준)
+- **현행 버전**: `versions/v7-lean.md` — ① 외부 SEED CARD(MACRO/VISUAL/PERSONA/WILD) 무작위 강제배정+락인 ② 자기 디폴트 회피 ③ 성능을 단일 원리(THE LAW: 매프레임=transform/opacity / THE TRAP: 무거운 레이어 이동 금지)로 ④ lean(금지목록 삭감).
+- **표준 생성 워크플로**: `harness/run-v7-fast.sh` = `--effort low`(사고 1패스) + `--disallowedTools Bash`(자가검증 루프 차단) → `perfcheck.sh` 정적검사 → FAIL이면 `--resume`(low)로 그 항목만 교정. **R17 39.8분 → ~10분(-75%), perfcheck 0 FAIL.** (effort max/high는 타임아웃/과부하 → 금지)
+- **검증된 목표**: 같은 프롬프트→매번 다른 산출(R16) · 다도메인 커버(R6/R19) · 클리셰 수렴 탈출(R14) · 렉 없는 코드(R17) · 빠른 생성(R18~19).
+- **라이브 데모**: `demo/spark-research/` (v2~v7.2, v7-fast). **라이브 SPARK.md(curriculum) 반영은 미정** — 연구 버전에만 적용 중.
+- **archive/**: 구 버전(v2~v6)·구 러너·구 리포트는 `archive/`로 이동(재현용). 신규 작업은 위 현행만 사용.
 
 ---
 

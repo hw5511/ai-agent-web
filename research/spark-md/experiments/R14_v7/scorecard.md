@@ -22,3 +22,5 @@
 
 ## 판정
 **v7-lean = 수렴 타파 성공.** 금지→외부배정 전환이 데이터로 입증(다양성·성능·lean 동시). 잔여 2건은 하네스 보강으로 처리.
+
+> 스크린샷은 라이브로 대체(샌드박스 CDN 차단으로 모션 미표시). 라이브: https://hw5511.github.io/ai-agent-web/demo/spark-research/v7/

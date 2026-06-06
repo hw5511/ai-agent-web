@@ -17,3 +17,5 @@ R12 "기법 클리셰(파동선)" 교정 시도: BANNED_DEFAULT_TECHNIQUE + MECH
 ## v6.3 방향 (진짜 수정)
 - **MECHANISM 무작위 배정**: LIGHTBULB가 영감을 랜덤 주입하듯, MECHANISM_PALETTE에서 *무작위 1개*를 뽑아 강제(모델의 자유 안전선택 차단). 주제마다 다른 기법이 강제됨.
 - 또는 "house style"로 키네틱 타이포 수용(ceramic/bookstore는 충분히 좋음) — 다양성 포기.
+
+> 스크린샷은 라이브로 대체(샌드박스 CDN 차단으로 모션 미표시). 라이브: https://hw5511.github.io/ai-agent-web/demo/spark-research/v6.2/

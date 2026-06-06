@@ -14,3 +14,5 @@
 ## 판정 — v6 성공
 - **컨셉 수렴(별자리 클리셰) 해결.** LIGHTBULB를 발상 엔진(random entry)으로 승격 + BANNED_OBVIOUS/3-METHOD 발산이 1차 연상을 실제로 차단.
 - v5의 균형(경험+접근성)도 그대로 유지. → v6 = 현재 최상위 후보.
+
+> 스크린샷은 라이브로 대체(샌드박스 CDN 차단으로 모션 미표시). 라이브: https://hw5511.github.io/ai-agent-web/demo/spark-research/v6/
