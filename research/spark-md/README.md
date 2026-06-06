@@ -3,6 +3,28 @@
 SPARK.md(우희표 커스텀 시스템 프롬프트)를 **버전을 올려가며 격리 실험**으로 검증하고,
 그 과정을 연구일지(`JOURNAL.md`)에 누적 기록하는 공간이다.
 
+## ★ 표준 생성 워크플로 (R19 확정 — 앞으로 이걸로 굳힘)
+
+연구 라운드의 생성은 **`harness/run-v7-fast.sh`** 로 한다. 비싼 모델 자가검증을 3단계로 분해해
+**품질 유지(perfcheck 0 FAIL) + 생성 시간 ~10분(R17 39.8분→-75%)** 을 동시에 잡은 파이프라인이다.
+
+1. **생성** — `--effort low`(사고 1패스) + `--disallowedTools Bash`(쉘 자가검증 에이전트 루프 차단).
+   `--effort max/high`는 사고 예산이 과대해 작성 전 타임아웃/지연(R19 실측) → **쓰지 않는다.**
+2. **검사** — `harness/perfcheck.sh`(공짜·ms)가 성능(THE LAW/TRAP) + 마감(em-dash 주석제외·이모지·끊긴 링크)을 정적 적발.
+3. **교정** — FAIL이면 같은 `session_id`를 `--resume`(`FIX_EFFORT=low`, **stream-json 필수**)해 적발 항목만 1턴(~10초) 수정. 재생성 안 함.
+
+```bash
+research/spark-md/harness/run-v7-fast.sh R20_<주제> \
+  book:case1_bookstore.txt  fest:case2_festival.txt  dine:case4_dining.txt
+# 인자: <라운드ID> <name>:<prompts/파일명> ...  (하네스가 SEED CARD를 무작위 강제배정)
+# 조절: GEN_EFFORT(기본 low, high까지 안전·max 금지) / FIX_EFFORT(기본 low) / MAXPAR(기본 5)
+```
+- 결과물: `/tmp/spark-lab/<라운드ID>/<name>/{index.html,styles.css,script.js}`, 요약은 `_seeds.log`(시간·교정여부·perfcheck·배정시드).
+- 근거·실측: `JOURNAL.md` Round 18~19. 라이브 예시: `demo/spark-research/v7-fast/`.
+- (구버전 `run.sh`/`run-v4~v6` 등은 이력 보존용. 신규 라운드는 `run-v7-fast.sh` 사용.)
+
+---
+
 ## 목적
 - 동일 프롬프트로 **기본(맨손) / SPARK v1 / SPARK v2 변형들**을 생성해 결과 품질을 비교한다.
 - "SPARK.md가 실제로 어디서 효과를 내고 어디가 비는지"를 근거(점수표/스크린샷)로 남긴다.
