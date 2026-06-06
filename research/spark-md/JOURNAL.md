@@ -294,3 +294,33 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - **검증(R17, v7.2 4주제)**: perfcheck 4/4 FAIL=0. 특히 noc가 **컬러필드(run4와 동일 위험기법)** 배정받았으나 blur≥40px=0(정적 그라디언트로 구현) → **CPU6x 60fps**(run4 22→60). 원리가 위험 시드에서도 렉 코드를 차단.
 - perfcheck 자체검증: run4(렉) FAIL=2 적발, run5/run1(정상) 통과. rAF FPS 사각 보완.
 - 교훈: 성능도 클리셰처럼 "개별 캡"이 아니라 **단일 원리 + 정적 검증**이 본질. (캡은 다음 무거운 패턴으로 도망감)
+
+---
+
+## Round 18 — 생성 속도 분해 + 최적화 (run당 30분 원인 규명)  [완료 2026-06-05]
+- 질문(CEO): "run당 claude -p가 30분 넘는데, 이게 그만큼의 코딩 분량인가?" → **아니다.**
+- **분해(R17 stream usage)**: 벽시계의 99.9%가 모델 추론(api_ms≈duration_ms). 하네스/verbose/병렬경합은 무의미. 시간 ∝ output_tokens.
+  - 실제 코드(~1,600줄 ≈ 20k토큰)는 5~6분 분량. 나머지는 ① thinking ② 재작성 ③ Bash 자가검증 에이전트 루프.
+  - obs 18.0분/72k/think610/9turn/Bash3 · noc 39.8분/156k/think1386/**13turn/Bash9**.
+- **최적화 2레버 → `harness/run-v7-fast.sh`**: `--effort medium`(thinking 예산↓) + `--disallowedTools Bash`(자가검증 루프 차단, self_check 머릿속 1패스).
+- **A/B 실측(동일 시드·NOCTURNE)**: ctrl는 API 과부하(api_retry 10)로 out_tok 0·파일 0개 **무효**. fast는 정상: 24.9분/103k/4turn/**Bash 0·Write3 Edit0**/perfcheck **FAIL 0**.
+  - fast vs R17 noc 베이스라인: 39.8→24.9분(**-37%**), 156k→103k(-34%), 13→4turn, **Bash 9→0**, 품질 0 FAIL 유지. 메커니즘 입증.
+- 잔여: fast도 thinking 877청크로 여전히 무거움 → `--effort low` 추가 단축 여지(품질 검증 필요). ctrl 무효라 깨끗한 1:1 시간차는 재측정 필요.
+- 결론: **30분은 코딩량이 아니라 사고+자가검증 에이전트 루프 비용.** Bash 차단이 가장 확실한 레버(루프 원천 제거, 품질 무손실).
+
+---
+
+## Round 19 — effort 스윕 + 검사·교정 파이프라인 확정  [완료 2026-06-05]
+- 가설(CEO): "생성 effort를 **max**로 올려 사고를 충분히 끝낸 뒤 1패스에 위반 0개로 쓰게 하면?" → **실측으로 반증.**
+- **effort 스윕(동일 시드: 분할화면/키네틱타이포/영화타이틀/시간의향, NOCTURNE)**:
+  | effort | 시간 | thinking | 코드 | 결과 |
+  |---|---|---|---|---|
+  | **low** | **9.7분** | 166 | 1955줄 | 마감 위반 2(em-dash)→resume 교정 |
+  | medium | 24.9분 | 877 | OK | 깨끗 |
+  | high | (외부 과부하로 중단) | 329(=low의 2배) | **사고만 ~10분=low 전체** | 코드 진입 전 api_retry |
+  | **max** | **46.6분** | 824+ | **0줄** | **단일 턴 "Request timed out" 실패** |
+  - 핵심: effort는 "충분히"가 아니라 "**최대치까지**" 생각 → max는 작성 전 타임아웃, high도 사고만으로 low 전체와 맞먹음. **사고량으로 마감을 막는 접근은 비현실적.**
+- **파이프라인 확정(`run-v7-fast.sh`)**: ① 생성 `GEN_EFFORT=low` + `--disallowedTools Bash` ② 정적검사 `perfcheck.sh`(성능+마감 em-dash/이모지/링크, ms) ③ FAIL이면 같은 `session_id`를 `--resume`(`FIX_EFFORT=low`, **stream-json 필수** — 평문이면 deferred-tool marker 에러) 1턴 교정(~10~18초). 재생성 안 함.
+- **perfcheck 확장**: em-dash는 **주석 제외 렌더 텍스트만** 검사(comment의 — 오탐 제거 — v7.2 c1/noc 0 FAIL 유지, low의 title/alt 2건만 적발). 이모지 유니코드 블록, 끊긴 css/js 링크.
+- **검증**: 확인 런 자동 루프(생성→FAIL→resume 교정)가 최종 perfcheck **FAIL=0**으로 완결.
+- 결론: 비싼 모델 자가검증을 **"빠른 low 생성 + 공짜 정적검사 + 필요 시 짧은 targeted resume"** 으로 분해. R17 39.8분 → ~10분(-75%), 품질 결정론적 보장.
