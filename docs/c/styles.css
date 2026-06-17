@@ -1,0 +1,590 @@
+/* =====================================================
+   GROOVE 회현 — SPARK 모험 디자인
+   STYLE: Swiss-Editorial × Art Deco 혼종
+   DARING_MOVE: 시간대별 oklch 팔레트 실시간 주입
+   ===================================================== */
+
+/* ── 한글 줄바꿈 CRITICAL ── */
+:where(body, h1, h2, h3, h4, h5, h6, p, li, a, span, button, label, blockquote, figcaption, td, th) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+h1, h2, h3, .rhythm-line, .tagline { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+/* ── CSS 변수 기본 (낮 팔레트 — JS가 덮어씀) ── */
+:root {
+  /* 낮 기본값 */
+  --bg:          oklch(96% 0.02 85);
+  --bg2:         oklch(91% 0.03 80);
+  --fg:          oklch(18% 0.04 60);
+  --accent:      oklch(58% 0.16 55);
+  --accent2:     oklch(70% 0.12 45);
+  --deco-line:   oklch(55% 0.08 55);
+  --deco-accent: oklch(62% 0.14 50);
+  --muted:       oklch(50% 0.06 70);
+
+  --vinyl-center: oklch(22% 0.04 60);
+  --vinyl-mid:    oklch(15% 0.02 0);
+  --vinyl-outer:  oklch(10% 0.01 0);
+  --vinyl-edge:   oklch(8% 0.01 0);
+  --groove-line:  oklch(70% 0.05 60);
+  --label-bg:     oklch(58% 0.16 55);
+
+  --gc-jazz-bg:    oklch(90% 0.05 70);
+  --gc-pop-bg:     oklch(88% 0.06 60);
+  --gc-indie-bg:   oklch(85% 0.07 50);
+
+  /* 전환 속도 */
+  --theme-transition: 4s;
+
+  /* 타이포 */
+  --font-serif: 'DM Serif Display', 'Noto Serif KR', Georgia, serif;
+  --font-body:  'Noto Serif KR', 'Georgia', serif;
+
+  /* 레이아웃 */
+  --gutter: clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ── 리셋 ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; } /* Lenis가 담당 */
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background var(--theme-transition) ease,
+              color var(--theme-transition) ease;
+}
+
+/* ── 아트데코 배경 SVG ── */
+.deco-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
+  transition: opacity var(--theme-transition) ease;
+}
+
+/* ── 시간대 인디케이터 ── */
+.time-indicator {
+  position: fixed;
+  top: 1.5rem;
+  right: var(--gutter);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  transition: color var(--theme-transition) ease;
+}
+.time-bar {
+  width: 48px;
+  height: 2px;
+  background: oklch(50% 0.04 0 / 0.2);
+  border-radius: 1px;
+}
+.time-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1px;
+  will-change: width;
+  transition: width 30s linear, background var(--theme-transition) ease;
+}
+
+/* ── 사이트 래퍼 ── */
+.site-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ======================================================
+   SECTION A — IDENTITY
+   구조: 전체 화면, 리듬 반복 타이포가 Z축으로 겹침
+   ====================================================== */
+.identity-section {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: clamp(4rem, 10vh, 8rem) var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+
+.identity-inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* 리듬 있는 반복 — LAYOUT_SPARK 구현 */
+/* 같은 단어 3번 반복, 점점 커지고 점점 불투명해지며 오른쪽으로 밀림 */
+.rhythm-title-wrap {
+  position: relative;
+  height: clamp(220px, 40vw, 480px);
+  margin-bottom: 2.5rem;
+}
+
+.rhythm-line {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  line-height: 0.88;
+  position: absolute;
+  left: 0;
+  color: var(--fg);
+  transition: color var(--theme-transition) ease;
+  will-change: transform, opacity;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+/* 1단: 아주 작고 투명 (배경 울림) */
+.r-line-1 {
+  font-size: clamp(3.5rem, 9vw, 9rem);
+  opacity: 0.08;
+  top: 0;
+  transform: translateX(0);
+  color: var(--accent);
+}
+/* 2단: 중간 */
+.r-line-2 {
+  font-size: clamp(6rem, 16vw, 17rem);
+  opacity: 0.18;
+  top: clamp(2rem, 6vw, 8rem);
+  transform: translateX(clamp(1rem, 3vw, 4rem));
+}
+/* 3단: 선명한 주역 */
+.r-line-3 {
+  font-size: clamp(8.5rem, 24vw, 26rem);
+  opacity: 1;
+  top: clamp(3.5rem, 12vw, 16rem);
+  transform: translateX(clamp(-1rem, -2vw, -3rem));
+}
+
+/* 한국어 부제 */
+.store-kor {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  text-align: right;
+}
+.store-kor-main {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 5rem);
+  line-height: 1;
+  color: var(--accent);
+  transition: color var(--theme-transition) ease;
+}
+.store-kor-sub {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  transition: color var(--theme-transition) ease;
+}
+
+/* 아트데코 구분선 */
+.deco-divider {
+  margin-bottom: 1.8rem;
+}
+.deco-divider svg {
+  width: clamp(200px, 50vw, 400px);
+  height: 24px;
+  stroke: var(--accent);
+  transition: stroke var(--theme-transition) ease;
+}
+
+.tagline {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  line-height: 1.9;
+  transition: color var(--theme-transition) ease;
+}
+
+/* ======================================================
+   SECTION B — NOW (시간대 연동 무드)
+   ====================================================== */
+.now-section {
+  min-height: 80svh;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  padding: clamp(4rem, 10vh, 7rem) var(--gutter);
+  position: relative;
+}
+
+.now-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.now-label {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color var(--theme-transition) ease;
+}
+
+.now-mood {
+  grid-column: 1;
+  grid-row: 2;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.15;
+  color: var(--accent);
+  transition: color var(--theme-transition) ease;
+  will-change: opacity;
+}
+
+.now-desc {
+  grid-column: 1;
+  grid-row: 3;
+  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  color: var(--fg);
+  max-width: 36ch;
+  line-height: 1.8;
+  transition: color var(--theme-transition) ease;
+}
+
+/* 레코드 비주얼 */
+.vinyl-wrap {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.vinyl-disc {
+  width: clamp(200px, 40vw, 380px);
+  aspect-ratio: 1;
+  will-change: transform;
+  animation: spark-vinyl-spin 18s linear infinite;
+}
+
+@keyframes spark-vinyl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.vinyl-svg {
+  width: 100%;
+  height: 100%;
+  transition: all var(--theme-transition) ease;
+}
+
+@media (max-width: 680px) {
+  .now-inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .vinyl-wrap {
+    grid-column: 1;
+    grid-row: 4;
+    justify-content: center;
+  }
+}
+
+/* ======================================================
+   SECTION C — GENRE (리듬 반복 카드 트랙)
+   ====================================================== */
+.genre-section {
+  padding: clamp(4rem, 10vh, 7rem) var(--gutter);
+  position: relative;
+}
+
+.genre-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.genre-label-deco {
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: var(--accent);
+  letter-spacing: -0.1em;
+  transition: color var(--theme-transition) ease;
+}
+.genre-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-style: italic;
+  color: var(--fg);
+  transition: color var(--theme-transition) ease;
+}
+
+.genre-track-wrap {
+  overflow: hidden;
+}
+
+/* 비대칭 트랙 — 반복 패턴이지만 수직 오프셋으로 리듬감 */
+.genre-track {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr;
+  gap: clamp(1px, 0.3vw, 3px);
+  align-items: start;
+}
+
+.genre-card {
+  position: relative;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--bg2);
+  border-top: 1px solid var(--accent);
+  transition: background var(--theme-transition) ease,
+              border-color var(--theme-transition) ease;
+  will-change: transform;
+  cursor: default;
+}
+
+/* 리듬 변주: 카드마다 다른 수직 위치 */
+.gc-jazz   { margin-top: 0; }
+.gc-citypop { margin-top: clamp(2rem, 5vw, 5rem); }
+.gc-indie  { margin-top: clamp(1rem, 2.5vw, 3rem); }
+
+.gc-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: var(--accent);
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  transition: color var(--theme-transition) ease;
+  user-select: none;
+}
+
+.gc-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--fg);
+  margin-bottom: 0.8rem;
+  transition: color var(--theme-transition) ease;
+}
+
+.gc-desc {
+  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+  color: var(--muted);
+  line-height: 1.8;
+  transition: color var(--theme-transition) ease;
+}
+
+/* 아트데코 하단 바 (리듬 반복 — 너비 변주) */
+.gc-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: background var(--theme-transition) ease,
+              width 0.4s ease;
+  width: 40%;
+}
+.gc-jazz .gc-bar   { width: 60%; }
+.gc-citypop .gc-bar { width: 35%; }
+.gc-indie .gc-bar  { width: 80%; }
+
+@media (max-width: 720px) {
+  .genre-track {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+  .gc-jazz, .gc-citypop, .gc-indie { margin-top: 0; }
+}
+
+/* ======================================================
+   SECTION D — INFO (바우하우스 그리드 — AESTHETIC_PINCH)
+   ====================================================== */
+.info-section {
+  padding: clamp(4rem, 10vh, 7rem) var(--gutter);
+}
+
+.info-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.info-deco-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+  margin-bottom: 3rem;
+  transition: background var(--theme-transition) ease;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1px, 0.2vw, 2px);
+  margin-bottom: 4rem;
+}
+
+.info-block {
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem);
+  border-left: 1px solid var(--accent);
+  transition: border-color var(--theme-transition) ease;
+}
+
+.ib-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  transition: color var(--theme-transition) ease;
+}
+
+.ib-body {
+  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  color: var(--fg);
+  line-height: 2;
+  transition: color var(--theme-transition) ease;
+}
+
+@media (max-width: 640px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .info-block {
+    border-left: none;
+    border-top: 1px solid var(--accent);
+  }
+}
+
+/* CTA */
+.visit-cta {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  flex-wrap: wrap;
+}
+
+.visit-line {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  color: var(--fg);
+  transition: color var(--theme-transition) ease;
+}
+
+.visit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.2rem;
+  transition: color var(--theme-transition) ease,
+              border-color var(--theme-transition) ease,
+              gap 0.25s ease;
+}
+.visit-link:hover { gap: 1rem; }
+.visit-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.visit-arrow {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.visit-link:hover .visit-arrow { transform: translateX(4px); }
+
+/* ── FOOTER ── */
+.site-footer {
+  padding: clamp(2rem, 5vh, 4rem) var(--gutter);
+  border-top: 1px solid oklch(50% 0.04 0 / 0.15);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.footer-deco svg {
+  width: 200px;
+  height: 20px;
+}
+.footer-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  transition: color var(--theme-transition) ease;
+}
+
+/* ======================================================
+   접근성 — prefers-reduced-motion
+   ====================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .vinyl-disc {
+    animation: none;
+  }
+  /* 모든 reveal 즉시 가시 상태 */
+  .genre-card,
+  .info-block,
+  .now-mood,
+  .now-desc,
+  .rhythm-line {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ======================================================
+   진입 애니메이션 초기 상태
+   ====================================================== */
+.genre-card {
+  opacity: 0;
+  transform: translateY(32px);
+}
+.info-block {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.now-mood {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.now-desc {
+  opacity: 0;
+  transform: translateY(12px);
+}

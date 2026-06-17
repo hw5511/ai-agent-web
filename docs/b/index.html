@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GROOVE 회현 — 바이닐 레코드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- 배경 노이즈 캔버스 -->
+  <canvas id="spark_noise_canvas" aria-hidden="true"></canvas>
+
+  <!-- 커서 추적 빛 -->
+  <div id="spark_cursor_light" aria-hidden="true"></div>
+
+  <!-- SECTION 1: 타이틀 해체 오프닝 -->
+  <section class="s-title" aria-label="가게 이름">
+    <div class="title-wrapper" id="spark_title_wrapper">
+      <div class="title-line title-line--groove" aria-label="GROOVE">
+        <span class="t-char" data-char="G">G</span>
+        <span class="t-char" data-char="R">R</span>
+        <span class="t-char" data-char="O">O</span>
+        <span class="t-char" data-char="O">O</span>
+        <span class="t-char" data-char="V">V</span>
+        <span class="t-char" data-char="E">E</span>
+      </div>
+      <div class="title-line title-line--hoehyeon" aria-label="회현">
+        <span class="t-char" data-char="회">회</span>
+        <span class="t-char" data-char="현">현</span>
+      </div>
+    </div>
+
+    <p class="tagline">서울 회현역 골목 / 중고 &amp; 신보 바이닐</p>
+
+    <div class="title-genre-bar" aria-label="취급 장르">
+      <span>Jazz</span>
+      <span class="bar-dot" aria-hidden="true"></span>
+      <span>City Pop</span>
+      <span class="bar-dot" aria-hidden="true"></span>
+      <span>Korean Indie</span>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 심해 선언 (철학) -->
+  <section class="s-manifesto" aria-label="가게 소개">
+    <div class="manifesto-inner">
+      <p class="m-label">GROOVE 회현에 대하여</p>
+      <blockquote class="m-quote">
+        "레코드는 물건이 아니라<br />
+        당신이 아직 듣지 못한<br />
+        기억의 조각입니다."
+      </blockquote>
+      <p class="m-body">
+        회현역 4번 출구, 계단을 내려가 두 번째 골목.
+        이 가게는 우연히 발견하는 사람을 위해 존재합니다.
+        재즈의 호흡, 시티팝의 빛, 국내 인디의 솔직함—
+        세 가지 온도가 한 공간에 공존합니다.
+      </p>
+    </div>
+    <div class="manifesto-accent" aria-hidden="true">
+      <div class="accent-line accent-line--1"></div>
+      <div class="accent-line accent-line--2"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 앨범 사선 갤러리 (비대칭 자유 배치) -->
+  <section class="s-picks" aria-label="지금 가게에 있는 음악">
+    <div class="picks-header">
+      <span class="picks-label">이번 주 입고</span>
+    </div>
+
+    <div class="picks-grid" id="spark_picks_grid">
+
+      <article class="pick-item pick-item--a" data-genre="jazz">
+        <div class="pick-img-wrap">
+          <img
+            src="https://loremflickr.com/400/400/jazz,vinyl,record"
+            alt="재즈 앨범 재킷"
+            width="400" height="400"
+            loading="lazy"
+          />
+          <div class="pick-img-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="pick-meta">
+          <span class="pick-genre">Jazz</span>
+          <h3 class="pick-title">Miles Davis — Kind of Blue</h3>
+          <p class="pick-note">모든 것의 시작점. 한 장이면 충분하다.</p>
+        </div>
+      </article>
+
+      <article class="pick-item pick-item--b" data-genre="citypop">
+        <div class="pick-img-wrap">
+          <img
+            src="https://loremflickr.com/400/400/city,night,japan,music"
+            alt="시티팝 앨범 재킷"
+            width="400" height="400"
+            loading="lazy"
+          />
+          <div class="pick-img-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="pick-meta">
+          <span class="pick-genre">City Pop</span>
+          <h3 class="pick-title">竹内まりや — Plastic Love</h3>
+          <p class="pick-note">도시의 밤이 레코드에 눌렸다.</p>
+        </div>
+      </article>
+
+      <article class="pick-item pick-item--c" data-genre="indie">
+        <div class="pick-img-wrap">
+          <img
+            src="https://loremflickr.com/400/400/seoul,indie,music,band"
+            alt="국내 인디 앨범 재킷"
+            width="400" height="400"
+            loading="lazy"
+          />
+          <div class="pick-img-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="pick-meta">
+          <span class="pick-genre">Korean Indie</span>
+          <h3 class="pick-title">잔나비 — 전설</h3>
+          <p class="pick-note">바이닐로 들으면 완전히 다른 노래.</p>
+        </div>
+      </article>
+
+      <article class="pick-item pick-item--d" data-genre="jazz">
+        <div class="pick-img-wrap">
+          <img
+            src="https://loremflickr.com/400/400/jazz,saxophone,vinyl"
+            alt="재즈 앨범 재킷"
+            width="400" height="400"
+            loading="lazy"
+          />
+          <div class="pick-img-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="pick-meta">
+          <span class="pick-genre">Jazz</span>
+          <h3 class="pick-title">John Coltrane — A Love Supreme</h3>
+          <p class="pick-note">침묵과 소리가 동등한 무게를 갖는 음악.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- 사선 텍스트 레이어 -->
+    <p class="picks-scroll-text" aria-hidden="true">VINYL &nbsp; VINYL &nbsp; VINYL &nbsp; VINYL &nbsp; VINYL &nbsp; VINYL</p>
+  </section>
+
+  <!-- SECTION 4: 방문 정보 -->
+  <section class="s-visit" aria-label="방문 정보">
+    <div class="visit-split">
+      <div class="visit-left">
+        <p class="visit-eyebrow">찾아오시는 길</p>
+        <address class="visit-address">
+          서울특별시 중구 퇴계로<br />
+          회현역 4번 출구<br />
+          계단 내려 두 번째 골목
+        </address>
+        <div class="visit-hours">
+          <div class="hours-row">
+            <span class="hours-day">화 — 금</span>
+            <span class="hours-time">12:00 — 21:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">토 — 일</span>
+            <span class="hours-time">11:00 — 22:00</span>
+          </div>
+          <div class="hours-row hours-row--closed">
+            <span class="hours-day">월요일</span>
+            <span class="hours-time">휴무</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="visit-right">
+        <!-- 큰 타이포그래픽 CTA -->
+        <p class="visit-cta-label">직접 와서 들어보세요</p>
+        <a
+          href="https://naver.me/groovehoehyeon"
+          class="visit-cta-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="네이버 지도에서 GROOVE 회현 보기"
+        >
+          <span class="cta-text">지도 열기</span>
+          <span class="cta-arrow" aria-hidden="true">
+            <svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="20" aria-hidden="true">
+              <path d="M0 10 H35 M28 2 L38 10 L28 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+        <p class="visit-instagram">
+          Instagram &nbsp;
+          <a href="https://instagram.com/groove_hoehyeon" target="_blank" rel="noopener noreferrer">@groove_hoehyeon</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <p class="footer-mark">GROOVE 회현 &copy; 2024</p>
+    <p class="footer-sub">바이닐은 직접 만져야 압니다</p>
+  </footer>
+
+  <!-- 라이브러리 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
