@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GROOVE 회현 · 회현역 뒷골목 바이닐 레코드</title>
+  <meta name="description" content="서울 회현역 뒷골목의 바이닐 레코드 전문점. 재즈, 시티팝, 국내 인디 LP 큐레이션과 청음 공간." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 색면이 곧 방(room). 좌우로 거니는 비선형 갤러리 -->
+  <a class="skip" href="#room-philosophy">본문으로 건너뛰기</a>
+
+  <!-- 고정 좌측 세로 인덱스: 방 번호로 이동 -->
+  <nav class="atlas" aria-label="전시실 이동">
+    <span class="atlas-mark" aria-hidden="true">GROOVE</span>
+    <ol class="atlas-list">
+      <li><button type="button" class="atlas-btn is-current" data-go="0" aria-current="true"><span class="atlas-no">00</span><span class="atlas-name">입구</span></button></li>
+      <li><button type="button" class="atlas-btn" data-go="1"><span class="atlas-no">01</span><span class="atlas-name">철학</span></button></li>
+      <li><button type="button" class="atlas-btn" data-go="2"><span class="atlas-no">02</span><span class="atlas-name">재즈</span></button></li>
+      <li><button type="button" class="atlas-btn" data-go="3"><span class="atlas-no">03</span><span class="atlas-name">시티팝</span></button></li>
+      <li><button type="button" class="atlas-btn" data-go="4"><span class="atlas-no">04</span><span class="atlas-name">인디</span></button></li>
+      <li><button type="button" class="atlas-btn" data-go="5"><span class="atlas-no">05</span><span class="atlas-name">청음</span></button></li>
+      <li><button type="button" class="atlas-btn" data-go="6"><span class="atlas-no">06</span><span class="atlas-name">입고</span></button></li>
+      <li><button type="button" class="atlas-btn" data-go="7"><span class="atlas-no">07</span><span class="atlas-name">길</span></button></li>
+    </ol>
+  </nav>
+
+  <!-- 진행 막대 (transform: scaleX) -->
+  <div class="meter" aria-hidden="true"><span class="meter-fill"></span></div>
+
+  <!-- 가로로 흐르는 색면의 연속. 각 패널은 하나의 방. -->
+  <main class="hall" id="hall">
+
+    <!-- 00 입구: 거대 색면. 정지인데 떨림이 느껴지는 영원한 찰나 -->
+    <section class="room room--entry" data-room="0" aria-labelledby="entry-h">
+      <div class="field field--entry" aria-hidden="true">
+        <span class="field-band field-band--a"></span>
+        <span class="field-band field-band--b"></span>
+        <span class="field-band field-band--c"></span>
+      </div>
+      <div class="entry-copy">
+        <p class="kicker">회현역 4번 출구, 뒷골목 안쪽</p>
+        <h1 id="entry-h" class="entry-title">바늘이<br />내려앉는<br />소리부터</h1>
+        <p class="entry-lead">한 장의 LP가 돌기 전, 정적이 먼저 흐릅니다.<br />GROOVE 회현은 그 정적을 파는 가게입니다.</p>
+        <p class="entry-hint"><span class="entry-hint-line" aria-hidden="true"></span>오른쪽으로 거닐어 보세요</p>
+      </div>
+    </section>
+
+    <!-- 01 철학 -->
+    <section class="room room--text" data-room="1" id="room-philosophy" aria-labelledby="phil-h">
+      <div class="field field--phil" aria-hidden="true"></div>
+      <div class="room-inner">
+        <p class="room-no" aria-hidden="true">01 · 가게의 태도</p>
+        <h2 id="phil-h" class="room-h">우리는 음반을<br />진열하지 않습니다.<br />놓아 둡니다.</h2>
+        <div class="phil-body">
+          <p>좁은 골목 2층, 스무 평 남짓한 공간에 LP는 빼곡하지 않습니다. 한 칸을 비워 두는 일이 우리에게는 큐레이션입니다. 비움이 다음 한 장으로 시선을 끌어 주니까요.</p>
+          <p>점주는 십이 년 차 재즈 디깅 중독자입니다. 들어오는 모든 음반을 직접 들어 보고, 들을 만한 것만 골라 둡니다. 그래서 재고가 적습니다. 그게 자랑입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 재즈 컬렉션: 여백 속에 드문드문 -->
+    <section class="room room--gallery" data-room="2" aria-labelledby="jazz-h">
+      <div class="field field--jazz" aria-hidden="true"></div>
+      <div class="gallery-head">
+        <p class="room-no" aria-hidden="true">02 · 컬렉션</p>
+        <h2 id="jazz-h" class="room-h">재즈<br /><em>JAZZ</em></h2>
+        <p class="gallery-note">하드밥부터 모던 크리에이티브까지. 청음 우선, 설명은 나중.</p>
+      </div>
+      <ul class="plinths">
+        <li class="plinth plinth--hi">
+          <img src="https://picsum.photos/seed/groovejazz1/520/520" alt="블루노트 계열 재즈 LP 재킷" width="520" height="520" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">하드밥</span><strong>Blue Note 오리지널 프레스 입하</strong><span>모노 반, 상태 VG+ 위주 소량</span></div>
+        </li>
+        <li class="plinth plinth--lo">
+          <img src="https://picsum.photos/seed/groovejazz2/440/440" alt="모던 재즈 트리오 LP 재킷" width="440" height="440" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">피아노 트리오</span><strong>북유럽 ECM 라인</strong><span>여백이 많은 음악, 여백이 많은 진열</span></div>
+        </li>
+        <li class="plinth plinth--mid">
+          <img src="https://picsum.photos/seed/groovejazz3/480/480" alt="스피리추얼 재즈 LP 재킷" width="480" height="480" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">스피리추얼</span><strong>국내 재발매 중고 셀렉</strong><span>가격대 합리, 회전 빠름</span></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 03 시티팝 -->
+    <section class="room room--gallery" data-room="3" aria-labelledby="city-h">
+      <div class="field field--city" aria-hidden="true"></div>
+      <div class="gallery-head">
+        <p class="room-no" aria-hidden="true">03 · 컬렉션</p>
+        <h2 id="city-h" class="room-h">시티팝<br /><em>CITY POP</em></h2>
+        <p class="gallery-note">밤 열한 시, 한강 둔치에서 듣고 싶은 음반만.</p>
+      </div>
+      <ul class="plinths">
+        <li class="plinth plinth--mid">
+          <img src="https://loremflickr.com/480/480/tokyo,night" alt="80년대 일본 시티팝 LP 재킷" width="480" height="480" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">80s 재팬</span><strong>야마시타 타츠로 인근 라인</strong><span>오리지널은 귀하게, 재발매는 넉넉히</span></div>
+        </li>
+        <li class="plinth plinth--hi">
+          <img src="https://loremflickr.com/520/520/neon,city" alt="네온 무드의 시티팝 LP 재킷" width="520" height="520" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">AOR</span><strong>한낮보다 자정에 어울리는 셀렉</strong><span>청음 추천 1번 코너</span></div>
+        </li>
+        <li class="plinth plinth--lo">
+          <img src="https://loremflickr.com/440/440/sunset,ocean" alt="해질녘 무드의 시티팝 LP 재킷" width="440" height="440" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">신스 펑크</span><strong>한국 라이선스반 디깅</strong><span>가성비 코너, 자주 바뀜</span></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 04 국내 인디 -->
+    <section class="room room--gallery" data-room="4" aria-labelledby="indie-h">
+      <div class="field field--indie" aria-hidden="true"></div>
+      <div class="gallery-head">
+        <p class="room-no" aria-hidden="true">04 · 컬렉션</p>
+        <h2 id="indie-h" class="room-h">국내 인디<br /><em>K-INDIE</em></h2>
+        <p class="gallery-note">홍대와 을지로 사이, 지금 만들어지는 소리.</p>
+      </div>
+      <ul class="plinths">
+        <li class="plinth plinth--lo">
+          <img src="https://picsum.photos/seed/grooveindie1/440/440" alt="국내 인디 밴드 LP 재킷" width="440" height="440" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">포크</span><strong>소규모 레이블 직거래 신보</strong><span>입고 즉시 한 장은 청음용으로</span></div>
+        </li>
+        <li class="plinth plinth--mid">
+          <img src="https://picsum.photos/seed/grooveindie2/480/480" alt="국내 인디 싱어송라이터 LP 재킷" width="480" height="480" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">드림팝</span><strong>한정반 사인 에디션</strong><span>매대가 아니라 카운터 뒤에</span></div>
+        </li>
+        <li class="plinth plinth--hi">
+          <img src="https://picsum.photos/seed/grooveindie3/520/520" alt="국내 인디 밴드 두 번째 LP 재킷" width="520" height="520" loading="lazy" />
+          <div class="plinth-cap"><span class="plinth-tag">개러지</span><strong>점주 사심 추천 상시 코너</strong><span>물어보면 한 시간은 떠듭니다</span></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 05 청음 공간: 전략적 마찰 · 3단계 의식 -->
+    <section class="room room--listen" data-room="5" aria-labelledby="listen-h">
+      <div class="field field--listen" aria-hidden="true"></div>
+      <div class="listen-left">
+        <p class="room-no" aria-hidden="true">05 · 청음 공간</p>
+        <h2 id="listen-h" class="room-h">한 장을<br />끝까지.</h2>
+        <p class="listen-lead">청음 좌석은 두 자리뿐입니다. 그래서 미리 한 가지 의식을 거칩니다. 빈 자리를 비워 두는 것 또한 큐레이션이니까요.</p>
+        <figure class="listen-figure">
+          <img src="https://loremflickr.com/640/440/turntable,vinyl" alt="청음 공간의 턴테이블과 진공관 앰프" width="640" height="440" loading="lazy" />
+          <figcaption>1970년대 진공관 앰프와 다이렉트드라이브 턴테이블. 헤드폰은 개방형 하나, 밀폐형 하나.</figcaption>
+        </figure>
+      </div>
+
+      <!-- 의식(儀式)형 청음 신청: 단계별 마찰 -->
+      <form class="rite" id="rite" novalidate aria-labelledby="rite-h">
+        <p class="rite-eyebrow" id="rite-h">청음 청하기 · 세 번의 물음</p>
+
+        <div class="rite-stage" data-stage="1">
+          <p class="rite-progress"><span class="rite-step">하나</span> / 셋</p>
+          <p class="rite-q">오늘, 무엇을 듣고 싶습니까?</p>
+          <div class="rite-choices" role="radiogroup" aria-label="듣고 싶은 장르">
+            <button type="button" class="rite-pick" data-name="genre" data-value="재즈">재즈</button>
+            <button type="button" class="rite-pick" data-name="genre" data-value="시티팝">시티팝</button>
+            <button type="button" class="rite-pick" data-name="genre" data-value="국내 인디">국내 인디</button>
+            <button type="button" class="rite-pick" data-name="genre" data-value="아직 모름">아직 모름</button>
+          </div>
+        </div>
+
+        <div class="rite-stage" data-stage="2" hidden>
+          <p class="rite-progress"><span class="rite-step">둘</span> / 셋</p>
+          <p class="rite-q">어떤 마음으로 오십니까?</p>
+          <div class="rite-choices" role="radiogroup" aria-label="방문 목적">
+            <button type="button" class="rite-pick" data-name="mood" data-value="처음 입문">처음, 입문하러</button>
+            <button type="button" class="rite-pick" data-name="mood" data-value="특정 음반 디깅">특정 음반을 찾아</button>
+            <button type="button" class="rite-pick" data-name="mood" data-value="그냥 머물러">그냥 한 장 머물러</button>
+          </div>
+        </div>
+
+        <div class="rite-stage" data-stage="3" hidden>
+          <p class="rite-progress"><span class="rite-step">셋</span> / 셋</p>
+          <p class="rite-q">언제 들르실 수 있나요?</p>
+          <label class="rite-field">
+            <span>이름 또는 부르고 싶은 호칭</span>
+            <input type="text" name="who" autocomplete="name" required />
+          </label>
+          <label class="rite-field">
+            <span>희망 날짜와 대략의 시간</span>
+            <input type="text" name="when" placeholder="예: 6월 28일 저녁 무렵" required />
+          </label>
+          <button type="submit" class="rite-submit">자리를 비워 두기</button>
+        </div>
+
+        <div class="rite-done" hidden role="status" aria-live="polite">
+          <p class="rite-done-h">한 자리를 비워 두었습니다.</p>
+          <p class="rite-done-body" id="rite-summary"></p>
+          <p class="rite-done-foot">실제 예약은 연락으로 확정됩니다. 천천히 오세요.</p>
+        </div>
+
+        <div class="rite-nav">
+          <button type="button" class="rite-back" hidden>이전 물음</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 06 신보·입고 소식 -->
+    <section class="room room--news" data-room="6" aria-labelledby="news-h">
+      <div class="field field--news" aria-hidden="true"></div>
+      <div class="news-head">
+        <p class="room-no" aria-hidden="true">06 · 신보 · 입고</p>
+        <h2 id="news-h" class="room-h">이번 주<br />들어온 것들</h2>
+      </div>
+      <ul class="ledger">
+        <li class="ledger-row">
+          <span class="ledger-date">06.16</span>
+          <span class="ledger-kind ledger-kind--new">신보</span>
+          <p class="ledger-text">국내 드림팝 4인조 정규 2집, 투명 컬러 바이닐 한정반. 매장 보유 여덟 장.</p>
+        </li>
+        <li class="ledger-row">
+          <span class="ledger-date">06.14</span>
+          <span class="ledger-kind ledger-kind--used">중고</span>
+          <p class="ledger-text">개인 컬렉터 일괄 매입분 중 ECM 재즈 열두 장 검수 완료. 상태 우수, 카운터 문의.</p>
+        </li>
+        <li class="ledger-row">
+          <span class="ledger-date">06.11</span>
+          <span class="ledger-kind ledger-kind--new">신보</span>
+          <p class="ledger-text">일본 시티팝 재발매 시리즈 4종 입하. 띠지 포함, 한 종당 소량.</p>
+        </li>
+        <li class="ledger-row">
+          <span class="ledger-date">06.09</span>
+          <span class="ledger-kind ledger-kind--used">중고</span>
+          <p class="ledger-text">하드밥 모노 오리지널 프레스 한 장 입고. 청음 후 판매, 사진 문의 환영.</p>
+        </li>
+      </ul>
+      <p class="news-foot">입고는 불규칙합니다. 비워 둔 자리에 무엇이 올지 우리도 모릅니다.</p>
+    </section>
+
+    <!-- 07 찾아오는 길 -->
+    <section class="room room--access" data-room="7" aria-labelledby="acc-h">
+      <div class="field field--access" aria-hidden="true">
+        <span class="field-band field-band--a"></span>
+        <span class="field-band field-band--b"></span>
+      </div>
+      <div class="access-inner">
+        <p class="room-no" aria-hidden="true">07 · 찾아오는 길</p>
+        <h2 id="acc-h" class="room-h">회현역 4번 출구,<br />간판 없는 2층.</h2>
+        <dl class="access-list">
+          <div class="access-item">
+            <dt>주소</dt>
+            <dd>서울 중구 회현동 골목 안, 회현역 4번 출구에서 도보 3분. 1층 헌책방 옆 계단으로.</dd>
+          </div>
+          <div class="access-item">
+            <dt>영업시간</dt>
+            <dd>화–일 오후 1시 – 밤 9시 / 월요일 휴무 / 청음 마지막 입장 밤 8시</dd>
+          </div>
+          <div class="access-item">
+            <dt>연락</dt>
+            <dd>전화 02-000-0000 · 디엠으로 음반 사진 문의 가능</dd>
+          </div>
+        </dl>
+        <p class="access-close">간판은 없습니다. 계단을 올라 문을 밀면, 바늘 내려앉는 소리가 먼저 맞이합니다.</p>
+        <p class="access-sig">GROOVE 회현</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GROOVE 회현 · 한 장의 LP가 걸어온 여정</title>
+<meta name="description" content="서울 회현역 뒷골목의 바이닐 레코드 전문점. 재즈, 시티팝, 국내 인디 LP 큐레이션과 청음 공간." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#chapter-2">본문 큐레이션으로 건너뛰기</a>
+
+<!-- 진행 척추: 레코드 그루브 형태의 비선형 챕터 내비게이션 -->
+<nav class="spine" aria-label="여정 챕터 이동">
+  <span class="spine-rail" aria-hidden="true"></span>
+  <span class="spine-needle" aria-hidden="true"></span>
+  <ul class="spine-list">
+    <li><button class="spine-dot is-active" data-target="chapter-0" aria-label="여정 1: 입고">
+      <span class="spine-num">01</span><span class="spine-tip">입고</span></button></li>
+    <li><button class="spine-dot" data-target="chapter-1" aria-label="여정 2: 가게 철학">
+      <span class="spine-num">02</span><span class="spine-tip">철학</span></button></li>
+    <li><button class="spine-dot" data-target="chapter-2" aria-label="여정 3: 장르 큐레이션">
+      <span class="spine-num">03</span><span class="spine-tip">큐레이션</span></button></li>
+    <li><button class="spine-dot" data-target="chapter-3" aria-label="여정 4: 청음 공간">
+      <span class="spine-num">04</span><span class="spine-tip">청음</span></button></li>
+    <li><button class="spine-dot" data-target="chapter-4" aria-label="여정 5: 신보 입고 소식">
+      <span class="spine-num">05</span><span class="spine-tip">소식</span></button></li>
+    <li><button class="spine-dot" data-target="chapter-5" aria-label="여정 6: 찾아오는 길">
+      <span class="spine-num">06</span><span class="spine-tip">길</span></button></li>
+  </ul>
+</nav>
+
+<header class="brandmark" aria-label="GROOVE 회현">
+  <span class="brandmark-en">GROOVE</span>
+  <span class="brandmark-ko">회현</span>
+</header>
+
+<!-- 가로로 흐르는 여정 트랙. 세로 스크롤 = 이야기 진행 -->
+<main class="track" id="track">
+
+  <!-- 여정 00: 프롤로그 · 한 장의 LP를 손에 쥔 순간 -->
+  <section class="stage stage-prologue" id="chapter-0" aria-labelledby="t0">
+    <div class="prologue-grid">
+      <figure class="disc" aria-hidden="true">
+        <span class="disc-platter">
+          <span class="disc-ring r1"></span>
+          <span class="disc-ring r2"></span>
+          <span class="disc-ring r3"></span>
+          <span class="disc-label"><span class="disc-rpm">33⅓</span></span>
+        </span>
+      </figure>
+      <div class="prologue-copy">
+        <p class="kicker">여정 <span class="en">01</span> · 입고대 위에서</p>
+        <h1 class="headline" id="t0">
+          <span class="en-accent">A Record</span><br />
+          한 장이 도착하면<br />이야기가 시작된다
+        </h1>
+        <p class="lede">
+          새벽 입고대에 올라온 LP 한 장. 누군가의 거실에서 수십 년을
+          돌다 회현 뒷골목까지 흘러온 소리. 우리는 그 여정을 닦아내고,
+          다시 바늘 앞에 세웁니다. 스크롤을 내리면 그 한 장이 걸어온
+          길을 함께 따라가게 됩니다.
+        </p>
+        <button class="btn-press" id="begin-btn" data-target="chapter-1">
+          <span class="btn-press-face">바늘 내리기</span>
+        </button>
+        <p class="microcopy" id="begin-note">살살 내려도 됩니다. 급할 것 없어요.</p>
+      </div>
+    </div>
+    <p class="scroll-hint" aria-hidden="true">아래로 · 트랙이 흐릅니다</p>
+  </section>
+
+  <!-- 여정 01: 가게 철학 -->
+  <section class="stage stage-philosophy" id="chapter-1" aria-labelledby="t1">
+    <div class="philosophy-frame">
+      <p class="kicker"><span class="en">02</span> · 우리가 바늘을 내리는 이유</p>
+      <h2 class="stage-title" id="t1">
+        빠른 건 이미 충분합니다.<br />여기선 <em class="en-accent">B-side</em>로 흐릅니다
+      </h2>
+      <div class="philosophy-body">
+        <p>
+          GROOVE 회현은 효율을 팔지 않습니다. 곡 사이의 정적, 판을
+          뒤집으러 일어서는 그 몇 초, 표지를 손끝으로 읽는 시간 ·
+          스트리밍이 잘라낸 그 여백을 다시 돌려드리는 가게입니다.
+        </p>
+        <p>
+          사장이 직접 듣고 통과한 판만 매대에 오릅니다. 잡음이 심한
+          판엔 솔직하게 메모를 붙여둡니다. "이 판, 1분 12초에 살짝
+          튀어요. 그래도 연주가 좋아 들였습니다." 라고요.
+        </p>
+      </div>
+      <ul class="creed" aria-label="가게의 약속">
+        <li class="creed-item">
+          <span class="creed-en">No.1</span>
+          <span class="creed-txt">들어보지 않은 판은 팔지 않는다</span>
+        </li>
+        <li class="creed-item">
+          <span class="creed-en">No.2</span>
+          <span class="creed-txt">상태는 부풀리지 않고 적는다</span>
+        </li>
+        <li class="creed-item">
+          <span class="creed-en">No.3</span>
+          <span class="creed-txt">손님이 끝까지 듣고 가게 둔다</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 여정 02: 장르별 큐레이션 (가로 비균등 셀) -->
+  <section class="stage stage-curation" id="chapter-2" aria-labelledby="t2">
+    <div class="curation-head">
+      <p class="kicker"><span class="en">03</span> · 어느 골목으로 들어가시겠어요</p>
+      <h2 class="stage-title" id="t2">세 갈래의 <em class="en-accent">Crate</em></h2>
+    </div>
+    <div class="crates" role="list">
+      <article class="crate crate-jazz" role="listitem" tabindex="0">
+        <div class="crate-art">
+          <img src="https://loremflickr.com/720/900/jazz,vinyl,record" alt="재즈 LP가 쌓인 진열대" width="720" height="900" loading="lazy" />
+        </div>
+        <div class="crate-meta">
+          <span class="crate-en">Jazz</span>
+          <h3 class="crate-name">재즈 · 늦은 밤의 단골 골목</h3>
+          <p class="crate-desc">
+            모달과 하드밥 사이를 오갑니다. 블루노트 재반·국내반,
+            드물게 오리지널 모노반까지. 처음이라면 발라드 한 장부터
+            권해드립니다.
+          </p>
+          <span class="crate-count"><span class="en">240</span>여 장 상시</span>
+        </div>
+      </article>
+      <article class="crate crate-citypop" role="listitem" tabindex="0">
+        <div class="crate-art">
+          <img src="https://loremflickr.com/720/900/citypop,vinyl,80s" alt="시티팝 LP 표지가 진열된 모습" width="720" height="900" loading="lazy" />
+        </div>
+        <div class="crate-meta">
+          <span class="crate-en">City Pop</span>
+          <h3 class="crate-name">시티팝 · 한낮의 드라이브</h3>
+          <p class="crate-desc">
+            8090 일본반과 재발매를 가립니다. 빛바랜 표지일수록
+            오래 사랑받았다는 증거. 여름이면 가장 먼저 빠지는 골목입니다.
+          </p>
+          <span class="crate-count"><span class="en">160</span>여 장 상시</span>
+        </div>
+      </article>
+      <article class="crate crate-indie" role="listitem" tabindex="0">
+        <div class="crate-art">
+          <img src="https://loremflickr.com/720/900/indie,band,vinyl" alt="국내 인디 LP가 놓인 선반" width="720" height="900" loading="lazy" />
+        </div>
+        <div class="crate-meta">
+          <span class="crate-en">K-Indie</span>
+          <h3 class="crate-name">국내 인디 · 가까운 동네의 목소리</h3>
+          <p class="crate-desc">
+            한정 LP와 직거래 입고가 섞입니다. 음원으로만 듣던 밴드의
+            한정반을 손에 쥐는 순간을 위해. 입고되면 금세 사라집니다.
+          </p>
+          <span class="crate-count"><span class="en">90</span>여 장 상시</span>
+        </div>
+      </article>
+    </div>
+    <p class="microcopy curation-note">셀을 눌러보세요 · 살짝 들어갑니다. 마음에 드는 골목이 있나요?</p>
+  </section>
+
+  <!-- 여정 03: 청음 공간 -->
+  <section class="stage stage-listening" id="chapter-3" aria-labelledby="t3">
+    <div class="listening-grid">
+      <div class="listening-copy">
+        <p class="kicker"><span class="en">04</span> · 사기 전에, 끝까지 들어보세요</p>
+        <h2 class="stage-title" id="t3">
+          청음석 <em class="en-accent">No.3</em><br />당신만의 33분
+        </h2>
+        <p class="listening-lede">
+          창가 자리 세 석. 진공관 앰프와 동축 스피커, 그리고 닳지 않은
+          바늘. 고르신 판을 처음부터 끝까지 돌려드립니다. 안 사셔도
+          괜찮습니다 · 그게 청음석의 규칙이에요.
+        </p>
+        <dl class="listening-facts">
+          <div><dt>좌석</dt><dd>창가 <span class="en">3</span>석 (예약 권장)</dd></div>
+          <div><dt>한 판</dt><dd>약 <span class="en">33</span>분, 양면 청음 가능</dd></div>
+          <div><dt>비용</dt><dd>무료 · 음료 한 잔이면 충분</dd></div>
+        </dl>
+        <p class="microcopy">바늘이 마지막 홈을 빠져나갈 때까지, 자리는 당신 겁니다.</p>
+      </div>
+      <figure class="listening-photo">
+        <img src="https://picsum.photos/seed/groovelisten/860/1040" alt="턴테이블과 진공관 앰프가 놓인 청음 공간" width="860" height="1040" loading="lazy" />
+        <figcaption class="en">Listening Room · by the window</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 여정 04: 신보 · 입고 소식 -->
+  <section class="stage stage-news" id="chapter-4" aria-labelledby="t4">
+    <div class="news-head">
+      <p class="kicker"><span class="en">05</span> · 이번 주 입고대</p>
+      <h2 class="stage-title" id="t4">막 도착한 <em class="en-accent">New In</em></h2>
+    </div>
+    <ol class="ticker" aria-label="최근 입고 목록">
+      <li class="ticker-row">
+        <span class="ticker-no en">001</span>
+        <span class="ticker-when">06.16 입고</span>
+        <span class="ticker-what">재즈 / 모달 · 상태 양호, 한 장 한정</span>
+        <span class="ticker-tag tag-used">중고</span>
+      </li>
+      <li class="ticker-row">
+        <span class="ticker-no en">002</span>
+        <span class="ticker-when">06.15 입고</span>
+        <span class="ticker-what">시티팝 8090 재발매 · 셀로판 미개봉</span>
+        <span class="ticker-tag tag-new">신보</span>
+      </li>
+      <li class="ticker-row">
+        <span class="ticker-no en">003</span>
+        <span class="ticker-when">06.14 입고</span>
+        <span class="ticker-what">국내 인디 한정 LP · 직거래 <span class="en">3</span>장</span>
+        <span class="ticker-tag tag-limited">한정</span>
+      </li>
+      <li class="ticker-row">
+        <span class="ticker-no en">004</span>
+        <span class="ticker-when">06.12 입고</span>
+        <span class="ticker-what">재즈 / 보컬 발라드 · 표지 약간 바램</span>
+        <span class="ticker-tag tag-used">중고</span>
+      </li>
+    </ol>
+    <p class="microcopy news-note">입고는 거의 매일, 하지만 좋은 판은 하루를 못 넘깁니다. 발걸음이 곧 알림입니다.</p>
+  </section>
+
+  <!-- 여정 05: 찾아오는 길 · 영업시간 (에필로그) -->
+  <section class="stage stage-visit" id="chapter-5" aria-labelledby="t5">
+    <div class="visit-grid">
+      <div class="visit-copy">
+        <p class="kicker"><span class="en">06</span> · 바늘이 마지막 홈을 지나면</p>
+        <h2 class="stage-title" id="t5">
+          이제, 직접<br /><em class="en-accent">B-side</em>를 뒤집으러
+        </h2>
+        <address class="visit-info">
+          <p class="visit-line"><span class="visit-key">주소</span>서울 중구 회현동 뒷골목, 회현역 <span class="en">4</span>번 출구 도보 <span class="en">3</span>분</p>
+          <p class="visit-line"><span class="visit-key">영업</span>화–일 <span class="en">13:00 – 21:00</span> · 월요일 휴무</p>
+          <p class="visit-line"><span class="visit-key">청음</span>마감 <span class="en">40</span>분 전까지 입장</p>
+          <p class="visit-line"><span class="visit-key">연락</span><a class="en" href="tel:+820212345678">02-1234-5678</a></p>
+        </address>
+        <button class="btn-press btn-press-cta" id="top-btn" data-target="chapter-0">
+          <span class="btn-press-face">처음으로 · 바늘 다시 올리기</span>
+        </button>
+        <p class="microcopy">문 닫기 전에 한 번 더 들러주세요. 새 판이 와 있을지도 모르니까.</p>
+      </div>
+      <figure class="visit-photo">
+        <img src="https://picsum.photos/seed/groovealley/820/980" alt="회현 뒷골목 레코드 가게 외관" width="820" height="980" loading="lazy" />
+        <figcaption class="en">Hoehyeon back-alley, Seoul</figcaption>
+      </figure>
+    </div>
+    <footer class="end-note">
+      <span class="brandmark-en">GROOVE</span>
+      <span>회현 · 한 장의 LP가 걸어온 여정</span>
+    </footer>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
