@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GROOVE 회현 — 바이닐 레코드</title>
+  <meta name="description" content="서울 회현역 골목. 재즈·시티팝·국내 인디 중고·신보 바이닐 레코드 전문점 GROOVE 회현." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Fog cursor layer -->
+  <div class="fog-cursor" id="spark_fogCursor" aria-hidden="true"></div>
+
+  <!-- Vinyl ambient background ring -->
+  <div class="vinyl-bg" aria-hidden="true">
+    <div class="vinyl-ring" id="spark_vinylRing"></div>
+  </div>
+
+  <!-- ===================== SECTION 1: ENTRY ===================== -->
+  <section class="entry-screen" id="spark_entry">
+
+    <!-- Vertical text rail — LAYOUT_SPARK -->
+    <div class="vertical-rail left-rail" aria-hidden="true">
+      <span class="v-text">HUEHYEON · SEOUL</span>
+    </div>
+
+    <div class="entry-core">
+      <div class="store-label">
+        <span class="label-line">LP · EP · Single</span>
+        <span class="label-line">Jazz · City Pop · Indie</span>
+      </div>
+
+      <h1 class="site-title">
+        <span class="title-en">GROOVE</span>
+        <span class="title-ko">회현</span>
+      </h1>
+
+      <p class="entry-sub">
+        서울 지하철 4호선 회현역 3번 출구,<br />
+        골목 안쪽의 작은 바이닐 레코드 가게.
+      </p>
+
+      <a href="#spark_floor" class="entry-cta" id="spark_ctaBtn">
+        <span class="cta-text">입장하기</span>
+        <span class="cta-line" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <!-- Vertical text rail right -->
+    <div class="vertical-rail right-rail" aria-hidden="true">
+      <span class="v-text">VINYL · RECORD · STORE</span>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+    </div>
+
+  </section>
+
+  <!-- ===================== SECTION 2: FLOOR (비대칭 그리드) ===================== -->
+  <section class="floor-section" id="spark_floor">
+
+    <div class="floor-grid">
+
+      <!-- A: 큰 이미지 셀 (grid-span 비대칭) -->
+      <article class="cell cell-a" aria-label="레코드 가게 내부">
+        <img
+          src="https://loremflickr.com/800/600/vinyl,record,shop"
+          alt="GROOVE 회현 레코드 가게 내부"
+          width="800"
+          height="600"
+          loading="lazy"
+        />
+        <div class="cell-label">
+          <span>재고 상시 업데이트</span>
+        </div>
+      </article>
+
+      <!-- B: 세로 텍스트 셀 — LAYOUT_SPARK writing-mode -->
+      <article class="cell cell-b">
+        <div class="cell-b-inner">
+          <h2 class="section-heading-v">
+            <span class="sh-en" aria-hidden="true">FLOOR</span>
+            <span class="sh-ko">매장 소개</span>
+          </h2>
+          <p class="floor-body">
+            좁지만 깊은 공간. 벽 천장까지 빼곡한 LP들.<br />
+            재즈 선반, 시티팝 코너, 국내 인디 특선.<br />
+            직접 들어보고 고르는 것이 원칙입니다.
+          </p>
+          <dl class="floor-meta">
+            <div class="meta-row">
+              <dt>영업시간</dt>
+              <dd>화–일 13:00 – 20:00 (월 휴무)</dd>
+            </div>
+            <div class="meta-row">
+              <dt>위치</dt>
+              <dd>서울 중구 남대문로 4가<br />회현역 3번 출구 도보 2분</dd>
+            </div>
+            <div class="meta-row">
+              <dt>입고 문의</dt>
+              <dd>매장 직접 방문</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- C: 세로 텍스트 장식 기둥 -->
+      <div class="cell cell-c" aria-hidden="true">
+        <div class="v-pillar">
+          <span class="pillar-text">◦ Jazz ◦ City Pop ◦ Indie ◦ Soul ◦ Folk ◦</span>
+        </div>
+      </div>
+
+      <!-- D: 지금 이 가게에서 — 분위기 텍스트 셀 -->
+      <article class="cell cell-d">
+        <blockquote class="mood-quote">
+          <p>
+            새벽 배송 끝나고 열린 상자들,<br />
+            아직 아무도 모르는 재킷 냄새.
+          </p>
+          <footer>
+            <cite>— 매일 오전, 입고 준비 중</cite>
+          </footer>
+        </blockquote>
+      </article>
+
+      <!-- E: 장르별 선반 — 3열 비균등 타이포그래피 -->
+      <article class="cell cell-e">
+        <h3 class="genre-title">선반</h3>
+        <ul class="genre-list" role="list">
+          <li class="genre-item jazz">
+            <span class="g-num">01</span>
+            <span class="g-name">Jazz</span>
+            <span class="g-desc">국내외 하드밥·쿨재즈·모달</span>
+          </li>
+          <li class="genre-item citypop">
+            <span class="g-num">02</span>
+            <span class="g-name">City Pop</span>
+            <span class="g-desc">J-Pop 80s 명반·희귀반</span>
+          </li>
+          <li class="genre-item indie">
+            <span class="g-num">03</span>
+            <span class="g-name">국내 인디</span>
+            <span class="g-desc">독립 레이블·한정반·신보</span>
+          </li>
+        </ul>
+      </article>
+
+    </div><!-- /floor-grid -->
+
+  </section>
+
+  <!-- ===================== SECTION 3: RECORD SPOTLIGHT ===================== -->
+  <section class="spotlight-section" id="spark_spotlight">
+
+    <div class="spotlight-inner">
+
+      <div class="spotlight-heading-wrap">
+        <div class="sh-vertical" aria-hidden="true">
+          <span>PICK OF THE WEEK</span>
+        </div>
+        <h2 class="spotlight-title">이번 주<br />추천반</h2>
+      </div>
+
+      <div class="record-strip" id="spark_recordStrip">
+
+        <div class="record-card" data-index="0">
+          <div class="rc-sleeve">
+            <img
+              src="https://loremflickr.com/360/360/jazz,vinyl"
+              alt="재즈 LP 재킷"
+              width="360"
+              height="360"
+              loading="lazy"
+            />
+            <div class="rc-groove" aria-hidden="true"></div>
+          </div>
+          <div class="rc-info">
+            <span class="rc-genre">Jazz</span>
+            <h3 class="rc-title">Miles Davis<br /><em>Kind of Blue</em></h3>
+            <span class="rc-note">180g 리이슈 · 상태 A</span>
+          </div>
+        </div>
+
+        <div class="record-card" data-index="1">
+          <div class="rc-sleeve">
+            <img
+              src="https://loremflickr.com/360/360/citypop,japan"
+              alt="시티팝 LP 재킷"
+              width="360"
+              height="360"
+              loading="lazy"
+            />
+            <div class="rc-groove" aria-hidden="true"></div>
+          </div>
+          <div class="rc-info">
+            <span class="rc-genre">City Pop</span>
+            <h3 class="rc-title">山下達郎<br /><em>For You</em></h3>
+            <span class="rc-note">오리지널 일반반 · 상태 B+</span>
+          </div>
+        </div>
+
+        <div class="record-card" data-index="2">
+          <div class="rc-sleeve">
+            <img
+              src="https://loremflickr.com/360/360/indie,korea,music"
+              alt="국내 인디 LP 재킷"
+              width="360"
+              height="360"
+              loading="lazy"
+            />
+            <div class="rc-groove" aria-hidden="true"></div>
+          </div>
+          <div class="rc-info">
+            <span class="rc-genre">국내 인디</span>
+            <h3 class="rc-title">잔나비<br /><em>전설</em></h3>
+            <span class="rc-note">한정 바이닐 · 신품</span>
+          </div>
+        </div>
+
+      </div><!-- /record-strip -->
+
+    </div>
+
+  </section>
+
+  <!-- ===================== SECTION 4: VISIT ===================== -->
+  <section class="visit-section" id="spark_visit">
+
+    <div class="visit-grid">
+
+      <div class="visit-text-col">
+        <div class="visit-label-v" aria-hidden="true">VISIT</div>
+        <h2 class="visit-title">찾아오는 길</h2>
+        <address class="visit-address">
+          서울특별시 중구 남대문로 4가<br />
+          <strong>회현역 3번 출구</strong> 도보 2분<br />
+          골목 왼쪽 붉은 철문
+        </address>
+        <p class="visit-note">
+          주차장 없음. 대중교통 권장.<br />
+          지하철 4호선 회현역 직결.
+        </p>
+      </div>
+
+      <div class="visit-map-col">
+        <div class="map-placeholder" role="img" aria-label="위치 안내 지도 영역">
+          <div class="map-grid-lines" aria-hidden="true">
+            <span class="map-street map-s1">남대문로</span>
+            <span class="map-street map-s2">퇴계로</span>
+            <span class="map-dot" id="spark_mapDot"></span>
+            <span class="map-label-store">GROOVE 회현</span>
+            <span class="map-station">
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                <circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="7" cy="7" r="2.5" fill="currentColor"/>
+              </svg>
+              회현역
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-store">GROOVE 회현</span>
+        <span class="footer-since">Est. 2019</span>
+      </div>
+      <div class="footer-right">
+        <span>화–일 13:00–20:00</span>
+        <span>회현역 3번 출구</span>
+        <span class="footer-copy">바이닐은 공간을 점령한다</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

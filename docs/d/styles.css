@@ -1,0 +1,818 @@
+/* ============================================================
+   GROOVE 회현 — styles.css
+   Style: Tactile-Digital + Anti-Design 혼합
+   SPARK Seeds: Type-as-Architecture / Strategic Friction /
+                Tactile Texture / 파쇄된 질서
+   ============================================================ */
+
+/* ── 0. 한글 줄바꿈 전역 적용 ── */
+:where(body, h1, h2, h3, h4, h5, h6, p, li, a, span, button, label,
+       blockquote, figcaption, td, th, dt, dd) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+h1, h2, h3, .spark-intro-h1, .spark-finder-h2, .spark-visit-h2 {
+  text-wrap: balance;
+}
+p, li, dd { text-wrap: pretty; }
+
+/* ── 1. CSS 커스텀 프로퍼티 ── */
+:root {
+  /* 색상 — 어두운 크림 + 버건디 + 더스티 골드: navy/white 완전 회피 */
+  --c-bg:       oklch(10% 0.018 30);       /* 거의 검정이지만 적갈 띰 */
+  --c-surface:  oklch(14% 0.022 35);
+  --c-cream:    oklch(92% 0.025 80);       /* 크림 — 밝은 텍스트 */
+  --c-accent:   oklch(55% 0.18 25);        /* 버건디/적갈 */
+  --c-gold:     oklch(72% 0.12 78);        /* 더스티 골드 */
+  --c-dim:      oklch(45% 0.02 30);
+
+  /* 타이포 */
+  --f-base:     "Pretendard Variable", "Pretendard", -apple-system, sans-serif;
+  --fw-thin:    200;
+  --fw-reg:     400;
+  --fw-med:     500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+
+  /* 공간 */
+  --max-w:      1440px;
+  --gutter:     clamp(1.25rem, 4vw, 4rem);
+}
+
+/* ── 2. 리셋 & 베이스 ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: auto; /* Lenis가 담당 */ }
+
+body {
+  background: var(--c-bg);
+  color: var(--c-cream);
+  font-family: var(--f-base);
+  font-weight: var(--fw-reg);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* 포커스 가시성 */
+:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 3px;
+}
+
+/* ── 3. 배경 캔버스 (feTurbulence 비닐 질감) ── */
+#spark-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  will-change: opacity;
+}
+
+/* ── 4. 사이드 네비게이션 ── */
+.spark-sidenav {
+  position: fixed;
+  right: clamp(0.75rem, 2vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 100;
+}
+
+.spark-nav-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--c-dim);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spark-nav-dot.active {
+  border-color: var(--c-gold);
+  background: var(--c-gold);
+}
+.spark-nav-dot:hover { border-color: var(--c-cream); }
+
+.spark-nav-label {
+  position: absolute;
+  right: calc(100% + 0.75rem);
+  white-space: nowrap;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  font-weight: var(--fw-semi);
+  color: var(--c-dim);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(4px);
+  transition: opacity 0.25s, transform 0.25s, color 0.25s;
+}
+.spark-nav-dot:hover .spark-nav-label,
+.spark-nav-dot.active .spark-nav-label {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--c-cream);
+}
+
+/* ── 5. 스크롤 진행 바 ── */
+.spark-progress {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100vh;
+  background: oklch(20% 0.01 30);
+  z-index: 100;
+}
+.spark-progress-fill {
+  width: 100%;
+  height: 0%;
+  background: var(--c-accent);
+  will-change: transform;
+  transform-origin: top;
+}
+
+/* ── 6. 섹션 공통 ── */
+.spark-section {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* ── 7. SECTION 1 — INTRO ── */
+.s-intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  background: var(--c-bg);
+}
+
+/* 거대 타이포 — Type as Architecture */
+.spark-arch-type {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.spark-arch-type span {
+  font-size: clamp(10rem, 22vw, 22rem);
+  font-weight: var(--fw-bold);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(25% 0.03 30);
+  letter-spacing: -0.04em;
+  will-change: transform, opacity;
+}
+/* 각 글자가 살짝 다른 위치에 — 파쇄된 질서 */
+.arch-G  { transform: translate(-3%,  8%); }
+.arch-R  { transform: translate( 0%, -5%); }
+.arch-O  { transform: translate( 2%,  3%); }
+.arch-O2 { transform: translate(-1%, -8%); }
+.arch-V  { transform: translate( 3%,  6%); }
+.arch-E  { transform: translate(-2%, -3%); }
+
+/* 레코드 비주얼 */
+.spark-record-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  will-change: transform;
+}
+.spark-record {
+  position: relative;
+  width: clamp(220px, 38vw, 480px);
+  height: clamp(220px, 38vw, 480px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50%,
+    oklch(18% 0.02 30) 0%,
+    oklch(8% 0.01 30) 35%,
+    oklch(12% 0.015 30) 36%,
+    oklch(6% 0.008 30) 100%
+  );
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* 비닐 그루브 효과 */
+.spark-record-groove {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50%,
+    transparent 0px,
+    transparent 4px,
+    oklch(15% 0.01 30 / 0.6) 4px,
+    oklch(15% 0.01 30 / 0.6) 5px
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* 레이블 중앙 원 */
+.spark-record-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: var(--c-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.record-label-text {
+  font-size: clamp(0.55rem, 1.2vw, 0.9rem);
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.12em;
+  color: var(--c-cream);
+}
+
+/* 레코드 배경 사진 (혼합) */
+.spark-record-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0.18;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+
+/* 인트로 콘텐츠 — 하단 좌측 비대칭 배치 */
+.spark-intro-content {
+  position: absolute;
+  bottom: clamp(3rem, 8vh, 7rem);
+  left: clamp(3rem, 6vw, 7rem);
+  z-index: 4;
+  max-width: 420px;
+}
+.spark-eyebrow {
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  letter-spacing: 0.22em;
+  font-weight: var(--fw-semi);
+  color: var(--c-gold);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.spark-intro-h1 {
+  font-size: clamp(2.4rem, 6vw, 5.5rem);
+  font-weight: var(--fw-thin);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+.spark-intro-h1 em {
+  font-style: normal;
+  font-weight: var(--fw-bold);
+  color: var(--c-accent);
+}
+.spark-intro-desc {
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  font-weight: var(--fw-reg);
+  color: oklch(70% 0.01 30);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+/* 스크롤 큐 버튼 */
+.spark-scroll-cue {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0;
+  color: var(--c-cream);
+}
+.scroll-cue-line {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--c-gold);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.spark-scroll-cue:hover .scroll-cue-line { transform: scaleX(1.8); }
+.scroll-cue-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  font-weight: var(--fw-semi);
+  text-transform: uppercase;
+}
+
+/* 파쇄된 질서: 비스듬한 라벨 */
+.spark-torn-label {
+  position: absolute;
+  top: clamp(2rem, 5vh, 4.5rem);
+  right: clamp(3rem, 7vw, 8rem);
+  font-size: clamp(0.55rem, 0.8vw, 0.65rem);
+  letter-spacing: 0.35em;
+  font-weight: var(--fw-semi);
+  color: var(--c-dim);
+  text-transform: uppercase;
+  transform: rotate(90deg);
+  transform-origin: right top;
+  z-index: 4;
+}
+
+/* ── 8. SECTION 2 — COLLECTION ── */
+.s-collection {
+  padding: clamp(5rem, 12vh, 10rem) var(--gutter);
+  background: var(--c-surface);
+  overflow: hidden;
+}
+
+.spark-col-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(3rem, 6vh, 5rem);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.spark-col-h2 {
+  font-weight: var(--fw-thin);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+.col-h2-small {
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.2em;
+  color: var(--c-dim);
+  font-weight: var(--fw-semi);
+  text-transform: uppercase;
+}
+.col-h2-big {
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--c-cream);
+  font-weight: var(--fw-thin);
+}
+.spark-col-sub {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  color: var(--c-dim);
+  max-width: 220px;
+  text-align: right;
+}
+
+/* 콜라주 — 불규칙 배치 (파쇄된 질서) */
+.spark-collage {
+  position: relative;
+  min-height: clamp(480px, 70vh, 800px);
+}
+
+.collage-item {
+  position: absolute;
+  overflow: hidden;
+  will-change: transform;
+}
+.collage-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.collage-item:hover img { transform: scale(1.04); }
+
+.collage-item figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1rem 1rem;
+  background: linear-gradient(to top, oklch(5% 0.01 30 / 0.9), transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.ci-genre {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  font-weight: var(--fw-semi);
+  color: var(--c-gold);
+  text-transform: uppercase;
+}
+.ci-title {
+  font-size: clamp(0.75rem, 1.1vw, 0.875rem);
+  font-weight: var(--fw-med);
+  color: var(--c-cream);
+}
+.ci-price {
+  font-size: 0.75rem;
+  color: oklch(65% 0.01 30);
+  font-weight: var(--fw-reg);
+}
+
+/* 불규칙 배치 */
+.ci-1 {
+  width: clamp(200px, 32%, 420px);
+  height: clamp(260px, 55vh, 540px);
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 90% 100%, 0 100%);
+}
+.ci-2 {
+  width: clamp(170px, 25%, 340px);
+  height: clamp(210px, 44vh, 420px);
+  top: clamp(3rem, 6vh, 6rem);
+  left: clamp(230px, 35%, 470px);
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%, 0 10%);
+}
+.ci-3 {
+  width: clamp(140px, 21%, 290px);
+  height: clamp(170px, 36vh, 360px);
+  top: clamp(8rem, 15vh, 14rem);
+  left: clamp(420px, 62%, 750px);
+  clip-path: polygon(0 0, 92% 0, 100% 8%, 100% 100%, 0 100%);
+}
+
+/* 겹치는 텍스트 오브젝트 */
+.collage-overlay-text {
+  position: absolute;
+  bottom: clamp(-1rem, -2vw, -2rem);
+  right: clamp(0.5rem, 2vw, 2rem);
+  font-size: clamp(5rem, 14vw, 14rem);
+  font-weight: var(--fw-bold);
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(30% 0.03 30);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.spark-col-footer {
+  margin-top: clamp(2rem, 5vh, 4rem);
+}
+.spark-col-note {
+  font-size: clamp(0.7rem, 1vw, 0.8rem);
+  color: var(--c-dim);
+  border-left: 2px solid var(--c-accent);
+  padding-left: 1rem;
+}
+
+/* ── 9. SECTION 3 — FINDER (전략적 마찰) ── */
+.s-finder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-bg);
+  padding: clamp(5rem, 12vh, 10rem) var(--gutter);
+}
+
+.spark-finder-inner {
+  max-width: 780px;
+  width: 100%;
+}
+
+.spark-finder-header {
+  margin-bottom: clamp(3rem, 6vh, 5rem);
+}
+.spark-finder-h2 {
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
+  font-weight: var(--fw-thin);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.spark-finder-desc {
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+  color: var(--c-dim);
+}
+
+/* 장르 버튼들 */
+.spark-genre-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-top: 1px solid oklch(22% 0.02 30);
+}
+
+.spark-genre-btn {
+  position: relative;
+  background: none;
+  border: none;
+  border-bottom: 1px solid oklch(22% 0.02 30);
+  padding: clamp(1.2rem, 2.5vh, 2rem) 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  overflow: hidden;
+  text-align: left;
+  color: var(--c-cream);
+  transition: color 0.3s;
+}
+
+/* 트랙 (배경 채우기) */
+.genre-btn-track {
+  position: absolute;
+  inset: 0;
+  background: var(--c-accent);
+  transform: translateX(-101%);
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 0;
+}
+.spark-genre-btn:hover .genre-btn-track,
+.spark-genre-btn[aria-pressed="true"] .genre-btn-track {
+  transform: translateX(0);
+}
+
+.genre-btn-name {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.4rem, 4vw, 3.5rem);
+  font-weight: var(--fw-thin);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  min-width: clamp(120px, 30%, 280px);
+  transition: color 0.3s;
+}
+.genre-btn-sub {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  color: var(--c-dim);
+  letter-spacing: 0.08em;
+  transition: color 0.3s;
+}
+.spark-genre-btn:hover .genre-btn-sub,
+.spark-genre-btn[aria-pressed="true"] .genre-btn-sub {
+  color: oklch(85% 0.01 30);
+}
+
+/* 마찰 통과 결과 패널 */
+.spark-finder-reveal {
+  margin-top: clamp(2.5rem, 5vh, 4rem);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: max-height 0.6s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity 0.4s ease;
+}
+.spark-finder-reveal.open {
+  max-height: 280px;
+  opacity: 1;
+}
+
+.spark-reveal-inner {
+  border-left: 2px solid var(--c-gold);
+  padding: 1.5rem 2rem;
+  background: oklch(13% 0.02 30);
+}
+
+.reveal-confirm {
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-weight: var(--fw-med);
+  color: var(--c-cream);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.reveal-cta-row { display: flex; }
+.spark-cta-primary {
+  background: var(--c-gold);
+  color: var(--c-bg);
+  border: none;
+  padding: 0.85rem 2.5rem;
+  font-family: var(--f-base);
+  font-size: 0.75rem;
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.15s;
+  will-change: transform;
+}
+.spark-cta-primary:hover {
+  background: var(--c-cream);
+  transform: translateY(-2px);
+}
+.spark-cta-primary:active { transform: translateY(1px); }
+
+/* ── 10. SECTION 4 — VISIT ── */
+.s-visit {
+  background: oklch(8.5% 0.02 30);
+  overflow: hidden;
+}
+
+.spark-visit-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* 왼쪽: 이미지 + 배경 타이포 */
+.spark-visit-left {
+  position: relative;
+  overflow: hidden;
+}
+.visit-arch-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(10rem, 18vw, 22rem);
+  font-weight: var(--fw-bold);
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(18% 0.03 30);
+  pointer-events: none;
+  z-index: 0;
+}
+.spark-visit-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.75;
+  will-change: transform;
+}
+
+/* 오른쪽: 정보 */
+.spark-visit-right {
+  padding: clamp(4rem, 8vh, 8rem) clamp(2.5rem, 5vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.spark-visit-h2 {
+  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  font-weight: var(--fw-thin);
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+  color: var(--c-cream);
+}
+
+/* 정보 리스트 */
+.spark-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: clamp(2rem, 4vh, 3rem);
+}
+.spark-info-row {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid oklch(20% 0.02 30);
+  align-items: start;
+}
+.spark-info-row dt {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  font-weight: var(--fw-semi);
+  color: var(--c-gold);
+  text-transform: uppercase;
+  padding-top: 0.2rem;
+}
+.spark-info-row dd {
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+  color: var(--c-cream);
+  line-height: 1.7;
+}
+.info-note {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--c-dim);
+  margin-top: 0.25rem;
+}
+
+.spark-link {
+  color: var(--c-gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.spark-link:hover { border-color: var(--c-gold); }
+
+.spark-visit-note {
+  font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+  color: var(--c-dim);
+  line-height: 1.75;
+  margin-bottom: clamp(2rem, 4vh, 3rem);
+}
+
+/* 인용 — 대각선 잘린 효과 */
+.spark-quote {
+  position: relative;
+  border-left: none;
+  padding: 1.5rem;
+  background: oklch(13% 0.02 30);
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 90% 100%, 0 100%);
+}
+.spark-quote p {
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+  font-weight: var(--fw-reg);
+  color: oklch(65% 0.01 30);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* ── 11. 푸터 ── */
+.spark-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem var(--gutter);
+  border-top: 1px solid oklch(18% 0.02 30);
+  background: var(--c-bg);
+}
+.footer-mark {
+  font-size: 0.7rem;
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-cream);
+}
+.footer-sep { color: var(--c-dim); }
+.footer-copy {
+  font-size: 0.65rem;
+  color: var(--c-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ── 12. prefers-reduced-motion — 모든 reveal 즉시 가시 상태 복원 ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .spark-arch-type span,
+  .spark-record,
+  .collage-item,
+  .collage-overlay-text,
+  .spark-finder-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    max-height: none !important;
+  }
+  .spark-visit-img { opacity: 0.75 !important; transform: none !important; }
+}
+
+/* ── 13. 반응형 ── */
+@media (max-width: 900px) {
+  .spark-visit-split {
+    grid-template-columns: 1fr;
+  }
+  .spark-visit-left {
+    min-height: 50vh;
+  }
+  .collage-item { position: relative !important; top: auto !important; left: auto !important; }
+  .spark-collage {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+  .ci-1, .ci-2, .ci-3 {
+    width: 100% !important;
+    height: clamp(200px, 45vw, 320px);
+    clip-path: none;
+  }
+  .collage-overlay-text { display: none; }
+  .spark-sidenav { display: none; }
+}
+
+@media (max-width: 600px) {
+  .spark-intro-h1 { font-size: clamp(2rem, 10vw, 3rem); }
+  .spark-intro-content { left: 1.5rem; right: 1.5rem; }
+  .spark-genre-btn { gap: 1rem; }
+  .genre-btn-name { font-size: clamp(1.2rem, 6vw, 2rem); min-width: auto; }
+}
