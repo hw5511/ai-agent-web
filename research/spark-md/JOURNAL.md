@@ -360,8 +360,17 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 
 ---
 
-## Round 22 — BOLD 라운드: 모험성 다이얼 상향 (동일 브리프 ×5, PREDICTABILITY ≤ 2)  [진행중 2026-06-17]
+## Round 22 — BOLD 라운드: 모험성 다이얼 상향 (동일 브리프 ×5, PREDICTABILITY ≤ 2)  [완료 2026-06-17]
 - 질문(CEO): "모험적 시도의 경향성을 더 높이면?" → R21과 **동일 브리프(GROOVE 회현)** 로 A/B. 모험성 레버만 상향.
 - **상향한 레버**: ① PREDICTABILITY 목표 ≤ 3 → **≤ 2** ② 표준 수직 Hero→Section→Footer **전면 금지**(배정 LAYOUT_SPARK를 1차 구조·내비 원리로) ③ DARING_MOVE **2개 이상** 의무 ④ 씨드는 R20 교훈대로 **배치 내 축별 비복원추출**(LAYOUT/INTERACTION/VISUAL/PINCHES 각 5개 중복 0) ⑤ 폰트도 디스플레이/영문전용 포함해 과감하게 배정(영문전용·poor는 헤드라인 전용 + 한글 본문 페어링 지침).
 - 배정 씨드: a(소극적공간의적극성/전략적마찰/색면추상/영원한찰나/Pretendard) · b(세로텍스트그리드/온보딩영웅여정/시맨틱채도/의도된불친절/Jua+NotoKR) · c(나이키서사/마이크로카피/뉴모피즘/정오의명징/Playfair+Pretendard) · d(시각적무게균형/탄성잔향/MatCap/아침의해상도/Syne+Pretendard) · e(리듬반복/생체인증UX/공감각사운드/빛의파편/NotoKR).
-- 산출: `docs/bold/{a..e}` + 비교 갤러리. (결과·판정 보강 예정)
+- 생성: 5개 독립 서브에이전트 병렬(각 SKILL.md 정독 + 강화규칙 + 배정 씨드). 1개당 ~4~5분.
+- **결과(목표: 더 과감한 구조 발산)**: 5/5 모두 **수직 공식 탈출 + 내비게이션 자체를 재설계**.
+  - **A** 가로 색면(Rothko) 전시실 복도 + 세로쓰기 인덱스 비선형 점프 + 의식형 청음 폼(전략적 마찰).
+  - **B** 잠긴 6챕터를 스크롤로 해금하는 "영웅 여정" HUD + 세로쓰기 한글 축 + 절반-노출 토글.
+  - **C** 세로→가로 트랙 변환(=바늘이 LP 홈을 읽음), 그루브 척추 내비 + 인격적 마이크로카피.
+  - **D** 무게추(data-w) 비선형 내비 물리 무대 + 드래그 관성/스프링 잔향 Three.js MatCap LP.
+  - **E** LP 그루브 트랙바(SIDE A/B) 비선형 내비 + 버튼별 톤·진동 사운드 핸드셰이크 청음 의식.
+- **게이트**: 1차 perfcheck 5/5 FAIL(전부 em-dash, A는 추가로 viewport급 레이어+blur 46px = THE TRAP). → em-dash 일괄 치환(시간·요일범위 `~`, 나머지 `·`) + A blur 46→30px·will-change 제거로 **교정 후 5/5 FAIL=0**. (R19 "빠른 생성 + 공짜 정적검사 + targeted fix" 파이프라인을 서브에이전트 산출에도 그대로 적용.)
+- **배포**: `docs/bold/{a..e}` + 비교 갤러리 `docs/bold/index.html`, 메인 갤러리에 BOLD 배너 연결. main 직접 커밋(3aab263). 라이브 6 URL 전부 200: `https://hw5511.github.io/ai-agent-web/docs/bold/`.
+- **판정**: 모험성 다이얼(predictability 상한 ↓ + 수직공식 금지 + DARING 2개)이 **구조/내비 층의 발산을 실제로 끌어올림** — R21(섹션형 다수)보다 "처음 보는 패턴" 비중이 명확히 증가. 잔여 관찰: 모험성↑은 **첫 화면 가독성·로딩 체감 비용**과 트레이드오프(가로 변환 A/C, 사운드 E) → 미감 게이트(R20 C)로 R21 vs R22 정량 비교가 다음 후보.
