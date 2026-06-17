@@ -81,8 +81,13 @@ def main():
     inter = rng.choice(sections["INTERACTION"])
     visual = rng.choice(sections["VISUAL"])
     pinch = rng.choice(sections["PINCHES"])
-    # 폰트는 한글 본문용만 후보로 (영문전용은 페어링용이라 메인폰트 부적합)
-    kr_fonts = [f for f in fonts if "영문전용" not in (f[2] if len(f) > 2 else "")]
+    # 폰트는 한글 본문용만 후보로:
+    #  - 영문전용(Space Grotesk 등)은 페어링용이라 메인폰트 부적합
+    #  - bold_readability poor(Black Han Sans/Jua)는 heading 전용이라 메인 부적합
+    def font_ok(f):
+        readability = f[2] if len(f) > 2 else ""
+        return "영문전용" not in readability and "poor" not in readability
+    kr_fonts = [f for f in fonts if font_ok(f)]
     font = rng.choice(kr_fonts) if kr_fonts else (rng.choice(fonts) if fonts else None)
 
     print("=== SPARK 강제 배정 씨드 (이 줄들을 그대로 spark_ignition에 옮겨 적어라) ===")
