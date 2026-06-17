@@ -12,12 +12,14 @@ allowed-tools: Read Bash
 
 ## 호출 즉시 실행 (이 순서 엄수)
 
-**STEP 1 — 씨드 추출:** `references/lightbulb.md`를 읽는다. 각 축에서 1개씩 무작위로 선택:
-- LAYOUT_SPARK: LAYOUT 섹션에서 1개
-- INTERACTION_SPARK: INTERACTION 섹션에서 1개
-- VISUAL_SPARK: VISUAL 섹션에서 1개
-- AESTHETIC_PINCH: PINCHES 섹션에서 1개
-- CHOSEN_FONT: FONTS 표에서 현재 작업 분위기에 맞는 한글 폰트 1개
+**STEP 1 — 씨드 강제 추출 (반드시 셸로):** 아래 명령을 실행해 난수로 배정된 씨드를 받는다.
+```bash
+python3 scripts/pick.py
+```
+출력된 LAYOUT_SPARK / INTERACTION_SPARK / VISUAL_SPARK / AESTHETIC_PINCH / CHOSEN_FONT 다섯 줄을 **그대로** STEP 2 블록에 옮겨 적는다.
+
+> 왜 셸인가: "랜덤하게 골라"라고 머리로만 고르면 매번 의미적으로 비슷한 항목(예: '바랜 기록' + 세로 타이포)으로 **수렴**한다. 셸이 진짜 난수를 굴려 배정해야 발산한다. **임의로 다시 고르지 마라.** 4개 씨드는 강제다. CHOSEN_FONT만 작업 분위기와 정면충돌할 때 1회 교체 허용.
+> (스크립트를 못 쓰는 환경이면 `references/lightbulb.md`를 읽고 각 섹션에서 직접 1개씩 고르되, 의식적으로 평소 안 고를 항목을 택하라.)
 
 **STEP 2 — 즉시 선언:**
 ```
