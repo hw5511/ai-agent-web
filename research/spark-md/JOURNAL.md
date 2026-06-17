@@ -348,3 +348,20 @@ obra/superpowers brainstorming · UI/UX Pro Max.
 - **구현 2 — 미감 게이트(C)**: `harness/aesthetic-gate.sh` 신설. 첫 화면 스크린샷(playwright)→`baseline/floor.png`와 **VLM pairwise 양방향**(position bias 상쇄) 비교, *양방향 모두 floor에 짐 = 확실히 나쁨*만 FAIL(절대점수 안 씀). 검증: 스크린샷 파이프라인 실작동(obs/noc/bookstore 렌더 확인), 판정로직·JSON파싱 단위테스트 통과. 한계: 샌드박스 CDN 차단 → 정적 구성만(모션은 라이브). 심판 `claude -p`는 러너와 동일 패턴(스탠드얼론 실행).
 - **안 한 것(과투자)**: 카탈로그 30+ 확장(D가 반증) · constrained decoding(프리폼 HTML N/A) · QD 루프(미감 신호 성숙 후) · effort 재튜닝(현 정합).
 - 결론: **방법론은 견고하다.** 즉효는 비복원추출(거의 공짜), 전략 투자는 미감 게이트(이게 없으면 "개선"을 측정조차 못 함). 다음 단계로 QD 루프는 미감 게이트가 신뢰 데이터를 쌓은 뒤 검토.
+
+---
+
+## Round 21 — /spark 스킬화 + GitHub Pages 라이브 쇼케이스 (동일 브리프 ×5)  [완료 2026-06-17]
+- 배경: 연구산물(SPARK v7-lean)을 **Claude Code 스킬**(`skills/spark/`: SKILL.md + references/lightbulb.md + scripts/pick.py)로 패키징. SKILL.md는 DARING FLOOR(PREDICTABILITY ≤ 3, 5 FORBIDDEN DEFAULTS, DARING_MOVE)로 모험성 명문화. (PR #23)
+- **실험**: 동일 브리프(독립 LP 레코드샵 "GROOVE 회현")를 `pick.py` 셸 난수 강제 배정 씨드로 5회 독립 생성 → `docs/{a..e}` + 갤러리 `docs/index.html`.
+- **결과(목표1 재확인)**: 5/5 LAYOUT·PINCH 전부 상이 → 시각적으로 확연히 다른 5개. (A 매거진 타이포 리듬/Swiss·ArtDeco · B 무한캔버스 해체/Split·Anti · C 시간대 동적테마 · D 촉각 비닐질감/feTurbulence · E 세로 텍스트 그리드/MatCap). 이모지·규칙위반 0.
+- **배포**: Pages 소스가 **main 루트 전체**(클래식 `pages-build-deployment`)임을 확인. GitHub App에 `workflows` 권한이 없어 Actions 워크플로 추가는 불가 → 기존 클래식 빌드 활용. `docs/` 16개 파일만 main에 직접 커밋(e9a2daf), 스킬 변경은 PR #23에 분리 유지. 라이브: `https://hw5511.github.io/ai-agent-web/docs/` (6 URL 전부 200 확인).
+- 교훈: 연구 하네스(run-v7-fast.sh) 없이도 **스킬 + 셸 RNG 씨드**만으로 run-to-run 발산이 재현됨. 배포 경로 제약(App 권한)은 클래식 Pages로 우회 가능.
+
+---
+
+## Round 22 — BOLD 라운드: 모험성 다이얼 상향 (동일 브리프 ×5, PREDICTABILITY ≤ 2)  [진행중 2026-06-17]
+- 질문(CEO): "모험적 시도의 경향성을 더 높이면?" → R21과 **동일 브리프(GROOVE 회현)** 로 A/B. 모험성 레버만 상향.
+- **상향한 레버**: ① PREDICTABILITY 목표 ≤ 3 → **≤ 2** ② 표준 수직 Hero→Section→Footer **전면 금지**(배정 LAYOUT_SPARK를 1차 구조·내비 원리로) ③ DARING_MOVE **2개 이상** 의무 ④ 씨드는 R20 교훈대로 **배치 내 축별 비복원추출**(LAYOUT/INTERACTION/VISUAL/PINCHES 각 5개 중복 0) ⑤ 폰트도 디스플레이/영문전용 포함해 과감하게 배정(영문전용·poor는 헤드라인 전용 + 한글 본문 페어링 지침).
+- 배정 씨드: a(소극적공간의적극성/전략적마찰/색면추상/영원한찰나/Pretendard) · b(세로텍스트그리드/온보딩영웅여정/시맨틱채도/의도된불친절/Jua+NotoKR) · c(나이키서사/마이크로카피/뉴모피즘/정오의명징/Playfair+Pretendard) · d(시각적무게균형/탄성잔향/MatCap/아침의해상도/Syne+Pretendard) · e(리듬반복/생체인증UX/공감각사운드/빛의파편/NotoKR).
+- 산출: `docs/bold/{a..e}` + 비교 갤러리. (결과·판정 보강 예정)
