@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GROOVE 회현 · 회현역 뒷골목 바이닐 레코드</title>
+<meta name="description" content="서울 회현역 뒷골목의 바이닐 레코드 전문점. 재즈·시티팝·국내 인디 LP, 청음 공간, 중고와 신보.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#intro" aria-label="GROOVE 회현 홈">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">GROOVE 회현</span>
+  </a>
+  <nav class="topnav" aria-label="주요 메뉴">
+    <a href="#intro">소개</a>
+    <a href="#curation">큐레이션</a>
+    <a href="#listening">청음실</a>
+    <a href="#arrivals">입고</a>
+    <a href="#visit">찾아오는 길</a>
+  </nav>
+  <span class="open-pill" aria-hidden="true">12:00&ndash;21:00</span>
+</header>
+
+<!-- 무대(STAGE): 스크롤 진행도에 따라 장면이 바뀌는 고정 장치 -->
+<aside class="stage" aria-hidden="true">
+  <div class="stage-inner">
+    <!-- 로우폴리 턴테이블 -->
+    <div class="rig" data-rig>
+      <div class="platter">
+        <div class="poly poly-a"></div>
+        <div class="poly poly-b"></div>
+        <div class="poly poly-c"></div>
+        <div class="poly poly-d"></div>
+        <div class="record">
+          <div class="record-grooves"></div>
+          <div class="record-label"></div>
+        </div>
+        <div class="tonearm"></div>
+      </div>
+    </div>
+    <!-- AR HUD: 마우스가 LP에 닿으면 스캔 라벨이 추적 -->
+    <div class="hud" data-hud>
+      <div class="reticle" aria-hidden="true">
+        <span class="r r1"></span><span class="r r2"></span>
+        <span class="r r3"></span><span class="r r4"></span>
+      </div>
+      <div class="hud-card">
+        <span class="hud-tag" data-hud-scene>SCANNING</span>
+        <strong class="hud-title" data-hud-title>GROOVE 회현</strong>
+        <span class="hud-meta" data-hud-meta>회현역 뒷골목 · vinyl only</span>
+      </div>
+    </div>
+    <!-- 장면 라벨 -->
+    <div class="scene-index">
+      <span class="si si0 on">01</span>
+      <span class="si si1">02</span>
+      <span class="si si2">03</span>
+      <span class="si si3">04</span>
+    </div>
+  </div>
+</aside>
+
+<main class="flow">
+
+  <!-- 01 소개 -->
+  <section class="scene" id="intro" data-scene="0">
+    <p class="kicker">SEOUL · HOEHYEON · SINCE 2014</p>
+    <h1 class="display">바늘이 내려앉는<br>그 0.1초를 판다</h1>
+    <div class="lede">
+      <p>GROOVE 회현은 회현역 4번 출구 뒷골목, 인쇄소와 공구상 사이 지하 한 칸에 있는 바이닐 레코드 전문점입니다. 스트리밍이 다 가진 시대에, 우리는 굳이 손으로 꺼내 닦고 바늘을 올리는 번거로움을 판매합니다.</p>
+      <p>재즈와 시티팝, 그리고 국내 인디를 중심으로 중고와 신보를 함께 다룹니다. 점주가 직접 청음하고 상태를 매긴 LP만 매대에 올립니다.</p>
+    </div>
+    <ul class="facts">
+      <li><span>취급</span><strong>재즈 · 시티팝 · 국내 인디</strong></li>
+      <li><span>상태등급</span><strong>VG / VG+ / NM 직접 검수</strong></li>
+      <li><span>구성</span><strong>중고반 · 신보 · 한정 재발매</strong></li>
+    </ul>
+  </section>
+
+  <!-- 02 장르별 큐레이션 -->
+  <section class="scene" id="curation" data-scene="1">
+    <p class="kicker">CRATE DIGGING</p>
+    <h2 class="section-h">장르별 큐레이션</h2>
+    <p class="section-sub">매대는 장르가 아니라 "기분"으로 나눕니다. 점주의 추천반과 가격대를 함께 적어 둡니다.</p>
+
+    <div class="crates">
+      <article class="crate">
+        <span class="crate-no">A1</span>
+        <h3>새벽 두 시의 재즈</h3>
+        <p class="crate-desc">담배 연기 자욱한 빌 에반스 트리오부터 ECM의 차가운 공기까지. 모노 오리지널과 재발매를 나란히 둡니다.</p>
+        <ul class="picks">
+          <li>Bill Evans &mdash; Waltz for Debby <em>중고 VG+ · 38,000원</em></li>
+          <li>Chet Baker &mdash; Sings <em>재발매 NM · 32,000원</em></li>
+          <li>박성연 &mdash; Live at Janus <em>국내반 · 45,000원</em></li>
+        </ul>
+      </article>
+
+      <article class="crate">
+        <span class="crate-no">B2</span>
+        <h3>도시의 여름, 시티팝</h3>
+        <p class="crate-desc">80년대 일본 시티팝 오리지널과 최근 리이슈. 표지부터 여름인 판들을 골라 둡니다.</p>
+        <ul class="picks">
+          <li>Tatsuro Yamashita &mdash; For You <em>리이슈 NM · 52,000원</em></li>
+          <li>Mariya Takeuchi &mdash; Variety <em>중고 VG+ · 68,000원</em></li>
+          <li>Anri &mdash; Timely!! <em>리이슈 NM · 49,000원</em></li>
+        </ul>
+      </article>
+
+      <article class="crate">
+        <span class="crate-no">C3</span>
+        <h3>지금 서울, 국내 인디</h3>
+        <p class="crate-desc">소량 프레싱으로 끝나버린 국내 인디 LP. 입고되면 금방 사라지는 매대입니다.</p>
+        <ul class="picks">
+          <li>장기하와 얼굴들 &mdash; 별일 없이 산다 <em>중고 VG · 36,000원</em></li>
+          <li>새소년 &mdash; 비적응 <em>신보 NM · 39,000원</em></li>
+          <li>잔나비 &mdash; 전설 <em>신보 NM · 42,000원</em></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 03 청음 공간 -->
+  <section class="scene" id="listening" data-scene="2">
+    <p class="kicker">LISTENING ROOM · 미시적 관찰</p>
+    <h2 class="section-h">사기 전에, 그루브를 들여다보세요</h2>
+    <p class="section-sub">매대 안쪽에 2인용 청음석 두 자리가 있습니다. 사려는 판은 계산 전에 끝까지 들어볼 수 있습니다.</p>
+
+    <div class="listen-grid">
+      <figure class="groove-scope">
+        <div class="scope-lens" data-scope>
+          <div class="scope-grooves"></div>
+          <div class="scope-cross" aria-hidden="true"></div>
+        </div>
+        <figcaption>마우스를 올리면 음구(groove)가 확대됩니다. 청음석에서는 실제로 상태를 눈으로 확인합니다.</figcaption>
+      </figure>
+      <div class="listen-copy">
+        <ul class="gear">
+          <li><span>턴테이블</span><strong>Technics SL-1200 MK7</strong></li>
+          <li><span>카트리지</span><strong>Audio-Technica VM540ML</strong></li>
+          <li><span>앰프 · 스피커</span><strong>Marantz PM6007 · KEF Q150</strong></li>
+          <li><span>이용</span><strong>구매 검토 시 무료 · 1인 30분</strong></li>
+        </ul>
+        <p class="note">바늘 마모를 줄이기 위해 청음은 한 면(약 20분) 단위로 안내드립니다. 헤드폰 청음도 가능합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 입고 + 찾아오는 길 -->
+  <section class="scene" id="arrivals" data-scene="3">
+    <p class="kicker">NEW IN · 신보와 입고 소식</p>
+    <h2 class="section-h">이번 주 매대에 오른 판</h2>
+
+    <ol class="arrivals-list">
+      <li>
+        <time>06.16</time>
+        <div><strong>이상순 &mdash; The First</strong><span>국내 인디 · 신보 입고 · 한정 컬러반</span></div>
+      </li>
+      <li>
+        <time>06.14</time>
+        <div><strong>Casiopea &mdash; Mint Jams</strong><span>시티팝/퓨전 · 일본반 중고 VG+ 2장</span></div>
+      </li>
+      <li>
+        <time>06.12</time>
+        <div><strong>John Coltrane &mdash; Blue Train</strong><span>재즈 · Blue Note Classic 재발매 입고</span></div>
+      </li>
+      <li>
+        <time>06.10</time>
+        <div><strong>아도이(ADOY) &mdash; VIVID</strong><span>국내 인디 · 재입고 · 마지막 1장</span></div>
+      </li>
+    </ol>
+    <p class="note">입고 소식은 매장 입구 칠판과 인스타그램 <span class="mono">@groove_hoehyeon</span> 에 먼저 올립니다.</p>
+
+    <div class="visit" id="visit">
+      <h2 class="section-h">찾아오는 길 · 영업시간</h2>
+      <div class="visit-grid">
+        <div class="map" role="img" aria-label="회현역 4번 출구 뒷골목, 인쇄골목 안쪽 지하 약도">
+          <span class="map-pin"><span class="pin-poly"></span></span>
+          <span class="map-line" aria-hidden="true"></span>
+          <span class="map-label l1">회현역 4번 출구</span>
+          <span class="map-label l2">인쇄골목</span>
+          <span class="map-label l3">GROOVE B1</span>
+        </div>
+        <dl class="visit-info">
+          <dt>주소</dt><dd>서울 중구 회현동 인쇄골목 안쪽, 지하 1층</dd>
+          <dt>가는 길</dt><dd>4호선 회현역 4번 출구 도보 4분. 공구상가 골목으로 들어와 파란 간판 지하 계단.</dd>
+          <dt>영업시간</dt><dd>화&ndash;일 12:00&ndash;21:00 / 매주 월요일 휴무</dd>
+          <dt>연락</dt><dd><span class="mono">02-755-0451</span> · 매입 문의 환영</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>GROOVE 회현</span>
+  <span>서울 중구 회현동 · B1</span>
+  <span>화&ndash;일 12:00&ndash;21:00</span>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
