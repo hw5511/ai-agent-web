@@ -125,8 +125,11 @@ async function listLive(ctx, page, limit) {
 async function fetchDetail(ctx, id) {
   const page = await ctx.newPage();
   try {
-    await page.goto(`${BASE}/font_page/${id}`, { waitUntil: 'networkidle', timeout: 40000 });
-    await page.waitForTimeout(500);
+    // networkidle은 눈누 광고 때문에 불안정 → 본문 콘텐츠(형태/라이선스)가 뜰 때까지 명시 대기
+    await page.goto(`${BASE}/font_page/${id}`, { waitUntil: 'domcontentloaded', timeout: 40000 });
+    await page.waitForFunction(
+      () => { const t = document.body.innerText; return /형태/.test(t) && /라이선스/.test(t); },
+      { timeout: 9000 }).catch(() => {});
     return await page.evaluate(() => {
       const lines = document.body.innerText.split('\n').map((l) => l.trim());
       const after = (label) => {
@@ -140,7 +143,8 @@ async function fetchDetail(ctx, id) {
         const cand = lines.find((l) =>
           /(오픈\s*폰트\s*라이[선센]스|OFL|SIL|공공누리|자유\s*이용|MIT|CC\s*BY|아파치|Apache)/.test(l) &&
           !/요약|전문|^라이선스/.test(l));
-        return cand || direct || null;
+        const raw = cand || direct || null;
+        return raw ? raw.split('\t')[0].trim() : null; // 탭 뒤 설명 제거, 라이선스명만
       })();
       const blocks = [...document.querySelectorAll('textarea, pre, code')]
         .map((e) => (e.value || e.innerText || '').trim())
@@ -221,7 +225,7 @@ async function mapPool(items, n, fn, onTick) {
 }
 async function cmdBuildCache(args) {
   const max = args.max ? Number(args.max) : Infinity;
-  const conc = args.concurrency ? Number(args.concurrency) : 6;
+  const conc = args.concurrency ? Number(args.concurrency) : 5;
   await withCtx(async (ctx) => {
     console.error('1/2 목록 수집 중...');
     const first = await listLive(ctx, 1);
@@ -237,7 +241,8 @@ async function cmdBuildCache(args) {
     if (base.length > max) base = base.slice(0, max);
     console.error(`목록 ${base.length}개 수집 완료. 2/2 상세 크롤(동시 ${conc})...`);
     const details = await mapPool(base, conc, async (f) => {
-      const d = await fetchDetail(ctx, f.id);
+      let d = await fetchDetail(ctx, f.id);
+      if (!d.shape && !d.usage.length) d = await fetchDetail(ctx, f.id); // 타이밍 실패 시 1회 재시도
       // 전체 굵기 CSS가 있으면 채택하고, font_family도 같은 소스에서 뽑아 일치시킨다
       const fullCss = (d.webfont_css_full && d.webfont_css_full.length > (f.webfont_css || '').length) ? d.webfont_css_full : f.webfont_css;
       return {
