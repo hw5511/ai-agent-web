@@ -153,18 +153,21 @@ for i,rgb in enumerate(json.load(sys.stdin).get('result',[])[:5]):
 폰트: STEP 2에서 선택한 CHOSEN_FONT 사용. 임의 선택 금지.
 NEVER: Inter·Roboto·Arial·Fraunces / bold_readability poor·medium에 weight 700+
 
-**실제 무료 폰트가 필요하면 — 눈누(noonnu) CLI:** 상업용 무료 한글 폰트(약 1,120종)를 검색하고, **그대로 붙여 넣는 웹폰트 @font-face CSS**와 분위기 확인용 **샘플 PNG**를 헤드리스 Playwright로 가져온다. CHOSEN_FONT를 실제 폰트로 확정하거나, lightbulb FONTS 표에 없는 폰트가 필요할 때 사용.
+**실제 무료 폰트가 필요하면 — 눈누(noonnu) CLI:** 상업용 무료 한글 폰트(약 1,120종)를 검색하고, **그대로 붙여 넣는 웹폰트 @font-face CSS**와 분위기 확인용 **샘플 PNG**를 가져온다. CHOSEN_FONT를 실제 폰트로 확정하거나, lightbulb FONTS 표에 없는 폰트가 필요할 때 사용.
 ```bash
 node scripts/noonnu.cjs search 손글씨            # 폰트/제작자 검색 (--limit N, --json)
-node scripts/noonnu.cjs category 명조            # 카테고리/태그 조회(고딕·명조·손글씨·장식·픽셀)
+node scripts/noonnu.cjs category 명조            # 카테고리/형태 조회(고딕·명조(=바탕)·손글씨·장식·픽셀)
 node scripts/noonnu.cjs info 694                 # 형태·라이선스·허용범위·굵기
 node scripts/noonnu.cjs webfont 프리텐다드        # @font-face CSS 전체 굵기 → styles.css에 그대로 삽입
 node scripts/noonnu.cjs sample 694 --text "GROOVE 회현" --out groove.png   # 임의 문구를 그 폰트로 렌더
 ```
-- 폰트 식별: 숫자=폰트 id, 그 외=이름(검색 첫 결과). 출력은 사람용/`--json` 둘 다.
+- **하이브리드(캐시 우선)**: `data/noonnu-fonts.json` 캐시가 있으면 search/category/list/info/webfont 는 네트워크·playwright 없이 즉시 응답. 캐시가 없거나 `--live` 면 라이브로 폴백.
+  - 캐시 생성·갱신: `node scripts/noonnu.cjs build-cache` (전체 카탈로그를 크롤해 캐시 저장 — 월 1회 정도면 충분). `--refresh` 동일.
+  - `sample` 은 캐시의 웹폰트 CSS로 렌더하므로 playwright만 필요(라이브 데이터 불필요).
+- 폰트 식별: 숫자=폰트 id, 그 외=이름(부분일치/검색 첫 결과). 출력은 사람용/`--json` 둘 다.
 - 웹폰트는 jsDelivr CDN @font-face라 `<link>` 없이 `styles.css` 상단에 붙이면 됨. `webfont`가 주는 `font-family` 토큰을 그대로 사용.
 - **라이선스 확인 필수**: `info`의 허용 범위(인쇄/웹/영상/임베딩/BI 등)를 보고 용도에 맞는지 확인. 글꼴 단독 판매는 대개 금지.
-- 의존: `npx playwright install chromium`. 인증서 가로채기 환경에서도 동작(ignoreHTTPSErrors).
+- 의존: 조회는 캐시만 있으면 Node로 충분. `build-cache`/`sample`/`--live` 는 `npx playwright install chromium` 필요. 인증서 가로채기 환경에서도 동작(ignoreHTTPSErrors).
 
 ### PHASE 4: Self-Audit
 ```
