@@ -1,7 +1,7 @@
 ---
 name: spark
 description: SPARK 모험 디자인 모드. 웹 디자인 작업에서 결과물이 평범하거나 클리셰에 빠질 것 같을 때 /spark로 호출. 랜덤 영감 씨드(120 ideas, 30 pinches, 10 fonts)를 즉시 추출·선언하고, PREDICTABILITY ≤ 3의 모험적 디자인 원칙과 60fps 성능 규칙을 현재 작업에 주입한다. Awwwards급 결과물 목표. 5 FORBIDDEN DEFAULTS(중앙 Hero·아이콘 카드그리드·단색 배색·전 섹션 fadeIn·hover shadow lift)를 전면 금지. Use when the design feels safe, predictable, or clichéd.
-compatibility: Designed for Claude Code. Optional internet for Colormind API.
+compatibility: Designed for Claude Code. Optional internet for Colormind API and the noonnu font CLI (Node + Playwright headless chromium).
 metadata:
   author: hw5511
   version: "1.0"
@@ -152,6 +152,19 @@ for i,rgb in enumerate(json.load(sys.stdin).get('result',[])[:5]):
 
 폰트: STEP 2에서 선택한 CHOSEN_FONT 사용. 임의 선택 금지.
 NEVER: Inter·Roboto·Arial·Fraunces / bold_readability poor·medium에 weight 700+
+
+**실제 무료 폰트가 필요하면 — 눈누(noonnu) CLI:** 상업용 무료 한글 폰트(약 1,120종)를 검색하고, **그대로 붙여 넣는 웹폰트 @font-face CSS**와 분위기 확인용 **샘플 PNG**를 헤드리스 Playwright로 가져온다. CHOSEN_FONT를 실제 폰트로 확정하거나, lightbulb FONTS 표에 없는 폰트가 필요할 때 사용.
+```bash
+node scripts/noonnu.cjs search 손글씨            # 폰트/제작자 검색 (--limit N, --json)
+node scripts/noonnu.cjs category 명조            # 카테고리/태그 조회(고딕·명조·손글씨·장식·픽셀)
+node scripts/noonnu.cjs info 694                 # 형태·라이선스·허용범위·굵기
+node scripts/noonnu.cjs webfont 프리텐다드        # @font-face CSS 전체 굵기 → styles.css에 그대로 삽입
+node scripts/noonnu.cjs sample 694 --text "GROOVE 회현" --out groove.png   # 임의 문구를 그 폰트로 렌더
+```
+- 폰트 식별: 숫자=폰트 id, 그 외=이름(검색 첫 결과). 출력은 사람용/`--json` 둘 다.
+- 웹폰트는 jsDelivr CDN @font-face라 `<link>` 없이 `styles.css` 상단에 붙이면 됨. `webfont`가 주는 `font-family` 토큰을 그대로 사용.
+- **라이선스 확인 필수**: `info`의 허용 범위(인쇄/웹/영상/임베딩/BI 등)를 보고 용도에 맞는지 확인. 글꼴 단독 판매는 대개 금지.
+- 의존: `npx playwright install chromium`. 인증서 가로채기 환경에서도 동작(ignoreHTTPSErrors).
 
 ### PHASE 4: Self-Audit
 ```
