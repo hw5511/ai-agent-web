@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GROOVE 회현 · 회현역 뒷골목 바이닐 레코드샵</title>
+  <meta name="description" content="서울 회현역 뒷골목의 바이닐 레코드 전문점 GROOVE 회현. 재즈·시티팝·국내 인디 LP 큐레이션, 청음 공간, 중고·신보 입고." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="sign" href="#top" aria-label="GROOVE 회현 홈">
+    <b>GROOVE</b><span>회현 · HOEHYEON</span>
+  </a>
+
+  <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="청음 사운드 켜기">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect class="bar" x="3"  y="10" width="3" height="4" rx="1.5" fill="currentColor"/>
+      <rect class="bar" x="8"  y="7"  width="3" height="10" rx="1.5" fill="currentColor"/>
+      <rect class="bar" x="13" y="4"  width="3" height="16" rx="1.5" fill="currentColor"/>
+      <rect class="bar" x="18" y="9"  width="3" height="6" rx="1.5" fill="currentColor"/>
+    </svg>
+    <span id="soundLabel">청음 켜기</span>
+  </button>
+
+  <main id="top">
+    <!-- INTRO: asymmetric, turntable deck instead of centered hero -->
+    <section class="intro wrap" aria-labelledby="introTitle">
+      <div class="intro-copy">
+        <p class="eyebrow reveal">Vinyl &amp; Listening Room · Est. 2016</p>
+        <h1 id="introTitle" class="reveal">
+          바늘을 내리면<span class="accent">소리가 시작됩니다</span>
+        </h1>
+        <p class="lede reveal">
+          회현역 4번 출구 뒷골목, 8평 남짓한 방에서 재즈와 시티팝, 국내 인디 LP를
+          한 장 한 장 골라 둡니다. 신보와 중고를 함께 두고, 사기 전에 직접 들어볼 수
+          있는 청음 공간을 운영합니다.
+        </p>
+        <ul class="intro-meta reveal">
+          <li>재즈 · 시티팝 · 국내 인디</li>
+          <li>중고 &amp; 신보 입고</li>
+          <li>청음 데스크 2석</li>
+          <li>화–일 오픈</li>
+        </ul>
+      </div>
+
+      <!-- DARING_MOVE base prop: turntable deck (겹침/적층) -->
+      <div class="deck reveal" aria-hidden="true">
+        <div class="platter" id="platter"></div>
+        <div class="tonearm" id="tonearm"></div>
+      </div>
+    </section>
+
+    <!-- COLLECTIONS: 5 curated genres (Hick's law) · overlapping sleeve rack -->
+    <section class="collections wrap" aria-labelledby="colTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Curation · 다섯 갈래</p>
+          <h2 id="colTitle" class="reveal">고른 다섯 칸,<br />그 안에서 길을 잃으세요</h2>
+        </div>
+        <p class="reveal">매대를 넓히는 대신 다섯 갈래로 좁혀 둡니다. 카드 위에 마우스를 올리면 이번 주 추천반이 빠져나옵니다.</p>
+      </div>
+
+      <div class="rack" role="list">
+        <article class="sleeve reveal" role="listitem" tabindex="0" style="--tilt:-3deg">
+          <img src="https://loremflickr.com/600/700/jazz,vinyl" alt="재즈 LP 슬리브 더미" width="600" height="700" loading="lazy" />
+          <div class="veil"></div>
+          <div class="body">
+            <h3>재즈</h3>
+            <p class="picks">Bill Evans &lt;Waltz for Debby&gt;, John Coltrane &lt;Blue Train&gt;, 모던·하드밥 중심 큐레이션.</p>
+            <span class="price">중고 18,000원~ · 신보 39,000원~</span>
+          </div>
+        </article>
+
+        <article class="sleeve reveal" role="listitem" tabindex="0" style="--tilt:2deg">
+          <img src="https://loremflickr.com/600/700/citypop,tokyo,night" alt="시티팝 LP 슬리브 더미" width="600" height="700" loading="lazy" />
+          <div class="veil"></div>
+          <div class="body">
+            <h3>시티팝</h3>
+            <p class="picks">山下達郎 &lt;FOR YOU&gt;, 竹内まりや &lt;VARIETY&gt;, 80년대 일본 도시 사운드.</p>
+            <span class="price">중고 35,000원~ · 일부 한정반</span>
+          </div>
+        </article>
+
+        <article class="sleeve reveal" role="listitem" tabindex="0" style="--tilt:-2deg">
+          <img src="https://loremflickr.com/600/700/indie,band,seoul" alt="국내 인디 LP 슬리브 더미" width="600" height="700" loading="lazy" />
+          <div class="veil"></div>
+          <div class="body">
+            <h3>국내 인디</h3>
+            <p class="picks">새소년 &lt;非&gt;, 잔나비, 검정치마, 국내 레이블 신보 입고.</p>
+            <span class="price">신보 29,000원~</span>
+          </div>
+        </article>
+
+        <article class="sleeve reveal" role="listitem" tabindex="0" style="--tilt:3deg">
+          <img src="https://loremflickr.com/600/700/soul,funk,record" alt="소울·펑크 LP 슬리브 더미" width="600" height="700" loading="lazy" />
+          <div class="veil"></div>
+          <div class="body">
+            <h3>소울 · 펑크</h3>
+            <p class="picks">Marvin Gaye &lt;What's Going On&gt;, Earth, Wind &amp; Fire, 그루브 한 코너.</p>
+            <span class="price">중고 22,000원~</span>
+          </div>
+        </article>
+
+        <article class="sleeve reveal" role="listitem" tabindex="0" style="--tilt:-1deg">
+          <img src="https://loremflickr.com/600/700/ost,film,score" alt="OST·사운드트랙 LP 슬리브 더미" width="600" height="700" loading="lazy" />
+          <div class="veil"></div>
+          <div class="body">
+            <h3>OST · 사운드트랙</h3>
+            <p class="picks">坂本龍一, 영화·드라마 스코어, 부정기 한정 프레스 위주.</p>
+            <span class="price">입고 시 SNS 공지</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- LISTENING ROOM -->
+    <section class="wrap" aria-labelledby="listenTitle">
+      <div class="listen">
+        <div class="listen-media">
+          <img src="https://loremflickr.com/900/900/turntable,headphones" alt="청음 데스크의 턴테이블과 헤드폰" width="900" height="900" loading="lazy" />
+        </div>
+        <div class="listen-body">
+          <p class="eyebrow reveal">Listening Room</p>
+          <h2 id="listenTitle" class="reveal">사기 전에,<br />먼저 들어보세요</h2>
+          <p class="reveal">데스크 2석에 Technics SL-1200과 밀폐형 헤드폰을 두었습니다. 매대의 LP는 거의 모두 청음 가능하고, 직원이 추천반도 함께 걸어 드립니다.</p>
+          <ul class="listen-list reveal">
+            <li><b>2석</b><span>턴테이블 청음 데스크 (예약 없이 이용)</span></li>
+            <li><b>30분</b><span>1인 권장 청음 시간 (혼잡 시 안내)</span></li>
+            <li><b>무료</b><span>구매 여부와 관계없이 청음 가능</span></li>
+            <li><b>커피</b><span>드립 한 잔 3,000원, 청음석에서</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW ARRIVALS: horizontal ticker rail -->
+    <section class="arrivals wrap" aria-labelledby="arrTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">This Week · 신보 · 입고</p>
+          <h2 id="arrTitle" class="reveal">이번 주 들어온 판</h2>
+        </div>
+        <p class="reveal">6월 셋째 주 입고 기준. 재고는 한 장씩이라 먼저 보는 분 우선입니다.</p>
+      </div>
+
+      <div class="rail-mask">
+        <div class="rail" id="rail">
+          <article class="disc">
+            <span class="tag">신보 · 재즈</span>
+            <h4>Köln Concert</h4>
+            <p class="by">Keith Jarrett · ECM 리이슈 2LP</p>
+            <div class="row"><span class="cond">New / 봉인</span><span class="won">54,000원</span></div>
+          </article>
+          <article class="disc">
+            <span class="tag">중고 · 시티팝</span>
+            <h4>A LONG VACATION</h4>
+            <p class="by">大滝詠一 · 일본반 NM</p>
+            <div class="row"><span class="cond">반·자켓 상태 양호</span><span class="won">42,000원</span></div>
+          </article>
+          <article class="disc">
+            <span class="tag">신보 · 국내 인디</span>
+            <h4>이방인</h4>
+            <p class="by">새소년 · 한정 컬러반</p>
+            <div class="row"><span class="cond">New / 봉인</span><span class="won">36,000원</span></div>
+          </article>
+          <article class="disc">
+            <span class="tag">중고 · 소울</span>
+            <h4>What's Going On</h4>
+            <p class="by">Marvin Gaye · US 재반</p>
+            <div class="row"><span class="cond">VG+ / 경미한 잡음</span><span class="won">24,000원</span></div>
+          </article>
+          <article class="disc">
+            <span class="tag">중고 · 재즈</span>
+            <h4>Somethin' Else</h4>
+            <p class="by">Cannonball Adderley · Blue Note</p>
+            <div class="row"><span class="cond">VG+ / 자켓 모서리 마모</span><span class="won">31,000원</span></div>
+          </article>
+          <article class="disc">
+            <span class="tag">신보 · OST</span>
+            <h4>Merry Christmas Mr. Lawrence</h4>
+            <p class="by">坂本龍一 · 30주년반</p>
+            <div class="row"><span class="cond">New / 봉인</span><span class="won">48,000원</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="visit wrap" aria-labelledby="visitTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Visit · 찾아오는 길</p>
+          <h2 id="visitTitle" class="reveal">회현역 4번 출구,<br />골목 안쪽 2층</h2>
+        </div>
+        <p class="reveal">대로변이 아니라 골목 안쪽이라 간판이 작습니다. 노란 GROOVE 사인을 찾아 올라오세요.</p>
+      </div>
+
+      <div class="visit-grid">
+        <ul class="hours" aria-label="영업시간">
+          <li class="today"><span>수요일 (오늘)</span><span>13:00 – 21:00</span></li>
+          <li><span>화 · 목 · 금</span><span>13:00 – 21:00</span></li>
+          <li><span>토 · 일</span><span>12:00 – 20:00</span></li>
+          <li><span>월요일</span><span>휴무</span></li>
+        </ul>
+
+        <dl class="addr">
+          <dt>주소</dt>
+          <dd>서울 중구 회현동1가 골목, 회현빌딩 2층 (회현역 4번 출구 도보 3분)</dd>
+          <dt>전화</dt>
+          <dd>02-318-0451</dd>
+          <dt>인스타그램</dt>
+          <dd>@groove_hoehyeon</dd>
+          <dt>입고 문의</dt>
+          <dd>중고 LP 매입·위탁 상담은 영업시간 중 방문 또는 DM</dd>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-grid">
+      <b>GROOVE 회현</b>
+      <span>서울 중구 회현동1가 · 02-318-0451 · 화–일 영업</span>
+      <span>© 2026 GROOVE 회현. 모든 음반의 저작권은 각 권리자에게 있습니다.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script defer src="script.js"></script>
+</body>
+</html>

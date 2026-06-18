@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GROOVE 회현 · 회현역 뒷골목 바이닐 레코드</title>
+<meta name="description" content="서울 회현역 뒷골목의 바이닐 레코드 전문점. 재즈·시티팝·국내 인디 LP, 청음 공간, 중고와 신보." />
+<link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- 정적 질감 필터: 대리석 결 + 종이 그레인 (정적, 매 프레임 변화 없음) -->
+<svg class="grain-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <filter id="marble-grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.04" numOctaves="3" seed="7" result="n" />
+    <feColorMatrix in="n" type="saturate" values="0" />
+    <feComponentTransfer><feFuncA type="linear" slope="0.5" intercept="0" /></feComponentTransfer>
+    <feComposite operator="in" in2="SourceGraphic" />
+  </filter>
+  <filter id="paper-grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" />
+    <feColorMatrix type="saturate" values="0" />
+    <feComponentTransfer><feFuncA type="linear" slope="0.06" /></feComponentTransfer>
+  </filter>
+</svg>
+
+<div class="marble-layer" aria-hidden="true"></div>
+<div class="paper-layer" aria-hidden="true"></div>
+
+<header class="masthead">
+  <a class="brand" href="#top" aria-label="GROOVE 회현 홈">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text">GROOVE <em>회현</em></span>
+  </a>
+  <nav class="nav" aria-label="주요 메뉴">
+    <a href="#philosophy" data-jump>가게</a>
+    <a href="#curation" data-jump>큐레이션</a>
+    <a href="#listening" data-jump>청음</a>
+    <a href="#stock" data-jump>입고</a>
+    <a href="#visit" data-jump>찾아오기</a>
+  </nav>
+  <p class="masthead-hours" aria-label="영업 안내">화–일 14:00–22:00 · 월 휴무</p>
+</header>
+
+<main id="top">
+
+  <!-- 시작: 회전하는 원반을 텍스트가 둘러싸는 비-중앙 구성 -->
+  <section class="overture" aria-labelledby="overture-title">
+    <div class="overture-disc" aria-hidden="true">
+      <div class="disc" data-disc>
+        <span class="disc-label"></span>
+      </div>
+    </div>
+    <div class="overture-copy">
+      <p class="kicker">서울 중구 회현동 · 회현역 4번 출구 뒷골목</p>
+      <h1 id="overture-title" class="overture-title" data-weight-flex>
+        먼지 한 톨까지<br />소리로 듣는 곳
+      </h1>
+      <p class="lede">
+        GROOVE 회현은 재즈와 시티팝, 국내 인디의 바이닐을 다룹니다.
+        바늘이 홈을 따라 내려앉는 그 0.5초의 정적을 위해, 우리는 음반 한 장 한 장을
+        직접 듣고 골라 진열대에 올립니다.
+      </p>
+      <a class="quiet-cta" href="#curation" data-jump>
+        진열대 둘러보기
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- 철학: 대리석 명판 같은 단락 -->
+  <section id="philosophy" class="philosophy" aria-labelledby="philosophy-title">
+    <p class="section-index">01 · 가게 이야기</p>
+    <h2 id="philosophy-title" class="slab" data-weight-flex>
+      우리는 음반을 파는 게 아니라,<br />다시 듣는 일을 팝니다.
+    </h2>
+    <div class="philosophy-grid">
+      <p>
+        2018년 겨울, 회현 지하상가 뒤편 작은 인쇄소 자리를 빌려 문을 열었습니다.
+        스트리밍 시대에 굳이 무거운 LP를 들고 가는 사람들에게는 한 가지 공통점이 있더군요.
+        소리보다 먼저, <strong>기다리는 시간</strong>을 사랑한다는 것.
+      </p>
+      <p>
+        그래서 GROOVE 회현은 빠른 회전을 좇지 않습니다.
+        매대에 오르는 모든 음반은 주인장이 청음실에서 한 면이라도 직접 들어본 것들입니다.
+        상태가 미덥지 않으면 가격을 낮추기보다 들이지 않습니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- 큐레이션: 텍스트가 원반 실루엣을 껴안는다 (DARING_MOVE) -->
+  <section id="curation" class="curation" aria-labelledby="curation-title">
+    <p class="section-index">02 · 장르별 큐레이션</p>
+    <h2 id="curation-title" class="curation-head" data-weight-flex>홈을 따라 흐르는 세 갈래</h2>
+
+    <article class="lp-block" data-lp>
+      <figure class="lp-art lp-art--left">
+        <span class="vinyl" aria-hidden="true"></span>
+        <img src="https://loremflickr.com/640/640/jazz,vinyl,record?lock=11" alt="재즈 LP 진열대에 꽂힌 음반들" width="640" height="640" loading="lazy" decoding="async" />
+      </figure>
+      <div class="lp-text">
+        <h3>재즈 · 회현의 밤공기</h3>
+        <p>
+          Blue Note·Impulse! 오리지널 재반과 일본 King 프레싱을 중심으로,
+          모달과 하드밥을 두텁게 둡니다. 비 오는 화요일이면
+          Bill Evans <em>Waltz for Debby</em>, Chet Baker <em>Sings</em>를
+          가장 먼저 턴테이블에 올려 둡니다. 중고 재즈는 1만 8천 원부터.
+        </p>
+      </div>
+    </article>
+
+    <article class="lp-block lp-block--rev" data-lp>
+      <figure class="lp-art lp-art--right">
+        <span class="vinyl" aria-hidden="true"></span>
+        <img src="https://loremflickr.com/640/640/citypop,record,sea?lock=22" alt="시티팝 LP 재킷 클로즈업" width="640" height="640" loading="lazy" decoding="async" />
+      </figure>
+      <div class="lp-text">
+        <h3>시티팝 · 80년대의 해변</h3>
+        <p>
+          山下達郎 <em>FOR YOU</em>, 竹内まりや <em>VARIETY</em>,
+          大貫妙子까지. 일본 시티팝 오리지널과 최근 리이슈를 나란히 둬
+          귀로 비교할 수 있게 했습니다. 인기반은 입고 즉시 청음 예약을 권합니다.
+          오리지널은 4만 원대부터, 리이슈 신보는 3만 9천 원.
+        </p>
+      </div>
+    </article>
+
+    <article class="lp-block" data-lp>
+      <figure class="lp-art lp-art--left">
+        <span class="vinyl" aria-hidden="true"></span>
+        <img src="https://loremflickr.com/640/640/seoul,indie,music?lock=33" alt="국내 인디 LP를 고르는 손" width="640" height="640" loading="lazy" decoding="async" />
+      </figure>
+      <div class="lp-text">
+        <h3>국내 인디 · 지금 서울의 소리</h3>
+        <p>
+          새소년, 잔나비, 검정치마, 아도이의 한정 컬러 바이닐을 매주 확인합니다.
+          국내 인디는 발매 수량이 적어 금방 품절되니, 입고 소식을
+          매장 칠판과 아래 입고 코너에서 함께 확인해 주세요. 신보 LP 3만 3천 원선.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <!-- 청음 공간 -->
+  <section id="listening" class="listening" aria-labelledby="listening-title">
+    <div class="listening-inner">
+      <p class="section-index light">03 · 청음 공간</p>
+      <h2 id="listening-title" class="listening-head" data-weight-flex>
+        사기 전에, 끝까지 들어 보세요
+      </h2>
+      <div class="booths">
+        <div class="booth">
+          <span class="booth-no">A</span>
+          <h3>턴테이블 부스 2석</h3>
+          <p>Technics SL-1200과 매킨토시 진공관 앰프. 헤드폰은 Sennheiser HD 600. 한 면을 통째로 들어도 좋습니다.</p>
+        </div>
+        <div class="booth">
+          <span class="booth-no">B</span>
+          <h3>공용 스피커석</h3>
+          <p>JBL 4312로 매장 추천반을 흘려 둡니다. 마음에 드는 곡이 흐르면 카운터에 음반 제목을 물어 주세요.</p>
+        </div>
+        <div class="booth">
+          <span class="booth-no">C</span>
+          <h3>청음 예약</h3>
+          <p>주말 청음석은 전화나 매장 방문으로 30분 단위 예약을 받습니다. 음료 한 잔이 포함됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 신보·입고 소식: 가로로 흐르는 입고 띠 -->
+  <section id="stock" class="stock" aria-labelledby="stock-title">
+    <p class="section-index">04 · 신보 · 입고 소식</p>
+    <h2 id="stock-title" class="stock-head" data-weight-flex>이번 주 매대에 오른 음반</h2>
+    <ul class="stock-list">
+      <li>
+        <span class="stock-date">06.17</span>
+        <span class="stock-name">山下達郎 · <em>RIDE ON TIME</em></span>
+        <span class="stock-tag">시티팝 · 일본 리이슈</span>
+        <span class="stock-price">39,000원</span>
+      </li>
+      <li>
+        <span class="stock-date">06.16</span>
+        <span class="stock-name">새소년 · <em>비적응</em> (한정 클리어)</span>
+        <span class="stock-tag">국내 인디 · 신보</span>
+        <span class="stock-price">33,000원</span>
+      </li>
+      <li>
+        <span class="stock-date">06.14</span>
+        <span class="stock-name">Bill Evans Trio · <em>Sunday at the Village Vanguard</em></span>
+        <span class="stock-tag">재즈 · 중고 VG+</span>
+        <span class="stock-price">26,000원</span>
+      </li>
+      <li>
+        <span class="stock-date">06.12</span>
+        <span class="stock-name">검정치마 · <em>Team Baby</em></span>
+        <span class="stock-tag">국내 인디 · 재입고</span>
+        <span class="stock-price">34,000원</span>
+      </li>
+    </ul>
+    <p class="stock-note">중고 음반은 상태 등급(M/NM/VG+)을 재킷에 표기합니다. 입고 알림은 매장 칠판이 가장 빠릅니다.</p>
+  </section>
+
+  <!-- 찾아오는 길 -->
+  <section id="visit" class="visit" aria-labelledby="visit-title">
+    <p class="section-index light">05 · 찾아오는 길</p>
+    <h2 id="visit-title" class="visit-head" data-weight-flex>회현역 4번 출구, 골목 안쪽</h2>
+    <div class="visit-grid">
+      <dl class="visit-info">
+        <div><dt>주소</dt><dd>서울 중구 회현동 퇴계로 골목 안 (회현역 4번 출구 도보 3분)</dd></div>
+        <div><dt>영업시간</dt><dd>화–일 14:00–22:00 · 월요일 휴무</dd></div>
+        <div><dt>전화</dt><dd><a href="tel:0212345678">02-123-4567</a></dd></div>
+        <div><dt>오는 길</dt><dd>4번 출구에서 나와 인쇄골목 방향으로 직진, 두 번째 갈림길에서 왼쪽. 파란 차양 아래 지하 계단으로 내려오세요.</dd></div>
+      </dl>
+      <figure class="visit-photo">
+        <img src="https://loremflickr.com/720/520/seoul,alley,night?lock=44" alt="회현동 뒷골목 야경" width="720" height="520" loading="lazy" decoding="async" />
+        <figcaption>밤이면 골목 끝 파란 차양이 가장 먼저 보입니다.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span class="brand-text small">GROOVE <em>회현</em></span>
+  <p>바늘이 닿기 전의 정적까지, 회현에서.</p>
+  <p class="copy">© 2026 GROOVE 회현 · 재즈 / 시티팝 / 국내 인디 바이닐</p>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
