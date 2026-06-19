@@ -60,8 +60,7 @@ node scripts/noonnu.cjs webfont 694
 - **주의**: "무료"라도 허용 범위(인쇄/웹/영상/임베딩/BI 등)는 폰트마다 다르다. 사용 전 `info` 의 허용 범위를 확인할 것. 글꼴 단독 판매는 대개 금지.
 - **새 폰트가 추가됐을 때 갱신**:
   ```bash
-  node scripts/noonnu.cjs build-cache        # 전체 재크롤(~25분, 동시성 5)
-  # 또는
-  node scripts/noonnu.cjs --refresh
+  node scripts/noonnu.cjs build-cache --incremental   # 권장: 라이브 목록과 비교해 신규 폰트만 크롤·병합(수 분)
+  node scripts/noonnu.cjs build-cache                 # 전체 재크롤(~25분) — 기존 폰트 메타까지 최신화하고 싶을 때
   ```
-  폰트 목록은 자주 바뀌지 않으므로 월 1회 정도면 충분하다. 갱신 후 `data/noonnu-fonts.json` 을 커밋해 두면 팀이 공유한다.
+  `--incremental` 은 목록만 먼저 비교해 신규가 없으면 즉시 종료(캐시 보존)한다. 폰트 목록은 자주 바뀌지 않으므로 가끔 `--incremental` 로 확인하면 충분하다. 갱신 후 `data/noonnu-fonts.json` 을 커밋해 두면 팀이 공유한다. (완전 자동화는 cron/CI에서 위 명령을 주기 실행하면 된다.)

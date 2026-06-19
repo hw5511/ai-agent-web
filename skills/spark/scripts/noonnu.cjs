@@ -226,6 +226,9 @@ async function mapPool(items, n, fn, onTick) {
 async function cmdBuildCache(args) {
   const max = args.max ? Number(args.max) : Infinity;
   const conc = args.concurrency ? Number(args.concurrency) : 5;
+  const incremental = !!args.incremental;
+  const existing = incremental ? ((loadCache() || {}).fonts || []) : [];
+  const existingMap = new Map(existing.map((f) => [f.id, f]));
   await withCtx(async (ctx) => {
     console.error('1/2 목록 수집 중...');
     const first = await listLive(ctx, 1);
@@ -239,8 +242,14 @@ async function cmdBuildCache(args) {
       if (base.length >= max) break;
     }
     if (base.length > max) base = base.slice(0, max);
-    console.error(`목록 ${base.length}개 수집 완료. 2/2 상세 크롤(동시 ${conc})...`);
-    const details = await mapPool(base, conc, async (f) => {
+    // 증분: 캐시에 없는 신규 폰트만 상세 크롤
+    const targets = incremental ? base.filter((f) => !existingMap.has(f.id)) : base;
+    if (incremental && !targets.length) {
+      console.log(`증분 갱신: 신규 폰트 없음 (캐시 ${existing.length}개 / 라이브 ${total}개). 변경 없음.`);
+      return;
+    }
+    console.error(`${incremental ? `증분: 신규 ${targets.length}개` : `목록 ${base.length}개`} 상세 크롤(동시 ${conc})...`);
+    const fresh = await mapPool(targets, conc, async (f) => {
       let d = await fetchDetail(ctx, f.id);
       if (!d.shape && !d.usage.length) d = await fetchDetail(ctx, f.id); // 타이밍 실패 시 1회 재시도
       // 전체 굵기 CSS가 있으면 채택하고, font_family도 같은 소스에서 뽑아 일치시킨다
@@ -258,12 +267,20 @@ async function cmdBuildCache(args) {
         font_family: familyFromCss(fullCss) || f.font_family,
       };
     }, (done, n) => { if (done % 50 === 0 || done === n) console.error(`  상세 ${done}/${n}`); });
-    const errs = details.filter((d) => d.__error).length;
+    // 증분이면 기존 + 신규를 라이브 목록 순서로 병합, 아니면 신규 전체
+    let details;
+    if (incremental) {
+      const freshMap = new Map(fresh.map((f) => [f.id, f]));
+      details = base.map((f) => freshMap.get(f.id) || existingMap.get(f.id)).filter(Boolean);
+    } else {
+      details = fresh;
+    }
+    const errs = fresh.filter((d) => d.__error).length;
     const out = { source: 'noonnu.cc', total_count: total, cached_count: details.length, cached_at: new Date().toISOString(), fonts: details };
     fs.mkdirSync(path.dirname(CACHE_PATH), { recursive: true });
     fs.writeFileSync(CACHE_PATH, JSON.stringify(out));
     const kb = Math.round(fs.statSync(CACHE_PATH).size / 1024);
-    console.log(`캐시 저장: ${CACHE_PATH}`);
+    console.log(`캐시 저장: ${CACHE_PATH}${incremental ? ` (증분: 신규 ${fresh.length}개 추가)` : ''}`);
     console.log(`  ${details.length}개 / 총 ${total}개 · ${kb}KB · 상세 실패 ${errs}개 · ${out.cached_at}`);
   });
 }
@@ -452,7 +469,8 @@ function usage() {
   const c = loadCache();
   console.log(`noonnu.cjs — 눈누 상업용 무료 한글 폰트 CLI (하이브리드: 캐시 우선 + 라이브 폴백)
 
-  build-cache               전체 카탈로그 크롤 → data/noonnu-fonts.json  [--max N] [--concurrency 6]
+  build-cache               전체 카탈로그 크롤 → data/noonnu-fonts.json  [--max N] [--concurrency 5] [--incremental]
+                            (--incremental: 캐시에 없는 신규 폰트만 크롤·병합)
   search <쿼리>              폰트/제작자 검색            [--limit N] [--json] [--live]
   category <형태>            카테고리/태그(캐시는 형태 정확매칭)  [--limit N] [--json] [--live]
   list                      목록(페이지네이션)          [--page N] [--limit N] [--json] [--live]
