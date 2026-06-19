@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GROOVE 회현 · 음악을 떠받치는 대들보</title>
+<meta name="description" content="회현역 뒷골목 바이닐 레코드 전문점 GROOVE 회현. 재즈·시티팝·국내 인디 LP, 청음 공간, 중고·신보." />
+<link rel="preconnect" href="https://hangeul.pstatic.net" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="styles.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script defer src="script.js"></script>
+</head>
+<body>
+
+<!-- 대들보: 사이트 전체를 가로지르는 수평 구조축(보). 모든 섹션이 여기에 매달린 장선(joist)처럼 걸린다. -->
+<div class="beam" aria-hidden="true">
+  <div class="beam__rail"></div>
+  <div class="beam__grain"></div>
+  <canvas id="spark_shards"></canvas>
+</div>
+
+<!-- 빛의 파편이 떨어지는 보(beam) 위를 따라가는 진행 표시 -->
+<nav class="spine" aria-label="섹션 이동">
+  <span class="spine__mark" data-go="1">철학</span>
+  <span class="spine__mark" data-go="2">큐레이션</span>
+  <span class="spine__mark" data-go="3">청음</span>
+  <span class="spine__mark" data-go="4">입고</span>
+  <span class="spine__mark" data-go="5">찾아오기</span>
+</nav>
+
+<header class="masthead" id="sec-0">
+  <p class="masthead__kicker">회현역 4번 출구 뒷골목 · 바이닐 레코드 전문</p>
+  <h1 class="masthead__title" data-vfont>
+    <span class="masthead__line">한 동네의 음악을</span>
+    <span class="masthead__line masthead__line--beam">떠받치는&nbsp;<em>대들보</em></span>
+  </h1>
+  <p class="masthead__lede">
+    GROOVE 회현은 천장을 가로지른 굵은 보(梁) 하나에서 시작합니다.
+    그 보에 음반을 한 장씩 걸어 동네의 소리를 떠받칩니다.
+    LP는 밤송이를 닮았습니다 · 까슬한 재킷과 등급을 벗겨야
+    안에 단단히 든 단맛, 그 한 곡이 손에 잡힙니다.
+  </p>
+  <p class="masthead__meta">매일 13:00–22:00 · 화요일 휴무 · 청음 자유</p>
+</header>
+
+<main>
+
+  <!-- 1) 철학 / 소개 -->
+  <section class="bay bay--creed" id="sec-1" aria-labelledby="creed-h">
+    <div class="bay__hang"></div>
+    <h2 class="bay__h" id="creed-h" data-vfont>겉껍질을 벗기는 가게</h2>
+    <div class="creed">
+      <p class="creed__p">
+        밤송이는 함부로 열리지 않습니다. 까슬한 가시가 단맛을 지킵니다.
+        음반도 그렇습니다. 빛바랜 재킷, 깨알 같은 매트릭스 번호,
+        VG에서 NM까지의 상태 등급 · 이 겉껍질을 같이 벗겨 드리는 것이
+        저희가 하는 일의 전부입니다.
+      </p>
+      <p class="creed__p">
+        2016년 회현 지하상가 뒤편에서 보(梁) 하나를 살리며 문을 열었습니다.
+        대들보는 가장 무거운 무게를 묵묵히 떠받칩니다. 유행이 지나도
+        사라지지 않는 소리를, 저희는 그렇게 떠받치고 싶었습니다.
+      </p>
+      <ul class="creed__facts">
+        <li><b>2016</b><span>회현 개점</span></li>
+        <li><b>9,400+</b><span>상시 재고 LP</span></li>
+        <li><b>3대</b><span>청음용 턴테이블</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2) 장르 큐레이션 · 밤송이가 갈라지듯 펼쳐지는 가변 셀 -->
+  <section class="bay bay--curate" id="sec-2" aria-labelledby="curate-h">
+    <div class="bay__hang"></div>
+    <h2 class="bay__h" id="curate-h" data-vfont>세 갈래로 갈라지는 송이</h2>
+    <p class="bay__sub">밤송이가 셋으로 갈라지듯, 진열은 세 결로 나뉩니다. 카드를 열어 안을 보세요.</p>
+    <div class="burrs">
+      <article class="burr" tabindex="0" aria-expanded="false">
+        <div class="burr__shell">
+          <span class="burr__no">01</span>
+          <h3 class="burr__name">재즈 / 모달·하드밥</h3>
+        </div>
+        <div class="burr__core">
+          <p>Blue Note·Prestige 재발매와 일본 프레싱 중심. 마일스 데이비스 「Kind of Blue」, 빌 에반스 트리오, 쳇 베이커 보컬반이 늘 한 칸을 지킵니다.</p>
+          <span class="burr__tag">신보 + 중고 VG~NM · 28,000–96,000원</span>
+        </div>
+      </article>
+      <article class="burr" tabindex="0" aria-expanded="false">
+        <div class="burr__shell">
+          <span class="burr__no">02</span>
+          <h3 class="burr__name">시티팝 / 7080 일본</h3>
+        </div>
+        <div class="burr__core">
+          <p>타츠로 야마시타 「For You」, 마리야 타케우치 「Variety」, 안리. 오리지널 OBI 보유반은 별도 케이스로 분리 보관합니다.</p>
+          <span class="burr__tag">중고 위주 VG+~NM · 45,000–180,000원</span>
+        </div>
+      </article>
+      <article class="burr" tabindex="0" aria-expanded="false">
+        <div class="burr__shell">
+          <span class="burr__no">03</span>
+          <h3 class="burr__name">국내 인디 / 신보</h3>
+        </div>
+        <div class="burr__core">
+          <p>새소년, 잔나비, 검정치마, 아도이의 한정 컬러 바이닐. 발매 당일 입고분은 보(beam) 왼쪽 끝 ‘갓 떨어진 알밤’ 칸에 겁니다.</p>
+          <span class="burr__tag">신보 NM · 26,000–58,000원</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3) 청음 공간 -->
+  <section class="bay bay--listen" id="sec-3" aria-labelledby="listen-h">
+    <div class="bay__hang"></div>
+    <h2 class="bay__h" id="listen-h" data-vfont>알밤을 깨무는 자리</h2>
+    <div class="listen">
+      <figure class="listen__fig">
+        <img src="https://loremflickr.com/720/900/vinyl,turntable,record" width="720" height="900" alt="청음 부스의 턴테이블과 헤드폰" loading="lazy" />
+        <figcaption>보 아래 세 자리의 청음 부스</figcaption>
+      </figure>
+      <div class="listen__body">
+        <p class="listen__lead">
+          사기 전에 깨물어 보세요. 까슬한 껍질을 벗기고 단맛을 확인하는 시간,
+          저희는 그것을 청음이라 부릅니다.
+        </p>
+        <dl class="listen__spec">
+          <div><dt>턴테이블</dt><dd>Technics SL-1200 · 2대</dd></div>
+          <div><dt>헤드폰</dt><dd>Sennheiser HD 600 · Audio-Technica</dd></div>
+          <div><dt>이용</dt><dd>구매 전 무료 · 한 자리 최대 30분</dd></div>
+          <div><dt>예약</dt><dd>주말 16–20시 권장 (현장 대기 가능)</dd></div>
+        </dl>
+        <p class="listen__note">중고반은 청음 후 상태 등급을 함께 확인해 드립니다. 사운드 노이즈가 등급과 다르면 교환·환불됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4) 신보·입고 · 보에 갓 걸린 알밤들 -->
+  <section class="bay bay--drop" id="sec-4" aria-labelledby="drop-h">
+    <div class="bay__hang"></div>
+    <h2 class="bay__h" id="drop-h" data-vfont>이번 주 보에 걸린 알밤</h2>
+    <p class="bay__sub">6월 셋째 주 입고. 상태 등급과 가격은 실물 기준입니다.</p>
+    <ul class="drops">
+      <li class="drop">
+        <img src="https://picsum.photos/seed/groove31/240/240" width="240" height="240" alt="새소년 신보 LP 재킷" loading="lazy" />
+        <div class="drop__txt"><h3>새소년 · 비적응 (컬러반)</h3><p>국내 인디 · 신보 NM · 한정 옐로 바이닐</p></div>
+        <span class="drop__price">38,000원</span>
+      </li>
+      <li class="drop">
+        <img src="https://picsum.photos/seed/groove32/240/240" width="240" height="240" alt="타츠로 야마시타 LP 재킷" loading="lazy" />
+        <div class="drop__txt"><h3>山下達郎 · For You</h3><p>시티팝 · 중고 VG+ · OBI 동봉 일본 프레싱</p></div>
+        <span class="drop__price">132,000원</span>
+      </li>
+      <li class="drop">
+        <img src="https://picsum.photos/seed/groove33/240/240" width="240" height="240" alt="빌 에반스 트리오 LP 재킷" loading="lazy" />
+        <div class="drop__txt"><h3>Bill Evans Trio · Waltz for Debby</h3><p>재즈 · 중고 VG · OJC 재발매</p></div>
+        <span class="drop__price">34,000원</span>
+      </li>
+      <li class="drop">
+        <img src="https://picsum.photos/seed/groove34/240/240" width="240" height="240" alt="검정치마 LP 재킷" loading="lazy" />
+        <div class="drop__txt"><h3>검정치마 · TEAM BABY</h3><p>국내 인디 · 신보 NM · 2LP</p></div>
+        <span class="drop__price">52,000원</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 5) 찾아오는 길 -->
+  <section class="bay bay--find" id="sec-5" aria-labelledby="find-h">
+    <div class="bay__hang"></div>
+    <h2 class="bay__h" id="find-h" data-vfont>보가 걸린 골목으로</h2>
+    <div class="find">
+      <div class="find__col">
+        <h3>주소</h3>
+        <p>서울 중구 회현동1가 회현지하쇼핑센터 뒤편<br />소공로 12길 안쪽 ‘보(梁)’ 간판 지하 1층</p>
+      </div>
+      <div class="find__col">
+        <h3>오는 길</h3>
+        <p>4호선 회현역 4번 출구 도보 3분.<br />지하상가 끝 계단을 내려와 천장의 굵은 나무 보를 따라 오세요.</p>
+      </div>
+      <div class="find__col">
+        <h3>영업</h3>
+        <p>매일 13:00–22:00<br />화요일 정기휴무<br />02-318-0000</p>
+      </div>
+    </div>
+    <p class="find__sign">GROOVE 회현 · 음악을 떠받치는 대들보</p>
+  </section>
+
+</main>
+
+</body>
+</html>

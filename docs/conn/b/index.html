@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GROOVE 회현 · 감정을 여는 열쇠 가게</title>
+<meta name="description" content="회현역 뒷골목 바이닐 레코드 전문점. 재즈·시티팝·국내 인디 LP, 청음 공간, 중고·신보. 음반은 닫힌 감정을 여는 열쇠다." />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- 색을 가르는 스펙트럼 빛: 화면 전역에 깔리는 무지개 프리즘 (정적 레이어) -->
+<div class="spark-prism" aria-hidden="true">
+  <span class="spark-band spark-band--r"></span>
+  <span class="spark-band spark-band--o"></span>
+  <span class="spark-band spark-band--y"></span>
+  <span class="spark-band spark-band--g"></span>
+  <span class="spark-band spark-band--b"></span>
+  <span class="spark-band spark-band--v"></span>
+</div>
+
+<!-- 열쇠고리: 내비게이션 자체가 열쇠 꾸러미. 클릭하면 열쇠가 돌아가며 자물쇠를 연다 -->
+<nav class="spark-ring" aria-label="섹션 열쇠고리">
+  <span class="spark-ring__hook" aria-hidden="true"></span>
+  <ul class="spark-ring__keys">
+    <li><a class="spark-key" href="#unlock-philosophy" data-key="00" data-hue="280" aria-label="철학 잠금 열기">
+      <svg class="spark-key__svg" viewBox="0 0 36 90" aria-hidden="true"><circle cx="18" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="18" cy="16" r="4" fill="currentColor"/><rect x="15" y="27" width="6" height="55" fill="currentColor"/><rect x="21" y="62" width="9" height="5" fill="currentColor"/><rect x="21" y="72" width="13" height="5" fill="currentColor"/></svg>
+      <span class="spark-key__tag">철학</span>
+    </a></li>
+    <li><a class="spark-key" href="#unlock-curation" data-key="01" data-hue="200" aria-label="큐레이션 잠금 열기">
+      <svg class="spark-key__svg" viewBox="0 0 36 90" aria-hidden="true"><circle cx="18" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="18" cy="16" r="4" fill="currentColor"/><rect x="15" y="27" width="6" height="55" fill="currentColor"/><rect x="21" y="58" width="11" height="5" fill="currentColor"/><rect x="21" y="70" width="8" height="5" fill="currentColor"/></svg>
+      <span class="spark-key__tag">큐레이션</span>
+    </a></li>
+    <li><a class="spark-key" href="#unlock-listening" data-key="02" data-hue="140" aria-label="청음 공간 잠금 열기">
+      <svg class="spark-key__svg" viewBox="0 0 36 90" aria-hidden="true"><circle cx="18" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="18" cy="16" r="4" fill="currentColor"/><rect x="15" y="27" width="6" height="55" fill="currentColor"/><rect x="21" y="64" width="13" height="5" fill="currentColor"/><rect x="21" y="74" width="7" height="5" fill="currentColor"/></svg>
+      <span class="spark-key__tag">청음</span>
+    </a></li>
+    <li><a class="spark-key" href="#unlock-stock" data-key="03" data-hue="40" aria-label="신보 입고 잠금 열기">
+      <svg class="spark-key__svg" viewBox="0 0 36 90" aria-hidden="true"><circle cx="18" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="18" cy="16" r="4" fill="currentColor"/><rect x="15" y="27" width="6" height="55" fill="currentColor"/><rect x="21" y="60" width="8" height="5" fill="currentColor"/><rect x="21" y="69" width="12" height="5" fill="currentColor"/></svg>
+      <span class="spark-key__tag">입고</span>
+    </a></li>
+    <li><a class="spark-key" href="#unlock-visit" data-key="04" data-hue="0" aria-label="찾아오는 길 잠금 열기">
+      <svg class="spark-key__svg" viewBox="0 0 36 90" aria-hidden="true"><circle cx="18" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="18" cy="16" r="4" fill="currentColor"/><rect x="15" y="27" width="6" height="55" fill="currentColor"/><rect x="21" y="56" width="13" height="5" fill="currentColor"/><rect x="21" y="66" width="6" height="5" fill="currentColor"/><rect x="21" y="75" width="10" height="5" fill="currentColor"/></svg>
+      <span class="spark-key__tag">오시는 길</span>
+    </a></li>
+  </ul>
+</nav>
+
+<main class="spark-main">
+
+  <!-- 입구: 자물쇠 화면. Hero 아님 · 잠긴 문이 먼저 등장 -->
+  <header class="spark-gate" id="gate">
+    <p class="spark-gate__kicker">회현역 4번 출구 · 뒷골목 지하 1층 · 바이닐 레코드 전문</p>
+    <h1 class="spark-gate__title">
+      <span class="spark-gate__line">닫혀 있던 감정에</span>
+      <span class="spark-gate__line spark-gate__line--key">꼭 맞는 열쇠를</span>
+      <span class="spark-gate__line">건네는 가게</span>
+    </h1>
+    <p class="spark-gate__sub">GROOVE 회현은 음반을 팔지 않습니다. 우리는 당신이 아직 이름 붙이지 못한 기분을 열어줄 <em>열쇠</em>를 골라 드립니다. 그 열쇠가 돌아가는 순간, 한 장의 LP가 여섯 갈래 빛으로 흩어집니다.</p>
+    <p class="spark-gate__hint" aria-hidden="true">아래로 내려가 자물쇠를 여세요</p>
+    <span class="spark-gate__keyhole" aria-hidden="true"></span>
+  </header>
+
+  <!-- 00 철학 -->
+  <section class="spark-lock" id="unlock-philosophy" data-hue="280" tabindex="-1" aria-labelledby="h-philosophy">
+    <div class="spark-lock__index" aria-hidden="true">00</div>
+    <div class="spark-lock__body">
+      <p class="spark-lock__eyebrow">왜 열쇠인가</p>
+      <h2 class="spark-lock__title" id="h-philosophy">한 장의 음반은<br />단 하나의 잠금장치를 엽니다</h2>
+      <div class="spark-lock__cols">
+        <p>2014년, 회현 지하상가 끝 계단을 내려간 좁은 방에서 시작했습니다. 우리는 장르로 음반을 진열하지 않습니다. 대신 "오늘 무엇을 열고 싶나요"라고 묻습니다. 새벽의 불안, 퇴근길의 헐거움, 비 오는 일요일의 게으름 · 그 닫힌 칸마다 들어맞는 열쇠가 따로 있다고 믿습니다.</p>
+        <p>그래서 우리 벽은 색으로 나뉩니다. 한 장을 턴테이블에 올리면 그 소리가 보라에서 빨강까지 여섯 갈래 빛으로 갈라지고, 당신은 그중 한 칸이 열리는 걸 느낍니다. 음반은 닫힌 마음의 열쇠, 장르는 그 열쇠가 열어젖히는 무지개입니다.</p>
+      </div>
+      <ul class="spark-lock__facts">
+        <li><span>운영 12년차</span></li>
+        <li><span>보유 바이닐 약 6,200장</span></li>
+        <li><span>중고 상태등급 5단계 표기</span></li>
+      </ul>
+    </div>
+    <figure class="spark-lock__plate">
+      <img src="https://loremflickr.com/720/900/vinyl,shop,shelf" alt="색깔별로 나뉜 GROOVE 회현 매장 벽면 음반 진열대" width="720" height="900" loading="lazy" />
+      <figcaption>장르가 아니라 색으로 나뉜 벽면 진열</figcaption>
+    </figure>
+  </section>
+
+  <!-- 01 큐레이션 = 여섯 갈래 색 열쇠 -->
+  <section class="spark-lock spark-lock--wide" id="unlock-curation" data-hue="200" tabindex="-1" aria-labelledby="h-curation">
+    <div class="spark-lock__index" aria-hidden="true">01</div>
+    <div class="spark-lock__body">
+      <p class="spark-lock__eyebrow">여섯 개의 열쇠 · 장르 큐레이션</p>
+      <h2 class="spark-lock__title" id="h-curation">어떤 칸을<br />열어 드릴까요</h2>
+      <p class="spark-lock__lead">장르는 곧 색입니다. 각 열쇠를 가리키면 그 색의 빛이 켜집니다. 매대 위 라벨에 적힌 그대로 골라 보세요.</p>
+    </div>
+    <ul class="spark-spectrum" role="list">
+      <li class="spark-genre" data-hue="285" style="--g-hue:285">
+        <p class="spark-genre__no">열쇠 V</p>
+        <h3 class="spark-genre__name">재즈</h3>
+        <p class="spark-genre__desc">Bill Evans, Chet Baker, 그리고 ECM 계열의 차가운 정적. 새벽 두 시의 칸을 엽니다.</p>
+        <p class="spark-genre__meta">신보·중고 약 1,400장</p>
+      </li>
+      <li class="spark-genre" data-hue="220" style="--g-hue:220">
+        <p class="spark-genre__no">열쇠 B</p>
+        <h3 class="spark-genre__name">시티팝</h3>
+        <p class="spark-genre__desc">Tatsuro Yamashita, Mariya Takeuchi, Anri. 80년대 네온이 켜지는 퇴근길의 칸.</p>
+        <p class="spark-genre__meta">일본반 위주 약 900장</p>
+      </li>
+      <li class="spark-genre" data-hue="150" style="--g-hue:150">
+        <p class="spark-genre__no">열쇠 G</p>
+        <h3 class="spark-genre__name">국내 인디</h3>
+        <p class="spark-genre__desc">잠비나이, 새소년, 실리카겔, 아도이. 지금 한국에서 자라는 소리의 칸.</p>
+        <p class="spark-genre__meta">국내 발매반 약 1,100장</p>
+      </li>
+      <li class="spark-genre" data-hue="55" style="--g-hue:55">
+        <p class="spark-genre__no">열쇠 Y</p>
+        <h3 class="spark-genre__name">소울 · 펑크</h3>
+        <p class="spark-genre__desc">D'Angelo, Roy Ayers, 그루브가 끈적한 한낮의 칸. 우리 가게 이름의 뿌리.</p>
+        <p class="spark-genre__meta">중고 위주 약 800장</p>
+      </li>
+      <li class="spark-genre" data-hue="28" style="--g-hue:28">
+        <p class="spark-genre__no">열쇠 O</p>
+        <h3 class="spark-genre__name">앰비언트</h3>
+        <p class="spark-genre__desc">Brian Eno, Hiroshi Yoshimura. 아무 일도 일어나지 않아도 되는 일요일의 칸.</p>
+        <p class="spark-genre__meta">재발매반 약 600장</p>
+      </li>
+      <li class="spark-genre" data-hue="2" style="--g-hue:2">
+        <p class="spark-genre__no">열쇠 R</p>
+        <h3 class="spark-genre__name">국내 가요 리이슈</h3>
+        <p class="spark-genre__desc">산울림, 김현철, 빛과 소금. 부모 세대의 칸을 다시 여는 재발매 컬렉션.</p>
+        <p class="spark-genre__meta">한정 재발매 약 400장</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 02 청음 공간 -->
+  <section class="spark-lock spark-lock--listen" id="unlock-listening" data-hue="140" tabindex="-1" aria-labelledby="h-listening">
+    <div class="spark-lock__index" aria-hidden="true">02</div>
+    <figure class="spark-lock__plate spark-lock__plate--alt">
+      <img src="https://picsum.photos/seed/groove-booth/760/860" alt="GROOVE 회현 지하 청음 부스의 의자와 헤드폰" width="760" height="860" loading="lazy" />
+      <figcaption>1인 청음 부스. 문을 닫으면 골목 소음이 사라집니다</figcaption>
+    </figure>
+    <div class="spark-lock__body">
+      <p class="spark-lock__eyebrow">열어 보고 사세요 · 청음 공간</p>
+      <h2 class="spark-lock__title" id="h-listening">사기 전에<br />먼저 열어 보세요</h2>
+      <div class="spark-lock__cols">
+        <p>지하 안쪽에 1인 청음 부스 세 개와 2인 소파석 하나가 있습니다. 매대의 어떤 음반이든 꺼내 와 직접 턴테이블에 올려 볼 수 있습니다. 카트리지는 Audio-Technica VM540ML, 앰프는 Marantz PM6007을 씁니다.</p>
+        <p>열쇠를 직접 돌려 보는 곳이라 생각하시면 됩니다. 한 칸이 정말 당신 것인지, A면 한 곡만 들어 봐도 대개 알 수 있습니다. 청음은 무료이며, 예약 없이 자리가 비면 바로 이용 가능합니다.</p>
+      </div>
+      <dl class="spark-listen-spec">
+        <div><dt>청음 부스</dt><dd>1인석 3 · 2인석 1</dd></div>
+        <div><dt>음반 상태등급</dt><dd>M / NM / VG+ / VG / G</dd></div>
+        <div><dt>이용료</dt><dd>무료 · 음료 4,000원~</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 03 신보·입고 -->
+  <section class="spark-lock spark-lock--stock" id="unlock-stock" data-hue="40" tabindex="-1" aria-labelledby="h-stock">
+    <div class="spark-lock__index" aria-hidden="true">03</div>
+    <div class="spark-lock__body">
+      <p class="spark-lock__eyebrow">이번 주 새로 깎은 열쇠 · 신보·입고</p>
+      <h2 class="spark-lock__title" id="h-stock">이번 주<br />새 열쇠 꾸러미</h2>
+      <p class="spark-lock__lead">매주 목요일 신보·중고가 함께 들어옵니다. 아래는 6월 셋째 주 입고분 일부입니다.</p>
+    </div>
+    <ol class="spark-stock" role="list">
+      <li class="spark-stock__item">
+        <span class="spark-stock__chip spark-stock__chip--new">신보</span>
+        <p class="spark-stock__title">새소년 · 비적응 (2024)</p>
+        <p class="spark-stock__line">국내 인디 · 180g 블랙 · 상태 M · 38,000원</p>
+      </li>
+      <li class="spark-stock__item">
+        <span class="spark-stock__chip">중고</span>
+        <p class="spark-stock__title">Tatsuro Yamashita · For You (1982, 일본 오리지널)</p>
+        <p class="spark-stock__line">시티팝 · 상태 VG+ (자켓 모서리 마모) · 145,000원</p>
+      </li>
+      <li class="spark-stock__item">
+        <span class="spark-stock__chip">중고</span>
+        <p class="spark-stock__title">Bill Evans · Sunday at the Village Vanguard</p>
+        <p class="spark-stock__line">재즈 · OJC 재발매 · 상태 NM · 52,000원</p>
+      </li>
+      <li class="spark-stock__item">
+        <span class="spark-stock__chip spark-stock__chip--new">신보</span>
+        <p class="spark-stock__title">실리카겔 · Machine Boy (재발매)</p>
+        <p class="spark-stock__line">국내 인디 · 컬러반 · 상태 M · 44,000원</p>
+      </li>
+      <li class="spark-stock__item">
+        <span class="spark-stock__chip">중고</span>
+        <p class="spark-stock__title">산울림 · 산울림 새노래 모음 (리이슈)</p>
+        <p class="spark-stock__line">가요 리이슈 · 상태 VG · 29,000원</p>
+      </li>
+      <li class="spark-stock__item">
+        <span class="spark-stock__chip spark-stock__chip--new">신보</span>
+        <p class="spark-stock__title">Hiroshi Yoshimura · GREEN (재발매)</p>
+        <p class="spark-stock__line">앰비언트 · 그린 컬러반 · 상태 M · 49,000원</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 04 찾아오는 길 = 마지막 열쇠 (피크엔드의 엔드) -->
+  <section class="spark-lock spark-lock--final" id="unlock-visit" data-hue="0" tabindex="-1" aria-labelledby="h-visit">
+    <div class="spark-lock__index" aria-hidden="true">04</div>
+    <div class="spark-final">
+      <p class="spark-lock__eyebrow">마지막 열쇠 · 찾아오는 길</p>
+      <h2 class="spark-lock__title" id="h-visit">문 앞까지<br />안내해 드릴게요</h2>
+      <p class="spark-final__lead">회현역 4번 출구에서 1분. 지하상가 안쪽 끝, 노란 자물쇠 간판을 찾으세요. 그 문 너머에 당신의 칸이 있습니다.</p>
+      <dl class="spark-visit">
+        <div><dt>주소</dt><dd>서울 중구 회현동1가 회현지하상가 다열 41호</dd></div>
+        <div><dt>영업시간</dt><dd>화–일 13:00–21:00 · 월요일 휴무</dd></div>
+        <div><dt>전화</dt><dd>02-318-6200</dd></div>
+        <div><dt>가는 길</dt><dd>4호선 회현역 4번 출구 → 지하상가 직진 80m</dd></div>
+      </dl>
+      <p class="spark-final__closing">한 칸이 열리는 소리는, 결국 당신만 들을 수 있습니다.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="spark-foot">
+  <p>GROOVE 회현 · 바이닐 레코드 전문점</p>
+  <p>화–일 13:00–21:00 · 월 휴무 · 02-318-6200</p>
+  <p class="spark-foot__fine">이미지는 예시이며 실제 매장과 다를 수 있습니다.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
