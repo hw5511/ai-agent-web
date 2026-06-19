@@ -392,6 +392,59 @@ async function cmdSample(args) {
   });
 }
 
+// 폰트 대조표: 여러 후보를 한 PNG에 같은 문구로 렌더 → 글자 생김새를 보고 셀렉
+async function cmdContact(args) {
+  const text = args.text || '다람쥐 헌 쳇바퀴에 타고파 GROOVE 0123';
+  const size = Number(args.size || 38);
+  const limit = args.limit ? Number(args.limit) : 8;
+  const out = args.out || `noonnu-contact-${Date.now()}.png`;
+  const cache = useCache(args);
+  await withCtx(async (ctx) => {
+    let fonts = [];
+    // 대상 결정: 명시 키(id/이름, 쉼표·공백 구분) > --category > --search
+    const keys = args._.slice(1).join(' ').split(/[,\s]+/).map((s) => s.trim()).filter(Boolean);
+    const resolveOne = async (k) => {
+      let f = cache && cacheFind(cache, k);
+      if (f && f.webfont_css) return f;
+      const b = /^\d+$/.test(k) ? { id: Number(k) } : (await searchLive(ctx, k, 1)).fonts[0];
+      if (!b) return null;
+      const d = await fetchDetail(ctx, b.id);
+      const css = (d.webfont_css_full && d.webfont_css_full.length > (b.webfont_css || '').length) ? d.webfont_css_full : b.webfont_css;
+      return css ? { id: b.id, name: b.name || d.name, shape: d.shape, font_family: familyFromCss(css) || b.font_family, webfont_css: css } : null;
+    };
+    if (keys.length) { for (const k of keys) { const f = await resolveOne(k); if (f) fonts.push(f); } }
+    else if (args.category) {
+      const r = cache ? cacheCategory(cache, args.category, limit) : await searchLive(ctx, args.category, limit);
+      fonts = r.fonts.filter((f) => f.webfont_css).slice(0, limit);
+    } else if (args.search) {
+      const r = cache ? cacheSearch(cache, args.search, limit) : await searchLive(ctx, args.search, limit);
+      fonts = r.fonts.filter((f) => f.webfont_css).slice(0, limit);
+    } else return fail('contact: <id/이름,...> 또는 --category <형태> / --search <쿼리> 가 필요합니다');
+    if (!fonts.length) return fail('대상 폰트가 없습니다');
+
+    const page = await ctx.newPage();
+    const css = fonts.map((f) => f.webfont_css).join('\n');
+    const rows = fonts.map((f) =>
+      `<div class="row"><div class="lbl">#${f.id} ${escapeHtml(f.name)}${f.shape ? ' · ' + escapeHtml(f.shape) : ''} · ${escapeHtml(f.font_family)}</div>` +
+      `<div class="smp" style="font-family:'${f.font_family}',sans-serif">${escapeHtml(text)}</div></div>`).join('');
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+      ${css}
+      body{margin:0;background:#fff;color:#111;width:1100px;font-family:system-ui,sans-serif}
+      .row{padding:18px 32px;border-bottom:1px solid #eee}
+      .lbl{font-size:12px;color:#888;margin-bottom:6px;letter-spacing:.02em}
+      .smp{font-size:${size}px;line-height:1.3;word-break:keep-all}
+    </style></head><body>${rows}</body></html>`;
+    await page.setContent(html, { waitUntil: 'load' });
+    await page.evaluate(async () => { if (document.fonts && document.fonts.ready) await document.fonts.ready; });
+    await page.waitForTimeout(800);
+    await page.screenshot({ path: out, fullPage: true });
+    await page.close();
+    if (args.json) return console.log(JSON.stringify({ out, count: fonts.length, fonts: fonts.map((f) => ({ id: f.id, name: f.name, font_family: f.font_family, shape: f.shape })) }, null, 2));
+    console.log(`대조표 저장: ${out}  (${fonts.length}개) — 이미지를 보고 셀렉하세요`);
+    fonts.forEach((f) => console.log(`  #${f.id} ${f.name} (${f.font_family})`));
+  });
+}
+
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function fail(msg) { console.error('ERROR: ' + msg); process.exitCode = 2; }
 
@@ -406,6 +459,7 @@ function usage() {
   info <id|이름>            형태·라이선스·허용범위·굵기   [--json] [--live]
   webfont <id|이름>         @font-face CSS + font-family [--json] [--live]
   sample <id|이름>          샘플 PNG 렌더               [--text "문구"] [--out f.png] [--size 64] [--weight 400] [--live]
+  contact <id,이름,...>     후보 폰트 대조표 PNG(셀렉용)  [--category 형태 | --search 쿼리] [--limit 8] [--text "문구"] [--out f.png]
 
   캐시: ${c ? `${c.cached_count}/${c.total_count}개 · ${c.cached_at}` : '없음 (build-cache 로 생성 권장)'}
   --live: 캐시 무시하고 라이브 / --refresh(build-cache 별칭)
@@ -429,6 +483,7 @@ async function main() {
       case 'info': return await cmdInfo(args);
       case 'webfont': return await cmdWebfont(args);
       case 'sample': return await cmdSample(args);
+      case 'contact': return await cmdContact(args);
       case undefined: case 'help': case '--help': case '-h': return usage();
       default: console.error(`알 수 없는 명령: ${cmd}\n`); return usage();
     }

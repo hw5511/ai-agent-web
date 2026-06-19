@@ -38,6 +38,23 @@ DARING_MOVE: 이 씨드로 무엇을 할 것인가 — 구체적 기법 1문장
 
 ---
 
+## 모험성 상향 — 강제연결(Forced Connection) [사용자가 "더 모험적/과감/뻔하지 않게"를 요청할 때만]
+
+기본 SPARK(STEP 1~3, 4축 씨드)는 구조·기법을 발산시키지만 **컨셉/은유 층**은 비어 있어, 같은 브리프가 도메인 1차 연상으로 수렴한다(예: 레코드샵 → 매번 LP 원반 + "바늘/소리" 카피). 사용자가 더 과감한 결과를 원할 때만 이 단계를 **추가로** 끼운다.
+
+1. **앵커 추출**: 브리프 핵심 명사 1개 (예: "레코드샵").
+2. **무작위 키워드 — 반드시 셸 RNG로** (LLM이 직접 단어를 "생각해내면" typicality bias로 수렴한다, 연구 검증됨):
+   ```bash
+   python3 scripts/forced_connection.py            # 1세트(무관 명사 2개)
+   python3 scripts/forced_connection.py --sets 5   # 변형 여러 개면 배치 비복원추출(중복 0)
+   ```
+3. **강제연결 → CENTER_METAPHOR**: "앵커 × 키워드들"을 보고 연상되는 *비자명한* 중심 은유를 1문장으로 도출해 spark_ignition에 `CENTER_METAPHOR`로 락인. 이 은유가 레이아웃·헤드라인 카피·색·모션을 관통한다.
+4. **1차 연상 자가 금지**: 도메인의 뻔한 시각/카피(레코드샵=LP원반·턴테이블·바늘·홈, "바늘/소리/골목")를 중심에서 배제. 1차 연상물은 부수 요소로만 허용.
+
+이 요청이 없으면 강제연결 없이 4축 씨드만으로 진행한다.
+
+---
+
 ## SPARK 정체성
 
 너는 애니메이터이자 UX 디자이너이자 프로토타이퍼다.
@@ -157,10 +174,13 @@ NEVER: Inter·Roboto·Arial·Fraunces / bold_readability poor·medium에 weight 
 ```bash
 node scripts/noonnu.cjs search 손글씨            # 폰트/제작자 검색 (--limit N, --json)
 node scripts/noonnu.cjs category 명조            # 카테고리/형태 조회(고딕·명조(=바탕)·손글씨·장식·픽셀)
+node scripts/noonnu.cjs contact --category 명조 --limit 8 --text "GROOVE 회현" --out cmp.png  # 후보 대조표 PNG
 node scripts/noonnu.cjs info 694                 # 형태·라이선스·허용범위·굵기
 node scripts/noonnu.cjs webfont 프리텐다드        # @font-face CSS 전체 굵기 → styles.css에 그대로 삽입
-node scripts/noonnu.cjs sample 694 --text "GROOVE 회현" --out groove.png   # 임의 문구를 그 폰트로 렌더
+node scripts/noonnu.cjs sample 694 --text "GROOVE 회현" --out groove.png   # 단일 폰트 렌더
 ```
+- **폰트는 텍스트 메타만 보고 고르지 마라(마루부리·프리텐다드 같은 인기 폰트로 쏠린다).** `contact`로 후보 6~8개를 한 장에 렌더한 뒤 **그 PNG를 Read로 직접 보고**, 글자 생김새가 컨셉(또는 CENTER_METAPHOR)과 맞는 것을 셀렉하라. `contact <id,이름,...>`로 특정 후보만 비교할 수도 있다.
+- 셀렉 절차: `category`/`search`로 후보 좁히기 → `contact`로 글자 비교(Read) → `info`로 라이선스 확인 → `webfont`로 CSS 삽입.
 - **하이브리드(캐시 우선)**: `data/noonnu-fonts.json` 캐시가 있으면 search/category/list/info/webfont 는 네트워크·playwright 없이 즉시 응답. 캐시가 없거나 `--live` 면 라이브로 폴백.
   - 캐시 생성·갱신: `node scripts/noonnu.cjs build-cache` (전체 카탈로그를 크롤해 캐시 저장 — 월 1회 정도면 충분). `--refresh` 동일.
   - `sample` 은 캐시의 웹폰트 CSS로 렌더하므로 playwright만 필요(라이브 데이터 불필요).
