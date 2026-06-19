@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GROOVE 회현 · 데워지는 음반 지층</title>
+<meta name="description" content="회현역 뒷골목 바이닐 레코드 전문점 GROOVE 회현. 재즈·시티팝·국내 인디 LP, 청음 공간, 중고·신보 입고.">
+<link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js" } }
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script type="module" src="script.js"></script>
+</head>
+<body>
+
+<a class="skip" href="#stratum-philosophy">본문으로 건너뛰기</a>
+
+<!-- 온돌 바닥: 정점 변위 히트맵 캔버스 (배경 고정, 아래로부터 데워짐) -->
+<canvas id="ondol-floor" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- 좌측 지층 게이지: 비선형 내비 -->
+<nav class="strata-gauge" aria-label="섹션 이동">
+  <span class="gauge-label">지층</span>
+  <ol>
+    <li><a href="#stratum-philosophy" data-depth="01"><i></i>표층</a></li>
+    <li><a href="#stratum-curation" data-depth="02"><i></i>장르 결</a></li>
+    <li><a href="#stratum-listen" data-depth="03"><i></i>청음 온돌</a></li>
+    <li><a href="#stratum-stock" data-depth="04"><i></i>신보 입고</a></li>
+    <li><a href="#stratum-visit" data-depth="05"><i></i>심층 / 찾기</a></li>
+  </ol>
+  <span class="gauge-temp" id="gauge-temp" aria-hidden="true">22.0&deg;</span>
+</nav>
+
+<header class="masthead">
+  <p class="kicker">회현역 7번 출구 뒷골목 · 바이닐 레코드 전문</p>
+  <h1 class="brand">GROOVE<span>회현</span></h1>
+  <p class="brand-sub">음반은 비늘처럼 겹쳐 쌓이고, 온기는 바닥에서 차오른다</p>
+</header>
+
+<main>
+
+<!-- 01 표층 / 철학 -->
+<section id="stratum-philosophy" class="stratum stratum--intro" data-stratum="01">
+  <div class="stratum-rim"><span class="rim-no">01</span><span class="rim-name">표층 · 철학</span></div>
+  <div class="intro-grid">
+    <div class="intro-lead">
+      <h2 class="lead-title">차가운 신보 한 장을<br>손바닥으로 데워 꺼내는 일</h2>
+      <p>우리는 매대를 진열대라 부르지 않는다. 음반이 비늘처럼 겹쳐 쌓인 <strong>지층</strong>이라 부른다. 손끝으로 한 장씩 들추면, 1980년의 시티팝과 지난주 들어온 국내 인디가 같은 결 안에서 나란히 누워 있다.</p>
+      <p>바닥은 늘 데워져 있다. 손님이 쪼그려 앉아 박스를 뒤지는 그 시간이 길어지도록, GROOVE 회현은 <strong>온돌처럼 아래에서부터 데우는 가게</strong>를 지향한다. 음악의 온기는 스피커가 아니라 바닥에서 올라온다고 믿는다.</p>
+    </div>
+    <aside class="intro-facts">
+      <dl>
+        <div><dt>개업</dt><dd>2016년 봄</dd></div>
+        <div><dt>보유 음반</dt><dd>중고 약 9,400장 · 신보 상시 입고</dd></div>
+        <div><dt>주력</dt><dd>재즈 · 시티팝 · 국내 인디</dd></div>
+        <div><dt>바닥 온도</dt><dd>겨울철 26&deg;C 유지 (온돌)</dd></div>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<!-- 02 장르 큐레이션: 비늘 타일 -->
+<section id="stratum-curation" class="stratum" data-stratum="02">
+  <div class="stratum-rim"><span class="rim-no">02</span><span class="rim-name">장르 결 · 큐레이션</span></div>
+  <h2 class="stratum-head">결마다 다른 비늘</h2>
+  <p class="stratum-sub">한 지층을 들추면 결이 갈린다. 우리가 매일 다시 쌓는 네 갈래의 비늘.</p>
+
+  <div class="scales">
+    <article class="scale" style="--i:0">
+      <span class="scale-tag">JAZZ</span>
+      <h3>재즈 · 가장 깊고 따뜻한 결</h3>
+      <p>Blue Note 50–60년대 재발매부터 ECM 유럽 재즈까지. Bill Evans <em>Waltz for Debby</em>, Chet Baker <em>Sings</em> 국내반 상시 보유.</p>
+      <ul class="scale-meta"><li>중고 18,000~120,000원</li><li>오리지널반 별도 케이스</li></ul>
+    </article>
+    <article class="scale" style="--i:1">
+      <span class="scale-tag">CITY POP</span>
+      <h3>시티팝 · 야경처럼 반짝이는 결</h3>
+      <p>山下達郎 <em>FOR YOU</em>, 竹内まりや <em>VARIETY</em>, 大貫妙子. 일본 재반·오비(띠지) 유무 명시.</p>
+      <ul class="scale-meta"><li>중고 30,000~210,000원</li><li>오비 보존반 프리미엄</li></ul>
+    </article>
+    <article class="scale" style="--i:2">
+      <span class="scale-tag">K-INDIE</span>
+      <h3>국내 인디 · 가장 최근에 쌓인 결</h3>
+      <p>새소년, 잠비나이, 김오키, 실리카겔. 소량 프레스 LP는 입고 즉시 소진되니 입고 알림 권장.</p>
+      <ul class="scale-meta"><li>신보 33,000~55,000원</li><li>한정 컬러반 입고 공지</li></ul>
+    </article>
+    <article class="scale" style="--i:3">
+      <span class="scale-tag">SOUL / FUNK</span>
+      <h3>소울·펑크 · 가장 끈적한 결</h3>
+      <p>Donny Hathaway, Roy Ayers, 70년대 한국 그룹사운드 재발매. 7인치 싱글 박스 별도 운영.</p>
+      <ul class="scale-meta"><li>중고 15,000~90,000원</li><li>7인치 5,000원~</li></ul>
+    </article>
+  </div>
+</section>
+
+<!-- 03 청음 공간: 온돌 -->
+<section id="stratum-listen" class="stratum stratum--warm" data-stratum="03">
+  <div class="stratum-rim"><span class="rim-no">03</span><span class="rim-name">청음 온돌 · 듣는 자리</span></div>
+  <div class="warm-grid">
+    <div class="warm-copy">
+      <h2 class="stratum-head">앉으면 바닥부터<br>데워지는 자리</h2>
+      <p>매장 안쪽, 좌식 청음 공간은 실제 온돌이다. 신발을 벗고 방석에 앉아 고른 음반을 직접 걸어 들을 수 있다. 한 번에 두 팀, 회전율보다 머무는 시간을 우선한다.</p>
+      <dl class="warm-spec">
+        <div><dt>청음기</dt><dd>Technics SL-1200 · Rega 입문기 2대</dd></div>
+        <div><dt>이용</dt><dd>구매 전 3장까지 무료 · 음료 주문 시 시간 제한 없음</dd></div>
+        <div><dt>좌석</dt><dd>좌식 4석 (예약 권장, 주말 한정)</dd></div>
+      </dl>
+    </div>
+    <figure class="warm-photo">
+      <img src="https://loremflickr.com/720/900/vinyl,record,store" alt="좌식 온돌 청음 공간에 음반 박스가 비늘처럼 겹쳐 놓인 모습" width="720" height="900" loading="lazy">
+      <figcaption>안쪽 좌식 청음 온돌 · 겨울에도 바닥이 따뜻하다</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 04 신보·입고 -->
+<section id="stratum-stock" class="stratum" data-stratum="04">
+  <div class="stratum-rim"><span class="rim-no">04</span><span class="rim-name">신보 입고 · 이번 주 새 비늘</span></div>
+  <h2 class="stratum-head">이번 주 새로 쌓인 비늘</h2>
+  <p class="stratum-sub">2026년 6월 셋째 주 입고. 상태 등급은 Goldmine 기준으로 표기한다.</p>
+  <ol class="stock-strata">
+    <li class="stock-row">
+      <span class="stock-grade" data-g="M">M</span>
+      <span class="stock-title"><strong>새소년 · 비적응</strong> <em>국내 인디 · 신보</em></span>
+      <span class="stock-note">한정 클리어 컬러반</span>
+      <span class="stock-price">49,000원</span>
+    </li>
+    <li class="stock-row">
+      <span class="stock-grade" data-g="VG+">VG+</span>
+      <span class="stock-title"><strong>山下達郎 · FOR YOU</strong> <em>시티팝 · 일본 재반</em></span>
+      <span class="stock-note">오비 있음 · 경미한 슬리브 마모</span>
+      <span class="stock-price">158,000원</span>
+    </li>
+    <li class="stock-row">
+      <span class="stock-grade" data-g="NM">NM</span>
+      <span class="stock-title"><strong>Bill Evans · Waltz for Debby</strong> <em>재즈 · OJC 재발매</em></span>
+      <span class="stock-note">반면 흠집 없음</span>
+      <span class="stock-price">42,000원</span>
+    </li>
+    <li class="stock-row">
+      <span class="stock-grade" data-g="VG">VG</span>
+      <span class="stock-title"><strong>Roy Ayers · Everybody Loves the Sunshine</strong> <em>소울·펑크 · 중고</em></span>
+      <span class="stock-note">표면 잡음 약간 · 가격 반영</span>
+      <span class="stock-price">76,000원</span>
+    </li>
+    <li class="stock-row">
+      <span class="stock-grade" data-g="M">M</span>
+      <span class="stock-title"><strong>실리카겔 · Power Andre 99</strong> <em>국내 인디 · 재발매</em></span>
+      <span class="stock-note">2LP · 게이트폴드</span>
+      <span class="stock-price">55,000원</span>
+    </li>
+  </ol>
+  <p class="stock-legend"><strong>M</strong> 미개봉 · <strong>NM</strong> 거의 새것 · <strong>VG+</strong> 양호 · <strong>VG</strong> 사용감 있음</p>
+</section>
+
+<!-- 05 찾아오는 길 -->
+<section id="stratum-visit" class="stratum stratum--deep" data-stratum="05">
+  <div class="stratum-rim"><span class="rim-no">05</span><span class="rim-name">심층 · 찾아오는 길</span></div>
+  <h2 class="stratum-head">가장 아래, 가장 뜨거운 층</h2>
+  <div class="visit-grid">
+    <dl class="visit-info">
+      <div><dt>주소</dt><dd>서울 중구 회현동1가 회현로 12, 지하 1층<br>(회현역 7번 출구 도보 4분, 골목 안쪽 계단 아래)</dd></div>
+      <div><dt>영업시간</dt><dd>화–일 13:00 – 21:00<br>월요일 휴무</dd></div>
+      <div><dt>전화</dt><dd>02-318-0612</dd></div>
+      <div><dt>입고 알림</dt><dd>인스타그램 @groove_hoehyeon DM</dd></div>
+    </dl>
+    <div class="visit-aside">
+      <p>지하로 내려오는 계단부터 바닥이 따뜻하다. 헤매면 골목 입구 붉은 차양을 찾으면 된다.</p>
+      <p class="visit-cta-note">매입 상담은 평일 오후, 사진을 먼저 보내주시면 빠르다.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="floor-foot">
+  <p class="foot-brand">GROOVE 회현</p>
+  <p class="foot-line">차가운 신보를 따뜻한 바닥에서 꺼내 가세요.</p>
+  <p class="foot-small">&copy; 2026 GROOVE 회현 · 회현역 뒷골목 바이닐 레코드 전문점</p>
+</footer>
+
+</body>
+</html>

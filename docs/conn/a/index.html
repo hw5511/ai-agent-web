@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GROOVE 회현 · 여울에 박힌 이정표</title>
+<meta name="description" content="서울 회현역 뒷골목 바이닐 레코드 전문점 GROOVE 회현. 재즈·시티팝·국내 인디 LP 큐레이션, 청음 공간, 중고·신보 입고." />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://hangeul.pstatic.net" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#stream">본문으로 건너뛰기</a>
+
+<!-- 색면추상 배경: 강바닥 깊이 레이어 (정적) -->
+<div class="riverbed" aria-hidden="true">
+  <div class="band band-1"></div>
+  <div class="band band-2"></div>
+  <div class="band band-3"></div>
+  <div class="band band-4"></div>
+  <div class="grain"></div>
+</div>
+
+<!-- 흐름 진행 표시: 강물의 수위 -->
+<div class="current-rail" aria-hidden="true">
+  <span class="current-fill" data-current-fill></span>
+</div>
+
+<header class="masthead">
+  <p class="mark">GROOVE</p>
+  <p class="mark-sub">회현 / HOEHYEON</p>
+  <nav class="mini-nav" aria-label="섹션 바로가기">
+    <a href="#philosophy">물길</a>
+    <a href="#waypoints">이정표</a>
+    <a href="#listening">청음</a>
+    <a href="#fresh">입고</a>
+    <a href="#visit">물가</a>
+  </nav>
+</header>
+
+<main id="stream">
+
+  <!-- 입수: 단호한 선포 대신, 여울로 발을 들이는 진입 -->
+  <section class="ford" id="ford" aria-labelledby="ford-title">
+    <div class="ford-copy">
+      <p class="kicker">바이닐 레코드 · 회현역 4번 출구 뒷골목</p>
+      <h1 id="ford-title" class="ford-title">
+        음악의 강이 <em>여울</em>지는 곳,<br />
+        멈춰 서면 발밑에<br />
+        한 장의 <em>이정표</em>가 잡힌다
+      </h1>
+      <p class="ford-lede">
+        GROOVE 회현은 빠르게 흘러온 한 사람의 음악 취향이 잠시 굽이치는 얕은 급류다.
+        재즈와 시티팝, 국내 인디의 물길을 따라 내려오다 발이 닿는 음반 한 장이
+        다음 청취로 가는 표지석이 된다.
+      </p>
+    </div>
+
+    <!-- 생체 인증식 진입 게이트: 누르고 머무르면 청음실 문이 열린다 -->
+    <div class="gate" data-gate>
+      <button class="gate-pad" type="button" data-gate-pad
+        aria-label="누르고 머무르면 청음실로 입장합니다">
+        <svg class="gate-ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="gate-ring-track" cx="60" cy="60" r="52" />
+          <circle class="gate-ring-fill" cx="60" cy="60" r="52" data-gate-arc />
+        </svg>
+        <span class="gate-print" aria-hidden="true">
+          <svg viewBox="0 0 48 56" width="40" height="46">
+            <path d="M24 4C13 4 6 12 6 24v10M24 4c11 0 18 8 18 20v6M14 22c0-7 4-12 10-12s10 5 10 12v14M20 24c0-3 2-5 4-5s4 2 4 5v18M24 32v18M24 40c-2 0-2 6-6 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="gate-label" data-gate-label>발을 담그기</span>
+      </button>
+      <p class="gate-hint" data-gate-hint>버튼을 길게 누르면 오늘의 청음 한 장이 떠오릅니다</p>
+    </div>
+  </section>
+
+  <!-- 물길: 가게 철학 (시각적 무게의 균형, 비대칭) -->
+  <section class="reach" id="philosophy" aria-labelledby="philosophy-title">
+    <p class="reach-index">01 / 물길</p>
+    <h2 id="philosophy-title" class="reach-title">우리는 음반을 팔지 않는다, 물길을 터준다</h2>
+    <div class="reach-body">
+      <p>
+        2016년 회현 지하상가 뒷골목에서 시작했다. 좋은 음반은 정답이 아니라 방향이라고 믿는다.
+        한 장을 사 간 손님이 석 달 뒤 전혀 다른 장르의 음반을 찾으러 돌아올 때,
+        그 사람의 취향에 새 물길이 났다는 걸 안다.
+      </p>
+      <p>
+        그래서 GROOVE 회현의 진열은 인기순도 발매순도 아니다.
+        Bill Evans의 한 음에서 山下達郎의 베이스로, 다시 새소년의 기타로 이어지도록
+        다음 청취가 자연스럽게 흘러가게 배치한다.
+      </p>
+    </div>
+    <ul class="reach-facts">
+      <li><span class="f-num">8,400+</span><span class="f-cap">상시 보유 음반</span></li>
+      <li><span class="f-num">VG~NM</span><span class="f-cap">중고 상태 등급 표기</span></li>
+      <li><span class="f-num">주 3회</span><span class="f-cap">신보·중고 입고</span></li>
+    </ul>
+  </section>
+
+  <!-- 이정표: 장르별 큐레이션 · 단계적 정보 공개 -->
+  <section class="waypoints" id="waypoints" aria-labelledby="waypoints-title">
+    <header class="wp-head">
+      <p class="reach-index">02 / 이정표</p>
+      <h2 id="waypoints-title" class="reach-title">물길 위의 표지석</h2>
+      <p class="wp-lede">스크롤을 따라 내려갈수록 표지석이 하나씩 떠오릅니다. 누르면 그 물목의 음반이 펼쳐집니다.</p>
+    </header>
+
+    <ol class="wp-list">
+      <li class="wp" data-wp>
+        <button class="wp-stone" type="button" data-wp-toggle aria-expanded="false" aria-controls="wp-panel-1">
+          <span class="wp-marker" aria-hidden="true">A</span>
+          <span class="wp-name">재즈 / Modal &amp; Cool</span>
+          <span class="wp-meta">표지석 자세히 보기</span>
+          <svg class="wp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="wp-panel" id="wp-panel-1" data-wp-panel>
+          <div class="wp-panel-inner">
+            <p class="wp-desc">잔잔히 깊어지는 물목. 처음 발을 담그기 좋은 모달·쿨 재즈를 모았습니다.</p>
+            <ul class="disc">
+              <li><b>Bill Evans</b> · Waltz for Debby <span class="grade">중고 · VG+</span><span class="price">38,000원</span></li>
+              <li><b>Miles Davis</b> · Kind of Blue (180g 재반) <span class="grade">신보 · NM</span><span class="price">42,000원</span></li>
+              <li><b>Chet Baker</b> · Sings <span class="grade">중고 · VG</span><span class="price">29,000원</span></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="wp" data-wp>
+        <button class="wp-stone" type="button" data-wp-toggle aria-expanded="false" aria-controls="wp-panel-2">
+          <span class="wp-marker" aria-hidden="true">B</span>
+          <span class="wp-name">시티팝 / City Pop</span>
+          <span class="wp-meta">표지석 자세히 보기</span>
+          <svg class="wp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="wp-panel" id="wp-panel-2" data-wp-panel>
+          <div class="wp-panel-inner">
+            <p class="wp-desc">물살이 반짝이며 빨라지는 구간. 80년대 일본 도시의 밤을 담은 음반들.</p>
+            <ul class="disc">
+              <li><b>山下達郎</b> · For You <span class="grade">중고 · VG+</span><span class="price">64,000원</span></li>
+              <li><b>竹内まりや</b> · Variety <span class="grade">중고 · VG</span><span class="price">58,000원</span></li>
+              <li><b>大貫妙子</b> · SUNSHOWER (리이슈) <span class="grade">신보 · NM</span><span class="price">49,000원</span></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="wp" data-wp>
+        <button class="wp-stone" type="button" data-wp-toggle aria-expanded="false" aria-controls="wp-panel-3">
+          <span class="wp-marker" aria-hidden="true">C</span>
+          <span class="wp-name">국내 인디 / Korean Indie</span>
+          <span class="wp-meta">표지석 자세히 보기</span>
+          <svg class="wp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="wp-panel" id="wp-panel-3" data-wp-panel>
+          <div class="wp-panel-inner">
+            <p class="wp-desc">가장 가까운 물가. 지금 한국에서 흐르는 소리를 모았습니다.</p>
+            <ul class="disc">
+              <li><b>새소년</b> · 비적응 <span class="grade">신보 · NM</span><span class="price">36,000원</span></li>
+              <li><b>실리카겔</b> · POWER ANDRE 99 <span class="grade">신보 · NM</span><span class="price">39,000원</span></li>
+              <li><b>아도이 (ADOY)</b> · VIVID <span class="grade">중고 · VG+</span><span class="price">33,000원</span></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 청음: 청음 공간 -->
+  <section class="listening" id="listening" aria-labelledby="listening-title">
+    <figure class="listening-fig">
+      <img src="https://loremflickr.com/960/720/turntable,vinyl,cafe" alt="GROOVE 회현 청음 공간의 따뜻한 조명과 앰프" width="960" height="720" loading="lazy" />
+      <figcaption>창가 청음석 · 한 번에 두 자리, 예약 없이도 이용 가능</figcaption>
+    </figure>
+    <div class="listening-copy">
+      <p class="reach-index">03 / 청음</p>
+      <h2 id="listening-title" class="reach-title">사기 전에, 발을 담가보세요</h2>
+      <p>
+        매장 안쪽 두 자리의 청음석에서는 구매 전 음반을 직접 들어볼 수 있습니다.
+        Thorens TD 145 턴테이블과 진공관 앰프, 그리고 클립쉬 모니터로
+        매장의 모든 중고·신보를 시청할 수 있습니다.
+      </p>
+      <dl class="listening-spec">
+        <div><dt>이용 시간</dt><dd>한 음반당 한 면, 자유롭게</dd></div>
+        <div><dt>좌석</dt><dd>창가 2석 (대기 시 카운터 안내)</dd></div>
+        <div><dt>비용</dt><dd>무료 · 구매 의무 없음</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 입고: 신보·입고 소식 -->
+  <section class="fresh" id="fresh" aria-labelledby="fresh-title">
+    <p class="reach-index">04 / 입고</p>
+    <h2 id="fresh-title" class="reach-title">이번 주 새로 흘러든 음반</h2>
+    <ul class="fresh-list">
+      <li class="fresh-item">
+        <p class="fresh-date">06.17 입고</p>
+        <p class="fresh-title-line">渡辺貞夫 · California Shower</p>
+        <p class="fresh-note">일본 프레싱 중고 · VG+ · 3장 입고 · 54,000원</p>
+      </li>
+      <li class="fresh-item">
+        <p class="fresh-date">06.16 입고</p>
+        <p class="fresh-title-line">잠비나이 · ONDA</p>
+        <p class="fresh-note">국내반 신보 · NM · 다수 보유 · 41,000원</p>
+      </li>
+      <li class="fresh-item">
+        <p class="fresh-date">06.15 입고</p>
+        <p class="fresh-title-line">Antônio Carlos Jobim · Wave</p>
+        <p class="fresh-note">미국 재반 중고 · VG · 1장 한정 · 32,000원</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 물가: 찾아오는 길·영업시간 -->
+  <section class="visit" id="visit" aria-labelledby="visit-title">
+    <p class="reach-index">05 / 물가</p>
+    <h2 id="visit-title" class="reach-title">물가로 오는 길</h2>
+    <div class="visit-grid">
+      <div class="visit-block">
+        <h3>주소</h3>
+        <p>서울 중구 남대문로1길 33, 지하 1층<br />회현역 4번 출구에서 도보 3분, 뒷골목 안쪽</p>
+      </div>
+      <div class="visit-block">
+        <h3>영업시간</h3>
+        <p>화–일 13:00–21:00<br />월요일 휴무 · 입고일(화·목·토)은 14:00 오픈</p>
+      </div>
+      <div class="visit-block">
+        <h3>연락</h3>
+        <p>02-318-7045<br />인스타그램 @groove.hoehyeon</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bank">
+  <p class="bank-mark">GROOVE 회현</p>
+  <p class="bank-line">음악의 강이 여울지는 곳에서, 다음 한 장을 건넵니다.</p>
+  <p class="bank-fine">재즈 · 시티팝 · 국내 인디 LP 전문 · 중고/신보 입고 · 청음 공간 운영</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
