@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
+  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
+  <text x="640" y="100" text-anchor="middle" font-size="52" font-weight="800" fill="#171717">공개 완료! 회고 &amp; 예고</text>
+  <rect x="300" y="118" width="680" height="4" rx="2" fill="#16a34a"/>
+  <rect x="60" y="148" width="580" height="516" rx="16" fill="#171717"/>
+  <text x="350" y="214" text-anchor="middle" font-size="24" font-weight="700" fill="#16a34a">오늘 배운 것</text>
+  <rect x="80" y="234" width="540" height="2" fill="#374151"/>
+  <text x="120" y="283" font-size="20" fill="#ffffff">✓ React = 컴포넌트 조합 방식</text>
+  <text x="120" y="329" font-size="20" fill="#ffffff">✓ MUI = 이미 만들어진 UI 블록</text>
+  <text x="120" y="375" font-size="20" fill="#ffffff">✓ 통합 프롬프트로 Claude 세팅</text>
+  <text x="120" y="421" font-size="20" fill="#ffffff">✓ Vite + React + MUI 포트폴리오 제작</text>
+  <text x="120" y="467" font-size="20" fill="#ffffff">✓ GitHub Pages 자동 배포 완료</text>
+  <rect x="80" y="508" width="540" height="2" fill="#374151"/>
+  <text x="350" y="570" text-anchor="middle" font-size="18" fill="#16a34a">내 포트폴리오가 공개 URL을 갖는다!</text>
+  <rect x="656" y="148" width="6" height="516" rx="3" fill="#16a34a"/>
+  <rect x="674" y="148" width="546" height="516" rx="16" fill="#f3f4f6"/>
+  <text x="947" y="214" text-anchor="middle" font-size="24" font-weight="700" fill="#171717">다음 시간 예고</text>
+  <rect x="694" y="234" width="506" height="2" fill="#e5e7eb"/>
+  <text x="947" y="296" text-anchor="middle" font-size="20" fill="#374151">STEP 9</text>
+  <text x="947" y="348" text-anchor="middle" font-size="24" font-weight="700" fill="#171717">Claude와 협업</text>
+  <text x="947" y="396" text-anchor="middle" font-size="24" font-weight="700" fill="#171717">심화 실습</text>
+  <rect x="694" y="444" width="506" height="2" fill="#e5e7eb"/>
+  <text x="947" y="504" text-anchor="middle" font-size="18" fill="#6b7280">포트폴리오를 더 다듬고</text>
+  <text x="947" y="542" text-anchor="middle" font-size="18" fill="#6b7280">고급 기능을 추가한다</text>
+  <rect x="694" y="572" width="506" height="56" rx="8" fill="#171717"/>
+  <text x="947" y="602" text-anchor="middle" dominant-baseline="middle" font-size="17" fill="#16a34a">URL을 채팅창에 공유해 주세요!</text>
+</svg>
