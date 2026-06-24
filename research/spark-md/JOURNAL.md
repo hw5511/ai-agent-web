@@ -390,3 +390,14 @@ obra/superpowers brainstorming · UI/UX Pro Max.
   4. **걸러낼 게이트를 안 돌림** — `aesthetic-gate.sh`(R20 보유)를 미실행. 잘림·흐림·전형성·카피중복이 perfcheck(성능/마감만)를 그대로 통과.
 - **R21 > R22의 메커니즘**: R21은 덜 모험적이라 기본기(읽히는 레이아웃·정돈된 색·구체 콘텐츠)가 살아 **완성도**가 높았다. 즉 현재 SPARK에서 **모험성과 완성도는 음의 상관** — 모험을 올리면 기본 미감이 무너진다. 이것이 다음 라운드의 진짜 과제.
 - **R23 방향 후보(미실행, 보류)**: ① 모험 강제를 '구조/내비'가 아니라 **첫 화면에 남는 시각 표현(D식 타이포 무게·색면·질감·이미지 마스킹)** 으로 이동 ② **aesthetic-gate를 첫인상에 의무화**(흐림/잘림/전형성/탁한 색 = 자동 리젝→재생성) ③ 카피를 추상 은유 금지 + **구체 콘텐츠 강제**(실제 앨범·가격·장르) ④ 배치 내 **컨셉/카피 dedup**(시드축뿐 아니라 은유도) ⑤ 기본 미감 floor(대비·정렬·여백 리듬)를 명문화해 모험과 분리.
+
+---
+
+## Round 23 — 강제연결(Forced Connection) + 눈누 폰트 통합 + 스킬 정본화  [완료 2026-06]
+- **컨셉층 수렴 해결**: R22 진단(4축 씨드가 못 거는 *컨셉/은유* 층이 도메인 1차 연상으로 수렴 — 레코드샵→매번 LP원반+"바늘/소리")의 처방으로 **강제연결** 도입. 브리프 앵커 × **셸 RNG 무관 명사** → 비자명 `CENTER_METAPHOR` 외부 강제 + 1차 연상 자가 금지. `scripts/forced_connection.py`(도메인무관 워드뱅크, 비복원추출).
+  - **검증**: 동일 브리프(GROOVE 회현) 5개의 중심 은유가 완전 발산(여울/이정표 · 열쇠/무지개 · 비늘/온돌 · 편자 대장간 · 대들보/밤송이), LP·바늘 1차 연상 5/5 배제. 라이브 `docs/conn/`.
+  - **핵심 원리**: "LLM에게 랜덤 단어를 생각해내게" 하면 또 수렴(R6 seed.42, R20 typicality) → **무작위는 셸 RNG, LLM은 연상만**. CEO 아이디어(앵커+무작위키워드 연상)에 이 한 가지(RNG 주입)만 보강.
+- **눈누(noonnu.cc) 무료폰트 CLI** `scripts/noonnu.cjs`: search/category/info/webfont/sample/**contact**(대조표) + 캐시(`data/noonnu-fonts.json`, 무료 1,120종 전체, 라이선스·허용범위·@font-face). 캐시 우선 + 라이브 폴백 + **증분 갱신**(--incremental). Playwright APIRequestContext(ignoreHTTPSErrors)로 인증서 가로채기 환경 대응.
+  - **폰트는 이미지로 셀렉**: 텍스트 메타만 보면 인기 폰트(마루부리/프리텐다드)로 쏠림 → `contact` 대조표 PNG를 Read로 보고 글자 생김새로 선택.
+- **스킬 정본화 + main 머지(PR #23)**: `skills/spark/`(SKILL.md·README·pick.py·forced_connection.py·noonnu.cjs·references/lightbulb.md·data 캐시). **3층 워크플로**: 기본(/spark) → "더 모험적" 요청 시 강제연결 → 폰트는 대조표 셀렉. 설치는 `~/.claude/skills/spark/`(자연어로 Claude에게 시켜 설치 가능).
+- **커리큘럼 동기화**: Session 8(`#basic/8`) SPARK 자료를 CLAUDE.md 방식 → **/spark 스킬 방식**으로 전환(SVG 8장 + 슬라이드 md + 학생용 SPARK.md + OVERVIEW v12 라벨), **Inter 폰트 모순**(SPARK가 금지한 폰트를 쓰라던 오류) 제거.
