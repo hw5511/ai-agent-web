@@ -15,11 +15,11 @@
   <rect x="60" y="236" width="1160" height="106" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
   <text x="84" y="268" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">A · B에 넣은 동일 프롬프트</text>
   <text x="84" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="500" fill="#374151">"내 소개 랜딩페이지를 index.html 한 파일로 — 큰 제목 + 한 줄 소개, '내가 한 일' 카드 3개, 맨 아래 연락하기 버튼."</text>
-  <text x="84" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">→ A는 이대로 / B는 폴더에 SPARK.md를 CLAUDE.md로만 추가. 프롬프트·모델 전부 동일.</text>
+  <text x="84" y="328" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="400" fill="#9ca3af">→ A는 이대로 / B는 /spark 만 적용. 프롬프트·모델 전부 동일.</text>
 
   <!-- A 카드 -->
   <rect x="80" y="362" width="540" height="184" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="108" y="398" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">A · 맨손 (CLAUDE.md 없음)</text>
+  <text x="108" y="398" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">A · 맨손 (/spark 없음)</text>
   <text x="108" y="442" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="400" fill="#9ca3af">─</text>
   <text x="140" y="442" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#374151">무난한 기본 레이아웃</text>
   <text x="108" y="478" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="400" fill="#9ca3af">─</text>
@@ -29,7 +29,7 @@
 
   <!-- B 카드 -->
   <rect x="660" y="362" width="540" height="184" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
-  <text x="688" y="398" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">B · SPARK.md 적용</text>
+  <text x="688" y="398" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">B · /spark 적용</text>
   <text x="688" y="442" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="400" fill="#9ca3af">─</text>
   <text x="720" y="442" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">의도된 분위기 (여백·대비)</text>
   <text x="688" y="478" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="400" fill="#9ca3af">─</text>
@@ -38,7 +38,7 @@
   <text x="720" y="514" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="18" font-weight="500" fill="#171717">등장 애니메이션 등 디테일</text>
 
   <!-- 그린 핵심 한 줄 -->
-  <text x="80" y="600" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#16a34a">같은 프롬프트, 다른 격 — 차이는 CLAUDE.md 하나</text>
+  <text x="80" y="600" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#16a34a">같은 프롬프트, 다른 격 — 차이는 /spark 하나</text>
 
   <!-- 하단 메타 -->
   <text x="80" y="664" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="500" fill="#9ca3af" letter-spacing="0.02em">실제 비교 라이브: hw5511.github.io/ai-agent-web/demo/spark-ab</text>

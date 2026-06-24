@@ -20,7 +20,7 @@
 
   <rect x="465" y="262" width="370" height="320" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
   <text x="493" y="306" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">FLOW 02 · 비교</text>
-  <text x="493" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">SPARK.md</text>
+  <text x="493" y="356" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="26" font-weight="700" fill="#171717">/spark</text>
   <text x="493" y="408" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#6b7280">강사 프롬프트를 넣고</text>
   <text x="493" y="434" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="17" font-weight="400" fill="#6b7280">같은 페이지를 다시 — 비교</text>
 
