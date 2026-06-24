@@ -45,7 +45,7 @@ PART 1 — 기초 8주: 통제 가능한 랜딩페이지 + 배포
  5. 스크롤 라이브러리 (GSAP ScrollTrigger)
  6. 마우스 인터랙션 (마그네틱·Flip·Spotlight)
  7. 시각 라이브러리 (tsParticles·Typed·Three·VANTA·Canvas)
- 8. v12 메타 시스템 + GitHub Pages 배포
+ 8. SPARK 스킬(/spark) + GitHub Pages 배포
 
  → 1부 도달점: 공개 URL을 가진 본인 랜딩페이지
 
@@ -134,11 +134,11 @@ PART 2 — 심화 8주: 데이터·도메인·결제
 ## 메타 시스템 3종 비교 (8회차 핵심)
 
 ```
-v12 (우리 시스템)             DESIGN.md (Google Labs Code)        Claude Design (Anthropic)
+SPARK 스킬 (우리 시스템)       DESIGN.md (Google Labs Code)        Claude Design (Anthropic)
 ────────────────────         ──────────────────────────         ──────────────────────────
-3-SPARK                     YAML 토큰                          브랜드 가이드 자동 추출
-AESTHETIC_PINCH             MD 본문 (왜)                       코드베이스 읽기
-FONT JUDGMENT               8섹션 표준                          결과물 일관성 보장
+/spark 영감 씨드 자동배정      YAML 토큰                          브랜드 가이드 자동 추출
+강제연결 + AESTHETIC_PINCH    MD 본문 (왜)                       코드베이스 읽기
+눈누 무료폰트 + 60fps 규칙     8섹션 표준                          결과물 일관성 보장
 
 → 셋 다 같은 발상: 토큰화 + 표준화 + AI 협업
 ```
@@ -233,7 +233,7 @@ FONT JUDGMENT               8섹션 표준                          결과물 �
 - [ ] 05_session5.md — 스크롤 라이브러리 (GSAP)
 - [ ] 06_session6.md — 마우스 인터랙션
 - [ ] 07_session7.md — 시각 라이브러리
-- [ ] 08_session8.md — v12 메타 + 배포
+- [ ] 08_session8.md — SPARK 스킬(/spark) + 배포
 
 ### Part 2 — 심화 8주
 - [ ] 09_session9.md — API 연동 (fetch)
