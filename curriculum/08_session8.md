@@ -18,7 +18,7 @@
 | 01 | `01_오늘의_목표.svg` | 인트로 | 8회차 목표(메타 정리 + 배포) 안내 |
 | 02 | `02_1주차_Claude_Design_다시.svg` | 회상 | 1주차에 본 Claude Design 결과물과 지금 내 페이지 비교 |
 | 03 | `03_메타_3종_비교.svg` | 메타 | v12 vs DESIGN.md vs Claude Design = 같은 발상 |
-| 04 | `04_실습1_v12로_재생성.svg` | 실습 | v12 프롬프트로 본인 작품 재생성 후 비교 |
+| 04 | `04_실습1_v12로_재생성.svg` | 실습 | `/spark` 스킬로 본인 작품 재생성 후 비교 (씨드 자동 배정) |
 | 05 | `05_git_기초_5분.svg` | 개념 | git이 뭔지·왜 필요한지 5분 압축 |
 | 06 | `06_GitHub_CLI_+_Pages.svg` | 개념 | gh CLI로 레포 생성 + GitHub Pages 활성화 |
 | 07 | `07_실습2_배포해줘.svg` | 실습 | "배포해줘" 한 마디로 GitHub Pages 링크 받기 |
@@ -32,7 +32,7 @@
   - **DESIGN.md** (Google Labs Code): YAML 토큰 + MD 본문 + 8섹션
   - **Claude Design** (Anthropic): DESIGN.md 워크플로우 제품화
   - → 셋 다 "토큰화 + 표준화 + AI 협업"
-- **04 v12 재생성**: 1~7주 결과물을 v12 프롬프트로 다시 / 1회차 결과물(만약 있다면)과 Before/After
+- **04 재생성**: 1~7주 결과물을 `/spark` 스킬로 다시 생성(씨드 자동 배정, "더 모험적으로"도 가능) / 1회차 결과물(만약 있다면)과 Before/After
 - **05 git 5분**: 변경 이력 / 협업 / 백업 — 단 5분만 (학생 부담 X)
 - **06 gh + Pages**: gh repo create / git push / Pages 설정 자동화
 - **07 배포 실습**: GitHub 토큰 준비 (사전과제로 부여) / "배포해줘" 한 줄로 끝
@@ -42,7 +42,7 @@
 
 | 실습 | 프롬프트 |
 |------|---------|
-| 04 v12 재생성 | [SPARK-1] 전면 다크 + 네온 / [SPARK-2] 마그네틱 CTA / [SPARK-3] 스크롤 페이드인 / [AESTHETIC_PINCH] noisy-gradient + cinematic-spacing / [FONT] Inter(헤드) + Noto Sans KR(본문) — 위 설정으로 내 페이지를 재생성해줘. |
+| 04 재생성 | `/spark` 를 호출해 내 페이지를 재생성해줘. (씨드 LAYOUT/INTERACTION/VISUAL/PINCH는 스킬이 셸 난수로 자동 배정 — 직접 고르지 않음) 폰트는 눈누 무료 한글폰트에서 골라 웹폰트로 적용해줘. |
 | 07 배포 | 이 페이지를 GitHub 레포 만들고 GitHub Pages로 배포해줘. 레포 이름은 my-portfolio. |
 
 ---

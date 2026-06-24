@@ -4,39 +4,26 @@
 > 평범한 웹페이지를 "Awwwards 급" 결과물로 끌어올리기 위한 디자인·모션·폰트 판단 기준을 한 장에 담았습니다.
 > 핵심은 **3-SPARK × AESTHETIC PINCH × FONT JUDGMENT** — 매 작업마다 신선한 영감을 주입받아 뻔하지 않은 결과를 만듭니다.
 
-## 사용법 (3단계)
+## 설치 & 사용 — 이제 `/spark` 스킬입니다
 
-1. 이 파일을 프로젝트 폴더 루트에 **`CLAUDE.md`** 라는 이름으로 저장한다. (Claude Code가 자동으로 읽는 시스템 프롬프트가 됩니다)
-2. (선택·강력 추천) 아래 **LIGHTBULB 연동**으로 영감 블록을 뽑아 작업 프롬프트 맨 위에 붙인다.
-3. "○○ 페이지 만들어줘" 한 줄이면, Claude가 이 기준대로 설계·구현한다.
+SPARK는 Claude Code **스킬**로 제공됩니다. 한 번 설치하면 `/spark` 한 줄로 영감 씨드가 자동 주입됩니다.
 
-## LIGHTBULB 연동 (3-SPARK 영감 주입)
+### 설치 (한 번만)
+1. 강사 공개 레포 `hw5511/ai-agent-web` 의 **`skills/spark`** 폴더를 받아 `~/.claude/skills/spark/` 에 둔다.
+   - **Claude Code에게 자연어로 시켜도 됩니다**: *"github.com/hw5511/ai-agent-web 의 skills/spark 를 내 ~/.claude/skills/ 에 설치하고, /spark 가 뜨는지 확인해줘."*
+2. (폰트 대조표·샘플 기능까지 쓰려면) `npm install playwright && npx playwright install chromium`
+   - 무료폰트 검색·웹폰트 추출은 동봉 캐시 덕에 위 설치 없이도 됩니다.
+3. 확인: Claude Code에서 `/skills` 목록에 **spark** 가 보이면 끝.
 
-3-SPARK / AESTHETIC_PINCH / FONT는 강사(우희)의 **공개 레포 `hw5511/ai-agent-web`(skills/lightbulb)** 에서 가져옵니다.
-(인사이트 120개 · 미감 30개 · 폰트 10종 — 강사가 직접 큐레이션한 영감 저장소입니다.)
+### 사용
+1. `/spark` 호출 → **씨드(LAYOUT / INTERACTION / VISUAL / PINCH)가 셸 난수로 자동 배정**됩니다. (직접 고르지 않습니다 — 사람이 고르면 매번 비슷해져요)
+2. 이어서 "○○ 페이지 만들어줘" 한 줄.
+3. **더 모험적으로** 원하면 그렇게 말하세요 → 무관한 단어와 **강제연결**해 뻔하지 않은 중심 컨셉을 잡습니다.
+4. **무료 한글폰트**가 필요하면 스킬이 눈누에서 후보를 대조표로 보여주고 골라 웹폰트(@font-face)를 적용합니다.
 
-작업을 시작하기 전, 아래 명령으로 이번 작업에 쓸 영감 블록을 뽑아 **프롬프트 맨 위에 붙여넣으세요.**
-
-```bash
-curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/ideas.json | python -c "
-import sys, json, random
-ideas = json.load(sys.stdin)['ideas']
-pick = lambda t: random.choice([i for i in ideas if i.get('spark_type')==t])
-ls, is_, vs = pick('layout'), pick('interaction'), pick('visual')
-print('<lightbulb_ignition>')
-print(f'LAYOUT_SPARK: [{ls[\"title\"]}] {ls[\"body\"]}')
-print(f'INTERACTION_SPARK: [{is_[\"title\"]}] {is_[\"body\"]}')
-print(f'VISUAL_SPARK: [{vs[\"title\"]}] {vs[\"body\"]}')
-print('</lightbulb_ignition>')
-"
-curl -s https://raw.githubusercontent.com/hw5511/ai-agent-web/main/skills/lightbulb/pinches.json | python -c "
-import sys, json, random
-p = random.choice(json.load(sys.stdin)['pinches'])
-print(f'AESTHETIC_PINCH: [{p[\"title\"]}] {p[\"body\"]}')
-"
-```
-
-> 영감 주입이 번거로우면 생략해도 됩니다. 단, SPARK.md 본문 규칙(아래)은 LIGHTBULB 없이도 그대로 작동합니다.
+> 영감 데이터(인사이트 120 · 미감 30 · 폰트)는 스킬에 `references/lightbulb.md` 로 **내장**돼 있어 별도 curl·네트워크가 필요 없습니다. 무작위 추출은 `scripts/pick.py` 가 셸 난수로 강제합니다(LLM에게 "랜덤하게 골라"라고 맡기면 의미가 수렴하기 때문).
+>
+> (옛 방식 — 이 파일을 프로젝트 루트에 `CLAUDE.md` 로 저장 — 도 본문 규칙은 그대로 작동하지만, 스킬 방식이 씨드 자동 배정·강제연결·폰트 도구까지 포함해 권장됩니다.)
 
 ---
 
