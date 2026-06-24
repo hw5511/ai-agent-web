@@ -45,9 +45,9 @@ PART 1 — 기초 8주: 통제 가능한 랜딩페이지 + 배포
  5. 스크롤 라이브러리 (GSAP ScrollTrigger)
  6. 마우스 인터랙션 (마그네틱·Flip·Spotlight)
  7. 시각 라이브러리 (tsParticles·Typed·Three·VANTA·Canvas)
- 8. SPARK 스킬(/spark) + GitHub Pages 배포
+ 8. React 포트폴리오 만들기 + GitHub Pages 배포
 
- → 1부 도달점: 공개 URL을 가진 본인 랜딩페이지
+ → 1부 도달점: React로 만든 내 포트폴리오가 공개 URL을 가짐
 
 ══════════════════════════════════════════════
 PART 2 — 심화 8주: 데이터·도메인·결제
@@ -79,7 +79,7 @@ PART 2 — 심화 8주: 데이터·도메인·결제
 | 5 | 스크롤 트리거 (GSAP) |
 | 6 | 좌표 추적 (마우스 인터랙션) |
 | 7 | 라이브러리 = 이름만 알면 끝 |
-| 8 | 인터넷에 내 사이트 띄우기 |
+| 8 | 컴포넌트로 포트폴리오 만들기 |
 | 9 | API 연동 (fetch) |
 | 10 | 데이터 구조화 + 저장 |
 | 11 | 클라우드 DB 연결 |
@@ -131,20 +131,6 @@ PART 2 — 심화 8주: 데이터·도메인·결제
 
 ---
 
-## 메타 시스템 3종 비교 (8회차 핵심)
-
-```
-SPARK 스킬 (우리 시스템)       DESIGN.md (Google Labs Code)        Claude Design (Anthropic)
-────────────────────         ──────────────────────────         ──────────────────────────
-/spark 영감 씨드 자동배정      YAML 토큰                          브랜드 가이드 자동 추출
-강제연결 + AESTHETIC_PINCH    MD 본문 (왜)                       코드베이스 읽기
-눈누 무료폰트 + 60fps 규칙     8섹션 표준                          결과물 일관성 보장
-
-→ 셋 다 같은 발상: 토큰화 + 표준화 + AI 협업
-```
-
----
-
 ## 외부 API 키 흐름 (3단계 점층)
 
 ```
@@ -174,10 +160,11 @@ SPARK 스킬 (우리 시스템)       DESIGN.md (Google Labs Code)        Claude
 
 | 영역 | 방침 |
 |------|------|
-| 직접 코드 작성 | ❌ (vanilla JS + Supabase JS SDK로 모든 실습) |
-| 메타 인식 | ✅ ".jsx가 뭔지", 컴포넌트 발상 이해 |
-| 회차 위치 | 1회차 청사진 + 8회차 메타 비교에 등장 |
-| 자료 | vibe-web (private)을 "참고 React 사례"로만 활용 |
+| 직접 코드 작성 | ✅ 8주차: Claude + MUI로 포트폴리오 만들기 (코드는 Claude가 생성) |
+| 메타 인식 | ✅ ".jsx가 뭔지", 컴포넌트 발상 이해 (레고 블록 비유) |
+| 회차 위치 | 1회차 청사진 + **8회차 React 포트폴리오** (Part 1 클라이맥스) |
+| UI 라이브러리 | **MUI** (Material UI) — shadcn/ui·Chakra도 소개 후 MUI 선택 |
+| 자료 | vibe-web 통합 프롬프트(CLAUDE.md·design-system.md·new_project.md) 기반 |
 
 ---
 
@@ -197,11 +184,10 @@ SPARK 스킬 (우리 시스템)       DESIGN.md (Google Labs Code)        Claude
 
 | 자료 | 위치 | 활용 |
 |------|------|------|
-| Claude Design 핸드오프 (sbs아카데미) | `curriculum/_design_test/` → `_assets/claude_design_demo/` | 1주 시연 + 8주 비교 |
-| DESIGN.md 표준 | rubric.im/curriculum/design-md/ (외부) | 1주 청사진 + 8주 비교 |
-| awesome-claude-design (68 사례) | github.com/VoltAgent/awesome-claude-design | 8주 실습 참고 |
-| vibe-web (React + Vite + Tailwind) | wi-archived-lectures/46-바이브코딩 (private) | 8주 비교 + 11~14주 참고 |
-| Lightbulb (v11 개념) | hub/index.html v11 그룹 + bench_v11_*.html | 8주 메타 비교 시 v11→v12 진화 사례 |
+| Claude Design 핸드오프 (sbs아카데미) | `curriculum/_design_test/` → `_assets/claude_design_demo/` | 1주 시연 |
+| DESIGN.md 표준 | rubric.im/curriculum/design-md/ (외부) | 1주 청사진 |
+| vibe-web (React + Vite + MUI) | `hw5511/vibe-web` | **8주 포트폴리오 통합 프롬프트 기반** + 11~14주 참고 |
+| 통합 프롬프트 3파일 | `curriculum/_assets/files/step08/` | 8주 학생 제공 파일 |
 
 ---
 
@@ -211,7 +197,7 @@ SPARK 스킬 (우리 시스템)       DESIGN.md (Google Labs Code)        Claude
 [선수강] Claude Code 기초 — 하네스, 컨텍스트·프롬프트 엔지니어링
 
 [이 코스 408] AI Agent Web 16주
-   Part 1: 랜딩페이지 마스터 + 배포 (8주)
+   Part 1: React 포트폴리오 + 배포 (8주)
    Part 2: 데이터·도메인·결제 (8주)
 
 [다음 갈래 1] 웹이론 + HTML/CSS/JS 4개월 — 코드 본격 학습
@@ -233,7 +219,7 @@ SPARK 스킬 (우리 시스템)       DESIGN.md (Google Labs Code)        Claude
 - [ ] 05_session5.md — 스크롤 라이브러리 (GSAP)
 - [ ] 06_session6.md — 마우스 인터랙션
 - [ ] 07_session7.md — 시각 라이브러리
-- [ ] 08_session8.md — SPARK 스킬(/spark) + 배포
+- [x] 08_session8.md — React 포트폴리오 만들기 + GitHub Pages 배포
 
 ### Part 2 — 심화 8주
 - [ ] 09_session9.md — API 연동 (fetch)
@@ -254,4 +240,4 @@ SPARK 스킬 (우리 시스템)       DESIGN.md (Google Labs Code)        Claude
 
 ---
 
-_시작: 2026-05-25_
+_시작: 2026-05-25 | 8주차 React 재편: 2026-06-24_
