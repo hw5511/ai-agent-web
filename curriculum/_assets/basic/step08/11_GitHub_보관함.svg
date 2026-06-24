@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
+  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
+  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">GitHub: 온라인 작품 보관함</text>
+  <rect x="280" y="116" width="720" height="4" rx="2" fill="#16a34a"/>
+  <rect x="60" y="153" width="540" height="510" rx="16" fill="#171717"/>
+  <text x="330" y="244" text-anchor="middle" font-size="60">&#x1F4E6;</text>
+  <text x="330" y="320" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">GitHub =</text>
+  <text x="330" y="362" text-anchor="middle" font-size="26" font-weight="700" fill="#16a34a">내 코드의 구글 드라이브</text>
+  <text x="330" y="440" text-anchor="middle" font-size="19" fill="#9ca3af">로친 코드를 온라인에 저장</text>
+  <text x="330" y="480" text-anchor="middle" font-size="19" fill="#9ca3af">버전 관리 (언제든 되돌리기)</text>
+  <text x="330" y="520" text-anchor="middle" font-size="19" fill="#9ca3af">협업 · 포트폴리오 공개</text>
+  <text x="330" y="560" text-anchor="middle" font-size="19" fill="#9ca3af">GitHub Pages로 무료 배포</text>
+  <rect x="640" y="153" width="580" height="510" rx="16" fill="#f3f4f6"/>
+  <text x="930" y="224" text-anchor="middle" font-size="22" font-weight="700" fill="#171717">Claude가 해주는 것</text>
+  <rect x="680" y="258" width="500" height="72" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="930" y="300" text-anchor="middle" dominant-baseline="middle" font-size="18" fill="#374151">git init · git add · git commit</text>
+  <text x="930" y="372" text-anchor="middle" font-size="22" fill="#16a34a">↓</text>
+  <rect x="680" y="394" width="500" height="72" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="930" y="436" text-anchor="middle" dominant-baseline="middle" font-size="18" fill="#374151">gh repo create + git push</text>
+  <text x="930" y="508" text-anchor="middle" font-size="22" fill="#16a34a">↓</text>
+  <rect x="680" y="528" width="500" height="72" rx="8" fill="#171717"/>
+  <text x="930" y="566" text-anchor="middle" dominant-baseline="middle" font-size="18" fill="#16a34a">GitHub 레포 생성 완료</text>
+</svg>

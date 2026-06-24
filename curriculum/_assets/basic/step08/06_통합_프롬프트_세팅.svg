@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
+  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
+  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">통합 프롬프트 세팅</text>
+  <rect x="380" y="116" width="520" height="4" rx="2" fill="#16a34a"/>
+  <text x="640" y="155" text-anchor="middle" font-size="22" fill="#6b7280">Claude 대화에 3개 파일을 드래그해서 넣으면 로키가 된다</text>
+  <rect x="60" y="193" width="360" height="438" rx="16" fill="#171717"/>
+  <rect x="60" y="193" width="360" height="6" rx="3" fill="#16a34a"/>
+  <text x="240" y="264" text-anchor="middle" font-size="22" font-weight="800" fill="#16a34a">CLAUDE.md ★</text>
+  <text x="240" y="328" text-anchor="middle" font-size="17" fill="#d1d5db">역할: 로키</text>
+  <text x="240" y="366" text-anchor="middle" font-size="17" fill="#d1d5db">MUI React 개발자</text>
+  <text x="240" y="428" text-anchor="middle" font-size="17" fill="#9ca3af">GitHub Actions로만</text>
+  <text x="240" y="464" text-anchor="middle" font-size="17" fill="#9ca3af">배포 (규칙 포함)</text>
+  <text x="240" y="544" text-anchor="middle" font-size="15" fill="#6b7280">페르소나 + 핵심 규칙</text>
+  <rect x="460" y="193" width="360" height="438" rx="16" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="264" text-anchor="middle" font-size="22" font-weight="800" fill="#171717">design-system.md</text>
+  <text x="640" y="328" text-anchor="middle" font-size="17" fill="#374151">MUI Grid 사용법</text>
+  <text x="640" y="366" text-anchor="middle" font-size="17" fill="#374151">CSS 초기화 패턴</text>
+  <text x="640" y="428" text-anchor="middle" font-size="17" fill="#374151">반응형 타이포</text>
+  <text x="640" y="464" text-anchor="middle" font-size="17" fill="#374151">간격(spacing) 규칙</text>
+  <text x="640" y="544" text-anchor="middle" font-size="15" fill="#9ca3af">디자인 시스템 가이드</text>
+  <rect x="860" y="193" width="360" height="438" rx="16" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="1040" y="264" text-anchor="middle" font-size="22" font-weight="800" fill="#171717">new_project.md</text>
+  <text x="1040" y="328" text-anchor="middle" font-size="17" fill="#374151">npm create vite</text>
+  <text x="1040" y="366" text-anchor="middle" font-size="17" fill="#374151">MUI 설치 명령어</text>
+  <text x="1040" y="428" text-anchor="middle" font-size="17" fill="#374151">vite.config.js</text>
+  <text x="1040" y="464" text-anchor="middle" font-size="17" fill="#374151">폴더 구조</text>
+  <text x="1040" y="544" text-anchor="middle" font-size="15" fill="#9ca3af">프로젝트 생성 가이드</text>
+  <text x="640" y="666" text-anchor="middle" font-size="20" fill="#16a34a" font-weight="600">↑ step08/ 폴더에서 다운로드</text>
+</svg>

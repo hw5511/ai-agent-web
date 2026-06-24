@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
+  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
+  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">포트폴리오 구조</text>
+  <rect x="440" y="116" width="400" height="4" rx="2" fill="#16a34a"/>
+  <text x="640" y="155" text-anchor="middle" font-size="22" fill="#6b7280">한 페이지에 4개 섹션으로 구성</text>
+  <rect x="60" y="183" width="275" height="488" rx="16" fill="#171717"/>
+  <rect x="60" y="183" width="275" height="6" rx="3" fill="#16a34a"/>
+  <text x="197" y="268" text-anchor="middle" font-size="32" font-weight="800" fill="#16a34a">Hero ★</text>
+  <text x="197" y="356" text-anchor="middle" font-size="18" fill="#d1d5db">이름</text>
+  <text x="197" y="396" text-anchor="middle" font-size="18" fill="#d1d5db">한 줄 소개</text>
+  <text x="197" y="436" text-anchor="middle" font-size="18" fill="#d1d5db">CTA 버튼</text>
+  <text x="197" y="540" text-anchor="middle" font-size="15" fill="#6b7280">첫인상 섹션</text>
+  <rect x="355" y="183" width="275" height="488" rx="16" fill="#f3f4f6"/>
+  <text x="492" y="268" text-anchor="middle" font-size="32" font-weight="800" fill="#171717">About</text>
+  <text x="492" y="356" text-anchor="middle" font-size="18" fill="#374151">자기소개</text>
+  <text x="492" y="396" text-anchor="middle" font-size="18" fill="#374151">기술 스택</text>
+  <text x="492" y="436" text-anchor="middle" font-size="18" fill="#374151">관심사</text>
+  <text x="492" y="540" text-anchor="middle" font-size="15" fill="#6b7280">나를 소개하는 섹션</text>
+  <rect x="650" y="183" width="275" height="488" rx="16" fill="#f3f4f6"/>
+  <text x="787" y="268" text-anchor="middle" font-size="32" font-weight="800" fill="#171717">Projects</text>
+  <text x="787" y="356" text-anchor="middle" font-size="18" fill="#374151">프로젝트 카드</text>
+  <text x="787" y="396" text-anchor="middle" font-size="18" fill="#374151">제목 · 설명</text>
+  <text x="787" y="436" text-anchor="middle" font-size="18" fill="#374151">GitHub 링크</text>
+  <text x="787" y="540" text-anchor="middle" font-size="15" fill="#6b7280">작품 전시 섹션</text>
+  <rect x="945" y="183" width="275" height="488" rx="16" fill="#f3f4f6"/>
+  <text x="1082" y="268" text-anchor="middle" font-size="32" font-weight="800" fill="#171717">Contact</text>
+  <text x="1082" y="356" text-anchor="middle" font-size="18" fill="#374151">이메일</text>
+  <text x="1082" y="396" text-anchor="middle" font-size="18" fill="#374151">GitHub 링크</text>
+  <text x="1082" y="436" text-anchor="middle" font-size="18" fill="#374151">SNS 링크</text>
+  <text x="1082" y="540" text-anchor="middle" font-size="15" fill="#6b7280">연락처 섹션</text>
+</svg>

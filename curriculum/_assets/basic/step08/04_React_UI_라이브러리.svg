@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
+  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
+  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">React UI 라이브러리</text>
+  <rect x="370" y="116" width="540" height="4" rx="2" fill="#16a34a"/>
+  <text x="640" y="155" text-anchor="middle" font-size="22" fill="#6b7280">이미 만들어진 UI 컴포넌트 묶음 — 버튼, 카드, 그리드를 가져다 쓴다</text>
+  <rect x="60" y="188" width="360" height="466" rx="16" fill="#171717"/>
+  <rect x="60" y="188" width="360" height="6" rx="3" fill="#16a34a"/>
+  <text x="240" y="264" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">MUI ★</text>
+  <text x="240" y="304" text-anchor="middle" font-size="16" fill="#16a34a">Material UI</text>
+  <text x="240" y="368" text-anchor="middle" font-size="18" fill="#d1d5db">구글 Material Design</text>
+  <text x="240" y="404" text-anchor="middle" font-size="18" fill="#d1d5db">기반의 풍부한 컴포넌트</text>
+  <text x="240" y="464" text-anchor="middle" font-size="18" fill="#d1d5db">Button, Grid, Card,</text>
+  <text x="240" y="500" text-anchor="middle" font-size="18" fill="#d1d5db">Typography...</text>
+  <rect x="100" y="566" width="280" height="44" rx="8" fill="#16a34a"/>
+  <text x="240" y="589" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="700" fill="#ffffff">우리가 쓸 것!</text>
+  <rect x="460" y="188" width="360" height="466" rx="16" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="264" text-anchor="middle" font-size="28" font-weight="800" fill="#171717">shadcn/ui</text>
+  <text x="640" y="304" text-anchor="middle" font-size="16" fill="#6b7280">Copy-paste 방식</text>
+  <text x="640" y="368" text-anchor="middle" font-size="18" fill="#374151">깔끔한 디자인</text>
+  <text x="640" y="404" text-anchor="middle" font-size="18" fill="#374151">커스터마이징 쉬움</text>
+  <text x="640" y="464" text-anchor="middle" font-size="18" fill="#374151">코드 직접 소유</text>
+  <text x="640" y="556" text-anchor="middle" font-size="16" fill="#9ca3af">최근 인기 급상승</text>
+  <rect x="860" y="188" width="360" height="466" rx="16" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="1040" y="264" text-anchor="middle" font-size="28" font-weight="800" fill="#171717">Chakra UI</text>
+  <text x="1040" y="304" text-anchor="middle" font-size="16" fill="#6b7280">접근성 중심</text>
+  <text x="1040" y="368" text-anchor="middle" font-size="18" fill="#374151">직관적인 API</text>
+  <text x="1040" y="404" text-anchor="middle" font-size="18" fill="#374151">테마 시스템 강력</text>
+  <text x="1040" y="464" text-anchor="middle" font-size="18" fill="#374151">다크모드 내장</text>
+  <text x="1040" y="556" text-anchor="middle" font-size="16" fill="#9ca3af">스타트업 선호</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
+  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
+  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">우리 스택: MUI</text>
+  <rect x="450" y="116" width="380" height="4" rx="2" fill="#16a34a"/>
+  <rect x="60" y="152" width="560" height="510" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="340" y="222" text-anchor="middle" font-size="22" font-weight="700" fill="#16a34a">🌐 vibe-web 레퍼런스</text>
+  <text x="340" y="284" text-anchor="middle" font-size="18" fill="#374151">강사의 실제 포트폴리오 사이트가</text>
+  <text x="340" y="320" text-anchor="middle" font-size="18" fill="#374151">MUI로 만들어진 레퍼런스</text>
+  <text x="340" y="384" text-anchor="middle" font-size="18" fill="#374151">여러분도 같은 도구로</text>
+  <text x="340" y="420" text-anchor="middle" font-size="18" fill="#374151">포트폴리오를 만든다</text>
+  <rect x="100" y="480" width="480" height="140" rx="8" fill="#ffffff"/>
+  <text x="340" y="538" text-anchor="middle" font-size="16" fill="#6b7280">통합 프롬프트 3개 파일이</text>
+  <text x="340" y="570" text-anchor="middle" font-size="16" fill="#6b7280">Claude에게 MUI 사용법을 알려준다</text>
+  <rect x="660" y="152" width="560" height="155" rx="12" fill="#171717"/>
+  <text x="940" y="218" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">⚡ Vite</text>
+  <text x="940" y="262" text-anchor="middle" font-size="18" fill="#9ca3af">빠른 개발 서버 + 빌드 도구</text>
+  <rect x="660" y="322" width="560" height="155" rx="12" fill="#171717"/>
+  <text x="940" y="388" text-anchor="middle" font-size="26" font-weight="700" fill="#61dafb">⚛ React</text>
+  <text x="940" y="432" text-anchor="middle" font-size="18" fill="#9ca3af">컴포넌트 기반 UI 라이브러리</text>
+  <rect x="660" y="492" width="560" height="170" rx="12" fill="#0081cb"/>
+  <text x="940" y="566" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">🎨 MUI</text>
+  <text x="940" y="610" text-anchor="middle" font-size="18" fill="#e3f2fd">Material UI 컴포넌트</text>
+</svg>

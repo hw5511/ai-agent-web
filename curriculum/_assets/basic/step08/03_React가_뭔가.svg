@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
+  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
+  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">React가 뭔가?</text>
+  <rect x="500" y="116" width="280" height="4" rx="2" fill="#16a34a"/>
+  <rect x="60" y="148" width="520" height="452" rx="16" fill="#f3f4f6"/>
+  <text x="320" y="210" text-anchor="middle" font-size="26" font-weight="700" fill="#6b7280">1~7주 방식</text>
+  <text x="320" y="290" text-anchor="middle" font-size="20" fill="#374151">📄  index.html</text>
+  <text x="320" y="344" text-anchor="middle" font-size="20" fill="#374151">🎨  style.css</text>
+  <text x="320" y="398" text-anchor="middle" font-size="20" fill="#374151">⚙️  script.js</text>
+  <text x="320" y="476" text-anchor="middle" font-size="18" fill="#9ca3af">파일마다 역할이 분리</text>
+  <text x="320" y="512" text-anchor="middle" font-size="18" fill="#9ca3af">섹션이 많아지면 복잡해짐</text>
+  <text x="622" y="382" text-anchor="middle" font-size="36" fill="#16a34a">→</text>
+  <rect x="700" y="148" width="520" height="452" rx="16" fill="#171717"/>
+  <text x="960" y="210" text-anchor="middle" font-size="26" font-weight="700" fill="#16a34a">React 방식</text>
+  <text x="960" y="290" text-anchor="middle" font-size="20" fill="#ffffff">🧩  Hero.jsx</text>
+  <text x="960" y="344" text-anchor="middle" font-size="20" fill="#ffffff">🧩  About.jsx</text>
+  <text x="960" y="398" text-anchor="middle" font-size="20" fill="#ffffff">🧩  Projects.jsx</text>
+  <text x="960" y="452" text-anchor="middle" font-size="20" fill="#ffffff">🧩  Contact.jsx</text>
+  <text x="960" y="528" text-anchor="middle" font-size="18" fill="#16a34a">각 섹션 = 독립된 컴포넌트</text>
+  <rect x="200" y="624" width="880" height="52" rx="8" fill="#f0fdf4"/>
+  <text x="640" y="651" text-anchor="middle" dominant-baseline="middle" font-size="22" fill="#16a34a" font-weight="600">컴포넌트 = 레고 블록 한 조각 · 조합하면 완성!</text>
+</svg>
