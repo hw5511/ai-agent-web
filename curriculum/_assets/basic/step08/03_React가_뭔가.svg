@@ -1,27 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <defs>
-    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
-  </defs>
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
-  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
-  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
-  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">React가 뭔가?</text>
-  <rect x="500" y="116" width="280" height="4" rx="2" fill="#16a34a"/>
-  <rect x="60" y="148" width="520" height="452" rx="16" fill="#f3f4f6"/>
-  <text x="320" y="210" text-anchor="middle" font-size="26" font-weight="700" fill="#6b7280">1~7주 방식</text>
-  <text x="320" y="290" text-anchor="middle" font-size="20" fill="#374151">📄  index.html</text>
-  <text x="320" y="344" text-anchor="middle" font-size="20" fill="#374151">🎨  style.css</text>
-  <text x="320" y="398" text-anchor="middle" font-size="20" fill="#374151">⚙️  script.js</text>
-  <text x="320" y="476" text-anchor="middle" font-size="18" fill="#9ca3af">파일마다 역할이 분리</text>
-  <text x="320" y="512" text-anchor="middle" font-size="18" fill="#9ca3af">섹션이 많아지면 복잡해짐</text>
-  <text x="622" y="382" text-anchor="middle" font-size="36" fill="#16a34a">→</text>
-  <rect x="700" y="148" width="520" height="452" rx="16" fill="#171717"/>
-  <text x="960" y="210" text-anchor="middle" font-size="26" font-weight="700" fill="#16a34a">React 방식</text>
-  <text x="960" y="290" text-anchor="middle" font-size="20" fill="#ffffff">🧩  Hero.jsx</text>
-  <text x="960" y="344" text-anchor="middle" font-size="20" fill="#ffffff">🧩  About.jsx</text>
-  <text x="960" y="398" text-anchor="middle" font-size="20" fill="#ffffff">🧩  Projects.jsx</text>
-  <text x="960" y="452" text-anchor="middle" font-size="20" fill="#ffffff">🧩  Contact.jsx</text>
-  <text x="960" y="528" text-anchor="middle" font-size="18" fill="#16a34a">각 섹션 = 독립된 컴포넌트</text>
-  <rect x="200" y="624" width="880" height="52" rx="8" fill="#f0fdf4"/>
-  <text x="640" y="651" text-anchor="middle" dominant-baseline="middle" font-size="22" fill="#16a34a" font-weight="600">컴포넌트 = 레고 블록 한 조각 · 조합하면 완성!</text>
+
+  <!-- 상단 WEB 08 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+
+  <!-- 제목 -->
+  <text x="60" y="130" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">React가 뭔가</text>
+  <!-- 부제 -->
+  <text x="60" y="178" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">한 파일에 다 쓰던 걸, 컴포넌트로 쪼개서 조립한다</text>
+  <!-- 구분선 -->
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- 좌 카드: 1~7주 방식 -->
+  <rect x="60" y="258" width="540" height="328" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="88" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">1~7주 방식</text>
+  <text x="88" y="352" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#374151">index.html · 구조</text>
+  <text x="88" y="398" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#374151">style.css · 디자인</text>
+  <text x="88" y="444" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#374151">script.js · 동작</text>
+  <text x="88" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#9ca3af">한 파일에 다 — 길어지면 복잡해진다</text>
+
+  <!-- 화살표 -->
+  <text x="640" y="430" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="28" font-weight="400" fill="#9ca3af">→</text>
+
+  <!-- 우 카드: React 방식 -->
+  <rect x="680" y="258" width="540" height="328" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="708" y="300" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">REACT 방식 · 컴포넌트</text>
+  <text x="708" y="350" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#374151">Hero.jsx</text>
+  <text x="708" y="392" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#374151">About.jsx</text>
+  <text x="708" y="434" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#374151">Projects.jsx</text>
+  <text x="708" y="476" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="21" font-weight="500" fill="#374151">Contact.jsx</text>
+  <text x="708" y="540" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="400" fill="#9ca3af">각 섹션 = 재사용 가능한 UI 조각</text>
+
+  <!-- 핵심 한 줄 (그린 강조, 슬라이드당 1회) -->
+  <text x="60" y="652" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="700" fill="#16a34a">컴포넌트 = 레고 블록 한 조각, 조합하면 완성</text>
 </svg>

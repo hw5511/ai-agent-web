@@ -1,14 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <defs>
-    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
-  </defs>
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
-  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
-  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
-  <text x="640" y="250" text-anchor="middle" font-size="76" font-weight="800" fill="#171717">React로 내 포트폴리오를</text>
-  <text x="640" y="345" text-anchor="middle" font-size="76" font-weight="800" fill="#171717">만들고 인터넷에 띄운다</text>
-  <rect x="260" y="372" width="760" height="6" rx="3" fill="#16a34a"/>
-  <rect x="340" y="428" width="600" height="68" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
-  <text x="640" y="468" text-anchor="middle" dominant-baseline="middle" font-size="24" font-weight="600" fill="#16a34a">https://내아이디.github.io/portfolio/</text>
-  <text x="640" y="578" text-anchor="middle" font-size="26" fill="#6b7280">Vite + React + MUI · GitHub Pages</text>
+
+  <!-- 상단 WEB 08 배지 -->
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+
+  <!-- 부제 -->
+  <text x="60" y="312" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="20" font-weight="400" fill="#9ca3af">Part 1 클라이맥스</text>
+
+  <!-- 제목 -->
+  <text x="60" y="372" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="56" font-weight="700" fill="#171717" letter-spacing="-0.02em">React로 내 포트폴리오 만들기</text>
+
+  <!-- 그린 언더라인 -->
+  <rect x="62" y="398" width="120" height="4" rx="2" fill="#16a34a"/>
+
+  <!-- 메타 -->
+  <text x="60" y="452" font-family="'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="19" font-weight="400" fill="#6b7280">React · MUI · GitHub Pages 배포</text>
 </svg>

@@ -1,25 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <defs>
-    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
-  </defs>
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");text{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
-  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
-  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
-  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">실습 A: 프로젝트 세팅</text>
-  <rect x="300" y="116" width="680" height="4" rx="2" fill="#16a34a"/>
-  <rect x="60" y="155" width="560" height="200" rx="12" fill="#171717"/>
-  <text x="340" y="212" text-anchor="middle" font-size="20" font-weight="700" fill="#16a34a">STEP 1</text>
-  <text x="340" y="256" text-anchor="middle" font-size="20" fill="#ffffff">Claude 대화 열기</text>
-  <text x="340" y="298" text-anchor="middle" font-size="18" fill="#9ca3af">step08/ 폴더의 3개 파일을</text>
-  <text x="340" y="330" text-anchor="middle" font-size="18" fill="#9ca3af">대화창에 드래그 &amp; 드롭</text>
-  <rect x="660" y="155" width="560" height="200" rx="12" fill="#171717"/>
-  <text x="940" y="212" text-anchor="middle" font-size="20" font-weight="700" fill="#16a34a">STEP 2</text>
-  <text x="940" y="256" text-anchor="middle" font-size="20" fill="#ffffff">프롬프트 입력</text>
-  <text x="940" y="298" text-anchor="middle" font-size="18" fill="#9ca3af">아래 프롬프트를 복사해서</text>
-  <text x="940" y="330" text-anchor="middle" font-size="18" fill="#9ca3af">Claude에게 보낸다</text>
-  <rect x="60" y="385" width="1160" height="240" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
-  <text x="140" y="434" font-size="18" font-weight="700" fill="#16a34a">💬 프롬프트</text>
-  <rect x="80" y="453" width="1120" height="2" fill="#d1fae5"/>
-  <text x="640" y="524" text-anchor="middle" font-size="26" font-weight="700" fill="#171717">portfolio 라는 이름으로 새로운 프로젝트 세팅해줘</text>
-  <text x="640" y="580" text-anchor="middle" font-size="18" fill="#6b7280">Claude가 npm create vite, npm install @mui/... 까지 자동으로 진행</text>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">실습 A · 프로젝트 세팅</text>
+  <text x="60" y="178" font-size="19" font-weight="400" fill="#6b7280">Vite + React + MUI 자동 세팅</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="60" y="282" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="282" font-size="20" font-weight="500" fill="#171717">3파일을 새 폴더에 복사</text>
+  <text x="60" y="344" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="344" font-size="20" font-weight="500" fill="#171717">Claude Code 열기</text>
+  <text x="60" y="406" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="406" font-size="20" font-weight="500" fill="#171717">아래 프롬프트 입력</text>
+  <text x="60" y="468" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="468" font-size="20" font-weight="500" fill="#171717">npm run dev 로 확인</text>
+  <rect x="680" y="250" width="540" height="240" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="708" y="288" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">프롬프트 (복사해서 붙여넣기)</text>
+  <text x="708" y="336" font-size="18" font-weight="500" fill="#374151">portfolio 라는 이름으로</text>
+  <text x="708" y="368" font-size="18" font-weight="500" fill="#374151">새로운 프로젝트 세팅해줘</text>
+  <text x="708" y="452" font-size="15" fill="#9ca3af">new_project.md를 읽고 5분이면 세팅 끝</text>
+  <text x="60" y="600" font-size="24" font-weight="700" fill="#16a34a">코드는 Claude가 짠다 — 우리는 개념과 결정만</text>
 </svg>

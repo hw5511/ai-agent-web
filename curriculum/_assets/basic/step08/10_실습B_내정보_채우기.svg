@@ -1,32 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <defs>
-    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
-  </defs>
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");text{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
-  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
-  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
-  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">실습 B: 섹션 송룄기</text>
-  <rect x="320" y="116" width="640" height="4" rx="2" fill="#16a34a"/>
-  <rect x="60" y="153" width="680" height="510" rx="16" fill="#171717"/>
-  <rect x="60" y="153" width="680" height="6" rx="3" fill="#16a34a"/>
-  <text x="140" y="218" font-size="18" font-weight="700" fill="#16a34a">💬 프롬프트 (내 정보로 수정)</text>
-  <rect x="80" y="238" width="640" height="2" fill="#374151"/>
-  <text x="140" y="288" font-size="17" fill="#ffffff">Hero 섹션에 이름을 [내이름],</text>
-  <text x="140" y="326" font-size="17" fill="#ffffff">소개를 [한줄소개]로 바꿈줘.</text>
-  <text x="140" y="378" font-size="17" fill="#ffffff">Projects 카드를 내 실제 프로젝트로</text>
-  <text x="140" y="416" font-size="17" fill="#ffffff">바꿈줘:</text>
-  <text x="140" y="460" font-size="17" fill="#9ca3af">  - [프로젝트1]: [한줄설명1]</text>
-  <text x="140" y="498" font-size="17" fill="#9ca3af">  - [프로젝트2]: [한줄설명2]</text>
-  <text x="140" y="536" font-size="17" fill="#9ca3af">  - [프로젝트3]: [한줄설명3]</text>
-  <text x="140" y="588" font-size="17" fill="#ffffff">Contact에 이메일 [내이메일] 넣어줘.</text>
-  <rect x="760" y="153" width="460" height="510" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
-  <text x="990" y="218" text-anchor="middle" font-size="18" font-weight="700" fill="#16a34a">💡 예시</text>
-  <rect x="780" y="238" width="420" height="2" fill="#d1fae5"/>
-  <text x="990" y="290" text-anchor="middle" font-size="17" fill="#374151">이름: 홍길동</text>
-  <text x="990" y="340" text-anchor="middle" font-size="17" fill="#374151">소개: AI로 웹을 만드는</text>
-  <text x="990" y="374" text-anchor="middle" font-size="17" fill="#374151">개발자 지망생</text>
-  <rect x="780" y="404" width="420" height="2" fill="#d1fae5"/>
-  <text x="990" y="448" text-anchor="middle" font-size="17" fill="#374151">프로젝트1: 날씨 앱</text>
-  <text x="990" y="492" text-anchor="middle" font-size="17" fill="#374151">프로젝트2: 투두 리스트</text>
-  <text x="990" y="536" text-anchor="middle" font-size="17" fill="#374151">프로젝트3: 포트폴리오</text>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">실습 B · 내 정보로 채우기</text>
+  <text x="60" y="178" font-size="19" font-weight="400" fill="#6b7280">뼈대에 내 이름·프로젝트를 넣는다</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="60" y="282" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="282" font-size="20" font-weight="500" fill="#171717">Hero 정보 변경</text>
+  <text x="60" y="344" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="344" font-size="20" font-weight="500" fill="#171717">Projects 카드 채우기</text>
+  <text x="60" y="406" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="406" font-size="20" font-weight="500" fill="#171717">결과 확인</text>
+  <rect x="680" y="250" width="540" height="240" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="708" y="288" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">프롬프트 (복사해서 붙여넣기)</text>
+  <text x="708" y="332" font-size="18" font-weight="500" fill="#374151">Hero 이름은 [본인이름], 소개는</text>
+  <text x="708" y="364" font-size="18" font-weight="500" fill="#374151">[한 줄 소개]로 바꿔줘. Projects 카드는</text>
+  <text x="708" y="396" font-size="18" font-weight="500" fill="#374151">[프로젝트1·2·3]으로 채워줘.</text>
+  <text x="708" y="452" font-size="15" fill="#9ca3af">[ ] 안을 각자 본인 것으로 바꿔 입력</text>
+  <text x="60" y="600" font-size="24" font-weight="700" fill="#16a34a">이제 진짜 내 포트폴리오가 됐다</text>
 </svg>

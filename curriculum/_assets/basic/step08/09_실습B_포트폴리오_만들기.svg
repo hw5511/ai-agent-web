@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <defs>
-    <style>text { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }</style>
-  </defs>
+  <defs><style>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");text{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}</style></defs>
   <rect width="1280" height="720" fill="#ffffff"/>
-  <rect x="20" y="24" width="84" height="28" rx="4" fill="#171717"/>
-  <text x="62" y="44" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="1">WEB 08</text>
-  <text x="640" y="100" text-anchor="middle" font-size="48" font-weight="800" fill="#171717">실습 B: 포트폴리오 만들기</text>
-  <rect x="240" y="116" width="800" height="4" rx="2" fill="#16a34a"/>
-  <rect x="60" y="158" width="1160" height="420" rx="16" fill="#171717"/>
-  <rect x="60" y="158" width="1160" height="6" rx="3" fill="#16a34a"/>
-  <text x="140" y="224" font-size="20" font-weight="700" fill="#16a34a">💬 프롬플트</text>
-  <rect x="80" y="244" width="1120" height="2" fill="#374151"/>
-  <text x="140" y="300" font-size="20" fill="#ffffff">MUI로 포트폴리오 사이트 만들어줘.</text>
-  <text x="140" y="348" font-size="20" fill="#ffffff">Hero(이름·한 줄 소개·버튼), About 섹션,</text>
-  <text x="140" y="396" font-size="20" fill="#ffffff">Projects 카드 3개, Contact 섹션으로 구성해줘.</text>
-  <rect x="60" y="600" width="1160" height="90" rx="10" fill="#f0fdf4"/>
-  <text x="640" y="650" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#16a34a">📌 일단 빰대를 만든다 — 내용은 다음 단계에서 송</ub8c4</text>
+  <rect x="60" y="44" width="66" height="24" rx="12" fill="#171717"/>
+  <text x="93" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.05em">WEB 08</text>
+  <text x="60" y="130" font-size="40" font-weight="700" fill="#171717" letter-spacing="-0.01em">실습 B · 포트폴리오 만들기</text>
+  <text x="60" y="178" font-size="19" font-weight="400" fill="#6b7280">프롬프트 한 줄로 전체 뼈대 생성</text>
+  <line x1="60" y1="212" x2="1220" y2="212" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="60" y="282" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="282" font-size="20" font-weight="500" fill="#171717">아래 프롬프트 입력</text>
+  <text x="60" y="344" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="344" font-size="20" font-weight="500" fill="#171717">Claude가 컴포넌트 생성</text>
+  <text x="60" y="406" font-size="20" font-weight="500" fill="#9ca3af">─</text><text x="100" y="406" font-size="20" font-weight="500" fill="#171717">npm run dev 로 확인</text>
+  <rect x="680" y="250" width="540" height="240" rx="12" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="708" y="288" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="0.08em">프롬프트 (복사해서 붙여넣기)</text>
+  <text x="708" y="332" font-size="18" font-weight="500" fill="#374151">MUI로 포트폴리오 사이트 만들어줘.</text>
+  <text x="708" y="364" font-size="18" font-weight="500" fill="#374151">Hero(이름·소개·버튼), About 섹션,</text>
+  <text x="708" y="396" font-size="18" font-weight="500" fill="#374151">Projects 카드 3개, Contact 섹션.</text>
+  <text x="708" y="452" font-size="15" fill="#9ca3af">각 섹션이 컴포넌트로 분리되어 생성된다</text>
+  <text x="60" y="600" font-size="24" font-weight="700" fill="#16a34a">결과를 보면 React = 섹션을 컴포넌트로 나눈 것</text>
 </svg>
