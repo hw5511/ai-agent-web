@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이서연 - 주니어 웹 디자이너</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* 기본 */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    }
+
+    /* 가운데 정렬 컨테이너 */
+    header nav,
+    main,
+    footer {
+      max-width: 860px;
+      margin-inline: auto;
+    }
+
+    /* 링크 */
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 헤더 / 네비게이션 */
+    header {
+      background-color: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      padding: 1.25rem 2rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: #ffffff;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    /* 공통 섹션 */
+    section {
+      padding: 6rem 2rem;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+
+    h2 {
+      margin-bottom: 2.5rem;
+    }
+
+    h3 {
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* 히어로 */
+    #hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    #hero h1 .char {
+      display: inline-block;
+      color: #334155;
+    }
+
+    #hero p {
+      margin-bottom: 0.75rem;
+    }
+
+    #hero a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.4rem;
+      background-color: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    #hero a:hover {
+      background-color: #7dd3fc;
+      text-decoration: none;
+    }
+
+    /* 갤러리 */
+    #gallery {
+      overflow: hidden;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #gallery h2 {
+      padding: 0 2rem;
+      margin-bottom: 2rem;
+    }
+
+    #gallery ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1.5rem;
+      padding: 0 2rem 2rem;
+      width: max-content;
+    }
+
+    #gallery li {
+      flex-shrink: 0;
+      width: 300px;
+    }
+
+    #gallery article {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    #gallery article a {
+      color: #ffffff;
+      display: block;
+    }
+
+    #gallery article a:hover h3 {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    #gallery figure {
+      line-height: 0;
+    }
+
+    #gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #gallery figcaption {
+      display: none;
+    }
+
+    #gallery h3 {
+      padding: 0.75rem 1rem 0.25rem;
+    }
+
+    #gallery p {
+      padding: 0 1rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* 연락처 */
+    #contact-info ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    #contact-info span {
+      color: #94a3b8;
+      margin-right: 0.5rem;
+    }
+
+    /* 문의 폼 */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 480px;
+    }
+
+    label {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    input, textarea {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      color: #ffffff;
+      padding: 0.6rem 0.8rem;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus {
+      outline: 2px solid #38bdf8;
+      border-color: transparent;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      align-self: flex-start;
+      padding: 0.6rem 1.4rem;
+      background-color: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #7dd3fc;
+    }
+
+    /* 커스텀 커서 */
+    #hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #cursor-glow {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,189,248,0.35) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+
+    #hero:hover #cursor-glow {
+      opacity: 1;
+    }
+
+    /* GSAP 초기 상태 — JS 비활성 환경 대비 */
+    section {
+      opacity: 0;
+    }
+
+    /* 푸터 */
+    footer {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      color: #475569;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#about">소개</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#contact-info">연락처</a>
+      <a href="#contact">문의하기</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="hero">
+      <h1>이서연</h1>
+      <p>주니어 웹 디자이너</p>
+      <p>작은 디테일까지 챙기는 디자이너입니다</p>
+      <a href="#contact">연락하기</a>
+    </section>
+
+    <section id="about">
+      <h2>소개</h2>
+      <p></p>
+    </section>
+
+    <section id="portfolio">
+      <h2>포트폴리오</h2>
+      <ul>
+        <li>
+          <h3>프로젝트 제목</h3>
+          <p>프로젝트 설명</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="gallery">
+      <h2>작품 갤러리</h2>
+      <ul>
+        <li>
+          <article>
+            <a href="https://example.com/project-cafe" target="_blank" rel="noopener noreferrer">
+              <h3>동네 카페 메뉴판 리디자인</h3>
+              <figure>
+                <img src="https://loremflickr.com/640/480/cafe,menu" alt="동네 카페 메뉴판 리디자인 미리보기">
+                <figcaption>동네 카페 메뉴판 리디자인</figcaption>
+              </figure>
+            </a>
+            <p>프로젝트 설명</p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <a href="https://example.com/project-plant" target="_blank" rel="noopener noreferrer">
+              <h3>반려식물 물주기 알림 앱</h3>
+              <figure>
+                <img src="https://loremflickr.com/640/480/plant,nature" alt="반려식물 물주기 알림 앱 미리보기">
+                <figcaption>반려식물 물주기 알림 앱</figcaption>
+              </figure>
+            </a>
+            <p>프로젝트 설명</p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <a href="https://example.com/project-book" target="_blank" rel="noopener noreferrer">
+              <h3>중고책 거래 플랫폼 UI</h3>
+              <figure>
+                <img src="https://loremflickr.com/640/480/book,library" alt="중고책 거래 플랫폼 UI 미리보기">
+                <figcaption>중고책 거래 플랫폼 UI</figcaption>
+              </figure>
+            </a>
+            <p>프로젝트 설명</p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <a href="https://example.com/project-4" target="_blank" rel="noopener noreferrer">
+              <h3>프로젝트 제목 4</h3>
+              <figure>
+                <img src="https://loremflickr.com/640/480/design,ui" alt="프로젝트 4 미리보기">
+                <figcaption>프로젝트 제목 4</figcaption>
+              </figure>
+            </a>
+            <p>프로젝트 설명</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact-info">
+      <h2>연락처</h2>
+      <ul>
+        <li>
+          <span>이메일</span>
+          <a href="mailto:seoyeon.lee@example.com">seoyeon.lee@example.com</a>
+        </li>
+        <li>
+          <span>GitHub</span>
+          <a href="https://github.com/seoyeon" target="_blank" rel="noopener noreferrer">github.com/seoyeon</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>연락하기</h2>
+      <form action="#" method="post">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">메시지</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit">연락하기</button>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('section:not(#gallery)').forEach((section) => {
+      gsap.fromTo(
+        section,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
+    });
+
+    // 갤러리 수평 스크롤
+    const galleryTrack = document.querySelector('#gallery ul');
+    const gallerySection = document.querySelector('#gallery');
+
+    gsap.fromTo(gallerySection, { opacity: 0 }, {
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: gallerySection, start: 'top 85%', once: true },
+    });
+
+    gsap.to(galleryTrack, {
+      x: () => -(galleryTrack.scrollWidth - gallerySection.clientWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: gallerySection,
+        pin: true,
+        scrub: 1,
+        start: 'top top',
+        end: () => '+=' + (galleryTrack.scrollWidth - gallerySection.clientWidth),
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // 헤드라인 글자별 스크롤 reveal
+    const h1 = document.querySelector('#hero h1');
+    h1.innerHTML = [...h1.textContent]
+      .map(ch => `<span class="char">${ch}</span>`)
+      .join('');
+
+    gsap.to('#hero h1 .char', {
+      color: '#ffffff',
+      ease: 'none',
+      stagger: 0.4,
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+    });
+
+    const hero = document.querySelector('#hero');
+    const glow = document.createElement('div');
+    glow.id = 'cursor-glow';
+    hero.appendChild(glow);
+
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      glow.style.left = (e.clientX - rect.left) + 'px';
+      glow.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+
+    document.querySelector('#contact form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      this.hidden = true;
+
+      const msg = document.createElement('p');
+      msg.textContent = '감사합니다! 곧 연락드리겠습니다.';
+      msg.style.color = '#38bdf8';
+      msg.style.fontSize = '1.1rem';
+      this.parentElement.appendChild(msg);
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2026 이서연. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

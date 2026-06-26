@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이서연 - 웹 디자이너</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── 리셋 ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── 베이스 ── */
+    body {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    h1, h2, h3 { color: #ffffff; }
+    h2 { margin-bottom: 2.5rem; }
+    h3 { margin-bottom: 0.75rem; }
+    p  { color: #cbd5e1; }
+
+    /* ── 레이아웃 컨테이너 ── */
+    .container {
+      max-width: 900px;
+      margin-inline: auto;
+      padding-inline: 2rem;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e293b;
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1.1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: 0.03em;
+    }
+
+    nav { display: flex; gap: 1.75rem; }
+    nav a { color: #94a3b8; font-size: 0.9rem; transition: color 0.2s; }
+    nav a:hover { color: #38bdf8; text-decoration: none; }
+
+    /* ── 공통 섹션 ── */
+    section {
+      padding: 7rem 0;
+      border-bottom: 1px solid #1e293b;
+      opacity: 0; /* GSAP 초기 상태 */
+    }
+
+    /* ── 히어로 ── */
+    #hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      min-height: calc(100vh - 56px);
+    }
+
+    /* 파티클 캔버스 */
+    #tsparticles {
+      position: absolute !important;
+      inset: 0;
+      z-index: 0 !important;
+    }
+
+    /* 마우스 빛 */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      background:
+        radial-gradient(100px circle at var(--gx, -999px) var(--gy, -999px),
+          rgba(56,189,248,0.28) 0%, transparent 100%),
+        radial-gradient(550px circle at var(--gx, -999px) var(--gy, -999px),
+          rgba(56,189,248,0.08) 0%, transparent 70%);
+    }
+    #hero:hover::before { opacity: 1; }
+
+    /* 콘텐츠 레이어 */
+    #hero > *:not(#tsparticles) { position: relative; z-index: 2; }
+
+    #hero-content { flex: 1; min-width: 0; }
+
+    #hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+    #hero h1 .char {
+      display: inline-block;
+      color: #334155;
+    }
+
+    #hero .subtitle {
+      font-size: 1.15rem;
+      color: #38bdf8;
+      min-height: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    #hero .intro { color: #94a3b8; margin-bottom: 0; }
+
+    .btn-primary {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.7rem 1.6rem;
+      background-color: #38bdf8;
+      color: #0f172a;
+      font-weight: 700;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    .btn-primary:hover {
+      background-color: #7dd3fc;
+      text-decoration: none;
+    }
+
+    /* Three.js 큐브 */
+    #hero-canvas {
+      flex: 0 0 300px;
+      height: 300px;
+    }
+    #hero-canvas canvas { display: block; }
+
+    /* ── 소개 ── */
+    #about p + p { margin-top: 1rem; }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      padding: 0.3rem 0.8rem;
+      border: 1px solid #334155;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    /* ── 갤러리 ── */
+    #gallery {
+      overflow: hidden;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    #gallery .container { padding-right: 0; }
+    #gallery h2 { padding-right: 2rem; }
+
+    #gallery ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1.5rem;
+      padding: 0 2rem 2rem;
+      width: max-content;
+    }
+
+    /* 플립 카드 */
+    #gallery li {
+      flex-shrink: 0;
+      width: 300px;
+      height: 360px;
+      perspective: 1000px;
+    }
+
+    #gallery article {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      cursor: pointer;
+    }
+    #gallery article:hover { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .flip-front {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+    }
+    .flip-front figure { flex: 1; overflow: hidden; line-height: 0; }
+    .flip-front img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .flip-front h3 { padding: 0.9rem 1rem; font-size: 0.95rem; }
+
+    .flip-back {
+      background-color: #0f172a;
+      border: 1px solid #38bdf8;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.75rem;
+      text-align: center;
+    }
+    .flip-back h3 { color: #38bdf8; font-size: 1rem; }
+    .flip-back p  { font-size: 0.9rem; }
+    .flip-back a {
+      margin-top: 0.25rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid #38bdf8;
+      border-radius: 4px;
+      color: #38bdf8;
+      font-size: 0.85rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .flip-back a:hover {
+      background-color: #38bdf8;
+      color: #0f172a;
+      text-decoration: none;
+    }
+
+    /* ── 연락처 ── */
+    #contact-info ul { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    #contact-info li { display: flex; align-items: center; gap: 0.75rem; }
+    #contact-info .label {
+      font-size: 0.8rem;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      width: 4.5rem;
+    }
+
+    /* ── 문의 폼 ── */
+    form { display: flex; flex-direction: column; gap: 0.9rem; max-width: 520px; }
+    label { color: #94a3b8; font-size: 0.85rem; }
+    input, textarea {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      color: #ffffff;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      width: 100%;
+      transition: border-color 0.2s, outline 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: 2px solid #38bdf8;
+      border-color: transparent;
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    button[type="submit"] {
+      align-self: flex-start;
+      padding: 0.65rem 1.5rem;
+      background-color: #38bdf8;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button[type="submit"]:hover { background-color: #7dd3fc; }
+
+    /* ── 푸터 ── */
+    footer { padding: 2.5rem 0; text-align: center; }
+    footer p { color: #334155; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <span class="logo">이서연</span>
+      <nav>
+        <a href="#about">소개</a>
+        <a href="#gallery">갤러리</a>
+        <a href="#contact-info">연락처</a>
+        <a href="#contact">문의하기</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 히어로 -->
+    <section id="hero">
+      <div id="tsparticles"></div>
+      <div class="container" style="display:flex;align-items:center;gap:3rem;width:100%;max-width:900px;">
+        <div id="hero-content">
+          <h1>이서연</h1>
+          <p class="subtitle"><span id="typed-title"></span></p>
+          <p class="intro">작은 디테일까지 챙기는 디자이너입니다</p>
+          <a href="#contact" class="btn-primary" id="cta-btn">연락하기</a>
+        </div>
+        <div id="hero-canvas"></div>
+      </div>
+    </section>
+
+    <!-- 소개 -->
+    <section id="about">
+      <div class="container">
+        <h2>소개</h2>
+        <p>안녕하세요, 주니어 웹 디자이너 이서연입니다.</p>
+        <p>사용자가 불편함을 느끼기 전에 먼저 고민하는 디자이너를 목표로 합니다.<br>
+           타이포그래피, 여백, 색상의 작은 차이가 경험의 질을 바꾼다고 믿습니다.</p>
+        <ul class="tag-list">
+          <li class="tag">Figma</li>
+          <li class="tag">HTML / CSS</li>
+          <li class="tag">UI 디자인</li>
+          <li class="tag">사용자 경험</li>
+          <li class="tag">프로토타이핑</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 작품 갤러리 -->
+    <section id="gallery">
+      <div class="container">
+        <h2>작품 갤러리</h2>
+        <ul>
+          <li>
+            <article>
+              <div class="flip-front">
+                <figure><img src="https://loremflickr.com/640/480/cafe,menu" alt="동네 카페 메뉴판 리디자인"></figure>
+                <h3>동네 카페 메뉴판 리디자인</h3>
+              </div>
+              <div class="flip-back">
+                <h3>동네 카페 메뉴판 리디자인</h3>
+                <p>골목 카페의 정체성을 살린 핸드메이드 감성의 메뉴판 리디자인 프로젝트</p>
+                <a href="https://example.com/project-cafe" target="_blank" rel="noopener noreferrer">자세히 보기</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article>
+              <div class="flip-front">
+                <figure><img src="https://loremflickr.com/640/480/plant,nature" alt="반려식물 물주기 알림 앱"></figure>
+                <h3>반려식물 물주기 알림 앱</h3>
+              </div>
+              <div class="flip-back">
+                <h3>반려식물 물주기 알림 앱</h3>
+                <p>식물 종류별 맞춤 알림과 성장 일지를 기록하는 모바일 앱 UI 디자인</p>
+                <a href="https://example.com/project-plant" target="_blank" rel="noopener noreferrer">자세히 보기</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article>
+              <div class="flip-front">
+                <figure><img src="https://loremflickr.com/640/480/book,library" alt="중고책 거래 플랫폼 UI"></figure>
+                <h3>중고책 거래 플랫폼 UI</h3>
+              </div>
+              <div class="flip-back">
+                <h3>중고책 거래 플랫폼 UI</h3>
+                <p>책의 상태와 밑줄·메모를 함께 공유하는 중고책 거래 플랫폼 전체 UI</p>
+                <a href="https://example.com/project-book" target="_blank" rel="noopener noreferrer">자세히 보기</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article>
+              <div class="flip-front">
+                <figure><img src="https://loremflickr.com/640/480/design,typography" alt="타이포그래피 포스터 시리즈"></figure>
+                <h3>타이포그래피 포스터 시리즈</h3>
+              </div>
+              <div class="flip-back">
+                <h3>타이포그래피 포스터 시리즈</h3>
+                <p>한글 자모의 조형미를 탐구한 실험적 타이포그래피 포스터 4종 시리즈</p>
+                <a href="https://example.com/project-typo" target="_blank" rel="noopener noreferrer">자세히 보기</a>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 연락처 -->
+    <section id="contact-info">
+      <div class="container">
+        <h2>연락처</h2>
+        <ul>
+          <li>
+            <span class="label">이메일</span>
+            <a href="mailto:seoyeon.lee@example.com">seoyeon.lee@example.com</a>
+          </li>
+          <li>
+            <span class="label">GitHub</span>
+            <a href="https://github.com/seoyeon" target="_blank" rel="noopener noreferrer">github.com/seoyeon</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 문의하기 -->
+    <section id="contact">
+      <div class="container">
+        <h2>문의하기</h2>
+        <form action="#" method="post">
+          <label for="name">이름</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">메시지</label>
+          <textarea id="message" name="message" required></textarea>
+
+          <button type="submit">연락하기</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 이서연. 작은 디테일까지 챙기는 디자이너.</p>
+  </footer>
+
+  <!-- 라이브러리 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2/dist/typed.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ── Three.js 큐브 ── */
+    (function () {
+      const container = document.getElementById('hero-canvas');
+      const W = container.clientWidth;
+      const H = container.clientHeight;
+
+      const scene  = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
+      camera.position.z = 3.5;
+
+      const edges = new THREE.EdgesGeometry(new THREE.BoxGeometry(1.6, 1.6, 1.6));
+      const cube  = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x38bdf8 }));
+      scene.add(cube);
+
+      const dotGeo = new THREE.BufferGeometry();
+      dotGeo.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0], 3));
+      scene.add(new THREE.Points(dotGeo, new THREE.PointsMaterial({ color: 0x7dd3fc, size: 0.18 })));
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(W, H);
+      renderer.setClearColor(0x000000, 0);
+      container.appendChild(renderer.domElement);
+
+      (function tick() {
+        requestAnimationFrame(tick);
+        cube.rotation.x += 0.004;
+        cube.rotation.y += 0.007;
+        renderer.render(scene, camera);
+      })();
+
+      window.addEventListener('resize', () => {
+        const nW = container.clientWidth;
+        const nH = container.clientHeight;
+        camera.aspect = nW / nH;
+        camera.updateProjectionMatrix();
+        renderer.setSize(nW, nH);
+      });
+    })();
+
+    /* ── Typed.js ── */
+    new Typed('#typed-title', {
+      strings: ['웹 디자이너', 'UI 디자이너', '디테일 덕후'],
+      typeSpeed: 80,
+      backSpeed: 45,
+      backDelay: 1800,
+      startDelay: 400,
+      loop: true,
+      cursorChar: '|',
+    });
+
+    /* ── tsParticles ── */
+    tsParticles.load('tsparticles', {
+      background: { color: 'transparent' },
+      fpsLimit: 60,
+      particles: {
+        number: { value: 70, density: { enable: true, area: 800 } },
+        color: { value: '#ffffff' },
+        opacity: {
+          value: { min: 0.08, max: 0.45 },
+          animation: { enable: true, speed: 0.5, sync: false },
+        },
+        size: { value: { min: 1, max: 2.5 } },
+        move: { enable: true, speed: 0.5, random: true, outModes: 'out' },
+        links: { enable: false },
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: 'repulse' },
+          onClick: { enable: true, mode: 'push' },
+        },
+        modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push: { quantity: 3 },
+        },
+      },
+      detectRetina: true,
+    });
+
+    /* ── GSAP 스크롤 페이드인 (갤러리 제외) ── */
+    gsap.utils.toArray('section:not(#gallery)').forEach(section => {
+      gsap.fromTo(section,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1, y: 0, duration: 0.9, ease: 'power2.out',
+          scrollTrigger: { trigger: section, start: 'top 82%', once: true },
+        }
+      );
+    });
+
+    /* ── 갤러리 수평 스크롤 ── */
+    const gallerySection = document.querySelector('#gallery');
+    const galleryTrack   = document.querySelector('#gallery ul');
+
+    gsap.fromTo(gallerySection,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: gallerySection, start: 'top 82%', once: true } }
+    );
+
+    gsap.to(galleryTrack, {
+      x: () => -(galleryTrack.scrollWidth - gallerySection.clientWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: gallerySection,
+        pin: true,
+        scrub: 1,
+        start: 'top top',
+        end: () => '+=' + (galleryTrack.scrollWidth - gallerySection.clientWidth),
+        invalidateOnRefresh: true,
+      },
+    });
+
+    /* ── 헤드라인 스크롤 reveal (글자별 gray → white) ── */
+    const h1 = document.querySelector('#hero h1');
+    h1.innerHTML = [...h1.textContent].map(ch => `<span class="char">${ch}</span>`).join('');
+
+    gsap.to('#hero h1 .char', {
+      color: '#ffffff',
+      ease: 'none',
+      stagger: 0.4,
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 },
+    });
+
+    /* ── 마우스 빛 효과 ── */
+    const hero = document.querySelector('#hero');
+    hero.addEventListener('mousemove', e => {
+      const r = hero.getBoundingClientRect();
+      hero.style.setProperty('--gx', (e.clientX - r.left) + 'px');
+      hero.style.setProperty('--gy', (e.clientY - r.top)  + 'px');
+    });
+
+    /* ── 마그네틱 버튼 ── */
+    const magnetBtn = document.getElementById('cta-btn');
+    const RADIUS = 100, STRENGTH = 0.45;
+
+    document.addEventListener('mousemove', e => {
+      const r    = magnetBtn.getBoundingClientRect();
+      const cx   = r.left + r.width  / 2;
+      const cy   = r.top  + r.height / 2;
+      const dx   = e.clientX - cx;
+      const dy   = e.clientY - cy;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < RADIUS) {
+        const pull = (RADIUS - dist) / RADIUS;
+        gsap.to(magnetBtn, { x: dx * pull * STRENGTH, y: dy * pull * STRENGTH, duration: 0.3, ease: 'power2.out' });
+      } else {
+        gsap.to(magnetBtn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+      }
+    });
+
+    /* ── 폼 제출 ── */
+    document.querySelector('#contact form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      this.hidden = true;
+      const msg = document.createElement('p');
+      msg.textContent = '감사합니다! 곧 연락드리겠습니다.';
+      msg.style.cssText = 'color:#38bdf8;font-size:1.1rem;margin-top:1rem';
+      this.parentElement.appendChild(msg);
+    });
+  </script>
+
+</body>
+</html>

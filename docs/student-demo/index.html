@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 에이전트 웹 — 수강생 따라하기 결과물 (이서연)</title>
+<style>
+  :where(*){margin:0;padding:0;box-sizing:border-box}
+  :where(body,h1,h2,h3,p,a,li){word-break:keep-all;overflow-wrap:break-word}
+  :root{--bg:#0b0d12;--card:#141821;--ink:#f3f5f8;--dim:#9aa3b2;--line:#242c39;--accent:#38bdf8}
+  body{background:var(--bg);color:var(--ink);font-family:'Pretendard','Noto Sans KR',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;padding:clamp(24px,6vw,72px);min-height:100vh;
+    background-image:radial-gradient(circle at 85% -5%,rgba(56,189,248,.10),transparent 45%)}
+  header{max-width:1080px;margin:0 auto clamp(36px,6vw,72px)}
+  .ey{font-size:.72rem;letter-spacing:.32em;color:var(--accent);text-transform:uppercase;font-weight:700}
+  h1{font-size:clamp(2rem,5.5vw,3.4rem);font-weight:800;letter-spacing:-.02em;margin:.4em 0 .5em;line-height:1.05}
+  .lede{max-width:64ch;color:var(--dim);font-size:clamp(.98rem,2.2vw,1.12rem)}
+  .lede b{color:var(--ink);font-weight:600}
+  .who{display:inline-flex;gap:.5rem;align-items:center;margin-top:1.4rem;font-size:.85rem;color:var(--dim);
+    border:1px solid var(--line);border-radius:99px;padding:.5rem 1rem}
+  .who b{color:var(--accent)}
+  main{max-width:1080px;margin:0 auto;display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .card{position:relative;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:24px;text-decoration:none;color:inherit;min-height:188px;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s}
+  a.card:hover{transform:translateY(-5px);border-color:var(--accent)}
+  .wk{font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+  .card h2{font-size:1.28rem;font-weight:800;margin:.4em 0 .2em}
+  .topic{color:var(--dim);font-size:.9rem;flex:1}
+  .go{margin-top:1rem;font-size:.83rem;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:.35em}
+  .go::after{content:"→";transition:transform .3s}
+  a.card:hover .go::after{transform:translateX(5px)}
+  .card.off{opacity:.55}
+  .card.off .go{color:var(--dim)}
+  .note{font-size:.78rem;color:var(--dim);margin-top:.6rem;border-top:1px dashed var(--line);padding-top:.6rem}
+  footer{max-width:1080px;margin:clamp(40px,7vw,80px) auto 0;border-top:1px solid var(--line);
+    padding-top:1.6rem;color:var(--dim);font-size:.82rem}
+  .tip{background:#10202b;border:1px solid #1c3a48;border-radius:12px;padding:1rem 1.2rem;margin:1.6rem auto 0;
+    max-width:1080px;color:#bfe6f5;font-size:.86rem}
+</style>
+</head>
+<body>
+  <header>
+    <p class="ey">AI Agent Web · Part 1 (기초 8주)</p>
+    <h1>프롬프트만 따라 입력하면<br>이렇게 쌓인다</h1>
+    <p class="lede">웹을 처음 배우는 수강생이 <b>각 회차의 실습 프롬프트를 그대로 입력</b>했을 때 나오는 결과물을
+    회차별로 모았다. 2주차 한 페이지에서 시작해 매주 디자인·인터랙션·라이브러리를 <b>누적</b>으로 얹어,
+    8주차에 React 포트폴리오로 재탄생한다.</p>
+    <span class="who">가상 수강생 <b>이서연</b> · 주니어 웹 디자이너 · 카페 메뉴판·반려식물 앱·중고책 UI</span>
+  </header>
+
+  <div class="tip">팁: 4주차부터는 파티클·타이핑·3D·마우스 효과가 들어갑니다. 페이지를 열고 <b>스크롤·마우스 이동</b>을 해보세요. (각 회차는 그 주까지 누적된 상태입니다.)</div>
+
+  <main style="margin-top:24px">
+    <div class="card off">
+      <span class="wk">Week 01</span>
+      <h2>AI로 웹 만드는 세계</h2>
+      <p class="topic">Claude Design으로 1시간 만에 첫 랜딩페이지 — 외부 도구 실습이라 별도 결과물 링크는 없음.</p>
+      <p class="note">청사진 · 메타 인식 (HTML·CSS·JS / React / 디자인시스템)</p>
+    </div>
+
+    <a class="card" href="./week2/">
+      <span class="wk">Week 02 · HTML</span>
+      <h2>웹의 뼈대</h2>
+      <p class="topic">스타일 없이 구조만 — 이름·소개·작품 갤러리·연락처. 무스타일 HTML 골격.</p>
+      <span class="go">결과 열기</span>
+    </a>
+
+    <a class="card" href="./week3/">
+      <span class="wk">Week 03 · CSS</span>
+      <h2>다크 디자인 입히기</h2>
+      <p class="topic">다크 테마(#0f172a)·포인트 색·Google Fonts·여백/가운데정렬. 구조가 디자인으로.</p>
+      <span class="go">결과 열기</span>
+    </a>
+
+    <a class="card" href="./week4/">
+      <span class="wk">Week 04 · JS</span>
+      <h2>인터랙션 기초</h2>
+      <p class="topic">클릭 메시지 · 스크롤 페이드인(IntersectionObserver) · 마우스 따라다니는 커서.</p>
+      <span class="go">결과 열기</span>
+    </a>
+
+    <a class="card" href="./week5/">
+      <span class="wk">Week 05 · GSAP</span>
+      <h2>스크롤 라이브러리</h2>
+      <p class="topic">ScrollTrigger 페이드인 · 작품 갤러리 수평 스크롤 · 헤드라인 reveal.</p>
+      <span class="go">결과 열기</span>
+    </a>
+
+    <a class="card" href="./week6/">
+      <span class="wk">Week 06 · 마우스</span>
+      <h2>마우스 인터랙션</h2>
+      <p class="topic">연락 버튼 마그네틱 · 작품 Flip Card · 히어로 Spotlight(커서 주변만 밝게).</p>
+      <span class="go">결과 열기</span>
+    </a>
+
+    <a class="card" href="./week7/">
+      <span class="wk">Week 07 · 라이브러리</span>
+      <h2>시각 라이브러리 총동원</h2>
+      <p class="topic">tsParticles 파티클 배경 · Typed.js 타이핑 직함 · Three.js 3D 큐브 — 풀 스펙 랜딩.</p>
+      <span class="go">결과 열기</span>
+    </a>
+
+    <a class="card" href="./week8/">
+      <span class="wk">Week 08 · React + MUI</span>
+      <h2>React 포트폴리오</h2>
+      <p class="topic">Vite + React + MUI로 컴포넌트 기반 포트폴리오 재구성 후 빌드·배포. Part 1 클라이맥스.</p>
+      <span class="go">결과 열기</span>
+    </a>
+  </main>
+
+  <footer>
+    <p>각 회차 = 그 주차의 실습 프롬프트를 가상 수강생 '이서연'이 그대로 누적 입력한 결과(claude -p sonnet 재현).
+    2~7주는 단일 HTML(CDN 라이브러리), 8주는 React 빌드 산출물.<br>
+    Repo: <a href="https://github.com/hw5511/ai-agent-web" style="color:var(--ink)">hw5511/ai-agent-web</a></p>
+  </footer>
+</body>
+</html>
