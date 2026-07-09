@@ -2,3 +2,6 @@ curriculum/_design_test/
 server.log
 .playwright-mcp/
 _archive/
+
+# Understand-Anything 코드맵 (로컬 전용 — 노트북에서만 생성/사용)
+.understand-anything/
